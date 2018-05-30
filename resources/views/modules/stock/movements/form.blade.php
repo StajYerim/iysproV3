@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <!-- widget grid -->
-    <section id="stock" class="">
+    <section id="stock" v-cloak>
         <!-- row -->
         <div class="row">
             <!-- NEW WIDGET ROW START -->
@@ -181,7 +181,7 @@
         <script>
             window.addEventListener("load", () => {
                 Vue.component('v-select', VueSelect.VueSelect);
-                 Stock = new Vue({
+                 VueName = new Vue({
                     el: "#stock",
                     data: () => ({
                         options: [],

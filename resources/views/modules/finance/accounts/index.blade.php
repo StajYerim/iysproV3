@@ -108,9 +108,16 @@
                     }, {
                         data: "currency"
                     },{
-                        data: "currency",
-                        render:function(){
-                            return "0,00";
+                        data: "balance",
+                        name: "balance",
+                        render: function (balance,d,s) {
+                            if(s.currency == "TRL"){
+                                currency = "try";
+                            }else{
+                                currency =  s.currency;
+                            }
+                            return balance+" <span class='fa fa-"+currency+"'></span>";
+
                         }
                     }
                 ],
@@ -131,7 +138,7 @@
             table_search(tables)
 
             function product_update(id) {
-                return window.location.href = '/{{aid()}}/stocks/movements/' + id + '/show';
+                return window.location.href = '/{{aid()}}/finance/accounts/' + id + '/show';
             }
 
         </script>

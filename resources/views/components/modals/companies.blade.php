@@ -198,22 +198,21 @@
             el: '#companies_form',
             data: () => ({
                 form: {
-                    company_name: "{{$form_type == "Update" ? $company->company_name:""}}",
-                    company_short_name: "{{$form_type == "Update" ? $company->company_short_name:""}}",
-                    char_code: "{{$form_type == "Update" ? $company->char_code:""}}",
-                    email: "{{$form_type == "Update" ? $company->address["email"]:""}}",
+                    company_name: "",
+                    company_short_name: "",
+                    char_code: "",
+                    email: "",
                     option: '',
-                    tax_office: "{{$form_type == "Update" ? $company->tax_office:""}}",
-                    tax_id: "{{$form_type == "Update" ? $company->tax_id:""}}",
-                    e_invoice_registered: "{{$form_type == "Update" ? $company->e_invoice_registered:0}}",
-                    address: "{{$form_type == "Update" ? $company->address["address"]:""}}",
-                    address_abroad: '{{$form_type == "Update" ? $company->address["address_abroad"]:0}}',
-                    town: "{{$form_type == "Update" ? $company->address["town"]:""}}",
-                    city: "{{$form_type == "Update" ? $company->address["city"]:""}}",
-                    phone_number: "{{$form_type == "Update" ? $company->address["phone_number"]:""}}",
-                    fax_number: "{{$form_type == "Update" ? $company->address["fax_number"]:""}}",
-                    iban: "{{$form_type == "Update" ? $company->iban:""}}",
-                    tags: [],
+                    tax_office: "",
+                    tax_id: "",
+                    e_invoice_registered: 0,
+                    address: "",
+                    address_abroad: 0,
+                    town: "",
+                    city: "",
+                    phone_number: "",
+                    fax_number: "",
+                    iban: "",
                 },
 
             }),
@@ -227,7 +226,7 @@
                         if (result) {
                             axios.post('{{route("company.quick.store",[aid(),0])}}', this.form, {tags: []})
                                 .then(function (response) {
-                                    Stock.form.company_id = {id: response.data.id, text: response.data.text};
+                                    VueName.form.company_id = {id: response.data.id, text: response.data.text};
 
                                 }).catch(function (error) {
 

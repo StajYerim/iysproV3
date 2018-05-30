@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <!-- widget grid -->
-    <section id="customer" class="">
+    <section id="customer" v-cloak>
         <!-- row -->
         <div class="row">
             <!-- NEW WIDGET ROW START -->
@@ -177,6 +177,7 @@
         <script type="text/x-template" id="phone">
             <input type="text" class="phone" v-model="internalValue" v-on:input="updateValue($event.target.value)"/>
         </script>
+        <script src="https://unpkg.com/@johmun/vue-tags-input/dist/vue-tags-input.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
 
         <script>
@@ -236,7 +237,8 @@
                             phone_number: "{{$form_type == "Update" ? $company->address["phone_number"]:""}}",
                             fax_number: "{{$form_type == "Update" ? $company->address["fax_number"]:""}}",
                             iban: "{{$form_type == "Update" ? $company->iban:""}}",
-                            tags: [],
+                            tag: '',
+                            tagsd: [],
                             tester: "",
                         },
 

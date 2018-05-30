@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <!-- widget grid -->
-    <section id="account" class="">
+    <section id="account" v-cloak>
         <!-- row -->
         <div class="row">
             <!-- NEW WIDGET ROW START -->
@@ -34,28 +34,40 @@
                                     </div>
                                     <hr>
                                 </fieldset>
+                                @if($id == 0 and $form_type == "new")
                                 <fieldset>
                                     <div class="form-group">
                                         <label class="col-md-3 control-label">Döviz Cinsi</label>
                                         <div class="col-md-4 ">
                                             <div class="">
                                                 <select v-model="form.currency" class="form-control">
-                                                    <option v-cloak v-for="item in currency_list" v-bind:value="item.text">
-                                                        @{{ item.text }}
+                                                    <option v-cloak v-for="item in currency_list" v-bind:value="item.code">
+                                                        @{{ item.icon }} - @{{ item.code }}
                                                     </option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                 </fieldset>
+                                @else
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Döviz Cinsi </label>
+                                            <label class=" control-label">{{$account->cur_info["icon"]." ".$account->cur_info["code"]}} - {{$account->cur_info["name"]}}</label>
 
-                                <fieldset>
+                                        </div>
+                                    </fieldset>
+
+                                 @endif
+
+                                @if($id == 0 and $form_type == "new")
+                                <fieldset >
                                     <div class="form-group">
                                         <label class="col-md-3 control-label">Açılış Bakiyesi</label>
                                         <div class="col-md-4 ">
-                                            <div >
+                                            <div>
                                                 <money v-bind="money" class="form-control "
-                                                       v-model="form.attributes.start_balance"></money>
+                                                       v-model="form.item.start_balance"></money>
                                             </div>
                                         </div>
                                     </div>
@@ -67,11 +79,12 @@
                                         <div class="col-md-4 ">
                                             <div >
                                                 <input type="text" class="form-control datepicker"
-                                                       v-model="form.attributes.start_date">
+                                                       v-model="form.item.start_date">
                                             </div>
                                         </div>
                                     </div>
                                 </fieldset>
+                                @endif
                                 @if($type == 2 or $type==3)
                                 <fieldset>
                                     <div class="form-group">
@@ -79,7 +92,7 @@
                                         <div class="col-md-4">
                                             <div class="checkbox"  style="z-index: 1;">
                                                 <label>
-                                                    <input type="checkbox" v-model="form.cheque" value="1"
+                                                    <input type="checkbox" v-model="form.cheque"
                                                            class="checkbox style-3">
                                                     <span>Çek Kullanılabilir</span>
                                                 </label>
@@ -162,19 +175,26 @@
                     el: "#account",
                     data: () => ({
                         form: {
-                            name: "{{$}}",
-                            currency: "TRY",
-                            bank_name: "",
-                            bank_branch: "",
-                            bank_no: "",
-                            bank_iban: "",
-                            type:"{{$type}}",
-                            attributes: {
+                            name: "{{$id == 0 ? "":$account->name}}",
+                            currency: '{{$id == 0 ? "try":$account->currency}}',
+                            bank_name: '{{$id == 0 ? "":$account->bank_name}}',
+                            bank_branch: '{{$id == 0 ? "":$account->bank_branch}}',
+                            bank_no: '{{$id == 0 ? "":$account->bank_no}}',
+                            bank_iban: '{{$id == 0 ? "":$account->bank_iban}}',
+                            type:'{{$id == 0 ? $type:$account->type}}',
+                            cheque:'{{$id == 0 ? false:$account->cheque}}',
+                            item: {
                                 start_balance: "",
                                 start_date: "{{date_tr()}}"
                             }
                         },
-                        currency_list: [{text: "TRY"}, {text: "USD"}, {text: "EUR"}],
+                        currency_list: [
+                                @foreach($currency as $cur)
+                            {
+                                icon: "{{$cur->icon}}", code: "{{$cur->code}}"
+                            },
+                            @endforeach
+                        ],
                         money: {
                             decimal: ',',
                             thousands: '.',

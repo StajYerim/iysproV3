@@ -15,6 +15,14 @@ class CreateBankItemsTable extends Migration
     {
         Schema::create('bank_items', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer("bank_account_id")->unsigned()->comment("Hareketin gerçekleştiği ana hesap");
+            $table->string('type')->comment("start_balance->Açılış Bakiyesi");
+            $table->integer('doc_id')->comment("İşlem yapan 3.ortamın ID'si")->nullable();
+            $table->date('date')->comment("İşlem Tarihi");
+            $table->decimal("amount",12,2)->comment("Meblağ");
+            $table->string("description")->nullable()->comment("İşlem Açıklaması");
+            $table->integer("action_type")->comment("Hareket Tipi / 1-Para Girişi / 0-Para Çıkışı");
+            $table->foreign("bank_account_id")->references("id")->on("bank_accounts")->onDelete("cascade");
             $table->timestamps();
         });
     }

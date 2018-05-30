@@ -18,11 +18,12 @@ Route::group(['prefix'=>'{company_id}/stocks','middleware'=>'not.admin'],functio
     Route::post("/product/image/delete","Stock\StockController@image_delete")->name("stock.image.delete");
 
     //Stock Search
-    Route::any("/product/source","Stock\StockController@product_source")->name("stock.product.source");
+
     Route::get("/product/{id}/show","Stock\StockController@show")->name("stock.product.show");
     Route::delete("/product/{id}/destroy","Stock\StockController@destroy")->name("stock.product.destroy");
     Route::post("/product/new/category","Stock\StockController@new_category")->name("stock.product.new_category");
     Route::post("/product/language/","Stock\StockController@language")->name("stock.product.language");
+    Route::any("/tesla","Stock\StockController@product_source")->name("stock.product.source");
 
     //Movements
     Route::get("movements","Stock\MovementsController@index")->name("stock.movements.index");

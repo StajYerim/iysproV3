@@ -45,14 +45,17 @@
     <link rel="apple-touch-startup-image" href="{{asset("img/splash/iphone.png")}}" media="screen and (max-device-width: 320px)">
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset("js/full-loading/loading.css")}}">
 
+
     <!-- VueJs -->
     <script src="{{asset("js/vue/vue.js")}}"></script>
-    <script src="{{asset("js/vue/vuejs-datepicker.js")}}"></script>
     <script src="{{asset("js/vue/vue-select.js")}}"></script>
+    {{--<script src="{{asset("js/vue/date-picker.js")}}"></script>--}}
+    <script src="{{asset("js/vue/vue-dialog.js")}}"></script>
     <script src="{{asset("js/vue/loadash.js")}}"></script>
     <script src="{{asset("js/vue/v-money.js")}}"></script>
     <script src="{{asset("js/vue/vue-router.js")}}"></script>
     <script src="{{asset("js/vue/v-validate.js")}}"></script>
+    <script src="https://unpkg.com/vue-the-mask"></script>
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
@@ -73,6 +76,7 @@
         function fullLoading(text="Please waiting.") {
             $('body').loadingModal({text: text});
             $('body').loadingModal('animation', 'fadingCircle');
+            $('body').loadingModal('color', '#000');
         }
 
         fullLoading("Loading...");
@@ -83,7 +87,7 @@
         Vue.use(VeeValidate);
     </script>
     @stack("style")
-<body style="text-transform:uppercase" class="fixed-header fixed-navigation">
+<body style="text-transform:uppercase;color:#7b7b7b" class="fixed-header fixed-navigation">
 @include("layouts.header")
 @include("layouts.sidebar")
 @include("layouts.main")

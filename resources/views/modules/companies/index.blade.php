@@ -70,8 +70,6 @@
         <script src="/js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="/js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="/js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script src="//cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
         <script type="text/javascript">
           tables =  $('#table').DataTable({
                 "sDom":"t" +

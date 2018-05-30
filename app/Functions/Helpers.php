@@ -125,9 +125,9 @@ function money_db_format($value, $currency = null)
 }
 
 
-function get_money($value, $currency = null)
+function get_money($value, $currency = 2)
 {
-    return number_format($value, "2", ",", ".");
+    return number_format($value, $currency, ",", ".");
 }
 
 function product_img_url($img)
@@ -255,7 +255,6 @@ function date_convert($tarih)
         }elseif($tarih == ""){
             return null;
         }else{
-
 
             $datetime = $tarih;
             return $datetime;

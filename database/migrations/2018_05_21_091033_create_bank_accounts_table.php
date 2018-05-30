@@ -24,7 +24,7 @@ class CreateBankAccountsTable extends Migration
             $table->string('bank_no')->nullable();
             $table->string('bank_iban')->nullable();
             $table->string('currency')->default("TRY,EUR,USD");
-            $table->integer('cheque')->nullable()->default(0)->comment("Çek Kullanımı 0-Pasif 1-Aktif");
+            $table->string('cheque')->nullable()->default("false")->comment("Çek Kullanımı false-Pasif true-Aktif");
             $table->foreign('account_id')
                 ->references('id')->on('app_accounts')
                 ->onDelete('cascade');

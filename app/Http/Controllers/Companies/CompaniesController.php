@@ -113,16 +113,14 @@ class CompaniesController extends Controller
 
         $term = $request->get('q');
         $results = array();
-        $queries = Companies::where("account_id", aid())->where('company_name', 'like', '%' . $term . '%')->get();
+        $queries = Companies::where("account_id", aid())->where('company_name', 'like', $term . '%')->orWhere('tax_id', 'like', '%' . $term . '%')->get();
         foreach ($queries as $query) {
             $results[] = [
                 'id' => $query->id,
-                'text' => $query->company_name,
+                'text' => $query->company_name." (".$query->tax_id.")",
             ];
         }
-
        return $results;
-
     }
 
 

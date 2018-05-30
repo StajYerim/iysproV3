@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <!-- widget grid -->
-    <section id="show" class="">
+    <section id="show" v-cloak>
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
                 <h1><i class="fa fa-truck "></i> <span class="semi-bold">Stok Grişi</span></h1>

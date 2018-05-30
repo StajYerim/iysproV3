@@ -99,11 +99,9 @@
 
                     <div class="tab-pane fade active in" id="g2">
                         <div>
-
                             <div class="alert alert-info">
                                 <span class="fa fa-info-circle"></span>  Hizmet / Ürünün işlem geçmişi yok, geçmiş işlemleri burada görebileceksiniz.
                             </div>
-
                         </div>
                     </div>
 

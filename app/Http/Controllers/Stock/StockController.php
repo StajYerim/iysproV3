@@ -34,7 +34,8 @@ class StockController extends Controller
                 'onclick' => function ($product) {
                     return "product_update($product->id)";
                 },
-            ])->editColumn("inventory_tracking",function($product){
+            ])
+            ->editColumn("inventory_tracking",function($product){
                 return "tester";
             })
             ->setRowClass("row-title")
@@ -213,4 +214,25 @@ class StockController extends Controller
         return $results;
     }
 
+
+//    public function product_source($aid, Request $request)
+//    {
+//
+//        $term = $request->get('q');
+//        $results = array();
+//        $queries = Product::where("account_id", aid())->orWhere('code', 'like', '%' . $term . '%')->whereHas("named",function($q,$search = $term){
+//            $q->where('name', 'like',  '%' . $search . '%');
+//        })->get();
+//
+//
+//        foreach ($queries as $query) {
+//            $results[] = [
+//                'id' => $query->id,
+//                'text' => $query->name." (".$query->code.")",
+//            ];
+//        }
+//
+//        return $results;
+//
+//    }
 }

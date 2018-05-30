@@ -61,7 +61,7 @@ class Product extends Model
 
     public function named()
     {
-        return $this->hasOne(ProductDescriptions::class);
+        return $this->hasOne(ProductDescriptions::class)->where("lang_code","tr");
     }
 
     public function names()
@@ -80,7 +80,7 @@ class Product extends Model
 
     public function getNameAttribute()
     {
-        return $this->names()->first()["name"];
+        return $this->names()->where("lang_code","tr")->first()["name"];
     }
 
 

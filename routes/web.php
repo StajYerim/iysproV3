@@ -1,6 +1,7 @@
 <?php
 
 use App\Role;
+use http\Env\Request;
 use Spatie\TranslationLoader\LanguageLine;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,8 @@ Route::middleware('admin')->group(function() {
 
 
 
+
+
 });
 
 
@@ -76,6 +79,10 @@ Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
 
     //Tags
     Route::post("/tags","TagController@give")->name("tags.give");
+
+    //Döviz kurları
+    Route::get("/exchange","ExchangeController@exchange")->name("exchange");
+
 
 });
 
@@ -109,7 +116,9 @@ Route::get("/data-delete",function(){
 })->name("data.delete");
 
 Route::get("/tester",function(){
-  dd(movements_type());
+    $data = "2018-05-12T21:00:00.000Z";
+    $date = \Carbon\Carbon::createFromTimeString($data);
+    return $date->format("yyyy-mm-dd");
 });
 
 

@@ -18,20 +18,57 @@ function money_per() {
 
 }
 
+$(".money").blur(function(){
+    if($(this).val() == "" ){
+        $(this).val("0,00")
+    }
+});
+
 // Para Maskeleri
-function money(data) {
-    var _money = data;
-//İnputa değer girilmemiş ise input değerini 0,00 yap
-    if (_money.length === 0) {
-        return "0,00";
-    }
-//İnputa değer doğru girilmişse mask uygula
-    else {
-        var data = _money.replace(/\./g, '').replace(",", ".");
-        var money = parseFloat(data);
-        var yeni = money.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 4});
-        return yeni;
-    }
+function money(para) {
+
+                var _money = para;
+                //Ä°nputa deÄŸer girilmemiÅŸ ise input deÄŸerini 0,00 yap
+                if (_money == "")
+                {
+                  return  '0,00';
+                }
+                //Ä°nputa deÄŸer doÄŸru girilmiÅŸse mask uygula
+                else
+                {
+                    var data = $(this).val().replace(/\./g, '').replace(",",".");
+                    var money = parseFloat(data);
+                    var yeni = money.toLocaleString('tr-TR', {  minimumFractionDigits: 2, maximumFractionDigits: 4 });
+                    return yeni;
+                }
+
+
+}
+
+
+function money_clear(val = "0,00") {
+
+if(val == 0){
+    val = "0,00";
+}
+
+  return  (val.replace(/\./g, '').replace(",",".")*1);
+
+}
+
+//Toplam Fiyat
+function total_price(adet,kdv,birimfiyat) {
+
+    let toplam = (birimfiyat*adet)*(1+(kdv/100));
+    return toplam;
+}
+
+//Birim fiyatı kdvsiz
+function birimFiyatKvdsiz(adet,kdv,toplam) {
+    adet = money_clear(adet);
+    toplam = money_clear(toplam);
+    var birim = (toplam) / (1 + (kdv/100)) / adet;
+    return birim;
 }
 
 //Full screen delay
@@ -116,6 +153,8 @@ function HarfleriBuyut() {
 
 HarfleriBuyut();
 
+
+
 // Tarih Formatları
 function datePicker() {
     $('.datepicker').datepicker({
@@ -127,7 +166,63 @@ function datePicker() {
         nextText: '<i class="fa fa-chevron-right"></i>',
         changeMonth: true,
         changeYear: true,
-        dateFormat: 'dd.mm.yy'
+        dateFormat: 'dd.mm.yy',
+        onSelect: function(date,datePicker) {
 
+                    data = datePicker.input[0].name;
+                    if(data == "form.date"){
+                        VueName.form.date = date;
+                    }else if(data == "form.expired_date"){
+                        VueName.form.expired_date = date;
+                    }else if(data == "form.effective_date"){
+                        console.log(VueName.form.effective_date,date);
+                        VueName.form.effective_date = date;
+                    }
+                    console.log(data);
+
+
+        },
+        beforeShow: function() {
+            setTimeout(function(){
+                $('.ui-datepicker').css('z-index', 99999999999999);
+            }, 0);
+        }
     });
+}
+
+function vade_tarih(tarih,vade){
+
+$("#day7").click(function () {
+
+Vuen.form.expired_date = tariheGunEkle($("#"+tarih).val(), 7);
+console.log($("#"+tarih).val())
+});
+
+$("#day14").click(function () {
+    Vuen.form.expired_date = tariheGunEkle($("#"+tarih).val(), 14);
+});
+
+$("#day30").click(function () {
+    Vuen.form.expired_date = tariheGunEkle($("#"+tarih).val(), 30);
+});
+
+$("#day60").click(function () {
+    Vuen.form.expired_date = tariheGunEkle($("#"+tarih).val(), 60);
+});
+
+$("#today").click(function () {
+    Vuen.form.expired_date = $("#"+tarih).val();
+});
+
+}
+
+function tariheGunEkle(tarih,kacGun) {
+
+    var new_date = moment(tarih, "DD-MM-YYYY").add('days', kacGun);
+    var day = new_date.format('DD');
+    var month = new_date.format('MM');
+    var year = new_date.format('YYYY');
+
+    return day + '.' + month + '.' + year;
+
 }

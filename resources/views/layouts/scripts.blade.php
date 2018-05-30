@@ -1,6 +1,5 @@
 
 
-
 <!-- IMPORTANT: APP CONFIG -->
 <script src="{{asset("js/app.config.js")}}"></script>
 
@@ -56,6 +55,7 @@
 <!-- SmartChat UI : plugin -->
 <script src="{{asset("js/smart-chat-ui/smart.chat.ui.min.js")}}"></script>
 <script src="{{asset("js/smart-chat-ui/smart.chat.manager.min.js")}}"></script>
+<script type="text/javascript" src="/js/plugin/moment/moment.min.js"></script>
 <script type="text/javascript" src="/js/autocomplete/scripts/jquery.mockjax.js"></script>
 <script type="text/javascript" src="/js/autocomplete/src/jquery.autocomplete.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -63,4 +63,5 @@
 <script src="/js/general.js"></script>
 
 @stack("scripts")
+@stack("script_form")
 {{--<script src="{{asset("js/table.js")}}"></script>--}}

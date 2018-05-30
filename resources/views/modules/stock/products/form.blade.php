@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <!-- widget grid -->
-    <section id="customer" class="">
+    <section id="customer" v-cloak>
         <!-- row -->
         <div class="row">
             <!-- NEW WIDGET ROW START -->
@@ -173,7 +173,7 @@
                                              v-show="form.type_id === '3' || form.type_id === '1' || form.type_id ==='4'">
                                             <label> Alış Fiyatı</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control money2" value="0,00"
+                                                <input type="text" class="form-control " value="0,00"
                                                        autocomplete="OFF" v-model.lazy="form.buying_price">
                                                 <div class="input-group-btn">
                                                     <select v-model="form.buying_currency" class="buying_currency">
@@ -190,7 +190,7 @@
                                              v-show="form.type_id === '3' || form.type_id === '2'">
                                             <label> Satış Fiyatı</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control money1" value="0,00"
+                                                <input type="text" v-on:keypress="isNumber" class="form-control" value="0,00"
                                                        autocomplete="OFF" v-model.lazy="form.list_price">
                                                 <div class="input-group-btn">
                                                     <select v-model="form.currency" class="price_currency">
@@ -274,18 +274,25 @@
                     }),
                     watch: {
                         "form.buying_price": function (yeni, eski) {
-                            this.form.buying_price = money(yeni);
+                            this.form.buying_price = money_clear(yeni).toLocaleString('tr-TR', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 4
+                            });
+
+
 
                         },
                         "form.list_price": function (yeni, eski) {
 
 
-                            this.form.list_price = money(yeni);
+                            this.form.list_price = money_clear(yeni).toLocaleString('tr-TR', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 4
+                            });
                         }
                     },
                     mounted: function () {
-                        HarfleriBuyut();
-                        money_per();
+
 
 
                         @if($form_type == "update")
@@ -349,7 +356,6 @@
                             $("#image-upload").val("");
                         });
 
-                        //Money Mask Function
 
 
                         //Category autocomplete
@@ -390,6 +396,15 @@
 
                     },
                     methods: {
+                        isNumber: function (evt) {
+                            evt = (evt) ? evt : window.event;
+                            var charCode = (evt.which) ? evt.which : evt.keyCode;
+                            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode != 8 && charCode != 44 && charCode != 46) {
+                                evt.preventDefault();
+                            } else {
+                                return true;
+                            }
+                        },
                         onFileUpload() {
                             this.image = this.$refs.image.files[0];
 

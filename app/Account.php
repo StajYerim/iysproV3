@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Model\Finance\BankAccounts;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,6 +39,20 @@ class Account extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function save(array $options = array())
+    {
+
+        parent::save($options);
+
+        BankAccounts::create([
+            "name" => "KASA HESABI",
+            "type" => 1,
+            "currency"=>"TRL",
+            ]);
+
+
     }
 
     /**
