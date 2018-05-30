@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Stock;
 use App\Account;
 
 use App\Currency;
+use App\Model\Parasut;
 use App\Model\Stock\Product\Barcode;
 use App\Model\Stock\Product\Category;
 use App\Model\Stock\Product\Product;
@@ -212,5 +213,19 @@ class StockController extends Controller
 
         return $results;
     }
-
+    
+    public function sync_with_parasut($aid, $id) {
+      $product = Product::find($id);
+      $parasut_product = \App::make('App\Parasut')->sync_stock_product($product);
+      $pivot_product = Parasut::where('app_record_id', $parasut_product['product']['id'])->get()->first();
+      if (!$pivot_product) {
+        Parasut::create([
+          'our_id' => $id,
+          'app_api' => '',
+          'app_record_id' => $parasut_product['product']['id'],
+          'type' => 'Product',
+        ]);
+      }
+      return redirect()->route('stock.product.show', [ $aid, $id ]); 
+    }
 }

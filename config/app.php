@@ -165,7 +165,8 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
 
-
+        //Parasut
+        App\Providers\ParasutServiceProvider::class,
     ],
 
     /*

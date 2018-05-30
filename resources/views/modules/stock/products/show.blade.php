@@ -15,6 +15,9 @@
                                 İŞLEMLER <span class="caret"></span> </a>
                             <ul class="dropdown-menu">
                                                                    <li>
+                                    <a href="{{ route('stock.product.sync', [ aid(), $product->id ]) }}"><i class="fa fa-send"></i> PARAŞÜT'e Gönder</a>
+                                </li>
+                                                                   <li>
                                     <a href="#" data-toggle="modal" data-target="#openStartReceipt"><i
                                                 class="fa fa-plus " aria-hidden="true"></i> AÇILIŞ FİŞİ OLUŞTUR</a>
                                 </li>
