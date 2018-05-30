@@ -32,4 +32,7 @@ Route::group(['prefix'=>'{company_id}/stocks','middleware'=>'not.admin'],functio
     Route::post("movements/{id}/store","Stock\MovementsController@store")->name("stock.movements.store");
     Route::get("movements//index_list","Stock\MovementsController@index_list")->name("stock.movements.index_list");
     Route::delete("movements/{id}/destroy","Stock\MovementsController@destroy")->name("stock.movements.destroy");
+
+    //Parasut Sync
+    Route::get("/product/{id}/sync","Stock\StockController@sync_with_parasut")->name("stock.product.sync");
 });

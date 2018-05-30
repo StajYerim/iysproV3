@@ -35,4 +35,13 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'parasut' => [
+        'client_id' => env('PARASUT_CLIENT_ID'),
+        'client_secret' => env('PARASUT_CLIENT_SECRET'),
+        'username' => env('PARASUT_USERNAME'),
+        'password' => env('PARASUT_PASSWORD'),
+        'company_id' => env('PARASUT_COMPANY_ID'),
+        'grant_type' => 'password',
+        'redirect_uri' => env('PARASUT_CALLBACK_URLS'),
+    ],
 ];
