@@ -5,6 +5,7 @@ use http\Env\Request;
 use Spatie\TranslationLoader\LanguageLine;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Parasut\Client;
 
 Auth::routes();
 
