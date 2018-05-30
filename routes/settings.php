@@ -13,4 +13,10 @@ Route::group(['prefix'=>'{company_id}/settings','middleware'=>'not.admin'],funct
     //Settings Units
     Route::get('units', 'SettingsManager\UnitSettingsController@index')->name('settings.units.index');
     Route::post("units/update","SettingsManager\UnitSettingsController@unit_status_update")->name("settings.units.update");
+
+
+    //Api Connect
+    Route::get("api-list","Modules\Settings\ApiConnectController@index")->name("settings.api.index");
+    Route::post("api-save","Modules\Settings\ApiConnectController@save")->name("settings.api.save");
+
 });

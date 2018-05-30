@@ -143,7 +143,7 @@
         @if(auth()->user()->role->id == 2)
         <ul class="header-dropdown-list hidden-xs">
 
-            <li>
+            <li class="pull-right">
 
                 <div class="btn-header transparent pull-right hidden-sm hidden-xs " data-toggle="dropdown">
                     <div>
@@ -159,6 +159,10 @@
 
                     <li  class="">
                         <a href=""><i class="fa fa-cubes"></i> Applications</a>
+                    </li>
+
+                    <li  class="">
+                        <a href="{{route("settings.api.index",aid())}}"><i class="fa fa-retweet"></i> Api Info</a>
                     </li>
 
                 </ul>

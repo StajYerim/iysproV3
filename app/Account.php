@@ -20,9 +20,11 @@ class Account extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'company_name', 'sector_id', 'owner_id', 'expiry_date'
-    ];
+//    protected $fillable = [
+//        'company_name', 'sector_id', 'owner_id', 'expiry_date'
+//    ];
+
+    protected $guarded = [];
 
     /**
      * The attributes that are dates.

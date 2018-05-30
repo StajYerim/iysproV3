@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateParasutProductsTable extends Migration
+class CreateParasutTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,6 @@ class CreateParasutProductsTable extends Migration
     {
         Schema::create('parasut', function (Blueprint $table) {
           $table->increments('id');
-
           $table->string('our_id', 16);
           $table->string('app_api', 255);
           $table->string('app_record_id', 16);
