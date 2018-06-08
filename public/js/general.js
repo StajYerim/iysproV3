@@ -167,9 +167,10 @@ function datePicker() {
         changeMonth: true,
         changeYear: true,
         dateFormat: 'dd.mm.yy',
-        onSelect: function(date,datePicker) {
+        onSelect: function(date,datePicker,index) {
 
                     data = datePicker.input[0].name;
+console.log(data)
                     if(data == "form.date"){
                         VueName.form.date = date;
                     }else if(data == "form.expired_date"){
@@ -177,8 +178,29 @@ function datePicker() {
                     }else if(data == "form.effective_date"){
                         console.log(VueName.form.effective_date,date);
                         VueName.form.effective_date = date;
+                    }else if(data == "form.due_date"){
+                        console.log(VueName.form.due_date,date);
+                        VueName.form.effective_date = date;
+                    }else if(data == "collection.form.date"){
+                        console.log(VueCollect.collection.form.date,date);
+                        VueCollect.collection.form.date = date;
+                    }else if(data == "cheque_collect.form.date"){
+                        console.log(VueCollect.collection.form.date,date);
+                        VueCollect.cheque_collect.form.date = date;
+                    }else if(data == "cheque_collect.form.payment_date"){
+                        console.log(VueCollect.collection.form.date,date);
+                        VueCollect.cheque_collect.form.payment_date = date;
+                    }else if(data == "money_form.date"){
+                        console.log(date);
+                        VueName.money_form.date = date;
                     }
-                    console.log(data);
+
+
+
+
+
+
+                    console.log(datePicker);
 
 
         },
@@ -189,6 +211,15 @@ function datePicker() {
         }
     });
 }
+
+
+function many(val,min=2,max=2){
+    return val.toLocaleString('tr-TR', {
+        minimumFractionDigits: min,
+        maximumFractionDigits: max
+    });
+}
+
 
 function vade_tarih(tarih,vade){
 

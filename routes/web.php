@@ -1,5 +1,6 @@
 <?php
 
+use App\Companies;
 use App\Role;
 use http\Env\Request;
 use Spatie\TranslationLoader\LanguageLine;
@@ -117,9 +118,10 @@ Route::get("/data-delete",function(){
 })->name("data.delete");
 
 Route::get("/tester",function(){
-    $data = "2018-05-12T21:00:00.000Z";
-    $date = \Carbon\Carbon::createFromTimeString($data);
-    return $date->format("yyyy-mm-dd");
+$orders = \App\Model\Sales\SalesOrders::find(21);
+
+
+
 });
 
 

@@ -22,7 +22,7 @@ class CompaniesController extends Controller
 
     public function customer_data($aid)
     {
-        $companies = Companies::list("customer", $aid);
+        $companies = Companies::where("account_id",aid())->where("customer",1)->get();
 
         return Datatables::of($companies)
             ->make(true);
@@ -69,20 +69,20 @@ class CompaniesController extends Controller
         );
 
 
-  foreach($request->tags as $tag){
-   $tag =  Tags::firstOrcreate(["title"=>$tag,"type"=>"companies","account_id"=>aid()],[
-        "account_id" => aid(),
-        "title"=>$tag,
-        "type" => "companies",
-        "bg_color"=>"red"
-    ]);
+//  foreach($request->tags as $tag){
+//   $tag =  Tags::firstOrcreate(["title"=>$tag,"type"=>"companies","account_id"=>aid()],[
+//        "account_id" => aid(),
+//        "title"=>$tag,
+//        "type" => "companies",
+//        "bg_color"=>"red"
+//    ]);
+//
+//    TagData::firstOrCreate(["tag_id"=>$tag->id],[
+//        "tag_id"=>$tag->id,
+//        "doc_id"=>$company->id
+//    ]);
 
-    TagData::firstOrCreate(["tag_id"=>$tag->id],[
-        "tag_id"=>$tag->id,
-        "doc_id"=>$company->id
-    ]);
-
-  }
+//  }
 
 
         flash()->overlay($id == 0 ? "New companies created" : "Company updated", 'Success')->success();

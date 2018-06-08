@@ -5,10 +5,16 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 
 function aid(){
-    if (!auth()->user()->isAdmin()) {
+
+    if (Auth::check()) {
         return Auth::user()->memberOfAccount->id;
     }
+
+
 }
+
+
+
 
 function routers($route, $data = array())
 {
@@ -241,6 +247,10 @@ function movements_type($action = 7)
 // TR Tarih Formatı
 function date_tr(){
     return \Carbon\Carbon::now()->format("d.m.Y");
+}
+//Global Tarih Formatı
+function date_local(){
+    return \Carbon\Carbon::now()->format("Y-m-d");
 }
 
 //Türkiye için olan tarih formatını datetime formatına getir

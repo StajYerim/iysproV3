@@ -129,12 +129,12 @@
                                 </tr>
                                 </tbody>
                                 <tbody id="tablo" style="font-size: 11px;">
-                                <tr v-for="item in itemsReverse">
+                                <tr v-for="item in itemsReverse" style="cursor:pointer" v-on:click="redirect(item.id)">
                                     <td>
                                         @{{ item.type }}
                                     </td>
                                     <td>@{{ item.date }}</td>
-                                    <td>@{{ item.contact }} </td>
+                                    <td>@{{ item.company }} @{{ item.contact }} </td>
                                     <td align="right">@{{ item.description }}</td>
                                     <td align="right">
                                         @{{ item.action_type }} @{{ item.amount }} <i
@@ -155,7 +155,6 @@
 
 
                 </div>
-
 
             </div>
             <div class="col-sm-4" style=";height: 500px;overflow: scroll;">
@@ -475,6 +474,9 @@
                     this.actions();
                 },
                 methods: {
+                    redirect:function($id){
+                        return window.location.href='/{{aid()}}/finance/accounts/'+$id+'/receipt';
+                    },
                     delete_data: function ($id) {
                         fullLoading();
                         axios.delete('{{route("stock.movements.destroy",[aid(),$account->id])}}')

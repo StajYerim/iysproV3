@@ -25,4 +25,12 @@ Route::group(['prefix'=>'{company_id}/sales','middleware'=>'not.admin'],function
     Route::delete("offers/{id}/destroy","Modules\Sales\OffersController@destroy")->name("sales.offers.destroy");
     Route::post("offers/{id}/status-send","Modules\Sales\OffersController@status_send")->name("sales.offers.status_send");
 
+    //Sales Orders
+    Route::get('orders', 'Modules\Sales\OrdersController@index')->name('sales.orders.index');
+    Route::get('orders/index_list', 'Modules\Sales\OrdersController@index_list')->name('sales.orders.index_list');
+    Route::get("orders/form/{id}/{type}","Modules\Sales\OrdersController@form")->name("sales.orders.form");
+    Route::post("orders/{id}/store","Modules\Sales\OrdersController@store")->name("sales.orders.store");
+    Route::get("orders/{id}/show","Modules\Sales\OrdersController@show")->name("sales.orders.show");
+    Route::delete("orders/{id}/destroy","Modules\Sales\OrdersController@destroy")->name("sales.orders.destroy");
+
 });

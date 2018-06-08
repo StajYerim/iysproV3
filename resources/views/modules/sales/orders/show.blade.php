@@ -4,7 +4,7 @@
     <section id="show" v-cloak>
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
-                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$offer->descriptions}}</span></h1>
+                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$order->description}}</span></h1>
 
             </div>
             <div class="col-lg-4 col-sm-4">
@@ -15,12 +15,17 @@
                                     class="fa fa-reorder"></span> &nbsp;<span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{route("sales.offers.form",[aid(),$offer->id,"update"])}}"><i
-                                            class="fa fa-edit" arisha-hidden="true"></i>
+                                <a href="{{route("sales.orders.form",[aid(),$order->id,"update"])}}"><i
+                                            class="fa fa-edit" aria-hidden="true"></i>
                                     DÜZENLE</a>
                             </li>
                             <li>
-                                <a href="{{route("sales.offers.form",[aid(),$offer->id,"copy"])}}"><i class="fa fa-copy"
+                                <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction"><i
+                                            class="fa fa-edit" aria-hidden="true"></i>
+                                    TAHSİLAT EKLE</a>
+                            </li>
+                            <li>
+                                <a href="{{route("sales.orders.form",[aid(),$order->id,"copy"])}}"><i class="fa fa-copy"
                                                                                                       aria-hidden="true"></i>
                                     KOPYASINI OLUŞTUR</a>
                             </li>
@@ -79,12 +84,12 @@
                             <div class="row">
                                 <div class="col-sm-5" style="font-weight: 400;font-size:15px;"><i
                                             class="fa fa-building-o"></i> <a
-                                            href="{{route("sales.companies.show",[aid(),$offer->company["id"]])}}">{{$offer->company["company_name"] == null ? "Belirtilmedi":$offer->company["company_name"]}}</a>
+                                            href="{{route("sales.companies.show",[aid(),$order->company["id"]])}}">{{$order->company["company_name"] == null ? "Belirtilmedi":$order->company["company_name"]}}</a>
                                 </div>
                                 <div class="col-sm-3" style="font-weight: 400;font-size:15px;"><i
-                                            class="fa fa-calendar"></i> {{$offer->date}}</div>
+                                            class="fa fa-calendar"></i> {{$order->date}}</div>
                                 <div class="col-sm-3" style="font-weight: 400;font-size:15px;"><i
-                                            class="fa fa-calendar"></i> {{$offer->expired_date}}</div>
+                                            class="fa fa-calendar"></i> {{$order->due_date}}</div>
                             </div>
                             <br>
                             <div class="row">
@@ -112,10 +117,10 @@
 
                                                 <td>@{{ item.quantity }} @{{ item.unit }}</td>
                                                 <td style="text-align:right">@{{ item.price }} <i
-                                                            class='fa fa-{{$offer->currency}}'></i></td>
+                                                            class='fa fa-{{$order->currency}}'></i></td>
                                                 <td align="right">%@{{item.vat}}</td>
                                                 <td style="text-align:right"> @{{ item.total }} <i
-                                                            class="fa fa-{{$offer->currency}}"></i></td>
+                                                            class="fa fa-{{$order->currency}}"></i></td>
                                             </tr>
 
 
@@ -134,8 +139,8 @@
                                                         <div class="bottom-info">ARA TOPLAM</div>
                                                     </td>
                                                     <td style="text-align:right">
-                                                        <div class="bottom-info">{{$offer->sub_total}} <i
-                                                                    class="fa fa-{{$offer->currency}}"></i></div>
+                                                        <div class="bottom-info">{{$order->sub_total}} <i
+                                                                    class="fa fa-{{$order->currency}}"></i></div>
                                                     </td>
                                                 </tr>
 
@@ -144,8 +149,8 @@
                                                         <div class="bottom-info">TOPLAM KDV</div>
                                                     </td>
                                                     <td style="text-align:right">
-                                                        <div class="bottom-info">{{$offer->vat_total}} <i
-                                                                    class="fa fa-{{$offer->currency}}"></i></div>
+                                                        <div class="bottom-info">{{$order->vat_total}} <i
+                                                                    class="fa fa-{{$order->currency}}"></i></div>
                                                     </td>
                                                 </tr>
                                                 <tr v-for="vato in vat_only" class="trow"
@@ -159,7 +164,7 @@
                                                     <td style="text-align:right">
                                                         <div class="bottom-info" style="font-size: 11px"><span
                                                                     id="total-vat-1">@{{ vato.total }}</span> <i
-                                                                    class="fa fa-{{$offer->currency}}"></i></div>
+                                                                    class="fa fa-{{$order->currency}}"></i></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -168,18 +173,18 @@
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info"
-                                                             style="color:#2AC!important">{{$offer->grand_total}}
-                                                            <i class="fa fa-{{$offer->currency}}"></i></div>
+                                                             style="color:#2AC!important">{{$order->grand_total}}
+                                                            <i class="fa fa-{{$order->currency}}"></i></div>
                                                     </td>
                                                 </tr>
-                                                @if($offer->currency != "try")
+                                                @if($order->currency != "try")
                                                     <tr>
                                                         <td>
                                                             <div class="bottom-info">TL KARŞILIĞI</div>
                                                         </td>
                                                         <td style="text-align:right">
                                                             <div class="bottom-info"
-                                                                 style="color:#2AC!important">{{$offer->tl_convert}}
+                                                                 style="color:#2AC!important">{{$order->tl_convert}}
                                                                 <i class="fa fa-try"></i></div>
                                                         </td>
                                                     </tr>
@@ -189,8 +194,8 @@
                                                         </td>
                                                         <td style="text-align:right">
                                                             <div class="bottom-info" style="color:#2AC!important">1 <i
-                                                                        class="fa fa-{{$offer->currency}}"></i>
-                                                                = {{$offer->currency_value}} <i class="fa fa-try"></i>
+                                                                        class="fa fa-{{$order->currency}}"></i>
+                                                                = {{$order->currency_value}} <i class="fa fa-try"></i>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -198,15 +203,47 @@
                                                 </tbody>
                                             </table>
                                         </div>
+
+                                            <table class="table">
+                                                <tfoot>
+                                                <tr>
+                                                    <td width="5%"></td>
+                                                    <td width="40%"></td>
+                                                    <td></td>
+                                                    <td>KALAN</td>
+                                                    <td><span class="pull-right">@{{ remaining }} <i class="fa fa-{{$order->currency}}"></i></span></td>
+                                                </tr>
+                                                </tfoot>
+                                                <tbody>
+
+                                                    <tr v-for="item in collect_items"   class="success" style="cursor: pointer;" @click="redirect(item.id,item.type)">
+                                                        <td>  <i class="fa fa-sign-in fa-rotate-90 "></i></td>
+                                                        <td>@{{item.date}} </td>
+                                                        <td></td>
+                                                        <td>@{{item.bank_account}}</td>
+                                                        <td> <span class="pull-right">@{{item.amount}} <i class="fa fa-{{$order->currency}}"></i></span></td>
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
+
+
+
                                     </div>
+
+
                                 </div>
+
+
+
 
 
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-sm-4" >
+                    <div class="col-sm-4">
 
                         <div id="order_info" class="well">
 
@@ -215,32 +252,28 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">TEKLİF TUTARI <span class="pull-right"
-                                                                                     style="font-size:15px;color:#2AC!important">{{$offer->grand_total}}
-                                                <i class="fa fa-{{$offer->currency}}"></i></span></div>
+                                        <div class="bottom-info">SİPARİŞ TUTARI <span class="pull-right"
+                                                                                   style="font-size:15px;color:#2AC!important">{{$order->grand_total}}
+                                                <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="row">
                                     <div class="col-sm-12">
-
-                                        <div style="font-size:15px;" :class="status_color" class="bottom-info">
-                                            @{{status_name}}
-                                            <a href="#" @click="offer_status"><span
-                                                        class="fa fa-edit " :class="status_color"></span> </a><span
-                                                    class="pull-right " style="font-size:15px;">@{{status_effective_date}}</span>
-                                        </div>
+                                        <div class="bottom-info">KALAN TUTAR <span class="pull-right"
+                                                                                     style="font-size:15px;color:#2AC!important">@{{ remaining }}
+                                                <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
 
+                                    <div class="col-sm-12">
+                                        <div class="bottom-info">HESAP BAKİYESİ <span class="pull-right"
+                                                                                   style="font-size:15px;color:#2AC!important">{{$order->company->balance}}
+                                                <i class="fa fa-{{$order->currency}}"></i></span></div>
+                                    </div>
                                 </div>
-
-                                <hr>
-
+                              <hr>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        TEKLİFTEN OLUŞTURULAN SİPARİŞLER
+                                       TEKLİFİ
                                         <br>
-                                        <a href="http://demo.iyspro.com/salesmanager/sales-orders/22"> SATIŞ SİPARİŞİ
+                                        <a href=">!"> SATIŞ TEKLİFİ
                                             &nbsp;(#22)</a><br>
                                     </div>
 
@@ -256,84 +289,11 @@
             </article>
         </div>
 
-        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales offer ?",$id=$offer->id])
-
-
-        {{-- Durum Modal--}}
-        <div class="modal fade" id="statusModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
-             style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            ×
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">DEĞİŞTİR</h4>
-                    </div>
-                    <div class="modal-body modal-body-content">
-                        <form id="StatusForm">
-                            <div class="row">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">DURUM</label>
-                                        <div class="col-md-6 ">
-                                            <div class="input-group">
-                                                <select v-model="form.status" class="form-control">
-                                                    <option v-for="statu in status" :value="statu.id">@{{statu.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <HR>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">EFEKTİF TARİH</label>
-                                        <div class="col-md-4 ">
-                                            <div class="input-group">
-                                                <input type="text"
-                                                       v-model="form.effective_date"
-                                                       data-mask="99.99.9999"
-                                                       name="form.effective_date"
-                                                       value="{{$offer->effective_date}}"
-                                                       class="form-control datepicker"
-                                                       data-dateformat="dd.mm.yy">
-                                                <span class="input-group-addon"><i
-                                                            class="fa fa-calendar"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <hr>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">AÇIKLAMA</label>
-                                        <div class="col-md-6 ">
-                                            <div class="input-group">
-                                                <textarea v-model="form.note" rows="3" cols="25"
-                                                          class="form-control custom-scroll">{{$offer->note}}</textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                            VAZGEÇ
-                        </button>
-                        <button type="button" class="btn btn-primary" v-on:click="status_send">
-                            KAYDET
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales order ?",$id=$order->id])
 
     </section>
+    @include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])
+
 
     @push('scripts')
         <script>
@@ -341,16 +301,29 @@
                 VueName = new Vue({
                     el: "#show",
                     data: {
-                        status: [@foreach($offer->get_status as $statu) {
-                            id: "{{$statu["id"]}}",
-                            name: "{{$statu["name"]}}"
-                        },  @endforeach],
-                        form: {
-                            status: "{{$offer->status}}",
-                            note: "{{$offer->note}}",
-                            effective_date: "{{$offer->effective_date}}"
-                        },
-                        items: [@foreach($offer->items as $item)
+
+                        remaining:"{{$order->remaining}}",
+                        collect_items:[
+                                @foreach($order->payments as $pay)
+                            {
+                                type:"collect",
+                                id:"{{$pay->id}}",
+                                date:"{{$pay->date}}",
+                                bank_account:'{{$pay->bank_account["name"]}}',
+                                amount:"{{get_money($pay->pivot->amount)}}"
+                            },
+                            @endforeach()
+                                @foreach($order->cheques as $che)
+                            {
+                                type:"cheq",
+                                id:"{{$che->id}}",
+                                date:"{{$che->date}}",
+                                bank_account:'ALINAN ÇEK',
+                                amount:"{{get_money($che->pivot->amount)}}"
+                            },
+                            @endforeach()
+                        ],
+                        items: [@foreach($order->items as $item)
                         {
                             product: "{{$item->product->named["name"]}}",
                             quantity: "{{$item->quantity}}",
@@ -360,9 +333,6 @@
                             total: "{{$item->total}}"
                         },
                             @endforeach ],
-                        status_color: "{{$offer->status_color}}",
-                        status_name: "{{$offer->status_name}}",
-                        status_effective_date: "{{$offer->effective_date}}",
                         vat_only: [
                             {name: "%1", total: 0},
                             {name: "%8", total: 0},
@@ -370,29 +340,22 @@
                         ],
                     },
                     methods: {
-                        offer_status: function () {
-                            $("#statusModal").modal("show");
-                        },
-                        status_send: function () {
-                            axios.post('{{route("sales.offers.status_send",[aid(),$offer->id])}}', this.form)
-                                .then(function (response) {
-                                    if (response.data.message == "success") {
-                                        VueName.status_name = response.data.status_name;
-                                        VueName.status_color = response.data.status_color;
-                                        VueName.status_effective_date = response.data.status_effective_date;
-                                        $("#statusModal").modal("hide");
-                                    }
-                                }).catch(function (error) {
-                                notification("Error", error.response.data.message, "danger");
 
-                            });
+                        redirect:function($id,$type){
+                            if($type=="collect"){
+                                return window.location.href='/{{aid()}}/finance/accounts/'+$id+'/receipt';
+                            }else{
+                                return window.location.href='/{{aid()}}/finance/cheques/'+$id+'/show';
+                            }
+
                         },
+
                         delete_data: function ($id) {
                             fullLoading();
-                            axios.delete('{{route("sales.offers.destroy",[aid(),$offer->id])}}')
+                            axios.delete('{{route("sales.orders.destroy",[aid(),$order->id])}}')
                                 .then(function (response) {
                                     if (response.data.message == "success") {
-                                        window.location.href = '{{route("sales.offers.index",aid())}}';
+                                        window.location.href = '{{route("sales.orders.index",aid())}}';
                                     }
                                 }).catch(function (error) {
                                 notification("Error", error.response.data.message, "danger");
@@ -407,7 +370,6 @@
                             vat1 = 0;
                             vat8 = 0;
                             vat18 = 0;
-
 
                             this.items.reduce((total, item) => {
 

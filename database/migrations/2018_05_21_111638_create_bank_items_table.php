@@ -16,6 +16,8 @@ class CreateBankItemsTable extends Migration
         Schema::create('bank_items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer("bank_account_id")->unsigned()->comment("Hareketin gerçekleştiği ana hesap");
+            $table->integer("company_id")->nullable()->unsigned()->comment("İşlem yapan müşteri veya tedarikçi");
+            $table->integer("cheque_id")->nullable()->unsigned()->comment("Çek tahsilatı id");
             $table->string('type')->comment("start_balance->Açılış Bakiyesi");
             $table->integer('doc_id')->comment("İşlem yapan 3.ortamın ID'si")->nullable();
             $table->date('date')->comment("İşlem Tarihi");

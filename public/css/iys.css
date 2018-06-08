@@ -165,6 +165,15 @@ table {
 !important;
 }
 
+.mini{
+    text-transform:none
+}
+
+.error{
+    color:#ad082e;
+    font-weight:bold
+}
+
 thead {
     border-top: 1px solid #ccc;
 }

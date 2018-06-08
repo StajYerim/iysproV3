@@ -30,10 +30,18 @@ class ChequesController extends Controller
             ->make(true);
     }
 
-    public function show($id)
+    public function show($aid, $id)
     {
         $cheq = Cheques::find($id);
         $accounts = BankAccounts::where("account_id",aid())->get();
         return view("modules.finance.cheques.show",compact("cheq","accounts"));
+    }
+
+    public function destroy($aid,$id)
+    {
+        Cheques::destroy($id);
+        flash()->overlay("Cheque Deleted", 'Success')->success();
+        sleep(1);
+        return ["message" => "success", 'type' => "cheque"];
     }
 }

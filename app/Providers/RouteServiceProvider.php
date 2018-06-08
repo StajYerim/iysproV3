@@ -38,7 +38,9 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes(); // Api Routers
         $this->mapWebRoutes(); // Web Routers (General)
         $this->mapStockRoutes(); // Stock Routers
+        $this->mapTasksRoutes(); // Tasks Routers
         $this->mapSalesRoutes(); // Sales Routers
+        $this->mapEcommerceRoutes(); // Ecommerce Routers
         $this->mapSettingsRoutes(); // Settings Routers
         $this->mapCompaniesRoutes(); // Company Routers
         $this->mapFinanceRoutes(); // Finance Routers
@@ -66,6 +68,20 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/stock.php'));
+    }
+
+    protected function mapTasksRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/tasks.php'));
+    }
+
+    protected function mapEcommerceRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/ecommerce.php'));
     }
 
     protected function mapSalesRoutes()

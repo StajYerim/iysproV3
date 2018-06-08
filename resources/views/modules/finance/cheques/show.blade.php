@@ -33,17 +33,56 @@
                             <div class="col-sm-5" style="font-weight: 400;font-size:15px;">
                                 <i class="fa fa-calendar"></i> ALINDIĞI TARİH, MÜŞTERİ<br><br>
                                 <i class="fa fa-calendar"></i> VADE TARİHİ<br><br>
+                                <div v-if="collect_cheque_show == true"><i class="fa fa-calendar"></i> TAHSİL EDİLDİĞİ HESAP <br><br></div>
                             </div>
 
 
-                            <div class="col-sm-6">
-                                <div>{{$cheq->date}}, <a href="{{route("sales.companies.show",[aid(),$cheq->company["id"]])}}"> {{$cheq->company["company_name"]}}</a></div><br><br>
-                                <div>{{$cheq->payment_date}}</div><br><br>
+                            <div class="col-sm-6" style="font-weight: 400;font-size:15px;">
+                             {{$cheq->date}}, <a href="{{route("sales.companies.show",[aid(),$cheq->company["id"]])}}"> {{$cheq->company["company_name"]}}</a><br><br>
+                              {{$cheq->payment_date}}<br><br>
+                                <div v-if="collect_cheque_show == true"> <div v-html="bank_name"></div><br><br></div>
                             </div>
 
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="table-responsive table-condensed table-hover " >
+                            <table class="table table-hover">
+                                <tfoot>
+                                <tr>
+                                    <td width="5%"></td>
+                                    <td></td>
+                                    <td style="text-align:right" >KALAN</td>
+                                    <td><span class="pull-right">{{$cheq->remaining}} <i class="fa fa-try"></i></span></td>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr>
+                                    <th width="20%">İŞLENDİĞİ FATURA</th>
+                                    <th width="20%">DURUMU</th>
+                                    <th style="text-align:right" width="10%">MEBLAĞ</th>
+                                    <th style="text-align:right" width="15%">İŞLENEN MEBLAĞ</th>
+
+                                </tr>
+                                </tbody>
+                                <tbody id="tablo" style="font-size: 11px;">
+                                <tr v-for="item in orders" style="cursor:pointer" v-on:click="redirect(item.id)">
+                                    <td>
+                                        @{{ item.type }}
+                                    </td>
+                                    <td>@{{ item.status }}</td>
+                                    <td style="text-align:right">@{{ item.grand_total }} </td>
+                                    <td align="right">@{{ item.process_amount }}</td>
+
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+                    </div>
 
                 </div>
 
@@ -55,7 +94,7 @@
                     <div id="short_info" class="col-12">
 
                         <div v-show="transfer_info">
-                            <div class="row">
+                            <div class="row" v-if="collect_button == true">
                                 <div class="col-sm-12">
                                     <button v-on:click="other_transfer" type="button"
                                             class="btn  btn-block bg-color-blue txt-color-white ">
@@ -66,7 +105,7 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <button type="button" class="btn btn-block bg-color-red txt-color-white">
+                                    <button type="button" data-toggle="modal" data-target="#deleteModal" class="btn btn-block bg-color-red txt-color-white">
                                        ÇEKİ SİL
                                     </button>
                                 </div>
@@ -74,7 +113,7 @@
                         </div>
 
                         <div v-show="other_transfer_show">
-                            <form @submit.prevent="money_in_send(3)" class="form-horizontal bv-form"
+                            <form @submit.prevent="cheuqe_collection_send" class="form-horizontal bv-form"
                                   novalidate="novalidate">
                                 <h1><i class="fa fa-1x c-textLight fa-share-square-o"></i> <span class="semi-bold">ÇEK TAHSİLATI</span>
                                 </h1>
@@ -104,7 +143,7 @@
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
-                                                <input type="text" v-model="money_form.date" class="form-control  datepicker "
+                                                <input type="text" v-model="money_form.date" name="money_form.date" class="form-control  datepicker "
                                                        data-mask="99.99.9999" data-dateformat="dd.mm.yy">
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                             </div>
@@ -112,27 +151,13 @@
                                     </div>
                                 </fieldset>
 
-
-
-                                <fieldset>
-                                    <div class="form-group has-feedback">
-                                        <label class="col-sm-4 control-label">
-                                            <span>AÇIKLAMA</span>
-                                        </label>
-                                        <div class="col-sm-8 ">
-                                            <div class="input-group" style="width:100%">
-                                                <input type="text" v-model="money_form.description" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
                                 <footer>
                                     <button type="button" v-on:click="cancel" class="btn pull-left ">
                                         VAZGEÇ
                                     </button>
 
-                                    <button type="submit" :disabled="money_form.amount == 0 || money_form.bank_account_id == '' " class="btn btn btn-danger pull-right" >
-                                        TRANSFER ET
+                                    <button type="submit" :disabled="money_form.bank_account_id == '' " class="btn btn btn-danger pull-right" >
+                                        TAHSİL ET
                                     </button>
                                     <br><br>
                                 </footer>
@@ -145,14 +170,14 @@
                         <div class="row">
 
                             <div class="col-sm-12">
-                                <h7>DURUMU <span class="pull-right" style="font-size:15px;color:#7a7c71!important">
-                                                                                Tahsil Edilecek
+                                <div class="bottom-info">DURUMU <span class="pull-right" style="font-size:15px;color:#7a7c71!important">
+                                                                             @{{ collect_statu }}
 
-                                    </span></h7>
+                                    </span></div>
                             </div>
                             <div class="col-sm-12">
-                                <h7>ÇEK TOPLAMI <span class="pull-right" style="font-size:15px;color:#2AC!important">
-                                    {{$cheq->amount}}   <i class="fa fa-try"></i></span></h7>
+                                <div class="bottom-info">ÇEK TOPLAMI <span class="pull-right" style="font-size:15px;color:#2AC!important">
+                                    {{$cheq->amount}}   <i class="fa fa-try"></i></span></div>
                             </div>
                         </div>
 
@@ -165,6 +190,8 @@
         </div>
 
 
+        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete cheque ?",$id=$cheq->id])
+
 
     </section>
 
@@ -173,9 +200,14 @@
 
             window.addEventListener("load", function(event) {
 
-            new Vue({
+         VueName =   new Vue({
                 el: "#show",
                 data: {
+                    collect_cheque_show:"{{$cheq->collect_statu == 1 ? true:false}}",
+                    bank_name:"{{$cheq->collect_statu == 1 ? $cheq->collect->bank_account["name"]:false}}",
+                    collect_statu:"{{$cheq->collect_statu == 1 ? "TAHSİL EDİLDİ":"TAHSİL EDİLECEK"}}",
+                    collect_button:"{{$cheq->collect_statu == 1 ? false:true}}",
+                    orders:[],
                     balance: "",
                     money: {
                         decimal: ',',
@@ -184,36 +216,59 @@
                         masked: false
                     },
                     details: false,
-
                     other_transfer_show: false,
                     transfer_info: true,
                     account_items: [],
                     accounts: [{name:"Hesap Seçin",id:""}, @foreach($accounts as $acc) {name: "{{$acc->name}}", id: "{{$acc->id}}"},@endforeach],
                     money_form: {
                         date: "{{date_tr()}}",
-                        amount: "",
                         bank_account_id:"",
-                        description: "",
-                        type: ""
+                        cheque_id:"{{$cheq->id}}",
+                        type:"cheque_collect",
                     },
 
                 },
-                computed: {
-                    itemsReverse() {
-                        return this.account_items.reverse()
-                    }
-                },
                 mounted() {
                     datePicker();
-
+                    this.orders.push(
+                                @foreach($cheq->orders as $order){
+                            id:"{{$order->id}}",
+                            type:"Fatura",
+                            status:"{{$order->status}}",
+                            grand_total:"{{$order->grand_total}}",
+                            process_amount:"{{get_money($order->pivot->amount)}}"
+                        },
+                            @endforeach()
+                    );
                 },
                 methods: {
+                    cheuqe_collection_send:function(){
+                        console.log(VueName.money_form);
+                        this.$validator.validate().then((result) => {
+                            if (result) {
+
+                                axios.post("{{route("finance.accounts.cheque",aid())}}",VueName.money_form).then(function(res){
+                                   VueName.bank_name = res.data.bank_name
+                                   VueName.collect_button = false;
+                                   VueName.collect_statu = "TAHSİL EDİLDİ";
+                                    VueName.collect_cheque_show = true;
+                                    VueName.cancel();
+                                })
+
+
+
+
+                            }});
+                    },
+                    redirect:function($id){
+                      return window.location.href='/{{aid()}}/sales/orders/'+$id+'/show';
+                    },
                     delete_data: function ($id) {
                         fullLoading();
-                        axios.delete('{{route("stock.movements.destroy",[aid(),0])}}')
+                        axios.delete('{{route("finance.cheques.destroy",[aid(),$cheq->id])}}')
                             .then(function (response) {
                                 if (response.data.message == "success") {
-                                    window.location.href = '{{route("stock.movements.index",aid())}}';
+                                    window.location.href = '{{route("finance.cheques.index",aid())}}';
                                 }
                             }).catch(function (error) {
                             notification("Error", error.response.data.message, "danger");
@@ -236,19 +291,6 @@
                         this.money_form.description = "";
 
                     },
-                    {{--money_in_send: function ($type) {--}}
-                        {{--fullLoading();--}}
-                        {{--this.money_form.type = $type;--}}
-                        {{--axios.post("{{route("finance.accounts.transaction",[aid(),0])}}", this.money_form).then(response => {--}}
-
-                            {{--this.actions();--}}
-                            {{--this.cancel();--}}
-                            {{--this.balance = response.data.balance;--}}
-
-                            {{--notification("Success", "Money was entered","success")--}}
-                            {{--fullLoadingClose();--}}
-                        {{--})--}}
-                    {{--}--}}
 
                 }
             });

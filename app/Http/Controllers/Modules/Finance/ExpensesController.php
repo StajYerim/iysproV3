@@ -16,7 +16,7 @@ class ExpensesController extends Controller
 {
     public function index()
     {
-        $accounts = BankAccounts::all();
+        $accounts = BankAccounts::where("account_id",aid())->get();
         $tags = Tags::where("type", "expenses")->get();
         return view("modules.finance.expenses.index", compact("accounts", "tags"));
     }
@@ -27,11 +27,6 @@ class ExpensesController extends Controller
         $expenses = Expenses::with("tags", "bank_item", "bank_item.bank_account")->select("expenses.*")->where("account_id", aid());
 
         return Datatables::of($expenses)
-//            ->setRowAttr([
-//                'onclick' => function ($expense) {
-//                    return "product_update($expense->id)";
-//                },
-//            ])
             ->editColumn("balance", function ($expense) {
                 return $expense->balance;
             })

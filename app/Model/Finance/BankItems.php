@@ -2,6 +2,9 @@
 
 namespace App\Model\Finance;
 
+use App\Bankabble;
+use App\Companies;
+use App\Model\Sales\SalesOrders;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -43,6 +46,35 @@ class BankItems extends Model
 
     public function bank_account()
     {
-        return $this->hasOne(BankAccounts::class,"id","bank_account_id");
+        return $this->hasOne(BankAccounts::class, "id", "bank_account_id");
     }
+
+    public function company()
+    {
+        return $this->hasOne(Companies::class, "id", "company_id");
+    }
+
+    public function orders()
+    {
+        return $this->morphedByMany(SalesOrders::class, 'bankabble')->withPivot("amount");
+    }
+
+    public function bankabble()
+    {
+        return $this->hasOne(Bankabble::class, "bank_items_id", "id");
+    }
+
+    public function getRemainingAttribute()
+    {
+        $used = $this->orders->sum("pivot.amount");
+        $total = money_db_format($this->amount);
+
+        $general_total = get_money($total - $used);
+
+        return $general_total;
+
+
+    }
+
+
 }

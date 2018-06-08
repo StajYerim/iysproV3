@@ -3,7 +3,7 @@
     @if($form_type == "copy")
         @php
                 $form_type = "update";
-        $copy = 0;
+                      $copy = 0;
 
                 @endphp
         @endif
@@ -92,14 +92,14 @@
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group"
-                                             v-bind:class="{'has-error':errors.has('form.expired_date')}">
-                                            <label class="col-md-3 control-label">Geçerlilik Tarihi</label>
+                                             v-bind:class="{'has-error':errors.has('form.due_date')}">
+                                            <label class="col-md-3 control-label">Vade Tarihi</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"
-                                                              name="form.expired_date" v-validate="'required'"
+                                                              name="form.due_date" v-validate="'required'"
                                                               class="form-control datepicker"
-                                                              v-model="form.expired_date"></the-mask>
+                                                              v-model="form.due_date"></the-mask>
 
                                                     <span class="input-group-addon"><i
                                                                 class="fa fa-calendar"></i></span>
@@ -108,7 +108,7 @@
                                         </div>
                                     </fieldset>
                                 </div>
-                                @includeIf("components.external.rows",[$offer,$proccess_type = "sales"])
+                                @includeIf("components.external.rows",[$offer = $order,$proccess_type = "sales"])
                             </form>
 
 
@@ -124,7 +124,6 @@
             <!-- WIDGET ROW END -->
         </div>
         @include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0])
-
     </section>
 
     {{--@include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0])--}}
@@ -148,23 +147,20 @@
                             masked: false
                         },
                         form: {
-                            description: "{{$form_type == "update" ? $offer->description:""}}",
-                            company_id: @if($form_type == "update") { id:'{{$offer->company["id"]}}',text:'{{$offer->company["company_name"]}}' } @else "" @endif,
-                            date: "{{$form_type == "update" ? $offer->date:date_tr()}}",
-                            expired_date: "{{$form_type == "update" ? $offer->expired_date:date_tr()}}",
-                            grand_total: "{{$form_type == "update" ? $offer->grand_total:"0,00"}}",
-                            sub_total: "{{$form_type == "update" ? $offer->sub_total:"0,00"}}",
-                            vat_total: "{{$form_type == "update" ? $offer->vat_total:"0,00"}}",
-                            currency: "{{$form_type == "update" ? $offer->currency:"try"}}",
-                            currency_value: "{{$form_type == "update" ? $offer->currency_value:"0,00"}}",
-
+                            description: "{{$form_type == "update" ? $order->description:""}}",
+                            company_id: @if($form_type == "update") { id:'{{$order->company["id"]}}',text:'{{$order->company["company_name"]}}' } @else "" @endif,
+                            date: "{{$form_type == "update" ? $order->date:date_tr()}}",
+                            due_date: "{{$form_type == "update" ? $order->due_date:date_tr()}}",
+                            grand_total: "{{$form_type == "update" ? $order->grand_total:"0,00"}}",
+                            sub_total: "{{$form_type == "update" ? $order->sub_total:"0,00"}}",
+                            vat_total: "{{$form_type == "update" ? $order->vat_total:"0,00"}}",
+                            currency: "{{$form_type == "update" ? $order->currency:"try"}}",
+                            currency_value: "{{$form_type == "update" ? $order->currency_value:"0,00"}}",
                         }
                     }),
-
                     mounted: function () {
                         money_per();
                       datePicker();
-
                     },
                     methods: {
                         addRow: function () {
@@ -187,7 +183,6 @@
                             axios.get("{{route("company.source",aid())}}?q=" + escape(search)).then(function (res) {
                                 Companies.form.company_name = search;
                                 vm.options = res.data;
-
                                 loading(false)
                             });
 
@@ -197,14 +192,14 @@
                             this.$validator.validate().then((result) => {
                                 if (result) {
                                     fullLoading();
-                                    axios.post('{{route("sales.offers.store",[aid(),isset($copy)  == false ? $form_type == "update" ? $offer->id:0:0])}}', {
+                                    axios.post('{{route("sales.orders.store",[aid(),isset($copy)  == false ? $form_type == "update" ? $order->id:0:0])}}', {
                                         form: this.form,
                                         items: Vuen.items
                                     })
                                         .then(function (response) {
                                             if (response.data.message) {
                                                 if (response.data.message == "success") {
-                                                    window.location.href = '/{{aid()}}/sales/offers/' + response.data.id + "/show";
+                                                    window.location.href = '/{{aid()}}/sales/orders/' + response.data.id + "/show";
                                                     fullLoadingClose();
                                                 }
 

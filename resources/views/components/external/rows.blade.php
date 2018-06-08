@@ -13,11 +13,11 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
             <div class="col-md-2 ">
 
                 <div class="input-group">
-                    <div class="dropdown "><a data-toggle="dropdown" href="#"
+                    <div class="dropdown change"><a data-toggle="dropdown" href="#"
                                               aria-expanded="true"
-                                              class="btn btn-sm btn-default dropdown-toggle "><span
+                                              class="btn btn-sm btn-default change dropdown-toggle "><span
                                     class="fa fa-try"></span> DEĞİŞTİR</a>
-                        <ul class="dropdown-menu dropdown-caret"
+                        <ul class="dropdown-menu change dropdown-caret"
                             style="min-width: 350px; padding: 7px 9px; margin: -32px -1px 0px;">
                             <li>
                                 <div class="alert alert-warning" style="font-size:11px">
@@ -58,12 +58,12 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
         <table class="table  table-condensed">
             <tbody>
             <tr>
-                <th width="40%">HİZMET / ÜRÜN</th>
+                <th width="41%">HİZMET / ÜRÜN</th>
                 <th width="10%">MİKTAR</th>
                 <th width="10%">BİRİM</th>
                 <th width="10%">BR FİYAT</th>
                 <th width="12%">KDV</th>
-                <th width="14%">TOPLAM</th>
+                <th width="13%">TOPLAM</th>
                 <th width="1%">#</th>
             </tr>
             </tbody>
@@ -71,11 +71,11 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
             <tbody v-for="(item, index) in items">
             <tr>
                 <td>
-                    <v-select label="text" v-model="item.tetra"
-                              v-bind:class="{'v-select-error':errors.has('item.tetra')}"
+                    <v-select :ref="'field-'+index" label="text" v-model="item.tetra"
+                              v-bind:class="{'v-select-error':errors.has('item.tetra'+index)}"
 
                               v-validate="'required'" :filterable="true" placeholder="Choose Product"
-                              :options="options" name="item.tetra"
+                              :options="options" :name="'item.tetra'+index"
                               @input="function(val) { consoleCallback(index, val); }">
 
                         <template slot="option" slot-scope="option">
@@ -89,21 +89,14 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             </div>
                         </template>
                     </v-select>
-
-                    <div class="input-group" style="top: 2px;" v-show="item.description_show">
-                        <input type="text" class="form-control" v-model="item.description">
-                        <div class="input-group-btn">
-                            <button type="button" placeholder="Description" class="btn btn-default"
-                                    @click="item.description_show = false" tabindex="-1">X
-                            </button>
-                        </div>
-                    </div>
                 </td>
                 <td>
 
                     <input v-on:keypress="isNumber" v-model.lazy="item.quantity"
                            class="form-control"
                            style="text-align: right"/>
+
+
                 </td>
 
                 <td>
@@ -132,6 +125,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             <span class="fa fa-list"></span></button>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li><a href="#!" v-on:click="addNote(index)" v-show="!item.description_show">Not</a></li>
+                            <li><a href="#!" v-on:click="addTermin(index)" v-show="!item.termin_show">TERMİN</a></li>
                             <li><a href="#!">İndirim</a></li>
                             <li><a href="#!" v-if="index != 0 " v-on:click="removeRow(index)">
                                     Satırı Sil
@@ -141,6 +135,33 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                 </td>
 
             </tr>
+            <tr>
+                <td colspan="1">
+                    <div class="input-group" style="top: 2px;" v-show="item.description_show">
+                        <input type="text" class="form-control" v-model="item.description">
+                        <div class="input-group-btn">
+                            <button type="button" placeholder="Description" class="btn btn-default"
+                                    @click="item.description_show = false" tabindex="-1">X
+                            </button>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="input-group" style="top: 2px;" v-show="item.termin_show">
+                        <input  type="date"
+                                  class="form-control"
+                                  v-model="item.termin_date">
+
+                        <div class="input-group-btn">
+                            <button type="button" placeholder="Termin Date" class="btn btn-default"
+                                    @click="item.termin_show = false" tabindex="-1">X
+                            </button>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="4"></td>
+            </tr>
+
 
             </tbody>
         </table>
@@ -221,6 +242,14 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 @push("script_form")
     <script>
         window.addEventListener("load", () => {
+            Vue.directive('focus', {
+                inserted: function (el, binding, vnode) {
+                    Vue.nextTick(function () {
+                        el.focus()
+                    })
+                }
+            })
+
             Vue.component('v-select', VueSelect.VueSelect);
             Vuen = new Vue({
                 el: "#rows",
@@ -258,6 +287,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             id: 0,
                             description: "",
                             description_show: false,
+                            termin_show: false,
+                            termin_date: "{{date_local()}}",
                             unit: 1,
                             vat: 18,
                             note: "",
@@ -321,9 +352,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         return this.items.reduce((total, item) => {
                             st += money_clear(item.quantity) * money_clear(item.amount);
                             result = st.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 4});
-
                             this.sub_total = result;
-                            //Ana form
                             VueName.form.sub_total = result;
                             return result;
                         }, 0);
@@ -334,7 +363,6 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         this.items.reduce((total, item) => {
                             tp += money_clear(item.total) * 1;
                         }, 0);
-
 
                         let yeni = tp.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 4});
                         this.grand_total = yeni;
@@ -381,7 +409,6 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 
 
                             } else if (item.vat == 8) {
-
 
                                 t = money_clear(item.total);
                                 a = money_clear(item.amount);
@@ -441,6 +468,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     },
                 },
                 mounted: function () {
+                    datePicker();
+
                     @if($form_type == "update")
 
                             @foreach($offer->items as $item)
@@ -455,6 +484,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             note: "{{$item->note}}",
                             product_id: "{{$item->product_id}}",
                             amount: "{{$item->price}}",
+                            termin_date: "{{$item->termin_date}}",
+                            termin_show: "{{$item->termin_show}}",
                             quantity: "{{$item->quantity}}",
                             total: "{{$item->total}}",
                         }
@@ -463,13 +494,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 
                             @endif
 
-
-                        this.currency_process(this.currency);
-
-                    $(document).on('click', '.dropdown .dropdown-menu', function (e) {
-                        e.stopPropagation();
-
-                    });
+                   this.currency_process(this.currency);
 
                     window.addEventListener("keypress", function (e) {
                         if (e.keyCode == 43) {
@@ -481,8 +506,17 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         }
 
                     }.bind(this));
+
+
+                    $(document).on('click', '.change', function (e) {
+                        e.stopPropagation();
+
+                    });
                 },
                 methods: {
+                    itemdate(index){
+                      return "itemdate-"+index;
+                    },
                     consoleCallback: function (val, tag) {
 
                         if (this.load == true) {
@@ -534,6 +568,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             id: 0,
                             unit: "1",
                             description_show: false,
+                            termin_show: false,
+                            termin_date: "{{date_local()}}",
                             vat: 18,
                             tetra: "",
                             product_id: "",
@@ -542,6 +578,16 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             total: "0,00",
                             note: "",
                         });
+
+                        col = this.items.length - 1;
+
+                        this.$nextTick(() => {
+                            const input = this.$refs["field-" + col][0].$el.querySelector('input');
+                            input.focus();
+
+                        })
+
+                        console.log(this.items[col].product_id = '');
                     },
                     removeRow: function (index) {
                         if (index != 0) {
@@ -551,6 +597,10 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     addNote: function (index) {
 
                         this.items[index].description_show = true;
+                    },
+                    addTermin: function (index) {
+                        this.items[index].termin_show = true;
+                        datePicker();
                     },
                     isNumber: function (evt) {
                         evt = (evt) ? evt : window.event;

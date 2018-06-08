@@ -49,6 +49,7 @@ class Account extends Model
         parent::save($options);
 
         BankAccounts::create([
+            "account_id"=>$this->id,
             "name" => "KASA HESABI",
             "type" => 1,
             "currency"=>"TRL",

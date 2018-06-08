@@ -160,7 +160,7 @@
 
                                         <label class="col-md-3 control-label">Stok Türü</label>
                                         <div class="col-md-4">
-                                            <select class="form-control" v-model="form.type_id">
+                                            <select class="form-control" v-model="form.type_id" @change="priceShow(form.type_id)">
                                                 @foreach(product_type_list() as $type)
                                                     <option value="{{$type["id"]}}">{{$type["name"]}}</option>
                                                 @endforeach
@@ -237,12 +237,10 @@
     </section>
 
     @push("style")
-
         <link href="{{asset("/js/flager/css/flags.css")}}"
               rel="stylesheet"/>
         <link href="{{asset("/js/boost-select/css/bootstrap-select.min.css")}}"
               rel="stylesheet"/>
-
     @endpush
     @push("scripts")
         <script src="{{asset("/js/flager/js/jquery.flagstrap.min.js")}}"></script>
@@ -278,9 +276,6 @@
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 4
                             });
-
-
-
                         },
                         "form.list_price": function (yeni, eski) {
 
@@ -292,7 +287,6 @@
                         }
                     },
                     mounted: function () {
-
 
 
                         @if($form_type == "update")
@@ -396,6 +390,14 @@
 
                     },
                     methods: {
+                        priceShow:function(type_id){
+                           if(type_id == 1 || type_id == 4){
+                               this.form.list_price = "0,00"
+                           }else if(type_id == 2){
+                               this.form.buying_price = "0,00"
+                           }
+
+                        },
                         isNumber: function (evt) {
                             evt = (evt) ? evt : window.event;
                             var charCode = (evt.which) ? evt.which : evt.keyCode;
