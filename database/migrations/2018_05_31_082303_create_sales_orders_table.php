@@ -16,6 +16,7 @@ class CreateSalesOrdersTable extends Migration
         Schema::create('sales_orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer("account_id")->unsigned();
+            $table->integer("sales_offer_id")->nullable();
             $table->string('description')->nullable();
             $table->integer("company_id")->unsigned();
             $table->string("currency");

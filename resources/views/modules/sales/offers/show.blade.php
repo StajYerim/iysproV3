@@ -25,7 +25,7 @@
                                     KOPYASINI OLUŞTUR</a>
                             </li>
                             <li>
-                                <a onclick="$(this).orderReturn()" data-id="0" id="orderReturn" href="#"><i
+                                <a href="{{route("sales.orders.form",[aid(),$offer->id,"offers"])}}"><i
                                             class="fa fa-reply " aria-hidden="true"></i>
                                     SİPARİŞE DÖNÜŞTÜR</a>
                             </li>

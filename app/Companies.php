@@ -137,6 +137,8 @@ class Companies extends Model
 
         Bankabble::where("bankabble_id", $order->id)->where("bankabble_type", "App\Model\Sales\SalesOrders")->delete();
 
+
+
         //Açık Banka Fişleri
         foreach ($open_receipts as $receipts) {
             $ordersd = SalesOrders::find($order->id);
@@ -196,6 +198,8 @@ class Companies extends Model
             }
         }
 
+
+        Bankabble::where("amount",0)->delete();
 
     }
 

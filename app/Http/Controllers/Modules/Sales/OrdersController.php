@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Modules\Sales;
 
 use App\Bankabble;
+use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
@@ -43,8 +44,18 @@ class OrdersController extends Controller
     public function form($aid, $id, $type)
     {
         $form_type = $type;
-        $order = $id == 0 ? "" : SalesOrders::find($id);
-        return view("modules.sales.orders.form", compact("form_type", "order"));
+
+        if($form_type == "offers"){
+            $order = $id == 0 ? "" : SalesOffers::find($id);
+            $form_type = "update";
+            $order->due_date = $order->date;
+            $copy = 0;
+
+        }else{
+            $order = $id == 0 ? "" : SalesOrders::find($id);
+        }
+
+        return view("modules.sales.orders.form", compact("form_type", "order","copy"));
 
     }
 
