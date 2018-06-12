@@ -56,7 +56,6 @@
     <script src="{{asset("js/vue/vue-router.js")}}"></script>
     <script src="{{asset("js/vue/v-validate.js")}}"></script>
     <script src="https://unpkg.com/vue-the-mask"></script>
-    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
         if (!window.jQuery) {

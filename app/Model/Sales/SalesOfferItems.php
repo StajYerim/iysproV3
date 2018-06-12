@@ -26,6 +26,11 @@ class SalesOfferItems extends Model
         $this->attributes['total'] = money_db_format($value);
     }
 
+    public function getOnlyPriceAttribute()
+    {
+        return get_money(money_db_format($this->price)*money_db_format($this->quantity));
+    }
+
     public function getQuantityAttribute(){
 
         $a = new \NumberFormatter("tr-TR", \NumberFormatter::DECIMAL);

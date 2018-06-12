@@ -2,7 +2,6 @@
     <vue-tags-input
             v-model="form.tag"
             :tags="form.tagsd"
-            :autocomplete-items="filteredItems"
             @tags-changed="newTags => form.tagsd = newTags"
     />
 </div>

@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Modules\Sales;
-
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOfferItems;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Artisan;
 
 class OffersController extends Controller
 {
@@ -97,6 +98,23 @@ class OffersController extends Controller
     {
         $offer = SalesOffers::find($id);
         return view("modules.sales.offers.show", compact("offer"));
+    }
+
+    public function pdf($aid, $id,$type)
+    {
+        Artisan::call('view:clear');
+
+        if($type=="url"){
+            $offer = SalesOffers::find($id);
+            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer"))->setPaper('A4');
+            return $pdf->stream();
+        }else{
+            $offer = SalesOffers::find($id);
+            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer"))->setPaper('A4');
+            return   $pdf->download($offer->company["company_name"].' ('.$offer->description.').pdf');
+        }
+
+
     }
 
     public function destroy($aid, $id)
