@@ -24,6 +24,7 @@ Route::group(['prefix'=>'{company_id}/sales','middleware'=>'not.admin'],function
     Route::get("offers/{id}/show","Modules\Sales\OffersController@show")->name("sales.offers.show");
     Route::delete("offers/{id}/destroy","Modules\Sales\OffersController@destroy")->name("sales.offers.destroy");
     Route::post("offers/{id}/status-send","Modules\Sales\OffersController@status_send")->name("sales.offers.status_send");
+    Route::get("offers/{id}/pdf/{type}","Modules\Sales\OffersController@pdf")->name("sales.offers.pdf");
 
     //Sales Orders
     Route::get('orders', 'Modules\Sales\OrdersController@index')->name('sales.orders.index');

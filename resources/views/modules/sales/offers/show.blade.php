@@ -44,12 +44,12 @@
                                     class="fa fa-print"></span> YAZDIR <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
+                                <a target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url"])}}"><i
                                             class="fa fa-print" aria-hidden="true"></i>
                                     TEKLİFİ YAZDIR</a>
                             </li>
                             <li>
-                                <a download="" href="http://demo.iyspro.com/salesmanager/sales-offer/8/printDown"
+                                <a download="" href="{{route("sales.offers.pdf",[aid(),$offer->id,"download"])}}"
                                    id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
                                     TEKLİFİ İNDİR</a>
                             </li>
@@ -58,7 +58,7 @@
 
                     </div>
 
-                    <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
+                    <a href="#!" data-toggle="modal" data-target="#shareModal" class="btn btn-default"><i
                                 class="fa fa-envelope"></i> Paylaş</a>
 
                 </div>
@@ -257,7 +257,7 @@
         </div>
 
         @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales offer ?",$id=$offer->id])
-
+        @include("components.external.share",[$title="Teklif",$thread="Teklif",$message="Mesaj içeriği"])
 
         {{-- Durum Modal--}}
         <div class="modal fade" id="statusModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"

@@ -155,7 +155,7 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                {{--tags--}}
+
                                 @includeIf('components.external.tags', [$type="companies"])
                             </form>
                         </div>
@@ -239,16 +239,12 @@
                             iban: "{{$form_type == "Update" ? $company->iban:""}}",
                             tag: '',
                             tagsd: [],
-                            tester: "",
                         },
-
                     }),
                     mounted: function () {
 
-
-                        selena();
                         city_and_county();
-                        console.log(this.form);
+
                     },
                     methods: {
 

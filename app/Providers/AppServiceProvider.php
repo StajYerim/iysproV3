@@ -6,6 +6,7 @@ use App\Language;
 use App\Menu;
 use App\Role;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -48,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
             return auth()->check() && auth()->user()->role_id == Role::ACCOUNT_OWNER;
         });
 
+        Artisan::call("view:clear");
 
     }
 
