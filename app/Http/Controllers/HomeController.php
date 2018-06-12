@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use Illuminate\Http\Request;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -17,6 +18,21 @@ class HomeController extends Controller
     {
         return view('dashboard');
     }
+  
+  
+    public function profil_update($aid,$id){
+      
+     
+      return view("modules.users.update");
+    }
+  
+      public function account_update($aid){
+      
+     
+      return view("modules.accounts.update");
+    }
+  
+  
 
     /**
      * Present profile of authenticated user.

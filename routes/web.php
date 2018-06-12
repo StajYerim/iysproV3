@@ -65,8 +65,6 @@ Route::middleware('admin')->group(function() {
 Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
 
 
-
-    Route::get('myprofile', 'HomeController@myProfile')->name('myProfile');
     Route::get('dashboard', 'HomeController@index')->name('dashboard');
     Route::get('company-profile', 'AccountsController@profile')->name('company.profile');
     Route::get('user-list', 'AccountUsersController@index')->name('users.index');
