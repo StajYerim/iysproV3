@@ -13,12 +13,11 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-md-3 ">ALICI *</label>
-                                <div class="col-md-9 ">
-                                    <input id='ms-emails' name="shareEmail" type='text' class='tags'>
-
+                                <div class="col-md-9">
+                                    <input id='ms-emails' name="shareEmail" type='text'>
                                 </div>
                             </div>
-                        </div><br><br><br>
+                        </div><br>
                         <HR>
                         <div class="col-md-12">
                             <div class="form-group">
@@ -50,50 +49,34 @@
     </div>
 </div>
 @push("style")
-    <link href="/js/magicsuggest/magicsuggest.css" rel="stylesheet">
+    <link href="{{asset("/js/magicsuggest/magicsuggest.css")}}" rel="stylesheet">
 @endpush
 @push("scripts")
-    <script src="/js/magicsuggest/magicsuggest.js"></script>
+    <script src="{{asset("/js/magicsuggest/magicsuggest.js")}}"></script>
+    <script src="{{asset("/js/plugin/summernote/summernote.min.js")}}"></script>
+
 <script>
-    window.addEventListener("load", () => {
-        Vue.component('v-select', VueSelect.VueSelect);
-ShareForm = new Vue({
-    el:"#share-form",
-    data:{
+    $(document).ready(function() {
 
-    },
-    methods:{
+        pageSetUp();
+        $('.editor').summernote({
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'hr']],
+                ['view', ['fullscreen', 'codeview', 'help']]
 
-    },
-    mounted:function(){
+            ]
+        });
         let ms = $('#ms-emails').magicSuggest({
-            vtype: 'email',
-            noSuggestionText: 'Girilen değerde kayıt bulunamadı',
-            placeholder: 'Eposta',
-            data: [{
-                    name: 'yakup',
-                    email: 'yakupguvenc@yandex.com'
-                },
-
-
-            ],
-            valueField: 'email',
-            renderer: function(data){
-                return  data.email;
-            },
-            resultAsString: false
         });
 
-        $(ms).on(
-            'selectionchange', function(e, cb, s){
-
-                if(this.isValid() == false){
-                    this.remove();
-                }
-            }
-        );
-    }
-})
     });
 </script>
 @endpush()

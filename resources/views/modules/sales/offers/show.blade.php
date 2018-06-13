@@ -5,7 +5,6 @@
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
                 <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$offer->descriptions}}</span></h1>
-
             </div>
             <div class="col-lg-4 col-sm-4">
 
@@ -16,7 +15,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="{{route("sales.offers.form",[aid(),$offer->id,"update"])}}"><i
-                                            class="fa fa-edit" arisha-hidden="true"></i>
+                                            class="fa fa-edit" aria-hidden="true"></i>
                                     DÜZENLE</a>
                             </li>
                             <li>
