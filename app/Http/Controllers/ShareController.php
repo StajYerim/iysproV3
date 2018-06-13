@@ -13,7 +13,6 @@ class ShareController extends Controller
     {
 
 
-
         $data = [];
         $data["thread"] = $request->thread;
         $data["message"] = $request->message;

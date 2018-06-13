@@ -87,22 +87,17 @@
                 formSend: function () {
                     fullLoading()
                     this.btnDisable = true;
-
+                    ShareForm.form.message = $('.editor').summernote('code');
 
                     $("#shareModal").modal("toggle");
-                    axios.post("{{route("share.offer",[aid(),$data->id])}}", this.form).then(function(res)
-                    {
-                        console.log(res.data);
-                    }
-                )
-                    ;
+                    axios.post("{{route("share.offer",[aid(),$data->id])}}", this.form).then(function (res) {
 
+                            fullLoadingClose();
+                            this.btnDisable = false;
+                            notification("Success", "Mail was sent", "success")
+                        }
+                    );
 
-                    this.formReset()
-                    fullLoadingClose();
-                    this.btnDisable = false;
-                    ShareForm.form.message = $('.editor').summernote('code');
-                    console.log(this.form)
                 },
                 formReset: function () {
                     this.form = {
