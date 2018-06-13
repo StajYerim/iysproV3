@@ -253,10 +253,10 @@
 
 
             </article>
+            <div id="ms-emails"></div>
         </div>
 
         @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales offer ?",$id=$offer->id])
-        @include("components.external.share",[$title="Teklif",$thread="Teklif",$message="Mesaj içeriği"])
 
         {{-- Durum Modal--}}
         <div class="modal fade" id="statusModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
@@ -333,8 +333,13 @@
         </div>
 
     </section>
+    @include("components.external.share",[$title="Teklif",$thread="Teklif",$message="Mesaj içeriği",$type="sales_offers",$data = $offer])
+
 
     @push('scripts')
+
+
+
         <script>
             window.addEventListener("load", () => {
                 VueName = new Vue({

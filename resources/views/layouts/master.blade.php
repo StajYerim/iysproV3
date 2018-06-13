@@ -86,7 +86,7 @@
         Vue.use(VeeValidate);
     </script>
     @stack("style")
-<body style="text-transform:uppercase;color:#7b7b7b" class="fixed-header fixed-navigation">
+<body style="color:#7b7b7b" class="fixed-header fixed-navigation">
 @include("layouts.header")
 @include("layouts.sidebar")
 @include("layouts.main")

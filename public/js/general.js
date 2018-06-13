@@ -196,10 +196,6 @@ console.log(data)
                     }
 
 
-
-
-
-
                     console.log(datePicker);
 
 

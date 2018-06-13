@@ -31,9 +31,7 @@
 [v-cloak] {
     display: none;
 }
-nav{
-    text-transform: capitalize;
-}
+
 .input-group .form-control {
     z-index: 1;
 }

@@ -83,6 +83,8 @@ Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
     //Döviz kurları
     Route::get("/exchange","ExchangeController@exchange")->name("exchange");
 
+    //Share Offers/Orders
+    Route::post("/offer-share/{id}","ShareController@offer_share")->name("share.offer");
 
 });
 
