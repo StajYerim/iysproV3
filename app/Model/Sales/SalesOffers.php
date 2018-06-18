@@ -231,5 +231,10 @@ class SalesOffers extends Model
         }
     }
 
+    public function orders()
+    {
+        return $this->hasMany(SalesOrders::class, "sales_offer_id", "id");
+    }
+
 
 }

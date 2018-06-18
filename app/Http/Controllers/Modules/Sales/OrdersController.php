@@ -49,14 +49,16 @@ class OrdersController extends Controller
         if($form_type == "offers"){
             $order = $id == 0 ? "" : SalesOffers::find($id);
             $form_type = "update";
+            $offer_id = $id;
             $order->due_date = $order->date;
             $copy = 0;
 
         }else{
             $order = $id == 0 ? "" : SalesOrders::find($id);
+            $offer_id = null;
         }
 
-        return view("modules.sales.orders.form", compact("form_type", "order","copy"));
+        return view("modules.sales.orders.form", compact("form_type", "order","copy","id","offer_id"));
 
     }
 
@@ -66,6 +68,7 @@ class OrdersController extends Controller
 
 
         $order = SalesOrders::updateOrCreate(["id" => $id], [
+            "sales_offer_id"=>$request->form["sales_offer_id"],
             "description" => $request->form["description"],
             "company_id" => $request->form["company_id"]["id"],
             "date" => $request->form["date"],

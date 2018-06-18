@@ -236,12 +236,16 @@
                                 <hr>
 
                                 <div class="row">
+                                    @if($offer->orders->count() >0)
                                     <div class="col-sm-12">
                                         TEKLİFTEN OLUŞTURULAN SİPARİŞLER
                                         <br>
-                                        <a href="http://demo.iyspro.com/salesmanager/sales-orders/22"> SATIŞ SİPARİŞİ
-                                            &nbsp;(#22)</a><br>
+                                        @foreach($offer->orders as $order)
+                                        <a href="{{route("sales.orders.show",[aid(),$order->id])}}"> {{$order->description == null ? "SATIŞ SİPARİŞİ": $order->description}}
+                                            &nbsp;(#{{$order->id}})</a><br>
+                                            @endforeach
                                     </div>
+                                        @endif
 
                                 </div>
                             </div>

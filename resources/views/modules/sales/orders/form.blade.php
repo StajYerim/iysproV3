@@ -1,12 +1,14 @@
 @extends('layouts.master')
 @section('content')
+
     @if($form_type == "copy")
         @php
-                $form_type = "update";
-                      $copy = 0;
+            $offer_id = $id;
+             $form_type = "update";
+               $copy = 0;
 
-                @endphp
-        @endif
+        @endphp
+    @endif
     <!-- widget grid -->
     <section>
         <!-- row -->
@@ -149,6 +151,7 @@
                         form: {
                             description: "{{$form_type == "update" ? $order->description:""}}",
                             company_id: @if($form_type == "update") { id:'{{$order->company["id"]}}',text:'{{$order->company["company_name"]}}' } @else "" @endif,
+                            sales_offer_id: "{{$offer_id}}",
                             date: "{{$form_type == "update" ? $order->date:date_tr()}}",
                             due_date: "{{$form_type == "update" ? $order->due_date:date_tr()}}",
                             grand_total: "{{$form_type == "update" ? $order->grand_total:"0,00"}}",
@@ -210,7 +213,7 @@
                                             }
                                         }).catch(function (error) {
                                         fullLoadingClose();
-                                        notification("Error", "Please add offer item", "danger");
+                                        notification("Error", "Please add order item", "danger");
 
                                     });
 

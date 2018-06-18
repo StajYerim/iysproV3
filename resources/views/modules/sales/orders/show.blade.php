@@ -270,12 +270,14 @@
                                 </div>
                               <hr>
                                 <div class="row">
+                                  @if($order->offer)
                                     <div class="col-sm-12">
                                        TEKLİFİ
                                         <br>
-                                        <a href=">!"> SATIŞ TEKLİFİ
-                                            &nbsp;(#22)</a><br>
+                                        <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? "SATIŞ TEKLİFİ":$order->offer["description"]}} (#{{$order->offer["id"]}})</a><br>
                                     </div>
+                                      @endif
+
 
                                 </div>
                             </div>
