@@ -333,7 +333,12 @@
         </div>
 
     </section>
-    @include("components.external.share",[$title="Teklif",$thread="Teklif",$message="Mesaj içeriği",$type="sales_offers",$data = $offer])
+    @include("components.external.share",[
+    $title="Teklif",
+    $thread="Satış Teklifi : ".$offer->company["company_name"],
+    $message="Merhaba,<br>Satış Teklifi detaylarınız ektedir indirerek inceleyebilirsiniz.<br>İyi çalışmalar.<br><br><b>".account()["name"]."</b>",
+    $type="share.offer",
+    $data = $offer])
 
 
     @push('scripts')

@@ -33,5 +33,7 @@ Route::group(['prefix'=>'{company_id}/sales','middleware'=>'not.admin'],function
     Route::post("orders/{id}/store","Modules\Sales\OrdersController@store")->name("sales.orders.store");
     Route::get("orders/{id}/show","Modules\Sales\OrdersController@show")->name("sales.orders.show");
     Route::delete("orders/{id}/destroy","Modules\Sales\OrdersController@destroy")->name("sales.orders.destroy");
+    Route::get("orders/{id}/pdf/{type}","Modules\Sales\OrdersController@pdf")->name("sales.orders.pdf");
+
 
 });

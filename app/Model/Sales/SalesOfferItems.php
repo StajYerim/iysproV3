@@ -2,6 +2,7 @@
 
 namespace App\Model\Sales;
 
+use App\Currency;
 use App\Model\Stock\Product\Product;
 use App\Units;
 use Illuminate\Database\Eloquent\Model;
@@ -55,4 +56,6 @@ class SalesOfferItems extends Model
     public function unit(){
         return $this->hasOne(Units::class,"id","unit_id");
     }
+
+
 }

@@ -3,6 +3,7 @@
 namespace App\Model\Sales;
 
 use App\Companies;
+use App\Currency;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -213,6 +214,21 @@ class SalesOffers extends Model
                 break;
         }
 
+    }
+
+    public function getCurrencyIconAttribute(){
+
+      return  currency_symbol($this->currency);
+
+    }
+
+    public function getCurrencyNameAttribute(){
+        $currencies = Currency::All();
+        foreach($currencies as $cur){
+            if(strtoupper($cur->code) === strtoupper($this->currency)){
+                return strtoupper($cur->name);
+            }
+        }
     }
 
 

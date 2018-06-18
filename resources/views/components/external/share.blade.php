@@ -79,7 +79,7 @@
                 form: {
                     thread: "{{$thread}}",
                     receivers: [],
-                    message: "{{$message }}"
+                    message: "{!! $message !!}"
                 }
 
             },
@@ -90,20 +90,25 @@
                     ShareForm.form.message = $('.editor').summernote('code');
 
                     $("#shareModal").modal("toggle");
-                    axios.post("{{route("share.offer",[aid(),$data->id])}}", this.form).then(function (res) {
+
+
+
+                    axios.post("{{route($type,[aid(),$data->id])}}", this.form).then(function (res) {
 
                             fullLoadingClose();
-                            this.btnDisable = false;
+                            ShareForm.btnDisable = false;
                             notification("Success", "Mail was sent", "success")
                         }
                     );
+
+
 
                 },
                 formReset: function () {
                     this.form = {
                         thread: "{{$thread}}",
                         receivers: [],
-                        message: "{{$message }}"
+                        message: "{!! $message !!}"
                     }
                 }
             }
@@ -149,7 +154,6 @@
                     ShareForm.form.receivers = [];
 
                     mail = this.getValue();
-
                     ShareForm.form.receivers = mail;
                 }
             }

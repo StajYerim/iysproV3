@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Modules\Sales;
 use App\Bankabble;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
+use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -115,6 +116,23 @@ class OrdersController extends Controller
         $order = SalesOrders::find($id);
 
         return view("modules.sales.orders.show", compact("order"));
+    }
+
+    public function pdf($aid, $id,$type)
+    {
+
+
+        if($type=="url"){
+            $order = SalesOrders::find($id);
+            $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order"))->setPaper('A4');
+            return $pdf->stream();
+        }else{
+            $order = SalesOrders::find($id);
+            $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order"))->setPaper('A4');
+            return   $pdf->download($order->company["company_name"].' ('.$order->description.').pdf');
+        }
+
+
     }
 
     public function destroy($aid, $id)

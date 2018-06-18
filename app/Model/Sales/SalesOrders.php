@@ -3,6 +3,7 @@
 namespace App\Model\Sales;
 
 use App\Companies;
+use App\Currency;
 use App\Model\Finance\BankItems;
 use App\Model\Finance\Cheques;
 use Illuminate\Database\Eloquent\Model;
@@ -135,5 +136,20 @@ class SalesOrders extends Model
          }else{
              return "KISMİ ÖDENDİ";
          }
+    }
+
+    public function getCurrencyIconAttribute(){
+
+        return  currency_symbol($this->currency);
+
+    }
+
+    public function getCurrencyNameAttribute(){
+        $currencies = Currency::All();
+        foreach($currencies as $cur){
+            if(strtoupper($cur->code) === strtoupper($this->currency)){
+                return strtoupper($cur->name);
+            }
+        }
     }
 }

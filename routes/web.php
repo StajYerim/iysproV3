@@ -85,6 +85,7 @@ Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
 
     //Share Offers/Orders
     Route::post("/offer-share/{id}","ShareController@offer_share")->name("share.offer");
+    Route::post("/order-share/{id}","ShareController@order_share")->name("share.order");
 
 });
 

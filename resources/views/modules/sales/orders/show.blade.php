@@ -49,21 +49,21 @@
                                     class="fa fa-print"></span> YAZDIR <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
+                                <a target="_blank" href={{route("sales.orders.pdf",[aid(),$order->id,"url"])}}><i
                                             class="fa fa-print" aria-hidden="true"></i>
-                                    TEKLİFİ YAZDIR</a>
+                                    SİPARİŞİ YAZDIR</a>
                             </li>
                             <li>
-                                <a download="" href="http://demo.iyspro.com/salesmanager/sales-offer/8/printDown"
+                                <a download="" href="{{route("sales.orders.pdf",[aid(),$order->id,"download"])}}"
                                    id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
-                                    TEKLİFİ İNDİR</a>
+                                    SİPARİŞİ İNDİR</a>
                             </li>
 
                         </ul>
 
                     </div>
 
-                    <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
+                    <a href="#" data-toggle="modal" data-target="#shareModal" class="btn btn-default"><i
                                 class="fa fa-envelope"></i> Paylaş</a>
 
                 </div>
@@ -294,7 +294,12 @@
     </section>
     @include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])
 
-
+    @include("components.external.share",[
+    $title="Sipariş",
+    $thread="Satış Siparişi : ".$order->company["company_name"],
+    $message="Merhaba,<br>Satış Siparişi detaylarınız ektedir indirerek inceleyebilirsiniz.<br>İyi çalışmalar.<br><br><b>".account()["name"]."</b>",
+    $type="share.order",
+    $data = $order])
     @push('scripts')
         <script>
             window.addEventListener("load", () => {
