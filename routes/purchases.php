@@ -8,14 +8,17 @@ Auth::routes();
 // If user is authenticated and he is not admin
 Route::group(['prefix'=>'{company_id}/purchases','middleware'=>'not.admin'],function() {
 
-//    //Companies
-//    Route::get("customers","Companies\CompaniesController@customer")->name("sales.companies.customer");
-//    Route::get("customer/{id}","Companies\CompaniesController@show")->name("sales.companies.show");
-//    Route::get("customers/data","Companies\CompaniesController@customer_data")->name("sales.companies.customer.data");
-//    Route::get("customer/{option}/{id}/{type}","Companies\CompaniesController@form")->name("sales.companies.form");
-//    Route::post("customer/{id}/store","Companies\CompaniesController@store")->name("sales.companies.store");
-//    Route::post("customer/{id}/destroy","Companies\CompaniesController@destroy")->name("sales.companies.destroy");
-//
+
+
+
+    //Companies
+    Route::get("suppliers","Companies\CompaniesController@supplier")->name("purchases.companies.supplier");
+    Route::get("supplier/{id}","Companies\CompaniesController@show")->name("purchases.companies.show");
+    Route::get("supplier/data/{type}","Companies\CompaniesController@supplier_data")->name("purchases.companies.supplier.data");
+    Route::get("supplier/{option}/{id}/{type}","Companies\CompaniesController@form")->name("purchases.companies.form");
+    Route::post("supplier/{id}/store","Companies\CompaniesController@store")->name("purchases.companies.store");
+    Route::post("supplier/{id}/destroy","Companies\CompaniesController@destroy")->name("purchases.companies.destroy");
+
 //    //Sales Offers
 //    Route::get('offers', 'Modules\Sales\OffersController@index')->name('sales.offers.index');
 //    Route::get("offers/index_list","Modules\Sales\OffersController@index_list")->name("sales.offers.index_list");

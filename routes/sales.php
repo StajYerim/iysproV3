@@ -11,7 +11,7 @@ Route::group(['prefix'=>'{company_id}/sales','middleware'=>'not.admin'],function
     //Companies
     Route::get("customers","Companies\CompaniesController@customer")->name("sales.companies.customer");
     Route::get("customer/{id}","Companies\CompaniesController@show")->name("sales.companies.show");
-    Route::get("customers/data","Companies\CompaniesController@customer_data")->name("sales.companies.customer.data");
+    Route::get("customers/data/{type}","Companies\CompaniesController@customer_data")->name("sales.companies.customer.data");
     Route::get("customer/{option}/{id}/{type}","Companies\CompaniesController@form")->name("sales.companies.form");
     Route::post("customer/{id}/store","Companies\CompaniesController@store")->name("sales.companies.store");
     Route::post("customer/{id}/destroy","Companies\CompaniesController@destroy")->name("sales.companies.destroy");

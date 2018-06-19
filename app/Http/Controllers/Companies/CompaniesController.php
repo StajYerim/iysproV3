@@ -17,12 +17,32 @@ class CompaniesController extends Controller
 {
     public function customer()
     {
-        return view("modules.companies.index", compact("companies", "type"));
+
+        $type="customer";
+        $route = "sales.companies.customer.data";
+        return view("modules.companies.index", compact("companies", "type","route"));
+
+
     }
 
-    public function customer_data($aid)
+    public function supplier()
     {
-        $companies = Companies::where("account_id",aid())->where("customer",1)->get();
+        $type="supplier";
+        $route = "purchases.companies.supplier.data";
+        return view("modules.companies.index", compact("companies", "type","route"));
+    }
+
+    public function customer_data($aid,$type)
+    {
+        $companies = Companies::where("account_id",aid())->where($type,1)->get();
+
+        return Datatables::of($companies)
+            ->make(true);
+    }
+
+    public function supplier_data($aid,$type)
+    {
+        $companies = Companies::where("account_id",aid())->where($type,1)->get();
 
         return Datatables::of($companies)
             ->make(true);
@@ -37,7 +57,7 @@ class CompaniesController extends Controller
         return view("modules.companies.form", compact("form_type", "company_type","company"));
     }
 
-    public function store(Request $request, $id)
+    public function store($aid,Request $request, $id)
     {
 
         $company = Companies::updateOrCreate(
