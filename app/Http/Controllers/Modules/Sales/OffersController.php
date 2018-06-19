@@ -55,6 +55,7 @@ class OffersController extends Controller
 
         $offer = SalesOffers::updateOrCreate(["id" => $id], [
             "description" => $request->form["description"],
+            "description_detail" => $request->form["description_detail"],
             "company_id" => $request->form["company_id"]["id"],
             "date" => $request->form["date"],
             "expired_date" => $request->form["expired_date"],
