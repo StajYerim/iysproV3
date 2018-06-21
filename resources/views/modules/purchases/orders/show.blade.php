@@ -29,11 +29,7 @@
                                                                                                       aria-hidden="true"></i>
                                     KOPYASINI OLUŞTUR</a>
                             </li>
-                            <li>
-                                <a onclick="$(this).orderReturn()" data-id="0" id="orderReturn" href="#"><i
-                                            class="fa fa-reply " aria-hidden="true"></i>
-                                    SİPARİŞE DÖNÜŞTÜR</a>
-                            </li>
+
                             <li class="divider"></li>
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
@@ -144,15 +140,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        <div class="bottom-info">TOPLAM KDV</div>
-                                                    </td>
-                                                    <td style="text-align:right">
-                                                        <div class="bottom-info">{{$order->vat_total}} <i
-                                                                    class="fa fa-{{$order->currency}}"></i></div>
-                                                    </td>
-                                                </tr>
+
                                                 <tr v-for="vato in vat_only" class="trow"
                                                     v-if="vato.total!=0">
 
@@ -164,6 +152,15 @@
                                                     <td style="text-align:right">
                                                         <div class="bottom-info" style="font-size: 11px"><span
                                                                     id="total-vat-1">@{{ vato.total }}</span> <i
+                                                                    class="fa fa-{{$order->currency}}"></i></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="bottom-info">TOPLAM KDV</div>
+                                                    </td>
+                                                    <td style="text-align:right">
+                                                        <div class="bottom-info">{{$order->vat_total}} <i
                                                                     class="fa fa-{{$order->currency}}"></i></div>
                                                     </td>
                                                 </tr>
@@ -283,8 +280,7 @@
         @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete purchase order ?",$id=$order->id])
 
     </section>
-    {{--@include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])--}}
-
+    @include("components.external.transaction_payment",[$type="payment",$local="purchase_orders",$detail = $order,$abble="App\\\Model\\\Purchases\\\PurchaseOrders"])
 
     @push('scripts')
         <script>
@@ -295,15 +291,15 @@
 
                         remaining:"{{$order->remaining}}",
                         collect_items:[
-                                {{--@foreach($order->payments as $pay)--}}
-                            {{--{--}}
-                                {{--type:"collect",--}}
-                                {{--id:"{{$pay->id}}",--}}
-                                {{--date:"{{$pay->date}}",--}}
-                                {{--bank_account:'{{$pay->bank_account["name"]}}',--}}
-                                {{--amount:"{{get_money($pay->pivot->amount)}}"--}}
-                            {{--},--}}
-                            {{--@endforeach()--}}
+                                @foreach($order->payments as $pay)
+                            {
+                                type:"collect",
+                                id:"{{$pay->id}}",
+                                date:"{{$pay->date}}",
+                                bank_account:'{{$pay->bank_account["name"]}}',
+                                amount:"{{get_money($pay->pivot->amount)}}"
+                            },
+                            @endforeach()
                                 {{--@foreach($order->cheques as $che)--}}
                             {{--{--}}
                                 {{--type:"cheq",--}}

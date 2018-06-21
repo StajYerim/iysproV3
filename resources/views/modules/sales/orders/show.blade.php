@@ -144,15 +144,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        <div class="bottom-info">TOPLAM KDV</div>
-                                                    </td>
-                                                    <td style="text-align:right">
-                                                        <div class="bottom-info">{{$order->vat_total}} <i
-                                                                    class="fa fa-{{$order->currency}}"></i></div>
-                                                    </td>
-                                                </tr>
+
                                                 <tr v-for="vato in vat_only" class="trow"
                                                     v-if="vato.total!=0">
 
@@ -164,6 +156,15 @@
                                                     <td style="text-align:right">
                                                         <div class="bottom-info" style="font-size: 11px"><span
                                                                     id="total-vat-1">@{{ vato.total }}</span> <i
+                                                                    class="fa fa-{{$order->currency}}"></i></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="bottom-info">TOPLAM KDV</div>
+                                                    </td>
+                                                    <td style="text-align:right">
+                                                        <div class="bottom-info">{{$order->vat_total}} <i
                                                                     class="fa fa-{{$order->currency}}"></i></div>
                                                     </td>
                                                 </tr>

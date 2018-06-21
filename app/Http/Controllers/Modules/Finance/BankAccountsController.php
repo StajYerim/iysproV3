@@ -10,6 +10,7 @@ use App\Model\Finance\BankAccounts;
 
 use App\Model\Finance\BankItems;
 use App\Model\Finance\Cheques;
+use App\Model\Purchases\PurchaseOrders;
 use App\Model\Sales\SalesOrders;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
@@ -211,6 +212,40 @@ class BankAccountsController extends Controller
 
     }
 
+    public function transaction_payment($aid, Request $request)
+    {
+
+        $account = BankAccounts::find($request->bank_account_id);
+
+        $orders = PurchaseOrders::find($request->doc_id);
+
+        $detail = $account->items()->save(new BankItems([
+            "type" => $request->type,
+            "company_id" => $orders->company["id"],
+            "date" => $request->date,
+            "amount" => $request->amount,
+            "description" => $request->description,
+            "action_type" => 0,
+            "doc_id" => null
+        ]));
+
+
+        Bankabble::create([
+            "bank_items_id" => $detail->id,
+            "bankabble_id" => $request->doc_id,
+            "bankabble_type" => $request->bankabble_type,
+            "amount" => $request->amount]);
+
+        $able = Bankabble::where("bankabble_id", $request->doc_id)->where("bankabble_type", $request->bankabble_type)->sum("amount");
+
+
+        $remaining = $orders->remaining;
+
+        $action = array("id" => $detail->id, "bank_account" => $account->name, "amount" => $detail->amount, "date" => $detail->date);
+        return ["message" => "success", "remaining" => $remaining, "collect_items" => $action];
+
+
+    }
 
     public function transaction_company($aid, Request $request)
     {

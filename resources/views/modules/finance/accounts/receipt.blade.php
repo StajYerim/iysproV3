@@ -19,7 +19,7 @@
                     <h1>
                         <i style="vertical-align: -7px;color:#2AC!important"
                            class="fa fa-sign-in fa-rotate-90 fa-2x "></i> <span
-                                class="semi-bold"> TAHSİLAT
+                                class="semi-bold"> {{$receipt->type}}
                              </span>
 
                         <span class="pull-right"><a  href="#!" data-toggle="modal" data-target="#deleteModal" class="btn btn-default btn-lg "> DELETE</a></span>
@@ -131,7 +131,7 @@
                                   type:"Fatura",
                                   status:"{{$order->status}}",
                                   grand_total:"{{$order->grand_total}}",
-                                  process_amount:"{{get_money($order->pivot->amount)}}"
+                                  process_amount:"{{get_money($order->amount)}}"
                               },@endforeach()
                               );
                         },

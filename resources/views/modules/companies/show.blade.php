@@ -281,7 +281,6 @@
     </section>
     @include("components.external.transaction",[$type="collect",$local="company",$detail = $company,$abble="App\\\Model\\\Sales\\\SalesOrders"])
 
-
     <!-- end widget grid -->
     @push('scripts')
         <script>

@@ -56,7 +56,7 @@ class BankItems extends Model
 
     public function orders()
     {
-        return $this->morphedByMany(SalesOrders::class, 'bankabble')->withPivot("amount");
+        return $this->hasMany(Bankabble::class, 'bank_items_id',"id");
     }
 
     public function bankabble()

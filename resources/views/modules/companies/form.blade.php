@@ -257,7 +257,7 @@
                                         .then(function (response) {
                                             if(response.data.message){
                                             if(response.data.message == "success"){
-                                               window.location.href = '/{{aid()}}/{{$company_type=="customer" ? "sales":"purchases"}}/{{$company_type}}/'+response.data.id;
+                                               window.location.href = '/{{aid()}}/{{$company_type=="customer" ? "sales":"purchases"}}/{{$company_type}}/'+response.data.id+'/show';
                                            }else{
                                                 fullLoadingClose();
                                                 notification("Error", response, "danger");
