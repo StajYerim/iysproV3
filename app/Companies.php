@@ -5,6 +5,7 @@ namespace App;
 use App\Model\Companies\Address;
 use App\Model\Finance\BankItems;
 use App\Model\Finance\Cheques;
+use App\Model\Purchases\PurchaseOrders;
 use App\Model\Sales\SalesOrders;
 use Illuminate\Database\Eloquent\Model;
 
@@ -60,6 +61,11 @@ class Companies extends Model
         return $this->hasMany(SalesOrders::class, "company_id", "id");
     }
 
+    public function purchase_orders()
+    {
+        return $this->hasMany(PurchaseOrders::class, "company_id", "id");
+    }
+
     public function getOpenOrdersAttribute()
     {
         $list = $this->sales_orders;
@@ -91,13 +97,19 @@ class Companies extends Model
         //Satış Siparişlerinin Toplam Tutarı;
         $sales_orders = $this->sales_orders()->sum("grand_total");
 
+        //Alış Siparişlerinin Toplam Tutarı;
+        $purchase_orders = $this->purchase_orders()->sum("grand_total");
+
         //Yapılan Tahsilat
         $collects = $this->collects()->where("action_type", 1)->sum("amount");
 
         //Alınan Çek
         $buy_cheques = $this->buy_cheques()->sum("amount");
 
-        return get_money(($collects + $buy_cheques) - $sales_orders);
+        $sales_net_total =  $sales_orders-($collects + $buy_cheques);
+        $purchase_net_total = $purchase_orders;
+
+        return get_money($sales_net_total-$purchase_net_total);
     }
 
     public function getOpenReceiptsAttribute()

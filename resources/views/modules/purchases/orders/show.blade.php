@@ -4,7 +4,7 @@
     <section id="show" v-cloak>
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
-                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$order->description}}</span></h1>
+                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$order->descriptions}}</span></h1>
 
             </div>
             <div class="col-lg-4 col-sm-4">
@@ -15,17 +15,17 @@
                                     class="fa fa-reorder"></span> &nbsp;<span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{route("sales.orders.form",[aid(),$order->id,"update"])}}"><i
+                                <a href="{{route("purchases.orders.form",[aid(),$order->id,"update"])}}"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
                                     DÜZENLE</a>
                             </li>
                             <li>
                                 <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
-                                    TAHSİLAT EKLE</a>
+                                    ÖDEME EKLE</a>
                             </li>
                             <li>
-                                <a href="{{route("sales.orders.form",[aid(),$order->id,"copy"])}}"><i class="fa fa-copy"
+                                <a href="{{route("purchases.orders.form",[aid(),$order->id,"copy"])}}"><i class="fa fa-copy"
                                                                                                       aria-hidden="true"></i>
                                     KOPYASINI OLUŞTUR</a>
                             </li>
@@ -268,16 +268,7 @@
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
                                 </div>
-                              <hr>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                       TEKLİFİ
-                                        <br>
-                                        <a href=">!"> SATIŞ TEKLİFİ
-                                            &nbsp;(#22)</a><br>
-                                    </div>
 
-                                </div>
                             </div>
                         </div>
 
@@ -289,10 +280,10 @@
             </article>
         </div>
 
-        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales order ?",$id=$order->id])
+        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete purchase order ?",$id=$order->id])
 
     </section>
-    @include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])
+    {{--@include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])--}}
 
 
     @push('scripts')
@@ -304,24 +295,24 @@
 
                         remaining:"{{$order->remaining}}",
                         collect_items:[
-                                @foreach($order->payments as $pay)
-                            {
-                                type:"collect",
-                                id:"{{$pay->id}}",
-                                date:"{{$pay->date}}",
-                                bank_account:'{{$pay->bank_account["name"]}}',
-                                amount:"{{get_money($pay->pivot->amount)}}"
-                            },
-                            @endforeach()
-                                @foreach($order->cheques as $che)
-                            {
-                                type:"cheq",
-                                id:"{{$che->id}}",
-                                date:"{{$che->date}}",
-                                bank_account:'ALINAN ÇEK',
-                                amount:"{{get_money($che->pivot->amount)}}"
-                            },
-                            @endforeach()
+                                {{--@foreach($order->payments as $pay)--}}
+                            {{--{--}}
+                                {{--type:"collect",--}}
+                                {{--id:"{{$pay->id}}",--}}
+                                {{--date:"{{$pay->date}}",--}}
+                                {{--bank_account:'{{$pay->bank_account["name"]}}',--}}
+                                {{--amount:"{{get_money($pay->pivot->amount)}}"--}}
+                            {{--},--}}
+                            {{--@endforeach()--}}
+                                {{--@foreach($order->cheques as $che)--}}
+                            {{--{--}}
+                                {{--type:"cheq",--}}
+                                {{--id:"{{$che->id}}",--}}
+                                {{--date:"{{$che->date}}",--}}
+                                {{--bank_account:'ALINAN ÇEK',--}}
+                                {{--amount:"{{get_money($che->pivot->amount)}}"--}}
+                            {{--},--}}
+                            {{--@endforeach()--}}
                         ],
                         items: [@foreach($order->items as $item)
                         {
@@ -352,10 +343,10 @@
 
                         delete_data: function ($id) {
                             fullLoading();
-                            axios.delete('{{route("sales.orders.destroy",[aid(),$order->id])}}')
+                            axios.delete('{{route("purchases.orders.destroy",[aid(),$order->id])}}')
                                 .then(function (response) {
                                     if (response.data.message == "success") {
-                                        window.location.href = '{{route("sales.orders.index",aid())}}';
+                                        window.location.href = '{{route("purchases.orders.index",aid())}}';
                                     }
                                 }).catch(function (error) {
                                 notification("Error", error.response.data.message, "danger");

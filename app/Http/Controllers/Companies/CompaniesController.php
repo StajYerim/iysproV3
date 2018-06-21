@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Companies;
 
 use App\Companies;
 use App\Model\Companies\Address;
+use App\Model\Finance\BankItems;
 use App\ProductImage;
 use App\TagData;
 use App\Tags;
@@ -52,7 +53,7 @@ class CompaniesController extends Controller
     {
         $company = $type != "new" ? Companies::find($id):"";
 
-        $company_type = $option == "Customer" ? "customer" : "supplier";
+        $company_type = $option == "customer" ? "customer" : "supplier";
         $form_type = $type == "new" ? "New" : "Update";
         return view("modules.companies.form", compact("form_type", "company_type","company"));
     }
@@ -120,7 +121,7 @@ class CompaniesController extends Controller
     public function destroy($company_id, $id)
     {
         Companies::destroy($id);
-        ProductImage::where("product_id",$id)->delete();
+        BankItems::where("company_id",$id)->delete();
 
         flash()->overlay("Company deleted", 'Success')->success();
         sleep(1);

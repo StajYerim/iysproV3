@@ -27,7 +27,7 @@ class SalesOrders extends Model
 
     public function getDescriptionsAttribute()
     {
-        return $this->description == null ? "Satış Siparişi" : $this->description;
+        return $this->description == null ? "SATIŞ SİPARİŞİ" : $this->description;
     }
 
     public function setDateAttribute($value)

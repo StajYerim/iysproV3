@@ -19,7 +19,7 @@
                                         <label class="col-md-3 control-label"> <span
                                                     style="vertical-align: -9px;">{{$company_type}} {{trans("general.name") }}</span></label>
                                         <div class="col-md-3 pull-right">
-                                            <a href="{{$form_type == "new" ? route("sales.companies.customer",aid()): URL::previous() }}"
+                                            <a href="{{$form_type == "new" ? route($company_type=="customer"?"sales.companies.customer":"purchases.companies.supplier",aid()): URL::previous() }}"
                                                class="btn btn-default btn-lg ">{{trans("general.back")}}
                                             </a>
                                             <button type="submit" href="#" class="btn btn-success btn-lg ">

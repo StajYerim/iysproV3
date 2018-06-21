@@ -36,7 +36,7 @@
 
                             </div>
 
-                            <a href="{{route("sales.companies.form",[aid(),$type,"0","new"])}}" style="margin-top: 8px;margin-right: 4px;float: right;" class="btn btn-success">New {{$type}}</a>
+                            <a href="{{route($type=="supplier"?"purchases.companies.form":"sales.companies.form"."",[aid(),$type,"0","new"])}}" style="margin-top: 8px;margin-right: 4px;float: right;" class="btn btn-success">New {{$type}}</a>
 
                             <table id="table" class="table table-striped table-bordered table-hover" width="100%">
                                 <thead>
@@ -88,7 +88,7 @@
                     {
                         data: 'company_name', name: 'company_name',
                         "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                            $(nTd).attr("onclick","window.location.href='/{{aid()}}/{{$type=="customer"?"sales":"purchases"}}/{{$type}}/"+oData.id+"'")
+                            $(nTd).attr("onclick","window.location.href='/{{aid()}}/{{$type=="customer"?"sales":"purchases"}}/{{$type}}/"+oData.id+"/show'")
                                 .attr("style","cursor:pointer");
                         }
                     },

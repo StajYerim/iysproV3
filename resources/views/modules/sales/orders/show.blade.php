@@ -4,7 +4,7 @@
     <section id="show" v-cloak>
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
-                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$order->description}}</span></h1>
+                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$order->descriptions}}</span></h1>
 
             </div>
             <div class="col-lg-4 col-sm-4">
