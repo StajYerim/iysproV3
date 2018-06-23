@@ -5,6 +5,7 @@ namespace App\Model\Purchases;
 use App\Companies;
 use App\Currency;
 use App\Model\Finance\BankItems;
+use App\Model\Finance\Cheques;
 use App\Model\Sales\SalesOfferItems;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -141,6 +142,11 @@ class PurchaseOrders extends Model
         return $this->morphToMany(BankItems::class, 'bankabble')->withPivot('amount');
     }
 
+    public function cheques()
+    {
+        return $this->morphToMany(Cheques::class, 'bankabble')->withPivot('amount');
+    }
+
     public function getRemainingAttribute()
     {
         $pay = $this->payments->sum("pivot.amount");
@@ -150,5 +156,10 @@ class PurchaseOrders extends Model
 
         return get_money((money_db_format($this->grand_total) - $total));
     }
+
+
+
+
+
 
 }

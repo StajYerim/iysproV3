@@ -1,4 +1,4 @@
-<div class="modal fade" v-if="VueName.remaining !='0,00'" id="transaction" tabindex="-1" role="dialog"
+<div class="modal fade" v-if="VueName.remaining !='0,00'" id="transaction_payment" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -8,26 +8,26 @@
                 </button>
                 <h4 class="modal-title" id="myModalLabel">{{ $type == 'payment' ? 'ÖDEME EKLE' : 'TAHSİLAT EKLE' }}</h4>
             </div>
-            <div class="modal-body" id="vue-trans">
+            <div class="modal-body" id="vue-payment">
                 <div v-show="loading" style="text-align: center;"><img
                             src="https://loading.io/spinners/pies/lg.pie-chart-loading-gif.gif"></div>
                 <div v-show="!loading" class="row">
 
                     <div id="collectError"></div>
-                    <ul id="myTab1" style="display:flex;text-align:center"
+                    <ul id="myTab2" style="display:flex;text-align:center"
                         class="nav nav-tabs flex-wrap">
                         <li class="active" style="text-align: center;flex:1;">
-                            <a href="#s1" data-toggle="tab"
+                            <a href="#s3" data-toggle="tab"
                                aria-expanded="false">NAKİT {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
                         </li>
                         <li style="text-align: center;flex:1;">
-                            <a href="#s2" data-toggle="tab"
+                            <a href="#s4" data-toggle="tab"
                                aria-expanded="true">ÇEK-SENET {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
                         </li>
                     </ul>
 
-                    <div id="myTabContent1" class="tab-content padding-10 ">
-                        <div class="tab-pane fade active in" id="s1">
+                    <div id="myTabContent2" class="tab-content padding-10 ">
+                        <div class="tab-pane fade active in" id="s3">
                             <form class="form-horizontal bv-form"
                                   novalidate="novalidate">
                                 <button type="submit" class="bv-hidden-submit"
@@ -39,8 +39,8 @@
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
-                                                <input type="text" v-model="collection.form.date"
-                                                       name="collection.form.date"
+                                                <input type="text" v-model="payment.form.date"
+                                                       name="payment.form.date"
                                                        class="form-control datepicker"
                                                        data-dateformat="dd.mm.yy">
                                                 <span class="input-group-addon"><i
@@ -52,24 +52,23 @@
 
                                 <fieldset>
                                     <div class="form-group"
-                                         :class="{'has-error':errors.has('collection.form.bank_account_id')}">
+                                         :class="{'has-error':errors.has('payment.form.bank_account_id')}">
                                         <label class="col-sm-4 control-label">
                                             <div class="bottom-info">HESAP</div>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
 
-                                                <select v-model="collection.form.bank_account_id"
-                                                        v-validate="'required'" name="collection.form.bank_account_id"
+                                                <select v-model="payment.form.bank_account_id"
+                                                        v-validate="'required'" name="payment.form.bank_account_id"
                                                         class="form-control"
                                                         name="AccId">
 
                                                     <option v-for="(acc,index) in accounts" :disabled="acc.id ==''"
-                                                            :value="acc.id">@{{acc.name}}
-                                                    </option>
+                                                            :value="acc.id">@{{acc.name}}</option>
 
                                                 </select>
-                                                <span v-if="errors.has('collection.form.bank_account_id')"
+                                                <span v-if="errors.has('payment.form.bank_account_id')"
                                                       class="error mini">Lütfen kasa seçimi yapınız.</span>
                                             </div>
                                         </div>
@@ -84,11 +83,11 @@
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
                                                 <input type="text" @keypress="isNumber"
-                                                       v-model.lazy="collection.form.amount"
+                                                       v-model.lazy="payment.form.amount"
                                                        class="form-control">
                                             </div>
-                                            <span class="error mini" v-if="collection.warning_amount">
-                                                  @{{ collection.warning_amount_message }}
+                                            <span class="error mini" v-if="payment.warning_amount">
+                                                  @{{ payment.warning_amount_message }}
                                                 </span>
                                         </div>
                                     </div>
@@ -101,7 +100,7 @@
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
-                                                <input type="text" v-model="collection.form.description"
+                                                <input type="text" v-model="payment.form.description"
                                                        class="form-control">
                                             </div>
                                         </div>
@@ -112,16 +111,16 @@
                             <button type="button" class="btn btn-default" data-dismiss="modal">
                                 İPTAL
                             </button>
-                            <button @click="collectionFormSend" :disabled="collection.collect_send_btn" type="button"
+                            <button @click="collectionFormSend" :disabled="payment.collect_send_btn" type="button"
                                     class="btn btn btn-danger pull-right">
                                 {{ $type == 'payment' ? 'ÖDEME EKLE' : 'TAHSİLAT EKLE' }}
                             </button>
                         </div>
 
 
-                        <div class="tab-pane fade " id="s2">
+                        <div class="tab-pane fade " id="s4">
 
-                            @if($type=="payment")
+
                                 <form class="form-horizontal bv-form" novalidate="novalidate">
                                     <button type="submit" class="bv-hidden-submit"
                                             style="display: none; width: 0px; height: 0px;"></button>
@@ -133,8 +132,8 @@
                                             <div class="col-sm-8 ">
                                                 <div class="input-group" style="width:100%">
 
-                                                    <select class="form-control" name="CheqOption" id="CheqOption">
-                                                        <option value="0">BANKA ÇEKİ</option>
+                                                    <select class="form-control"  v-model="cheque_payment.form.cheque_type">
+                                                        <option selected value="0">BANKA ÇEKİ</option>
                                                         <option value="1">MÜŞTERİ ÇEKİ</option>
                                                     </select>
                                                 </div>
@@ -142,28 +141,48 @@
                                         </div>
                                     </fieldset>
 
-                                    <fieldset class="banks">
+                                    <fieldset v-show="cheque_payment.form.cheque_type == 0" >
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
                                                 <div class="bottom-info">BANKALAR</div>
                                             </label>
-                                            <div class="col-sm-8 ">
+                                            <div class="col-sm-8 " v-if="cheque_payment.no_banks">
+                                                Çek verebileceğiniz banka hesabınız bulunmuyor.
 
+                                            </div>
+                                            <div class="col-sm-8 " v-else="!cheque_payment.no_banks">
+                                                <div class="input-group" style="width:100%">
+
+                                                    <select v-model="cheque_payment.form.cheque_bank_id"
+                                                            v-validate="'required'" name="cheque_payment.form.cheque_bank_id"
+                                                            class="form-control">
+
+                                                        <option v-for="(accd,index) in cheque_payment.cheque_banks" :selected="accd.id == ''"
+                                                                :value="accd.id">@{{accd.name}}</option>
+
+                                                    </select>
+                                                    <span v-if="errors.has('payment.form.bank_account_id')"
+                                                          class="error mini">Lütfen kasa seçimi yapınız.</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </fieldset>
-                                    <div class="nocheqs">
-                                        <fieldset style="display:none" class="cheqs">
+
+                                    <div class="nocheqs" >
+                                        <fieldset v-show="cheque_payment.form.cheque_type == 1" >
                                             <div class="form-group has-feedback">
                                                 <label class="col-sm-4 control-label">
                                                     <div class="bottom-info">ÇEKLER</div>
                                                 </label>
-                                                <div class="col-sm-8 ">
+                                                <div class="col-sm-8 " v-if="cheque_payment.no_cheqs">
+                                                    Kullanabileceğiniz müşteri çeki bulunmuyor.
+
+                                                </div>
+                                                <div class="col-sm-8 " v-else="!cheque_payment.no_cheqs">
 
                                                 </div>
                                             </div>
                                         </fieldset>
-
 
                                         <fieldset>
                                             <div class="form-group has-feedback">
@@ -182,6 +201,7 @@
                                             </div>
                                         </fieldset>
 
+                                        <div v-show="cheque_payment.form.cheque_type == 0">
                                         <fieldset>
                                             <div class="form-group has-feedback">
                                                 <label class="col-sm-4 control-label">
@@ -189,9 +209,9 @@
                                                 </label>
                                                 <div class="col-sm-8 ">
                                                     <div class="input-group">
-                                                        <input type="text" name="TransactionDueDate"
+                                                        <input type="text"
                                                                value="{{date_tr()}}"
-                                                               class="form-control xdate" data-dateformat="dd.mm.yy">
+                                                               class="form-control datepicker" data-dateformat="dd.mm.yy">
                                                         <span class="input-group-addon"><i
                                                                     class="fa fa-calendar"></i></span>
                                                     </div>
@@ -225,163 +245,18 @@
                                                 </div>
                                             </div>
                                         </fieldset>
+                                        </div>
 
                                     </div>
                                 </form>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                     İPTAL
                                 </button>
-                                <button type="submit" disabled
+                                <button type="button" disabled
                                         class="btn btn btn-danger pull-right">
                                     ÖDEME EKLE
                                 </button>
 
-                            @else
-                                <form class="form-horizontal bv-form" novalidate="novalidate">
-                                    {{--Çek senet tahsilat işlemleri--}}
-                                    <button type="submit" class="bv-hidden-submit"
-                                            style="display: none; width: 0px; height: 0px;"></button>
-
-                                    <fieldset>
-                                        <div class="form-group has-feedback">
-                                            <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">EVRAK TÜRÜ</div>
-                                            </label>
-
-                                            <div class="col-sm-8 ">
-                                                <label class="radio radio-inline">
-
-                                                    <input type="radio" class="radiobox" :value="0" checked
-                                                           v-model="cheque_collect.form.doc_type">
-                                                    <span>ÇEK</span>
-
-                                                </label>
-                                                <label class="radio radio-inline">
-                                                    <input type="radio" class="radiobox" :value="1"
-                                                           v-model="cheque_collect.form.doc_type">
-                                                    <span>SENET</span>
-                                                </label>
-
-                                            </div>
-
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div class="form-group has-feedback">
-                                            <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">BANKA ADI</div>
-                                            </label>
-                                            <div class="col-sm-8 ">
-                                                <div class="input-group" style="width:100%">
-                                                    <input type="text" v-model="cheque_collect.form.bank_name"
-                                                           class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group has-feedback">
-                                            <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">ŞUBESİ</div>
-                                            </label>
-                                            <div class="col-sm-8 ">
-                                                <div class="input-group" style="width:100%">
-                                                    <input type="text" v-model="cheque_collect.form.branch_name"
-                                                           class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group has-feedback">
-                                            <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">EVRAK NO</div>
-                                            </label>
-                                            <div class="col-sm-8 ">
-                                                <div class="input-group" style="width:100%">
-                                                    <input type="text" v-model="cheque_collect.form.number"
-                                                           class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div class="form-group has-feedback">
-                                            <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">TARİH</div>
-                                            </label>
-                                            <div class="col-sm-8 ">
-                                                <div class="input-group">
-                                                    <input type="text" v-model="cheque_collect.form.date"
-                                                           value="{{date_tr()}}"
-                                                           class="form-control datepicker" data-dateformat="dd.mm.yy">
-                                                    <span class="input-group-addon"><i
-                                                                class="fa fa-calendar"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group has-feedback">
-                                            <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">VADE TARİHİ</div>
-                                            </label>
-                                            <div class="col-sm-8 ">
-                                                <div class="input-group">
-                                                    <input type="text" v-model="cheque_collect.form.payment_date"
-                                                           value="{{date_tr()}}"
-                                                           class="form-control datepicker" data-dateformat="dd.mm.yy">
-                                                    <span class="input-group-addon"><i
-                                                                class="fa fa-calendar"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group has-feedback">
-                                            <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">MEBLAĞ</div>
-                                            </label>
-                                            <div class="col-sm-8 ">
-                                                <div class="input-group" style="width:100%">
-                                                    <input type="text" class="form-control"
-                                                           v-model.lazy="cheque_collect.form.amount"  @keypress="isNumber"
-                                                           value="0,00">
-                                                </div>
-                                                <span class="error mini" v-if="cheque_collect.warning_amount">
-                                                  @{{ cheque_collect.warning_amount_message }}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group has-feedback">
-                                            <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">AÇIKLAMA</div>
-                                            </label>
-                                            <div class="col-sm-8 ">
-                                                <div class="input-group" style="width:100%">
-                                                    <input type="text" v-model="cheque_collect.form.description"
-                                                           class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">
-                                    İPTAL
-                                </button>
-                                <button type="button" @click="chequeCollectFormSend" :disabled="cheque_collect.cheque_send_btn"
-                                        class="btn btn btn-primary pull-right">
-                                    TAHSİLAT EKLE
-                                </button>
-
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -393,17 +268,19 @@
 </div>
 @php
     $banks = \App\Model\Finance\BankAccounts::where("account_id",aid())->get();
+    $cheq_banks = \App\Model\Finance\BankAccounts::where("account_id",aid())->where("cheque",true)->get();
+    $cheqs = \App\Model\Finance\Cheques::where("account_id",aid())->where("status",0)->get();
 
 @endphp
 @push("scripts")
     <script>
         window.addEventListener("load", () => {
-            VueCollect = new Vue({
-                el: "#vue-trans",
+            VuePayment = new Vue({
+                el: "#vue-payment",
                 data: {
                     loading: false,
                     accounts: [{id: "", name: "Select Account"}],
-                    collection: {
+                    payment: {
                         warning_amount: false,
                         warning_amount_message: "",
                         collect_send_btn: false,
@@ -417,15 +294,20 @@
                             amount: "{{$local == "purchase_orders" ? $detail->remaining:"0,00"}}"
                         }
                     },
-                    cheque_collect:{
+                    cheque_payment:{
+                        no_banks : {{count($cheq_banks)== 0 ? "true":"false"}},
+                        cheque_banks : [{id: "", name: "Select Account"}],
+                        no_cheqs : {{count($cheqs)== 0 ? "true":"false"}},
                         warning_amount: false,
                         warning_amount_message: "",
                         cheque_send_btn: true,
                         form:{
+                            cheque_type:0,
+                            cheque_bank_id:null,
                             doc_type:"0",
                             order_id:"{{$local == "purchase_orders" ? $order->id:""}}",
                             company_id:"{{$local == "purchase_orders" ? $order->company["id"]:$company->id}}",
-                            type:"cheque_collect",
+                            type:"cheque_payment",
                             bank_name:"",
                             branch_name:"",
                             number:"",
@@ -446,17 +328,26 @@
                         },@endforeach()
 
                     )
+
+                    this.cheque_payment.cheque_banks.push(
+                                @foreach($cheq_banks as $bank)
+                        {id:"{{$bank->id}}",name:"{{$bank->name}}"},
+                            @endforeach()
+
+                    )
+
+                    datePicker()
                 },
                 watch: {
-                    "collection.form.amount": function (yeni, eski) {
-                        this.collection.form.amount = money_clear(yeni).toLocaleString('tr-TR', {
+                    "payment.form.amount": function (yeni, eski) {
+                        this.payment.form.amount = money_clear(yeni).toLocaleString('tr-TR', {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 4
                         });
 
                         order_total = money_clear(VueName.remaining);
 
-                        amount = money_clear(this.collection.form.amount);
+                        amount = money_clear(this.payment.form.amount);
                         @if($local == "purchase_payment")
                         if (amount > order_total) {
                             this.warning_amount = true;
@@ -466,30 +357,30 @@
                         @endif
 
                             if (amount <= 0) {
-                            this.collection.warning_amount = true;
-                            this.collection.warning_amount_message = "Lütfen geçerli bir tutar giriniz.";
-                            this.collection.collect_send_btn = true
+                            this.payment.warning_amount = true;
+                            this.payment.warning_amount_message = "Lütfen geçerli bir tutar giriniz.";
+                            this.payment.collect_send_btn = true
                         } else {
-                            this.collection.warning_amount = false;
-                            this.collection.collect_send_btn = false
+                            this.payment.warning_amount = false;
+                            this.payment.collect_send_btn = false
                         }
                     },
-                    "cheque_collect.form.amount": function (yeni, eski) {
-                        this.cheque_collect.form.amount = money_clear(yeni).toLocaleString('tr-TR', {
+                    "cheque_payment.form.amount": function (yeni, eski) {
+                        this.cheque_payment.form.amount = money_clear(yeni).toLocaleString('tr-TR', {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 4
                         });
 
 
-                        amount = money_clear(this.cheque_collect.form.amount);
+                        amount = money_clear(this.cheque_payment.form.amount);
 
                        if (amount <= 0) {
-                            this.cheque_collect.warning_amount = true;
-                            this.cheque_collect.warning_amount_message = "Lütfen geçerli bir tutar giriniz.";
-                            this.cheque_collect.cheque_send_btn = true
+                            this.cheque_payment.warning_amount = true;
+                            this.cheque_payment.warning_amount_message = "Lütfen geçerli bir tutar giriniz.";
+                            this.cheque_payment.cheque_send_btn = true
                         } else {
-                            this.cheque_collect.warning_amount = false;
-                            this.cheque_collect.cheque_send_btn = false
+                            this.cheque_payment.warning_amount = false;
+                            this.cheque_payment.cheque_send_btn = false
                         }
                     },
                     deep: true
@@ -505,24 +396,25 @@
                         }
                     },
                     collectionFormSend: function () {
+
+
                         this.$validator.validate().then((result) => {
                             if (result) {
+
                                 @if($local == "purchase_orders")
-                                    this.collection.collect_send_btn = false;
+                                    this.payment.collect_send_btn = false;
                                 order_total = money_clear(VueName.remaining);
-                                amount = money_clear(this.collection.form.amount);
+                                amount = money_clear(this.payment.form.amount);
                                 if (amount > order_total) {
 
                                 } else {
 
                                     this.loading = true;
-                                    axios.post("{{route("finance.accounts.transaction_payment",aid())}}", this.collection.form).then(function (res) {
+                                    axios.post("{{route("finance.accounts.transaction_payment",aid())}}", this.payment.form).then(function (res) {
 
                                         if (res.data.message == "success") {
                                             VueName.remaining = res.data.remaining;
-
-
-                                            VueCollect.collection.form.amount = res.data.remaining;
+                                            VuePayment.payment.form.amount = res.data.remaining;
                                             VueName.collect_items.push({
                                                 type:"payment",
                                                 id: res.data.collect_items.id,
@@ -530,39 +422,41 @@
                                                 date: res.data.collect_items.date,
                                                 amount: res.data.collect_items.amount
                                             });
-                                            VueCollect.loading = false;
-                                            $("#transaction").modal("hide");
+                                            VuePayment.loading = false;
+                                            $("#transaction_payment").modal("hide");
                                             notification("Success", "Tahsilat işlemi başarıyla gerçekleşti.", "success");
-
-
                                         }
                                     }).catch(function (e) {
                                         console.log(e)
-                                        VueCollect.loading = false;
+                                        VuePayment.loading = false;
                                     });
 
                                 }
+
                                 @else
 
-                                    this.collection.collect_send_btn = false;
+                               this.payment.collect_send_btn = false;
 
-                                amount = money_clear(this.collection.form.amount);
+                                amount = money_clear(this.payment.form.amount);
                                 if (amount > 0) {
+                                    console.log("tester");
                                     this.loading = true;
-                                    axios.post("{{route("finance.accounts.transaction_company",aid())}}", this.collection.form).then(function (res) {
+                                    axios.post("{{route("finance.accounts.transaction_company",aid())}}", this.payment.form).then(function (res) {
 
                                         if (res.data.message == "success") {
+
+                                            $("#transaction_payment").modal("hide");
                                             VueName.remaining = res.data.remaining;
-                                            VueCollect.collection.form.amount = res.data.remaining;
-                                            VueCollect.loading = false;
-                                            $("#transaction").modal("hide");
+                                            VuePayment.payment.form.amount = res.data.remaining;
+                                            VuePayment.loading = false;
+
                                             notification("Success", "Tahsilat işlemi başarıyla gerçekleşti.", "success");
 
 
                                         }
                                     }).catch(function (e) {
-                                        console.log(e)
-                                        VueCollect.loading = false;
+
+                                        VuePayment.loading = false;
                                     });
                                 }
                                 @endif
@@ -580,18 +474,18 @@
                     chequeCollectFormSend: function () {
                         if(amount>!0){
 
-                            this.cheque_collect.cheque_send_btn = true;
+                            this.cheque_payment.cheque_send_btn = true;
 
                             this.loading = true;
 
 
-                            axios.post("{{route("finance.accounts.transaction_company",aid())}}", this.cheque_collect.form).then(function (res) {
+                            axios.post("{{route("finance.accounts.transaction_company",aid())}}", this.cheque_payment.form).then(function (res) {
 
                                 if (res.data.message == "success") {
                                     VueName.remaining = res.data.remaining;
-                                    VueCollect.collection.form.amount = res.data.remaining;
-                                    VueCollect.loading = false;
-                                    $("#transaction").modal("hide");
+                                    VuePayment.payment.form.amount = res.data.remaining;
+                                    VuePayment.loading = false;
+                                    $("#transaction_payment").modal("hide");
                                     notification("Success", "Çek Alım işlemi başarıyla gerçekleşti.", "success");
 
                                 }
@@ -599,8 +493,8 @@
 
                             }).catch(function (e) {
                                 console.log(e)
-                                VueCollect.loading = false;
-                                VueCollect.cheque_collect.cheque_send_btn = false;
+                                VuePayment.loading = false;
+                                VuePayment.cheque_payment.cheque_send_btn = false;
                             });
 
                         }else {

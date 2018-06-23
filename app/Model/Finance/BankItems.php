@@ -4,6 +4,7 @@ namespace App\Model\Finance;
 
 use App\Bankabble;
 use App\Companies;
+use App\Model\Purchases\PurchaseOrders;
 use App\Model\Sales\SalesOrders;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -56,7 +57,12 @@ class BankItems extends Model
 
     public function orders()
     {
-        return $this->hasMany(Bankabble::class, 'bank_items_id',"id");
+        return $this->morphedByMany(SalesOrders::class, 'bankabble')->withPivot("amount");
+    }
+
+    public function porders()
+    {
+        return $this->morphedByMany(PurchaseOrders::class, 'bankabble')->withPivot("amount");
     }
 
     public function bankabble()
@@ -67,12 +73,11 @@ class BankItems extends Model
     public function getRemainingAttribute()
     {
         $used = $this->orders->sum("pivot.amount");
+        $pused = $this->porders->sum("pivot.amount");
         $total = money_db_format($this->amount);
-
-        $general_total = get_money($total - $used);
+        $general_total = get_money($total - $used-$pused);
 
         return $general_total;
-
 
     }
 

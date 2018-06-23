@@ -36,7 +36,7 @@
                                         TAHSİLAT EKLE</a>
                                 </li>
                                 <li>
-                                    <a href="#!"  data-toggle="modal" data-target="#transaction"><i
+                                    <a href="#!"  data-toggle="modal" data-target="#transaction_payment"><i
                                                 class="fa fa-edit" aria-hidden="true"></i>
                                         ÖDEME EKLE</a>
                                 </li>
@@ -280,10 +280,12 @@
 
     </section>
     @include("components.external.transaction",[$type="collect",$local="company",$detail = $company,$abble="App\\\Model\\\Sales\\\SalesOrders"])
+    @include("components.external.transaction_payment",[$type="payment",$local="company",$detail = $company,$abble="App\\\Model\\\Purchases\\\PurchaseOrders"])
 
     <!-- end widget grid -->
     @push('scripts')
         <script>
+
             window.addEventListener("load", () => {
           VueName =  new Vue({
                 el: "#show",

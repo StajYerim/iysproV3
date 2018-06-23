@@ -82,6 +82,22 @@ class Companies extends Model
         return $open;
     }
 
+    public function getPopenOrdersAttribute()
+    {
+        $list = $this->purchase_orders;
+
+        $open = [];
+        foreach ($list as $order) {
+
+            if (money_db_format($order->remaining) > 0)
+
+                $open[] = $order;
+        }
+
+
+        return $open;
+    }
+
     public function collects()
     {
         return $this->hasMany(BankItems::class, "company_id", "id");
@@ -103,25 +119,50 @@ class Companies extends Model
         //Yapılan Tahsilat
         $collects = $this->collects()->where("action_type", 1)->sum("amount");
 
+        //Yapılan Ödeme
+        $payments = $this->collects()->where("action_type", 0)->sum("amount");
+
         //Alınan Çek
         $buy_cheques = $this->buy_cheques()->sum("amount");
 
         $sales_net_total =  $sales_orders-($collects + $buy_cheques);
-        $purchase_net_total = $purchase_orders;
+        $purchase_net_total = $purchase_orders-$payments;
 
         return get_money($sales_net_total-$purchase_net_total);
     }
 
+    //Satış Siparişlerine İşlenmemiş Tahsilatlar
     public function getOpenReceiptsAttribute()
     {
         $list = $this->collects;
 
         $open = [];
         foreach ($list as $collect) {
+        if($collect->action_type == 1){
 
             if ($collect->remaining > 0) {
 
                 $open[] = $collect;
+            }
+
+        }
+
+        }
+        return $open;
+    }
+
+    //Alış siparişne işlenmemiş ödemeler
+    public function getPopenReceiptsAttribute()
+    {
+        $list = $this->collects;
+
+        $open = [];
+        foreach ($list as $collect) {
+            if($collect->action_type == 0) {
+                if ($collect->remaining > 0) {
+
+                    $open[] = $collect;
+                }
             }
         }
         return $open;
@@ -142,7 +183,7 @@ class Companies extends Model
         return $open;
     }
 
-
+    //Satış Siparişi oluşturulduğunda Müşterinin daha önceden tahsilatı var ise alış faturasına aktarılır
     public function open_receipts_set($open_receipts, $open_cheques, $order)
     {
 
@@ -210,6 +251,51 @@ class Companies extends Model
             }
         }
 
+
+        Bankabble::where("amount",0)->delete();
+
+    }
+
+    //Alış Siparişi oluşturulduğunda Tedarikçinin daha önceden avansı var ise alış faturasına aktarılır
+    public function open_receipts_payment_set($open_receipts, $order)
+    {
+
+        Bankabble::where("bankabble_id", $order->id)->where("bankabble_type", "App\Model\Purchases\PurchaseOrders")->delete();
+
+
+
+        //Açık Banka Fişleri
+        foreach ($open_receipts as $receipts) {
+
+            $ordersd = PurchaseOrders::find($order->id);
+
+            $siparis_total = money_db_format($ordersd->remaining);
+
+            $receipt_remaining = $receipts->remaining;
+
+            //Banka fişi tutarı sipariş toplamından büyük veya eşit ise sipariş toplamını öde
+            if ($siparis_total <= $receipt_remaining) {
+
+                Bankabble::create([
+                    "bank_items_id" => $receipts->id,
+                    "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                    "bankabble_id" => $ordersd->id,
+                    "amount" => get_money($siparis_total),
+                ]);
+
+
+            } else {
+
+                Bankabble::create([
+                    "bank_items_id" => $receipts->id,
+                    "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                    "bankabble_id" => $ordersd->id,
+                    "amount" => $receipt_remaining
+                ]);
+
+
+            }
+        }
 
         Bankabble::where("amount",0)->delete();
 

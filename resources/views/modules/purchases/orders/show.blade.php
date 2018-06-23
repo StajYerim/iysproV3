@@ -20,7 +20,7 @@
                                     DÜZENLE</a>
                             </li>
                             <li>
-                                <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction"><i
+                                <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction_payment"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
                                     ÖDEME EKLE</a>
                             </li>

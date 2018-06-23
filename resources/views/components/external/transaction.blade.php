@@ -121,122 +121,6 @@
 
                         <div class="tab-pane fade " id="s2">
 
-                            @if($type=="payment")
-                                <form class="form-horizontal bv-form" novalidate="novalidate">
-                                    <button type="submit" class="bv-hidden-submit"
-                                            style="display: none; width: 0px; height: 0px;"></button>
-                                    <fieldset>
-                                        <div class="form-group has-feedback">
-                                            <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">ÇEK TÜRÜ</div>
-                                            </label>
-                                            <div class="col-sm-8 ">
-                                                <div class="input-group" style="width:100%">
-
-                                                    <select class="form-control" name="CheqOption" id="CheqOption">
-                                                        <option value="0">BANKA ÇEKİ</option>
-                                                        <option value="1">MÜŞTERİ ÇEKİ</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="banks">
-                                        <div class="form-group has-feedback">
-                                            <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">BANKALAR</div>
-                                            </label>
-                                            <div class="col-sm-8 ">
-
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <div class="nocheqs">
-                                        <fieldset style="display:none" class="cheqs">
-                                            <div class="form-group has-feedback">
-                                                <label class="col-sm-4 control-label">
-                                                    <div class="bottom-info">ÇEKLER</div>
-                                                </label>
-                                                <div class="col-sm-8 ">
-
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-
-                                        <fieldset>
-                                            <div class="form-group has-feedback">
-                                                <label class="col-sm-4 control-label">
-                                                    <div class="bottom-info">TARİH</div>
-                                                </label>
-                                                <div class="col-sm-8 ">
-                                                    <div class="input-group">
-                                                        <input type="text" value="{{date_tr()}}"
-                                                               class="form-control datepicker"
-                                                               data-dateformat="dd.mm.yy">
-                                                        <span class="input-group-addon"><i
-                                                                    class="fa fa-calendar"></i></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset>
-                                            <div class="form-group has-feedback">
-                                                <label class="col-sm-4 control-label">
-                                                    <div class="bottom-info">VADE TARİHİ</div>
-                                                </label>
-                                                <div class="col-sm-8 ">
-                                                    <div class="input-group">
-                                                        <input type="text" name="TransactionDueDate"
-                                                               value="{{date_tr()}}"
-                                                               class="form-control xdate" data-dateformat="dd.mm.yy">
-                                                        <span class="input-group-addon"><i
-                                                                    class="fa fa-calendar"></i></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset>
-                                            <div class="form-group has-feedback">
-                                                <label class="col-sm-4 control-label">
-                                                    <div class="bottom-info">MEBLAĞ</div>
-                                                </label>
-                                                <div class="col-sm-8 ">
-                                                    <div class="input-group" style="width:100%">
-                                                        <input type="text" class="form-control money" name="Amount"
-                                                               value="0,00">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset>
-                                            <div class="form-group has-feedback">
-                                                <label class="col-sm-4 control-label">
-                                                    <div class="bottom-info">AÇIKLAMA</div>
-                                                </label>
-                                                <div class="col-sm-8 ">
-                                                    <div class="input-group" style="width:100%">
-                                                        <input type="text" name="Description" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                    </div>
-                                </form>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">
-                                    İPTAL
-                                </button>
-                                <button type="submit" disabled
-                                        class="btn btn btn-danger pull-right">
-                                    ÖDEME EKLE
-                                </button>
-
-                            @else
                                 <form class="form-horizontal bv-form" novalidate="novalidate">
                                     {{--Çek senet tahsilat işlemleri--}}
                                     <button type="submit" class="bv-hidden-submit"
@@ -381,7 +265,7 @@
                                     TAHSİLAT EKLE
                                 </button>
 
-                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -435,7 +319,6 @@
                             description:""
                         }
                     }
-
                 },
                 mounted: function () {
                     this.accounts.push(
@@ -454,18 +337,21 @@
                             maximumFractionDigits: 4
                         });
 
-                        order_total = money_clear(VueName.remaining);
+
 
                         amount = money_clear(this.collection.form.amount);
-                        @if($local == "sales_orders")
-                        if (amount > order_total) {
-                            this.warning_amount = true;
-                            this.warning_amount_message = "Tahsilat tutarı, sipariş tutarından yüksek olamaz.Yüksek miktarda tahsilatı müşteri profilinden yapabilirsiniz.";
-                            this.collect_send_btn = true
-                        }
-                        @endif
 
-                            if (amount <= 0) {
+                        @if($local == "sales_orders")
+                            order_total = money_clear(VueName.remaining);
+                        @else
+                            order_total = 0;
+                        @endif
+                        if (amount > order_total) {
+
+                            this.collection.warning_amount = true;
+                            this.collection.warning_amount_message = "Tahsilat tutarı, sipariş tutarından yüksek olamaz.Yüksek miktarda tahsilatı müşteri profilinden yapabilirsiniz.";
+                            this.collection.collect_send_btn = true
+                        } else if (amount <= 0) {
                             this.collection.warning_amount = true;
                             this.collection.warning_amount_message = "Lütfen geçerli bir tutar giriniz.";
                             this.collection.collect_send_btn = true
@@ -521,13 +407,17 @@
                                             VueCollect.loading = false;
                                             $("#transaction").modal("hide");
                                             notification("Success", "Tahsilat işlemi başarıyla gerçekleşti.", "success");
-
-
                                         }
+
                                     }).catch(function (e) {
-                                        console.log(e)
+
                                         VueCollect.loading = false;
                                     });
+                                } else {
+
+                                    VueCollect.collection.warning_amount = true;
+                                    VueCollect.collection.warning_amount_message = "Lütfen geçerli bir tutar giriniz.";
+                                    VueCollect.collection.collect_send_btn = true
                                 }
                                 @else
                                     this.collection.collect_send_btn = false;
@@ -536,33 +426,39 @@
                                 if (amount > order_total) {
 
                                 } else {
+                                    amount = money_clear(this.collection.form.amount);
+                                    if (amount > 0) {
+                                        this.loading = true;
+                                        axios.post("{{route("finance.accounts.global_transaction",aid())}}", this.collection.form).then(function (res) {
 
-                                    this.loading = true;
-                                    axios.post("{{route("finance.accounts.global_transaction",aid())}}", this.collection.form).then(function (res) {
-
-                                        if (res.data.message == "success") {
-                                            VueName.remaining = res.data.remaining;
+                                            if (res.data.message == "success") {
+                                                VueName.remaining = res.data.remaining;
 
 
-                                            VueCollect.collection.form.amount = res.data.remaining;
-                                            VueName.collect_items.push({
-                                                type:"collect",
-                                                id: res.data.collect_items.id,
-                                                bank_account: res.data.collect_items.bank_account,
-                                                date: res.data.collect_items.date,
-                                                amount: res.data.collect_items.amount
-                                            });
+                                                VueCollect.collection.form.amount = res.data.remaining;
+                                                VueName.collect_items.push({
+                                                    type: "collect",
+                                                    id: res.data.collect_items.id,
+                                                    bank_account: res.data.collect_items.bank_account,
+                                                    date: res.data.collect_items.date,
+                                                    amount: res.data.collect_items.amount
+                                                });
+                                                VueCollect.loading = false;
+                                                $("#transaction").modal("hide");
+                                                notification("Success", "Tahsilat işlemi başarıyla gerçekleşti.", "success");
+
+
+                                            }
+                                        }).catch(function (e) {
+                                            console.log(e)
                                             VueCollect.loading = false;
-                                            $("#transaction").modal("hide");
-                                            notification("Success", "Tahsilat işlemi başarıyla gerçekleşti.", "success");
+                                        });
+                                    } else {
 
-
-                                        }
-                                    }).catch(function (e) {
-                                        console.log(e)
-                                        VueCollect.loading = false;
-                                    });
-
+                                        VueCollect.collection.warning_amount = true;
+                                        VueCollect.collection.warning_amount_message = "Lütfen geçerli bir tutar giriniz.";
+                                        VueCollect.collection.collect_send_btn = true
+                                    }
                                 }
 
                                 @endif
