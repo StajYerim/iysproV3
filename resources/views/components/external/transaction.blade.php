@@ -344,7 +344,7 @@
                         @if($local == "sales_orders")
                             order_total = money_clear(VueName.remaining);
                         @else
-                            order_total = 0;
+                            order_total = amount+amount;
                         @endif
                         if (amount > order_total) {
 
@@ -403,7 +403,8 @@
 
                                         if (res.data.message == "success") {
                                             VueName.remaining = res.data.remaining;
-                                            VueCollect.collection.form.amount = res.data.remaining;
+
+                                            VueCollect.collection.form.amount = "0,00";
                                             VueCollect.loading = false;
                                             $("#transaction").modal("hide");
                                             notification("Success", "Tahsilat işlemi başarıyla gerçekleşti.", "success");
@@ -433,8 +434,6 @@
 
                                             if (res.data.message == "success") {
                                                 VueName.remaining = res.data.remaining;
-
-
                                                 VueCollect.collection.form.amount = res.data.remaining;
                                                 VueName.collect_items.push({
                                                     type: "collect",
@@ -443,6 +442,7 @@
                                                     date: res.data.collect_items.date,
                                                     amount: res.data.collect_items.amount
                                                 });
+
                                                 VueCollect.loading = false;
                                                 $("#transaction").modal("hide");
                                                 notification("Success", "Tahsilat işlemi başarıyla gerçekleşti.", "success");

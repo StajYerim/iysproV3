@@ -23,7 +23,7 @@
             <div class="col-sm-8">
                 <div class="well">
 
-                        <h1><i style="vertical-align: -7px;" class="fa fa-sign-in fa-rotate-90 fa-2x "></i> <span class="semi-bold">Alınan  Çek</span>
+                        <h1><i style="vertical-align: -7px;" class="fa fa-sign-in fa-rotate-90 fa-2x "></i> <span class="semi-bold"> {{$cheq->company_id == null ? "Verilen ":" Alınan"}} {{$cheq->transfer_company_id == null ? "Alınan ":"Verilen "}} Çek</span>
                     </h1>
 
                     <hr>

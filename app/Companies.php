@@ -108,6 +108,11 @@ class Companies extends Model
         return $this->hasMany(Cheques::class, "company_id", "id");
     }
 
+    public function sell_cheques()
+    {
+        return $this->hasMany(Cheques::class, "transfer_company_id", "id");
+    }
+
     public function getBalanceAttribute()
     {
         //Satış Siparişlerinin Toplam Tutarı;
@@ -125,8 +130,12 @@ class Companies extends Model
         //Alınan Çek
         $buy_cheques = $this->buy_cheques()->sum("amount");
 
+        //Verilen Çek
+        $sell_cheques = $this->sell_cheques()->sum("amount");
+
+
         $sales_net_total =  $sales_orders-($collects + $buy_cheques);
-        $purchase_net_total = $purchase_orders-$payments;
+        $purchase_net_total = $purchase_orders-($payments+ $sell_cheques);
 
         return get_money($sales_net_total-$purchase_net_total);
     }
@@ -171,6 +180,21 @@ class Companies extends Model
     public function getOpenChequesAttribute()
     {
         $list = $this->buy_cheques;
+
+        $open = [];
+        foreach ($list as $cheque) {
+
+            if ($cheque->remaining > 0) {
+
+                $open[] = $cheque;
+            }
+        }
+        return $open;
+    }
+
+    public function getPopenChequesAttribute()
+    {
+        $list = $this->sell_cheques;
 
         $open = [];
         foreach ($list as $cheque) {
@@ -257,7 +281,7 @@ class Companies extends Model
     }
 
     //Alış Siparişi oluşturulduğunda Tedarikçinin daha önceden avansı var ise alış faturasına aktarılır
-    public function open_receipts_payment_set($open_receipts, $order)
+    public function open_receipts_payment_set($open_receipts,$open_cheques, $order)
     {
 
         Bankabble::where("bankabble_id", $order->id)->where("bankabble_type", "App\Model\Purchases\PurchaseOrders")->delete();
@@ -297,7 +321,41 @@ class Companies extends Model
             }
         }
 
+
+        sleep(1);
+
+        //Verilen Çekler
+        foreach ($open_cheques as $cheque) {
+            $orders = PurchaseOrders::find($order->id);
+            $siparis_toplam = money_db_format($orders->remaining);
+            $remaining = $cheque->remaining;
+            //Banka fişi tutarı sipariş toplamından büyük veya eşit ise sipariş toplamını öde
+            if ($siparis_toplam <= $remaining) {
+
+                Bankabble::create([
+                    "cheques_id" => $cheque->id,
+                    "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                    "bankabble_id" => $orders->id,
+                    "amount" => get_money($siparis_toplam),
+                ]);
+
+
+            } else {
+
+                Bankabble::create([
+                    "cheques_id" => $cheque->id,
+                    "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                    "bankabble_id" => $orders->id,
+                    "amount" => $remaining
+                ]);
+
+
+            }
+        }
+
+
         Bankabble::where("amount",0)->delete();
+
 
     }
 

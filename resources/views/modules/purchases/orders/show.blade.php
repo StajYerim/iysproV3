@@ -300,15 +300,15 @@
                                 amount:"{{get_money($pay->pivot->amount)}}"
                             },
                             @endforeach()
-                                {{--@foreach($order->cheques as $che)--}}
-                            {{--{--}}
-                                {{--type:"cheq",--}}
-                                {{--id:"{{$che->id}}",--}}
-                                {{--date:"{{$che->date}}",--}}
-                                {{--bank_account:'ALINAN ÇEK',--}}
-                                {{--amount:"{{get_money($che->pivot->amount)}}"--}}
-                            {{--},--}}
-                            {{--@endforeach()--}}
+                                @foreach($order->cheques as $che)
+                            {
+                                type:"cheq",
+                                id:"{{$che->id}}",
+                                date:"{{$che->date}}",
+                                bank_account:'VERİLEN ÇEK',
+                                amount:"{{get_money($che->pivot->amount)}}"
+                            },
+                            @endforeach()
                         ],
                         items: [@foreach($order->items as $item)
                         {

@@ -150,8 +150,8 @@ class PurchaseOrders extends Model
     public function getRemainingAttribute()
     {
         $pay = $this->payments->sum("pivot.amount");
-//        $cheq = $this->cheques->sum("pivot.amount");
-        $cheq = 0;
+        $cheq = $this->cheques->sum("pivot.amount");
+//        $cheq = 0;
         $total = $pay+$cheq;
 
         return get_money((money_db_format($this->grand_total) - $total));

@@ -453,6 +453,10 @@ function date_local(){
     return \Carbon\Carbon::now()->format("Y-m-d");
 }
 
+function short($value,$lenght =30,$charecter="..."){
+    return str_limit($value,$lenght,$charecter);
+}
+
 //Türkiye için olan tarih formatını datetime formatına getir
 function date_convert($tarih)
 {

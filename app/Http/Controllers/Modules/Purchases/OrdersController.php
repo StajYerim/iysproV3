@@ -104,7 +104,7 @@ class OrdersController extends Controller
         $order->items()->whereNotIn("id", $whereNot)->delete();
 
 
-        $order->company->open_receipts_payment_set($order->company->popen_receipts,$order);
+        $order->company->open_receipts_payment_set($order->company->popen_receipts,$order->company->popen_cheques,$order);
 
 
         flash()->overlay($id == 0 ? "New Sales Order" : "Purchase Order Updated", 'Success')->success();

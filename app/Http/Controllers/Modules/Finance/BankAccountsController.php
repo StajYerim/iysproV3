@@ -408,6 +408,61 @@ class BankAccountsController extends Controller
             return ["message" => "success", "remaining" => $company->balance];
 
         }
+        else if($request->type =="cheque_payment"){
+            $company = Companies::find($request->company_id);
+
+            if($request->cheque_type  == 0){
+            $cheq = Cheques::create([
+                "account_id" => aid(),
+                "transfer_company_id" => $company->id,
+                "type" => $request->doc_type,
+                "description" => $request->description,
+                "document_no" => $request->number,
+                "bank_name" => $request->bank_name,
+                "bank_branch" => $request->branch_name,
+                "date" => $request->date,
+                "payment_date" => $request->payment_date,
+                "amount" => $request->amount,
+                "status" => 0
+            ]);
+
+            }else{
+
+            }
+
+            $cek_tutari = money_db_format($cheq->amount);
+
+            foreach ($company->popen_orders as $order) {
+                //Çek tutarı Faturanın son bakiyesinden yüksek veya eşit ise her halükarda
+                //Faturanın toplam tutarı ödenmiş sayılacak.
+
+                if ($cek_tutari >= money_db_format($order->remaining)) {
+
+                    Bankabble::create([
+                        "cheques_id" => $cheq->id,
+                        "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                        "bankabble_id" => $order->id,
+                        "amount" => $order->remaining,
+                    ]);
+                    $cek_tutari -= money_db_format($order->remaining);
+
+                } else {
+                    //Çek tutarı Faturanın son bakiyesinden yüksek veya eşit değil ise altındadır.
+                    //Bu nedenle çek tutarı ne kadar ise o kadarı bu fatura için ödenecektir.
+                    Bankabble::create([
+                        "cheques_id" => $cheq->id,
+                        "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                        "bankabble_id" => $order->id,
+                        "amount" => get_money($cek_tutari),
+                    ]);
+                    break;
+
+                }
+
+            }
+
+            return ["message" => "success", "remaining" => $company->balance];
+        }
 
 
     }
