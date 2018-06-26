@@ -197,7 +197,7 @@
                                                 <div class="col-sm-8 ">
                                                     <div class="input-group">
                                                         <input type="text" value="{{date_tr()}}"
-                                                               class="form-control datepicker" v-model="cheque_payment.form.date"
+                                                               class="form-control datepicker" v-model="cheque_payment.form.date" name="cheque_payment.form.date"
                                                                data-dateformat="dd.mm.yy">
                                                         <span class="input-group-addon"><i
                                                                     class="fa fa-calendar"></i></span>
@@ -215,7 +215,7 @@
                                                 <div class="col-sm-8 ">
                                                     <div class="input-group">
                                                         <input type="text"
-                                                               value="{{date_tr()}}" v-model="cheque_payment.form.due_date"
+                                                               value="{{date_tr()}}" v-model="cheque_payment.form.payment_date" name="cheque_payment.form.payment_date"
                                                                class="form-control datepicker" data-dateformat="dd.mm.yy">
                                                         <span class="input-group-addon"><i
                                                                     class="fa fa-calendar"></i></span>
@@ -315,14 +315,10 @@
                         form:{
                             cheque_type:0,
                             cheque_bank_id:null,
-                            doc_type:"0",
                             cheques_id: null,
                             order_id:"{{$local == "purchase_orders" ? $order->id:""}}",
                             company_id:"{{$local == "purchase_orders" ? $order->company["id"]:$company->id}}",
                             type:"cheque_payment",
-                            bank_name:"",
-                            branch_name:"",
-                            number:"",
                             date:"{{date_tr()}}",
                             payment_date:"{{date_tr()}}",
                             amount:"0,00",
@@ -409,6 +405,16 @@
                             this.cheque_payment.warning_amount = false;
                             this.cheque_payment.cheque_send_btn = false
                         }
+                    },
+                    "cheque_payment.form.cheque_bank_id": function (yeni) {
+                        if (yeni == null) {
+
+                            this.cheque_payment.cash_error = true;
+                        } else {
+
+                            this.cheque_payment.cash_error = false
+                        }
+
                     },
                     deep: true
                 },
@@ -500,21 +506,34 @@
                     },
                     chequeCollectFormSend: function () {
                         $form = this.cheque_payment.form;
+                        $cheque = this.cheque_payment;
+
+
                         if ($form.cheque_type == 0) {
 
-                            if (money_clear($form.amount)>0 ){
-                          //Banka Çeki
-console.log($form)
+                            if (money_clear($form.amount) > 0 && $cheque.cash_error == false) {
+                                //Banka Çeki
+                                axios.post('{{route("finance.accounts.transaction_company",aid())}}',$form).then(res=>{
+                                    console.log(res.data)
+                                })
 
                             }else{
-                                this.cheque_payment.warning_amount = true;
-                                this.cheque_payment.warning_amount_message = "Lütfen geçerli bir tutar giriniz.";
+                                if (money_clear($form.amount) >= 0) {
+                                    this.cheque_payment.warning_amount = true;
+                                    this.cheque_payment.warning_amount_message = "Lütfen geçerli bir tutar giriniz.";
+                                }
+
+                                if($form.cheque_bank_id == null){
+                                    $cheque.cash_error = true;
+                                }
+
                             }
 
 
 
                             //Müşteri Çeki
                                 } else {
+
                             console.log("Müşteri Çeki")
                         }
 

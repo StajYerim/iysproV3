@@ -230,12 +230,6 @@
 
 
                                         <div id="short_info" class="col-12">
-                                            {{--<div class="row">--}}
-                                                {{--<div class="col-sm-12">--}}
-                                                    {{--GECİKMİŞ TAHSİLAT <span class="pull-right">2.500,00</span>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<hr>--}}
 
                                             <div class="row">
                                                 <div class="col-sm-12 bottom-info" >

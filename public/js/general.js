@@ -193,6 +193,12 @@ console.log(data)
                     }else if(data == "money_form.date"){
                         console.log(date);
                         VueName.money_form.date = date;
+                    }else if(data == "cheque_payment.form.date"){
+                        console.log(VueCollect.collection.form.date,date);
+                        VuePayment.cheque_payment.form.date = date;
+                    }else if(data == "cheque_payment.form.payment_date"){
+                        console.log(VueCollect.collection.form.date,date);
+                        VuePayment.cheque_payment.form.payment_date = date;
                     }
 
 
