@@ -167,6 +167,9 @@ return [
 
         //Parasut
         App\Providers\ParasutServiceProvider::class,
+      
+        //Cron
+        Liebig\Cron\Laravel5ServiceProvider::class
     ],
 
     /*

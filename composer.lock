@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d506def55d4441cbdedd4cb145ec4848",
+    "content-hash": "65d855c2683c1bc47ad4a25534ce2fc0",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1633,6 +1633,63 @@
                 "rest"
             ],
             "time": "2017-06-12T11:04:56+00:00"
+        },
+        {
+            "name": "liebig/cron",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liebig/cron.git",
+                "reference": "2ca74412b939e7a8444b2f70edb1f37072ad1231"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/liebig/cron/zipball/2ca74412b939e7a8444b2f70edb1f37072ad1231",
+                "reference": "2ca74412b939e7a8444b2f70edb1f37072ad1231",
+                "shasum": ""
+            },
+            "require": {
+                "dragonmantank/cron-expression": "2.*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "illuminate/support": "4.0.x|~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Liebig\\Cron\\Laravel5ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/migrations"
+                ],
+                "psr-0": {
+                    "Liebig\\Cron": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Liebig",
+                    "email": "marc.liebig@gmx.eu"
+                }
+            ],
+            "description": "Job scheduling for Laravel",
+            "homepage": "http://liebig.github.io/cron",
+            "keywords": [
+                "cron",
+                "cronjob",
+                "cronmanager",
+                "laravel"
+            ],
+            "time": "2018-04-23T06:37:58+00:00"
         },
         {
             "name": "maatwebsite/excel",
@@ -5850,7 +5907,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "teknomavi/tcmb": 20
+        "teknomavi/tcmb": 20,
+        "liebig/cron": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

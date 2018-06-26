@@ -19,7 +19,8 @@
         "spatie/laravel-translation-loader": "^2.1",
         "teknomavi/tcmb": "dev-master",
         "yajra/laravel-datatables": "^1.0",
-        "yajra/laravel-datatables-oracle": "~8.0"
+        "yajra/laravel-datatables-oracle": "~8.0",
+        "liebig/cron": "dev-master"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
