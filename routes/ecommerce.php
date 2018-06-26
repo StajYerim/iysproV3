@@ -17,4 +17,6 @@ Route::group(['prefix'=>'{company_id}/ecommerce','middleware'=>'not.admin'],func
 
     //Orders
     Route::get("orders","Modules\Ecommerce\OrdersController@index")->name("ecommerce.orders.index");
+    Route::get("orders/show/{order_id}","Modules\Ecommerce\OrdersController@show")->name("ecommerce.orders.show");
+    Route::get("orders/index_list/{status?}","Modules\Ecommerce\OrdersController@index_list")->name("ecommerce.orders.index_list");
 });
