@@ -10,17 +10,21 @@ use App\Http\Controllers\Modules\Ecommerce\Models\N11;
 use App\Http\Controllers\Modules\Ecommerce\Models\ECommerce;
 use Yajra\DataTables\Facades\DataTables;
 use App\Model\Stock\Product\Product;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
     protected $n11;
 
     public function __construct() {
-        $account = Account::find(aid());
-        $this->n11 = new N11([
-            'appKey' => $account["n11_api_key"],
-            'appSecret' => $account["n11_api_password"]
-        ]);
+        $this->middleware(function ($request, $next) {
+            $account = Account::find(aid());
+            $this->n11 = new N11([
+                'appKey' => $account["n11_api_key"],
+                'appSecret' => $account["n11_api_password"]
+            ]);
+            return $next($request);
+        });
     }
 
     public function index() {
