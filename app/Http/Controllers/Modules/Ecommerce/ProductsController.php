@@ -18,8 +18,8 @@ class ProductsController extends Controller
     public function __construct() {
         $account = Account::find(aid());
         $this->n11 = new N11([
-            'appKey' => $account->n11_api_key,
-            'appSecret' => $account->n11_api_password
+            'appKey' => $account["n11_api_key"],
+            'appSecret' => $account["n11_api_password"]
         ]);
     }
 
@@ -91,7 +91,7 @@ class ProductsController extends Controller
             "stock" => $request->input('stock')
         ]);
 
-        return redirect()->route('ecommerce.products.index', [ aid() ]); 
+        return redirect()->route('ecommerce.products.index', [ aid() ]);
     }
 
     public function categories($company_id, $category = null) {
