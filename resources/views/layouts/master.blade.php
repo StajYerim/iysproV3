@@ -20,7 +20,7 @@
     <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/smartadmin-rtl.min.css")}}">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/iys.css")}}"> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/iys.css")}}"> &nbsp;
 
     <!-- FAVICONS -->
     <link rel="shortcut icon" href="{{asset("img/favicon/favicon.ico")}}" type="image/x-icon">

@@ -14,4 +14,7 @@ Route::group(['prefix'=>'{company_id}/ecommerce','middleware'=>'not.admin'],func
 
     // N11 Categories
     Route::get("categories/{category?}","Modules\Ecommerce\ProductsController@categories")->name("ecommerce.products.categories");
+
+    //Orders
+    Route::get("orders","Modules\Ecommerce\OrdersController@index")->name("ecommerce.orders.index");
 });
