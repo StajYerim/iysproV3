@@ -23,7 +23,7 @@
 
                                 <fieldset>
                                     <legend>
-                                        N1 API BİLGİLERİ
+                                        N11 API BİLGİLERİ
                                     </legend>
 
                                 </fieldset>
