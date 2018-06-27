@@ -21,7 +21,7 @@ Route::group(['prefix'=>'{company_id}/ecommerce','middleware'=>'not.admin'],func
     Route::get("orders/show/{order_id}","Modules\Ecommerce\OrdersController@show")->name("ecommerce.orders.show");
     Route::get("orders/index_list/{status?}","Modules\Ecommerce\OrdersController@index_list")->name("ecommerce.orders.index_list");
   
-    //Jobs
+    /* Jobs
     Route::get("jobs", function() {
       return response()->json(CronJob::create([
         'command' => 'n11:orders',
@@ -30,4 +30,5 @@ Route::group(['prefix'=>'{company_id}/ecommerce','middleware'=>'not.admin'],func
         'user_id' => 2
       ]));
     });
+    */
 });
