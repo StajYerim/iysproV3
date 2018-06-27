@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65d855c2683c1bc47ad4a25534ce2fc0",
+    "content-hash": "6cbf9e1d8ddcb330ab59d4c4c657c630",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2636,6 +2636,77 @@
                 "translate"
             ],
             "time": "2018-03-06T20:50:34+00:00"
+        },
+        {
+            "name": "studio/laravel-totem",
+            "version": "v3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codestudiohq/laravel-totem.git",
+                "reference": "e4f30b06da1224edf7447c72d48545435eb65087"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codestudiohq/laravel-totem/zipball/e4f30b06da1224edf7447c72d48545435eb65087",
+                "reference": "e4f30b06da1224edf7447c72d48545435eb65087",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/bus": "~5.6.0",
+                "illuminate/console": "~5.6.0",
+                "illuminate/contracts": "~5.6.0",
+                "illuminate/database": "~5.6.0",
+                "illuminate/events": "~5.6.0",
+                "illuminate/notifications": "~5.6.0",
+                "laravelcollective/html": "~5.6",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/database": "^3.0",
+                "orchestra/testbench": "^3.6",
+                "phpunit/phpunit": ">=6.0"
+            },
+            "suggest": {
+                "nexmo/client": "Required for sms notifications."
+            },
+            "type": "library",
+            "extra": {
+                "component": "package",
+                "branch-alias": {
+                    "dev-3.0": "3.0.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Studio\\Totem\\Providers\\TotemServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Studio\\Totem\\": "src/",
+                    "Studio\\Totem\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roshan Gautam",
+                    "email": "roshan.gautam@hotmail.com"
+                }
+            ],
+            "description": "A Laravel package to manage your cron jobs through a beautiful dashboard",
+            "keywords": [
+                "Code Studio",
+                "laravel",
+                "manager",
+                "schedule",
+                "totem"
+            ],
+            "time": "2018-03-22T19:25:20+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5907,8 +5978,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "teknomavi/tcmb": 20,
-        "liebig/cron": 20
+        "liebig/cron": 20,
+        "teknomavi/tcmb": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

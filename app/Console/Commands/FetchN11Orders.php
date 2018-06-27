@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class FetchN11Orders extends Command
 {
@@ -37,6 +38,6 @@ class FetchN11Orders extends Command
      */
     public function handle()
     {
-        //
+      Log::info("Logger Working!");
     }
 }
