@@ -480,10 +480,9 @@
 
                                             $("#transaction_payment").modal("hide");
                                             VueName.remaining = res.data.remaining;
-                                            VuePayment.payment.form.amount = res.data.remaining;
                                             VuePayment.loading = false;
 
-                                            notification("Success", "Tahsilat işlemi başarıyla gerçekleşti.", "success");
+                                            notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
 
 
                                         }
@@ -514,7 +513,16 @@
                             if (money_clear($form.amount) > 0 && $cheque.cash_error == false) {
                                 //Banka Çeki
                                 axios.post('{{route("finance.accounts.transaction_company",aid())}}',$form).then(res=>{
-                                    console.log(res.data)
+                                    if (res.data.message == "success") {
+
+                                        $("#transaction_payment").modal("hide");
+                                        VueName.remaining = res.data.remaining;
+                                        VuePayment.loading = false;
+
+                                        notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
+
+
+                                    }
                                 })
 
                             }else{
@@ -524,17 +532,39 @@
                                 }
 
                                 if($form.cheque_bank_id == null){
-                                    $cheque.cash_error = true;
+
+                                    console.log("yemedi")
                                 }
 
                             }
 
 
-
                             //Müşteri Çeki
                                 } else {
 
-                            console.log("Müşteri Çeki")
+                            if ($form.cheques_id != null) {
+                                console.log("Müşteri Çeki")
+                                axios.post('{{route("finance.accounts.transaction_company",aid())}}', {
+                                    cheques_id: $form.cheques_id,
+                                    type: $form.type,
+                                    cheque_type: $form.cheque_type,
+                                    company_id:$form.company_id
+                                }).then(res => {
+                                    if (res.data.message == "success") {
+
+                                        $("#transaction_payment").modal("hide");
+                                        VueName.remaining = res.data.remaining;
+                                        VuePayment.loading = false;
+
+                                        notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
+
+
+                                    }
+                                })
+
+                            } else {
+                                console.log("yemedi")
+                            }
                         }
 
 

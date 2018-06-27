@@ -3,6 +3,7 @@
 namespace App\Model\Finance;
 
 use App\Companies;
+use App\Model\Purchases\PurchaseOrders;
 use App\Model\Sales\SalesOrders;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -15,6 +16,10 @@ class Cheques extends Model
 
     public function company(){
         return $this->hasOne(Companies::class,"id","company_id");
+    }
+
+    public function transfer_company(){
+        return $this->hasOne(Companies::class,"id","transfer_company_id");
     }
 
     public function setDateAttribute($value)
@@ -56,12 +61,18 @@ class Cheques extends Model
         return $this->morphedByMany(SalesOrders::class, 'bankabble')->withPivot("amount");
     }
 
+    public function porders()
+    {
+        return $this->morphedByMany(PurchaseOrders::class, 'bankabble')->withPivot("amount");
+    }
+
     public function getRemainingAttribute()
     {
         $used = $this->orders->sum("pivot.amount");
+        $pused = $this->porders->sum("pivot.amount");
         $total = money_db_format($this->amount);
 
-        $general_total = get_money($total - $used);
+        $general_total = get_money($total - $used -$pused);
 
         return $general_total;
     }
@@ -79,6 +90,32 @@ class Cheques extends Model
             return 1;
         }
 
+    }
+
+    public function getChequeStatusAttribute()
+    {
+        if ($this->company_id != null && $this->transfer_company_id != null) {
+            return 2;
+        } elseif ($this->company_id != null) {
+            return 1;
+        } elseif ($this->transfer_company != null) {
+            return 0;
+        }
+    }
+
+    public function getStatusTextAttribute()
+    {
+        switch ($this->cheque_status) {
+            case 0;
+                return "Verilen Çek";
+                break;
+            case 1;
+                return "Alınan Çek";
+                break;
+            case 2;
+                return "Alınan, Verilen Çek";
+                break;
+        }
     }
 
 }

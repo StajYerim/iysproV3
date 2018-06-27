@@ -95,8 +95,8 @@
                         }
                     }, {
                         data: "payment_date",
-                        render:function(payment_date){
-                            return payment_date+"<br><small class='note'>Alınan Çek</small>";
+                        render:function(payment_date,s,d){
+                            return payment_date;
                         }
 
                     }, {

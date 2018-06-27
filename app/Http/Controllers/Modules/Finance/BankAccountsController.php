@@ -461,6 +461,41 @@ class BankAccountsController extends Controller
 
             }else{
 
+                $cheq = Cheques::find($request->cheques_id);
+                $cheq->update(["transfer_company_id"=>$company->id,"status"=>2]);
+
+                $cek_tutari = money_db_format($cheq->amount);
+
+                foreach ($company->popen_orders as $order) {
+                    //Çek tutarı Faturanın son bakiyesinden yüksek veya eşit ise her halükarda
+                    //Faturanın toplam tutarı ödenmiş sayılacak.
+
+                    if ($cek_tutari >= money_db_format($order->remaining)) {
+
+                        Bankabble::create([
+                            "cheques_id" => $cheq->id,
+                            "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                            "bankabble_id" => $order->id,
+                            "amount" => $order->remaining,
+                        ]);
+                        $cek_tutari -= money_db_format($order->remaining);
+
+                    } else {
+                        //Çek tutarı Faturanın son bakiyesinden yüksek veya eşit değil ise altındadır.
+                        //Bu nedenle çek tutarı ne kadar ise o kadarı bu fatura için ödenecektir.
+                        Bankabble::create([
+                            "cheques_id" => $cheq->id,
+                            "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                            "bankabble_id" => $order->id,
+                            "amount" => get_money($cek_tutari),
+                        ]);
+                        break;
+
+                    }
+
+                }
+
+                return ["message" => "success", "remaining" => $company->balance];
 
 
             }
@@ -481,7 +516,7 @@ class BankAccountsController extends Controller
 
         $detail = $account->items()->save(new BankItems([
             "type" => $request->type,
-            "cheque_id" => $cheq->cheque_id,
+            "cheque_id" => $request->cheque_id,
             "date" => $request->date,
             "amount" => $cheq->amount,
             "action_type" => 1,
