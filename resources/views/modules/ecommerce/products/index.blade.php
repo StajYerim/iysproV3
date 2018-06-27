@@ -78,6 +78,12 @@
 <section id="widget-grid" class="">
     <!-- row -->
     <div class="row">
+        <a href="#" data-toggle="modal" data-target="#myModal" style="margin-top:8px;margin-right:13px;margin-bottom:8px;float: right;" class="btn btn-success">
+          <i class="fa fa-plus"></i> Ürün Ekle
+        </a>
+        <a href="#" style="margin-top:8px;margin-right:8px;margin-bottom:8px;float: right;" class="btn btn-default">
+          <i class="fa fa-filter"></i> Filtrele
+        </a>
         <!-- NEW WIDGET START -->
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="jarviswidget" id="wid-id-0">
@@ -86,18 +92,12 @@
                         <i class="fa fa-comments"></i>
                     </span>
                     <h2>Ürünler </h2>
-
                 </header>
                 <!-- widget div-->
-                <div>
+                <div style="padding:5px 13px 0">
                     <!-- widget content -->
                     <div class="widget-body no-padding">
-                        <a href="#" data-toggle="modal" data-target="#myModal" style="margin-top:8px;margin-right:8px;margin-bottom:8px;float: right;" class="btn btn-success">
-                          <i class="fa fa-plus"></i> Ürün Ekle
-                        </a>
-                        <a href="#" style="margin-top:8px;margin-right:8px;margin-bottom:8px;float: right;" class="btn btn-default">
-                          <i class="fa fa-filter"></i> Filtrele
-                        </a>
+                        
                         <table id="table" class="table table-striped table-hover" width="100%">
                             <thead>
                                 <tr>
