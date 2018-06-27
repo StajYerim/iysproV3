@@ -12,7 +12,7 @@ class FetchN11Orders extends Command
      *
      * @var string
      */
-    protected $signature = 'n11:orders';
+    protected $signature = 'n11:orders {user}';
 
     /**
      * The console command description.
@@ -38,6 +38,6 @@ class FetchN11Orders extends Command
      */
     public function handle()
     {
-      Log::info("Logger Working!");
+      Log::info("Logger Working! - " . $this->argument('user'));
     }
 }

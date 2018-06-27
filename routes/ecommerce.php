@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\CronJob;
 
 Auth::routes();
 // If user is authenticated and he is not admin
@@ -19,4 +20,14 @@ Route::group(['prefix'=>'{company_id}/ecommerce','middleware'=>'not.admin'],func
     Route::get("orders","Modules\Ecommerce\OrdersController@index")->name("ecommerce.orders.index");
     Route::get("orders/show/{order_id}","Modules\Ecommerce\OrdersController@show")->name("ecommerce.orders.show");
     Route::get("orders/index_list/{status?}","Modules\Ecommerce\OrdersController@index_list")->name("ecommerce.orders.index_list");
+  
+    //Jobs
+    Route::get("jobs", function() {
+      return response()->json(CronJob::create([
+        'command' => 'n11:orders',
+        'interval' => 1,
+        'nextRuntime' => Carbon\Carbon::now('America/New_York')->addMinutes(1),
+        'user_id' => 2
+      ]));
+    });
 });
