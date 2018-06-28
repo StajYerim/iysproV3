@@ -38,11 +38,12 @@
 
                             <a href="{{route($type=="supplier"?"purchases.companies.form":"sales.companies.form"."",[aid(),$type,"0","new"])}}" style="margin-top: 8px;margin-right: 4px;float: right;" class="btn btn-success">New {{$type}}</a>
 
-                            <table id="table" class="table table-striped table-bordered table-hover" width="100%">
+                            <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>{{strtoupper($type)}}
-
+                                    <th width="1px">#</th>
+                                    <th>{{$type}}</th>
+                                    <th>Balance</th>
                                 </tr>
                                 </thead>
 
@@ -86,16 +87,23 @@
                 ajax: '{!! route($route,[aid(),$type]) !!}',
                 columns: [
                     {
-                        data: 'company_name', name: 'company_name',
-                        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                            $(nTd).attr("onclick","window.location.href='/{{aid()}}/{{$type=="customer"?"sales":"purchases"}}/{{$type}}/"+oData.id+"/show'")
-                                .attr("style","cursor:pointer");
+                        data: 'id',
+                        render: function (id) {
+                            return '<i class="fa fa-building-o fa-3x"></i>';
                         }
                     },
+                    {
+                        data: 'company_name', name: 'company_name',
+                    },
+                    {
+                        data: 'balance', name: 'balance',
+                    },
+
                 ]
             });
 
           table_search(tables)
+
         </script>
     @endpush
 @endsection

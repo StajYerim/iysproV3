@@ -140,6 +140,16 @@ class Companies extends Model
         return get_money($sales_net_total-$purchase_net_total);
     }
 
+    public function getMoneyStatusAttribute()
+    {
+            $money = money_db_format($this->balance);
+            if($money > 0){
+                return "TAHSİL EDİLECEK";
+            }elseif($money<0){
+                return "ALACAKLI";
+            }
+    }
+
     //Satış Siparişlerine İşlenmemiş Tahsilatlar
     public function getOpenReceiptsAttribute()
     {

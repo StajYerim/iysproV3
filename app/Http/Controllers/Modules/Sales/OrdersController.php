@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Modules\Sales;
 
 use App\Bankabble;
+use App\Language;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -119,8 +120,9 @@ class OrdersController extends Controller
 
 
         $order = SalesOrders::find($id);
+        $langs = Language::All();
 
-        return view("modules.sales.orders.show", compact("order"));
+        return view("modules.sales.orders.show", compact("order","lang"));
     }
 
     public function pdf($aid, $id,$type)

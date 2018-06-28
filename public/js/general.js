@@ -222,6 +222,20 @@ function many(val,min=2,max=2){
     });
 }
 
+function redirect_company(id,type,aid){
+
+    if(type==0){
+        return  window.location.href = '/'+aid+'/sales/customer/' + id + '/show';
+    }else if(type==1){
+        return  window.location.href = '/'+aid+'/purchases/supplier/' + id + '/show';
+    }
+
+
+}
+
+function product_update(id) {
+    return window.location.href = '/{{aid()}}/sales/orders/' + id + '/show';
+}
 
 function vade_tarih(tarih,vade){
 

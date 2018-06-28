@@ -108,7 +108,7 @@
                                         <span style="line-height:12px;font-size:10px;">
                                             {!! str_replace("\n","<br>",account()["address"]) !!} {!! account()["town"] !!}/{!! account()["city"] !!}
 
-                                            <br>V.D ve No {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>Telefon {!! account()["phone"] !!}<br>
+                                            <br>V.D ve No{{$lang}} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>Telefon {!! account()["phone"] !!}<br>
 
                                     </span>
                                     </td>
@@ -163,7 +163,7 @@
         @forelse($offer->items as $off)
             <tr class="item" style="font-size:12px;font-weight: 600">
                 <td  style="text-align: left;">
-                    {{$off->product["name"]}}
+                   {{$off->product->lang($off->product["id"], $lang)}}
                 </td>
                 <td  style="text-align: right;">
                     {{$off->quantity}} {{$off->unit["name"]}}

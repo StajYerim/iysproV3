@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Modules\Sales;
+use App\Language;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOfferItems;
@@ -97,21 +98,22 @@ class OffersController extends Controller
 
     public function show($aid, $id)
     {
+        $langs = Language::all();
         $offer = SalesOffers::find($id);
-        return view("modules.sales.offers.show", compact("offer"));
+        return view("modules.sales.offers.show", compact("offer","langs"));
     }
 
-    public function pdf($aid, $id,$type)
+    public function pdf($aid, $id,$type,$lang)
     {
         Artisan::call('view:clear');
 
         if($type=="url"){
             $offer = SalesOffers::find($id);
-            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer"))->setPaper('A4');
+            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer","lang"))->setPaper('A4');
             return $pdf->stream();
         }else{
             $offer = SalesOffers::find($id);
-            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer"))->setPaper('A4');
+            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer","lang"))->setPaper('A4');
             return   $pdf->download($offer->company["company_name"].' ('.$offer->description.').pdf');
         }
 

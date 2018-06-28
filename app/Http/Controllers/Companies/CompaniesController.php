@@ -38,6 +38,19 @@ class CompaniesController extends Controller
         $companies = Companies::where("account_id",aid())->where($type,1)->get();
 
         return Datatables::of($companies)
+            ->addColumn("balance",function($company){
+                return $company->balance."<br>".$company->money_status;
+            })
+            ->editColumn("company_name",function($company){
+                return "<span class='row-title'>".$company->company_name."</span><br>".$company->phone_number;
+            })
+            ->setRowAttr([
+                'style' => 'cursor:pointer',
+                'onclick' => function ($company) {
+                    return "redirect_company($company->id,0,".aid().")";
+                },
+            ])
+            ->rawColumns(["balance","company_name"])
             ->make(true);
     }
 
@@ -46,6 +59,19 @@ class CompaniesController extends Controller
         $companies = Companies::where("account_id",aid())->where($type,1)->get();
 
         return Datatables::of($companies)
+            ->addColumn("balance",function($company){
+                return $company->balance."<br>".$company->money_status;
+            })
+            ->editColumn("company_name",function($company){
+                return "<span class='row-title'>".$company->company_name."</span><br>".$company->phone_number;
+            })
+            ->setRowAttr([
+                'style' => 'cursor:pointer',
+                'onclick' => function ($company) {
+                    return "redirect_company($company->id,1,".aid().")";
+                },
+            ])
+            ->rawColumns(["balance","company_name"])
             ->make(true);
     }
 

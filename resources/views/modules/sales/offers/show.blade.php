@@ -42,15 +42,32 @@
                         <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
                                     class="fa fa-print"></span> YAZDIR <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url"])}}"><i
-                                            class="fa fa-print" aria-hidden="true"></i>
-                                    TEKLİFİ YAZDIR</a>
+                            {{--<li>--}}
+                                {{--<a class="dropdown-submenu" target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url"])}}">--}}
+                                    {{--<i class="fa fa-print" aria-hidden="true"></i>--}}
+                                    {{--TEKLİFİ YAZDIR</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a class="dropdown-submenu" download="" href="{{route("sales.offers.pdf",[aid(),$offer->id,"download"])}}"--}}
+                                   {{--id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>--}}
+                                     {{--TEKLİFİ İNDİR</a>--}}
+
+                            {{--</li>--}}
+                            <li class="dropdown-submenu">
+                                <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> TEKLİFİ YAZDIR</a>
+                                <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
+                                   @foreach($langs as $lang)
+                                    <li><a tabindex="-1" target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url",$lang->lang_code])}}"> <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
+                                    @endforeach
+                                </ul>
                             </li>
-                            <li>
-                                <a download="" href="{{route("sales.offers.pdf",[aid(),$offer->id,"download"])}}"
-                                   id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
-                                    TEKLİFİ İNDİR</a>
+                            <li class="dropdown-submenu">
+                                <a class="test" tabindex="-1" href="#">   <i class="fa fa-print" aria-hidden="true"></i> TEKLİFİ İNDİR </a>
+                                <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
+                                    @foreach($langs as $lang)
+                                        <li><a tabindex="-1" target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url",$lang->lang_code])}}" > <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
+                                    @endforeach
+                                </ul>
                             </li>
 
                         </ul>
