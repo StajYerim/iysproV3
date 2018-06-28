@@ -27,11 +27,11 @@ class HomeController extends Controller
     }
   
     public function profil_update_save(Request $request){
-      User::find(aid())->update([
-        "name" => $request->name,
-        "email" => $request->email,
-        "mobile" => $request->mobile,
-      ]);
+      $user = Auth::user();
+      $user->name = $request->name;      
+      $user->email = $request->email;      
+      $user->mobile = $request->mobile;      
+      $user->save();
       
       return response()->json([
         "message" => "Successfully Updated!"
