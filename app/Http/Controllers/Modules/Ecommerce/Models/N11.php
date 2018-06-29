@@ -31,6 +31,25 @@ class N11 {
         self::$_parameters['pagingData'] = ['itemsPerPage' => $itemsPerPage, 'currentPage' => $currentPage];
         return self::$_sclient->GetProductList(self::$_parameters);
     }
+  
+    public function OrderList(array $searchData = Array()) {
+        $this->setUrl('https://api.n11.com/ws/OrderService.wsdl');
+        self::$_parameters['searchData'] = $searchData;
+        return self::$_sclient->OrderList(self::$_parameters);
+    }
+  
+    public function DetailedOrderList($searchData, $currentPage = 0) {
+        $this->setUrl('https://api.n11.com/ws/OrderService.wsdl');
+        self::$_parameters['searchData'] = $searchData;
+        self::$_parameters['pagingData'] = ['pageSize' => 15, 'currentPage' => $currentPage];
+        return self::$_sclient->DetailedOrderList(self::$_parameters);
+    }
+  
+    public function OrderDetail(array $orderRequest = Array()) {
+        $this->setUrl('https://api.n11.com/ws/OrderService.wsdl');
+        self::$_parameters['orderRequest'] = $orderRequest;
+        return self::$_sclient->OrderDetail(self::$_parameters);
+    }
  
     public function SaveProduct(array $product = Array()) {
         $this->setUrl('https://api.n11.com/ws/ProductService.wsdl');
