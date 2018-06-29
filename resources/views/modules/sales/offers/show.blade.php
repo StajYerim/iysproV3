@@ -42,17 +42,6 @@
                         <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
                                     class="fa fa-print"></span> YAZDIR <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
-                            {{--<li>--}}
-                                {{--<a class="dropdown-submenu" target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url"])}}">--}}
-                                    {{--<i class="fa fa-print" aria-hidden="true"></i>--}}
-                                    {{--TEKLİFİ YAZDIR</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a class="dropdown-submenu" download="" href="{{route("sales.offers.pdf",[aid(),$offer->id,"download"])}}"--}}
-                                   {{--id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>--}}
-                                     {{--TEKLİFİ İNDİR</a>--}}
-
-                            {{--</li>--}}
                             <li class="dropdown-submenu">
                                 <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> TEKLİFİ YAZDIR</a>
                                 <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
@@ -75,7 +64,7 @@
                     </div>
 
                     <a href="#!" data-toggle="modal" data-target="#shareModal" class="btn btn-default"><i
-                                class="fa fa-envelope"></i> Paylaş</a>
+                                class="fa fa-envelope"></i> {{trans("general.share")}}</a>
 
                 </div>
 

@@ -17,6 +17,7 @@ class ShareController extends Controller
         $data = [];
         $data["thread"] = $request->thread;
         $data["message"] = $request->message;
+        $data["lang"] = $request->lang;
         $data["offer_id"] = $id;
 
 
@@ -31,6 +32,7 @@ class ShareController extends Controller
         $data = [];
         $data["thread"] = $request->thread;
         $data["message"] = $request->message;
+        $data["lang"] = $request->lang;
         $data["offer_id"] = $id;
 
 

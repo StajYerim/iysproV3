@@ -1,3 +1,6 @@
+@php
+    app()->setLocale($lang);
+@endphp
 <!doctype html>
 <html>
 <head>
@@ -138,7 +141,7 @@
                 ÜRÜN/HİZMET
             </td>
             <td  style="text-align: right;width:60px" >
-                MİKTAR
+                {{trans("general.quantity")}}
             </td>
             <td style="text-align: right;width:120px">
                 BİRİM FİYAT
@@ -163,7 +166,7 @@
         @forelse($order->items as $off)
             <tr class="item" style="font-size:12px;font-weight: 600">
                 <td  style="text-align: left;">
-                    {{$off->product["name"]}}
+                    {{$off->product->lang($off->product["id"], $lang)}}
                 </td>
                 <td  style="text-align: right;">
                     {{$off->quantity}} {{$off->unit["name"]}}

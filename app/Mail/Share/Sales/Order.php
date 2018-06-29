@@ -36,8 +36,9 @@ class Order extends Mailable
 
         //SalesOrder
         $order = SalesOrders::find($this->order["offer_id"]);
+        $lang = $this->order["lang"];
         //SalesOrder/PDF
-        $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order"))->setPaper('A4');
+        $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order","lang"))->setPaper('A4');
 
         //SalesOrder Mail Send for Share
         return  $this->from(env("MAIL_FROM_ADDRESS"),account()["name"])->subject($this->order["thread"])->view('mails.share.orders')->with([

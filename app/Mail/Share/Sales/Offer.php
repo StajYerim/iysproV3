@@ -35,8 +35,9 @@ class Offer extends Mailable
 
         //SalesOffer
         $offer = SalesOffers::find($this->offer["offer_id"]);
+        $lang = $this->offer["lang"];
         //SalesOffer/PDF
-        $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer"))->setPaper('A4');
+        $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer","lang"))->setPaper('A4');
 
         //SalesOffer Mail Send for Share
         return  $this->from(env("MAIL_FROM_ADDRESS"),account()["name"])->subject($this->offer["thread"])->view('mails.share.offers')->with([

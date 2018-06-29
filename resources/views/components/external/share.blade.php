@@ -42,7 +42,15 @@
                                       required="">
                                </textarea>
                         </div>
-
+                        <div class="col-md-12">
+                            <div class="form-group"><label class="col-md-3 ">Paylaşım Dili</label>
+                                <div class="col-md-4"><select v-model="form.lang" class="form-control">
+                                        @foreach($langs as $lang)
+                                            <option value="{{$lang->lang_code}}">{{$lang->name}}</option>
+                                        @endforeach
+                                    </select></div>
+                            </div>
+                        </div>
                     </div>
 
                 </form>
@@ -79,7 +87,8 @@
                 form: {
                     thread: "{{$thread}}",
                     receivers: [],
-                    message: "{!! $message !!}"
+                    message: "{!! $message !!}",
+                    lang: "{{app()->getLocale()}}"
                 }
 
             },

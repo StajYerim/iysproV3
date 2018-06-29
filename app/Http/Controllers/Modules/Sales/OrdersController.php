@@ -122,20 +122,20 @@ class OrdersController extends Controller
         $order = SalesOrders::find($id);
         $langs = Language::All();
 
-        return view("modules.sales.orders.show", compact("order","lang"));
+        return view("modules.sales.orders.show", compact("order","langs"));
     }
 
-    public function pdf($aid, $id,$type)
+    public function pdf($aid, $id,$type,$lang)
     {
 
 
         if($type=="url"){
             $order = SalesOrders::find($id);
-            $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order"))->setPaper('A4');
+            $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order","lang"))->setPaper('A4');
             return $pdf->stream();
         }else{
             $order = SalesOrders::find($id);
-            $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order"))->setPaper('A4');
+            $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order","lang"))->setPaper('A4');
             return   $pdf->download($order->company["company_name"].' ('.$order->description.').pdf');
         }
 

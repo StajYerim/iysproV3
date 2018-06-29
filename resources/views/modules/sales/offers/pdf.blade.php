@@ -1,4 +1,7 @@
-<!doctype html>
+@php
+app()->setLocale($lang);
+ @endphp
+        <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -123,7 +126,7 @@
                 <span style="text-align:center"><h2>PROFORMA FATURA / TEKLİF </h2></span>
                 <span style="float:left"><b style="font-size:15px;">
                         {{$offer->company["company_name"]}}
-                    </b> <span style="float:right" >Tarih:
+                    </b> <span style="float:right" >{{trans("general.date")}}:
                         {{$offer->date}}
                     </span></span>
                 @if($offer->description)  <br>
@@ -138,7 +141,7 @@
                 ÜRÜN/HİZMET
             </td>
             <td  style="text-align: right;width:60px" >
-                MİKTAR
+                {{trans("general.quantity")}}
             </td>
             <td style="text-align: right;width:120px">
                 BİRİM FİYAT
