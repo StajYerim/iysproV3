@@ -212,4 +212,70 @@ class CompaniesController extends Controller
         $form_type = "new";
     return view("components.modals.companies_remote",compact("type","form_type"));
     }
+
+    public function items($aid, $id)
+    {
+        $company = Companies::find($id);
+
+
+        $results = array();
+
+        $last_balance = 0;
+        $action_type = null;
+        $amount = 0;
+        foreach ($company->statement_list as $item) {
+
+            if ($item->pro_type == "sales_order") {
+                $amount = $item->grand_total;
+                $route=route("sales.orders.show",[aid(),$item->id]);
+                $last_balance = $last_balance + money_db_format($amount);
+                $action_type = "";
+            } else if ($item->pro_type == "purchase_order") {
+                $amount = $item->grand_total;
+                $route=route("purchases.orders.show",[aid(),$item->id]);
+                $last_balance = $last_balance - money_db_format($amount);
+                $action_type = "-";
+
+            } else if ($item->pro_type == "collect") {
+                $route=route("finance.accounts.receipt",[aid(),$item->id]);
+                $amount = $item->amount;
+                $last_balance = $last_balance-money_db_format($amount);
+                $action_type = "-";
+
+            } else if ($item->pro_type == "payment") {
+                $route=route("finance.accounts.receipt",[aid(),$item->id]);
+                $amount = $item->amount;
+                $last_balance = $last_balance+money_db_format($amount);
+                $action_type = "";
+
+            } else if ($item->pro_type == "buy_cheque") {
+                $route=route("finance.cheques.show",[aid(),$item->id]);
+                $amount = $item->amount;
+                $last_balance = $last_balance - money_db_format($amount);
+                $action_type = "-";
+
+            } else if ($item->pro_type == "sell_cheque") {
+                $route=route("finance.cheques.show",[aid(),$item->id]);
+                $amount = $item->amount;
+                $last_balance = $last_balance + money_db_format($amount);
+                $action_type = "";
+
+            }
+
+
+            $results[] =
+                array(
+                    "url" => $route,
+                    "type" => $item->type_text,
+                    "description" => $item->description,
+                    "date" => $item->date,
+                    "action_type" => $action_type,
+                    "amount" => $amount,
+                    "last_balance" => get_money($last_balance)
+                );
+        }
+
+        return $results;
+
+    }
 }

@@ -43,6 +43,11 @@ class PurchaseOrders extends Model
         return $dt->format("d.m.Y");
     }
 
+    public function getDatemAttribute()
+    {
+        return $this->attributes["date"];
+    }
+
     public function setDueDateAttribute($value)
     {
         $this->attributes['due_date'] = date_convert($value);

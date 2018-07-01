@@ -177,26 +177,28 @@
 
                                         </div>
                                         <hr>
+
+
                                         <table class="table table-striped table-condensed table-hover smart-form ">
                                             <thead>
                                             <tr>
-                                                <th>İŞLEM TÜRÜ</th>
-                                                <th>AÇIKLAMA</th>
-                                                <th>İŞLEM TARİHİ</th>
-                                                <th>MEBLAĞ</th>
-                                                <th>BAKİYE</th>
+                                                <th width="15%">İŞLEM TÜRÜ</th>
+                                                <th width="30%">AÇIKLAMA</th>
+                                                <th width="10%">İŞLEM TARİHİ</th>
+                                                <th width="10%">MEBLAĞ</th>
+                                                <th width="10%">BAKİYE</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($company->statement_list as $stat)
-                                            <tr>
-                                                <td>{{$stat->type_text}}</td>
-                                                <td>{{$stat->description}}</td>
-                                                <td>{{$stat->datem}}</td>
-                                                <td>{{$stat->amount}} {{ $stat->grand_total}}</td>
-                                                <td>{{money_db_format($company->balance)}}</td>
+
+                                            <tr v-for="item in reverseItems " style="cursor:pointer" @click="redirect(item.url)">
+                                                <td>@{{item.type}}</td>
+                                                <td>@{{item.description}}</td>
+                                                <td>@{{item.date}}</td>
+                                                <td>@{{ item.action_type }} @{{item.amount}}</td>
+                                                <td>@{{item.last_balance}}</td>
                                             </tr>
-                                                @endforeach
+
 
                                             </tbody>
                                         </table>
@@ -277,16 +279,34 @@
     <!-- end widget grid -->
     @push('scripts')
         <script>
-
             window.addEventListener("load", () => {
-          VueName =  new Vue({
+                Vue.filter('reverse', function(value) {
+                    // slice to make a copy of array, then reverse the copy
+                    return value.slice().reverse();
+                });
+                VueName = new Vue({
                 el: "#show",
                 data: {
                     remaining:"{{$company->balance}}",
                     details: false,
-                    detail_name: 'TÜM BİLGİLER'
+                    detail_name: 'TÜM BİLGİLER',
+                    items: []
                 },
+                    mounted: function () {
+                       this.statement();
+                    },
+                    computed: {
+                        reverseItems() {
+                            return this.items.slice().reverse();
+                        }
+                    },
                 methods: {
+                    statement:function(){
+                        axios.post("{{route("company.items",[aid(),$company->id])}}")
+                            .then(response => {
+                                VueName.items = response.data
+                            })
+                    },
                     detail:function(){
                         if(this.details == false){
                             this.details = true;
@@ -296,6 +316,9 @@
                             this.details = false;
                             this.detail_name = "TÜM BİLGİLER"
                         }
+                    },
+                    redirect:function(url){
+                      return window.location.href = url;
                     },
                     delete_data:function($id){
                         fullLoading();
@@ -310,7 +333,9 @@
                         });
                     },
 
-                }
+
+                },
+
 
           });
             });

@@ -198,7 +198,7 @@
                                             </label>
                                             <div class="col-sm-8 ">
                                                 <div class="input-group">
-                                                    <input type="text" v-model="cheque_collect.form.date"
+                                                    <input type="text" v-model="cheque_collect.form.date" name="cheque_collect.form.date"
                                                            value="{{date_tr()}}"
                                                            class="form-control datepicker" data-dateformat="dd.mm.yy">
                                                     <span class="input-group-addon"><i
@@ -215,7 +215,7 @@
                                             </label>
                                             <div class="col-sm-8 ">
                                                 <div class="input-group">
-                                                    <input type="text" v-model="cheque_collect.form.payment_date"
+                                                    <input type="text" v-model="cheque_collect.form.payment_date" name="cheque_collect.form.payment_date"
                                                            value="{{date_tr()}}"
                                                            class="form-control datepicker" data-dateformat="dd.mm.yy">
                                                     <span class="input-group-addon"><i
@@ -403,6 +403,7 @@
 
                                         if (res.data.message == "success") {
                                             VueName.remaining = res.data.remaining;
+                                            VueName.statement();
 
                                             VueCollect.collection.form.amount = "0,00";
                                             VueCollect.loading = false;
@@ -486,6 +487,7 @@
 
                                 if (res.data.message == "success") {
                                     VueName.remaining = res.data.remaining;
+                                    VueName.statement();
                                     VueCollect.collection.form.amount = res.data.remaining;
                                     VueCollect.loading = false;
                                     $("#transaction").modal("hide");

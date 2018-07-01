@@ -447,6 +447,7 @@
 
                                         if (res.data.message == "success") {
                                             VueName.remaining = res.data.remaining;
+                                            VueName.statement();
                                             VuePayment.payment.form.amount = res.data.remaining;
                                             VueName.collect_items.push({
                                                 type:"payment",
@@ -480,6 +481,7 @@
 
                                             $("#transaction_payment").modal("hide");
                                             VueName.remaining = res.data.remaining;
+                                            VueName.statement();
                                             VuePayment.loading = false;
 
                                             notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
@@ -517,6 +519,7 @@
 
                                         $("#transaction_payment").modal("hide");
                                         VueName.remaining = res.data.remaining;
+                                        VueName.statement();
                                         VuePayment.loading = false;
 
                                         notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");

@@ -194,15 +194,19 @@ console.log(data)
                         console.log(date);
                         VueName.money_form.date = date;
                     }else if(data == "cheque_payment.form.date"){
-                        console.log(VueCollect.collection.form.date,date);
+                        console.log(VuePayment.cheque_payment.form.date,date);
                         VuePayment.cheque_payment.form.date = date;
                     }else if(data == "cheque_payment.form.payment_date"){
-                        console.log(VueCollect.collection.form.date,date);
+                        console.log(VuePayment.cheque_payment.form.date,date);
                         VuePayment.cheque_payment.form.payment_date = date;
+                    }else if(data == "payment.form.date"){
+                        console.log(VuePayment.payment.form.date,date);
+                        VuePayment.payment.form.date = date;
                     }
 
 
-                    console.log(datePicker);
+
+            console.log(datePicker);
 
 
         },

@@ -424,7 +424,7 @@ class Companies extends Model
         $data = $this->statement;
 
         usort($data, "sortFunction");
-             return $data;
+ return $data;
     }
 
 }

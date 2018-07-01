@@ -33,6 +33,11 @@ class Cheques extends Model
         return $dt->format("d.m.Y");
     }
 
+    public function getDatemAttribute()
+    {
+        return $this->attributes["date"];
+    }
+
     public function setPaymentDateAttribute($value)
     {
         $this->attributes['payment_date'] = date_convert($value);

@@ -16,11 +16,8 @@ function aid(){
 }
 
 function sortFunction( $a, $b ) {
-   $adate =  explode(".",$a->date);
-    $adate = $adate[2]."-".$adate[1]."-".$adate[0];
-    $bdate =  explode(".",$b->date);
-    $bdate = $bdate[2]."-".$bdate[1]."-".$bdate[0];
-    return   strtotime($bdate)-strtotime($adate);
+
+    return   strtotime($a->datem)-strtotime($b->datem);
 }
 
 
@@ -469,12 +466,6 @@ function short($value,$lenght =30,$charecter="..."){
 function date_convert($tarih)
 {
 
-
-
-
-
-
-
     if(strstr($tarih,"-")){
 
         if($tarih == "Bilinmiyor")
@@ -498,7 +489,7 @@ function date_convert($tarih)
 
             $date = explode(".", $tarih);
             $datetime = $date[2]."-".$date[1]."-".$date[0];
-            return $datetime.\Carbon\Carbon::now()->format(" h:i:s");
+            return $datetime.\Carbon\Carbon::now()->format(" H:i:s");
         }
 
     }
