@@ -23,7 +23,7 @@ class CreateSalesOrderItemsTable extends Migration
             $table->integer("vat")->comment("KDV");
             $table->decimal("total",12,2)->comment("Toplam Tutar");
             $table->string("note")->nullable()->comment("Satır notu");
-            $table->date("termin_date")->nullable()->comment("Termin Tarihi");
+            $table->datetime("termin_date")->nullable()->comment("Termin Tarihi");
             $table->string("termin_show")->default(false)->nullable()->comment("Termin Statu");
             $table->decimal("discount",12,2)->nullable()->comment("Satır İndirimi");
             $table->string("discount_type")->nullable()->comment("Satır İndirim türü Para/Yüzdelik(money/percent)");

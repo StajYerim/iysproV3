@@ -103,6 +103,7 @@
                                                 <div class="col-sm-2"><span  v-on:click="detail()"  class="pull-right" style="cursor:pointer;">@{{ detail_name }}</span>
                                                 </div>
                                             </div>
+
                                             <div style="display:none" v-show="details" class="col-12"><br>
                                                 <hr>
                                                 <div class=" col-sm-9">
@@ -175,10 +176,7 @@
                                             </div>
 
                                         </div>
-
                                         <hr>
-
-
                                         <table class="table table-striped table-condensed table-hover smart-form ">
                                             <thead>
                                             <tr>
@@ -190,11 +188,11 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($company->statement as $stat)
+                                            @foreach($company->statement_list as $stat)
                                             <tr>
-                                                <td></td>
+                                                <td>{{$stat->type_text}}</td>
                                                 <td>{{$stat->description}}</td>
-                                                <td>{{$stat->date}}</td>
+                                                <td>{{$stat->datem}}</td>
                                                 <td>{{$stat->amount}} {{ $stat->grand_total}}</td>
                                                 <td>{{money_db_format($company->balance)}}</td>
                                             </tr>

@@ -36,6 +36,11 @@ class BankItems extends Model
         return $dt->format("d.m.Y");
     }
 
+    public function getDatemAttribute()
+    {
+     return $this->attributes["date"];
+    }
+
     public function getContactAttribute()
     {
         switch ($this->type) {

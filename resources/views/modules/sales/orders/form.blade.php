@@ -125,7 +125,7 @@
             </div>
             <!-- WIDGET ROW END -->
         </div>
-        @include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0])
+        @include("components.modals.companies",[$option="customer",$title="New Company",$type = "new_company",$message="Company Form",$id=0])
     </section>
 
     {{--@include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0])--}}

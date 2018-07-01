@@ -50,7 +50,6 @@ class BankAccountsController extends Controller
     public function store($aid, $id, Request $request)
     {
 
-
         $account = BankAccounts::updateOrCreate(["id" => $id],
             [
                 "name" => $request->name,
@@ -126,6 +125,7 @@ class BankAccountsController extends Controller
         return $results;
     }
 
+    //Banka/Kasa hesapları arasında para giriş-çıkış işleminin yapılması
     public function transaction($aid, $id, Request $request)
     {
         $account = BankAccounts::find($id);
@@ -177,6 +177,7 @@ class BankAccountsController extends Controller
 
     }
 
+    //Sipariş alanından alınan nakit tahsilat
     public function global_transaction($aid, Request $request)
     {
 
@@ -205,13 +206,15 @@ class BankAccountsController extends Controller
 
 
         $remaining = $orders->remaining;
+        $balance = $orders->company->balance;
 
         $action = array("id" => $detail->id, "bank_account" => $account->name, "amount" => $detail->amount, "date" => $detail->date);
-        return ["message" => "success", "remaining" => $remaining, "collect_items" => $action];
+        return ["message" => "success", "balance"=>$balance,"remaining" => $remaining, "collect_items" => $action];
 
 
     }
 
+    //Alış siparişinin nakit ile ödemesinin yapılması
     public function transaction_payment($aid, Request $request)
     {
 
@@ -247,6 +250,13 @@ class BankAccountsController extends Controller
 
     }
 
+    /**
+     * müşteri profilinden yapılan tahsilat/ödemeler
+     * collect -> nakit tahsilat
+     * cheque_collect -> çek ile tahsilat
+     * payment -> nakit ödeme
+     * cheqye_payment -> çek ile ödeme
+     */
     public function transaction_company($aid, Request $request)
     {
 
@@ -508,6 +518,7 @@ class BankAccountsController extends Controller
 
     }
 
+    //Satış siparişi alanında çek ile tahsilat yapılması
     public function transaction_cheque($aid, Request $request)
     {
 
@@ -528,6 +539,7 @@ class BankAccountsController extends Controller
 
     }
 
+    //Banka/Kasa hesap fişinin silinmesi
     public function receipt_destroy($aid, $id)
     {
         BankItems::destroy($id);

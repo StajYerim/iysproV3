@@ -434,6 +434,7 @@
 
                                             if (res.data.message == "success") {
                                                 VueName.remaining = res.data.remaining;
+                                                VueName.company_balance = res.data.balance;
                                                 VueCollect.collection.form.amount = res.data.remaining;
                                                 VueName.collect_items.push({
                                                     type: "collect",

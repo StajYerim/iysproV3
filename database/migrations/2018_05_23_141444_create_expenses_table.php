@@ -18,7 +18,7 @@ class CreateExpensesTable extends Migration
             $table->integer('account_id')->unsigned();
             $table->string("name");
             $table->string("description")->nullable();
-            $table->date("date");
+            $table->datetime("date");
             $table->decimal("amount",12,2);
             $table->integer("bank_account_id");
             $table->foreign("account_id")->references("id")->on("app_accounts")->onDelete("cascade");

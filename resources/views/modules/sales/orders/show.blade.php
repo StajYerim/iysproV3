@@ -271,7 +271,7 @@
 
                                     <div class="col-sm-12">
                                         <div class="bottom-info">HESAP BAKİYESİ <span class="pull-right"
-                                                                                   style="font-size:15px;color:#2AC!important">{{$order->company->balance}}
+                                                                                   style="font-size:15px;color:#2AC!important">@{{ company_balance }}
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
                                 </div>
@@ -317,6 +317,7 @@
                     data: {
 
                         remaining:"{{$order->remaining}}",
+                        company_balance:"{{$order->company->balance}}",
                         collect_items:[
                                 @foreach($order->payments as $pay)
                             {

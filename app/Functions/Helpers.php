@@ -15,6 +15,14 @@ function aid(){
 
 }
 
+function sortFunction( $a, $b ) {
+   $adate =  explode(".",$a->date);
+    $adate = $adate[2]."-".$adate[1]."-".$adate[0];
+    $bdate =  explode(".",$b->date);
+    $bdate = $bdate[2]."-".$bdate[1]."-".$bdate[0];
+    return   strtotime($bdate)-strtotime($adate);
+}
+
 
 function account()
 {

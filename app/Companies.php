@@ -376,19 +376,55 @@ class Companies extends Model
         $statements = [];
 
         foreach($this->sales_orders as $order){
+            $order["pro_type"] = "sales_order";
+            $order["type_text"] = "Satış Siparişi";
             $statements[] = $order;
+
+        }
+
+        foreach ($this->purchase_orders as $order) {
+            $order["pro_type"] = "purchase_order";
+            $order["type_text"] = "Alış Siparişi";
+            $statements[] = $order;
+
         }
 
         foreach($this->collects as $collect){
+            if ($collect->action_type == 1) {
+                $collect["pro_type"] = "collect";
+                $collect["type_text"] = "Tahsilat";
+            } else {
+                $collect["pro_type"] = "payment";
+                $collect["type_text"] = "Ödeme";
+            }
             $statements[] = $collect;
+
         }
 
-        foreach($this->buy_cheques as $cheque){
-            $statements[] = $cheque;
+
+        foreach ($this->buy_cheques as $buy_cheque) {
+            $buy_cheque["pro_type"] = "buy_cheque";
+            $buy_cheque["type_text"] = "Alınan Çek";
+            $statements[] = $buy_cheque;
+
+        }
+
+        foreach ($this->sell_cheques as $sell_cheque) {
+            $sell_cheque["pro_type"] = "sell_cheque";
+            $sell_cheque["type_text"] = "Verilen Çek";
+            $statements[] = $sell_cheque;
         }
 
         return $statements;
 
+    }
+
+    public function getStatementListAttribute()
+    {
+        $data = $this->statement;
+
+        usort($data, "sortFunction");
+             return $data;
     }
 
 }
