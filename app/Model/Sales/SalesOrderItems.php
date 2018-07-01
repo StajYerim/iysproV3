@@ -44,11 +44,10 @@ class SalesOrderItems extends Model
 
     public function getTerminDateAttribute(){
         if($this->attributes["termin_show"] != null){
-        $explode = explode("-", $this->attributes["termin_date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+            $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["termin_date"]);
         return $dt->format("Y-m-d");
         }
-        }
+    }
 
     public function getPriceAttribute(){
         return get_money($this->attributes["price"]);

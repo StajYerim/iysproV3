@@ -469,6 +469,12 @@ function short($value,$lenght =30,$charecter="..."){
 function date_convert($tarih)
 {
 
+
+
+
+
+
+
     if(strstr($tarih,"-")){
 
         if($tarih == "Bilinmiyor")
@@ -492,7 +498,7 @@ function date_convert($tarih)
 
             $date = explode(".", $tarih);
             $datetime = $date[2]."-".$date[1]."-".$date[0];
-            return $datetime;
+            return $datetime.\Carbon\Carbon::now()->format(" h:i:s");
         }
 
     }

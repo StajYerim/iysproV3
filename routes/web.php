@@ -120,7 +120,7 @@ Route::get("/data-delete",function(){
 })->name("data.delete");
 
 Route::get("/tester",function(){
-$orders = \App\Model\Sales\SalesOrders::find(21);
+return date_convert("01.07.2018");
 
 
 

@@ -180,7 +180,7 @@ console.log(data)
                         VueName.form.effective_date = date;
                     }else if(data == "form.due_date"){
                         console.log(VueName.form.due_date,date);
-                        VueName.form.effective_date = date;
+                        VueName.form.due_date = date;
                     }else if(data == "collection.form.date"){
                         console.log(VueCollect.collection.form.date,date);
                         VueCollect.collection.form.date = date;

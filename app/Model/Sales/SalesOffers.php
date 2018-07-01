@@ -34,7 +34,7 @@ class SalesOffers extends Model
     public function getDateAttribute()
     {
         $explode = explode("-", $this->attributes["date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["date"]);
         return $dt->format("d.m.Y");
     }
 
@@ -45,8 +45,7 @@ class SalesOffers extends Model
 
     public function getExpiredDateAttribute()
     {
-        $explode = explode("-", $this->attributes["expired_date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["expired_date"]);
         return $dt->format("d.m.Y");
     }
 
@@ -57,8 +56,7 @@ class SalesOffers extends Model
 
     public function getEffectiveDateAttribute()
     {
-        $explode = explode("-", $this->attributes["effective_date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["effective_date"]);
         return $dt->format("d.m.Y");
     }
 

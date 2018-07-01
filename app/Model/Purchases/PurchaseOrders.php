@@ -39,8 +39,7 @@ class PurchaseOrders extends Model
 
     public function getDateAttribute()
     {
-        $explode = explode("-", $this->attributes["date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["date"]);
         return $dt->format("d.m.Y");
     }
 
@@ -51,8 +50,7 @@ class PurchaseOrders extends Model
 
     public function getDueDateAttribute()
     {
-        $explode = explode("-", $this->attributes["due_date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["due_date"]);
         return $dt->format("d.m.Y");
     }
 
