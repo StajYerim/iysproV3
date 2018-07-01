@@ -179,7 +179,7 @@ console.log(data)
                         console.log(VueName.form.effective_date,date);
                         VueName.form.effective_date = date;
                     }else if(data == "form.due_date"){
-                        console.log(VueName.form.due_date,date);
+                        console.log("Field"+data,"Eski Tarih :"+VueName.form.due_date,"Girilen Tarih:"+date);
                         VueName.form.due_date = date;
                     }else if(data == "collection.form.date"){
                         console.log(VueCollect.collection.form.date,date);
