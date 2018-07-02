@@ -487,12 +487,12 @@
 
                                 if (res.data.message == "success") {
                                     VueName.remaining = res.data.remaining;
-                                    VueName.statement();
+
                                     VueCollect.collection.form.amount = res.data.remaining;
                                     VueCollect.loading = false;
                                     $("#transaction").modal("hide");
                                     notification("Success", "Çek Alım işlemi başarıyla gerçekleşti.", "success");
-
+                                    VueName.statement();
                                 }
 
 

@@ -108,7 +108,7 @@
                                         </div>
                                     </fieldset>
                                 </div>
-                                @includeIf("components.external.rows",[$offer = $order,$proccess_type = "sales"])
+                                @includeIf("components.external.rows",[$offer = $order,$proccess_type = "purchases"])
                             </form>
 
 

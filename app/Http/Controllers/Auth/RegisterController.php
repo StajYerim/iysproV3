@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Account;
 use App\Events\AccountRegistration;
 use App\Mail\ConfirmationCode;
+use App\Model\Finance\BankAccounts;
 use App\Role;
 use App\Sector;
 use App\User;
@@ -214,6 +215,18 @@ class RegisterController extends Controller
 
         $user->account_id = $account->id;
         $user->save();
+
+        BankAccounts::create([
+            "account_id" => $account->id,
+            "name" => "KASA HESABI",
+            "type" => 1,
+            "currency" => "try",
+        ]);
+
+        // Modules Activated
+        $account = Account::find($account->id);
+        $account->update(["modules" => "[1,2,3,9,15,21,32,33]"]);
+
 
         return $user;
     }

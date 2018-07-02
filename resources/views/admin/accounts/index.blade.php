@@ -36,13 +36,13 @@
                         <tbody>
 
                         @foreach($companies as $company)
-                            <tr>
+                            <tr class="{{$company->is_active == 0 ? "danger":""}}">
                                 <td>{{ $company->id }}</td>
-                                <td>{{ $company->company_name }}</td>
+                                <td><a href="{{route("companies.show",$company->id)}}">{{ $company->company_name }}</a></td>
                                 <td>{{ $company->owner->name }}</td>
                                 <td>{{ $company->owner->mobile }}</td>
                                 <td>{{ $company->sector->name }}</td>
-                                <td>{{ $company->expiry_date->format('d.m.Y') }}</td>
+                                <td style="{{$company->is_active == 0 ? "font-weight:600":""}}">{{ $company->expiry_date->format("d.m.Y H:i") }}</td>
                                 <td><a href="{{ route('companies.edit', ['company' => $company]) }}">Edit</a></td>
                                 <td><a href="{{ route('users.create', ['company' => $company]) }}">Invite</a></td>
                             </tr>

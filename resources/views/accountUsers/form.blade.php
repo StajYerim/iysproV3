@@ -94,7 +94,13 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label text-md-right"></label>
 
+                            <div class="col-md-9">
+                                <button type="button" class="btn btn-danger" id="permission">PERMISSIONS</button>
+                            </div>
+                        </div>
                         <hr>
 
                         {{-- Owner can not set permissions for himself --}}
@@ -119,6 +125,7 @@
                             </div>
                         @endif
 
+
                         <div class="form-group row">
                             <div class="col-sm-12 col-form-label text-md-right">
                                 <a href="{{ \App\User::getIndexRoute() }}" class="btn btn-outline-dark">CANCEL</a>
@@ -138,5 +145,430 @@
 
 
     </article>
+    {{--İzin Modalı--}}
+    <div class="modal fade" id="permissionModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Kullanıcı İzinleri</h4>
+                </div>
+                <div class="modal-body" style="padding:2px !important;">
 
+                    <form id="permissionForm">
+                        <div class="panel-group smart-accordion-default" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                                               href="#collapseOne" aria-expanded="true" class=""> <i
+                                                    class="fa fa-lg fa-angle-down pull-right"></i> <i
+                                                    class="fa fa-lg fa-angle-up pull-right"></i> İŞ LİSTESİ İZİNLERİ</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                    <div class="panel-body no-padding">
+                                        <table class="table table-bordered table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th width="200px">İŞLEM SAYFALARI</th>
+                                                <th>GÖSTER</th>
+                                                <th>EKLE</th>
+                                                <th>SİL</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            @foreach($permissions as $permission)
+                                                @php
+                                                    $name = explode("*",$permission->name);
+                                                @endphp
+                                                @if($name[1] == "İŞ LİSTESİ")
+                                                    <tr>
+                                                        <td>
+
+                                                            <h7>{{$name[1]}}</h7>
+
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input name="permission[]" value="{{$permission->name}}"
+                                                                       @if($user->can($permission->name)) checked
+                                                                       @endif type="checkbox" class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                                               href="#collapseTwo" class="collapsed"
+                                                               aria-expanded="false">
+                                            <i class="fa fa-lg fa-angle-down pull-right"></i> <i
+                                                    class="fa fa-lg fa-angle-up pull-right"></i>SATIŞ İŞLEMLERİ İZİNLERİ
+                                        </a></h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false"
+                                     style="height: 0px;">
+                                    <div class="panel-body no-padding">
+                                        <table class="table table-bordered table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th width="200px">İŞLEM SAYFALARI</th>
+                                                <th>GÖSTER</th>
+                                                <th>EKLE</th>
+                                                <th>SİL</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            @foreach($permissions as $permission)
+                                                @php
+                                                    $name = explode("*",$permission->name);
+
+
+                                                @endphp
+                                                @if($name[0] == "1" )
+                                                    <tr>
+                                                        <td>
+
+                                                            <h7>{{$name[1]}}</h7>
+
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input name="permission[]" value="{{$permission->name}}"
+                                                                       @if($user->can($permission->name)) checked
+                                                                       @endif type="checkbox" class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                                               href="#collapseThree" class="collapsed"
+                                                               aria-expanded="false"> <i
+                                                    class="fa fa-lg fa-angle-down pull-right"></i> <i
+                                                    class="fa fa-lg fa-angle-up pull-right"></i> SATIN ALMA İZİNLERİ</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false"
+                                     style="height: 0px;">
+                                    <div class="panel-body no-padding">
+                                        <table class="table table-bordered table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th width="200px">İŞLEM SAYFALARI</th>
+                                                <th>GÖSTER</th>
+                                                <th>EKLE</th>
+                                                <th>SİL</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            @foreach($permissions as $permission)
+                                                @php
+                                                    $name = explode("*",$permission->name);
+
+
+                                                @endphp
+                                                @if($name[0] == "2" )
+                                                    <tr>
+                                                        <td>
+
+                                                            <h7>{{$name[1]}}</h7>
+
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input name="permission[]" value="{{$permission->name}}"
+                                                                       @if($user->can($permission->name)) checked
+                                                                       @endif type="checkbox" class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                                               href="#collapseFour" class="collapsed"
+                                                               aria-expanded="false">
+                                            <i class="fa fa-lg fa-angle-down pull-right"></i> <i
+                                                    class="fa fa-lg fa-angle-up pull-right"></i> FİNANS İZİNLERİ</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFour" class="panel-collapse collapse" aria-expanded="false"
+                                     style="height: 0px;">
+                                    <div class="panel-body no-padding">
+                                        <table class="table table-bordered table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th width="200px">İŞLEM SAYFALARI</th>
+                                                <th>GÖSTER</th>
+                                                <th>EKLE</th>
+                                                <th>SİL</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            @foreach($permissions as $permission)
+                                                @php
+                                                    $name = explode("*",$permission->name);
+
+
+                                                @endphp
+                                                @if($name[0] == "3" )
+                                                    <tr>
+                                                        <td>
+
+                                                            <h7>{{$name[1]}}</h7>
+
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input name="permission[]" value="{{$permission->name}}"
+                                                                       @if($user->can($permission->name)) checked
+                                                                       @endif type="checkbox" class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                                               href="#collapseFive" class="collapsed"
+                                                               aria-expanded="false">
+                                            <i class="fa fa-lg fa-angle-down pull-right"></i> <i
+                                                    class="fa fa-lg fa-angle-up pull-right"></i> STOK İZİNLERİ </a></h4>
+                                </div>
+                                <div id="collapseFive" class="panel-collapse collapse" aria-expanded="false"
+                                     style="height: 0px;">
+                                    <div class="panel-body no-padding">
+                                        <table class="table table-bordered table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th width="200px">İŞLEM SAYFALARI</th>
+                                                <th>GÖSTER</th>
+                                                <th>EKLE</th>
+                                                <th>SİL</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            @foreach($permissions as $permission)
+                                                @php
+                                                    $name = explode("*",$permission->name);
+                                                @endphp
+                                                @if($name[0] == "4" )
+                                                    <tr>
+                                                        <td>
+
+                                                            <h7>{{$name[1]}}</h7>
+
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input name="permission[]" value="{{$permission->name}}"
+                                                                       @if($user->can($permission->name)) checked
+                                                                       @endif type="checkbox" class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                                               href="#collapseSix" class="collapsed"
+                                                               aria-expanded="false">
+                                            <i class="fa fa-lg fa-angle-down pull-right"></i> <i
+                                                    class="fa fa-lg fa-angle-up pull-right"></i> ÜRETİM PLANLAMA İZİNLERİ </a></h4>
+                                </div>
+                                <div id="collapseSix" class="panel-collapse collapse" aria-expanded="false"
+                                     style="height: 0px;">
+                                    <div class="panel-body no-padding">
+                                        <table class="table table-bordered table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th width="200px">İŞLEM SAYFALARI</th>
+                                                <th>GÖSTER</th>
+                                                <th>EKLE</th>
+                                                <th>SİL</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            @foreach($permissions as $permission)
+                                                @php
+                                                    $name = explode("*",$permission->name);
+                                                @endphp
+                                                @if($name[0] == "5" )
+                                                    <tr>
+                                                        <td>
+
+                                                            <h7>{{$name[1]}}</h7>
+
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input name="permission[]" value="{{$permission->name}}"
+                                                                       @if($user->can($permission->name)) checked
+                                                                       @endif type="checkbox" class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td><label class="checkbox-inline">
+                                                                <input type="checkbox" disabled
+                                                                       class="checkbox style-3">
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Vazgeç
+                    </button>
+                    <button type="button" class="btn btn-primary" id="permissionSave">
+                        Kaydet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--İzin Modalı--}}
+
+    @push("scripts")
+    <script>
+        $("#permission").on("click", function () {
+            $("#permissionModal").modal("show");
+        });
+
+        $("#permissionSave").on("click", function () {
+            ajaxEnd("post", "{{route("permission.AddEdit",$user->id)}}", $("#permissionForm").serialize(), function (res) {
+                if (res == "ok") {
+                    bildirim("İşlem Başarılı", "Kullanıcı yetkileri düzenlendi", "success", "check");
+                    $("#permissionModal").modal("hide");
+                }
+            }, function () {
+                bildirim("İşlem Hatalı", "Kullanıcı yetkileri düzenlenemedi", "error", "remove");
+                $("#permissionModal").modal("hide");
+            })
+
+        });
+    </script>
+    @endpush()
 @endsection

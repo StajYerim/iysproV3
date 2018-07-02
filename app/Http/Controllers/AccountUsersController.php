@@ -113,6 +113,45 @@ class AccountUsersController extends Controller
         return redirect(User::getIndexRoute());
     }
 
+
+
+    public function modal_invite(Request $request, Account $company)
+    {
+        $this->authorize('invite', $company);
+
+        // Validate user's input
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'mobile' => 'nullable|string|max:255',
+            'language' => 'required|exists:app_languages,lang_id',
+            'company_access' => 'required|exists:permissions,id'
+        ]);
+
+        // store user to DB
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'mobile' => $validated['mobile'] ?: Null,
+            'lang_id' => $validated['language'],
+            'role_id' => Role::USER,
+            'account_id' => $company->id,
+            'confirmation_code' => str_random(32)
+        ]);
+
+        // store chosen permissions for user
+        UserPermission::create([
+            'user_id' => $user->id,
+            'permission_id' => $validated['company_access'],
+        ]);
+
+        // fire event, that user has been invited
+        event(new UserIsInvited($user));
+
+        // redirect back
+        return redirect(User::getIndexRoute());
+    }
+
     /**
      * Display the specified resource.
      *

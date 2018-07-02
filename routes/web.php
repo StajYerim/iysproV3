@@ -46,6 +46,8 @@ Route::middleware('admin')->group(function() {
     Route::get('/app/company/new', 'AccountsController@create')->name('companies.create');
     Route::get('/app/user-list', 'AccountUsersController@adminIndex')->name('admin.users.index');
 
+    Route::post("/app/company-list/{id}/modules/update","AccountsController@modules_update")->name("admin.companies.modules.update");
+
     //Settings Menu
     Route::get('/app/settings/menu', 'Admin\Settings\MenuController@index')->name('admin.menu.index');
     Route::post('/app/settings/menu/order/post', 'Admin\Settings\MenuController@order_post')->name('admin.menu.order.post');
@@ -53,8 +55,6 @@ Route::middleware('admin')->group(function() {
 
     //Locale
     Route::get("/app/locale","Admin\LocaleController@index")->name("admin.locale.index");
-
-
 
 
 
@@ -120,10 +120,8 @@ Route::get("/data-delete",function(){
 })->name("data.delete");
 
 Route::get("/tester",function(){
-return date_convert("01.07.2018");
-
-
-
+    $modules = array(1,2,3,9,15,21,32,33);
+return json_encode($modules);
 });
 
 

@@ -22,7 +22,6 @@ class LangMiddleware
     {
         // Eğer sessionda bir dil mevcut ise o dili sistem yapısına uygula.
         if ( $langi = Session::get('lang') ){
-
             app()->setLocale($langi);
         }
 

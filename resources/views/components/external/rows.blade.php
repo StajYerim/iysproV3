@@ -4,7 +4,7 @@
 $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn("type_id",[2,3])->get();
     }else{
     $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn("type_id",[1,3,4])->get();
-    }
+}
 @endphp
 <div id="rows" v-cloak>
     <fieldset>

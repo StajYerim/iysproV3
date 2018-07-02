@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Events\AccountRegistration;
+use App\Menu;
+use App\Model\Finance\BankAccounts;
 use App\Role;
 use App\Sector;
 use App\User;
 use Carbon\Carbon;
+use function MongoDB\BSON\toJSON;
 use Illuminate\Http\Request;
 
 class AccountsController extends Controller
@@ -77,6 +80,19 @@ class AccountsController extends Controller
         $user->account_id = $account->id;
         $user->save();
 
+
+        BankAccounts::create([
+            "account_id" => $account->id,
+            "name" => "KASA HESABI",
+            "type" => 1,
+            "currency" => "try",
+        ]);
+
+        // Modules Activated
+        $account = Account::find($account->id);
+        $account->update(["modules" => "[1,2,3,9,15,21,32,33]"]);
+
+
         // send email
         event(new AccountRegistration($user));
 
@@ -92,8 +108,10 @@ class AccountsController extends Controller
      */
     public function show(Account $company)
     {
+        $modules = Menu::where("parent_id", null)->where("permission", 2)->get();
         return view('admin.accounts.show', [
-            'company' => $company
+            'company' => $company,
+            'modules' => $modules,
         ]);
     }
 
@@ -160,6 +178,36 @@ class AccountsController extends Controller
 
         flash('Company and associated user is updated.')->success();
         return redirect()->route('companies.index');
+    }
+
+    public function modules_update(Request $request, $id)
+    {
+        $company = Account::find($id);
+        $moduller = json_decode($company->modules);
+        if (in_array($request->id, $moduller)) {
+
+
+            $key = array_search($request->id, $moduller);
+            if (false !== $key) {
+                unset($moduller[$key]);
+            }
+
+            Account::find($id)->update(["modules" =>"[".implode(",", $moduller)."]"]);
+
+            return $moduller;
+
+
+        } else {
+
+            array_push($moduller,$request->id);
+
+            Account::find($id)->update(["modules" =>"[".implode(",", $moduller)."]"]);
+
+            return $moduller;
+
+        }
+
+
     }
 
     /**

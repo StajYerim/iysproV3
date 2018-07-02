@@ -140,7 +140,7 @@
                             class="fa fa-arrows-alt"></i></a> </span>
         </div>
         <!-- end fullscreen button -->
-      
+
         <!-- start settings button "only visible for account owner" -->
         @if(auth()->user()->role->id == 2)
         <ul class="header-dropdown-list hidden-xs">
@@ -156,12 +156,12 @@
 
                 <ul class="dropdown-menu pull-left">
          <!-- only owner can see this menu item -->
-                  
+
                   <li  class="">
                         <a href="{{route("settings.accounts.profile",aid())}}"><i class="fa fa-suitcase"></i> Company Profile</a>
                     </li>
          <!-- only owner can see this menu item -->
-                  
+
                   <li  class="">
                         <a href="{{route("settings.users.profile",[aid(),auth()->user()->id])}}"><i class="fa fa-user"></i> User Profile</a>
                     </li>
@@ -172,7 +172,9 @@
                     <li  class="">
                         <a href=""><i class="fa fa-cubes"></i> Applications</a>
                     </li>
-
+                    <li  class="">
+                        <a href="{{route("users.index",aid())}}"><i class="fa fa-users"></i> Users</a>
+                    </li>
                     <li  class="">
                         <a href="{{route("settings.api.index",aid())}}"><i class="fa fa-retweet"></i> Api Info</a>
                     </li>
@@ -182,7 +184,7 @@
         </ul>
     @endif
               <!-- end settings button "only visible for account owner" -->
-      
+
         <!-- multiple lang dropdown : find all flags in the flags page -->
         <ul class="header-dropdown-list hidden-xs">
             @php $locale = \App\Language::where("lang_code",app()->getLocale())->first(); @endphp

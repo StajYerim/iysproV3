@@ -43,20 +43,10 @@ class Account extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function save(array $options = array())
-    {
-
-        parent::save($options);
-
-        BankAccounts::create([
-            "account_id"=>$this->id,
-            "name" => "KASA HESABI",
-            "type" => 1,
-            "currency"=>"TRL",
-            ]);
 
 
-    }
+
+
 
     /**
      * Company or Account has many users.
@@ -66,6 +56,11 @@ class Account extends Model
     public function users()
     {
         return $this->hasMany(User::class, 'account_id');
+    }
+
+    public function modules()
+    {
+
     }
 
     /**
