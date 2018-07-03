@@ -65,7 +65,7 @@
                                                         name="AccId">
 
                                                     <option v-for="(acc,index) in accounts" :disabled="acc.id ==''"
-                                                            :value="acc.id">@{{acc.name}}
+                                                            :value="acc.id">@{{acc.name}} (@{{ acc.balance }})
                                                     </option>
 
                                                 </select>
@@ -325,7 +325,8 @@
                                 @foreach($banks as $acc)
                         {
                             "id": "{{$acc->id}}",
-                            "name": "{{$acc->name}}"
+                            "name": "{{$acc->name}}",
+                            "balance":"{{$acc->balance}}",
                         },@endforeach()
 
                     )

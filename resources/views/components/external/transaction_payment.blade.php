@@ -65,7 +65,7 @@
                                                         name="AccId">
 
                                                     <option v-for="(acc,index) in accounts" :disabled="acc.id ==''"
-                                                            :value="acc.id">@{{acc.name}}</option>
+                                                            :value="acc.id">@{{acc.name}} (@{{acc.balance}})</option>
 
                                                 </select>
                                                 <span v-if="errors.has('payment.form.bank_account_id')"
@@ -157,7 +157,7 @@
                                                             class="form-control">
                                                         <option :disabled="accd.id == null"
                                                                 v-for="(accd,index) in cheque_payment.cheque_banks"
-                                                                :value="accd.id">@{{accd.name}}</option>
+                                                                :value="accd.id">@{{accd.name}} ()@{{ accd.balance }}</option>
 
                                                     </select>
                                                     <span v-if="cheque_payment.cash_error" class="error mini">Lütfen kasa seçimi yapınız.</span>
@@ -332,14 +332,15 @@
                                 @foreach($banks as $acc)
                         {
                             "id": "{{$acc->id}}",
-                            "name": "{{$acc->name}}"
+                            "name": "{{$acc->name}}",
+                            "balance":"{{$acc->balance}}"
                         },@endforeach()
 
                     );
 
                     this.cheque_payment.cheque_banks.push(
                                 @foreach($cheq_banks as $bank)
-                        {id:"{{$bank->id}}",name:"{{$bank->name}}"},
+                        {id:"{{$bank->id}}",name:"{{$bank->name}}",balance:"{{$bank->balance}}"},
                             @endforeach()
 
                     );
