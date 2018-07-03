@@ -7,7 +7,7 @@
         <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
 
             <header role="heading" class="ui-sortable-handle"> <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                <h2>     {{ isset($user) ? '' : 'Invite user' }}</h2>
+                <h2>     {{ isset($user) ? 'Edit' : 'Invite user' }}</h2>
 
                 <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
 
@@ -146,7 +146,8 @@
 
 
     </article>
-    @if(isset($user))
+    @if(auth()->user()->role_id == 3)
+
         @php
 
             if(auth()->user()->role_id == 1)    {

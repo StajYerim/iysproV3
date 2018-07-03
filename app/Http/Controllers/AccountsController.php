@@ -88,6 +88,9 @@ class AccountsController extends Controller
             "currency" => "try",
         ]);
 
+        $account->units()->attach(1);
+        $account->units()->attach(20);
+
         // Modules Activated
         $account = Account::find($account->id);
         $account->update(["modules" => "[1,2,3,9,15,21,32,33]"]);

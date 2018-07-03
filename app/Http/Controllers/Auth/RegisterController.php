@@ -212,7 +212,8 @@ class RegisterController extends Controller
             'owner_id' => $user->id,
             'expiry_date' => Carbon::now()->addMonth()
         ]);
-
+        $account->units()->attach(1);
+        $account->units()->attach(20);
         $user->account_id = $account->id;
         $user->save();
 

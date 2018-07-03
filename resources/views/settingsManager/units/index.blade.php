@@ -11,13 +11,12 @@
                 <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
 
-
                     <!-- widget div-->
                     <div>
 
                         <!-- widget content -->
                         <div class="widget-body no-padding">
-                            <table class="table  table-hover table-striped">
+                            <table class="table  table-hover table-condensed table-striped">
                                 <thead class="fixed-title">
                                 <tr>
                                     <th>Unit Name</th>
@@ -27,9 +26,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
-
-
                                 @foreach($units as $unit)
                                     <tr>
                                         <td>{{$unit->name}}</td>
@@ -37,7 +33,7 @@
                                         <td>{{$unit->type}}</td>
                                         <td><span class="onoffswitch">
 												<input type="checkbox" name="unit_status"  onchange="switcher({{$unit->id}})"
-                                                       class="onoffswitch-checkbox" {{$unit->account->count() == 1 ? "checked":""}} id="{{$unit->id}}">
+                                                       class="onoffswitch-checkbox" {{$unit->account_unit == 1 ? "checked":""}} id="{{$unit->id}}">
 												<label class="onoffswitch-label" for="{{$unit->id}}">
 													<span class="onoffswitch-inner" data-swchon-text="ON"
                                                           data-swchoff-text="OFF"></span>

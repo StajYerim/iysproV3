@@ -115,16 +115,4 @@ Route::get("/general/script.js","GeneralController@script")->name("general.scrip
 
 Route::post("/get",'GeneralController@test')->name("general.test");
 
-Route::get("/data-delete",function(){
-   \App\Companies::delete();
-
-   flash()->overlay("Delete all data","Success")->success();
-    return redirect()->back();
-})->name("data.delete");
-
-Route::get("/tester",function(){
-    $modules = array(1,2,3,9,15,21,32,33);
-return json_encode($modules);
-});
-
 
