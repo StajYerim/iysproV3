@@ -19,6 +19,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
 
+
         // Check if .env file exists
         if (File::exists(base_path('.env'))) {
             return $next($request);
@@ -30,17 +31,19 @@ class RedirectIfAuthenticated
         }
 
 
-
-
         if (Auth::guard($guard)->check()) {
             // get user
             $user = auth()->user();
 
+
+
             // if user is admin, redirect to admin dashboard
             // if not, user dashboard
             if ($user->isAdmin()) {
+
                 return redirect()->route('admin.dashboard');
             } else {
+
                 return redirect($user->getDashboardRoute());
             }
         }

@@ -21,7 +21,14 @@
     if(auth()->user()->role_id == 1)    {
         $menu = \App\Menu::whereNull("parent_id")->where("permission",1)->orderBy("order","asc")->get();
     }else{
-       $menu = \App\Menu::whereNull("parent_id")->whereIn("id",json_decode(auth()->user()->memberOfAccount["modules"]))->whereIn("permission",[2,3])->orderBy("order","asc")->get();
+
+        if(auth()->user()->role_id == 3){
+       $menu = \App\Menu::whereNull("parent_id")->whereIn("id",json_decode(auth()->user()->memberOfAccount["modules"]))->whereIn("id",json_decode(auth()->user()->permissions))->orderBy("order","asc")->get();
+    }elseif((auth()->user()->role_id == 2)){
+
+        $menu = \App\Menu::whereNull("parent_id")->whereIn("id",json_decode(auth()->user()->memberOfAccount["modules"]))->orderBy("order","asc")->get();
+
+    }
     }
 @endphp
     <nav>

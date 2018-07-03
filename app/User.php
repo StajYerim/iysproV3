@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Routing\Route;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'mobile', 'lang_id', 'role_id', 'confirmed', 'confirmation_code', 'account_id'
+        'name', 'email', 'password', 'mobile', 'lang_id', 'role_id', 'confirmed', 'confirmation_code', 'account_id',"permissions"
     ];
 
     /**
@@ -36,6 +37,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function language(){
+        return $this->hasOne(Language::class,"id","lang_id");
     }
 
     /**
@@ -263,4 +268,6 @@ class User extends Authenticatable
     {
         return route('users.edit', ['company' => $user ? $user->memberOfAccount : auth()->user()->memberOfAccount]);
     }
+
+
 }

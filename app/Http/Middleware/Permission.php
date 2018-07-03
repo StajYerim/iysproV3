@@ -3,10 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Session;
 
-class NotAdmin
+class Permission
 {
     /**
      * Handle an incoming request.
@@ -18,7 +16,6 @@ class NotAdmin
     public function handle($request, Closure $next)
     {
         if (auth()->check() && !auth()->user()->isAdmin()) {
-
             session()->put("company_id",auth()->user()->id);
             session()->put("account_id",auth()->user()->memberOfAccount["id"]);
             return $next($request);

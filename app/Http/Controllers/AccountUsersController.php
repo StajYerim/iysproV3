@@ -97,6 +97,7 @@ class AccountUsersController extends Controller
             'lang_id' => $validated['language'],
             'role_id' => Role::USER,
             'account_id' => $company->id,
+            "permission"=> "[1]",
             'confirmation_code' => str_random(32)
         ]);
 
@@ -115,41 +116,35 @@ class AccountUsersController extends Controller
 
 
 
-    public function modal_invite(Request $request, Account $company)
+    public function permission_update (Request $request, $aid,$id)
     {
-        $this->authorize('invite', $company);
+        $user = User::find($id);
+        $moduller = json_decode($user->permissions);
+        if (in_array($request->id, $moduller)) {
 
-        // Validate user's input
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email',
-            'mobile' => 'nullable|string|max:255',
-            'language' => 'required|exists:app_languages,lang_id',
-            'company_access' => 'required|exists:permissions,id'
-        ]);
 
-        // store user to DB
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'mobile' => $validated['mobile'] ?: Null,
-            'lang_id' => $validated['language'],
-            'role_id' => Role::USER,
-            'account_id' => $company->id,
-            'confirmation_code' => str_random(32)
-        ]);
+            $key = array_search($request->id, $moduller);
 
-        // store chosen permissions for user
-        UserPermission::create([
-            'user_id' => $user->id,
-            'permission_id' => $validated['company_access'],
-        ]);
+            if (false !== $key) {
+                unset($moduller[$key]);
+            }
 
-        // fire event, that user has been invited
-        event(new UserIsInvited($user));
+            User::find($id)->update(["permissions" =>"[".implode(",", $moduller)."]"]);
 
-        // redirect back
-        return redirect(User::getIndexRoute());
+            return $moduller;
+
+
+        } else {
+
+            array_push($moduller,$request->id);
+
+            User::find($id)->update(["permissions" =>"[".implode(",", $moduller)."]"]);
+
+            return $moduller;
+
+        }
+
+
     }
 
     /**

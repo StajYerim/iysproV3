@@ -12,8 +12,8 @@
 
                 <input type="hidden" name="code" value="{{$code}}">
                 <fieldset>
-                    COMMERCIAL TITLE : {{ $user->memberOfAccount->company_name }}<br>
-                    SECTOR : {{ $user->memberOfAccount->sector->name }}<br>
+                    COMMERCIAL TITLE : {{ $user->memberOfAccount["company_name"] }}<br>
+                    {{--SECTOR : {{ $user->memberOfAccount->sector["name"] }}<br>--}}
                     <br>
                     FULL NAME : {{ $user->name }}<br>
                     E-MAIL : {{ $user->email }}<br>

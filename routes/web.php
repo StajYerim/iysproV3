@@ -29,8 +29,9 @@ Route::post('/activation/{code}', 'Auth\RegisterController@activateWithPassword'
 Route::middleware('auth')->group(function() {
     Route::get('/', 'Auth\LoginController@redirect');
     Route::resource('/{company}/users', 'AccountUsersController', ['only' => ['edit', 'update']]);
-    Route::get('/{company}/users/invite/new', 'AccountUsersController@create')->name('users.create');
-    Route::post('/{company}/users', 'AccountUsersController@store')->name('users.store');
+    Route::get('/users/invite/new', 'AccountUsersController@create')->name('users.create');
+    Route::post('/users', 'AccountUsersController@store')->name('users.store');
+
 });
 
 // Allows only authenticated admin to visit this pages
@@ -69,6 +70,8 @@ Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
     Route::get('dashboard', 'HomeController@index')->name('dashboard');
     Route::get('company-profile', 'AccountsController@profile')->name('company.profile');
     Route::get('user-list', 'AccountUsersController@index')->name('users.index');
+    Route::post("user/{id}/permission/update","AccountUsersController@permission_update")->name("settings.users.permission.update");
+
 
     //App all settings
     Route::get('settings', 'SettingsManager\SettingsManagerController@index')->name('settings.index');

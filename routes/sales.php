@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 // If user is authenticated and he is not admin
-Route::group(['prefix'=>'{company_id}/sales','middleware'=>'not.admin'],function() {
+Route::group(['prefix'=>'{company_id}/sales','middleware'=>['not.admin','permission']],function() {
 
     //Companies
     Route::get("customers","Companies\CompaniesController@customer")->name("sales.companies.customer");

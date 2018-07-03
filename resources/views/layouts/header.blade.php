@@ -57,7 +57,7 @@
     <div class="project-context hidden-xs">
 
         <span class="label"></span>
-        <span class="project-selector dropdown-toggle" data-toggle="dropdown">Recent projects </head>
+        <span class="project-selector dropdown-toggle" data-toggle="dropdown">Recent project </head>
             <i
                     class="fa fa-angle-down"></i></span>
         <!-- Suggestion: populate this list with fetch and push technique -->
