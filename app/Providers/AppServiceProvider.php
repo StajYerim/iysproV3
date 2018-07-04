@@ -5,10 +5,8 @@ namespace App\Providers;
 use App\Language;
 use App\Menu;
 use App\Role;
-use App\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -25,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // Common problem with mysql email migration. Uncomment, if encountered "1071" issue.
          Schema::defaultStringLength(191);
+
+
 
          // Cache forever languages
         // TODO: cache it again

@@ -7,8 +7,9 @@ use Parasut\Client;
 class Parasut {
 
   private $parasut = null;
-  
-  public function __construct($params) { 
+
+  public function __construct($params) {
+
     $this->parasut = new Client($params);
     $this->parasut->authorize();
   }
@@ -43,11 +44,11 @@ class Parasut {
       'name' => $product->name,
       'code' => $product->code,
       'barcode' => '123456',
-      'buying_price' => str_replace(',', '.', $product->buying_price),
-      'list_price' => str_replace(',', '.', $product->list_price),
+      'buying_price' => money_db_format($product->buying_price),
+      'list_price' => money_db_format($product->list_price),
       'vat_rate' => $product->vat_rate,
-      'category_id' => $category_exist, 
-    ]); 
+      'category_id' => $category_exist,
+    ]);
   }
 
   public function sync_stock_product($product) {
@@ -55,7 +56,7 @@ class Parasut {
     if ($category_exist === false) {
       $category_exist = $this->add_category($product->category, 'Product');
     }
-    
+
     $product_already_in_parasut = $this->check_product_in_parasut($product);
     if ($product_already_in_parasut === true) {
       return $this->update_parasut_product($product, $category_exist);
@@ -65,10 +66,10 @@ class Parasut {
       'name' => $product->name,
       'code' => $product->code,
       'barcode' => '123456',
-      'buying_price' => str_replace(',', '.', $product->buying_price),
-      'list_price' => str_replace(',', '.', $product->list_price),
+      'buying_price' => money_db_format($product->buying_price),
+      'list_price' => money_db_format($product->list_price),
       'vat_rate' => $product->vat_rate,
-      'category_id' => $category_exist, 
+      'category_id' => $category_exist,
     ]);
   }
 

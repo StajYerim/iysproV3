@@ -173,7 +173,7 @@
                         <a href=""><i class="fa fa-cubes"></i> Applications</a>
                     </li>
                     <li  class="">
-                        <a href="{{route("users.index",aid())}}"><i class="fa fa-users"></i> Users</a>
+                        <a href="{{route("settings.users.index",aid())}}"><i class="fa fa-users"></i> Users</a>
                     </li>
                     <li  class="">
                         <a href="{{route("settings.api.index",aid())}}"><i class="fa fa-retweet"></i> Api Info</a>
