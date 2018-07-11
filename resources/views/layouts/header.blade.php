@@ -187,7 +187,7 @@
 
         <!-- multiple lang dropdown : find all flags in the flags page -->
         <ul class="header-dropdown-list hidden-xs">
-            @php $locale = \App\Language::where("lang_code",app()->getLocale())->first(); @endphp
+            @php $locale = \App\Language::where("lang_id",auth()->user()->lang_id)->first();  @endphp
             <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="{{asset("img/blank.gif")}}"
                                                                                  class="flag flag-{{$locale->lang_code == "en" ? "us":$locale->lang_code}}"
@@ -199,7 +199,7 @@
                     @endphp
 
                     @foreach($langs as $lang)
-                        <li  @if($lang->lang_code == app()->getLocale()) class="active" @endif >
+                        <li  @if($lang->lang_id == auth()->user()->lang_id) class="active" @endif >
                             <a href="{{route("lang",$lang->lang_code)}}"><img src="{{asset("img/blank.gif")}}" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a>
                         </li>
                     @endforeach

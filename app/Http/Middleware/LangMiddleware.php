@@ -6,6 +6,7 @@ use App\Language;
 use Closure;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 
@@ -20,9 +21,13 @@ class LangMiddleware
      */
     public function handle($request, Closure $next)
     {
+
+
         // Eğer sessionda bir dil mevcut ise o dili sistem yapısına uygula.
-        if ( $langi = Session::get('lang') ){
-            app()->setLocale($langi);
+        if (Auth::check() &&  $language = Language::where("lang_id",auth()->user()->lang_id)->first() ){
+
+            session()->put('lang', $language["lang_code"]);
+
         }
 
         return $next($request);

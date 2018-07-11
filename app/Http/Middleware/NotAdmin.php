@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Language;
 use Closure;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 
 class NotAdmin
@@ -21,6 +23,8 @@ class NotAdmin
 
             session()->put("company_id",auth()->user()->id);
             session()->put("account_id",auth()->user()->memberOfAccount["id"]);
+            $language = Language::where("lang_id",auth()->user()->lang_id)->first();
+            App::setLocale($language["lang_code"]);
             return $next($request);
         }
 
