@@ -35,7 +35,7 @@
 
                             <div class="pull-right new-button">
 
-                                <a href="{{route("sales.orders.form",[aid(),0,"new"])}}">
+                                <a href="{{route("purchases.orders.form",[aid(),0,"new"])}}">
                                 <span class="btn btn-success">New Order</span>
                                 </a>
                             </div>
@@ -87,7 +87,7 @@
                 stateDuration: 45,
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('sales.orders.index_list',aid()) !!}',
+                ajax: '{!! route('purchases.orders.index_list',aid()) !!}',
                 columns: [
                     {
                         data: 'id',
@@ -122,7 +122,7 @@
             table_search(tables)
 
             function product_update(id) {
-                return window.location.href = '/{{aid()}}/sales/orders/' + id + '/show';
+                return window.location.href = '/{{aid()}}/purchases/orders/' + id + '/show';
             }
 
         </script>

@@ -37,9 +37,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     Send Password Reset Link
                                 </button>
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
+
                             </div>
                         </div>
                     </form>

@@ -4,7 +4,7 @@
     <section id="show" v-cloak>
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
-                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$order->description}}</span></h1>
+                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$order->descriptions}}</span></h1>
 
             </div>
             <div class="col-lg-4 col-sm-4">
@@ -15,25 +15,21 @@
                                     class="fa fa-reorder"></span> &nbsp;<span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{route("sales.orders.form",[aid(),$order->id,"update"])}}"><i
+                                <a href="{{route("purchases.orders.form",[aid(),$order->id,"update"])}}"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
                                     DÜZENLE</a>
                             </li>
                             <li>
-                                <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction"><i
+                                <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction_payment"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
-                                    TAHSİLAT EKLE</a>
+                                    ÖDEME EKLE</a>
                             </li>
                             <li>
-                                <a href="{{route("sales.orders.form",[aid(),$order->id,"copy"])}}"><i class="fa fa-copy"
+                                <a href="{{route("purchases.orders.form",[aid(),$order->id,"copy"])}}"><i class="fa fa-copy"
                                                                                                       aria-hidden="true"></i>
                                     KOPYASINI OLUŞTUR</a>
                             </li>
-                            <li>
-                                <a onclick="$(this).orderReturn()" data-id="0" id="orderReturn" href="#"><i
-                                            class="fa fa-reply " aria-hidden="true"></i>
-                                    SİPARİŞE DÖNÜŞTÜR</a>
-                            </li>
+
                             <li class="divider"></li>
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
@@ -144,15 +140,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        <div class="bottom-info">TOPLAM KDV</div>
-                                                    </td>
-                                                    <td style="text-align:right">
-                                                        <div class="bottom-info">{{$order->vat_total}} <i
-                                                                    class="fa fa-{{$order->currency}}"></i></div>
-                                                    </td>
-                                                </tr>
+
                                                 <tr v-for="vato in vat_only" class="trow"
                                                     v-if="vato.total!=0">
 
@@ -164,6 +152,15 @@
                                                     <td style="text-align:right">
                                                         <div class="bottom-info" style="font-size: 11px"><span
                                                                     id="total-vat-1">@{{ vato.total }}</span> <i
+                                                                    class="fa fa-{{$order->currency}}"></i></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="bottom-info">TOPLAM KDV</div>
+                                                    </td>
+                                                    <td style="text-align:right">
+                                                        <div class="bottom-info">{{$order->vat_total}} <i
                                                                     class="fa fa-{{$order->currency}}"></i></div>
                                                     </td>
                                                 </tr>
@@ -268,16 +265,7 @@
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
                                 </div>
-                              <hr>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                       TEKLİFİ
-                                        <br>
-                                        <a href=">!"> SATIŞ TEKLİFİ
-                                            &nbsp;(#22)</a><br>
-                                    </div>
 
-                                </div>
                             </div>
                         </div>
 
@@ -289,11 +277,10 @@
             </article>
         </div>
 
-        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales order ?",$id=$order->id])
+        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete purchase order ?",$id=$order->id])
 
     </section>
-    @include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])
-
+    @include("components.external.transaction_payment",[$type="payment",$local="purchase_orders",$detail = $order,$abble="App\\\Model\\\Purchases\\\PurchaseOrders"])
 
     @push('scripts')
         <script>
@@ -318,7 +305,7 @@
                                 type:"cheq",
                                 id:"{{$che->id}}",
                                 date:"{{$che->date}}",
-                                bank_account:'ALINAN ÇEK',
+                                bank_account:'VERİLEN ÇEK',
                                 amount:"{{get_money($che->pivot->amount)}}"
                             },
                             @endforeach()
@@ -352,10 +339,10 @@
 
                         delete_data: function ($id) {
                             fullLoading();
-                            axios.delete('{{route("sales.orders.destroy",[aid(),$order->id])}}')
+                            axios.delete('{{route("purchases.orders.destroy",[aid(),$order->id])}}')
                                 .then(function (response) {
                                     if (response.data.message == "success") {
-                                        window.location.href = '{{route("sales.orders.index",aid())}}';
+                                        window.location.href = '{{route("purchases.orders.index",aid())}}';
                                     }
                                 }).catch(function (error) {
                                 notification("Error", error.response.data.message, "danger");

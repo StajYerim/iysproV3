@@ -42,15 +42,21 @@
                         <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
                                     class="fa fa-print"></span> YAZDIR <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url"])}}"><i
-                                            class="fa fa-print" aria-hidden="true"></i>
-                                    TEKLİFİ YAZDIR</a>
+                            <li class="dropdown-submenu">
+                                <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> TEKLİFİ YAZDIR</a>
+                                <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
+                                   @foreach($langs as $lang)
+                                    <li><a tabindex="-1" target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url",$lang->lang_code])}}"> <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
+                                    @endforeach
+                                </ul>
                             </li>
-                            <li>
-                                <a download="" href="{{route("sales.offers.pdf",[aid(),$offer->id,"download"])}}"
-                                   id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
-                                    TEKLİFİ İNDİR</a>
+                            <li class="dropdown-submenu">
+                                <a class="test" tabindex="-1" href="#">   <i class="fa fa-print" aria-hidden="true"></i> TEKLİFİ İNDİR </a>
+                                <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
+                                    @foreach($langs as $lang)
+                                        <li><a tabindex="-1" target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url",$lang->lang_code])}}" > <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
+                                    @endforeach
+                                </ul>
                             </li>
 
                         </ul>
@@ -58,7 +64,7 @@
                     </div>
 
                     <a href="#!" data-toggle="modal" data-target="#shareModal" class="btn btn-default"><i
-                                class="fa fa-envelope"></i> Paylaş</a>
+                                class="fa fa-envelope"></i> {{trans("general.share")}}</a>
 
                 </div>
 
@@ -138,15 +144,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        <div class="bottom-info">TOPLAM KDV</div>
-                                                    </td>
-                                                    <td style="text-align:right">
-                                                        <div class="bottom-info">{{$offer->vat_total}} <i
-                                                                    class="fa fa-{{$offer->currency}}"></i></div>
-                                                    </td>
-                                                </tr>
+
                                                 <tr v-for="vato in vat_only" class="trow"
                                                     v-if="vato.total!=0">
 
@@ -158,6 +156,15 @@
                                                     <td style="text-align:right">
                                                         <div class="bottom-info" style="font-size: 11px"><span
                                                                     id="total-vat-1">@{{ vato.total }}</span> <i
+                                                                    class="fa fa-{{$offer->currency}}"></i></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="bottom-info">TOPLAM KDV</div>
+                                                    </td>
+                                                    <td style="text-align:right">
+                                                        <div class="bottom-info">{{$offer->vat_total}} <i
                                                                     class="fa fa-{{$offer->currency}}"></i></div>
                                                     </td>
                                                 </tr>
@@ -236,12 +243,16 @@
                                 <hr>
 
                                 <div class="row">
+                                    @if($offer->orders->count() >0)
                                     <div class="col-sm-12">
                                         TEKLİFTEN OLUŞTURULAN SİPARİŞLER
                                         <br>
-                                        <a href="http://demo.iyspro.com/salesmanager/sales-orders/22"> SATIŞ SİPARİŞİ
-                                            &nbsp;(#22)</a><br>
+                                        @foreach($offer->orders as $order)
+                                        <a href="{{route("sales.orders.show",[aid(),$order->id])}}"> {{$order->description == null ? "SATIŞ SİPARİŞİ": $order->description}}
+                                            &nbsp;(#{{$order->id}})</a><br>
+                                            @endforeach
                                     </div>
+                                        @endif
 
                                 </div>
                             </div>
@@ -253,10 +264,10 @@
 
 
             </article>
+            <div id="ms-emails"></div>
         </div>
 
         @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales offer ?",$id=$offer->id])
-        @include("components.external.share",[$title="Teklif",$thread="Teklif",$message="Mesaj içeriği"])
 
         {{-- Durum Modal--}}
         <div class="modal fade" id="statusModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
@@ -333,8 +344,18 @@
         </div>
 
     </section>
+    @include("components.external.share",[
+    $title="Teklif",
+    $thread="Satış Teklifi : ".$offer->company["company_name"],
+    $message="Merhaba,<br>Satış Teklifi detaylarınız ektedir indirerek inceleyebilirsiniz.<br>İyi çalışmalar.<br><br><b>".account()["name"]."</b>",
+    $type="share.offer",
+    $data = $offer])
+
 
     @push('scripts')
+
+
+
         <script>
             window.addEventListener("load", () => {
                 VueName = new Vue({

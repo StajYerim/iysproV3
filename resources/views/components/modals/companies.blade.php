@@ -197,12 +197,13 @@
         Companies = new Vue({
             el: '#companies_form',
             data: () => ({
+
                 form: {
                     company_name: "",
                     company_short_name: "",
                     char_code: "",
                     email: "",
-                    option: '',
+                    option: '{{isset($option)== true ? $option:$act == "in" ? "supplier":"customer"}}',
                     tax_office: "",
                     tax_id: "",
                     e_invoice_registered: 0,

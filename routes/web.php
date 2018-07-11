@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Companies;
 use App\Role;
 use http\Env\Request;
@@ -27,9 +28,10 @@ Route::post('/activation/{code}', 'Auth\RegisterController@activateWithPassword'
 // Allows authenticated users to visit
 Route::middleware('auth')->group(function() {
     Route::get('/', 'Auth\LoginController@redirect');
-    Route::resource('/{company}/users', 'AccountUsersController', ['only' => ['edit', 'update']]);
-    Route::get('/{company}/users/invite/new', 'AccountUsersController@create')->name('users.create');
-    Route::post('/{company}/users', 'AccountUsersController@store')->name('users.store');
+    Route::resource('/users', 'AccountUsersController', ['only' => ['edit', 'update']]);
+    Route::get('/users/invite/new', 'AccountUsersController@create')->name('users.create');
+    Route::post('/users', 'AccountUsersController@store')->name('users.store');
+
 });
 
 // Allows only authenticated admin to visit this pages
@@ -45,6 +47,8 @@ Route::middleware('admin')->group(function() {
     Route::get('/app/company/new', 'AccountsController@create')->name('companies.create');
     Route::get('/app/user-list', 'AccountUsersController@adminIndex')->name('admin.users.index');
 
+    Route::post("/app/company-list/{id}/modules/update","AccountsController@modules_update")->name("admin.companies.modules.update");
+
     //Settings Menu
     Route::get('/app/settings/menu', 'Admin\Settings\MenuController@index')->name('admin.menu.index');
     Route::post('/app/settings/menu/order/post', 'Admin\Settings\MenuController@order_post')->name('admin.menu.order.post');
@@ -52,8 +56,6 @@ Route::middleware('admin')->group(function() {
 
     //Locale
     Route::get("/app/locale","Admin\LocaleController@index")->name("admin.locale.index");
-
-
 
 
 
@@ -67,7 +69,14 @@ Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
 
     Route::get('dashboard', 'HomeController@index')->name('dashboard');
     Route::get('company-profile', 'AccountsController@profile')->name('company.profile');
-    Route::get('user-list', 'AccountUsersController@index')->name('users.index');
+
+    Route::post("user/{id}/permission/update","AccountUsersController@permission_update")->name("settings.users.permission.update");
+
+    Route::get('/users/invite/new', 'AccountUsersController@invite_create')->name('settings.users.create');
+    Route::get('user-list', 'AccountUsersController@users_index')->name('settings.users.index');
+    Route::get('/users/{id}/edit', 'AccountUsersController@user_edit')->name('settings.users.edit');
+    Route::any('/users/{id}/update', 'AccountUsersController@user_update')->name('settings.users.update');
+    Route::post('/users/invite/store', 'AccountUsersController@invite_store')->name('settings.users.store');
 
     //App all settings
     Route::get('settings', 'SettingsManager\SettingsManagerController@index')->name('settings.index');
@@ -83,6 +92,9 @@ Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
     //Döviz kurları
     Route::get("/exchange","ExchangeController@exchange")->name("exchange");
 
+    //Share Offers/Orders
+    Route::post("/offer-share/{id}","ShareController@offer_share")->name("share.offer");
+    Route::post("/order-share/{id}","ShareController@order_share")->name("share.order");
 
 });
 
@@ -107,19 +119,5 @@ Route::get("/add-lang/{name}/{eng}/{tr}",function($name,$eng,$tr){
 Route::get("/general/script.js","GeneralController@script")->name("general.script");
 
 Route::post("/get",'GeneralController@test')->name("general.test");
-
-Route::get("/data-delete",function(){
-   \App\Companies::delete();
-
-   flash()->overlay("Delete all data","Success")->success();
-    return redirect()->back();
-})->name("data.delete");
-
-Route::get("/tester",function(){
-$orders = \App\Model\Sales\SalesOrders::find(21);
-
-
-
-});
 
 

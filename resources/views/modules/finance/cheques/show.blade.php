@@ -23,7 +23,8 @@
             <div class="col-sm-8">
                 <div class="well">
 
-                        <h1><i style="vertical-align: -7px;" class="fa fa-sign-in fa-rotate-90 fa-2x "></i> <span class="semi-bold">Alınan  Çek</span>
+                    <h1><i style="vertical-align: -7px;" class="fa fa-sign-in fa-rotate-90 fa-2x "></i> <span
+                                class="semi-bold"> {{$cheq->status_text}}</span>
                     </h1>
 
                     <hr>
@@ -31,15 +32,40 @@
 
                         <div class="col-12">
                             <div class="col-sm-5" style="font-weight: 400;font-size:15px;">
+                                @if($cheq->cheque_status == 1)
                                 <i class="fa fa-calendar"></i> ALINDIĞI TARİH, MÜŞTERİ<br><br>
+                                @elseif($cheq->cheque_status == 0)
+                                    <i class="fa fa-calendar"></i> VERİLDİĞİ TARİH, TEDARİKÇİ<br><br>
+                                @elseif($cheq->cheque_status == 2)
+                                    <i class="fa fa-calendar"></i> ALINDIĞI TARİH, MÜŞTERİ<br><br>
+                                    <i class="fa fa-calendar"></i> VERİLDİĞİ TARİH, TEDARİKÇİ<br><br>
+                                @endif
                                 <i class="fa fa-calendar"></i> VADE TARİHİ<br><br>
                                 <div v-if="collect_cheque_show == true"><i class="fa fa-calendar"></i> TAHSİL EDİLDİĞİ HESAP <br><br></div>
                             </div>
 
 
                             <div class="col-sm-6" style="font-weight: 400;font-size:15px;">
-                             {{$cheq->date}}, <a href="{{route("sales.companies.show",[aid(),$cheq->company["id"]])}}"> {{$cheq->company["company_name"]}}</a><br><br>
-                              {{$cheq->payment_date}}<br><br>
+                                @if($cheq->cheque_status == 1)
+                                    {{$cheq->date}}, <a
+                                            href="{{route("sales.companies.show",[aid(),$cheq->company["id"]])}}"> {{$cheq->company["company_name"]}}</a>
+                                    <br><br>
+                                @elseif($cheq->cheque_status == 0)
+                                    {{$cheq->date}}, <a
+                                            href="{{route("sales.companies.show",[aid(),$cheq->transfer_company["id"]])}}"> {{$cheq->transfer_company["company_name"]}}</a>
+                                    <br><br>
+                                @elseif($cheq->cheque_status == 2)
+                                    <a
+                                            href="{{route("sales.companies.show",[aid(),$cheq->company["id"]])}}"> {{$cheq->company["company_name"]}}</a>
+                                    <br><br>
+                                    {{$cheq->date}}, <a
+                                            href="{{route("sales.companies.show",[aid(),$cheq->transfer_company["id"]])}}"> {{$cheq->transfer_company["company_name"]}}</a>
+                                    <br><br>
+                                @endif
+
+
+
+                                {{$cheq->payment_date}}<br><br>
                                 <div v-if="collect_cheque_show == true"> <div v-html="bank_name"></div><br><br></div>
                             </div>
 
@@ -67,9 +93,9 @@
                                 </tr>
                                 </tbody>
                                 <tbody id="tablo" style="font-size: 11px;">
-                                <tr v-for="item in orders" style="cursor:pointer" v-on:click="redirect(item.id)">
+                                <tr v-for="item in orders" style="cursor:pointer" v-on:click="redirect(item.id,item.type)">
                                     <td>
-                                        @{{ item.type }}
+                                        @{{ item.desc }}
                                     </td>
                                     <td>@{{ item.status }}</td>
                                     <td style="text-align:right">@{{ item.grand_total }} </td>
@@ -95,14 +121,16 @@
 
                         <div v-show="transfer_info">
                             <div class="row" v-if="collect_button == true">
+                                @if($cheq->cheque_status  == 1)
                                 <div class="col-sm-12">
                                     <button v-on:click="other_transfer" type="button"
                                             class="btn  btn-block bg-color-blue txt-color-white ">
-                                        TAHSİL ET
+                                        TAHSİL ET {{$cheq->cheque_status }}
                                     </button>
 
                                 </div>
                             </div><br>
+                            @endif
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="button" data-toggle="modal" data-target="#deleteModal" class="btn btn-block bg-color-red txt-color-white">
@@ -168,13 +196,14 @@
 
                             <hr>
                         <div class="row">
-
+                            @if($cheq->cheque_status == 1)
                             <div class="col-sm-12">
                                 <div class="bottom-info">DURUMU <span class="pull-right" style="font-size:15px;color:#7a7c71!important">
                                                                              @{{ collect_statu }}
 
                                     </span></div>
                             </div>
+                            @endif
                             <div class="col-sm-12">
                                 <div class="bottom-info">ÇEK TOPLAMI <span class="pull-right" style="font-size:15px;color:#2AC!important">
                                     {{$cheq->amount}}   <i class="fa fa-try"></i></span></div>
@@ -230,15 +259,28 @@
                 },
                 mounted() {
                     datePicker();
+
                     this.orders.push(
                                 @foreach($cheq->orders as $order){
                             id:"{{$order->id}}",
-                            type:"Fatura",
+                            type:"sales",
+                            desc: "Satış Siparişi",
                             status:"{{$order->status}}",
                             grand_total:"{{$order->grand_total}}",
                             process_amount:"{{get_money($order->pivot->amount)}}"
                         },
                             @endforeach()
+                                @foreach($cheq->porders as $order){
+                            id: "{{$order->id}}",
+                            type: "purchases",
+                            desc: "Satın Alma Siparişi",
+                            status: "{{$order->status}}",
+                            grand_total: "{{$order->grand_total}}",
+                            process_amount: "{{get_money($order->pivot->amount)}}"
+                        },
+                            @endforeach()
+
+
                     );
                 },
                 methods: {
@@ -260,8 +302,8 @@
 
                             }});
                     },
-                    redirect:function($id){
-                      return window.location.href='/{{aid()}}/sales/orders/'+$id+'/show';
+                    redirect:function($id,type){
+                      return window.location.href='/{{aid()}}/'+type+'/orders/'+$id+'/show';
                     },
                     delete_data: function ($id) {
                         fullLoading();

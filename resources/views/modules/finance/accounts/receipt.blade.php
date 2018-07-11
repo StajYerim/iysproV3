@@ -19,7 +19,7 @@
                     <h1>
                         <i style="vertical-align: -7px;color:#2AC!important"
                            class="fa fa-sign-in fa-rotate-90 fa-2x "></i> <span
-                                class="semi-bold"> TAHSİLAT
+                                class="semi-bold"> {{$receipt->type}}
                              </span>
 
                         <span class="pull-right"><a  href="#!" data-toggle="modal" data-target="#deleteModal" class="btn btn-default btn-lg "> DELETE</a></span>
@@ -89,9 +89,9 @@
                                 </tr>
                                 </tbody>
                                 <tbody id="tablo" style="font-size: 11px;">
-                                <tr v-for="item in orders" style="cursor:pointer" v-on:click="redirect(item.id)">
+                                <tr v-for="item in orders" style="cursor:pointer" v-on:click="redirect(item.id,item.type)">
                                     <td>
-                                        @{{ item.type }}
+                                        @{{ item.name }}
                                     </td>
                                     <td>@{{ item.status }}</td>
                                     <td style="text-align:right">@{{ item.grand_total }} </td>
@@ -122,13 +122,24 @@
                     VueName = new Vue({
                         el:"#receipt",
                         data:{
-                            orders:[]
+                            orders:[
+
+                            ]
                         },
                         mounted:function(){
                           this.orders.push(
                               @foreach($receipt->orders as $order){
                                   id:"{{$order->id}}",
-                                  type:"Fatura",
+                                  type:"sales",
+                                  name:"Satış Siparişi",
+                                  status:"{{$order->status}}",
+                                  grand_total:"{{$order->grand_total}}",
+                                  process_amount:"{{get_money($order->pivot->amount)}}"
+                              },@endforeach()
+                                @foreach($receipt->porders as $order){
+                                  id:"{{$order->id}}",
+                                  type:"purchases",
+                                  name:"Alış Siparişi",
                                   status:"{{$order->status}}",
                                   grand_total:"{{$order->grand_total}}",
                                   process_amount:"{{get_money($order->pivot->amount)}}"
@@ -136,8 +147,8 @@
                               );
                         },
                         methods:{
-                            redirect:function($id){
-                              return window.location.href='/{{aid()}}/sales/orders/'+$id+"/show";
+                            redirect:function($id,$type){
+                              return window.location.href='/{{aid()}}/'+$type+'/orders/'+$id+"/show";
                             },
                             delete_data: function ($id) {
                                 fullLoading();

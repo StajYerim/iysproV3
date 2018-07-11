@@ -179,8 +179,8 @@ console.log(data)
                         console.log(VueName.form.effective_date,date);
                         VueName.form.effective_date = date;
                     }else if(data == "form.due_date"){
-                        console.log(VueName.form.due_date,date);
-                        VueName.form.effective_date = date;
+                        console.log("Field"+data,"Eski Tarih :"+VueName.form.due_date,"Girilen Tarih:"+date);
+                        VueName.form.due_date = date;
                     }else if(data == "collection.form.date"){
                         console.log(VueCollect.collection.form.date,date);
                         VueCollect.collection.form.date = date;
@@ -193,14 +193,20 @@ console.log(data)
                     }else if(data == "money_form.date"){
                         console.log(date);
                         VueName.money_form.date = date;
+                    }else if(data == "cheque_payment.form.date"){
+                        console.log(VuePayment.cheque_payment.form.date,date);
+                        VuePayment.cheque_payment.form.date = date;
+                    }else if(data == "cheque_payment.form.payment_date"){
+                        console.log(VuePayment.cheque_payment.form.date,date);
+                        VuePayment.cheque_payment.form.payment_date = date;
+                    }else if(data == "payment.form.date"){
+                        console.log(VuePayment.payment.form.date,date);
+                        VuePayment.payment.form.date = date;
                     }
 
 
 
-
-
-
-                    console.log(datePicker);
+            console.log(datePicker);
 
 
         },
@@ -220,6 +226,20 @@ function many(val,min=2,max=2){
     });
 }
 
+function redirect_company(id,type,aid){
+
+    if(type==0){
+        return  window.location.href = '/'+aid+'/sales/customer/' + id + '/show';
+    }else if(type==1){
+        return  window.location.href = '/'+aid+'/purchases/supplier/' + id + '/show';
+    }
+
+
+}
+
+function product_update(id) {
+    return window.location.href = '/{{aid()}}/sales/orders/' + id + '/show';
+}
 
 function vade_tarih(tarih,vade){
 

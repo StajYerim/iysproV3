@@ -3,6 +3,7 @@
 namespace App\Model\Sales;
 
 use App\Companies;
+use App\Currency;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -22,7 +23,7 @@ class SalesOffers extends Model
 
     public function getDescriptionsAttribute()
     {
-        return $this->description == null ? "Satış Teklifi" : $this->description;
+        return $this->description == null ? "SATIŞ TEKLİFİ" : $this->description;
     }
 
     public function setDateAttribute($value)
@@ -33,7 +34,7 @@ class SalesOffers extends Model
     public function getDateAttribute()
     {
         $explode = explode("-", $this->attributes["date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["date"]);
         return $dt->format("d.m.Y");
     }
 
@@ -44,8 +45,7 @@ class SalesOffers extends Model
 
     public function getExpiredDateAttribute()
     {
-        $explode = explode("-", $this->attributes["expired_date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["expired_date"]);
         return $dt->format("d.m.Y");
     }
 
@@ -56,8 +56,7 @@ class SalesOffers extends Model
 
     public function getEffectiveDateAttribute()
     {
-        $explode = explode("-", $this->attributes["effective_date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["effective_date"]);
         return $dt->format("d.m.Y");
     }
 
@@ -213,6 +212,26 @@ class SalesOffers extends Model
                 break;
         }
 
+    }
+
+    public function getCurrencyIconAttribute(){
+
+      return  currency_symbol($this->currency);
+
+    }
+
+    public function getCurrencyNameAttribute(){
+        $currencies = Currency::All();
+        foreach($currencies as $cur){
+            if(strtoupper($cur->code) === strtoupper($this->currency)){
+                return strtoupper($cur->name);
+            }
+        }
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(SalesOrders::class, "sales_offer_id", "id");
     }
 
 

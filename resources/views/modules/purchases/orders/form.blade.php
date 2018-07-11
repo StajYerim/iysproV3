@@ -50,7 +50,7 @@
                                     <fieldset>
                                         <div class="form-group" :class="{'has-error':errors.has('form.company_id')}">
 
-                                            <label class="col-md-3 control-label">{{trans("general.customer")}}</label>
+                                            <label class="col-md-3 control-label">{{trans("general.supplier")}}</label>
                                             <div class="col-md-6">
 
                                                 <v-select
@@ -62,7 +62,7 @@
                                                     <template slot="no-options">
                                                         <a type="button" style="color:white"
                                                            class='btn btn-sm btn-warning' href='#!'
-                                                           data-toggle='modal' data-target='#new_company'>Click for New
+                                                           data-toggle='modal' data-target='#new_supplier'>Click for New
                                                             Company </a>
                                                     </template>
                                                     <template slot="option" slot-scope="option">
@@ -78,7 +78,7 @@
 
                                     <fieldset>
                                         <div class="form-group" v-bind:class="{'has-error':errors.has('form.date')}">
-                                            <label class="col-md-3 control-label">Teklif Tarihi</label>
+                                            <label class="col-md-3 control-label">Sipariş Tarihi</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask @change="setDate(form.date)" :mask="['##.##.####']" type="text" name="form.date"
@@ -93,7 +93,7 @@
                                     <fieldset>
                                         <div class="form-group"
                                              v-bind:class="{'has-error':errors.has('form.due_date')}">
-                                            <label class="col-md-3 control-label">Vade Tarihi</label>
+                                            <label class="col-md-3 control-label">Ödeneceği Tarih</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"
@@ -108,7 +108,7 @@
                                         </div>
                                     </fieldset>
                                 </div>
-                                @includeIf("components.external.rows",[$offer = $order,$proccess_type = "sales"])
+                                @includeIf("components.external.rows",[$offer = $order,$proccess_type = "purchases"])
                             </form>
 
 
@@ -123,7 +123,7 @@
             </div>
             <!-- WIDGET ROW END -->
         </div>
-        @include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0])
+        @include("components.modals.companies",[$option="supplier",$title="New Supplier",$type = "new_supplier",$message="Company Form",$id=0])
     </section>
 
     {{--@include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0])--}}
@@ -192,14 +192,14 @@
                             this.$validator.validate().then((result) => {
                                 if (result) {
                                     fullLoading();
-                                    axios.post('{{route("sales.orders.store",[aid(),isset($copy)  == false ? $form_type == "update" ? $order->id:0:0])}}', {
+                                    axios.post('{{route("purchases.orders.store",[aid(),isset($copy)  == false ? $form_type == "update" ? $order->id:0:0])}}', {
                                         form: this.form,
                                         items: Vuen.items
                                     })
                                         .then(function (response) {
                                             if (response.data.message) {
                                                 if (response.data.message == "success") {
-                                                    window.location.href = '/{{aid()}}/sales/orders/' + response.data.id + "/show";
+                                                    window.location.href = '/{{aid()}}/purchases/orders/' + response.data.id + "/show";
                                                     fullLoadingClose();
                                                 }
 

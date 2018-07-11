@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Companies;
 
 use App\Companies;
 use App\Model\Companies\Address;
+use App\Model\Finance\BankItems;
 use App\ProductImage;
 use App\TagData;
 use App\Tags;
@@ -17,14 +18,60 @@ class CompaniesController extends Controller
 {
     public function customer()
     {
-        return view("modules.companies.index", compact("companies", "type"));
+
+        $type="customer";
+        $route = "sales.companies.customer.data";
+        return view("modules.companies.index", compact("companies", "type","route"));
+
+
     }
 
-    public function customer_data($aid)
+    public function supplier()
     {
-        $companies = Companies::where("account_id",aid())->where("customer",1)->get();
+        $type="supplier";
+        $route = "purchases.companies.supplier.data";
+        return view("modules.companies.index", compact("companies", "type","route"));
+    }
+
+    public function customer_data($aid,$type)
+    {
+        $companies = Companies::where("account_id",aid())->where($type,1)->get();
 
         return Datatables::of($companies)
+            ->addColumn("balance",function($company){
+                return $company->balance."<br>".$company->money_status;
+            })
+            ->editColumn("company_name",function($company){
+                return "<span class='row-title'>".$company->company_name."</span><br>".$company->phone_number;
+            })
+            ->setRowAttr([
+                'style' => 'cursor:pointer',
+                'onclick' => function ($company) {
+                    return "redirect_company($company->id,0,".aid().")";
+                },
+            ])
+            ->rawColumns(["balance","company_name"])
+            ->make(true);
+    }
+
+    public function supplier_data($aid,$type)
+    {
+        $companies = Companies::where("account_id",aid())->where($type,1)->get();
+
+        return Datatables::of($companies)
+            ->addColumn("balance",function($company){
+                return $company->balance."<br>".$company->money_status;
+            })
+            ->editColumn("company_name",function($company){
+                return "<span class='row-title'>".$company->company_name."</span><br>".$company->phone_number;
+            })
+            ->setRowAttr([
+                'style' => 'cursor:pointer',
+                'onclick' => function ($company) {
+                    return "redirect_company($company->id,1,".aid().")";
+                },
+            ])
+            ->rawColumns(["balance","company_name"])
             ->make(true);
     }
 
@@ -32,12 +79,12 @@ class CompaniesController extends Controller
     {
         $company = $type != "new" ? Companies::find($id):"";
 
-        $company_type = $option == "Customer" ? "customer" : "supplier";
+        $company_type = $option == "customer" ? "customer" : "supplier";
         $form_type = $type == "new" ? "New" : "Update";
         return view("modules.companies.form", compact("form_type", "company_type","company"));
     }
 
-    public function store(Request $request, $id)
+    public function store($aid,Request $request, $id)
     {
 
         $company = Companies::updateOrCreate(
@@ -100,7 +147,7 @@ class CompaniesController extends Controller
     public function destroy($company_id, $id)
     {
         Companies::destroy($id);
-        ProductImage::where("product_id",$id)->delete();
+        BankItems::where("company_id",$id)->delete();
 
         flash()->overlay("Company deleted", 'Success')->success();
         sleep(1);
@@ -164,5 +211,71 @@ class CompaniesController extends Controller
     {
         $form_type = "new";
     return view("components.modals.companies_remote",compact("type","form_type"));
+    }
+
+    public function items($aid, $id)
+    {
+        $company = Companies::find($id);
+
+
+        $results = array();
+
+        $last_balance = 0;
+        $action_type = null;
+        $amount = 0;
+        foreach ($company->statement_list as $item) {
+
+            if ($item->pro_type == "sales_order") {
+                $amount = $item->grand_total;
+                $route=route("sales.orders.show",[aid(),$item->id]);
+                $last_balance = $last_balance + money_db_format($amount);
+                $action_type = "";
+            } else if ($item->pro_type == "purchase_order") {
+                $amount = $item->grand_total;
+                $route=route("purchases.orders.show",[aid(),$item->id]);
+                $last_balance = $last_balance - money_db_format($amount);
+                $action_type = "-";
+
+            } else if ($item->pro_type == "collect") {
+                $route=route("finance.accounts.receipt",[aid(),$item->id]);
+                $amount = $item->amount;
+                $last_balance = $last_balance-money_db_format($amount);
+                $action_type = "-";
+
+            } else if ($item->pro_type == "payment") {
+                $route=route("finance.accounts.receipt",[aid(),$item->id]);
+                $amount = $item->amount;
+                $last_balance = $last_balance+money_db_format($amount);
+                $action_type = "";
+
+            } else if ($item->pro_type == "buy_cheque") {
+                $route=route("finance.cheques.show",[aid(),$item->id]);
+                $amount = $item->amount;
+                $last_balance = $last_balance - money_db_format($amount);
+                $action_type = "-";
+
+            } else if ($item->pro_type == "sell_cheque") {
+                $route=route("finance.cheques.show",[aid(),$item->id]);
+                $amount = $item->amount;
+                $last_balance = $last_balance + money_db_format($amount);
+                $action_type = "";
+
+            }
+
+
+            $results[] =
+                array(
+                    "url" => $route,
+                    "type" => $item->type_text,
+                    "description" => $item->description,
+                    "date" => $item->date,
+                    "action_type" => $action_type,
+                    "amount" => $amount,
+                    "last_balance" => get_money($last_balance)
+                );
+        }
+
+        return $results;
+
     }
 }

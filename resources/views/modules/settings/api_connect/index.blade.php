@@ -23,7 +23,7 @@
 
                                 <fieldset>
                                     <legend>
-                                        N1 API BİLGİLERİ
+                                        N11 API BİLGİLERİ
                                     </legend>
 
                                 </fieldset>
@@ -131,6 +131,18 @@
                                         </div>
                                     </div>
                                 </fieldset>
+
+                            <fieldset>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6 ">
+                                            <label class="control-label">USER NAME</label>
+                                            <input type="password" class="form-control"  v-model="parasut_form.password">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
 
                                 <fieldset>
                                     <div class="form-group">

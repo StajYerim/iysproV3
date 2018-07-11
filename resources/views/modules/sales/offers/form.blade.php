@@ -109,6 +109,19 @@
                                     </fieldset>
                                 </div>
                                 @includeIf("components.external.rows",[$offer,$proccess_type = "sales"])
+                                <fieldset >
+
+                                    <div class="form-group " id="description_detail" style="    margin-top: -69px;">
+                                        <label class=" control-label" style="margin-left:15px">Detaylı
+                                            Açıklama</label><br>
+
+                                        <div class="col-md-6 ">
+
+                                            <textarea v-model="form.description_detail" class="textarea-100"></textarea>
+
+                                        </div>
+                                    </div>
+                                </fieldset>
                             </form>
 
 
@@ -123,12 +136,11 @@
             </div>
             <!-- WIDGET ROW END -->
         </div>
-        @include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0])
+
+        @include("components.modals.companies",[$option="customer",$title="New Company",$type = "new_company",$message="Company Form",$id=0])
 
     </section>
 
-    {{--@include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0])--}}
-    {{--@include("components.modals.products",[$title="New Product",$type = "new_product",$message="Product Form",$id=0])--}}
 
     @push("scripts")
 
@@ -137,6 +149,22 @@
             window.addEventListener("load", () => {
                 Vue.use(VueTheMask);
                 Vue.component('v-select', VueSelect.VueSelect);
+
+                detail = new Vue({
+                    el: "#description_detail",
+                    data: () => ({
+                        form:{
+                            description_detail:"{!! $form_type == "update" ?  str_replace( array( "\n", "\r" ), array( "\\n", "\\r" ), $offer->description_detail ):"" !!}"
+                        }
+                    }),
+                    watch:{
+                        "form.description_detail":function(last){
+                            console.log(last)
+                            VueName.form.description_detail = last
+                        }
+                    }
+                });
+
                 VueName = new Vue({
                     el: "#sales_offer",
                     data: () => ({
@@ -148,6 +176,7 @@
                             masked: false
                         },
                         form: {
+                            description_detail:  "{!! $form_type == "update" ? str_replace( array( "\n", "\r" ), array( "\\n", "\\r" ), $offer->description_detail ):"" !!}",
                             description: "{{$form_type == "update" ? $offer->description:""}}",
                             company_id: @if($form_type == "update") { id:'{{$offer->company["id"]}}',text:'{{$offer->company["company_name"]}}' } @else "" @endif,
                             date: "{{$form_type == "update" ? $offer->date:date_tr()}}",
@@ -163,8 +192,8 @@
 
                     mounted: function () {
                         money_per();
-                      datePicker();
-
+                        datePicker();
+                        autosize($('textarea'));
                     },
                     methods: {
                         addRow: function () {

@@ -1,28 +1,28 @@
-
+@if(auth()->user()->isAdmin() == false)
 function city_and_county() {
-    $('#city').devbridgeAutocomplete({
-        serviceUrl: '{{route("city.search",aid())}}',
-        minChars: 1,
-        autoSelectFirst: true,
-        onSelect: function (suggestion) {
+$('#city').devbridgeAutocomplete({
+serviceUrl: '{{route("city.search",aid())}}',
+minChars: 1,
+autoSelectFirst: true,
+onSelect: function (suggestion) {
 
-        },
+},
 
 
-    });
+});
 
-    $('#county').devbridgeAutocomplete({
-        serviceUrl: '{{route("county.search",aid())}}',
-        minChars: 1,
-        autoSelectFirst: true,
-        onSelect: function (suggestion) {
-            $('#city').val(suggestion.city);
-        },
-        formatResult: function (suggestion, currentValue) {
-            return suggestion.value + ' (' + suggestion.city + ')';
-        },
+$('#county').devbridgeAutocomplete({
+serviceUrl: '{{route("county.search",aid())}}',
+minChars: 1,
+autoSelectFirst: true,
+onSelect: function (suggestion) {
+$('#city').val(suggestion.city);
+},
+formatResult: function (suggestion, currentValue) {
+return suggestion.value + ' (' + suggestion.city + ')';
+},
 
-    });
+});
 
 }
 
@@ -61,3 +61,4 @@ cache: true,
 }
 
 
+@endif

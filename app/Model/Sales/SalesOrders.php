@@ -3,6 +3,7 @@
 namespace App\Model\Sales;
 
 use App\Companies;
+use App\Currency;
 use App\Model\Finance\BankItems;
 use App\Model\Finance\Cheques;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +27,7 @@ class SalesOrders extends Model
 
     public function getDescriptionsAttribute()
     {
-        return $this->description == null ? "Satış Siparişi" : $this->description;
+        return $this->description == null ? "SATIŞ SİPARİŞİ" : $this->description;
     }
 
     public function setDateAttribute($value)
@@ -36,9 +37,14 @@ class SalesOrders extends Model
 
     public function getDateAttribute()
     {
-        $explode = explode("-", $this->attributes["date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["date"]);
         return $dt->format("d.m.Y");
+    }
+
+    public function getDatemAttribute()
+    {
+        return $this->attributes["date"];
     }
 
     public function setDueDateAttribute($value)
@@ -48,8 +54,7 @@ class SalesOrders extends Model
 
     public function getDueDateAttribute()
     {
-        $explode = explode("-", $this->attributes["due_date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["due_date"]);
         return $dt->format("d.m.Y");
     }
 
@@ -135,5 +140,24 @@ class SalesOrders extends Model
          }else{
              return "KISMİ ÖDENDİ";
          }
+    }
+
+    public function getCurrencyIconAttribute(){
+
+        return  currency_symbol($this->currency);
+
+    }
+
+    public function getCurrencyNameAttribute(){
+        $currencies = Currency::All();
+        foreach($currencies as $cur){
+            if(strtoupper($cur->code) === strtoupper($this->currency)){
+                return strtoupper($cur->name);
+            }
+        }
+    }
+
+    public function offer(){
+        return  $this->hasOne(SalesOffers::class,"id","sales_offer_id");
     }
 }

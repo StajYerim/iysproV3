@@ -17,9 +17,9 @@
                                 <fieldset class="fixed-title">
                                     <div class="form-group" :class="{'has-error': errors.has('form.company_name') }">
                                         <label class="col-md-3 control-label"> <span
-                                                    style="vertical-align: -9px;">{{trans('general.customer')}} {{trans("general.name") }}</span></label>
+                                                    style="vertical-align: -9px;">{{$company_type}} {{trans("general.name") }}</span></label>
                                         <div class="col-md-3 pull-right">
-                                            <a href="{{$form_type == "new" ? route("sales.companies.customer",aid()): URL::previous() }}"
+                                            <a href="{{$form_type == "new" ? route($company_type=="customer"?"sales.companies.customer":"purchases.companies.supplier",aid()): URL::previous() }}"
                                                class="btn btn-default btn-lg ">{{trans("general.back")}}
                                             </a>
                                             <button type="submit" href="#" class="btn btn-success btn-lg ">
@@ -257,7 +257,7 @@
                                         .then(function (response) {
                                             if(response.data.message){
                                             if(response.data.message == "success"){
-                                               window.location.href = '/{{aid()}}/sales/{{$company_type}}/'+response.data.id;
+                                               window.location.href = '/{{aid()}}/{{$company_type=="customer" ? "sales":"purchases"}}/{{$company_type}}/'+response.data.id+'/show';
                                            }else{
                                                 fullLoadingClose();
                                                 notification("Error", response, "danger");

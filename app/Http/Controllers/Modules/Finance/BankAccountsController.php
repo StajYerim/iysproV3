@@ -10,6 +10,7 @@ use App\Model\Finance\BankAccounts;
 
 use App\Model\Finance\BankItems;
 use App\Model\Finance\Cheques;
+use App\Model\Purchases\PurchaseOrders;
 use App\Model\Sales\SalesOrders;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
@@ -48,7 +49,6 @@ class BankAccountsController extends Controller
 
     public function store($aid, $id, Request $request)
     {
-
 
         $account = BankAccounts::updateOrCreate(["id" => $id],
             [
@@ -125,6 +125,7 @@ class BankAccountsController extends Controller
         return $results;
     }
 
+    //Banka/Kasa hesapları arasında para giriş-çıkış işleminin yapılması
     public function transaction($aid, $id, Request $request)
     {
         $account = BankAccounts::find($id);
@@ -176,6 +177,7 @@ class BankAccountsController extends Controller
 
     }
 
+    //Sipariş alanından alınan nakit tahsilat
     public function global_transaction($aid, Request $request)
     {
 
@@ -204,6 +206,43 @@ class BankAccountsController extends Controller
 
 
         $remaining = $orders->remaining;
+        $balance = $orders->company->balance;
+
+        $action = array("id" => $detail->id, "bank_account" => $account->name, "amount" => $detail->amount, "date" => $detail->date);
+        return ["message" => "success", "balance"=>$balance,"remaining" => $remaining, "collect_items" => $action];
+
+
+    }
+
+    //Alış siparişinin nakit ile ödemesinin yapılması
+    public function transaction_payment($aid, Request $request)
+    {
+
+        $account = BankAccounts::find($request->bank_account_id);
+
+        $orders = PurchaseOrders::find($request->doc_id);
+
+        $detail = $account->items()->save(new BankItems([
+            "type" => $request->type,
+            "company_id" => $orders->company["id"],
+            "date" => $request->date,
+            "amount" => $request->amount,
+            "description" => $request->description,
+            "action_type" => 0,
+            "doc_id" => null
+        ]));
+
+
+        Bankabble::create([
+            "bank_items_id" => $detail->id,
+            "bankabble_id" => $request->doc_id,
+            "bankabble_type" => $request->bankabble_type,
+            "amount" => $request->amount]);
+
+        $able = Bankabble::where("bankabble_id", $request->doc_id)->where("bankabble_type", $request->bankabble_type)->sum("amount");
+
+
+        $remaining = $orders->remaining;
 
         $action = array("id" => $detail->id, "bank_account" => $account->name, "amount" => $detail->amount, "date" => $detail->date);
         return ["message" => "success", "remaining" => $remaining, "collect_items" => $action];
@@ -211,7 +250,13 @@ class BankAccountsController extends Controller
 
     }
 
-
+    /**
+     * müşteri profilinden yapılan tahsilat/ödemeler
+     * collect -> nakit tahsilat
+     * cheque_collect -> çek ile tahsilat
+     * payment -> nakit ödeme
+     * cheqye_payment -> çek ile ödeme
+     */
     public function transaction_company($aid, Request $request)
     {
 
@@ -267,7 +312,8 @@ class BankAccountsController extends Controller
             return ["message" => "success", "remaining" => $company->balance];
 
 
-        } else if ($request->type = "cheque_collect") {
+        }
+        else if ($request->type == "cheque_collect") {
 
             $company = Companies::find($request->company_id);
 
@@ -287,19 +333,18 @@ class BankAccountsController extends Controller
 
             $cek_tutari = money_db_format($cheq->amount);
 
-
             foreach ($company->open_orders as $order) {
-
                 //Çek tutarı Faturanın son bakiyesinden yüksek veya eşit ise her halükarda
                 //Faturanın toplam tutarı ödenmiş sayılacak.
+
                 if ($cek_tutari >= money_db_format($order->remaining)) {
+
                     Bankabble::create([
                         "cheques_id" => $cheq->id,
                         "bankabble_type" => "App\Model\Sales\SalesOrders",
                         "bankabble_id" => $order->id,
                         "amount" => $order->remaining,
                     ]);
-
                     $cek_tutari -= money_db_format($order->remaining);
 
                 } else {
@@ -318,11 +363,162 @@ class BankAccountsController extends Controller
             }
 
             return ["message" => "success", "remaining" => $company->balance];
+
+        }
+        else if($request->type == "payment"){
+            //Firmaya yapılan ödeme
+            $company = Companies::find($request->doc_id);
+            $account = BankAccounts::find($request->bank_account_id);
+
+            $detail = $account->items()->save(new BankItems([
+                "type" => $request->type,
+                "company_id" => $company->id,
+                "date" => $request->date,
+                "amount" => $request->amount,
+                "description" => $request->description,
+                "action_type" => 0,
+                "doc_id" => null
+            ]));
+
+            $odeme_tutari = money_db_format($detail->amount);
+
+
+            foreach ($company->popen_orders as $order) {
+
+                //Çek tutarı Faturanın son bakiyesinden yüksek veya eşit ise her halükarda
+                //Faturanın toplam tutarı ödenmiş sayılacak.
+                if ($odeme_tutari >= money_db_format($order->remaining)) {
+
+                    Bankabble::create([
+                        "bank_items_id" => $detail->id,
+                        "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                        "bankabble_id" => $order->id,
+                        "amount" => $order->remaining,
+                    ]);
+
+                    $odeme_tutari -= money_db_format($order->remaining);
+
+                } else {
+
+                    //Çek tutarı Faturanın son bakiyesinden yüksek veya eşit değil ise altındadır.
+                    //Bu nedenle çek tutarı ne kadar ise o kadarı bu fatura için ödenecektir.
+                    Bankabble::create([
+                        "bank_items_id" => $detail->id,
+                        "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                        "bankabble_id" => $order->id,
+                        "amount" => get_money($odeme_tutari),
+                    ]);
+
+                    break;
+
+                }
+
+            }
+
+            return ["message" => "success", "remaining" => $company->balance];
+
+        }
+        else if($request->type =="cheque_payment"){
+
+
+            $company = Companies::find($request->company_id);
+
+            if($request->cheque_type  == 0){
+
+                $cheq = Cheques::create([
+                "account_id" => aid(),
+                "bank_id" => $request->cheque_bank_id,
+                "transfer_company_id" => $company->id,
+                "type" => 0,
+                "date" => $request->date,
+                "payment_date" => $request->payment_date,
+                "amount" => $request->amount,
+                "status" => 2
+            ]);
+
+                $cek_tutari = money_db_format($cheq->amount);
+
+                foreach ($company->popen_orders as $order) {
+                    //Çek tutarı Faturanın son bakiyesinden yüksek veya eşit ise her halükarda
+                    //Faturanın toplam tutarı ödenmiş sayılacak.
+
+                    if ($cek_tutari >= money_db_format($order->remaining)) {
+
+                        Bankabble::create([
+                            "cheques_id" => $cheq->id,
+                            "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                            "bankabble_id" => $order->id,
+                            "amount" => $order->remaining,
+                        ]);
+                        $cek_tutari -= money_db_format($order->remaining);
+
+                    } else {
+                        //Çek tutarı Faturanın son bakiyesinden yüksek veya eşit değil ise altındadır.
+                        //Bu nedenle çek tutarı ne kadar ise o kadarı bu fatura için ödenecektir.
+                        Bankabble::create([
+                            "cheques_id" => $cheq->id,
+                            "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                            "bankabble_id" => $order->id,
+                            "amount" => get_money($cek_tutari),
+                        ]);
+                        break;
+
+                    }
+
+                }
+
+                return ["message" => "success", "remaining" => $company->balance];
+
+            }else{
+
+                $cheq = Cheques::find($request->cheques_id);
+                $cheq->update(["transfer_company_id"=>$company->id,"status"=>2]);
+
+                $cek_tutari = money_db_format($cheq->amount);
+
+                foreach ($company->popen_orders as $order) {
+                    //Çek tutarı Faturanın son bakiyesinden yüksek veya eşit ise her halükarda
+                    //Faturanın toplam tutarı ödenmiş sayılacak.
+
+                    if ($cek_tutari >= money_db_format($order->remaining)) {
+
+                        Bankabble::create([
+                            "cheques_id" => $cheq->id,
+                            "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                            "bankabble_id" => $order->id,
+                            "amount" => $order->remaining,
+                        ]);
+                        $cek_tutari -= money_db_format($order->remaining);
+
+                    } else {
+                        //Çek tutarı Faturanın son bakiyesinden yüksek veya eşit değil ise altındadır.
+                        //Bu nedenle çek tutarı ne kadar ise o kadarı bu fatura için ödenecektir.
+                        Bankabble::create([
+                            "cheques_id" => $cheq->id,
+                            "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
+                            "bankabble_id" => $order->id,
+                            "amount" => get_money($cek_tutari),
+                        ]);
+                        break;
+
+                    }
+
+                }
+
+                return ["message" => "success", "remaining" => $company->balance];
+
+
+            }
+
+
+
+
         }
 
 
     }
 
+    //Satış siparişi alanında çek ile tahsilat yapılması
     public function transaction_cheque($aid, Request $request)
     {
 
@@ -331,7 +527,7 @@ class BankAccountsController extends Controller
 
         $detail = $account->items()->save(new BankItems([
             "type" => $request->type,
-            "cheque_id" => $cheq->cheque_id,
+            "cheque_id" => $request->cheque_id,
             "date" => $request->date,
             "amount" => $cheq->amount,
             "action_type" => 1,
@@ -343,6 +539,7 @@ class BankAccountsController extends Controller
 
     }
 
+    //Banka/Kasa hesap fişinin silinmesi
     public function receipt_destroy($aid, $id)
     {
         BankItems::destroy($id);

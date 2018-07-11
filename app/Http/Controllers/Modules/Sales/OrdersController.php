@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Modules\Sales;
 
 use App\Bankabble;
+use App\Language;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
+use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -48,14 +50,16 @@ class OrdersController extends Controller
         if($form_type == "offers"){
             $order = $id == 0 ? "" : SalesOffers::find($id);
             $form_type = "update";
+            $offer_id = $id;
             $order->due_date = $order->date;
             $copy = 0;
 
         }else{
             $order = $id == 0 ? "" : SalesOrders::find($id);
+            $offer_id = null;
         }
 
-        return view("modules.sales.orders.form", compact("form_type", "order","copy"));
+        return view("modules.sales.orders.form", compact("form_type", "order","copy","id","offer_id"));
 
     }
 
@@ -65,6 +69,7 @@ class OrdersController extends Controller
 
 
         $order = SalesOrders::updateOrCreate(["id" => $id], [
+            "sales_offer_id"=>$request->form["sales_offer_id"],
             "description" => $request->form["description"],
             "company_id" => $request->form["company_id"]["id"],
             "date" => $request->form["date"],
@@ -112,9 +117,29 @@ class OrdersController extends Controller
 
     public function show($aid, $id)
     {
-        $order = SalesOrders::find($id);
 
-        return view("modules.sales.orders.show", compact("order"));
+
+        $order = SalesOrders::find($id);
+        $langs = Language::All();
+
+        return view("modules.sales.orders.show", compact("order","langs"));
+    }
+
+    public function pdf($aid, $id,$type,$lang)
+    {
+
+
+        if($type=="url"){
+            $order = SalesOrders::find($id);
+            $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order","lang"))->setPaper('A4');
+            return $pdf->stream();
+        }else{
+            $order = SalesOrders::find($id);
+            $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order","lang"))->setPaper('A4');
+            return   $pdf->download($order->company["company_name"].' ('.$order->description.').pdf');
+        }
+
+
     }
 
     public function destroy($aid, $id)

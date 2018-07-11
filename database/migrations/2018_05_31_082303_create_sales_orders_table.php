@@ -16,7 +16,6 @@ class CreateSalesOrdersTable extends Migration
         Schema::create('sales_orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer("account_id")->unsigned();
-            $table->integer("sales_offer_id")->nullable();
             $table->string('description')->nullable();
             $table->integer("company_id")->unsigned();
             $table->string("currency");
@@ -26,8 +25,8 @@ class CreateSalesOrdersTable extends Migration
             $table->decimal('grand_total',12,2);
             $table->decimal('discount_value',12,2)->nullable();
             $table->integer('discount_type')->nullable();
-            $table->date('date');
-            $table->date('due_date')->nullable();
+            $table->datetime('date');
+            $table->datetime('due_date')->nullable();
             $table->foreign("account_id")->on("app_accounts")->references("id")->onDelete("cascade");
             $table->foreign("company_id")->on("company_list")->references("id")->onDelete("cascade");
             $table->timestamps();

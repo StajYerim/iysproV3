@@ -19,9 +19,10 @@ Route::group(['prefix'=>'{company_id}/finance','middleware'=>'not.admin'],functi
 
     //Accounts->Transactions
     Route::post("accounts/{id}/items","Modules\Finance\BankAccountsController@items")->name("finance.accounts.items");
-    Route::post("accounts/{id}/transaction","Modules\Finance\BankAccountsController@transaction")->name("finance.accounts.transaction");
-    Route::post("accounts/global-transaction","Modules\Finance\BankAccountsController@global_transaction")->name("finance.accounts.global_transaction");
-    Route::post("accounts/transaction-company","Modules\Finance\BankAccountsController@transaction_company")->name("finance.accounts.transaction_company");
+    Route::post("accounts/{id}/transaction","Modules\Finance\BankAccountsController@transaction")->name("finance.accounts.transaction");//Accounts to Account
+    Route::post("accounts/global-transaction","Modules\Finance\BankAccountsController@global_transaction")->name("finance.accounts.global_transaction");//Orders Transaction
+    Route::post("accounts/transaction-payment","Modules\Finance\BankAccountsController@transaction_payment")->name("finance.accounts.transaction_payment");//Orders Transaction
+    Route::post("accounts/transaction-company","Modules\Finance\BankAccountsController@transaction_company")->name("finance.accounts.transaction_company");//Company Transaction
     Route::post("accounts/transaction-cheque","Modules\Finance\BankAccountsController@transaction_cheque")->name("finance.accounts.cheque");
 
 

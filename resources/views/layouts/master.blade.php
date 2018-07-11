@@ -20,7 +20,7 @@
     <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/smartadmin-rtl.min.css")}}">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/iys.css")}}"> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/iys.css")}}"> &nbsp;
 
     <!-- FAVICONS -->
     <link rel="shortcut icon" href="{{asset("img/favicon/favicon.ico")}}" type="image/x-icon">
@@ -86,14 +86,17 @@
         Vue.use(VeeValidate);
     </script>
     @stack("style")
-<body style="text-transform:uppercase;color:#7b7b7b" class="fixed-header fixed-navigation">
+<body style="color:#7b7b7b" class="fixed-header ">
 @include("layouts.header")
+
 @include("layouts.sidebar")
+
 @include("layouts.main")
+
 @include("layouts.footer")
 @include("layouts.shourcut")
 @include("layouts.scripts")
-@include('flash::message')
+
 <script>
 
 </script>

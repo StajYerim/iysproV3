@@ -11,7 +11,7 @@ class Menu extends Model
     public $timestamps = false;
 
     public function submenu() {
-        return $this->hasMany(Menu::class, 'parent_id', 'id');
+        return $this->hasMany(Menu::class, 'parent_id', 'id')->orderBy("order","asc");
     }
 
     public function desc(){

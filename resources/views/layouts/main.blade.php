@@ -3,6 +3,7 @@
     @include("layouts.ribbon")
     <!-- MAIN CONTENT -->
         <div id="content" >
+            @include('flash::message')
 @yield("content")
         </div>
 </div>

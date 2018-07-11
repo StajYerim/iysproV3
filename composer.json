@@ -15,8 +15,10 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
         "laravelista/ekko": "^1.5",
+        "liebig/cron": "dev-master",
         "mayoz/parasut": "^1.0",
         "spatie/laravel-translation-loader": "^2.1",
+        "studio/laravel-totem": "^3.2",
         "teknomavi/tcmb": "dev-master",
         "yajra/laravel-datatables": "^1.0",
         "yajra/laravel-datatables-oracle": "~8.0"

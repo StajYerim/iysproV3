@@ -43,9 +43,10 @@ class SalesOrderItems extends Model
     }
 
     public function getTerminDateAttribute(){
-        $explode = explode("-", $this->attributes["termin_date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+        if($this->attributes["termin_show"] != null){
+            $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["termin_date"]);
         return $dt->format("Y-m-d");
+        }
     }
 
     public function getPriceAttribute(){
@@ -62,5 +63,10 @@ class SalesOrderItems extends Model
 
     public function unit(){
         return $this->hasOne(Units::class,"id","unit_id");
+    }
+
+    public function getOnlyPriceAttribute()
+    {
+        return get_money(money_db_format($this->price)*money_db_format($this->quantity));
     }
 }

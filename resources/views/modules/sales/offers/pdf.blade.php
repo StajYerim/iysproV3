@@ -1,4 +1,7 @@
-<!doctype html>
+@php
+app()->setLocale($lang);
+ @endphp
+        <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -107,7 +110,6 @@
                                         <b style="line-height: 12px;">{!! account()["name"]!!}</b><br>
                                         <span style="line-height:12px;font-size:10px;">
                                             {!! str_replace("\n","<br>",account()["address"]) !!} {!! account()["town"] !!}/{!! account()["city"] !!}
-
                                             <br>V.D ve No {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>Telefon {!! account()["phone"] !!}<br>
 
                                     </span>
@@ -123,7 +125,7 @@
                 <span style="text-align:center"><h2>PROFORMA FATURA / TEKLİF </h2></span>
                 <span style="float:left"><b style="font-size:15px;">
                         {{$offer->company["company_name"]}}
-                    </b> <span style="float:right" >Tarih:
+                    </b> <span style="float:right" >{{trans("general.date")}}:
                         {{$offer->date}}
                     </span></span>
                 @if($offer->description)  <br>
@@ -138,7 +140,7 @@
                 ÜRÜN/HİZMET
             </td>
             <td  style="text-align: right;width:60px" >
-                MİKTAR
+                {{trans("general.quantity")}}
             </td>
             <td style="text-align: right;width:120px">
                 BİRİM FİYAT
@@ -163,13 +165,13 @@
         @forelse($offer->items as $off)
             <tr class="item" style="font-size:12px;font-weight: 600">
                 <td  style="text-align: left;">
-                    {{$off->product["name"]}}
+                   {{$off->product->lang($off->product["id"], $lang)}}
                 </td>
                 <td  style="text-align: right;">
                     {{$off->quantity}} {{$off->unit["name"]}}
                 </td>
                 <td  style="text-align: right;">
-                    {{$off->price}}  <span style="text-transform: uppercase">{{$offer->currency}}</span>
+                    {{$off->price}}  <span style="text-transform: uppercase">{!! $offer->currency_icon!!}</span>
                 </td>
                 {{--@if($offer->Items->sum("OfferItemDiscount") > 0)--}}
                     {{--<td  style="text-align: right;">--}}
@@ -183,7 +185,7 @@
                     %{{$off->vat}}
                 </td>
                 <td  style="text-align: right;">
-                    {{$off->only_price}} <span style="text-transform: uppercase">{{$offer->currency}}</span>
+                    {{$off->only_price}} <span style="text-transform: uppercase">{!! $offer->currency_icon !!}</span>
                 </td>
             </tr>
             @if($off->note)
@@ -202,7 +204,7 @@
 
     </table>
     <br>
-    <table style="text-transform: uppercase"">
+    <table style="text-transform: uppercase">
 
         <tr class="total">
             <td></td>
@@ -215,7 +217,7 @@
                 TOPLAM:
             </td>
             <td colspan="1" style="text-align: right">
-                {{$offer->sub_total}} {{$offer->currency}}
+                {{$offer->sub_total}} {!! $offer->currency_icon!!}
             </td>
         </tr>
         {{--@if($offer->Items->sum("OfferItemDiscount") > 0)--}}
@@ -246,10 +248,10 @@
 
             </td>
             <td colspan="1" style="text-align: right">
-                <div style=";font-size:10px;">   @if(KdvTotal($offer->items,1) > 0)  {{KdvTotal($offer->items,1)}} {{$offer->currency}}<br>@endif
-                @if(KdvTotal($offer->items,8) > 0) {{KdvTotal($offer->items,8)}} {{$offer->currency}}<br>@endif
-                @if(KdvTotal($offer->items,18) > 0){{KdvTotal($offer->items,18)}} {{$offer->currency}}<br>@endif  </div>
-                {{$offer->vat_total}} {{$offer->currency}}
+                <div style=";font-size:10px;">   @if(KdvTotal($offer->items,1) > 0)  {{KdvTotal($offer->items,1)}} {!! $offer->currency_icon!!}<br>@endif
+                @if(KdvTotal($offer->items,8) > 0) {{KdvTotal($offer->items,8)}} {!! $offer->currency_icon!!}<br>@endif
+                @if(KdvTotal($offer->items,18) > 0){{KdvTotal($offer->items,18)}} {!! $offer->currency_icon!!}<br>@endif  </div>
+                {{$offer->vat_total}} {!! $offer->currency_icon!!}
 
             </td>
         </tr>
@@ -262,12 +264,12 @@
                 GENEL TOPLAM:
             </td>
             <td colspan="1" style="text-align: right;width:120px;">
-                {{$offer->grand_total}} {{$offer->currency}}
+                {{$offer->grand_total}} {!! $offer->currency_icon!!}
             </td>
         </tr>
     </table>
     <br>
-    <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2, $offer->currency, "KRŞ", "", null, null, null)}}
+    <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2, $offer->currency_name, "KRŞ", "", null, null, null)}}
     </span>
     <br><br><br>
     {{--{!! $logo->endText !!}--}}

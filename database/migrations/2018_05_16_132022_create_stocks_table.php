@@ -21,7 +21,7 @@ class CreateStocksTable extends Migration
             $table->integer('status')->comment("0-Giriş 1-Çıkış");
             $table->integer('receipt_id')->nullable()->comment("Fiş Türleri -> Giriş İrsaliyesi > Çıkış İrsaliyesi");
             $table->string('description')->nullable();
-            $table->date('date')->nullable();
+            $table->datetime('date')->nullable();
             $table->foreign('account_id')
                 ->references('id')->on('app_accounts')
                 ->onDelete('cascade');

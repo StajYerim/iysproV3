@@ -55,6 +55,7 @@
 <!-- SmartChat UI : plugin -->
 <script src="{{asset("js/smart-chat-ui/smart.chat.ui.min.js")}}"></script>
 <script src="{{asset("js/smart-chat-ui/smart.chat.manager.min.js")}}"></script>
+<script src="{{asset("js/autosize/autosize.min.js")}}"></script>
 <script type="text/javascript" src="/js/plugin/moment/moment.min.js"></script>
 <script type="text/javascript" src="/js/autocomplete/scripts/jquery.mockjax.js"></script>
 <script type="text/javascript" src="/js/autocomplete/src/jquery.autocomplete.js"></script>

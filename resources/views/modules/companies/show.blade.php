@@ -36,7 +36,7 @@
                                         TAHSİLAT EKLE</a>
                                 </li>
                                 <li>
-                                    <a href="#!"  data-toggle="modal" data-target="#transaction"><i
+                                    <a href="#!"  data-toggle="modal" data-target="#transaction_payment"><i
                                                 class="fa fa-edit" aria-hidden="true"></i>
                                         ÖDEME EKLE</a>
                                 </li>
@@ -103,6 +103,7 @@
                                                 <div class="col-sm-2"><span  v-on:click="detail()"  class="pull-right" style="cursor:pointer;">@{{ detail_name }}</span>
                                                 </div>
                                             </div>
+
                                             <div style="display:none" v-show="details" class="col-12"><br>
                                                 <hr>
                                                 <div class=" col-sm-9">
@@ -175,30 +176,29 @@
                                             </div>
 
                                         </div>
-
                                         <hr>
 
 
                                         <table class="table table-striped table-condensed table-hover smart-form ">
                                             <thead>
                                             <tr>
-                                                <th>İŞLEM TÜRÜ</th>
-                                                <th>AÇIKLAMA</th>
-                                                <th>İŞLEM TARİHİ</th>
-                                                <th>MEBLAĞ</th>
-                                                <th>BAKİYE</th>
+                                                <th width="15%">İŞLEM TÜRÜ</th>
+                                                <th width="30%">AÇIKLAMA</th>
+                                                <th width="10%">İŞLEM TARİHİ</th>
+                                                <th width="10%">MEBLAĞ</th>
+                                                <th width="10%">BAKİYE</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($company->statement as $stat)
-                                            <tr>
-                                                <td></td>
-                                                <td>{{$stat->description}}</td>
-                                                <td>{{$stat->date}}</td>
-                                                <td>{{$stat->amount}} {{ $stat->grand_total}}</td>
-                                                <td>{{money_db_format($company->balance)}}</td>
+
+                                            <tr v-for="item in reverseItems " style="cursor:pointer" @click="redirect(item.url)">
+                                                <td>@{{item.type}}</td>
+                                                <td>@{{item.description}}</td>
+                                                <td>@{{item.date}}</td>
+                                                <td>@{{ item.action_type }} @{{item.amount}}</td>
+                                                <td>@{{item.last_balance}}</td>
                                             </tr>
-                                                @endforeach
+
 
                                             </tbody>
                                         </table>
@@ -230,12 +230,6 @@
 
 
                                         <div id="short_info" class="col-12">
-                                            {{--<div class="row">--}}
-                                                {{--<div class="col-sm-12">--}}
-                                                    {{--GECİKMİŞ TAHSİLAT <span class="pull-right">2.500,00</span>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<hr>--}}
 
                                             <div class="row">
                                                 <div class="col-sm-12 bottom-info" >
@@ -280,20 +274,39 @@
 
     </section>
     @include("components.external.transaction",[$type="collect",$local="company",$detail = $company,$abble="App\\\Model\\\Sales\\\SalesOrders"])
-
+    @include("components.external.transaction_payment",[$type="payment",$local="company",$detail = $company,$abble="App\\\Model\\\Purchases\\\PurchaseOrders"])
 
     <!-- end widget grid -->
     @push('scripts')
         <script>
             window.addEventListener("load", () => {
-          VueName =  new Vue({
+                Vue.filter('reverse', function(value) {
+                    // slice to make a copy of array, then reverse the copy
+                    return value.slice().reverse();
+                });
+                VueName = new Vue({
                 el: "#show",
                 data: {
                     remaining:"{{$company->balance}}",
                     details: false,
-                    detail_name: 'TÜM BİLGİLER'
+                    detail_name: 'TÜM BİLGİLER',
+                    items: []
                 },
+                    mounted: function () {
+                       this.statement();
+                    },
+                    computed: {
+                        reverseItems() {
+                            return this.items.slice().reverse();
+                        }
+                    },
                 methods: {
+                    statement:function(){
+                        axios.post("{{route("company.items",[aid(),$company->id])}}")
+                            .then(response => {
+                                VueName.items = response.data
+                            })
+                    },
                     detail:function(){
                         if(this.details == false){
                             this.details = true;
@@ -303,6 +316,9 @@
                             this.details = false;
                             this.detail_name = "TÜM BİLGİLER"
                         }
+                    },
+                    redirect:function(url){
+                      return window.location.href = url;
                     },
                     delete_data:function($id){
                         fullLoading();
@@ -317,7 +333,9 @@
                         });
                     },
 
-                }
+
+                },
+
 
           });
             });

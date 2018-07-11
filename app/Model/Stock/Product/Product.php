@@ -86,6 +86,10 @@ class Product extends Model
 
     public function lang($id, $lang)
     {
+       if($lang == "en")
+       {
+           $lang = "us";
+       }
         $data = ProductDescriptions::where("product_id", $id)->where("lang_code", $lang)->first();
 
         if ($data == "[]") {

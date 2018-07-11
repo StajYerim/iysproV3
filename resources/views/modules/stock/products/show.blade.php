@@ -65,7 +65,7 @@
                                                             style="background:{{$product->category["color"]}}"> {{$product->category["name"]}} </span></div>
                                 <div class="col-lg-4" style="text-align:right"><img
                                             src="{{$product->images->last()["name"] == null ? "/img/noimage.gif":product_img_url($product->images->last()["name"])}}"
-                                            width="100px" height="100px;"></div>
+                                            width="135px" height="100px;"></div>
                                 <hr>
                             </div>
 

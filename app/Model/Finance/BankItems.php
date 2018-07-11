@@ -4,6 +4,7 @@ namespace App\Model\Finance;
 
 use App\Bankabble;
 use App\Companies;
+use App\Model\Purchases\PurchaseOrders;
 use App\Model\Sales\SalesOrders;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -30,9 +31,13 @@ class BankItems extends Model
 
     public function getDateAttribute()
     {
-        $explode = explode("-", $this->attributes["date"]);
-        $dt = Carbon::create($explode[0], $explode[1], $explode[2]);
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["date"]);
         return $dt->format("d.m.Y");
+    }
+
+    public function getDatemAttribute()
+    {
+     return $this->attributes["date"];
     }
 
     public function getContactAttribute()
@@ -59,6 +64,11 @@ class BankItems extends Model
         return $this->morphedByMany(SalesOrders::class, 'bankabble')->withPivot("amount");
     }
 
+    public function porders()
+    {
+        return $this->morphedByMany(PurchaseOrders::class, 'bankabble')->withPivot("amount");
+    }
+
     public function bankabble()
     {
         return $this->hasOne(Bankabble::class, "bank_items_id", "id");
@@ -67,12 +77,11 @@ class BankItems extends Model
     public function getRemainingAttribute()
     {
         $used = $this->orders->sum("pivot.amount");
+        $pused = $this->porders->sum("pivot.amount");
         $total = money_db_format($this->amount);
-
-        $general_total = get_money($total - $used);
+        $general_total = get_money($total - $used-$pused);
 
         return $general_total;
-
 
     }
 

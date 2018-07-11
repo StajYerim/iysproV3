@@ -4,7 +4,7 @@
     <section id="show" v-cloak>
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
-                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$order->description}}</span></h1>
+                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$order->descriptions}}</span></h1>
 
             </div>
             <div class="col-lg-4 col-sm-4">
@@ -48,22 +48,28 @@
                         <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
                                     class="fa fa-print"></span> YAZDIR <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
-                                            class="fa fa-print" aria-hidden="true"></i>
-                                    TEKLİFİ YAZDIR</a>
+                            <li class="dropdown-submenu">
+                                <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> SİPARİŞİ YAZDIR</a>
+                                <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
+                                    @foreach($langs as $lang)
+                                        <li><a tabindex="-1" target="_blank" href="{{route("sales.orders.pdf",[aid(),$order->id,"url",$lang->lang_code])}}"> <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
+                                    @endforeach
+                                </ul>
                             </li>
-                            <li>
-                                <a download="" href="http://demo.iyspro.com/salesmanager/sales-offer/8/printDown"
-                                   id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
-                                    TEKLİFİ İNDİR</a>
+                            <li class="dropdown-submenu">
+                                <a class="test" tabindex="-1" href="#">   <i class="fa fa-print" aria-hidden="true"></i> SİPARİŞİ İNDİR </a>
+                                <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
+                                    @foreach($langs as $lang)
+                                        <li><a tabindex="-1" target="_blank" href="{{route("sales.orders.pdf",[aid(),$order->id,"url",$lang->lang_code])}}" > <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
+                                    @endforeach
+                                </ul>
                             </li>
 
                         </ul>
 
                     </div>
 
-                    <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
+                    <a href="#" data-toggle="modal" data-target="#shareModal" class="btn btn-default"><i
                                 class="fa fa-envelope"></i> Paylaş</a>
 
                 </div>
@@ -144,15 +150,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        <div class="bottom-info">TOPLAM KDV</div>
-                                                    </td>
-                                                    <td style="text-align:right">
-                                                        <div class="bottom-info">{{$order->vat_total}} <i
-                                                                    class="fa fa-{{$order->currency}}"></i></div>
-                                                    </td>
-                                                </tr>
+
                                                 <tr v-for="vato in vat_only" class="trow"
                                                     v-if="vato.total!=0">
 
@@ -164,6 +162,15 @@
                                                     <td style="text-align:right">
                                                         <div class="bottom-info" style="font-size: 11px"><span
                                                                     id="total-vat-1">@{{ vato.total }}</span> <i
+                                                                    class="fa fa-{{$order->currency}}"></i></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="bottom-info">TOPLAM KDV</div>
+                                                    </td>
+                                                    <td style="text-align:right">
+                                                        <div class="bottom-info">{{$order->vat_total}} <i
                                                                     class="fa fa-{{$order->currency}}"></i></div>
                                                     </td>
                                                 </tr>
@@ -264,18 +271,20 @@
 
                                     <div class="col-sm-12">
                                         <div class="bottom-info">HESAP BAKİYESİ <span class="pull-right"
-                                                                                   style="font-size:15px;color:#2AC!important">{{$order->company->balance}}
+                                                                                   style="font-size:15px;color:#2AC!important">@{{ company_balance }}
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
                                 </div>
                               <hr>
                                 <div class="row">
+                                  @if($order->offer)
                                     <div class="col-sm-12">
                                        TEKLİFİ
                                         <br>
-                                        <a href=">!"> SATIŞ TEKLİFİ
-                                            &nbsp;(#22)</a><br>
+                                        <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? "SATIŞ TEKLİFİ":$order->offer["description"]}} (#{{$order->offer["id"]}})</a><br>
                                     </div>
+                                      @endif
+
 
                                 </div>
                             </div>
@@ -294,7 +303,12 @@
     </section>
     @include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])
 
-
+    @include("components.external.share",[
+    $title="Sipariş",
+    $thread="Satış Siparişi : ".$order->company["company_name"],
+    $message="Merhaba,<br>Satış Siparişi detaylarınız ektedir indirerek inceleyebilirsiniz.<br>İyi çalışmalar.<br><br><b>".account()["name"]."</b>",
+    $type="share.order",
+    $data = $order])
     @push('scripts')
         <script>
             window.addEventListener("load", () => {
@@ -303,6 +317,7 @@
                     data: {
 
                         remaining:"{{$order->remaining}}",
+                        company_balance:"{{$order->company->balance}}",
                         collect_items:[
                                 @foreach($order->payments as $pay)
                             {

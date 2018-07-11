@@ -57,7 +57,7 @@
     <div class="project-context hidden-xs">
 
         <span class="label"></span>
-        <span class="project-selector dropdown-toggle" data-toggle="dropdown">Recent projects </head>
+        <span class="project-selector dropdown-toggle" data-toggle="dropdown">Recent project </head>
             <i
                     class="fa fa-angle-down"></i></span>
         <!-- Suggestion: populate this list with fetch and push technique -->
@@ -140,7 +140,7 @@
                             class="fa fa-arrows-alt"></i></a> </span>
         </div>
         <!-- end fullscreen button -->
-      
+
         <!-- start settings button "only visible for account owner" -->
         @if(auth()->user()->role->id == 2)
         <ul class="header-dropdown-list hidden-xs">
@@ -156,12 +156,12 @@
 
                 <ul class="dropdown-menu pull-left">
          <!-- only owner can see this menu item -->
-                  
+
                   <li  class="">
                         <a href="{{route("settings.accounts.profile",aid())}}"><i class="fa fa-suitcase"></i> Company Profile</a>
                     </li>
          <!-- only owner can see this menu item -->
-                  
+
                   <li  class="">
                         <a href="{{route("settings.users.profile",[aid(),auth()->user()->id])}}"><i class="fa fa-user"></i> User Profile</a>
                     </li>
@@ -172,7 +172,9 @@
                     <li  class="">
                         <a href=""><i class="fa fa-cubes"></i> Applications</a>
                     </li>
-
+                    <li  class="">
+                        <a href="{{route("settings.users.index",aid())}}"><i class="fa fa-users"></i> Users</a>
+                    </li>
                     <li  class="">
                         <a href="{{route("settings.api.index",aid())}}"><i class="fa fa-retweet"></i> Api Info</a>
                     </li>
@@ -182,10 +184,10 @@
         </ul>
     @endif
               <!-- end settings button "only visible for account owner" -->
-      
+
         <!-- multiple lang dropdown : find all flags in the flags page -->
         <ul class="header-dropdown-list hidden-xs">
-            @php $locale = \App\Language::where("lang_code",app()->getLocale())->first(); @endphp
+            @php $locale = \App\Language::where("lang_id",auth()->user()->lang_id)->first();  @endphp
             <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="{{asset("img/blank.gif")}}"
                                                                                  class="flag flag-{{$locale->lang_code == "en" ? "us":$locale->lang_code}}"
@@ -197,7 +199,7 @@
                     @endphp
 
                     @foreach($langs as $lang)
-                        <li  @if($lang->lang_code == app()->getLocale()) class="active" @endif >
+                        <li  @if($lang->lang_id == auth()->user()->lang_id) class="active" @endif >
                             <a href="{{route("lang",$lang->lang_code)}}"><img src="{{asset("img/blank.gif")}}" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a>
                         </li>
                     @endforeach

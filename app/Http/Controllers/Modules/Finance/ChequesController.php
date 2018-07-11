@@ -26,7 +26,11 @@ class ChequesController extends Controller
                     return "product_update($cheq->id)";
                 },
             ])
+            ->editColumn("payment_date",function($cheq){
+                return $cheq->payment_date."<br><span class='note'>".$cheq->status_text."</span>";
+            })
             ->setRowClass("row-title")
+            ->rawColumns(["payment_date"])
             ->make(true);
     }
 
