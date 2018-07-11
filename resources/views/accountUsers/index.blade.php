@@ -12,7 +12,7 @@
                 <h2>   Account Users</h2>
                 <div class="pull-right">
 
-                    <a href="{{route("settings.users.create",aid())}}" >
+                    <a href="{{route("users.create",aid())}}" >
                         <span class="btn btn-success btn-sm">New Invite</span>
                     </a>
                 </div>

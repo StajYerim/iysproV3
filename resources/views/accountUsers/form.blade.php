@@ -96,6 +96,7 @@
                         </div>
                         {{-- Owner can not set permissions for himself --}}
                         @if(!isset($user) || auth()->id() != $user->id)
+                            @if(auth()->user()->role_id == 3)
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label text-md-right"></label>
 
@@ -103,6 +104,7 @@
                                 <button type="button" class="btn btn-danger" id="permission">PERMISSIONS</button>
                             </div>
                         </div>
+                            @endif
                         <hr>
 
 
@@ -146,6 +148,7 @@
 
 
     </article>
+
     @if(auth()->user()->role_id == 3)
 
         @php

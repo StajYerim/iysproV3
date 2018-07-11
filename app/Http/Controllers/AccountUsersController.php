@@ -33,6 +33,20 @@ class AccountUsersController extends Controller
         ]);
     }
 
+    public function users_index(Account $company)
+    {
+        // get authenticated user's company, then its users
+        $users = auth()->user()
+            ->memberOfAccount
+            ->users()
+            ->paginate(50);
+
+        // return view with users
+        return view('modules.settings.users.index', [
+            'users' => $users
+        ]);
+    }
+
     /**
      * Display listing of the resource for admin.
      *
@@ -126,10 +140,12 @@ class AccountUsersController extends Controller
 
     public function invite_store(Request $request,$aid)
     {
+
+
         $company =  Account::find(aid());
 
         // Validate user's input
-        $validated = $request->validate([
+            $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'mobile' => 'nullable|string|max:255',
@@ -145,11 +161,11 @@ class AccountUsersController extends Controller
             'lang_id' => $validated['language'],
             'role_id' => Role::USER,
             'account_id' => $company->id,
-            "permission"=> "[1]",
+            "permissions"=> "[1]",
             'confirmation_code' => str_random(32)
         ]);
 
-        // store chosen permissions for user
+//         store chosen permissions for user
         UserPermission::create([
             'user_id' => $user->id,
             'permission_id' => $validated['company_access'],
@@ -159,7 +175,7 @@ class AccountUsersController extends Controller
         event(new UserIsInvited($user));
 
         // redirect back
-        return redirect(User::getIndexRoute());
+        return redirect(route("settings.users.index",aid()));
     }
 
     public function permission_update (Request $request, $aid,$id)
@@ -224,7 +240,15 @@ class AccountUsersController extends Controller
             'company' => $company
         ]);
     }
-
+    public function user_edit($aid,$id)
+    {
+        $user = User::where("account_id",aid())->where("id",$id)->first();
+        // return view with user
+        return view('modules.settings.users.form', [
+            'languages' => Language::all(),
+            'user' => $user,
+        ]);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -273,7 +297,32 @@ class AccountUsersController extends Controller
         flash('User is updated.')->success();
         return redirect(User::getIndexRoute());
     }
+    public function user_update(Request $request,$aid,$id)
+    {
+       $user = User::where("account_id",aid())->where("id",$id)->first();
 
+        // Validate user's input
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
+            'mobile' => 'nullable|string|max:255',
+            'language' => 'required|exists:app_languages,lang_id',
+            'company_access' => 'nullable|exists:permissions,id'
+        ]);
+
+        // update user info
+        $user->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'mobile' => $validated['mobile'] ?: Null,
+            'lang_id' => $validated['language'],
+        ]);
+
+
+
+        flash('User is updated.')->success();
+        return redirect(route("settings.users.index",aid()));
+    }
     /**
      * Remove the specified resource from storage.
      *

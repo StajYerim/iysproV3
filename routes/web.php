@@ -28,7 +28,7 @@ Route::post('/activation/{code}', 'Auth\RegisterController@activateWithPassword'
 // Allows authenticated users to visit
 Route::middleware('auth')->group(function() {
     Route::get('/', 'Auth\LoginController@redirect');
-    Route::resource('/{company}/users', 'AccountUsersController', ['only' => ['edit', 'update']]);
+    Route::resource('/users', 'AccountUsersController', ['only' => ['edit', 'update']]);
     Route::get('/users/invite/new', 'AccountUsersController@create')->name('users.create');
     Route::post('/users', 'AccountUsersController@store')->name('users.store');
 
@@ -69,10 +69,14 @@ Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
 
     Route::get('dashboard', 'HomeController@index')->name('dashboard');
     Route::get('company-profile', 'AccountsController@profile')->name('company.profile');
-    Route::get('user-list', 'AccountUsersController@index')->name('settings.users.index');
+
     Route::post("user/{id}/permission/update","AccountUsersController@permission_update")->name("settings.users.permission.update");
+
     Route::get('/users/invite/new', 'AccountUsersController@invite_create')->name('settings.users.create');
-    Route::get('/users/invite/store', 'AccountUsersController@invite_store')->name('settings.users.store');
+    Route::get('user-list', 'AccountUsersController@users_index')->name('settings.users.index');
+    Route::get('/users/{id}/edit', 'AccountUsersController@user_edit')->name('settings.users.edit');
+    Route::any('/users/{id}/update', 'AccountUsersController@user_update')->name('settings.users.update');
+    Route::post('/users/invite/store', 'AccountUsersController@invite_store')->name('settings.users.store');
 
     //App all settings
     Route::get('settings', 'SettingsManager\SettingsManagerController@index')->name('settings.index');

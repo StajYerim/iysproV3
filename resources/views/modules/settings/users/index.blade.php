@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
 
     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
@@ -13,7 +12,7 @@
                 <div class="pull-right">
 
                     <a href="!#" data-toggle="modal" data-target="#new_invite">
-                        <span class="btn btn-success btn-sm">New Invİte</span>
+                        <span class="btn btn-success btn-sm">New Invite</span>
                     </a>
                 </div>
                 <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
@@ -47,7 +46,7 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->confirmed ? 'ACTIVE' : 'NOT ACTIVE' }}</td>
                                     <td>{{ strtoupper($user->role->name) }}</td>
-                                    <td><a href="{{ route('users.edit', ['company' => $user->memberOfAccount, 'user' => $user]) }}">Edit</a></td>
+                                    <td><a href="{{ route('settings.users.edit',[aid(),$user->id]) }}">Edit</a></td>
                                 </tr>
                             @endforeach
 
@@ -66,6 +65,9 @@
         <!-- Modal -->
         <div id="new_invite" class="modal fade" role="dialog">
             <div class="modal-dialog">
+                <form action="{{ route("settings.users.store",aid()) }}"
+                      method="POST">
+                    @csrf
 
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -74,8 +76,6 @@
                         <h4 class="modal-title">Modal Header</h4>
                     </div>
                     <div class="modal-body">
-
-
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label text-md-right">NAME SURNAME :</label>
 
@@ -139,13 +139,47 @@
                                 </div>
                             </div>
 
+                        {{-- Owner can not set permissions for himself --}}
+                        @if(!isset($user) || auth()->id() != $user->id)
+                            @if(auth()->user()->role_id == 3)
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label text-md-right"></label>
 
+                                    <div class="col-md-9">
+                                        <button type="button" class="btn btn-danger" id="permission">PERMISSIONS</button>
+                                    </div>
+                                </div>
+                            @endif
+                            <hr>
+
+
+
+                        @endif
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label text-md-right">COMPANY ACCESS :</label>
+
+                            <div class="col-md-9">
+                                <select class="form-control{{ $errors->has('language') ? ' is-invalid' : '' }}" name="company_access" required>
+                                    {{-- TODO: extend of module-role-permissions is required--}}
+                                    <option value="1"{{ old('company_access') == 1 || (isset($user) && $user->hasPermissions(1)) ? ' selected=selected' : '' }}>No Access</option>
+                                    <option value="2"{{ old('company_access') == 2 || (isset($user) && $user->hasPermissions(2)) ? ' selected=selected' : '' }}>View Only</option>
+                                    <option value="3"{{ old('company_access') == 3 || (isset($user) && $user->hasPermissions(3)) ? ' selected=selected' : '' }}>Full Access View/Edit</option>
+                                </select>
+
+                                @if ($errors->has('company_access'))
+                                    <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('company_access') }}</strong>
+                                        </span>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" >Save</button>
                     </div>
                 </div>
-
+                </form>
             </div>
         </div>
 @endsection
