@@ -155,8 +155,6 @@
                                         </div>
                                     </div>
                                 </fieldset>
-
-
                                 @includeIf('components.external.tags', [$type="companies"])
                             </form>
                         </div>
@@ -178,7 +176,7 @@
         <script type="text/x-template" id="phone">
             <input type="text" class="phone" v-model="internalValue" v-on:input="updateValue($event.target.value)"/>
         </script>
-        <script src="https://unpkg.com/@johmun/vue-tags-input/dist/vue-tags-input.js"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
 
         <script>

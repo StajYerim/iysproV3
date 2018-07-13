@@ -9,21 +9,21 @@ use App\ProductImage;
 use App\TagData;
 use App\Taggable;
 use App\Tags;
+
 use App\User;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CompaniesController extends Controller
 {
     public function customer()
     {
-
         $type="customer";
         $route = "sales.companies.customer.data";
         return view("modules.companies.index", compact("companies", "type","route"));
-
 
     }
 
@@ -88,13 +88,12 @@ class CompaniesController extends Controller
     public function store($aid,Request $request, $id)
     {
 
-        $this->validate($request, [
-            "company_name" => "required",
+        $model = new Companies();
+        $validator = Validator::make($request->all(),$model->rules);
 
-        ], ["is_cari.required" => "Lütfen Müşteri Seçimi Yapın.",
-            "is_aciklama.required" => "Açıklama Alanını Doldurunuz.",
-            "is_bildiren_yetkili.required" => "Firma Yetkilisini Boş Bırakmayınız."
-        ]);
+        if ($validator->fails()) {
+            return view("validate_error")->withErrors($validator);
+        }
 
         $company = Companies::updateOrCreate(
             ["id" => $id],
@@ -134,23 +133,6 @@ class CompaniesController extends Controller
                 "fax_number" => $request->fax_number
             ]
         );
-
-
-//  foreach($request->tags as $tag){
-//   $tag =  Tags::firstOrcreate(["title"=>$tag,"type"=>"companies","account_id"=>aid()],[
-//        "account_id" => aid(),
-//        "title"=>$tag,
-//        "type" => "companies",
-//        "bg_color"=>"red"
-//    ]);
-//
-//    TagData::firstOrCreate(["tag_id"=>$tag->id],[
-//        "tag_id"=>$tag->id,
-//        "doc_id"=>$company->id
-//    ]);
-
-//  }
-
 
         flash()->overlay($id == 0 ? "New companies created" : "Company updated", 'Success')->success();
         sleep(1);

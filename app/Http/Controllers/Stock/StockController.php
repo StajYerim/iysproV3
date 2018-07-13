@@ -56,6 +56,13 @@ class StockController extends Controller
 
     public function product_store($aid, $id, Request $request)
     {
+        $model = new Product();
+        $validator = Validator::make($request->all(),$model->rules);
+        if ($validator->fails()) {
+            return view("validate_error")->withErrors($validator);
+        }
+
+
         //Product or Create
         $product = Product::updateOrCreate(
             ["id" => $id],
