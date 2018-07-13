@@ -156,6 +156,7 @@
                                     </div>
                                 </fieldset>
 
+
                                 @includeIf('components.external.tags', [$type="companies"])
                             </form>
                         </div>
@@ -221,6 +222,10 @@
              Companies =    new Vue({
                     el: "#customer",
                     data: () => ({
+                        autocompleteItems: [@foreach($tags as $tag) {
+                            text: '{{$tag->title}}',
+                            style: 'background-color:{{$tag->bg_color}}',
+                        }, @endforeach],
                         form: {
                             company_name: "{{$form_type == "Update" ? $company->company_name:""}}",
                             company_short_name: "{{$form_type == "Update" ? $company->company_short_name:""}}",
@@ -241,8 +246,19 @@
                             tagsd: [],
                         },
                     }),
+                 computed: {
+                     filteredItems() {
+                         return this.autocompleteItems.filter(i => new RegExp(this.tag, 'i').test(i.text));
+                     },
+                 },
                     mounted: function () {
-
+                        @if($form_type == "Update")
+                            this.form.tagsd.push(@foreach($company->tags as $tag)
+                            {
+                                style: "background-color:{{$tag->bg_color}}", text: "{{$tag->title}}"
+                            },
+                                @endforeach());
+                        @endif
                         city_and_county();
 
                     },

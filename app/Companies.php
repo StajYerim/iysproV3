@@ -440,4 +440,10 @@ class Companies extends Model
  return $data;
     }
 
+    public function tags()
+    {
+        return $this->morphToMany(Tags::class, 'taggable');
+    }
+
+
 }

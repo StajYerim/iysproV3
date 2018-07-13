@@ -7,10 +7,10 @@ use App\Model\Companies\Address;
 use App\Model\Finance\BankItems;
 use App\ProductImage;
 use App\TagData;
+use App\Taggable;
 use App\Tags;
 use App\User;
 use Yajra\DataTables\DataTables;
-use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -79,20 +79,22 @@ class CompaniesController extends Controller
     public function form($aid, $option, $id, $type)
     {
         $company = $type != "new" ? Companies::find($id):"";
-
+        $tags = Tags::where("account_id",aid())->where("type", "companies")->get();
         $company_type = $option == "customer" ? "customer" : "supplier";
         $form_type = $type == "new" ? "New" : "Update";
-        return view("modules.companies.form", compact("form_type", "company_type","company"));
+        return view("modules.companies.form", compact("form_type", "company_type","company","tags"));
     }
 
     public function store($aid,Request $request, $id)
     {
-        $model = new Companies();
-        $validator = Validator::make($request->all(),$model->rules);
 
-        if ($validator->fails()) {
-            return view("validate_error")->withErrors($validator);
-        }
+        $this->validate($request, [
+            "company_name" => "required",
+
+        ], ["is_cari.required" => "Lütfen Müşteri Seçimi Yapın.",
+            "is_aciklama.required" => "Açıklama Alanını Doldurunuz.",
+            "is_bildiren_yetkili.required" => "Firma Yetkilisini Boş Bırakmayınız."
+        ]);
 
         $company = Companies::updateOrCreate(
             ["id" => $id],
@@ -109,6 +111,17 @@ class CompaniesController extends Controller
                 "e_invoice_registered" => $request->e_invoice_registered,
             ]
         );
+
+        Taggable::where("taggable_type","App\Companies")->where("taggable_id",$company->id)->delete();
+
+        if ($request->tagsd) {
+
+            foreach ($request->tagsd as $tag) {
+                $tag = Tags::firstOrCreate(["account_id"=>aid(),"type"=>"companies","title"=>$tag["text"]], ["type" => "companies", "bg_color" => rand_color()]);
+                $company->tags()->save($tag);
+
+            }
+        }
 
         Address::updateOrCreate(["company_id" => $company->id],
             [
@@ -135,7 +148,7 @@ class CompaniesController extends Controller
 //        "tag_id"=>$tag->id,
 //        "doc_id"=>$company->id
 //    ]);
-//
+
 //  }
 
 
@@ -181,13 +194,6 @@ class CompaniesController extends Controller
 
     public function quick_company(Request $request, $id)
     {
-
-        $model = new Companies();
-        $validator = Validator::make($request->all(),$model->rules);
-
-        if ($validator->fails()) {
-            return view("validate_error")->withErrors($validator);
-        }
 
         $company = Companies::create(
             [

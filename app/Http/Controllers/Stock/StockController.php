@@ -17,7 +17,6 @@ use SebastianBergmann\CodeCoverage\Report\Xml\Unit;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Validator;
 
 class StockController extends Controller
 {
@@ -57,17 +56,6 @@ class StockController extends Controller
 
     public function product_store($aid, $id, Request $request)
     {
-
-
-        $model = new Product();
-        $validator = Validator::make($request->all(),$model->rules);
-
-        if ($validator->fails()) {
-            return view("validate_error")->withErrors($validator);
-        }
-
-
-
         //Product or Create
         $product = Product::updateOrCreate(
             ["id" => $id],
@@ -207,7 +195,6 @@ class StockController extends Controller
 
     public function language($aid, Request $request)
     {
-
         $product = Product::find($request->product_id);
         return $product->lang($request->product_id, $request->code);
     }
