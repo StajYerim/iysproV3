@@ -223,12 +223,19 @@
             methods: {
 
                 formCompanySend: function (event) {
+                    eventing = event
                     this.$validator.validate().then((result) => {
                         if (result) {
                             axios.post('{{route("company.quick.store",[aid(),0])}}', this.form, {tags: []})
                                 .then(function (response) {
-                                    VueName.form.company_id = {id: response.data.id, text: response.data.text};
 
+                                    if(response.data.id){
+                                        VueName.form.company_id = {id: response.data.id, text: response.data.text};
+                                    }else{
+
+                                        notification("Error",response.data,"danger");
+
+                                    }
                                 }).catch(function (error) {
 
                             });
@@ -238,7 +245,7 @@
 
                         }
                     });
-                    event.target.reset();
+
                 }
             }
         });

@@ -182,6 +182,13 @@ class CompaniesController extends Controller
     public function quick_company(Request $request, $id)
     {
 
+        $model = new Companies();
+        $validator = Validator::make($request->all(),$model->rules);
+
+        if ($validator->fails()) {
+            return view("validate_error")->withErrors($validator);
+        }
+
         $company = Companies::create(
             [
                 "account_id" => aid(),
