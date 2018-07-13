@@ -10,6 +10,7 @@ use App\TagData;
 use App\Tags;
 use App\User;
 use Yajra\DataTables\DataTables;
+use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -86,6 +87,12 @@ class CompaniesController extends Controller
 
     public function store($aid,Request $request, $id)
     {
+        $test = new Companies();
+        $validator = Validator::make($request->all(),$test->rules);
+        if ($validator->fails()) {
+            return view("validate_error")->withErrors($validator);
+
+        }
 
         $company = Companies::updateOrCreate(
             ["id" => $id],

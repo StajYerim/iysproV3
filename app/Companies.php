@@ -14,7 +14,19 @@ class Companies extends Model
   protected $guarded = [];
 
   protected $table = "company_list";
+    public $rules = [
+        'company_name' => 'required|max:150',
+        'company_short_name' => 'max:50',
+        'char_code' => 'max:50',
+        'tax_id' => 'max:50',
+        'tax_office' => 'max:50',
+        'iban' => 'max:50',
+        'address' => 'max:200',
+        'town' => 'max:50',
+        'city' => 'max:50',
+        'email' => 'max:50',
 
+    ];
     public function scopeList($query, $type, $aid)
     {
         if ($type == 'customer') {

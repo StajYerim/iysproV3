@@ -260,12 +260,12 @@
                                                window.location.href = '/{{aid()}}/{{$company_type=="customer" ? "sales":"purchases"}}/{{$company_type}}/'+response.data.id+'/show';
                                            }else{
                                                 fullLoadingClose();
-                                                notification("Error", response, "danger");
+                                                notification("Error", response.data, "danger");
                                             }
 
                                             }else{
                                                fullLoadingClose();
-                                               notification("Error", response, "danger");
+                                               notification("Error", response.data, "danger");
 
                                            }
                                         }).catch(function (error) {
