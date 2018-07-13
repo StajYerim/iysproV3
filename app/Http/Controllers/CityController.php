@@ -29,7 +29,7 @@ class CityController extends Controller
     public function county(Request $request,$id){
         $term = $request->get('query');
         $results = array();
-        $queries = County::where('county', 'like', '%' . $term . '%')->take(5)->get();
+        $queries = County::where('county', 'like', $term . '%')->take(10)->get();
 
         foreach ($queries as $query) {
             $results[] = [

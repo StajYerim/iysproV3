@@ -13,6 +13,14 @@ class Product extends Model
 
     protected $guarded = [];
 
+    public $rules = [
+        'name' => 'required|max:200',
+        'barcode' => 'max:100',
+        'code' => 'max:100',
+        'buying_currency' => 'max:15',
+        'buying_price' => 'max:15',
+
+    ];
 
     //Category info
     public function category()

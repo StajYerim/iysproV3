@@ -7,22 +7,23 @@ use App\Model\Companies\Address;
 use App\Model\Finance\BankItems;
 use App\ProductImage;
 use App\TagData;
+use App\Taggable;
 use App\Tags;
+
 use App\User;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CompaniesController extends Controller
 {
     public function customer()
     {
-
         $type="customer";
         $route = "sales.companies.customer.data";
         return view("modules.companies.index", compact("companies", "type","route"));
-
 
     }
 
@@ -78,14 +79,21 @@ class CompaniesController extends Controller
     public function form($aid, $option, $id, $type)
     {
         $company = $type != "new" ? Companies::find($id):"";
-
+        $tags = Tags::where("account_id",aid())->where("type", "companies")->get();
         $company_type = $option == "customer" ? "customer" : "supplier";
         $form_type = $type == "new" ? "New" : "Update";
-        return view("modules.companies.form", compact("form_type", "company_type","company"));
+        return view("modules.companies.form", compact("form_type", "company_type","company","tags"));
     }
 
     public function store($aid,Request $request, $id)
     {
+
+        $model = new Companies();
+        $validator = Validator::make($request->all(),$model->rules);
+
+        if ($validator->fails()) {
+            return view("validate_error")->withErrors($validator);
+        }
 
         $company = Companies::updateOrCreate(
             ["id" => $id],
@@ -103,6 +111,17 @@ class CompaniesController extends Controller
             ]
         );
 
+        Taggable::where("taggable_type","App\Companies")->where("taggable_id",$company->id)->delete();
+
+        if ($request->tagsd) {
+
+            foreach ($request->tagsd as $tag) {
+                $tag = Tags::firstOrCreate(["account_id"=>aid(),"type"=>"companies","title"=>$tag["text"]], ["type" => "companies", "bg_color" => rand_color()]);
+                $company->tags()->save($tag);
+
+            }
+        }
+
         Address::updateOrCreate(["company_id" => $company->id],
             [
                 "address_abroad" => $request->address_abroad,
@@ -114,23 +133,6 @@ class CompaniesController extends Controller
                 "fax_number" => $request->fax_number
             ]
         );
-
-
-//  foreach($request->tags as $tag){
-//   $tag =  Tags::firstOrcreate(["title"=>$tag,"type"=>"companies","account_id"=>aid()],[
-//        "account_id" => aid(),
-//        "title"=>$tag,
-//        "type" => "companies",
-//        "bg_color"=>"red"
-//    ]);
-//
-//    TagData::firstOrCreate(["tag_id"=>$tag->id],[
-//        "tag_id"=>$tag->id,
-//        "doc_id"=>$company->id
-//    ]);
-
-//  }
-
 
         flash()->overlay($id == 0 ? "New companies created" : "Company updated", 'Success')->success();
         sleep(1);
