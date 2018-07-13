@@ -14,9 +14,12 @@
                             <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">DİĞER
                                 İŞLEMLER <span class="caret"></span> </a>
                             <ul class="dropdown-menu">
+                                @php $parasut = auth()->user()->memberOfAccount; @endphp
+                                @if($parasut["parasut_callback_url"] != null && $parasut["parasut_client_id"] != null && $parasut["parasut_client_secret"] != null && $parasut["parasut_username"] != null && $parasut["parasut_password"] != null && $parasut["parasut_company_id"] != null)
                                                                    <li>
                                     <a href="{{ route('stock.product.sync', [ aid(), $product->id ]) }}"><i class="fa fa-send"></i> PARAŞÜT'e Gönder</a>
                                 </li>
+                                @endif
                                                                    <li>
                                     <a href="#" data-toggle="modal" data-target="#openStartReceipt"><i
                                                 class="fa fa-plus " aria-hidden="true"></i> AÇILIŞ FİŞİ OLUŞTUR</a>

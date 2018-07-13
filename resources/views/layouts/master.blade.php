@@ -55,6 +55,7 @@
     <script src="{{asset("js/vue/v-money.js")}}"></script>
     <script src="{{asset("js/vue/vue-router.js")}}"></script>
     <script src="{{asset("js/vue/v-validate.js")}}"></script>
+    <script src="https://unpkg.com/@johmun/vue-tags-input/dist/vue-tags-input.js"></script>
     <script src="https://unpkg.com/vue-the-mask"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>

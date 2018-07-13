@@ -6,6 +6,8 @@ use App\Bankabble;
 use App\Language;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
+use App\Taggable;
+use App\Tags;
 use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
@@ -58,8 +60,8 @@ class OrdersController extends Controller
             $order = $id == 0 ? "" : SalesOrders::find($id);
             $offer_id = null;
         }
-
-        return view("modules.sales.orders.form", compact("form_type", "order","copy","id","offer_id"));
+        $tags = Tags::where("account_id",aid())->where("type", "sales_orders")->get();
+        return view("modules.sales.orders.form", compact("form_type", "order","copy","id","offer_id","tags"));
 
     }
 
@@ -80,6 +82,17 @@ class OrdersController extends Controller
             "vat_total" => $request->form["vat_total"],
             "grand_total" => $request->form["grand_total"]
         ]);
+
+        Taggable::where("taggable_type","App\Model\Sales\SalesOrders")->where("taggable_id",$order->id)->delete();
+
+        if ($request->tagsd) {
+
+            foreach ($request->tagsd as $tag) {
+                $tag = Tags::firstOrCreate(["account_id"=>aid(),"type"=>"sales_orders","title"=>$tag["text"]], ["type" => "sales_orders", "bg_color" => rand_color()]);
+                $order->tags()->save($tag);
+
+            }
+        }
 
 
         $whereNot = Array();
@@ -105,6 +118,8 @@ class OrdersController extends Controller
 
 
         $order->company->open_receipts_set($order->company->open_receipts,$order->company->open_cheques,$order);
+
+
 
 
         flash()->overlay($id == 0 ? "New Sales Order" : "Sales Order Updated", 'Success')->success();

@@ -56,6 +56,13 @@ class StockController extends Controller
 
     public function product_store($aid, $id, Request $request)
     {
+        $model = new Product();
+        $validator = Validator::make($request->all(),$model->rules);
+        if ($validator->fails()) {
+            return view("validate_error")->withErrors($validator);
+        }
+
+
         //Product or Create
         $product = Product::updateOrCreate(
             ["id" => $id],
@@ -195,7 +202,6 @@ class StockController extends Controller
 
     public function language($aid, Request $request)
     {
-
         $product = Product::find($request->product_id);
         return $product->lang($request->product_id, $request->code);
     }
@@ -235,7 +241,7 @@ class StockController extends Controller
 //        return $results;
 //
 //    }
-    
+
     public function sync_with_parasut($aid, $id) {
       $product = Product::find($id);
       $parasut_product = \App::make('App\Parasut')->sync_stock_product($product);
@@ -248,6 +254,6 @@ class StockController extends Controller
           'type' => 'Product',
         ]);
       }
-      return redirect()->route('stock.product.show', [ $aid, $id ]); 
+      return redirect()->route('stock.product.show', [ $aid, $id ]);
     }
 }

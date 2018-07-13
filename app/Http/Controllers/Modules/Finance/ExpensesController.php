@@ -17,7 +17,7 @@ class ExpensesController extends Controller
     public function index()
     {
         $accounts = BankAccounts::where("account_id",aid())->get();
-        $tags = Tags::where("type", "expenses")->get();
+        $tags = Tags::where("account_id",aid())->where("type", "expenses")->get();
         return view("modules.finance.expenses.index", compact("accounts", "tags"));
     }
 
