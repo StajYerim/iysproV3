@@ -87,11 +87,11 @@ class CompaniesController extends Controller
 
     public function store($aid,Request $request, $id)
     {
-        $test = new Companies();
-        $validator = Validator::make($request->all(),$test->rules);
+        $model = new Companies();
+        $validator = Validator::make($request->all(),$model->rules);
+
         if ($validator->fails()) {
             return view("validate_error")->withErrors($validator);
-
         }
 
         $company = Companies::updateOrCreate(
@@ -135,7 +135,7 @@ class CompaniesController extends Controller
 //        "tag_id"=>$tag->id,
 //        "doc_id"=>$company->id
 //    ]);
-
+//
 //  }
 
 

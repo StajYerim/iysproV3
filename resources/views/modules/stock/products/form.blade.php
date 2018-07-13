@@ -458,7 +458,7 @@
 
                                             } else {
                                                 fullLoadingClose();
-                                                notification("Error", response, "danger");
+                                                notification("Error", response.data, "danger");
 
                                             }
                                         }).catch(function (error) {
