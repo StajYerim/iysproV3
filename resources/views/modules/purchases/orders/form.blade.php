@@ -62,8 +62,8 @@
                                                     <template slot="no-options">
                                                         <a type="button" style="color:white"
                                                            class='btn btn-sm btn-warning' href='#!'
-                                                           data-toggle='modal' data-target='#new_supplier'>Click for New
-                                                            Company </a>
+                                                           data-toggle='modal' data-target='#new_supplier'>{{trans("general.click")}} {{trans("general.for")}} {{trans("general.new")}}
+                                                            {{trans("general.company")}} </a>
                                                     </template>
                                                     <template slot="option" slot-scope="option">
                                                         <div class="d-center">
@@ -78,7 +78,7 @@
 
                                     <fieldset>
                                         <div class="form-group" v-bind:class="{'has-error':errors.has('form.date')}">
-                                            <label class="col-md-3 control-label">Sipariş Tarihi</label>
+                                            <label class="col-md-3 control-label">{{trans("general.order")}} {{trans("general.date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask @change="setDate(form.date)" :mask="['##.##.####']" type="text" name="form.date"
@@ -93,7 +93,7 @@
                                     <fieldset>
                                         <div class="form-group"
                                              v-bind:class="{'has-error':errors.has('form.due_date')}">
-                                            <label class="col-md-3 control-label">Ödeneceği Tarih</label>
+                                            <label class="col-md-3 control-label">{{trans("general.payable")}} {{trans("general.date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"

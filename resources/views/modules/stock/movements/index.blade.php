@@ -37,7 +37,7 @@
 
 
                                 <span class="btn btn-success  dropdown-toggle" data-toggle="dropdown"
-                                      aria-expanded="false">New Action
+                                      aria-expanded="false">{{trans("general.new")}} {{trans("general.action")}}
             <i class="fa fa-angle-down"></i></span>
                                 <!-- Suggestion: populate this list with fetch and push technique -->
                                 <ul class="dropdown-menu">
@@ -55,9 +55,9 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>Description</th>
-                                    <th>Type</th>
-                                    <th>Edition Date</th>
+                                    <th>{{trans("general.description")}}</th>
+                                    <th>{{trans("general.type")}}</th>
+                                    <th>{{trans("general.edition")}} {{trans("general.date")}}</th>
                                 </tr>
                                 </thead>
 

@@ -33,14 +33,14 @@
                         <div class="col-12">
                             <div class="col-sm-5" style="font-weight: 400;font-size:15px;">
                                 @if($cheq->cheque_status == 1)
-                                <i class="fa fa-calendar"></i> ALINDIĞI TARİH, MÜŞTERİ<br><br>
+                                <i class="fa fa-calendar"></i> ALINDIĞI TARİH, {{trans("general.customer")}}<br><br>
                                 @elseif($cheq->cheque_status == 0)
-                                    <i class="fa fa-calendar"></i> VERİLDİĞİ TARİH, TEDARİKÇİ<br><br>
+                                    <i class="fa fa-calendar"></i> VERİLDİĞİ TARİH, {{trans("general.supplier")}}<br><br>
                                 @elseif($cheq->cheque_status == 2)
-                                    <i class="fa fa-calendar"></i> ALINDIĞI TARİH, MÜŞTERİ<br><br>
-                                    <i class="fa fa-calendar"></i> VERİLDİĞİ TARİH, TEDARİKÇİ<br><br>
+                                    <i class="fa fa-calendar"></i> ALINDIĞI TARİH, {{trans("general.customer")}}<br><br>
+                                    <i class="fa fa-calendar"></i> VERİLDİĞİ TARİH, {{trans("general.supplier")}}<br><br>
                                 @endif
-                                <i class="fa fa-calendar"></i> VADE TARİHİ<br><br>
+                                <i class="fa fa-calendar"></i> {{trans("general.expiry")}} {{trans("general.date")}}<br><br>
                                 <div v-if="collect_cheque_show == true"><i class="fa fa-calendar"></i> TAHSİL EDİLDİĞİ HESAP <br><br></div>
                             </div>
 
@@ -85,10 +85,10 @@
                                 </tfoot>
                                 <tbody>
                                 <tr>
-                                    <th width="20%">İŞLENDİĞİ FATURA</th>
-                                    <th width="20%">DURUMU</th>
-                                    <th style="text-align:right" width="10%">MEBLAĞ</th>
-                                    <th style="text-align:right" width="15%">İŞLENEN MEBLAĞ</th>
+                                    <th width="20%">{{trans("general.processed")}} {{trans("general.invoice")}}</th>
+                                    <th width="20%">{{trans("general.status")}}</th>
+                                    <th style="text-align:right" width="10%">{{trans("general.sum")}}</th>
+                                    <th style="text-align:right" width="15%">{{trans("general.processed")}} {{trans("general.sum")}}</th>
 
                                 </tr>
                                 </tbody>
@@ -125,7 +125,7 @@
                                 <div class="col-sm-12">
                                     <button v-on:click="other_transfer" type="button"
                                             class="btn  btn-block bg-color-blue txt-color-white ">
-                                        TAHSİL ET {{$cheq->cheque_status }}
+                                        {{trans("general.charge")}} {{$cheq->cheque_status }}
                                     </button>
 
                                 </div>
@@ -134,7 +134,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="button" data-toggle="modal" data-target="#deleteModal" class="btn btn-block bg-color-red txt-color-white">
-                                       ÇEKİ SİL
+                                        {{trans("general.check")}} {{trans("general.delete")}}
                                     </button>
                                 </div>
                             </div>
@@ -143,14 +143,14 @@
                         <div v-show="other_transfer_show">
                             <form @submit.prevent="cheuqe_collection_send" class="form-horizontal bv-form"
                                   novalidate="novalidate">
-                                <h1><i class="fa fa-1x c-textLight fa-share-square-o"></i> <span class="semi-bold">ÇEK TAHSİLATI</span>
+                                <h1><i class="fa fa-1x c-textLight fa-share-square-o"></i> <span class="semi-bold">{{trans("general.check")}} {{trans("general.collection")}}</span>
                                 </h1>
 
                                 <input type="hidden" value="4" name="thisAccId">
                                 <fieldset>
                                     <div class="form-group "  :class="{'has-error': errors.has('money_form.bank_account_id') }">
                                         <label class="col-sm-4 control-label">
-                                            <span>HESAP</span>
+                                            <span>{{trans("general.account")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -167,7 +167,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>TARİH</span>
+                                            <span>{{trans("general.date")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
@@ -181,11 +181,11 @@
 
                                 <footer>
                                     <button type="button" v-on:click="cancel" class="btn pull-left ">
-                                        VAZGEÇ
+                                        {{trans("general.cancel")}}
                                     </button>
 
                                     <button type="submit" :disabled="money_form.bank_account_id == '' " class="btn btn btn-danger pull-right" >
-                                        TAHSİL ET
+                                        {{trans("general.charge")}}
                                     </button>
                                     <br><br>
                                 </footer>
@@ -198,14 +198,14 @@
                         <div class="row">
                             @if($cheq->cheque_status == 1)
                             <div class="col-sm-12">
-                                <div class="bottom-info">DURUMU <span class="pull-right" style="font-size:15px;color:#7a7c71!important">
+                                <div class="bottom-info">{{trans("general.status")}} <span class="pull-right" style="font-size:15px;color:#7a7c71!important">
                                                                              @{{ collect_statu }}
 
                                     </span></div>
                             </div>
                             @endif
                             <div class="col-sm-12">
-                                <div class="bottom-info">ÇEK TOPLAMI <span class="pull-right" style="font-size:15px;color:#2AC!important">
+                                <div class="bottom-info">{{trans("general.check")}} {{trans("general.total")}} <span class="pull-right" style="font-size:15px;color:#2AC!important">
                                     {{$cheq->amount}}   <i class="fa fa-try"></i></span></div>
                             </div>
                         </div>

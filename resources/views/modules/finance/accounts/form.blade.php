@@ -37,7 +37,7 @@
                                 @if($id == 0 and $form_type == "new")
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Döviz Cinsi</label>
+                                        <label class="col-md-3 control-label">{{trans("general.currency")}} {{trans("general.type")}}</label>
                                         <div class="col-md-4 ">
                                             <div class="">
                                                 <select v-model="form.currency" class="form-control">
@@ -52,7 +52,7 @@
                                 @else
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Döviz Cinsi </label>
+                                            <label class="col-md-3 control-label">{{trans("general.currency")}} {{trans("general.currency")}} </label>
                                             <label class=" control-label">{{$account->cur_info["icon"]." ".$account->cur_info["code"]}} - {{$account->cur_info["name"]}}</label>
 
                                         </div>
@@ -63,7 +63,7 @@
                                 @if($id == 0 and $form_type == "new")
                                 <fieldset >
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Açılış Bakiyesi</label>
+                                        <label class="col-md-3 control-label">{{trans("general.opening")}} {{trans("general.balance")}}</label>
                                         <div class="col-md-4 ">
                                             <div>
                                                 <money v-bind="money" class="form-control "
@@ -75,7 +75,7 @@
 
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Açılış Bakiyesi Tarihi</label>
+                                        <label class="col-md-3 control-label">{{trans("general.opening")}} {{trans("general.balance")}} {{trans("general.date")}}</label>
                                         <div class="col-md-4 ">
                                             <div >
                                                 <input type="text" class="form-control datepicker"
@@ -94,7 +94,7 @@
                                                 <label>
                                                     <input type="checkbox" v-model="form.cheque"
                                                            class="checkbox style-3">
-                                                    <span>Çek Kullanılabilir</span>
+                                                    <span>{{trans("general.check")}} Kullanılabilir</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@
                                 <fieldset>
 
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Banka İsmi</label>
+                                        <label class="col-md-3 control-label">{{trans("general.bank")}} {{trans("general.name")}}</label>
                                         <div class="col-md-4 ">
                                             <div >
                                                 <input type="text" class="form-control " v-model="form.bank_name">
@@ -114,7 +114,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Banka Şubesi</label>
+                                        <label class="col-md-3 control-label">{{trans("general.banj")}} {{trans("general.branch")}}</label>
                                         <div class="col-md-4 ">
                                             <div >
                                                 <input type="text" class="form-control " v-model="form.bank_branch">
@@ -124,7 +124,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Hesap Numarası</label>
+                                        <label class="col-md-3 control-label">{{trans("general.account")}} {{trans("general.number")}}</label>
                                         <div class="col-md-4 ">
                                             <div >
                                                 <input type="text" class="form-control " v-model="form.bank_no">

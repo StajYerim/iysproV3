@@ -11,31 +11,31 @@
             <div class="col-lg-4 col-sm-4">
                    <span class="pull-right">
                                          <div class="btn-group">
-                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">DİĞER
-                                İŞLEMLER <span class="caret"></span> </a>
+                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{trans("general.other")}}
+                                {{trans("general.operations")}} <span class="caret"></span> </a>
                             <ul class="dropdown-menu">
                                                                    <li>
-                                    <a href="{{ route('stock.product.sync', [ aid(), $product->id ]) }}"><i class="fa fa-send"></i> PARAŞÜT'e Gönder</a>
+                                    <a href="{{ route('stock.product.sync', [ aid(), $product->id ]) }}"><i class="fa fa-send"></i> PARAŞÜT'e {{trans("general.send")}}</a>
                                 </li>
                                                                    <li>
                                     <a href="#" data-toggle="modal" data-target="#openStartReceipt"><i
-                                                class="fa fa-plus " aria-hidden="true"></i> AÇILIŞ FİŞİ OLUŞTUR</a>
+                                                class="fa fa-plus " aria-hidden="true"></i> {{trans("general.opening")}} {{trans("general.receipt")}} {{trans("general.create")}}</a>
                                 </li>
                                                                 <li>
-                                    <a href="#" id="productArchive"><i class="fa fa-archive" aria-hidden="true"></i> ARŞİVLE</a>
+                                    <a href="#" id="productArchive"><i class="fa fa-archive" aria-hidden="true"></i> {{trans("general.archive")}}</a>
                                     <a href="#" style="display:none" id="productArchiveOut"><i class="fa fa-archive"
-                                                                                               aria-hidden="true"></i> ARŞİVDEN ÇIKAR</a>
+                                                                                               aria-hidden="true"></i> {{trans("general.archive")}} {{trans("general.remove")}}</a>
                                 </li>
                                 <li>
                                     <a href="#!" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
-                                                                                                   aria-hidden="true"> </i> DELETE</a>
+                                                                                                   aria-hidden="true"> </i> {{trans("general.delete")}}</a>
                                 </li>
                             </ul>
                         </div>
 
                             <a class="btn btn-default "
                                href="{{route("stock.product.form",[aid(),$product->id,"update"])}}"><i
-                                        class="fa fa-edit"></i> EDİT</a>
+                                        class="fa fa-edit"></i> {{trans("general.edit")}}</a>
 
                         </span>
             </div>
@@ -58,8 +58,8 @@
                             <div class="col-lg-12" style="margin-bottom:15px">
                                 <div class="col-lg-4 col-xs-4">
                                     <small style="font-size:13px;">{{$product->type_name}}</small><br>
-                                    <small style="font-size:14px;">KDV %{{$product->vat_rate}}</small><br>
-                                    <small style="font-size:14px;">Barkod : {{$product->barcode}}</small>
+                                    <small style="font-size:14px;">{{trans("general.vat")}} %{{$product->vat_rate}}</small><br>
+                                    <small style="font-size:14px;">{{trans("general.barcode")}} : {{$product->barcode}}</small>
                                 </div>
                                 <div class="col-lg-4 col-xs-3"><span class="badge"
                                                             style="background:{{$product->category["color"]}}"> {{$product->category["name"]}} </span></div>
@@ -81,21 +81,21 @@
                 <!-- end widget -->
                 <ul id="myTab1" class="nav nav-tabs bordered">
                     <li class="active">
-                        <a href="#g1" data-toggle="tab" aria-expanded="true">BİLGİLER</a>
+                        <a href="#g1" data-toggle="tab" aria-expanded="true">{{trans("general.informations")}}</a>
                     </li>
 
                     <li>
-                        <a href="#g2" data-toggle="tab">STOK HAREKETLERİ</a>
+                        <a href="#g2" data-toggle="tab">{{trans("general.stock")}} {{trans("general.movements")}}</a>
                     </li>
                 </ul>
                 <div id="myTabContent1" class="tab-content padding-10" style="background-color: #fff">
                     <div class="tab-pane fade" id="g1">
                         <small style="font-size:13px;">
                             ----- </small>
-                        <br> <small style="font-size:14px;font-weight: 600;"> SATIŞ SİPARİŞİ: 0,00</small>
-                        <br><small style="font-size:14px;font-weight: 600;"> SATINALMA SİPARİŞİ: </small>
-                        <br> <small style="font-weight: 600">ALIŞ/MALİYET :</small> <small style="color:#886650!important;font-size:14px;font-weight: 600;">0,00<i class="fa fa-try"></i></small>
-                        <br>  <small style="font-weight: 600"> LİSTE FİYATI :</small> <small style="color:#2AC!important;font-size:14px;font-weight: 600;">135,00<i class="fa fa-try"></i></small>
+                        <br> <small style="font-size:14px;font-weight: 600;"> {{trans("general.sales")}} {{trans("general.order")}}: 0,00</small>
+                        <br><small style="font-size:14px;font-weight: 600;"> {{trans("general.purchase")}} {{trans("general.order")}}: </small>
+                        <br> <small style="font-weight: 600">{{trans("general.purchase")}}/{{trans("general.cost")}} :</small> <small style="color:#886650!important;font-size:14px;font-weight: 600;">0,00<i class="fa fa-try"></i></small>
+                        <br>  <small style="font-weight: 600"> {{trans("general.list")}} {{trans("general.price")}} :</small> <small style="color:#2AC!important;font-size:14px;font-weight: 600;">135,00<i class="fa fa-try"></i></small>
 
                     </div>
 

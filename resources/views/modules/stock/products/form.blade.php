@@ -82,7 +82,7 @@
                                                                 <div class="input-group-btn">
                                                                     <button class="btn btn-default new_cat_send"
                                                                             type="button">
-                                                                        New
+                                                                        {{trans("general.new")}}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -115,8 +115,8 @@
 
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label" style="margin-top: 34px;">Ürün
-                                            Resmi </label>
+                                        <label class="col-md-3 control-label" style="margin-top: 34px;">{{trans("general.product")}}
+                                            {{trans("general.image")}} </label>
                                         <div class="col-md-2">
                                             <div class="upload-preview">
                                                 <img width="156px" height="117px"
@@ -132,24 +132,24 @@
                                                     @endif @else style="display:none" @endif
                                                     @click="onFileDelete"
                                                     class="btn btn-xs btn-danger"><span class="fa fa-trash"></span>
-                                                Resmi Sil
+                                                {{trans("general.image")}} {{trans("general.delete")}}
                                             </button>
                                         </div>
                                     </div>
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Stok Takibi</label>
+                                        <label class="col-md-3 control-label">{{trans("general.stock")}} {{trans("general.track")}}</label>
                                         <div class="col-md-9">
                                             <label class="radio radio-inline">
                                                 <input type="radio" class="radiobox" value="1"
                                                        v-model="form.inventory_tracking">
-                                                <span>YAPILSIN</span>
+                                                <span>{{trans("general.okay")}}</span>
                                             </label>
                                             <label class="radio radio-inline">
                                                 <input type="radio" class="radiobox style-3" value="0" checked="checked"
                                                        v-model="form.inventory_tracking">
-                                                <span>YAPILMASIN</span>
+                                                <span>{{trans("general.no")}}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@
                                 <fieldset>
                                     <div class="form-group">
 
-                                        <label class="col-md-3 control-label">Stok Türü</label>
+                                        <label class="col-md-3 control-label">{{trans("general.stock")}} {{trans("general.type")}}</label>
                                         <div class="col-md-4">
                                             <select class="form-control" v-model="form.type_id" @change="priceShow(form.type_id)">
                                                 @foreach(product_type_list() as $type)
@@ -171,7 +171,7 @@
                                         <div class="col-md-3"></div>
                                         <div class="col-md-2"
                                              v-show="form.type_id === '3' || form.type_id === '1' || form.type_id ==='4'">
-                                            <label> Alış Fiyatı</label>
+                                            <label> {{trans("general.purchase")}} {{trans("general.price")}}</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control " value="0,00"
                                                        autocomplete="OFF" v-model.lazy="form.buying_price">
@@ -188,7 +188,7 @@
 
                                         <div class="col-md-2"
                                              v-show="form.type_id === '3' || form.type_id === '2'">
-                                            <label> Satış Fiyatı</label>
+                                            <label> {{trans("general.sales")}} {{trans("general.price")}}</label>
                                             <div class="input-group">
                                                 <input type="text" v-on:keypress="isNumber" class="form-control" value="0,00"
                                                        autocomplete="OFF" v-model.lazy="form.list_price">
@@ -208,10 +208,10 @@
                                         <div class="col-md-2">
                                             <div class="form-group"
                                                  :class="{'has-error': errors.has('form.vat_rate') }">
-                                                <label> Vergi</label>
+                                                <label> {{trans("general.tax")}}</label>
                                                 <select type="text" v-validate="'required'" name="form.vat_rate"
                                                         class="form-control" v-model="form.vat_rate">
-                                                    <option disabled value="">Vat Select</option>
+                                                    <option disabled value="">{{trans("general.vat")}} {{trans("general.select")}}</option>
                                                     @foreach(vat_list() as $vat)
                                                         <option value="{{$vat["id"]}}">{{$vat["name"]}}</option>
                                                     @endforeach

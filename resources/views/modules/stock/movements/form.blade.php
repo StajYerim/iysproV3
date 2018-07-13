@@ -47,8 +47,8 @@
                                                       transition="fade" v-model="form.company_id">
                                                 <template slot="no-options">
                                                     <a type="button" style="color:white" class='btn btn-sm btn-warning' href='#!'
-                                                       data-toggle='modal' data-target='#new_company'>Click for New
-                                                        Company </a>
+                                                       data-toggle='modal' data-target='#new_company'>{{trans("general.click")}} {{trans("general.for")}} {{trans("general.new")}}
+                                                        {{trans("general.company")}} </a>
                                                 </template>
                                                 <template slot="option" slot-scope="option">
                                                     <div class="d-center">
@@ -66,7 +66,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Düzenleme Tarihi</label>
+                                        <label class="col-md-3 control-label">{{trans("general.arrangement")}} {{trans("general.date")}}</label>
                                         <div class="col-md-2 ">
                                             <div class="input-group">
                                                 <input type="text" class="form-control datepicker" v-model="form.date">
@@ -77,11 +77,11 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Fiş Türü</label>
+                                        <label class="col-md-3 control-label">{{trans("general.receipt")}} {{trans("general.type")}}</label>
                                         <div class="col-md-3">
                                             <select v-model="form.receipt_id" class="form-control">
                                                 <option disabled value="">
-                                                    Choose Receipt Type
+                                                    {{trans("general.choose")}} {{trans("general.receipt")}} {{trans("general.type")}}
                                                 </option>
                                                 @foreach(movements_type($action) as $receipt)
                                                     <option value="{{$receipt["id"]}}">{{$receipt["name"]}}</option>
@@ -96,9 +96,9 @@
                                     <table class="table  table-hover table-condensed" id="invoice-table">
                                         <tbody>
                                         <tr>
-                                            <th width="33%">HİZMET / ÜRÜN</th>
-                                            <th width="10%">MİKTAR</th>
-                                            <th width="10%">BİRİM</th>
+                                            <th width="33%">{{trans("general.service")}} / {{trans("general.product")}}</th>
+                                            <th width="10%">{{trans("general.quantity")}}</th>
+                                            <th width="10%">{{trans("general.umity")}}</th>
                                             <th width="7%"></th>
                                         </tr>
                                         </tbody>
@@ -114,7 +114,7 @@
                                                               v-model="item.product_id">
                                                         <template slot="no-options">
                                                         <a href="#!" type="button" style="color:white"
-                                                           data-toggle='modal' data-target='#new_product' class="btn btn-warning">Add New Product</a></template>
+                                                           data-toggle='modal' data-target='#new_product' class="btn btn-warning">{{trans("general.add")}} {{trans("general.new")}} {{trans("general.product")}}</a></template>
                                                     </v-select>
 
                                                 </div>
@@ -147,7 +147,7 @@
                                         </tbody>
                                     </table>
 
-                                    <button class="btn btn-default" type="button" @click="addRow">New Row</button>
+                                    <button class="btn btn-default" type="button" @click="addRow">{{trans("general.new")}} {{trans("general.row")}}</button>
 
                                 </div>
                             </form>

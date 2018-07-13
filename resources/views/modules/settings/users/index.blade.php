@@ -12,7 +12,7 @@
                 <div class="pull-right">
 
                     <a href="!#" data-toggle="modal" data-target="#new_invite">
-                        <span class="btn btn-success btn-sm">New Invite</span>
+                        <span class="btn btn-success btn-sm">{{trans("general.new")}} {{trans("general.invite")}}</span>
                     </a>
                 </div>
                 <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
@@ -31,11 +31,11 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>NAME SURNAME</th>
-                                <th>E-MAIL</th>
-                                <th>STATUS</th>
-                                <th>ROLE</th>
-                                <th>EDIT</th>
+                                <th>{{trans("general.name")}} {{trans("general.surname")}}</th>
+                                <th>{{trans("general.email")}}</th>
+                                <th>{{trans("general.status")}}</th>
+                                <th>{{trans("general.role")}}</th>
+                                <th>{{trans("general.edit")}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -73,11 +73,11 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <h4 class="modal-title">{{trans("general.model")}} {{trans("general.header")}}</h4>
                     </div>
                     <div class="modal-body">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label text-md-right">NAME SURNAME :</label>
+                                <label class="col-sm-3 col-form-label text-md-right">{{trans("general.name")}} {{trans("general.surname")}} :</label>
 
                                 <div class="col-md-9">
                                     <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="" required autofocus>
@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label text-md-right">E-MAIL :</label>
+                                <label class="col-sm-3 col-form-label text-md-right">{{trans("general.email")}} :</label>
 
                                 <div class="col-md-9">
                                     <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="" required>
@@ -105,7 +105,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label text-md-right">MOBILE NO :</label>
+                                <label class="col-sm-3 col-form-label text-md-right">{{trans("general.mobile")}} {{trans("general.number")}} :</label>
 
                                 <div class="col-md-9">
                                     <input type="text" class="form-control{{ $errors->has('mobile') ? ' is-invalid' : '' }}" name="mobile" value="">
@@ -119,7 +119,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label text-md-right">LANGUAGE :</label>
+                                <label class="col-sm-3 col-form-label text-md-right">{{trans("general.language")}} :</label>
 
                                 <div class="col-md-9">
                                     @php $languages = \App\Language::All(); @endphp
@@ -146,7 +146,7 @@
                                     <label class="col-sm-3 col-form-label text-md-right"></label>
 
                                     <div class="col-md-9">
-                                        <button type="button" class="btn btn-danger" id="permission">PERMISSIONS</button>
+                                        <button type="button" class="btn btn-danger" id="permission">{{trans("general.permissions")}}</button>
                                     </div>
                                 </div>
                             @endif
@@ -156,14 +156,14 @@
 
                         @endif
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">COMPANY ACCESS :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">{{trans("general.company")}} {{trans("general.access")}} :</label>
 
                             <div class="col-md-9">
                                 <select class="form-control{{ $errors->has('language') ? ' is-invalid' : '' }}" name="company_access" required>
                                     {{-- TODO: extend of module-role-permissions is required--}}
-                                    <option value="1"{{ old('company_access') == 1 || (isset($user) && $user->hasPermissions(1)) ? ' selected=selected' : '' }}>No Access</option>
-                                    <option value="2"{{ old('company_access') == 2 || (isset($user) && $user->hasPermissions(2)) ? ' selected=selected' : '' }}>View Only</option>
-                                    <option value="3"{{ old('company_access') == 3 || (isset($user) && $user->hasPermissions(3)) ? ' selected=selected' : '' }}>Full Access View/Edit</option>
+                                    <option value="1"{{ old('company_access') == 1 || (isset($user) && $user->hasPermissions(1)) ? ' selected=selected' : '' }}>{{trans("general.no")}} {{trans("general.access")}}</option>
+                                    <option value="2"{{ old('company_access') == 2 || (isset($user) && $user->hasPermissions(2)) ? ' selected=selected' : '' }}>{{trans("general.view")}} {{trans("general.only")}}</option>
+                                    <option value="3"{{ old('company_access') == 3 || (isset($user) && $user->hasPermissions(3)) ? ' selected=selected' : '' }}>{{trans("general.full")}} {{trans("general.access")}} {{trans("general.view")}}/{{trans("general.edit")}}</option>
                                 </select>
 
                                 @if ($errors->has('company_access'))
@@ -175,8 +175,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success" >Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{trans("general.close")}}</button>
+                        <button type="submit" class="btn btn-success" >{{trans("general.save")}}</button>
                     </div>
                 </div>
                 </form>

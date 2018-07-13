@@ -12,7 +12,7 @@
           <span class="widget-icon">
             <i class="fa fa-info"></i>
           </span>
-          <h2>Order # {{ $order->id }} </h2>
+          <h2>{{trans("general.order")}} # {{ $order->id }} </h2>
         </header>
         <!-- widget div-->
         <div>
@@ -21,11 +21,11 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>Product</th>
-                  <th>Quantity</th>
+                  <th>{{trans("general.product")}}</th>
+                  <th>{{trans("general.quantitu")}}</th>
                   <th></th>
-                  <th class="text-center">Price</th>
-                  <th class="text-center">Total</th>
+                  <th class="text-center">{{trans("general.price")}}</th>
+                  <th class="text-center">{{trans("general.total")}}</th>
                 </tr>
               </thead>
               <tbody>
@@ -76,7 +76,7 @@
           <span class="widget-icon">
             <i class="fa fa-user"></i>
           </span>
-          <h2>Customer information</h2>
+          <h2>{{trans("general.customer")}} {{trans("general.information")}}</h2>
         </header>
         <!-- widget div-->
         <div>
@@ -115,7 +115,7 @@
           <span class="widget-icon">
             <i class="fa fa-truck"></i>
           </span>
-          <h2>Shipping address</h2>
+          <h2>{{trans("general.shipping")}} {{trans("general.address")}}</h2>
         </header>
         <!-- widget div-->
         <div>

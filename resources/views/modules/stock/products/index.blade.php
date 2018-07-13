@@ -42,11 +42,11 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>Code</th>
-                                    <th>Adı</th>
-                                    <th>Stok Miktarı</th>
-                                    <th>Alış Fiyatı</th>
-                                    <th>Satış Fiyatı</th>
+                                    <th>{{trans("general.code")}}</th>
+                                    <th>{{trans("general.name")}}</th>
+                                    <th>{{trans("general.stock")}} {{trans("general.quantity")}}</th>
+                                    <th>{{trans("general.purchase")}} {{trans("general.price")}}</th>
+                                    <th>{{trans("general.sales")}} {{trans("general.price")}}</th>
                                 </tr>
                                 </thead>
 

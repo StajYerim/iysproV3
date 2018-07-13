@@ -44,10 +44,10 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>Customer</th>
-                                    <th>Date</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
+                                    <th>{{trans("general.customer")}}</th>
+                                    <th>{{trans("general.date")}}</th>
+                                    <th>{{trans("general.total")}}</th>
+                                    <th>{{trans("general.status")}}</th>
                                 </tr>
                                 </thead>
 

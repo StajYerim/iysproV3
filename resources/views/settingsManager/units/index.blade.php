@@ -19,7 +19,7 @@
                             <table class="table  table-hover table-condensed table-striped">
                                 <thead class="fixed-title">
                                 <tr>
-                                    <th>Unit Name</th>
+                                    <th>{{trans("general.widget")}} Name</th>
                                     <th>Short</th>
                                     <th>Group</th>
                                     <th>Show</th>

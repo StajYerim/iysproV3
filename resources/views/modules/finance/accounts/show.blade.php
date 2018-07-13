@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="info-title"><span v-on:click="details = !details" class="pull-right"
-                                                                  style="cursor: pointer;">Tüm Bilgiler</span></div>
+                                                                  style="cursor: pointer;">{{trans("general.all")}} {{trans("general.informations")}}</span></div>
                                 </div>
                             @endif
                             <br>
@@ -67,8 +67,8 @@
                                         <tr>
                                             <td>
                                                 <div class="info-title"><i class="fa fa-bank" aria-hidden="true"></i>
-                                                    BANKA
-                                                    ve ŞUBE
+                                                    {{trans("general.bank")}}
+                                                    {{trans("general.and")}} {{trans("general.branch")}}
                                                 </div>
                                             </td>
                                             <td>{{$account->bank_name }} {{$account->bank_branch}}</td>
@@ -77,8 +77,8 @@
                                             <td>
                                                 <div class="info-title"><i class="fa fa-exchange"
                                                                            aria-hidden="true"></i>
-                                                    DÖVİZ
-                                                    CİNSİ
+                                                    {{trans("general.currency")}}
+                                                    {{trans("general.type")}}
                                                 </div>
                                             </td>
                                             <td> {{$account->cur_info["code"]}}
@@ -87,7 +87,7 @@
                                         <tr>
                                             <td>
                                                 <div class="info-title"><i class="fa fa-hashtag" aria-hidden="true"></i>
-                                                    HESAP NUMARASI
+                                                    {{trans("general.account")}} {{trans("general.number")}}
                                                 </div>
                                             </td>
                                             <td>{{$account->bank_no}}</td>
@@ -95,7 +95,7 @@
                                         <tr>
                                             <td>
                                                 <div class="info-title"><i class="fa fa-hashtag" aria-hidden="true"></i>
-                                                    IBAN NUMARASI
+                                                    IBAN {{trans("general.number")}}
                                                 </div>
                                             </td>
                                             <td>{{$account->bank_iban}}</td>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="info-title"><span v-on:click="details = !details" class="pull-right"
-                                                                  style="cursor: pointer;">Özet Bilgilere Dön</span>
+                                                                  style="cursor: pointer;">{{trans("general.summary")}} {{trans("general.informations")}} {{trans("general.return")}}</span>
                                     </div>
                                 </div>
                         </div>
@@ -120,12 +120,12 @@
                             <table class="table table-hover">
                                 <tbody>
                                 <tr>
-                                    <th width="20%">İŞLEM TÜRÜ</th>
-                                    <th width="20%">İŞLEM TARİH</th>
-                                    <th style="text-align:right" width="10%">MÜŞTERİ/TEDARİKÇİ</th>
-                                    <th style="text-align:right" width="15%">AÇIKLAMA</th>
-                                    <th style="text-align:right" width="20%">MEBLAĞ</th>
-                                    <th style="text-align:right" width="20%">BAKİYE</th>
+                                    <th width="20%">{{trans("general.operation")}} {{trans("general.type")}}</th>
+                                    <th width="20%">{{trans("general.operation")}} {{trans("general.date")}}</th>
+                                    <th style="text-align:right" width="10%">{{trans("general.customer")}}/{{trans("general.supplier")}}</th>
+                                    <th style="text-align:right" width="15%">{{trans("general.description")}}</th>
+                                    <th style="text-align:right" width="20%">{{trans("general.sum")}}</th>
+                                    <th style="text-align:right" width="20%">{{trans("general.balance")}}</th>
                                 </tr>
                                 </tbody>
                                 <tbody id="tablo" style="font-size: 11px;">

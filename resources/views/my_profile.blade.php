@@ -4,14 +4,14 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                My Profile
+                {{trans("general.benim")}} {{trans("general.profile")}}
             </div>
 
             <div class="card-body">
-                NAME SURNAME : {{ $user->name }}<br>
-                E-MAIL : {{ $user->email }}<br>
-                PASSWORD : ********<br>
-                PHONE : {{ $user->mobile }}
+                {{trans("general.name")}} {{trans("general.surname")}} : {{ $user->name }}<br>
+                {{trans("general.email")}} : {{ $user->email }}<br>
+                {{trans("general.password")}} : ********<br>
+                {{trans("general.mobile")}} : {{ $user->mobile }}
             </div>
         </div>
     </div>

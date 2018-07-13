@@ -80,7 +80,7 @@
 
                                     <fieldset>
                                         <div class="form-group" v-bind:class="{'has-error':errors.has('form.date')}">
-                                            <label class="col-md-3 control-label">Teklif Tarihi</label>
+                                            <label class="col-md-3 control-label">{{trans("general.offer")}} {{trans("general.date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask @change="setDate(form.date)" :mask="['##.##.####']" type="text" name="form.date"
@@ -95,7 +95,7 @@
                                     <fieldset>
                                         <div class="form-group"
                                              v-bind:class="{'has-error':errors.has('form.due_date')}">
-                                            <label class="col-md-3 control-label">Vade Tarihi</label>
+                                            <label class="col-md-3 control-label">{{trans("general.date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"

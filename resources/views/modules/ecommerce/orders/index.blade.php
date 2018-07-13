@@ -12,7 +12,7 @@
                     <span class="widget-icon">
                         <i class="fa fa-info"></i>
                     </span>
-                    <h2>Orders </h2>
+                    <h2>{{trans("general.order")}} </h2>
 
                 </header>
                 <!-- widget div-->
@@ -23,10 +23,10 @@
                             <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Customer</th>
-                                    <th>Total</th>
+                                    <th>{{trans("general.status")}}</th>
+                                    <th>{{trans("general.date")}}</th>
+                                    <th>{{trans("general.customer")}}</th>
+                                    <th>{{trans("general.total")}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,7 +35,7 @@
                         </table>
                         <div class="dt-toolbar-footer">
                           <div class="col-sm-6 col-xs-12 hidden-xs">
-                            <div class="dataTables_info" id="table_info" role="status" aria-live="polite">Toplam 0 Sipariş</div>
+                            <div class="dataTables_info" id="table_info" role="status" aria-live="polite">{{trans("general.total")}} 0 {{trans("general.order")}}</div>
                           </div>
                           <div class="col-sm-6 col-xs-12">
                             <div class="dataTables_paginate paging_simple_numbers">
@@ -60,7 +60,7 @@
                       <span class="widget-icon">
                           <i class="fa fa-info"></i>
                       </span>
-                      <h2>Searches </h2>
+                      <h2>{{trans("general.search")}} </h2>
 
                   </header>
                   <!-- widget div-->
@@ -69,13 +69,13 @@
                       <div class="widget-body">
                         <ul class="nav nav-pills nav-stacked" id="order-status">
                           <li role="presentation" class="active"><a href="#">All</a></li>
-                          <li role="presentation"><a href="#">New</a></li>
-                          <li role="presentation"><a href="#">Approved</a></li>
-                          <li role="presentation"><a href="#">Rejected</a></li>
-                          <li role="presentation"><a href="#">Shipped</a></li>
-                          <li role="presentation"><a href="#">Delivered</a></li>
-                          <li role="presentation"><a href="#">Completed</a></li>
-                          <li role="presentation"><a href="#">Claimed</a></li>
+                          <li role="presentation"><a href="#">{{trans("general.new")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("general.approved")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("general.rejected")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("general.shipped")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("general.delivered")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("general.completed")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("general.claimed")}}</a></li>
                         </ul>
                      </div>
                       <!-- end widget content -->

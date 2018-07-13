@@ -28,7 +28,7 @@
                     -->
                     <header>
                         <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-                        <h2>Widget Title </h2>
+                        <h2>{{trans("general.widget")}} {{trans("general.title")}} </h2>
 
                     </header>
 
@@ -47,18 +47,18 @@
                             <div class="table-responsive">
 <form @submit.prevent="form_send">
     <input type="form-control" v-model="new_item">
-    <button class="btn btn-suuccess" type="submit">Send</button></form>
+    <button class="btn btn-suuccess" type="submit">{{trans("general.send")}}</button></form>
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
                                         <th>@{{ mesaj }}</th>
-                                        <th>action</th>
+                                        <th>{{trans("general.action")}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr v-for="item in list">
                                         <td>@{{item}}</td>
-                                        <td><button class="btn btn-danger" v-on:click="delete">delete</button> </td>
+                                        <td><button class="btn btn-danger" v-on:click="delete">{{trans("general.delete")}}</button> </td>
                                     </tr>
 
                                     </tbody>
