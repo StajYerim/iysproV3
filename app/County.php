@@ -10,6 +10,6 @@ class County extends Model
     public $timestamps = false;
 
     public function city(){
-        return $this->hasOne("App\City","id","province_id");
+        return $this->hasOne(City::class,"id","province_id");
     }
 }
