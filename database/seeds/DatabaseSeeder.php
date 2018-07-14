@@ -22,11 +22,12 @@ class DatabaseSeeder extends Seeder
 //            PermissionsTableSeeder::class,
 //            MenuTableSeeder::class,
 //            MenuDescriptionsTableSeeder::class,
-            CitiesTableSeeder::class,
-            CountyTableSeeder::class,
+//            CitiesTableSeeder::class,
+//            CountyTableSeeder::class,
 //        factory(\App\Model\Companies\Address::class,200)->create(),
 //        UnitsTableSeeder::class,
 //        CurrencyTableSeeder::class,
+        LanguagesTableSeeder::class
 
 
         ]);
