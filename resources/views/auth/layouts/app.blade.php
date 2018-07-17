@@ -20,9 +20,7 @@
     <!-- SmartAdmin RTL Support -->
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/smartadmin-rtl.min.css")}}">
 
-    <!-- We recommend you use "your_style.css" to override SmartAdmin
-         specific styles this will also ensure you retrain your customization with each SmartAdmin update.
-    <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/your_style.css")}}"> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/login.css")}}">
 
     <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/demo.min.css")}}">
@@ -54,7 +52,7 @@
 </head>
 
 <body class="animated fadeInDown" >
-<div  role="main" style="margin-left: 39%;margin-top: 5%;">
+<div  role="main" class="login" >
 
 @yield('guest')
 

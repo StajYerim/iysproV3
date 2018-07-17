@@ -1,7 +1,7 @@
 @extends('auth.layouts.app')
 
 @section('guest')
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5" >
+    <div>
         @include('flash::message')
         @if ($errors->has('email'))
             <div class="alert
