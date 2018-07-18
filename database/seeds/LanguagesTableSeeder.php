@@ -154,7 +154,7 @@ class LanguagesTableSeeder extends Seeder
             ["group" => "general", "key"=> "tag", "text" => '{"en":"Tag","tr":"Etiket"}'],
             ["group" => "general", "key"=> "tags", "text" => '{"en":"Tags","tr":"Etiketler"}'],
             ["group" => "general", "key"=> "app", "text" => '{"en":"App","tr":"Uygulama"}'],
-            ["group" => "general", "key"=> "manager", "text" => '{"en":"Manager","tr":"Yönetici"}'],
+            ["group" => "general", "key"=> "manager", "text" => json_encode(array("en"=>"Manager","tr"=>"Yönetici"))],
 
 
         ]);

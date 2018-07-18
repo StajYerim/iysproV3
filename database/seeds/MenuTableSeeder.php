@@ -61,8 +61,8 @@ class MenuTableSeeder extends Seeder
                 'order' => 3,
                 'permission' => 2,
                 'icon' => 'money',
-                'route' => 'tasks.calendar.index',
-                'is_route' => 1
+                'route' => '',
+                'is_route' => 0
             ],
                     [
                         'id'=>6,
