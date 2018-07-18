@@ -291,7 +291,7 @@ class MenuTableSeeder extends Seeder
                         'order' => 1,
                         'permission' => 2,
                         'icon' => '',
-                        'route' => 'ecommerce.order.index',
+                        'route' => 'ecommerce.orders.index',
                         'is_route' => 1
                     ],
                     [
