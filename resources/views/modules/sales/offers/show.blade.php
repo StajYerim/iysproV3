@@ -206,8 +206,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
 
@@ -342,6 +340,10 @@
                 </div>
             </div>
         </div>
+        {{--Durum Modal--}}
+
+
+
 
     </section>
     @include("components.external.share",[

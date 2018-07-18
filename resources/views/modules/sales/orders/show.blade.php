@@ -64,7 +64,9 @@
                                     @endforeach
                                 </ul>
                             </li>
-
+                            <li class="">
+                                <a class="test" tabindex="-1"  data-toggle="modal" data-target="#waybillModal" href="#">   <i class="fa fa-print" aria-hidden="true"></i> İRSALİYE YAZDIR </a>
+                            </li>
                         </ul>
 
                     </div>
@@ -244,8 +246,6 @@
 
 
 
-
-
                             </div>
                         </div>
 
@@ -301,6 +301,77 @@
         @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales order ?",$id=$order->id])
 
     </section>
+
+    {{--İrsaliye Yazdır--}}
+    <div class="modal fade" id="waybillModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">İrsaliye Yazdır</h4>
+                </div>
+                <div class="modal-body modal-body-content ">
+
+                    <div class="wizard" data-initialize="wizard" id="myWizard">
+                        <div class="steps-contasiner">
+                            <ul class="steps">
+                                <li data-step="1" data-name="campaign" class="active">
+                                    <span class="badge">1</span>Campaign
+                                    <span class="chevron"></span>
+                                </li>
+                                <li data-step="2">
+                                    <span class="badge">2</span>Recipients
+                                    <span class="chevron"></span>
+                                </li>
+                                <li data-step="3" data-name="template">
+                                    <span class="badge">3</span>Template
+                                    <span class="chevron"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="actions">
+                            <button type="button" class="btn btn-default btn-prev">
+                                <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
+                            <button type="button" class="btn btn-primary btn-next" data-last="Complete">Next
+                                <span class="glyphicon glyphicon-arrow-right"></span>
+                            </button>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-pane active sample-pane alert" data-step="1">
+                                <h4>Setup Campaign</h4>
+                                <p>Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic. Beetroot water spinach okra water chestnut ricebean pea catsear courgette.</p>
+                            </div>
+                            <div class="step-pane sample-pane bg-info alert" data-step="2">
+                                <h4>Choose Recipients</h4>
+                                <p>Celery quandong swiss chard chicory earthnut pea potato. Salsify taro catsear garlic gram celery bitterleaf wattle seed collard greens nori. Grape wattle seed kombu beetroot horseradish carrot squash brussels sprout chard. </p>
+                            </div>
+                            <div class="step-pane sample-pane bg-danger alert" data-step="3">
+                                <h4>Design Template</h4>
+                                <p>Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley jÃ­cama salsify. </p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        VAZGEÇ
+                    </button>
+                    <button type="button" class="btn btn-primary" >
+                        KAYDET
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--İrsaliye Yazdır--}}
+
     @include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])
 
     @include("components.external.share",[
@@ -309,9 +380,21 @@
     $message="Merhaba,<br>Satış Siparişi detaylarınız ektedir indirerek inceleyebilirsiniz.<br>İyi çalışmalar.<br><br><b>".account()["name"]."</b>",
     $type="share.order",
     $data = $order])
+
+@push("style")
+    <link rel="stylesheet" href="//www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css">
+    @endpush
     @push('scripts')
+
+        <script src="//www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script>
         <script>
             window.addEventListener("load", () => {
+
+                $('#myWizard').on('actionclicked.fu.wizard', function (evt, data) {
+                    // do something
+                });
+
+
                 VueName = new Vue({
                     el: "#show",
                     data: {
@@ -458,6 +541,7 @@
                     mounted: function () {
                         datePicker();
                         this.vat_check
+
                     }
                 });
             });
