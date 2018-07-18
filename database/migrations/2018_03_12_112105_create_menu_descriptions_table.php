@@ -16,7 +16,7 @@ class CreateMenuDescriptionsTable extends Migration
         Schema::create('menu_descriptions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('lang_code'); // e.g. en, tr. ar
-            $table->integer('menu_id');
+            $table->integer('menu_id')->unsigned();
             $table->string('name');
             $table->foreign("menu_id")->on("menus")->references("id")->onDelete("cascade");
         });
