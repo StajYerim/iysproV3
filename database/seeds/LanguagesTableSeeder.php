@@ -12,7 +12,7 @@ class LanguagesTableSeeder extends Seeder
     public function run()
     {
         DB::table("language_lines")->delete();
-        DB::table("language_lines")->insert([
+        \App\Language_lines::create([
             ["group" => "general", "key"=> "customer", "text" => ['en'=>'Customer','tr'=>'Müşteri']],
             ["group" => "general", "key"=> "supplier", "text" => ['en'=>'Supplier','tr'=>'Tedarikçi']],
             ["group" => "general", "key"=> "service", "text" => ['en'=>'Service','tr'=>'Hizmet']],
