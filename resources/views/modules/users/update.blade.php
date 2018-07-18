@@ -15,7 +15,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">Name</label>
+                    <label class="control-label">{{trans("general.name")}}</label>
                     <input type="text" class="form-control" v-model="profile_form.name">
                   </div>
                 </div>
@@ -23,7 +23,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">E-Mail</label>
+                    <label class="control-label">{{trans("general.email")}}</label>
                     <input type="text" class="form-control" v-model="profile_form.email">
                   </div>
                 </div>
@@ -31,7 +31,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">Mobile</label>
+                    <label class="control-label">{{trans("general.mobile")}}</label>
                     <input type="text" class="form-control" v-model="profile_form.mobile">
                   </div>
                 </div>
@@ -41,7 +41,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <button class="btn btn-success" @click="profile_form_send" type="button">
-                    <i class="fa fa-send"></i> Save
+                    <i class="fa fa-send"></i> {{trans("general.save")}}
                   </button>
                 </div>
               </div>
@@ -56,14 +56,14 @@
           <div class="widget-body ">
             <fieldset>
               <legend>
-                Password Update
+                {{trans("general.password")}} {{trans("general.update")}}
               </legend>
             </fieldset>
             <fieldset>
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">Old Password</label>
+                    <label class="control-label">{{trans("general.old")}} {{trans("general.password")}}</label>
                     <input type="password" class="form-control" v-model="password_form.old_password">
                   </div>
                 </div>
@@ -71,7 +71,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">New Password</label>
+                    <label class="control-label">{{trans("general.new")}} {{trans("general.password")}}</label>
                     <input type="password" class="form-control" v-model="password_form.new_password">
                   </div>
                 </div>
@@ -79,7 +79,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">New Password Confirmation</label>
+                    <label class="control-label">{{trans("general.new")}} {{trans("general.password")}} {{trans("general.confirmation")}}</label>
                     <input type="password" class="form-control" v-model="password_form.new_password_confirmation">
                   </div>
                 </div>
@@ -89,7 +89,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <button class="btn btn-success" @click="password_form_send" type="button">
-                    <i class="fa fa-send"></i> Save
+                    <i class="fa fa-send"></i> {{trans("general.save")}}
                   </button>
                 </div>
               </div>

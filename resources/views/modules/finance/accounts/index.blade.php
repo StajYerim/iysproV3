@@ -43,10 +43,10 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>Account Name</th>
+                                    <th>{{trans("general.account")}} {{trans("general.name")}}</th>
                                     <th>IBAN</th>
-                                    <th>Currency</th>
-                                    <th>Balance</th>
+                                    <th>{{trans("general.currency")}}</th>
+                                    <th>{{trans("general.balance")}}</th>
                                 </tr>
                                 </thead>
 

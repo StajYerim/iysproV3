@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="info-title"><span v-on:click="details = !details" class="pull-right"
-                                                                  style="cursor: pointer;">Tüm Bilgiler</span></div>
+                                                                  style="cursor: pointer;">{{trans("general.all")}} {{trans("general.informations")}}</span></div>
                                 </div>
                             @endif
                             <br>
@@ -67,8 +67,8 @@
                                         <tr>
                                             <td>
                                                 <div class="info-title"><i class="fa fa-bank" aria-hidden="true"></i>
-                                                    BANKA
-                                                    ve ŞUBE
+                                                    {{trans("general.bank")}}
+                                                    {{trans("general.and")}} {{trans("general.branch")}}
                                                 </div>
                                             </td>
                                             <td>{{$account->bank_name }} {{$account->bank_branch}}</td>
@@ -77,8 +77,8 @@
                                             <td>
                                                 <div class="info-title"><i class="fa fa-exchange"
                                                                            aria-hidden="true"></i>
-                                                    DÖVİZ
-                                                    CİNSİ
+                                                    {{trans("general.currency")}}
+                                                    {{trans("general.type")}}
                                                 </div>
                                             </td>
                                             <td> {{$account->cur_info["code"]}}
@@ -87,7 +87,7 @@
                                         <tr>
                                             <td>
                                                 <div class="info-title"><i class="fa fa-hashtag" aria-hidden="true"></i>
-                                                    HESAP NUMARASI
+                                                    {{trans("general.account")}} {{trans("general.number")}}
                                                 </div>
                                             </td>
                                             <td>{{$account->bank_no}}</td>
@@ -95,7 +95,7 @@
                                         <tr>
                                             <td>
                                                 <div class="info-title"><i class="fa fa-hashtag" aria-hidden="true"></i>
-                                                    IBAN NUMARASI
+                                                    IBAN {{trans("general.number")}}
                                                 </div>
                                             </td>
                                             <td>{{$account->bank_iban}}</td>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="info-title"><span v-on:click="details = !details" class="pull-right"
-                                                                  style="cursor: pointer;">Özet Bilgilere Dön</span>
+                                                                  style="cursor: pointer;">{{trans("general.summary")}} {{trans("general.informations")}} {{trans("general.return")}}</span>
                                     </div>
                                 </div>
                         </div>
@@ -120,12 +120,12 @@
                             <table class="table table-hover">
                                 <tbody>
                                 <tr>
-                                    <th width="20%">İŞLEM TÜRÜ</th>
-                                    <th width="20%">İŞLEM TARİH</th>
-                                    <th style="text-align:right" width="10%">MÜŞTERİ/TEDARİKÇİ</th>
-                                    <th style="text-align:right" width="15%">AÇIKLAMA</th>
-                                    <th style="text-align:right" width="20%">MEBLAĞ</th>
-                                    <th style="text-align:right" width="20%">BAKİYE</th>
+                                    <th width="20%">{{trans("general.operation")}} {{trans("general.type")}}</th>
+                                    <th width="20%">{{trans("general.operation")}} {{trans("general.date")}}</th>
+                                    <th style="text-align:right" width="10%">{{trans("general.customer")}}/{{trans("general.supplier")}}</th>
+                                    <th style="text-align:right" width="15%">{{trans("general.description")}}</th>
+                                    <th style="text-align:right" width="20%">{{trans("general.sum")}}</th>
+                                    <th style="text-align:right" width="20%">{{trans("general.balance")}}</th>
                                 </tr>
                                 </tbody>
                                 <tbody id="tablo">
@@ -168,7 +168,7 @@
                                 <div class="col-sm-12">
                                     <button v-on:click="other_transfer" type="button"
                                             class="btn  btn-block bg-color-blueDark txt-color-white ">
-                                        DİĞER HESABA TRANSFER YAP
+                                        {{trans("general.other")}} {{trans("general.account")}} {{trans("general.transfer")}}
                                     </button>
 
                                 </div>
@@ -178,17 +178,17 @@
 
                                     <div class="btn-group btn-block">
                                         <button class="btn btn-block bg-color-blueDark txt-color-white dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                            PARA GİRİŞİ EKLE <span class="caret"></span>
+                                            {{trans("general.money")}} {{trans("general.entry")}} {{trans("general.add")}} <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" style="min-width:293px;text-align:center;font-size:15px;">
                                             <li>
                                                 <a href="javascript:void(0);" v-on:click="money_in"><i
-                                                            class="fa fa-sign-in fa-rotate-90"></i> PARA GİRİŞİ EKLE</a>
+                                                            class="fa fa-sign-in fa-rotate-90"></i> {{trans("general.money")}} {{trans("general.entry")}} {{trans("general.add")}}</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);" v-on:click="money_out"><i
-                                                            class="fa fa-sign-out fa-rotate-270"></i> PARA ÇIKIŞI
-                                                    EKLE</a>
+                                                            class="fa fa-sign-out fa-rotate-270"></i> {{trans("general.money")}} {{trans("general.out")}}
+                                                    {{trans("general.add")}}</a>
                                             </li>
 
                                         </ul>
@@ -200,7 +200,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="button" class="btn btn-block bg-color-blueLight txt-color-white">
-                                        DİĞER HESAP İŞLEMLERİ
+                                        {{trans("general.other")}} {{trans("general.account")}} {{trans("general.operations")}}
                                     </button>
                                 </div>
                             </div>
@@ -209,14 +209,14 @@
                         <div v-show="other_transfer_show">
                             <form @submit.prevent="money_in_send(3)" class="form-horizontal bv-form"
                                   novalidate="novalidate">
-                                <h1><i class="fa fa-1x c-textLight fa-share-square-o"></i> <span class="semi-bold">HESABA TRANSFER</span>
+                                <h1><i class="fa fa-1x c-textLight fa-share-square-o"></i> <span class="semi-bold">{{trans("general.account")}} {{trans("general.transfer")}}</span>
                                 </h1>
 
                                 <input type="hidden" value="4" name="thisAccId">
                                 <fieldset>
                                     <div class="form-group "  :class="{'has-error': errors.has('money_form.bank_account_id') }">
                                         <label class="col-sm-4 control-label">
-                                            <span>HESAP</span>
+                                            <span>{{trans("general.account")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -233,7 +233,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>TARİH</span>
+                                            <span>{{trans("general.date")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
@@ -248,7 +248,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>MEBLAĞ</span>
+                                            <span>{{trans("general.sum")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -263,7 +263,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>AÇIKLAMA</span>
+                                            <span>{{trans("general.description")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -274,11 +274,11 @@
                                 </fieldset>
                                 <footer>
                                     <button type="button" v-on:click="cancel" class="btn pull-left ">
-                                        VAZGEÇ
+                                        {{trans("general.cancel")}}
                                     </button>
 
                                     <button type="submit" :disabled="money_form.amount == 0 || money_form.bank_account_id == '' " class="btn btn btn-danger pull-right" >
-                                        TRANSFER ET
+                                        {{trans("general.transfer")}}
                                     </button>
                                     <br><br>
                                 </footer>
@@ -293,7 +293,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>TARİH</span>
+                                            <span>{{trans("general.date")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
@@ -309,7 +309,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>MEBLAĞ</span>
+                                            <span>{{trans("general.sum")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -324,7 +324,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>AÇIKLAMA</span>
+                                            <span>{{trans("general.description")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -336,12 +336,12 @@
                                 </fieldset>
                                 <footer>
                                     <button type="button" v-on:click="cancel" class="btn pull-left backAccountDetail">
-                                        VAZGEÇ
+                                        {{trans("general.cancel")}}
                                     </button>
 
                                     <button type="submit" class="btn btn btn-danger pull-right"
                                             :disabled="money_form.amount == 0">
-                                        EKLE
+                                        {{trans("general.add")}}
                                     </button>
                                     <br><br>
                                 </footer>
@@ -352,12 +352,12 @@
                         <div v-show="money_out_show">
                             <form @submit.prevent="money_in_send(0)" class="form-horizontal bv-form"
                                   novalidate="novalidate">
-                                <h1><i class="fa fa-sign-out fa-rotate-270"></i> <span class="semi-bold">PARA ÇIKIŞI</span></h1>
+                                <h1><i class="fa fa-sign-out fa-rotate-270"></i> <span class="semi-bold">{{trans("general.money")}} {{trans("general.out")}}</span></h1>
 
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>TARİH</span>
+                                            <span>{{trans("general.date")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
@@ -373,7 +373,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>MEBLAĞ</span>
+                                            <span>{{trans("general.sum")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -388,7 +388,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>AÇIKLAMA</span>
+                                            <span>{{trans("general.description")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -400,12 +400,12 @@
                                 </fieldset>
                                 <footer>
                                     <button type="button" v-on:click="cancel" class="btn pull-left ">
-                                        VAZGEÇ
+                                        {{trans("general.cancel")}}
                                     </button>
 
                                     <button type="submit" class="btn btn btn-danger pull-right"
                                             :disabled="money_form.amount == 0">
-                                        EKLE
+                                        {{trans("general.add")}}
                                     </button>
                                     <br><br>
                                 </footer>
@@ -416,7 +416,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <span style="color:gray;font-weight: 600;">BAKİYE <span style="font-size:15px;"
+                                    <span style="color:gray;font-weight: 600;">{{trans("general.balance")}} <span style="font-size:15px;"
                                                                                             class="pull pull-right">@{{ balance }}  <i
                                                     class="fa fa-{{strtolower($account->cur_info["code"] == "TRL" ? "try":$account->cur_info["code"])}}"></i></span></span>
                                 </div>

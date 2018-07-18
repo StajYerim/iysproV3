@@ -10,28 +10,28 @@
             <div class="col-lg-4 col-sm-4">
                    <span class="pull-right">
                                          <div class="btn-group">
-                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">DİĞER
-                                İŞLEMLER <span class="caret"></span> </a>
+                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{trans("general.other")}}
+                                {{trans("general.operations")}} <span class="caret"></span> </a>
                             <ul class="dropdown-menu">
                                                                    <li>
                                     <a href="#" data-toggle="modal" data-target="#openStartReceipt"><i
-                                                class="fa fa-plus " aria-hidden="true"></i> AÇILIŞ FİŞİ OLUŞTUR</a>
+                                                class="fa fa-plus " aria-hidden="true"></i> {{trans("general.opening")}} {{trans("general.receipt")}} {{trans("general.create")}}</a>
                                 </li>
                                                                 <li>
-                                    <a href="#" id="productArchive"><i class="fa fa-archive" aria-hidden="true"></i> ARŞİVLE</a>
+                                    <a href="#" id="productArchive"><i class="fa fa-archive" aria-hidden="true"></i> {{trans("general.archive")}}</a>
                                     <a href="#" style="display:none" id="productArchiveOut"><i class="fa fa-archive"
-                                                                                               aria-hidden="true"></i> ARŞİVDEN ÇIKAR</a>
+                                                                                               aria-hidden="true"></i> {{trans("general.archive")}} {{trans("general.remove")}}</a>
                                 </li>
                                 <li>
                                     <a href="#!" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
-                                                                                                   aria-hidden="true"> </i> DELETE</a>
+                                                                                                   aria-hidden="true"> </i> {{trans("general.delete")}}</a>
                                 </li>
                             </ul>
                         </div>
 
                             <a class="btn btn-default "
                                href="{{route("stock.movements.form",[aid(),$stock->id,"update","in"])}}"><i
-                                        class="fa fa-edit"></i> EDİT</a>
+                                        class="fa fa-edit"></i> {{trans("general.edit")}}</a>
 
                         </span>
             </div>
@@ -64,8 +64,8 @@
 
                                         <tbody>
                                         <tr>
-                                            <th width="33%">HİZMET / ÜRÜN</th>
-                                            <th width="10%">MİKTAR</th>
+                                            <th width="33%">{{trans("general.service")}} / {{trans("general.product")}}</th>
+                                            <th width="10%">{{trans("general.quantity")}}</th>
                                         </tr>
 
                                         </tbody>

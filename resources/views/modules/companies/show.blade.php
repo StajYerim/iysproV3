@@ -28,7 +28,7 @@
                                 <li>
                                     <a href="{{route("sales.companies.form",[aid(),'Customer',$company->id,'update'])}}"><i
                                                 class="fa fa-edit" aria-hidden="true"></i>
-                                        DÜZENLE</a>
+                                        {{trans("general.edit")}}</a>
                                 </li>
                                 <li>
                                     <a href="#!"  data-toggle="modal" data-target="#transaction"><i
@@ -46,7 +46,7 @@
                                 <li>
                                     <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
                                                                                                   aria-hidden="true"></i>
-                                        SİL</a>
+                                        {{trans("general.delete")}}</a>
                                 </li>
 
                             </ul>
@@ -54,17 +54,17 @@
                         </div>
                         <div class="btn-group">
                             <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
-                                        class="fa fa-print"></span> YAZDIR <span class="caret"></span> </a>
+                                        class="fa fa-print"></span> {{trans("general.print")}} <span class="caret"></span> </a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
                                                 class="fa fa-print" aria-hidden="true"></i>
-                                        TEKLİFİ YAZDIR</a>
+                                        TEKLİFİ {{trans("general.print")}}</a>
                                 </li>
                                 <li>
                                     <a download="" href="http://demo.iyspro.com/salesmanager/sales-offer/8/printDown"
                                        id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
-                                        TEKLİFİ İNDİR</a>
+                                        TEKLİFİ {{trans("general.download")}}</a>
                                 </li>
 
                             </ul>
@@ -72,7 +72,7 @@
                         </div>
 
                         <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
-                                    class="fa fa-envelope"></i> Paylaş</a>
+                                    class="fa fa-envelope"></i> {{trans("general.share")}}</a>
 
                     </div>
 
@@ -113,49 +113,49 @@
                                                            border="0">
                                                         <tr>
                                                             <td><i class="fa fa-building-o" aria-hidden="true"></i>
-                                                                FİRMA ÜNVANI
+                                                                {{trans("general.company")}} {{trans("general.title")}}
 
                                                             </td>
                                                             <td>{{$company->company_name}}</td>
                                                         </tr>
                                                         <tr>
                                                             <td><i class="fa fa-info-circle" aria-hidden="true"></i>
-                                                                KISA İSİM
+                                                                {{trans("general.short")}} {{trans("general.name")}}
 
                                                             </td>
                                                             <td>{{$company->company_short_name}}</td>
                                                         </tr>
                                                         <tr>
                                                             <td><i class="fa fa-envelope" aria-hidden="true"></i>
-                                                                E-POSTA
+                                                                {{trans("general.email")}}
 
                                                             </td>
                                                             <td>{{$company->email}}</td>
                                                         </tr>
                                                         <tr>
                                                             <td><i class="fa fa-phone" aria-hidden="true"></i>
-                                                                TELEFON NUMARASI
+                                                                {{trans("general.phone")}} {{trans("general.number")}}
 
                                                             </td>
                                                             <td>{{$company->phone}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><i class="fa fa-fax" aria-hidden="true"></i> FAKS
-                                                                NUMARASI
+                                                            <td><i class="fa fa-fax" aria-hidden="true"></i> {{trans("general.fax")}}
+                                                                {{trans("general.number")}}
 
                                                             </td>
                                                             <td>{{$company->fax}}</td>
                                                         </tr>
                                                         <tr>
                                                             <td><i class="fa fa-map-marker" aria-hidden="true"></i>
-                                                                AÇIK ADRESİ
+                                                                {{trans("general.open")}} {{trans("general.address")}}
 
                                                             </td>
                                                             <td>{{$company->addresss  }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><i class="fa fa-gavel" aria-hidden="true"></i> VERGİ
-                                                                BİLGİLERİ
+                                                            <td><i class="fa fa-gavel" aria-hidden="true"></i> {{trans("general.tax")}}
+                                                                {{trans("general.information")}}
 
                                                             </td>
                                                             <td>{{$company->tax_id}}/{{$company->tax_office}}</td>
@@ -182,11 +182,11 @@
                                         <table class="table table-striped table-condensed table-hover smart-form ">
                                             <thead>
                                             <tr>
-                                                <th width="15%">İŞLEM TÜRÜ</th>
-                                                <th width="30%">AÇIKLAMA</th>
-                                                <th width="10%">İŞLEM TARİHİ</th>
-                                                <th width="10%">MEBLAĞ</th>
-                                                <th width="10%">BAKİYE</th>
+                                                <th width="15%">{{trans("general.operation")}} {{trans("general.type")}}</th>
+                                                <th width="30%">{{trans("general.description")}}</th>
+                                                <th width="10%">{{trans("general.operation")}} {{trans("general.date")}}</th>
+                                                <th width="10%">{{trans("general.sum")}}</th>
+                                                <th width="10%">{{trans("general.balance")}}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -233,7 +233,7 @@
 
                                             <div class="row">
                                                 <div class="col-sm-12 bottom-info" >
-                                                     BAKİYE <span class="pull-right">@{{remaining}}</span>
+                                                    {{trans("general.balance")}} <span class="pull-right">@{{remaining}}</span>
 
                                                 </div>
                                             </div>
@@ -241,7 +241,7 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <button type="button" class="btn btn-primary btn btn-block">
-                                                        EKSTRE PDF OLARAK İNDİR
+                                                        {{trans("general.extract")}} PDF OLARAK {{trans("general.download")}}
                                                     </button>
                                                 </div>
                                             </div>

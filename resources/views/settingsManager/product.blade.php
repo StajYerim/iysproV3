@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">App Settings Manager</div>
+                    <div class="card-header">{{trans("general.app")}} {{trans("general.settings")}} {{trans("general.manager")}}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -15,7 +15,7 @@
                         @endif
                         <div class="row">
                             <div class="col-xs-6 col-md-3">
-                                    Product İmage Upload ?
+                                {{trans("general.product")}} {{trans("general.image")}} {{trans("general.upload")}} ?
                             </div>
 
                             <div class="col-xs-6 col-md-9">
@@ -26,11 +26,11 @@
 
                             <div class="col-xs-6 col-md-6">
                                 <a href="#">
-                                   Stock Units
+                                    {{trans("general.stock")}} Units
                                 </a>
                             </div>
                         </div><br>
-                            <button type="submit" >Save!</button>
+                            <button type="submit" >{{trans("general.save")}}!</button>
                     </div>
                 </div>
             </div>

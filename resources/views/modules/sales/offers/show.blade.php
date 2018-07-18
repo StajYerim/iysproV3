@@ -16,7 +16,7 @@
                             <li>
                                 <a href="{{route("sales.offers.form",[aid(),$offer->id,"update"])}}"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
-                                    DÜZENLE</a>
+                                    {{trans("general.edit")}}</a>
                             </li>
                             <li>
                                 <a href="{{route("sales.offers.form",[aid(),$offer->id,"copy"])}}"><i class="fa fa-copy"
@@ -32,7 +32,7 @@
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
                                                                                               aria-hidden="true"></i>
-                                    SİL</a>
+                                    {{trans("general.delete")}}</a>
                             </li>
 
                         </ul>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="btn-group">
                         <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
-                                    class="fa fa-print"></span> YAZDIR <span class="caret"></span> </a>
+                                    class="fa fa-print"></span> {{trans("general.print")}} <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
                                 <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> TEKLİFİ YAZDIR</a>
@@ -100,11 +100,11 @@
 
                                             <tbody>
                                             <tr>
-                                                <th width="33%">HİZMET / ÜRÜN</th>
-                                                <th width="14%">MİKTAR</th>
-                                                <th width="10%" style="text-align:right">BİRİM F.</th>
+                                                <th width="33%">{{trans("general.service")}} / {{trans("general.product")}}</th>
+                                                <th width="14%">{{trans("general.quantitu")}}</th>
+                                                <th width="10%" style="text-align:right">{{trans("general.unit")}} F.</th>
                                                 <th width="10%" style="text-align:right">KDV</th>
-                                                <th width="10%" style="text-align:right">TOPLAM</th>
+                                                <th width="10%" style="text-align:right">{{trans("general.total")}}</th>
                                             </tr>
 
                                             </tbody>
@@ -136,7 +136,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">ARA TOPLAM</div>
+                                                        <div class="bottom-info">{{trans("general.subtotal")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info">{{$offer->sub_total}} <i
@@ -149,7 +149,7 @@
                                                     v-if="vato.total!=0">
 
                                                     <td style="border-top: 0px;">
-                                                        <div class="bottom-info" style="font-size: 11px" >TOPLAM KDV @{{
+                                                        <div class="bottom-info" style="font-size: 11px" >{{trans("general.total")}} KDV @{{
                                                             vato.name }}
                                                         </div>
                                                     </td>
@@ -161,7 +161,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">TOPLAM KDV</div>
+                                                        <div class="bottom-info">{{trans("general.total")}} KDV</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info">{{$offer->vat_total}} <i
@@ -170,7 +170,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">GENEL TOPLAM</div>
+                                                        <div class="bottom-info">{{trans("general.general")}} {{trans("general.total")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info"
@@ -221,7 +221,7 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">TEKLİF TUTARI <span class="pull-right"
+                                        <div class="bottom-info">{{trans("general.offer")}} {{trans("general.amount")}}<span class="pull-right"
                                                                                      style="font-size:15px;color:#2AC!important">{{$offer->grand_total}}
                                                 <i class="fa fa-{{$offer->currency}}"></i></span></div>
                                     </div>
@@ -278,14 +278,14 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             ×
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">DEĞİŞTİR</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{trans("general.change")}}</h4>
                     </div>
                     <div class="modal-body modal-body-content">
                         <form id="StatusForm">
                             <div class="row">
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">DURUM</label>
+                                        <label class="col-md-4 control-label">{{trans("general.status")}}</label>
                                         <div class="col-md-6 ">
                                             <div class="input-group">
                                                 <select v-model="form.status" class="form-control">
@@ -299,7 +299,7 @@
                                 <HR>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">EFEKTİF TARİH</label>
+                                        <label class="col-md-4 control-label">{{trans("general.effective")}} {{trans("general.date")}}</label>
                                         <div class="col-md-4 ">
                                             <div class="input-group">
                                                 <input type="text"
@@ -318,7 +318,7 @@
                                 <hr>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">AÇIKLAMA</label>
+                                        <label class="col-md-4 control-label">{{trans("general.description")}}</label>
                                         <div class="col-md-6 ">
                                             <div class="input-group">
                                                 <textarea v-model="form.note" rows="3" cols="25"

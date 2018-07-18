@@ -7,14 +7,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Ürün Ekle</h4>
+        <h4 class="modal-title" id="myModalLabel">{{trans("general.product")}} {{trans("general.add")}}</h4>
       </div>
       <div class="modal-body">
         <form id="add-product-form" action="{{ route('ecommerce.products.add_product', [ aid() ]) }}" method="POST">
           @csrf
           <input type="hidden" name="category">
           <div id="wizard">
-            <h1>Kategori</h1>
+            <h1>{{trans("general.category")}}</h1>
             <div>
               <div class="form-group">
                 <select class="form-control" id="n11-category-list" size="5"></select>
@@ -37,22 +37,22 @@
               </div>
             </div>
 
-            <h1>Ürün Detayı</h1>
+            <h1>{{trans("general.product")}} {{trans("general.detail")}}</h1>
             <div>
               <div class="form-group">
-                <label>Ürün Seç</label>
+                <label>{{trans("general.product")}} {{trans("general.choose")}}</label>
                 <select name="product" class="form-control" id="product-list" size="5"></select>
               </div>
               <div class="form-group">
-                <label>Mağaza Kodu</label>
+                <label>{{trans("general.shop")}} {{trans("general.code")}}</label>
                 <input type="text" name="store_code" placeholder="000000" autocomplete="OFF" class="form-control">
               </div>
               <div class="form-group">
-                <label>Satış Fiyatı</label>
+                <label>{{trans("general.sales")}} {{trans("general.price")}}</label>
                 <input type="text" name="price" value="0,00" autocomplete="OFF" class="form-control">
               </div>
               <div class="form-group">
-                <label>Stok Sayısı</label>
+                <label>{{trans("general.stock")}} {{trans("general.number")}}</label>
                 <input type="text" name="stock" value="1" autocomplete="OFF" class="form-control">
               </div>
             </div>
@@ -60,7 +60,7 @@
             <h1>Açıklama</h1>
             <div>
               <div class="form-group">
-                <label>Açıklama</label>
+                <label>{{trans("general.description")}}</label>
                 <textarea name="description" class="form-control" rows="5"></textarea>
               </div>
             </div>
@@ -79,10 +79,10 @@
     <!-- row -->
     <div class="row">
         <a href="#" data-toggle="modal" data-target="#myModal" style="margin-top:8px;margin-right:13px;margin-bottom:8px;float: right;" class="btn btn-success">
-          <i class="fa fa-plus"></i> Ürün Ekle
+          <i class="fa fa-plus"></i> {{trans("general.product")}} {{trans("general.add")}}
         </a>
         <a href="#" style="margin-top:8px;margin-right:8px;margin-bottom:8px;float: right;" class="btn btn-default">
-          <i class="fa fa-filter"></i> Filtrele
+          <i class="fa fa-filter"></i> {{trans("general.filter")}}
         </a>
         <!-- NEW WIDGET START -->
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -91,7 +91,7 @@
                     <span class="widget-icon">
                         <i class="fa fa-comments"></i>
                     </span>
-                    <h2>Ürünler </h2>
+                    <h2>{{trans("general.product")}} </h2>
                 </header>
                 <!-- widget div-->
                 <div style="padding:5px 13px 0">
@@ -102,11 +102,11 @@
                             <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>Code</th>
-                                    <th>Adı</th>
+                                    <th>{{trans("general.code")}}</th>
+                                    <th>{{trans("general.name")}}</th>
                                     <th>API</th>
-                                    <th>Stok Miktarı</th>
-                                    <th>Satış Fiyatı</th>
+                                    <th>{{trans("general.stock")}} {{trans("general.quantity")}}</th>
+                                    <th>{{trans("general.sales")}} {{trans("general.price")}}</th>
                                 </tr>
                             </thead>
                         </table>

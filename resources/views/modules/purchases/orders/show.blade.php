@@ -17,24 +17,24 @@
                             <li>
                                 <a href="{{route("purchases.orders.form",[aid(),$order->id,"update"])}}"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
-                                    DÜZENLE</a>
+                                    {{trans("general.edit")}}</a>
                             </li>
                             <li>
                                 <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction_payment"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
-                                    ÖDEME EKLE</a>
+                                    {{trans("general.payment")}} {{trans("general.add")}}</a>
                             </li>
                             <li>
                                 <a href="{{route("purchases.orders.form",[aid(),$order->id,"copy"])}}"><i class="fa fa-copy"
                                                                                                       aria-hidden="true"></i>
-                                    KOPYASINI OLUŞTUR</a>
+                                    {{trans("general.copy")}} {{trans("general.create")}}</a>
                             </li>
 
                             <li class="divider"></li>
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
                                                                                               aria-hidden="true"></i>
-                                    SİL</a>
+                                    {{trans("general.delete")}}</a>
                             </li>
 
                         </ul>
@@ -42,17 +42,17 @@
                     </div>
                     <div class="btn-group">
                         <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
-                                    class="fa fa-print"></span> YAZDIR <span class="caret"></span> </a>
+                                    class="fa fa-print"></span> {{trans("general.print")}} <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
                                             class="fa fa-print" aria-hidden="true"></i>
-                                    TEKLİFİ YAZDIR</a>
+                                    {{trans("general.offer")}} {{trans("general.print")}}</a>
                             </li>
                             <li>
                                 <a download="" href="http://demo.iyspro.com/salesmanager/sales-offer/8/printDown"
                                    id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
-                                    TEKLİFİ İNDİR</a>
+                                    {{trans("general.offer")}} {{trans("general.download")}}</a>
                             </li>
 
                         </ul>
@@ -60,7 +60,7 @@
                     </div>
 
                     <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
-                                class="fa fa-envelope"></i> Paylaş</a>
+                                class="fa fa-envelope"></i> {{trans("general.share")}}</a>
 
                 </div>
 
@@ -96,11 +96,11 @@
 
                                             <tbody>
                                             <tr>
-                                                <th width="33%">HİZMET / ÜRÜN</th>
-                                                <th width="14%">MİKTAR</th>
-                                                <th width="10%" style="text-align:right">BİRİM F.</th>
+                                                <th width="33%">{{trans("general.service")}} / {{trans("general.product")}}</th>
+                                                <th width="14%">{{trans("general.quantity")}}</th>
+                                                <th width="10%" style="text-align:right">{{trans("general.unit")}} F.</th>
                                                 <th width="10%" style="text-align:right">KDV</th>
-                                                <th width="10%" style="text-align:right">TOPLAM</th>
+                                                <th width="10%" style="text-align:right">{{trans("general.total")}}</th>
                                             </tr>
 
                                             </tbody>
@@ -132,7 +132,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">ARA TOPLAM</div>
+                                                        <div class="bottom-info">{{trans("general.subTotal")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info">{{$order->sub_total}} <i
@@ -157,7 +157,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">TOPLAM KDV</div>
+                                                        <div class="bottom-info">{{trans("general.total")}} KDV</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info">{{$order->vat_total}} <i
@@ -166,7 +166,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">GENEL TOPLAM</div>
+                                                        <div class="bottom-info">{{trans("general.general")}} {{trans("general.total")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info"
@@ -177,7 +177,7 @@
                                                 @if($order->currency != "try")
                                                     <tr>
                                                         <td>
-                                                            <div class="bottom-info">TL KARŞILIĞI</div>
+                                                            <div class="bottom-info">TL {{trans("general.provision")}}</div>
                                                         </td>
                                                         <td style="text-align:right">
                                                             <div class="bottom-info"
@@ -207,7 +207,7 @@
                                                     <td width="5%"></td>
                                                     <td width="40%"></td>
                                                     <td></td>
-                                                    <td>KALAN</td>
+                                                    <td>{{trans("general.remaining")}}</td>
                                                     <td><span class="pull-right">@{{ remaining }} <i class="fa fa-{{$order->currency}}"></i></span></td>
                                                 </tr>
                                                 </tfoot>
@@ -249,18 +249,18 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">SİPARİŞ TUTARI <span class="pull-right"
+                                        <div class="bottom-info">{{trans("general.order")}} {{trans("general.amount")}} <span class="pull-right"
                                                                                    style="font-size:15px;color:#2AC!important">{{$order->grand_total}}
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">KALAN TUTAR <span class="pull-right"
+                                        <div class="bottom-info">{{trans("general.remaining")}} {{trans("general.amount")}} <span class="pull-right"
                                                                                      style="font-size:15px;color:#2AC!important">@{{ remaining }}
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">HESAP BAKİYESİ <span class="pull-right"
+                                        <div class="bottom-info">{{trans("general.account")}} {{trans("general.balance")}} <span class="pull-right"
                                                                                    style="font-size:15px;color:#2AC!important">{{$order->company->balance}}
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>

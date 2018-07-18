@@ -111,7 +111,7 @@
                                         <span style="line-height:12px;font-size:10px;">
                                             {!! str_replace("\n","<br>",account()["address"]) !!} {!! account()["town"] !!}/{!! account()["city"] !!}
 
-                                            <br>V.D ve No {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>Telefon {!! account()["phone"] !!}<br>
+                                            <br>V.D {{trans("general.and")}} {{trans("general.number")}} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>{{trans("general.phone")}} {!! account()["phone"] !!}<br>
 
                                     </span>
                                     </td>
@@ -123,10 +123,10 @@
                 </table>
                 {{--{!! $logo->startText !!}--}}
 
-                <span style="text-align:center"><h2>SATIŞ SİPARİŞİ</h2></span>
+                <span style="text-align:center"><h2>{{trans("general.satis")}} {{trans("general.order")}}</h2></span>
                 <span style="float:left"><b style="font-size:15px;">
                         {{$order->company["company_name"]}}
-                    </b> <span style="float:right" >Tarih:
+                    </b> <span style="float:right" >{{trans("general.date")}}:
                         {{$order->date}}
                     </span></span>
                 @if($order->description)  <br>
@@ -138,13 +138,13 @@
 
         <tr class="heading" style="font-size:11px;">
             <td  style="text-align: left;width:340px" >
-                ÜRÜN/HİZMET
+                {{trans("general.product")}}/{{trans("general.service")}}
             </td>
             <td  style="text-align: right;width:60px" >
                 {{trans("general.quantity")}}
             </td>
             <td style="text-align: right;width:120px">
-                BİRİM FİYAT
+                {{trans("general.unity")}} {{trans("general.price")}}
             </td>
             {{--@if($order->Items->sum("OfferItemDiscount") > 0)--}}
                 {{--<td  style="text-align: right;width:20px" >--}}
@@ -159,7 +159,7 @@
                 KDV
             </td>
             <td style="text-align:right;width:140px">
-                TUTAR(KDV Hariç)
+                {{trans("general.amount")}}(KDV {{trans("general.excluding")}})
             </td>
         </tr>
 
@@ -198,7 +198,7 @@
         @empty
             <tr class="item">
                 <td colspan="6">
-                    Teklif hareketi bulunmamaktadır.
+                    {{trans("general.offer")}} {{trans("general.movement")}} bulunmamaktadır.
                 </td>
             </tr>
         @endforelse
@@ -215,7 +215,7 @@
             <td></td>
 
             <td colspan="1" style="text-align: right">
-                TOPLAM:
+                {{trans("general.total")}}:
             </td>
             <td colspan="1" style="text-align: right">
                 {{$order->sub_total}} {!! $order->currency_icon!!}
@@ -245,7 +245,7 @@
                 @if(KdvTotal($order->items,8) > 0) %8 KDV<br>@endif
                 @if(KdvTotal($order->items,18) > 0) %18 KDV<br>@endif
               </div>
-                TOPLAM KDV:
+                {{trans("general.total")}} KDV:
 
             </td>
             <td colspan="1" style="text-align: right">
@@ -262,7 +262,7 @@
             <td></td>
             <td></td>
             <td colspan="1" style="text-align: right;width:140px;">
-                GENEL TOPLAM:
+                {{trans("general.general")}} {{trans("general.total")}}:
             </td>
             <td colspan="1" style="text-align: right;width:120px;">
                 {{$order->grand_total}} {!! $order->currency_icon!!}

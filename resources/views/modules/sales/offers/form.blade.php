@@ -22,6 +22,7 @@
 
                             <form class="form-horizontal">
                                 <div id="sales_offer" v-cloak>
+
                                     <fieldset class="fixed-title">
                                         <div class="form-group">
                                             <label class="col-md-3 col-sm-3 control-label"> <span
@@ -62,8 +63,8 @@
                                                     <template slot="no-options">
                                                         <a type="button" style="color:white"
                                                            class='btn btn-sm btn-warning' href='#!'
-                                                           data-toggle='modal' data-target='#new_company'>Click for New
-                                                            Company </a>
+                                                           data-toggle='modal' data-target='#new_company'>
+                                                            {{ trans("general.click") }} {{ trans("general.for") }} {{ trans("general.new") }} {{ trans("general.company")  }}</a>
                                                     </template>
                                                     <template slot="option" slot-scope="option">
                                                         <div class="d-center">
@@ -78,7 +79,7 @@
 
                                     <fieldset>
                                         <div class="form-group" v-bind:class="{'has-error':errors.has('form.date')}">
-                                            <label class="col-md-3 control-label">Teklif Tarihi</label>
+                                            <label class="col-md-3 control-label">{{ trans("general.offer") }} {{ trans("general.date") }}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask @change="setDate(form.date)" :mask="['##.##.####']" type="text" name="form.date"
@@ -90,10 +91,11 @@
                                             </div>
                                         </div>
                                     </fieldset>
+
                                     <fieldset>
                                         <div class="form-group"
                                              v-bind:class="{'has-error':errors.has('form.expired_date')}">
-                                            <label class="col-md-3 control-label">Geçerlilik Tarihi</label>
+                                            <label class="col-md-3 control-label">{{ trans("general.validity") }} {{ trans("general.date") }}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"
@@ -108,12 +110,14 @@
                                         </div>
                                     </fieldset>
                                 </div>
+
                                 @includeIf("components.external.rows",[$offer,$proccess_type = "sales"])
+
                                 <fieldset >
 
                                     <div class="form-group " id="description_detail" style="    margin-top: -69px;">
-                                        <label class=" control-label" style="margin-left:15px">Detaylı
-                                            Açıklama</label><br>
+                                        <label class=" control-label" style="margin-left:15px">{{ trans("general.detailed") }}
+                                            {{ trans("general.description") }}</label><br>
 
                                         <div class="col-md-6 ">
 
@@ -122,6 +126,7 @@
                                         </div>
                                     </div>
                                 </fieldset>
+
                             </form>
 
 

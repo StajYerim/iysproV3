@@ -22,7 +22,7 @@
                                 class="semi-bold"> {{$receipt->type}}
                              </span>
 
-                        <span class="pull-right"><a  href="#!" data-toggle="modal" data-target="#deleteModal" class="btn btn-default btn-lg "> DELETE</a></span>
+                        <span class="pull-right"><a  href="#!" data-toggle="modal" data-target="#deleteModal" class="btn btn-default btn-lg "> {{trans("general.delete")}}</a></span>
                     </h1>
                     <hr>
                     <div class="row">
@@ -34,14 +34,14 @@
                                        border="0">
                                     <tr>
                                         <td width="200px">
-                                            <div class="bottom-info"><i class="fa fa-building-o" aria-hidden="true"></i> MÜŞTERİ
+                                            <div class="bottom-info"><i class="fa fa-building-o" aria-hidden="true"></i> {{trans("general.customer")}}
                                             </div>
                                         </td>
                                         <td><a href="{{route("sales.companies.show",[aid(),$receipt->company["id"]])}}">{{$receipt->company["company_name"]}}</a></td>
                                     </tr>
                                     <tr>
                                         <td width="200px">
-                                            <div class="bottom-info"><i class="fa fa-calendar" aria-hidden="true"></i> İŞLEM TARİH</div>
+                                            <div class="bottom-info"><i class="fa fa-calendar" aria-hidden="true"></i> {{trans("general.operation")}} {{trans("general.date")}}</div>
                                         </td>
                                         <td>{{$receipt->date}}</td>
                                     </tr>
@@ -75,16 +75,16 @@
                                 <tr>
                                     <td width="5%"></td>
                                     <td></td>
-                                    <td style="text-align:right" >KALAN</td>
+                                    <td style="text-align:right" >{{trans("general.remaining")}}</td>
                                     <td><span class="pull-right">{{$receipt->remaining}} <i class="fa fa-{{$receipt->currency}}"></i></span></td>
                                 </tr>
                                 </tfoot>
                                 <tbody>
                                 <tr>
                                     <th width="20%">İŞLENDİĞİ FATURA</th>
-                                    <th width="20%">DURUMU</th>
-                                    <th style="text-align:right" width="10%">FATURA TOPLAMI</th>
-                                    <th style="text-align:right" width="15%">İŞLENEN MEBLAĞ</th>
+                                    <th width="20%">{{trans("general.status")}}</th>
+                                    <th style="text-align:right" width="10%">{{trans("general.invoice")}} {{trans("general.total")}}</th>
+                                    <th style="text-align:right" width="15%">{{trans("general.processed")}} {{trans("general.currency")}}</th>
 
                                 </tr>
                                 </tbody>

@@ -44,7 +44,7 @@
                                             <input type="text" class="form-control" v-model="form.company_short_name"/>
                                         </div>
 
-                                        <label class="col-md-1 control-label">Cari Kodu</label>
+                                        <label class="col-md-1 control-label">{{trans("general.current")}} {{trans("general.code")}}</label>
                                         <div class="col-md-2">
                                             <input type="text" class="form-control" v-model="form.char_code"/>
                                         </div>
@@ -53,7 +53,7 @@
 
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("Email")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("general.email")}}</label>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" v-model="form.email"/>
                                         </div>
@@ -61,13 +61,13 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("PhoneNumber")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("general.phone")}}</label>
                                         <div class="col-md-2">
                                             <phone class="form-control" v-model="form.phone_number"></phone>
                                         </div>
 
 
-                                        <label class="col-md-2 control-label">{{trans("FaxNumber")}}</label>
+                                        <label class="col-md-2 control-label">{{trans("general.fax")}}</label>
                                         <div class="col-md-2">
                                             <phone class="form-control" v-model="form.fax_number"></phone>
                                         </div>
@@ -76,7 +76,7 @@
                                 <fieldset>
                                     <div class="form-group">
 
-                                        <label class="col-md-3 control-label">{{trans("AddressAbroad")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("general.addressAbroad")}}</label>
                                         <div class=" col-md-2">
 
                                             <label class="radio radio-inline no-margin">
@@ -94,7 +94,7 @@
                                                 />
                                                 <span>{{trans("no")}}</span> </label>
                                         </div>
-                                        <label class="col-md-2 control-label">{{trans("EbillingTaxpayer")}}</label>
+                                        <label class="col-md-2 control-label">{{trans("general.eBilling")}} {{trans("general.taxPayer")}}</label>
                                         <div class=" col-md-3">
 
                                             <label class="radio radio-inline no-margin">
@@ -115,11 +115,11 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("Town")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("general.district")}}</label>
                                         <div class="col-md-2">
                                             <input type="text" class="form-control" v-model="form.town" id="county"/>
                                         </div>
-                                        <label class="col-md-1 control-label">{{trans("City")}}</label>
+                                        <label class="col-md-1 control-label">{{trans("general.province")}}</label>
                                         <div class="col-md-2">
                                             <input type="text" class="form-control" v-model="form.city" id="city"/>
                                         </div>
@@ -128,7 +128,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("ContactAddress")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("general.contact")}}</label>
                                         <div class="col-md-6">
                                             <textarea class="form-control" v-model="form.address" rows="3"></textarea>
                                         </div>
@@ -141,7 +141,7 @@
                                             <input type="text" class="form-control" v-model="form.tax_id"/>
                                         </div>
 
-                                        <label class="col-md-1 control-label">{{trans("TaxOffice")}}</label>
+                                        <label class="col-md-1 control-label">{{trans("general.tax")}} {{trans("general.office")}}</label>
                                         <div class="col-md-2">
                                             <input type="text" class="form-control" v-model="form.tax_office"/>
                                         </div>
@@ -149,7 +149,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("IbanNo")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("Iban")}} {{trans("general.number")}}</label>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" v-model="form.iban">
                                         </div>

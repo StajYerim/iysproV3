@@ -110,7 +110,7 @@ app()->setLocale($lang);
                                         <b style="line-height: 12px;">{!! account()["name"]!!}</b><br>
                                         <span style="line-height:12px;font-size:10px;">
                                             {!! str_replace("\n","<br>",account()["address"]) !!} {!! account()["town"] !!}/{!! account()["city"] !!}
-                                            <br>V.D ve No {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>Telefon {!! account()["phone"] !!}<br>
+                                            <br>V.D {{trans("general.and")}} {{trans("general.number")}} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>{{trans("general.phone")}} {!! account()["phone"] !!}<br>
 
                                     </span>
                                     </td>
@@ -122,7 +122,7 @@ app()->setLocale($lang);
                 </table>
                 {{--{!! $logo->startText !!}--}}
 
-                <span style="text-align:center"><h2>PROFORMA FATURA / TEKLİF </h2></span>
+                <span style="text-align:center"><h2>{{trans("general.proforma")}} {{trans("general.invoice")}} / {{trans("general.offer")}} </h2></span>
                 <span style="float:left"><b style="font-size:15px;">
                         {{$offer->company["company_name"]}}
                     </b> <span style="float:right" >{{trans("general.date")}}:
@@ -137,13 +137,13 @@ app()->setLocale($lang);
 
         <tr class="heading" style="font-size:11px;">
             <td  style="text-align: left;width:340px" >
-                ÜRÜN/HİZMET
+                {{trans("general.product")}}/{{trans("general.service")}}
             </td>
             <td  style="text-align: right;width:60px" >
                 {{trans("general.quantity")}}
             </td>
             <td style="text-align: right;width:120px">
-                BİRİM FİYAT
+                {{ trans("general.unit") }} {{trans("general.price")}}
             </td>
             {{--@if($offer->Items->sum("OfferItemDiscount") > 0)--}}
                 {{--<td  style="text-align: right;width:20px" >--}}
@@ -158,7 +158,7 @@ app()->setLocale($lang);
                 KDV
             </td>
             <td style="text-align:right;width:140px">
-                TUTAR(KDV Hariç)
+                {{trans("general.amount")}}(KDV {{trans("general.excuding")}})
             </td>
         </tr>
 
@@ -197,7 +197,7 @@ app()->setLocale($lang);
         @empty
             <tr class="item">
                 <td colspan="6">
-                    Teklif hareketi bulunmamaktadır.
+                    {{trans("general.offer")}} {{trans("general.movement")}} bulunmamaktadır.
                 </td>
             </tr>
         @endforelse
@@ -214,7 +214,7 @@ app()->setLocale($lang);
             <td></td>
 
             <td colspan="1" style="text-align: right">
-                TOPLAM:
+                {{trans("general.total")}}:
             </td>
             <td colspan="1" style="text-align: right">
                 {{$offer->sub_total}} {!! $offer->currency_icon!!}
@@ -244,7 +244,7 @@ app()->setLocale($lang);
                 @if(KdvTotal($offer->items,8) > 0) %8 KDV<br>@endif
                 @if(KdvTotal($offer->items,18) > 0) %18 KDV<br>@endif
               </div>
-                TOPLAM KDV:
+                {{trans("general.total"}} KDV:
 
             </td>
             <td colspan="1" style="text-align: right">
@@ -261,7 +261,7 @@ app()->setLocale($lang);
             <td></td>
             <td></td>
             <td colspan="1" style="text-align: right;width:140px;">
-                GENEL TOPLAM:
+                {{trans("general.general")}} {{trans("general.amount")}}:
             </td>
             <td colspan="1" style="text-align: right;width:120px;">
                 {{$offer->grand_total}} {!! $offer->currency_icon!!}

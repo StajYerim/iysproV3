@@ -28,7 +28,7 @@
                     -->
                     <header>
                         <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-                        <h2>Widget Title </h2>
+                        <h2>{{trans("general.widget")}} {{trans("general.title")}} </h2>
 
                     </header>
 

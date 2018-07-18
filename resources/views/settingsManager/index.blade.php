@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">App Settings Manager</div>
+                    <div class="card-header">{{trans("general.app")}} {{trans("general.settings")}} {{trans("general.manager")}}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -16,66 +16,66 @@
                         <div class="row">
                             <div class="col-xs-6 col-md-3">
                                 <a href="#">
-                                    General Settings
+                                    {{trans("general.general")}} {{trans("general.settings")}}
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a href="#">
-                                    Sales Offer
-                                </a>
-                            </div>
-
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#">
-                                    Sales Settings
+                                    {{trans("general.sales")}} {{trans("general.offer")}}
                                 </a>
                             </div>
 
                             <div class="col-xs-6 col-md-3">
                                 <a href="#">
-                                    Purchase Settings
+                                    {{trans("general.sales")}} {{trans("general.settings")}}
+                                </a>
+                            </div>
+
+                            <div class="col-xs-6 col-md-3">
+                                <a href="#">
+                                    {{trans("general.purchase")}} {{trans("general.settings")}}
                                 </a>
                             </div>
                             <hr>
                             <div class="col-xs-6 col-md-3">
                                 <a href="{{ \App\User::getProductSettingsRoute() }}">
-                                    Product Settings
+                                    {{trans("general.product")}} {{trans("general.settings")}}
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a href="#">
-                                    Account Settings
+                                    {{trans("general.account")}} {{trans("general.settings")}}
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a href="#">
-                                    User Settings
+                                    {{trans("general.user")}} {{trans("general.settings")}}
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a href="#">
-                                    Printer Templates
+                                    {{trans("general.printer")}} {{trans("general.templates")}}
                                 </a>
                             </div>
                             <hr>
                             <div class="col-xs-6 col-md-3">
                                 <a href="#">
-                                    Production Planning Settings
+                                    {{trans("general.product")}} {{trans("general.planning")}} {{trans("general.settings")}}
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a href="#">
-                                    Warehouse Settings
+                                    {{trans("general.warehouse")}} {{trans("general.settings")}}
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a href="#">
-                                    E-mail Settings
+                                    {{trans("general.email")}} {{trans("general.settings")}}
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a href="#">
-                                    Category and Tags
+                                    {{trans("general.category")}} {{trans("general.and")}} {{trans("general.tags")}}
                                 </a>
                             </div>
 

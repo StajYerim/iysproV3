@@ -36,7 +36,7 @@
                             <div class="pull-right new-button">
 
                                 <a href="{{route("sales.orders.form",[aid(),0,"new"])}}">
-                                <span class="btn btn-success">New Order</span>
+                                <span class="btn btn-success">{{trans("general.new")}} {{trans("general.order")}}</span>
                                 </a>
                             </div>
 
@@ -44,10 +44,10 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>Customer</th>
-                                    <th>Date</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
+                                    <th>{{trans("general.customer")}}</th>
+                                    <th>{{trans("general.date")}}</th>
+                                    <th>{{trans("general.total")}}</th>
+                                    <th>{{trans("general.status")}}</th>
                                 </tr>
                                 </thead>
 

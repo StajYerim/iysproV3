@@ -23,7 +23,7 @@
 
                                 <fieldset>
                                     <legend>
-                                        N11 API BİLGİLERİ
+                                        N11 API {{trans("general.informations")}}
                                     </legend>
 
                                 </fieldset>
@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-12 ">
-                                                <label class="control-label">API KEY</label>
+                                                <label class="control-label">API {{trans("general.key")}}</label>
                                                 <input type="text" class="form-control" v-model="n11_form.api_key">
 
                                             </div>
@@ -44,7 +44,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-12 ">
-                                                <label class="control-label">API PASSWORD</label>
+                                                <label class="control-label">API {{trans("general.password")}}</label>
                                                 <input type="text" class="form-control" v-model="n11_form.api_password" >
 
                                             </div>
@@ -57,7 +57,7 @@
                                         <div class="col-md-12">
                                             <button class="btn btn-default" @click="n11_form_send" type="button">
                                                 <i class="fa fa-eye"></i>
-                                                KAYDET
+                                                {{trans("general.save")}}
                                             </button>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
 
                                 <fieldset>
                                     <legend>
-                                        PARAŞÜT APİ BİLGİLERİ
+                                        PARAŞÜT APİ {{trans("general.informations")}}
                                     </legend>
 
                                 </fieldset>
@@ -100,7 +100,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-12 ">
-                                                <label class="control-label">CLIENT ID</label>
+                                                <label class="control-label">{{trans("general.client")}} ID</label>
                                                 <input type="text" class="form-control" v-model="parasut_form.client_id"  >
 
                                             </div>
@@ -112,7 +112,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-12 ">
-                                                <label class="control-label">CLIENT SECRET</label>
+                                                <label class="control-label">{{trans("general.client")}} {{trans("general.secret")}}</label>
                                                 <input type="text" class="form-control" v-model="parasut_form.client_secret" >
 
                                             </div>
@@ -124,7 +124,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-6 ">
-                                                <label class="control-label">USER NAME</label>
+                                                <label class="control-label">{{trans("general.user")}} {{trans("general.name")}}</label>
                                                 <input type="text" class="form-control"  v-model="parasut_form.username">
 
                                             </div>
@@ -136,7 +136,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6 ">
-                                            <label class="control-label">USER NAME</label>
+                                            <label class="control-label">{{trans("general.user")}} {{trans("general.name")}}</label>
                                             <input type="password" class="form-control"  v-model="parasut_form.password">
 
                                         </div>
@@ -148,7 +148,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-6 ">
-                                                <label class="control-label">COMPANY ID</label>
+                                                <label class="control-label">{{trans("general.company")}} ID</label>
                                                 <input type="text" class="form-control"  v-model="parasut_form.company_id">
 
                                             </div>
@@ -173,7 +173,7 @@
                                         <div class="col-md-12">
                                             <button class="btn btn-default" @click="parasut_form_send" type="button">
                                                 <i class="fa fa-eye"></i>
-                                                KAYDET
+                                                {{trans("general.save")}}
                                             </button>
                                         </div>
                                     </div>

@@ -43,7 +43,7 @@
                                 <tr>
                                     <th width="1px">#</th>
                                     <th>{{$type}}</th>
-                                    <th>Balance</th>
+                                    <th>{{trans("general.balance")}}</th>
                                 </tr>
                                 </thead>
 

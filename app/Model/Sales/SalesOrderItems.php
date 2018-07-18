@@ -6,6 +6,7 @@ use App\Model\Stock\Product\Product;
 use App\Units;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use \NumberFormatter;
 
 class SalesOrderItems extends Model
 {
@@ -31,10 +32,7 @@ class SalesOrderItems extends Model
     }
 
     public function getQuantityAttribute(){
-        $a = new \NumberFormatter("tr-TR", \NumberFormatter::DECIMAL);
-        $a->setAttribute(\NumberFormatter::MIN_FRACTION_DIGITS, 0);
-        $a->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, 2); // by default some locales got max 2 fraction digits, that is probably not what you want
-        return $a->format($this->attributes["quantity"]);
+        return get_money($this->attributes["quantity"]);
 
     }
 

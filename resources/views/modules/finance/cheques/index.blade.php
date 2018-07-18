@@ -36,9 +36,9 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>Düzenleyen/Bulunduğu Yer</th>
-                                    <th>Vade Tarihi/Türü</th>
-                                    <th>Meblağ</th>
+                                    <th>Düzenleyen/{{trans("general.location")}}</th>
+                                    <th>{{trans("general.expiry")}} {{trans("general.date")}}/{{trans("general.type")}}</th>
+                                    <th>{{trans("general.sum")}}</th>
                                 </tr>
                                 </thead>
 
