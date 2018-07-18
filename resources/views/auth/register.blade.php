@@ -1,7 +1,7 @@
 @extends('auth.layouts.app')
 
 @section('guest')
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+
         <div class="well no-padding">
 
             <form method="POST" action="{{ route('register') }}" id="smart-form-register" class="smart-form client-form">
@@ -105,20 +105,6 @@
             </form>
 
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @push("guest_script")

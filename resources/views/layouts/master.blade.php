@@ -87,7 +87,7 @@
         Vue.use(VeeValidate);
     </script>
     @stack("style")
-<body style="color:#7b7b7b" class="fixed-header ">
+<body style="color:#7b7b7b" class="fixed-header fuelux">
 @include("layouts.header")
 
 @include("layouts.sidebar")

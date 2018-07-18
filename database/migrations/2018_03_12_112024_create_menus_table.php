@@ -17,9 +17,11 @@ class CreateMenusTable extends Migration
             $table->increments('id');
             $table->integer('parent_id')->nullable();
             $table->integer('order')->nullable();
+            $table->string('group')->nullable();
             $table->integer('permission')->default(1);
             $table->string('icon')->nullable()->default("list");
             $table->string('route')->nullable();
+            $table->integer('is_route')->nullable()->default(1);
 
         });
     }

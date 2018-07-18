@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class LanguageLines extends Migration
+class CreateOrderWaybillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class LanguageLines extends Migration
      */
     public function up()
     {
-        Schema::create('language_lines', function (Blueprint $table) {
+        Schema::create('order_waybills', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('group');
-            $table->index('group');
-            $table->string('key');
-            $table->text('text');
+            $table->string("number")->nullable();
+            $table->date("edit_date")->nullable();
+            $table->date("dispatch_date")->nullable();
+            $table->string("description")->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class LanguageLines extends Migration
      */
     public function down()
     {
-        Schema::drop('language_lines');
+        Schema::dropIfExists('order_waybills');
     }
 }
