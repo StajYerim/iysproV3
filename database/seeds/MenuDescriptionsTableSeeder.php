@@ -18,7 +18,7 @@ class MenuDescriptionsTableSeeder extends Seeder
                 'id' => 1,
                 'lang_code' => "en",
                 'menu_id' => 1,
-                'name' => 'Dashboard'
+                'name' => 'Dashboard',
             ],
             [
                 'id' => 2,
