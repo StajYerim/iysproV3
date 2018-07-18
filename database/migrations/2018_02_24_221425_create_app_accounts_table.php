@@ -16,6 +16,7 @@ class CreateAppAccountsTable extends Migration
         Schema::create('app_accounts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('company_name');
+            $table->string('modules');
             $table->unsignedInteger('sector_id');
             $table->unsignedInteger('owner_id');
             $table->dateTime('expiry_date');
