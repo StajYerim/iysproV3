@@ -21,7 +21,7 @@ class CreateMenusTable extends Migration
             $table->integer('permission')->default(1);
             $table->string('icon')->nullable()->default("list");
             $table->string('route')->nullable();
-            $table->integer('is_route')->default(1);
+            $table->integer('is_route')->nullable()->default(1);
 
         });
     }
