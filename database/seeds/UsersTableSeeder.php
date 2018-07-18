@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->delete();
-        
+
         DB::table('users')->insert([
             [
                 'id' => 1,
@@ -47,6 +47,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('secret'),
                 'lang_id' => 1,
                 'role_id' => 3,
+                'permissions' => "{}",
                 'confirmed' => True,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
