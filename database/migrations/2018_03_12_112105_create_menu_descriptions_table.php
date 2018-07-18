@@ -18,6 +18,7 @@ class CreateMenuDescriptionsTable extends Migration
             $table->string('lang_code'); // e.g. en, tr. ar
             $table->integer('menu_id');
             $table->string('name');
+            $table->foreign("menu_id")->on("menus")->references("id")->onDelete("cascade");
         });
     }
 

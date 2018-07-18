@@ -15,149 +15,359 @@ class MenuDescriptionsTableSeeder extends Seeder
 
         DB::table('menu_descriptions')->insert([
             [
-                'id' => 1,
                 'lang_code' => "en",
                 'menu_id' => 1,
                 'name' => 'Dashboard',
             ],
             [
-                'id' => 2,
+                'lang_code' => "tr",
+                'menu_id' => 1,
+                'name' => 'Gösterge Paneli',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 2,
-                'name' => 'Tasks'
+                'name' => 'Tasks',
             ],
             [
-                'id' => 3,
+                'lang_code' => "tr",
+                'menu_id' => 2,
+                'name' => 'İş Listesi',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 3,
-                'name' => 'Sales'
+                'name' => 'Board',
             ],
             [
-                'id' => 4,
+                'lang_code' => "tr",
+                'menu_id' => 3,
+                'name' => 'Tahta',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 4,
-                'name' => 'Offers'
+                'name' => 'Calendar',
             ],
             [
-                'id' => 5,
+                'lang_code' => "tr",
+                'menu_id' => 4,
+                'name' => 'Takvim',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 5,
-                'name' => 'Orders'
+                'name' => 'Sales',
             ],
             [
-                'id' => 6,
+                'lang_code' => "tr",
+                'menu_id' => 5,
+                'name' => 'Satış',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 6,
-                'name' => 'Customers'
+                'name' => 'Offers',
             ],
             [
-                'id' => 7,
+                'lang_code' => "tr",
+                'menu_id' => 6,
+                'name' => 'Teklifler',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 7,
-                'name' => 'Sales Report'
+                'name' => 'Orders',
             ],
             [
-                'id' => 8,
+                'lang_code' => "tr",
+                'menu_id' => 7,
+                'name' => 'Siparişler',
+            ],
+
+            [
                 'lang_code' => "en",
                 'menu_id' => 8,
-                'name' => 'Collect Reports'
+                'name' => 'Customers',
             ],
             [
-                'id' => 9,
+                'lang_code' => "tr",
+                'menu_id' => 8,
+                'name' => 'Müşteriler',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 9,
-                'name' => 'Purchases'
+                'name' => 'Sales Report',
             ],
             [
-                'id' => 10,
+                'lang_code' => "tr",
+                'menu_id' => 9,
+                'name' => 'Satış Raporu',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 10,
-                'name' => 'Offers'
+                'name' => 'Collect Reports',
             ],
             [
-                'id' => 11,
+                'lang_code' => "tr",
+                'menu_id' => 10,
+                'name' => 'Tahsilat Raporu',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 11,
-                'name' => 'Orders'
+                'name' => 'Purchases',
             ],
             [
-                'id' => 12,
+                'lang_code' => "tr",
+                'menu_id' => 11,
+                'name' => 'Satın Alma',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 12,
-                'name' => 'Suppliers'
+                'name' => 'Offers',
             ],
             [
-                'id' => 13,
+                'lang_code' => "tr",
+                'menu_id' => 12,
+                'name' => 'Teklifler',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 13,
-                'name' => 'Purchase Report'
+                'name' => 'Orders',
             ],
             [
-                'id' => 14,
+                'lang_code' => "tr",
+                'menu_id' => 13,
+                'name' => 'Siparişler',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 14,
-                'name' => 'Payment Report'
+                'name' => 'Suppliers',
             ],
             [
-                'id' => 15,
+                'lang_code' => "tr",
+                'menu_id' => 14,
+                'name' => 'Tedarikçiler',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 15,
-                'name' => 'Finance'
+                'name' => 'Purchase Report',
             ],
             [
-                'id' => 16,
+                'lang_code' => "tr",
+                'menu_id' => 15,
+                'name' => 'Satınalma Raporu',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 16,
-                'name' => 'Expense'
+                'name' => 'Payment Report',
             ],
             [
-                'id' => 17,
+                'lang_code' => "tr",
+                'menu_id' => 16,
+                'name' => 'Ödeme Raporu',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 17,
-                'name' => 'Accounts'
+                'name' => 'Finance',
             ],
             [
-                'id' => 18,
+                'lang_code' => "tr",
+                'menu_id' => 17,
+                'name' => 'Finans',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 18,
-                'name' => 'Check Bond'
+                'name' => 'Expense',
             ],
             [
-                'id' => 19,
+                'lang_code' => "tr",
+                'menu_id' => 18,
+                'name' => 'Giderler',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 19,
-                'name' => 'Expenses Report'
+                'name' => 'Account',
             ],
             [
-                'id' => 20,
+                'lang_code' => "tr",
+                'menu_id' => 19,
+                'name' => 'Hesaplar',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 20,
-                'name' => 'VAT Reports'
+                'name' => 'Cheques',
             ],
             [
-                'id' => 21,
+                'lang_code' => "tr",
+                'menu_id' => 20,
+                'name' => 'Çekler',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 21,
-                'name' => 'Stocks'
+                'name' => 'Expenses Report',
             ],
             [
-                'id' => 22,
+                'lang_code' => "tr",
+                'menu_id' => 21,
+                'name' => 'Gider Raporu',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 22,
-                'name' => 'Services And Products'
+                'name' => 'VAT Reports',
             ],
             [
-                'id' => 23,
+                'lang_code' => "tr",
+                'menu_id' => 22,
+                'name' => 'KDV Raporu',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 23,
-                'name' => 'Stock Movements'
+                'name' => 'Stocks',
             ],
             [
-                'id' => 24,
+                'lang_code' => "tr",
+                'menu_id' => 23,
+                'name' => 'Stok',
+            ],
+            [
                 'lang_code' => "en",
                 'menu_id' => 24,
-                'name' => 'Products in Stock'
+                'name' => 'Service and Products',
             ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 24,
+                'name' => 'Hizmet ve Ürünler',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 25,
+                'name' => 'Stock Movements',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 25,
+                'name' => 'Stok Hareketleri',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 26,
+                'name' => 'Products in Stock',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 26,
+                'name' => 'Stoktaki Ürün Raporları',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 27,
+                'name' => 'E-Commerce',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 27,
+                'name' => 'E-Ticaret',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 28,
+                'name' => 'Orders',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 28,
+                'name' => 'Siparişler',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 29,
+                'name' => 'Products',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 29,
+                'name' => 'Ürünler',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 30,
+                'name' => 'Settings',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 30,
+                'name' => 'Ayarlar',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 31,
+                'name' => 'Menus',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 31,
+                'name' => 'Menüler',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 32,
+                'name' => 'Companies & Users',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 32,
+                'name' => 'Hesaplar & Kullanıcılar',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 33,
+                'name' => 'Companies',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 33,
+                'name' => 'Hesaplar',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 34,
+                'name' => 'Users',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 34,
+                'name' => 'Kullanıcılar',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 35,
+                'name' => 'Localization',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 35,
+                'name' => 'Bölgesel Ayarlar',
+            ],
+
+
+
 
         ]);
     }
