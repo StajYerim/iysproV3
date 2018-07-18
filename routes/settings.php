@@ -8,6 +8,23 @@ Auth::routes();
 
 Route::group(['prefix'=>'{company_id}/settings','middleware'=>'not.admin'],function() {
 
+    Route::group(["namespace" => "Modules\Settings"],function(){
+        Route::get("/","HomeController@index")->name("settings.home");
+        Route::get("/general","GeneralController@index")->name("general");
+        Route::get("/offer","OfferController@index")->name("offer");
+        Route::get("/sales","SalesController@index")->name("sales");
+        Route::get("/purchase","PurchaseController@index")->name("purchase");
+        Route::get("/product","ProductController@index")->name("product");
+        Route::get("/account","AccountController@index")->name("account");
+        Route::get("/user","UserController@index")->name("user");
+        Route::get("/print","PrintController@index")->name("print");
+        Route::get("/planning","PlanningController@index")->name("planning");
+        Route::get("/store","StoreController@index")->name("store");
+        Route::get("/email","EmailController@index")->name("email");
+        Route::get("/categoryandtags","CategoryAndTagsController@index")->name("categoryandtags");
+    });
+
+
     // Settings Units
     Route::get('units', 'SettingsManager\UnitSettingsController@index')->name('settings.units.index');
     Route::post("units/update","SettingsManager\UnitSettingsController@unit_status_update")->name("settings.units.update");

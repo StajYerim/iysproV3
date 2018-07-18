@@ -171,6 +171,7 @@
 
                     <li  class="">
                         <a href=""><i class="fa fa-cubes"></i> Applications</a>
+                        <a href="{{ route('settings.home',aid()) }}"><i class="fa fa-cubes"></i> Application Settings</a>
                     </li>
                     <li  class="">
                         <a href="{{route("settings.users.index",aid())}}"><i class="fa fa-users"></i> Users</a>

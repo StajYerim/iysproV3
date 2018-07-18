@@ -61,7 +61,6 @@ Route::middleware('admin')->group(function() {
     Route::delete("/app/locale/form/{id}","Admin\LocaleController@destroy")->name("admin.locale.destroy");
 
 
-
 });
 
 
