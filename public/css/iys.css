@@ -660,3 +660,7 @@ label {
 select[size]::-webkit-scrollbar {
 	display: none;
 }
+
+.dd-list li a{
+    color:#3a3633;
+}
