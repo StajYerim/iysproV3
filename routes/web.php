@@ -56,7 +56,9 @@ Route::middleware('admin')->group(function() {
 
     //Locale
     Route::get("/app/locale","Admin\LocaleController@index")->name("admin.locale.index");
-
+    Route::get("/app/locale/form/{id}","Admin\LocaleController@post_modal_form")->name("admin.locale.modal");
+    Route::post("/app/locale/form/{id}/store","Admin\LocaleController@post_modal_form_store")->name("admin.locale.store");
+    Route::delete("/app/locale/form/{id}","Admin\LocaleController@destroy")->name("admin.locale.destroy");
 
 
 });
