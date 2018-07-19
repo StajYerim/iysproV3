@@ -67,4 +67,8 @@ class SalesOrderItems extends Model
     {
         return get_money(money_db_format($this->price)*money_db_format($this->quantity));
     }
+
+    public function waybill_item(){
+        return $this->hasOne(WaybillItems::class,"order_item_id","id");
+    }
 }

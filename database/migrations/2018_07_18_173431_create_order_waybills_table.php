@@ -15,10 +15,12 @@ class CreateOrderWaybillsTable extends Migration
     {
         Schema::create('order_waybills', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer("order_id")->unsigned();
             $table->string("number")->nullable();
             $table->date("edit_date")->nullable();
             $table->date("dispatch_date")->nullable();
             $table->string("description")->nullable();
+            $table->foreign("order_id")->on("sales_orders")->references("id")->onDelete("cascade");
             $table->timestamps();
         });
     }

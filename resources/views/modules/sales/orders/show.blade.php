@@ -118,7 +118,7 @@
                                             </tbody>
                                             <tbody>
 
-                                            <tr v-for="item in items">
+                                            <tr v-for="item in items" v-bind:class="item.waybill">
                                                 <td>
                                                     @{{ item.product }}
                                                 </td>
@@ -253,8 +253,6 @@
                     <div class="col-sm-4">
 
                         <div id="order_info" class="well">
-
-
                             <div id="short_info" class="col-12">
 
                                 <div class="row">
@@ -276,15 +274,38 @@
                                     </div>
                                 </div>
                               <hr>
-                                <div class="row">
-                                  @if($order->offer)
+                                @if($order->offer)
                                     <div class="col-sm-12">
-                                       {{trans("general.offer")}}
+                                        {{trans("general.offer")}}
                                         <br>
-                                        <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? "SATIŞ TEKLİFİ":$order->offer["description"]}} (#{{$order->offer["id"]}})</a><br>
+                                        <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? "SATIŞ TEKLİFİ":$order->offer["description"]}}
+                                            (#{{$order->offer["id"]}})</a><br>
                                     </div>
-                                      @endif
+                                    <hr>
+                                @endif
+                                <div class="row">
+                                    @if($order->waybills->count() > 0)
+                                        <table class="table table-condensed table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>İrsaliye No</th>
+                                                <th>Düzenleme</th>
+                                                <th>Sevk</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($order->waybills as $waybill)
+                                                <tr onmouseover="this.style.cursor='pointer'" @click="waybill_process('{{$waybill->id}}','{{$waybill->number}}')" style="cursor: pointer;">
+                                                    <td>{{$waybill->number}}</td>
+                                                    <td>{{$waybill->edit_date}}</td>
+                                                    <td>{{$waybill->dispatch_date}}</td>
+                                                </tr>
+                                            @endforeach
 
+                                            </tbody>
+                                        </table>
+                                        <hr>
+                                    @endif
 
                                 </div>
                             </div>
@@ -299,78 +320,209 @@
         </div>
 
         @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales order ?",$id=$order->id])
+        {{--İrsaliye Yazdır--}}
+        <div class="modal fade" id="waybillModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
+             style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">İrsaliye Yazdır</h4>
+                    </div>
+                    <div class="modal-body modal-body-content">
+                        @if(count($order->no_waybills))
+                            <div class="row">
+                                <form id="wizard-1" novalidate="novalidate">
+                                    <div id="bootstrap-wizard-1" class="col-sm-12">
+                                        <div class="form-bootstrapWizard">
+                                            <ul class="bootstrapWizard form-wizard" style="width: 127%;">
+                                                <li class="active" data-target="#step1">
+                                                    <a href="#tab1" data-toggle="tab"> <span class="step">1</span> <span
+                                                                class="title">Ürün Seçimi</span> </a>
+                                                </li>
+                                                <li data-target="#step2">
+                                                    <a href="#tab2" data-toggle="tab"> <span class="step">2</span> <span
+                                                                class="title">İrsaliye Bilgileri</span> </a>
+                                                </li>
+                                                <li data-target="#step3">
+                                                    <a href="#tab3" data-toggle="tab"> <span class="step">3</span> <span
+                                                                class="title">Yazdır</span> </a>
+                                                </li>
 
-    </section>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab1">
+                                                <br>
+                                                <br>
 
-    {{--İrsaliye Yazdır--}}
-    <div class="modal fade" id="waybillModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
-         style="display: none;">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">İrsaliye Yazdır</h4>
-                </div>
-                <div class="modal-body modal-body-content ">
+                                                <div class="row">
+                                                    <br><br>
+                                                    <div style="background: #fff; margin: -20px -1px 0px 0px;font-size: 13px;font-weight: 600;"
+                                                         class="table-responsive">
+                                                        <table class="table">
 
-                    <div class="wizard" data-initialize="wizard" id="myWizard">
-                        <div class="steps-container">
-                            <ul class="steps">
-                                <li data-step="1" data-name="campaign" class="active">
-                                    <span class="badge">1</span>Campaign
-                                    <span class="chevron"></span>
-                                </li>
-                                <li data-step="2">
-                                    <span class="badge">2</span>Recipients
-                                    <span class="chevron"></span>
-                                </li>
-                                <li data-step="3" data-name="template">
-                                    <span class="badge">3</span>Template
-                                    <span class="chevron"></span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="actions">
-                            <button type="button" class="btn btn-default btn-prev">
-                                <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
-                            <button type="button" class="btn btn-primary btn-next" data-last="Complete">Next
-                                <span class="glyphicon glyphicon-arrow-right"></span>
-                            </button>
-                        </div>
-                        <div class="step-content">
-                            <div class="step-pane active sample-pane alert" data-step="1">
-                                <h4>Setup Campaign</h4>
-                                <p>Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic. Beetroot water spinach okra water chestnut ricebean pea catsear courgette.</p>
+                                                            <tbody>
+
+                                                            <tr v-for="item in waybill.items">
+                                                                <td>
+                                                                    @{{ item.product }}
+                                                                </td>
+
+                                                                <td>@{{ item.quantity }} @{{ item.unit }}</td>
+
+                                                                <td>
+                                                                    <div class="checkbox"
+                                                                         style="margin-top:0px;margin-bottom:0px;">
+                                                                        <label>
+                                                                            <input type="checkbox"
+                                                                                   v-model='item.selected'
+                                                                                   class="checkbox style-3">
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="tab-pane" id="tab2">
+                                                <br>
+                                                <br>
+                                                <div class="row">
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">İRSALİYE NO</label>
+                                                            <div class="col-md-6 ">
+                                                                <div class="input-group">
+                                                                    <input style="width: 266px;" type="text"
+                                                                           v-model="waybill.number"
+                                                                           class="form-control"
+                                                                    >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">DÜZENLEME
+                                                                TARİHİ</label>
+                                                            <div class="col-md-6 ">
+                                                                <div class="input-group">
+                                                                    <input type="text"
+                                                                           v-model="waybill.edit_date"
+                                                                           data-mask="99.99.9999"
+                                                                           class="form-control "
+                                                                           data-dateformat="dd.mm.yy">
+                                                                    <span class="input-group-addon"><i
+                                                                                class="fa fa-calendar"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">SEVK TARİHİ</label>
+                                                            <div class="col-md-6 ">
+                                                                <div class="input-group">
+                                                                    <input type="text" name=""
+                                                                           data-mask="99.99.9999"
+                                                                           v-model="waybill.dispatch_date"
+                                                                           class="form-control "
+                                                                           data-dateformat="dd.mm.yy">
+                                                                    <span class="input-group-addon"><i
+                                                                                class="fa fa-calendar"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                    </fieldset>
+
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <label for="" class="col-md-4 control-label">İRSALİYE NOTU
+
+                                                            </label>
+                                                            <div class="col-md-6">
+                                                                <div class="input-group">
+                                                                    <input type="text" style="width: 354px;"
+                                                                           v-model="waybill.description"
+                                                                           value=""
+                                                                           class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tab3">
+                                                <br>
+                                                <br>
+                                                <br>
+                                                <h1 class="text-center"><strong>
+                                                        <button type="button" class="btn btn-default btn-lg"
+                                                                @click="waybill_print"
+                                                                v-html="loading_message"></button>
+                                                    </strong></h1>
+                                                <br>
+                                                <br>
+                                            </div>
+
+
+                                            <div class="form-actions">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <ul class="pager wizard no-margin">
+                                                            <!--<li class="previous first disabled">
+                                                            <a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
+                                                            </li>-->
+                                                            <li class="previous disabled">
+                                                                <a href="javascript:void(0);"
+                                                                   class="btn btn-lg btn-default">
+                                                                    Geri </a>
+                                                            </li>
+                                                            <!--<li class="next last">
+                                                            <a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
+                                                            </li>-->
+                                                            <li class="next">
+                                                                <a href="javascript:void(0);"
+                                                                   class="btn btn-lg txt-color-darken"> İleri </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+
                             </div>
-                            <div class="step-pane sample-pane bg-info alert" data-step="2">
-                                <h4>Choose Recipients</h4>
-                                <p>Celery quandong swiss chard chicory earthnut pea potato. Salsify taro catsear garlic gram celery bitterleaf wattle seed collard greens nori. Grape wattle seed kombu beetroot horseradish carrot squash brussels sprout chard. </p>
-                            </div>
-                            <div class="step-pane sample-pane bg-danger alert" data-step="3">
-                                <h4>Design Template</h4>
-                                <p>Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley jÃ­cama salsify. </p>
-                            </div>
-                        </div>
+                        @else
+                            TÜM ÜRÜNLERİN İRSALİYELERİ YAZDIRILMIŞTIR.
+                            YENİDEN YAZDIRMAK İÇİN İRSALİYE LİSTESİNE BAKIN
+                        @endif
 
 
                     </div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        VAZGEÇ
-                    </button>
-                    <button type="button" class="btn btn-primary" >
-                        KAYDET
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
-    {{--İrsaliye Yazdır--}}
+        {{--İrsaliye Yazdır--}}
+    </section>
 
     @include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])
 
@@ -382,23 +534,23 @@
     $data = $order])
 
 @push("style")
-    <link rel="stylesheet" href="//www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css">
+
+    <style>
+        .row_dark{
+            background:#e2e2e2
+        }
+    </style>
+
     @endpush
     @push('scripts')
-
-        <script src="//www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script>
+        <script src="{{asset("js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js")}}"></script>
         <script>
             window.addEventListener("load", () => {
-
-                $('#myWizard').on('actionclicked.fu.wizard', function (evt, data) {
-                    // do something
-                });
-
-
                 VueName = new Vue({
                     el: "#show",
                     data: {
-
+                        loading: false,
+                        loading_message: '<i class="fa fa-print"></i> Yazdır',
                         remaining:"{{$order->remaining}}",
                         company_balance:"{{$order->company->balance}}",
                         collect_items:[
@@ -423,6 +575,7 @@
                         ],
                         items: [@foreach($order->items as $item)
                         {
+                            waybill: "{{$item->waybill_item ? 'row_dark':false}}",
                             product: "{{$item->product->named["name"]}}",
                             quantity: "{{$item->quantity}}",
                             unit: "{{$item->unit["short_name"]}}",
@@ -436,9 +589,75 @@
                             {name: "%8", total: 0},
                             {name: "%18", total: 0},
                         ],
+                        waybill: {
+                            id: "{{$order->id}}",
+                            number: "",
+                            edit_date: "{{date_tr()}}",
+                            dispatch_date: "{{date_tr()}}",
+                            description: "",
+                            items: [@foreach($order->no_waybills as $item)
+                            {
+                                id: "{{$item["id"]}}",
+                                product: "{{$item["name"]}}",
+                                quantity: "{{$item["quantity"]}}",
+                                unit: "{{$item["unit"]}}",
+                                selected: true,
+                            },
+                                @endforeach ],
+
+                        }
                     },
                     methods: {
+                        waybill_print: function ($id) {
+                            this.loading_message = '<i class="fa fa-refresh fa-spin  fa-fw"></i> Lütfen Bekleyiniz...';
 
+                            axios.post("{{route("sales.waybill.add",aid())}}", this.waybill).then(res => {
+                                console.log(res.data)
+                                window.open("/{{aid()}}/sales/orders/waybill-print/" + res.data);
+                                $("#waybillModal").modal("hide");
+                                location.reload();
+                            })
+                        },
+                        waybill_process: function ($id,$number) {
+
+                            if($number === null){
+                                $number = "Seçtiğiniz"
+                            }else{
+                                $number = $number;
+                            }
+                            swal(+$number + " irsaliye için ne yapmak istiyorsunuz ?", {
+                                buttons: {
+
+                                    print: {
+                                        text: "Yazdır",
+                                        value: "print"
+                                    },
+                                    catch: {
+                                        text: "SİL!",
+                                        value: "delete",
+                                    },
+                                    defeat: false,
+                                    cancel: "Vazgeç"
+                                },
+                            })
+                                .then((value) => {
+                                        switch (value) {
+
+                                            case"delete"
+                                            :
+                                                $.post("/{{aid()}}/sales/orders/waybill-delete/" + $id, function (data) {
+
+                                                });
+                                                swal("Başarılı", "Seçilen irsaliye kaldırıldı!", "success");
+                                                location.reload();
+                                                break;
+                                            case "print":
+                                                window.open("/{{aid()}}/sales/orders/waybill-print/" + $id);
+                                                break;
+                                        }
+                                    }
+                                );
+                        },
                         redirect:function($id,$type){
                             if($type=="collect"){
                                 return window.location.href='/{{aid()}}/finance/accounts/'+$id+'/receipt';
@@ -464,6 +683,7 @@
 
                     },
                     computed:{
+
                         vat_check() {
                             vat1 = 0;
                             vat8 = 0;
@@ -541,7 +761,82 @@
                     mounted: function () {
                         datePicker();
                         this.vat_check
+                        // fuelux wizard
+                        var $validator = $("#wizard-1").validate({
 
+                            rules: {
+                                email: {
+                                    required: true,
+                                    email: "Your email address must be in the format of name@domain.com"
+                                },
+                                fname: {
+                                    required: true
+                                },
+                                lname: {
+                                    required: true
+                                },
+                                country: {
+                                    required: true
+                                },
+                                city: {
+                                    required: true
+                                },
+                                postal: {
+                                    required: true,
+                                    minlength: 4
+                                },
+                                wphone: {
+                                    required: true,
+                                    minlength: 10
+                                },
+                                hphone: {
+                                    required: true,
+                                    minlength: 10
+                                }
+                            },
+
+                            messages: {
+                                fname: "Please specify your First name",
+                                lname: "Please specify your Last name",
+                                email: {
+                                    required: "We need your email address to contact you",
+                                    email: "Your email address must be in the format of name@domain.com"
+                                }
+                            },
+
+                            highlight: function (element) {
+                                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                            },
+                            unhighlight: function (element) {
+                                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                            },
+                            errorElement: 'span',
+                            errorClass: 'help-block',
+                            errorPlacement: function (error, element) {
+                                if (element.parent('.input-group').length) {
+                                    error.insertAfter(element.parent());
+                                } else {
+                                    error.insertAfter(element);
+                                }
+                            }
+                        });
+
+                        $('#bootstrap-wizard-1').bootstrapWizard({
+                            'tabClass': 'form-wizard',
+                            'onNext': function (tab, navigation, index) {
+                                var $valid = $("#wizard-1").valid();
+                                if (!$valid) {
+                                    $validator.focusInvalid();
+                                    return false;
+                                } else {
+
+                                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                                        'complete');
+                                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                                        .html('<i class="fa fa-check"></i>');
+                                }
+                            }
+                        });
                     }
                 });
             });
