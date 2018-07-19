@@ -12,6 +12,7 @@ use App\Model\Stock\Product\Product;
 use App\Model\Stock\Product\ProductDescriptions;
 use App\Model\Stock\Product\ProductImage;
 use App\Images;
+use Validator;
 use Faker\Provider\Image;
 use SebastianBergmann\CodeCoverage\Report\Xml\Unit;
 use Yajra\DataTables\Facades\DataTables;
