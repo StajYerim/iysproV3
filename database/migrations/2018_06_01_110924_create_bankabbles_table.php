@@ -16,7 +16,7 @@ class CreateBankabblesTable extends Migration
         Schema::create('bankabbles', function (Blueprint $table) {
             $table->integer('bank_items_id')->nullable();
             $table->integer('bankabble_id');
-            $table->integer('cheque_id')->nullable();
+            $table->integer('cheques_id')->nullable();
             $table->string('bankabble_type');
             $table->decimal('amount',12,2);
         });
