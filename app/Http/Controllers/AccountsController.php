@@ -88,6 +88,7 @@ class AccountsController extends Controller
             "currency" => "try",
         ]);
 
+        //Add default units
         $account->units()->attach(1);
         $account->units()->attach(20);
 

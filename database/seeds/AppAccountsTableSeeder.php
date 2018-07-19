@@ -28,6 +28,10 @@ class AppAccountsTableSeeder extends Seeder
             ],
         ]);
 
+        $account = \App\Account::find(1);
+        $account->units()->attach(1);
+        $account->units()->attach(20);
+
         $user = \App\User::find(2);
         $user->account_id = 1;
         $user->save();
