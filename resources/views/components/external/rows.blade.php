@@ -8,7 +8,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 @endphp
 <div id="rows" v-cloak>
     <fieldset>
-        <div class="form-group"><label class="col-md-3 control-label">DÖVİZ
+        <div class="form-group"><label class="col-md-3 control-label">{{ trans("general.currency") }}
             </label>
             <div class="col-md-2 ">
 
@@ -16,7 +16,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     <div class="dropdown change"><a data-toggle="dropdown" href="#"
                                               aria-expanded="true"
                                               class="btn btn-sm btn-default change dropdown-toggle "><span
-                                    class="fa fa-try"></span> DEĞİŞTİR</a>
+                                    class="fa fa-try"></span> {{ trans("general.ca") }}</a>
                         <ul class="dropdown-menu change dropdown-caret"
                             style="min-width: 350px; padding: 7px 9px; margin: -32px -1px 0px;">
                             <li>
@@ -31,7 +31,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                                 </select>
                                 <br>
                                 <button class="btn btn-default" type="button" v-on:click="currency_process(currency)">
-                                    Tamam
+                                    {{ trans("general.okay") }}
                                 </button>
                             </li>
                         </ul>
@@ -58,12 +58,12 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
         <table class="table  table-condensed">
             <tbody>
             <tr>
-                <th width="41%">HİZMET / ÜRÜN</th>
-                <th width="10%">MİKTAR</th>
-                <th width="10%">BİRİM</th>
-                <th width="10%">BR FİYAT</th>
-                <th width="12%">KDV</th>
-                <th width="13%">TOPLAM</th>
+                <th width="41%">{{ trans("general.service") }} / {{ trans("general.product") }}</th>
+                <th width="10%">{{ trans("general.quantity") }}</th>
+                <th width="10%">{{ trans("general.unit") }}</th>
+                <th width="10%">{{ trans("general.unit") }} {{ trans("general.price") }}</th>
+                <th width="12%">{{ trans("general.vat") }}</th>
+                <th width="13%">{{ trans("general.total") }}</th>
                 <th width="1%">#</th>
             </tr>
             </tbody>
@@ -153,7 +153,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                                   v-model="item.termin_date">
 
                         <div class="input-group-btn">
-                            <button type="button" placeholder="Termin Date" class="btn btn-default"
+                            <button type="button" placeholder="Termin {{ trans("general.date") }}" class="btn btn-default"
                                     @click="item.termin_show = false" tabindex="-1">X
                             </button>
                         </div>
@@ -167,8 +167,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
         </table>
         <div class="row ">
             <div class="col-sm-8">
-                <button type="button" v-on:click="addRow" class="btn btn-default"><i class="fa fa-plus"></i> YENİ
-                    SATIR EKLE
+                <button type="button" v-on:click="addRow" class="btn btn-default"><i class="fa fa-plus"></i> {{ trans("general.new") }}
+                    {{ trans("general.row") }} {{ trans("general.add") }}
                 </button>
             </div>
             <div class="col-sm-4">
@@ -177,7 +177,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     <tbody>
                     <tr>
                         <td style="border-bottom: 1px solid #ddd;">
-                            <div class="bottom-info">ARA TOPLAM</div>
+                            <div class="bottom-info">{{ trans("general.subtotal") }}</div>
                         </td>
                         <td style="text-align:right;    border-bottom: 1px solid #ddd;">
                             <div class="bottom-info"><span id="total-half">@{{sub_totall}}</span>
@@ -189,7 +189,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 
                     <tr v-for="vato in vat_only" v-if="vato.total!=0 || vato.name != vato.name">
                         <td style="border-top: 0px;">
-                            <div class="bottom-info" style="font-size: 11px">TOPLAM KDV @{{ vato.name }}</div>
+                            <div class="bottom-info" style="font-size: 11px">{{ trans("general.total") }} {{ trans("general.vat") }} @{{ vato.name }}</div>
                         </td>
                         <td style="text-align:right">
                             <div class="bottom-info" style="font-size: 11px"><span
@@ -200,7 +200,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 
                     <tr>
                         <td style="border-top: 0px;">
-                            <div class="bottom-info">TOPLAM KDV</div>
+                            <div class="bottom-info">{{ trans("general.total") }} {{ trans("general.vat") }}</div>
                         </td>
                         <td style="text-align:right;border-top: 0px;">
                             <div class="bottom-info"><span id="total-vat"></span>@{{ vat_totall }}
@@ -212,8 +212,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 
                     <tr>
                         <td>
-                            <div class="bottom-info">GENEL TOPLAM @{{ vat_check }}</div>
-                            <div class="bottom-info" v-show="dont_try">TL KARŞILIĞI</div>
+                            <div class="bottom-info">{{ trans("general.general") }} {{ trans("general.total") }} @{{ vat_check }}</div>
+                            <div class="bottom-info" v-show="dont_try">TL {{ trans("general.provision") }}</div>
                         </td>
                         <td style="text-align:right">
                             <div class="bottom-info" style="color:#2AC!important"><span
