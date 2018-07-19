@@ -216,7 +216,14 @@ console.log(data)
                     }else if(data == "waybill.edit_date"){
 
                         VueName.waybill.edit_date = date;
+                    }else if(data == "invoice.date"){
+
+                        VueName.invoice.date = date;
+                    }else if(data == "invoice.due_date"){
+
+                        VueName.invoice.due_date = date;
                     }
+
 
 
 

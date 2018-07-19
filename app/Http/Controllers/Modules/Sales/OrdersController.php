@@ -8,6 +8,7 @@ use App\Mail\Share\Sales\Order;
 use App\Model\Sales\OrderWaybill;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
+use App\Model\Sales\SalesOrderInvoice;
 use App\Model\Sales\WaybillItems;
 use App\Taggable;
 use App\Tags;
@@ -212,5 +213,38 @@ class OrdersController extends Controller
         OrderWaybill::destroy($id);
     }
 
+    public function invoice_add($aid, $id, Request $request)
+    {
+        $order = SalesOrders::find($id);
+
+        $invoice = SalesOrderInvoice::updateOrCreate(["id"=>$request->id],[
+            "sales_order_id" => $order->id,
+            "seri" => $request->seri,
+            "number" => $request->number,
+            "date" => $request->date,
+            "clock" => $request->clock,
+            "due_date" => $request->due_date,
+            "description" => $request->description
+        ]);
+        if($invoice){
+            return $order->id;
+        }
+    }
+
+    public function invoice_print($aid, $id)
+    {
+        $order = SalesOrders::find($id);
+        $invoice = $order->invoice;
+
+        $pdf = PDF::loadView('modules.sales.orders.invoice', compact("invoice"))->setPaper('A4');
+        return $pdf->stream($invoice->number == null ? $invoice->id : $invoice->number);
+    }
+
+    public function invoice_delete($aid,$id){
+        $order = SalesOrders::find($id);
+        $order->invoice()->delete();
+
+        return "delete";
+    }
 
 }

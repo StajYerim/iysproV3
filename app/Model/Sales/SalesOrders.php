@@ -182,4 +182,8 @@ class SalesOrders extends Model
 
         return $data;
     }
+
+    public function invoice(){
+        return $this->hasOne(SalesOrderInvoice::class,"sales_order_id","id");
+    }
 }

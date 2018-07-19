@@ -67,6 +67,10 @@
                             <li class="">
                                 <a class="test" tabindex="-1"  data-toggle="modal" data-target="#waybillModal" href="#">   <i class="fa fa-print" aria-hidden="true"></i> İRSALİYE YAZDIR </a>
                             </li>
+                            <li class="">
+                                <a class="test" tabindex="-1" data-toggle="modal" data-target="#invoiceModal" href="#">
+                                    <i class="fa fa-print" aria-hidden="true"></i> FATURA YAZDIR </a>
+                            </li>
                         </ul>
 
                     </div>
@@ -274,6 +278,29 @@
                                     </div>
                                 </div>
                               <hr>
+
+                                @if($order->invoice)
+
+                                    <div class="row">
+                                        <div class="col-sm-12"> <span class="pull-right">
+
+                                        <a href="{{route("sales.invoice.print",[aid(),$order->id])}}" target="_blank"
+                                           class="btn btn-primary btn-circle" title="Fatura Yazdır!"><i
+                                                    class="glyphicon glyphicon-print"></i></a>
+                                        <a href="javascript:void(0);"
+                                           @click="deleteInvoice('{{$order->invoice["id"]}}')"
+                                           class="btn btn-danger btn-circle" title="Fatura Kaydını Sil!"><i
+                                                    class="glyphicon glyphicon-remove"></i></a>
+                                    </span>
+                                            <strong>Fatura Bilgileri</strong><br>
+                                            {{$order->invoice["seri"]}} {{$order->invoice["number"]}}
+                                            <b>Tarih: </b>{{$order->invoice["date"]}} {{$order->invoice["clock"]}}
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                @endif
+
                                 @if($order->offer)
                                     <div class="col-sm-12">
                                         {{trans("general.offer")}}
@@ -283,6 +310,8 @@
                                     </div>
                                     <hr>
                                 @endif
+
+
                                 <div class="row">
                                     @if($order->waybills->count() > 0)
                                         <table class="table table-condensed table-hover">
@@ -470,9 +499,13 @@
                                                 <br>
                                                 <br>
                                                 <h1 class="text-center"><strong>
-                                                        <button type="button" class="btn btn-default btn-lg"
-                                                                @click="waybill_print"
-                                                                v-html="loading_message"></button>
+                                                        <center>
+                                                            <a type="button" class="btn btn-success btn-lg"
+                                                               @click="waybill_print"
+                                                               data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> İşlem Tamamlandı. Yazdırılıyor..."
+                                                               id="WaybillButton"><i class="fa fa-check"></i>
+                                                                Yazdır</a>
+                                                        </center>
                                                     </strong></h1>
                                                 <br>
                                                 <br>
@@ -519,6 +552,237 @@
             </div>
         </div>
         {{--İrsaliye Yazdır--}}
+
+        {{--Fatura Yazdır--}}
+        <div class="modal fade" id="invoiceModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
+             style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Fatura Yazdır</h4>
+                    </div>
+                    <div class="modal-body modal-body-content">
+
+                        <div class="row">
+                            <form id="wizard-2" novalidate="novalidate">
+                                <div id="bootstrap-wizard-2" class="col-sm-12">
+                                    <div class="form-bootstrapWizard">
+                                        <ul class="bootstrapWizard form-wizard" style="width: 200%;">
+                                            <li class="active" data-target="#step6">
+                                                <a href="#tab6" data-toggle="tab"> <span class="step">1</span> <span
+                                                            class="title">Fatura Bilgileri</span> </a>
+                                            </li>
+                                            <li data-target="#step7">
+                                                <a href="#tab7" data-toggle="tab"> <span class="step">2</span> <span
+                                                            class="title">Yazdır</span> </a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab6">
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label style="top:6px;" class="col-md-3 control-label">FATURA
+                                                        NO</label>
+                                                    <div class="col-md-3">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">SERİ</span>
+                                                            <input class="form-control" v-model="invoice.seri"
+                                                                   value="{{$order->SalesInvoiceSeri}}" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">NO</span>
+                                                            <input class="form-control" v-model="invoice.number"
+                                                                   value="{{$order->SalesInvoiceNumber}}"
+                                                                   type="text">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <label style="top:6px;"
+                                                           class="col-md-3 control-label">TARİH/SAAT</label>
+                                                    <div class="col-md-4">
+                                                        <div class="input-group">
+                                                            <the-mask @change="setDate(invoice.date)"
+                                                                      :mask="['##.##.####']" type="text"
+                                                                      name="invoice.date"
+                                                                      v-validate="'required'"
+                                                                      class="form-control datepicker"
+                                                                      v-model="invoice.date"></the-mask>
+                                                            <span class="input-group-addon"><i
+                                                                        class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="input-group">
+                                                            <input class="form-control" id="clockpicker" type="text"
+                                                                   v-model="invoice.clock"
+                                                                   data-autoclose="true">
+                                                            <span class="input-group-addon"><i
+                                                                        class="fa fa-clock-o"></i></span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2"></div>
+                                                <br><BR>
+
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">VADE TARİHİ</label>
+                                                        <div class="col-md-7 ">
+                                                            <div class="input-group">
+                                                                <the-mask @change="setDate(invoice.due_date)"
+                                                                          :mask="['##.##.####']" type="text"
+                                                                          name="invoice.due_date"
+                                                                          v-validate="'required'"
+                                                                          class="form-control datepicker"
+                                                                          v-model="invoice.due_date"></the-mask>
+                                                                <div class="btn-group btn-group-justified">
+
+                                                                    <a href="javascript:void(0);" id="day7"
+                                                                       class="btn btn-default">7
+                                                                        GÜN</a>
+                                                                    <a href="javascript:void(0);" id="day14"
+                                                                       class="btn btn-default">14 GÜN</a>
+                                                                    <a href="javascript:void(0);" id="day30"
+                                                                       class="btn btn-default">30 GÜN</a>
+                                                                    <a href="javascript:void(0);" id="day60"
+                                                                       class="btn btn-default">60 GÜN</a>
+                                                                </div>
+                                                                <span class="input-group-addon"><i
+                                                                            class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <hr>
+
+
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label for="" class="col-md-3 control-label">FATURA NOTU
+
+                                                        </label>
+                                                        <div class="col-md-6">
+                                                            <div class="input-group">
+                                                                <input type="text" style="width: 354px;"
+                                                                       v-model="invoice.description"
+                                                                       class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+
+
+                                                @if($order->waybills->count() > 0)
+                                                    <hr>
+
+                                                    <table class="table table-condensed table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <td colspan="3"><h4>BAĞLI İRSALİYELER</h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>İrsaliye No</th>
+                                                            <th>Düzenleme</th>
+                                                            <th>Sevk</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($order->waybills as $waybill)
+                                                            <tr>
+                                                                <td>{{$waybill->number}}</td>
+                                                                <td>{{$waybill->dispatch_date}}</td>
+                                                                <td>{{$waybill->edit_date}}</td>
+                                                            </tr>
+                                                        @endforeach
+
+
+                                                        </tbody>
+                                                    </table>
+
+
+                                                @else
+                                                    <hr>
+                                                    <div class="alert alert-info"><i class="fa fa-info-circle"></i>
+                                                        Faturasını oluşturmak istediğiniz sipariş için irsaliye <b>oluşturulmamıştır.</b>
+                                                        <br>Bu durum fatura kesmenize engel değildir.
+                                                    </div>
+                                                @endif
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="tab-pane" id="tab7">
+                                            <br>
+                                            <br>
+                                            <div class="row">
+
+                                                {{--<div class="alert alert-warning">--}}
+                                                {{--<strong>{{$order->company["company_name"]}}</strong>--}}
+                                                {{--<br>--}}
+                                                {{--{{$order->grand_total}} <i class="fa fa-{{$order->currency}}"></i>--}}
+                                                {{--alacak bakiyesi--}}
+                                                {{--oluşturulacaktır.--}}
+                                                {{--</div>--}}
+                                                <center>
+                                                    <a type="button" class="btn btn-success btn-lg" @click="invoiceAdd"
+                                                       data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> İşlem Onaylandı. Yazdırılıyor..."
+                                                       id="InvoiceCheckPrint"><i class="fa fa-check"></i> Onayla ve
+                                                        Yazdır</a></center>
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <ul class="pager wizard no-margin">
+                                                        <!--<li class="previous first disabled">
+                                                        <a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
+                                                        </li>-->
+                                                        <li class="previous disabled">
+                                                            <a href="javascript:void(0);"
+                                                               class="btn btn-lg btn-default">
+                                                                Geri </a>
+                                                        </li>
+                                                        <!--<li class="next last">
+                                                        <a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
+                                                        </li>-->
+                                                        <li class="next">
+                                                            <a href="javascript:void(0);"
+                                                               class="btn btn-lg txt-color-darken"> İleri </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{--Fatura Yazdır--}}
     </section>
 
     @include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])
@@ -531,24 +795,31 @@
     $data = $order])
 
 @push("style")
-
     <style>
+        .popover {
+            z-index: 1055;
+        }
         .row_dark{
             background:#e2e2e2
+        }
+
+        hr {
+            margin-top: 6px;
+            margin-bottom: 6px;
         }
     </style>
 
     @endpush
+
     @push('scripts')
         <script src="{{asset("js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js")}}"></script>
+        <script src="{{asset("js/plugin/clockpicker/clockpicker.min.js")}}"></script>
         <script>
             window.addEventListener("load", () => {
                 Vue.use(VueTheMask);
                 VueName = new Vue({
                     el: "#show",
                     data: {
-                        loading: false,
-                        loading_message: '<i class="fa fa-print"></i> Yazdır',
                         remaining:"{{$order->remaining}}",
                         company_balance:"{{$order->company->balance}}",
                         collect_items:[
@@ -603,14 +874,65 @@
                             },
                                 @endforeach ],
 
+                        },
+                        invoice: {
+                            id:"{{$order->invoice ? $order->invoice['id']:0}}",
+                            seri: "{{$order->invoice ? $order->invoice['seri']:""}}",
+                            number: "{{$order->invoice ? $order->invoice['number']:""}}",
+                            date: "{{$order->invoice ? $order->invoice['date']:date_tr()}}",
+                            due_date: "{{$order->invoice ? $order->invoice['due_date']:date_tr()}}",
+                            clock: "{{$order->invoice ? $order->invoice['clock']:\Carbon\Carbon::now()->format("H:i")}}",
+                            description: "{{$order->invoice ? $order->invoice['description']:""}}"
                         }
                     },
                     methods: {
-                        waybill_print: function ($id) {
-                            this.loading_message = '<i class="fa fa-refresh fa-spin  fa-fw"></i> Lütfen Bekleyiniz...';
+                        deleteInvoice: function ($id) {
+                            swal({
+                                title: "Fatura Silme İşlemini Onayla!",
+                                text: "Faturayı silmek istediğinizden eminmisiniz ? " +
+                                "Bu siparişten faturayı silmek üzeresiniz.",
+                                buttons: {
+                                    catch: {
+                                        text: "SİL!",
+                                        value: "delete",
+                                    },
+                                    defeat: false,
+                                    cancel: "Vazgeç"
+                                },
+                                dangerMode: true
+                            })
+                                .then((willDelete) => {
+                                        if (willDelete) {
+                                            $.post("{{route("sales.invoice.delete",[aid(),$order->id])}}", function (data) {
+                                                if (data == "delete") {
+                                                    swal("Fatura başarıyla silindi.", {
+                                                        icon: "success",
+                                                    });
+                                                    location.reload();
+                                                } else {
+                                                    swal("Fatura silinemedi lütfen sistem yöneticinizle görüşün.", {
+                                                        icon: "error",
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    }
+                                );
+                        },
+                        invoiceAdd: function () {
+                            $("#InvoiceCheckPrint").button("loading");
+                            axios.post("{{route("sales.invoice.add",[aid(),$order->id])}}", this.invoice).then(res => {
+                                window.open("/{{aid()}}/sales/orders/invoice-print/" + res.data);
+                                $("#invoiceModal").modal("hide");
+                                location.reload();
 
+                            })
+                        },
+                        waybill_print: function ($id) {
+
+                            $("#WaybillButton").button("loading");
                             axios.post("{{route("sales.waybill.add",aid())}}", this.waybill).then(res => {
-                                console.log(res.data)
+
                                 window.open("/{{aid()}}/sales/orders/waybill-print/" + res.data);
                                 $("#waybillModal").modal("hide");
                                 location.reload();
@@ -758,39 +1080,60 @@
                     },
                     mounted: function () {
                         datePicker();
+                        $('#clockpicker').clockpicker({
+                            placement: 'top',
+                            donetext: 'Done'
+                        });
+
+                        $('#clockpicker').change(function (e) {
+                            // Have to stop propagation here
+                            VueName.invoice.clock = $("#clockpicker").val();
+                        });
                         this.vat_check
-                        // fuelux wizard
-                        var $validator = $("#wizard-1").validate({
+
+
+                        let $validator1 = $("#wizard-1").validate({
 
                             rules: {
                                 email: {
                                     required: true,
                                     email: "Your email address must be in the format of name@domain.com"
                                 },
-                                fname: {
-                                    required: true
-                                },
-                                lname: {
-                                    required: true
-                                },
-                                country: {
-                                    required: true
-                                },
-                                city: {
-                                    required: true
-                                },
-                                postal: {
-                                    required: true,
-                                    minlength: 4
-                                },
-                                wphone: {
-                                    required: true,
-                                    minlength: 10
-                                },
-                                hphone: {
-                                    required: true,
-                                    minlength: 10
+                            },
+
+                            messages: {
+                                fname: "Please specify your First name",
+                                lname: "Please specify your Last name",
+                                email: {
+                                    required: "We need your email address to contact you",
+                                    email: "Your email address must be in the format of name@domain.com"
                                 }
+                            },
+
+                            highlight: function (element) {
+                                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                            },
+                            unhighlight: function (element) {
+                                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                            },
+                            errorElement: 'span',
+                            errorClass: 'help-block',
+                            errorPlacement: function (error, element) {
+                                if (element.parent('.input-group').length) {
+                                    error.insertAfter(element.parent());
+                                } else {
+                                    error.insertAfter(element);
+                                }
+                            }
+                        });
+
+                        let $validator2 = $("#wizard-2").validate({
+
+                            rules: {
+                                email: {
+                                    required: true,
+                                    email: "Your email address must be in the format of name@domain.com"
+                                },
                             },
 
                             messages: {
@@ -824,7 +1167,24 @@
                             'onNext': function (tab, navigation, index) {
                                 var $valid = $("#wizard-1").valid();
                                 if (!$valid) {
-                                    $validator.focusInvalid();
+                                    $validator1.focusInvalid();
+                                    return false;
+                                } else {
+
+                                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                                        'complete');
+                                    $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                                        .html('<i class="fa fa-check"></i>');
+                                }
+                            }
+                        });
+
+                        $('#bootstrap-wizard-2').bootstrapWizard({
+                            'tabClass': 'form-wizard',
+                            'onNext': function (tab, navigation, index) {
+                                var $valid = $("#wizard-2").valid();
+                                if (!$valid) {
+                                    $validator2.focusInvalid();
                                     return false;
                                 } else {
 
