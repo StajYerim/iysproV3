@@ -160,4 +160,26 @@ class SalesOrders extends Model
     public function offer(){
         return  $this->hasOne(SalesOffers::class,"id","sales_offer_id");
     }
+
+    public function waybills()
+    {
+        return $this->hasMany(OrderWaybill::class, "order_id", "id");
+    }
+
+    public function getNoWaybillsAttribute()
+    {
+
+        $data = array();
+        foreach ($this->items as $item) {
+          if(!$item->waybill_item){
+
+             array_push($data, array("name" => $item->product->named["name"],
+                 "quantity" => $item->quantity,
+                 "unit" => $item->unit["short_name"],
+                 "id" => $item->id));
+          }
+        }
+
+        return $data;
+    }
 }
