@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Modules\Sales;
 
 use App\Bankabble;
 use App\Language;
+use App\Mail\Share\Sales\Order;
+use App\Model\Sales\OrderWaybill;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
+use App\Model\Sales\SalesOrderInvoice;
+use App\Model\Sales\WaybillItems;
 use App\Taggable;
 use App\Tags;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -168,5 +172,79 @@ class OrdersController extends Controller
         return ["message" => "success", 'type' => "offer"];
     }
 
+    public function waybill_add($aid, Request $request)
+    {
+        $order = SalesOrders::find($request->id);
+
+
+        //Add waybill
+        $waybill = OrderWaybill::create([
+            "order_id" => $order->id,
+            "description" => $request->description,
+            "dispatch_date" => $request->dispatch_date,
+            "edit_date" => $request->edit_date,
+            "number" => $request->number
+        ]);
+
+        foreach ($request->items as $item) {
+
+
+            if ($item["selected"] == true) {
+                WaybillItems::create([
+                    "waybill_id" => $waybill["id"],
+                    "order_item_id"=>$item["id"]
+                ]);
+            }
+        }
+
+        return $waybill->id;
+    }
+
+    public function waybill_print($aid,$id)
+    {
+
+        $waybill = OrderWaybill::find($id);
+
+        $pdf = PDF::loadView('modules.sales.orders.waybill', compact("waybill"))->setPaper('A4');
+        return $pdf->stream($waybill->number == null ? $waybill->id:$waybill->number);
+    }
+
+    public function waybill_delete($aid,$id){
+        OrderWaybill::destroy($id);
+    }
+
+    public function invoice_add($aid, $id, Request $request)
+    {
+        $order = SalesOrders::find($id);
+
+        $invoice = SalesOrderInvoice::updateOrCreate(["id"=>$request->id],[
+            "sales_order_id" => $order->id,
+            "seri" => $request->seri,
+            "number" => $request->number,
+            "date" => $request->date,
+            "clock" => $request->clock,
+            "due_date" => $request->due_date,
+            "description" => $request->description
+        ]);
+        if($invoice){
+            return $order->id;
+        }
+    }
+
+    public function invoice_print($aid, $id)
+    {
+        $order = SalesOrders::find($id);
+        $invoice = $order->invoice;
+
+        $pdf = PDF::loadView('modules.sales.orders.invoice', compact("invoice"))->setPaper('A4');
+        return $pdf->stream($invoice->number == null ? $invoice->id : $invoice->number);
+    }
+
+    public function invoice_delete($aid,$id){
+        $order = SalesOrders::find($id);
+        $order->invoice()->delete();
+
+        return "delete";
+    }
 
 }

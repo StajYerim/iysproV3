@@ -60,6 +60,7 @@
 <script type="text/javascript" src="/js/autocomplete/scripts/jquery.mockjax.js"></script>
 <script type="text/javascript" src="/js/autocomplete/src/jquery.autocomplete.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nicescroll/3.5.4/jquery.nicescroll.min.js"></script>
 <script src="/general/script.js"></script>
 <script src="/js/general.js"></script>
 

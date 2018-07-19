@@ -226,7 +226,7 @@ class RegisterController extends Controller
 
         // Modules Activated
         $account = Account::find($account->id);
-        $account->update(["modules" => "[1,2,3,9,15,21,32,33]"]);
+        $account->update(["modules" => "[1,2,5,11,17,23,27]"]);
 
 
         return $user;
