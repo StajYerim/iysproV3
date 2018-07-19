@@ -7,6 +7,14 @@ $.ajaxSetup({
     }
 });
 
+$("body").niceScroll({
+    cursorcolor:"rgba(169, 34, 41, 0.88)",
+    cursorwidth:"5px",
+    background:"#3a3633",
+    cursorborder:"0px solid ",
+    cursorborderradius:0
+});  // a world full of color!
+
 function money_per() {
     $(".money").keypress(function (e) {
 //if the varter is not digit then display error and don't type anything
