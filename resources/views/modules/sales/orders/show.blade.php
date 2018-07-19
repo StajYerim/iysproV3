@@ -316,7 +316,7 @@
                 <div class="modal-body modal-body-content ">
 
                     <div class="wizard" data-initialize="wizard" id="myWizard">
-                        <div class="steps-contasiner">
+                        <div class="steps-container">
                             <ul class="steps">
                                 <li data-step="1" data-name="campaign" class="active">
                                     <span class="badge">1</span>Campaign
