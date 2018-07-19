@@ -20,7 +20,7 @@ class MenuTableSeeder extends Seeder
                 'group' => 'dasboard',
                 'order' => 1,
                 'permission' => 2,
-                'icon' => 'list',
+                'icon' => 'dashboard',
                 'route' => 'dashboard',
                 'is_route' => 1
             ],
