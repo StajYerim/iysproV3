@@ -202,6 +202,12 @@ console.log(data)
                     }else if(data == "payment.form.date"){
                         console.log(VuePayment.payment.form.date,date);
                         VuePayment.payment.form.date = date;
+                    }else if(data == "waybill.dispatch_date"){
+
+                        VueName.waybill.dispatch_date = date;
+                    }else if(data == "waybill.edit_date"){
+
+                        VueName.waybill.edit_date = date;
                     }
 
 

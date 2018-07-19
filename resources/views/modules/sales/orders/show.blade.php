@@ -413,43 +413,40 @@
                                                             </div>
                                                         </div>
                                                     </fieldset>
-
+                                                    <hr>
                                                     <fieldset>
                                                         <div class="form-group">
                                                             <label class="col-md-4 control-label">DÜZENLEME
                                                                 TARİHİ</label>
                                                             <div class="col-md-6 ">
                                                                 <div class="input-group">
-                                                                    <input type="text"
-                                                                           v-model="waybill.edit_date"
-                                                                           data-mask="99.99.9999"
-                                                                           class="form-control "
-                                                                           data-dateformat="dd.mm.yy">
+                                                                    <the-mask @change="setDate(waybill.edit_date)" :mask="['##.##.####']" type="text" name="waybill.edit_date"
+                                                                              v-validate="'required'" class="form-control datepicker"
+                                                                              v-model="waybill.edit_date"></the-mask>
                                                                     <span class="input-group-addon"><i
                                                                                 class="fa fa-calendar"></i></span>
+
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </fieldset>
-
+                                                        <hr>
                                                     <fieldset>
                                                         <div class="form-group">
                                                             <label class="col-md-4 control-label">SEVK TARİHİ</label>
                                                             <div class="col-md-6 ">
                                                                 <div class="input-group">
-                                                                    <input type="text" name=""
-                                                                           data-mask="99.99.9999"
-                                                                           v-model="waybill.dispatch_date"
-                                                                           class="form-control "
-                                                                           data-dateformat="dd.mm.yy">
+                                                                    <the-mask @change="setDate(waybill.edit_date)" :mask="['##.##.####']" type="text" name="waybill.dispatch_date"
+                                                                              v-validate="'required'" class="form-control datepicker"
+                                                                              v-model="waybill.dispatch_date"></the-mask>
                                                                     <span class="input-group-addon"><i
                                                                                 class="fa fa-calendar"></i></span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <br>
-                                                    </fieldset>
 
+                                                    </fieldset>
+                                                    <hr>
                                                     <fieldset>
                                                         <div class="form-group">
                                                             <label for="" class="col-md-4 control-label">İRSALİYE NOTU
@@ -546,6 +543,7 @@
         <script src="{{asset("js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js")}}"></script>
         <script>
             window.addEventListener("load", () => {
+                Vue.use(VueTheMask);
                 VueName = new Vue({
                     el: "#show",
                     data: {

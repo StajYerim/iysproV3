@@ -16,8 +16,9 @@ class CreateWaybillItemsTable extends Migration
         Schema::create('waybill_items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer("waybill_id")->unsigned();
-            $table->integer('order_item_id');
+            $table->integer('order_item_id')->unsigned();
             $table->foreign("waybill_id")->on("order_waybills")->references("id")->onDelete("cascade");
+            $table->foreign("order_item_id")->on("sales_order_items")->references("id")->onDelete("cascade");
         });
     }
 
