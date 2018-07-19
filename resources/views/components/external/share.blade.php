@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     ×
                 </button>
-                <h4 class="modal-title" id="myModalLabel">{{$title}} Paylaş</h4>
+                <h4 class="modal-title" id="myModalLabel">{{$title}} {{ trans("general.share") }}</h4>
             </div>
             <div class="modal-body">
 
@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="col-md-3 ">ALICI *</label>
+                                <label class="col-md-3 ">{{ trans("general.receiver") }} *</label>
                                 <div class="col-md-9">
                                     <input id='magicsuggest' name="shareEmail" type='text' v-model="form.receivers">
                                 </div>
