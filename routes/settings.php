@@ -22,6 +22,7 @@ Route::group(['prefix'=>'{company_id}/settings','middleware'=>'not.admin'],funct
         Route::get("/store","StoreController@index")->name("store");
         Route::get("/email","EmailController@index")->name("email");
         Route::get("/categoryandtags","CategoryAndTagsController@index")->name("categoryandtags");
+        Route::get("/invoice","InvoiceController@index")->name("invoice");
     });
 
 
