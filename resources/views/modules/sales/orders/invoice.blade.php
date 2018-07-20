@@ -31,49 +31,21 @@
             </td>
             <td>
                 <div id="InvoiceDetails" style="font-size:10px; margin-top:0px">
-                    {{--<div>@if(!$invoice->InvoiceMulti) {{!empty($invoice->Invoice->SalesInvoiceDate) ? $invoice->Invoice->SalesInvoiceDate->format("d.m.Y") :"" }}@else {{!empty($invoice->InvoiceMulti->SalesInvoiceDate) ? $invoice->InvoiceMulti->SalesInvoiceDate->format("d.m.Y") : ""}} @endif</div>--}}
-                    {{--<div style="height:30px">&nbsp;</div>--}}
-                    {{--<div style="height:30px;width:250px">--}}
-                        {{--@if($invoice->InvoiceMulti)--}}
-                            {{--@foreach($invoice->InvoiceMulti->OrderMultiple as $data)--}}
+                    <div>{{$invoice->date}}</div>
+                    <div style="height:30px">&nbsp;</div>
+                    <div style="height:34px;width:250px">
 
-                                {{--@foreach($data->Waybills as $bill)--}}
-                                    {{--{{$bill->WaybillNumber."-"}}--}}
+                                    @foreach($invoice->order->waybills as $bill)
+                                        {{$bill->number."-"}}
+                                    @endforeach
+                                    <div style="padding-top:8px">
 
-                                {{--@endforeach--}}
+                                        @foreach($invoice->order->waybills as $bill)
+                                            {{$bill->edit_date."-"}}
 
-                            {{--@endforeach--}}
-                            {{--<div>--}}
-                                {{--@foreach($invoice->InvoiceMulti->OrderMultiple as $data)--}}
+                                        @endforeach
 
-                                    {{--@foreach($data->Waybills as $bill)--}}
-                                        {{--{{$bill->WaybillDate->format("d.m.Y")."-"}}--}}
-
-                                    {{--@endforeach--}}
-
-                                {{--@endforeach--}}
-
-                                {{--@else--}}
-
-
-
-                                    {{--@foreach($invoice->Waybills as $bill)--}}
-                                        {{--{{$bill->WaybillNumber."-"}}--}}
-
-                                    {{--@endforeach--}}
-
-                                    {{--<div>--}}
-
-
-                                        {{--@foreach($invoice->Waybills as $bill)--}}
-                                            {{--{{$bill->WaybillDate->format("d.m.Y")."-"}}--}}
-
-                                        {{--@endforeach--}}
-
-
-
-                                        {{--@endif--}}
-                                    {{--</div>--}}
+                                    </div>
                             </div>
 
             </td>
@@ -101,8 +73,6 @@
                     <td width="50px" align="right">{{$item->quantity}}</td>
                     <td width="95px" class="unit" align="right">{{$item->price}}</td>
                     <td width="95px" align="right">{{$item->only_price}}</td>
-                    {{--<td class="qty">{{$item->SalesItemVat}}%</td>--}}
-                    {{--<td class="total">{{tl($item->SalesItemTotalAmount)}}</td>--}}
                 </tr>
             @endforeach
 

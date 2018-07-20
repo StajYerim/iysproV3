@@ -88,6 +88,13 @@
                         </a>
                     </h3>
                 </li>
+                <li class="col-md-4">
+                    <h3 class="h3 settings-title">
+                        <a href="{{ route("invoice", aid()) }}">
+                            <i class="fa fa-tag"></i> Fatura/İrsaliye
+                        </a>
+                    </h3>
+                </li>
             </ol>
 
         </div>

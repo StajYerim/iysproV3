@@ -122,7 +122,7 @@
                                             <td>
                                                 <money v-model="item.quantity"
                                                        v-bind="money"
-                                                       class="form-control " :value="1"></money>
+                                                       class="form-control" :value="1"></money>
 
                                             </td>
 
@@ -218,6 +218,7 @@
                             id: '{{$stock->company["id"]}}',
                             text: '{{$stock->company["company_name"]}}'
                         };
+
                         @foreach($stock->items as $item)
                             this.form.items.push({
                             id: "{{$item->id}}",

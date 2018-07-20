@@ -9,6 +9,7 @@ use App\Model\Sales\OrderWaybill;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
 use App\Model\Sales\SalesOrderInvoice;
+use App\Model\Sales\SalesTransferInfo;
 use App\Model\Sales\WaybillItems;
 use App\Taggable;
 use App\Tags;
@@ -16,6 +17,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
@@ -245,6 +247,48 @@ class OrdersController extends Controller
         $order->invoice()->delete();
 
         return "delete";
+    }
+
+    public function transfer_list($aid, $id)
+    {
+            $order = SalesOrders::find($id);
+            return $order->transfers;
+    }
+
+    public function transfer_add($aid, $id,Request $request)
+    {
+        $transfer = SalesTransferInfo::create(
+            [
+                "sales_order_id" => $id,
+                "transfer_company" => $request->transfer_company,
+                "transfer_number" => $request->transfer_no,
+                "customer_email" => $request->customer_mail,
+                "not"=>$request->not
+
+            ]);
+
+        $order = SalesOrders::find($id);
+        if($order->company["email"] == null && $transfer->customer_email){
+
+            $order->company->update(["email"=>$transfer->customer_email]);
+        }
+
+        if($request->mail_check && $transfer->customer_email){
+            $mail =  Mail::to($transfer->customer_email)->send(new TransferMailSend($transfer,$request->products));
+        }
+
+        if ($transfer) {
+            return $transfer;
+        } else {
+            return "error";
+        }
+    }
+
+    public function transfer_delete(Request $request){
+        $transfer = SalesTransferInfo::destroy($request->id);
+        if(!$transfer){
+            return "error";
+        }
     }
 
 }

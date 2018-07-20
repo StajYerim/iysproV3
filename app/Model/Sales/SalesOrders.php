@@ -186,4 +186,9 @@ class SalesOrders extends Model
     public function invoice(){
         return $this->hasOne(SalesOrderInvoice::class,"sales_order_id","id");
     }
+
+    public function transfers()
+    {
+        return $this->hasMany(SalesTransferInfo::class, "sales_order_id", "id");
+    }
 }

@@ -155,7 +155,8 @@
                                 axios.delete('{{route("finance.accounts.receipt.destroy",[aid(),$receipt->id])}}')
                                     .then(function (response) {
                                         if (response.data.message == "success") {
-                                            history.go(-1);
+
+                                            window.location.href=document.referrer
                                         }
                                     }).catch(function (error) {
                                     notification("Error", error.response.data.message, "danger");
