@@ -40,4 +40,10 @@ Route::group(['prefix'=>'{company_id}/sales','middleware'=>['not.admin','permiss
     Route::get("orders/waybill-print/{id}","Modules\Sales\OrdersController@waybill_print")->name("sales.waybill.print");
     Route::post("orders/waybill-delete/{id}","Modules\Sales\OrdersController@waybill_delete")->name("sales.waybill.delete");
 
+    //Sales Orders -> Invoice
+    Route::post("orders/invoice-add/{id}","Modules\Sales\OrdersController@invoice_add")->name("sales.invoice.add");
+    Route::get("orders/invoice-print/{id}","Modules\Sales\OrdersController@invoice_print")->name("sales.invoice.print");
+    Route::post("orders/invoice-delete/{id}","Modules\Sales\OrdersController@invoice_delete")->name("sales.invoice.delete");
+
+
 });

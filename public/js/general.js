@@ -7,6 +7,14 @@ $.ajaxSetup({
     }
 });
 
+$("body").niceScroll({
+    cursorcolor:"rgba(169, 34, 41, 0.88)",
+    cursorwidth:"5px",
+    background:"#3a3633",
+    cursorborder:"0px solid ",
+    cursorborderradius:0
+});  // a world full of color!
+
 function money_per() {
     $(".money").keypress(function (e) {
 //if the varter is not digit then display error and don't type anything
@@ -202,7 +210,20 @@ console.log(data)
                     }else if(data == "payment.form.date"){
                         console.log(VuePayment.payment.form.date,date);
                         VuePayment.payment.form.date = date;
+                    }else if(data == "waybill.dispatch_date"){
+
+                        VueName.waybill.dispatch_date = date;
+                    }else if(data == "waybill.edit_date"){
+
+                        VueName.waybill.edit_date = date;
+                    }else if(data == "invoice.date"){
+
+                        VueName.invoice.date = date;
+                    }else if(data == "invoice.due_date"){
+
+                        VueName.invoice.due_date = date;
                     }
+
 
 
 
