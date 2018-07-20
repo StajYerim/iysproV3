@@ -91,93 +91,7 @@
                             <div class="row">
                                 <div class="col-sm-8">
 
-                                    <div class="well">
-
-                                        <div class="row">
-                                            <div id="short_info" class="col-12">
-                                                <div class="col-sm-5">
-                                                    <i class="fa fa-envelope-o" aria-hidden="true"></i> {{$company->email}}
-                                                </div>
-                                                <div class="col-sm-5"><i class="fa fa-phone" aria-hidden="true"></i> {{$company->phone}}
-                                                </div>
-                                                <div class="col-sm-2"><span  v-on:click="detail()"  class="pull-right" style="cursor:pointer;">@{{ detail_name }}</span>
-                                                </div>
-                                            </div>
-
-                                            <div style="display:none" v-show="details" class="col-12"><br>
-                                                <hr>
-                                                <div class=" col-sm-9">
-
-                                                    <table class="table table-condensed table-striped table-no-padding"
-                                                           width="100%"
-                                                           border="0">
-                                                        <tr>
-                                                            <td><i class="fa fa-building-o" aria-hidden="true"></i>
-                                                                {{trans("general.company")}} {{trans("general.title")}}
-
-                                                            </td>
-                                                            <td>{{$company->company_name}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-info-circle" aria-hidden="true"></i>
-                                                                {{trans("general.short")}} {{trans("general.name")}}
-
-                                                            </td>
-                                                            <td>{{$company->company_short_name}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-envelope" aria-hidden="true"></i>
-                                                                {{trans("general.email")}}
-
-                                                            </td>
-                                                            <td>{{$company->email}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-phone" aria-hidden="true"></i>
-                                                                {{trans("general.phone")}} {{trans("general.number")}}
-
-                                                            </td>
-                                                            <td>{{$company->phone}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-fax" aria-hidden="true"></i> {{trans("general.fax")}}
-                                                                {{trans("general.number")}}
-
-                                                            </td>
-                                                            <td>{{$company->fax}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-map-marker" aria-hidden="true"></i>
-                                                                {{trans("general.open")}} {{trans("general.address")}}
-
-                                                            </td>
-                                                            <td>{{$company->addresss  }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-gavel" aria-hidden="true"></i> {{trans("general.tax")}}
-                                                                {{trans("general.information")}}
-
-                                                            </td>
-                                                            <td>{{$company->tax_id}}/{{$company->tax_office}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-bank" aria-hidden="true"></i> IBAN
-
-                                                            </td>
-                                                            <td>{{$company->iban}}</td>
-                                                        </tr>
-
-                                                    </table>
-
-                                                </div>
-                                                <div class="col-sm-3">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <hr>
-
+                                    <div class="">
 
                                         <table class="table table-striped table-condensed table-hover smart-form ">
                                             <thead>
@@ -195,7 +109,7 @@
                                                 <td>@{{item.type}}</td>
                                                 <td>@{{item.description}}</td>
                                                 <td>@{{item.date}}</td>
-                                                <td>@{{ item.action_type }} @{{item.amount}}</td>
+                                                <td>@{{item.action_type }} @{{item.amount}}</td>
                                                 <td>@{{item.last_balance}}</td>
                                             </tr>
 
@@ -251,6 +165,70 @@
 
                                         <hr>
 
+
+                                    </div>
+
+                                    <div class="well">
+
+                                        <table class="table table-condensed table-striped table-no-padding"
+                                               width="100%"
+                                               border="0">
+                                            <tr>
+                                                <td width="10"><i class="fa fa-building-o" aria-hidden="true"></i>
+
+
+                                                </td>
+                                                <td>{{$company->company_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-info-circle" aria-hidden="true"></i>
+
+                                                </td>
+                                                <td>{{$company->company_short_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-envelope" aria-hidden="true"></i>
+
+
+                                                </td>
+                                                <td>{{$company->email}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-phone" aria-hidden="true"></i>
+
+
+                                                </td>
+                                                <td>{{$company->phone}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-fax" aria-hidden="true"></i>
+
+
+                                                </td>
+                                                <td>{{$company->fax}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-map-marker" aria-hidden="true"></i>
+
+
+                                                </td>
+                                                <td>{{$company->addresss  }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-gavel" aria-hidden="true"></i>
+
+
+                                                </td>
+                                                <td>{{$company->tax_id}}/{{$company->tax_office}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-bank" aria-hidden="true"></i>
+
+                                                </td>
+                                                <td>{{$company->iban}}</td>
+                                            </tr>
+
+                                        </table>
 
                                     </div>
 
