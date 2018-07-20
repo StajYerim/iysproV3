@@ -23,7 +23,7 @@ class Stock extends Model
     {
      $explode = explode("-",$this->attributes["date"]);
      $dt = Carbon::create($explode[0],$explode[1],$explode[2]);
-     return $dt->format("d.m.Y");
+     return $dt->format("d.m.Y H:i:s");
     }
 
     public function company(){

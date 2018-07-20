@@ -52,7 +52,7 @@
                                             href="{{$stock->company["id" == null ? "#!":route("sales.companies.show",[aid(),$stock->company["id"]])]}}">{{$stock->company["company_name"] == null ? "Belirtilmedi":$stock->company["company_name"]}}</a>
                                 </div>
                                 <div class="col-sm-4" style="font-weight: 400;font-size:15px;"><i
-                                            class="fa fa-calendar"></i> {{$stock->date}}</div>
+                                            class="fa fa-calendar"></i> </div>
                                 <div class="col-sm-2" style="font-weight: 400;font-size:15px;"></div>
                             </div>
                             <hr>

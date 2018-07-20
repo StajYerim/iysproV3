@@ -123,7 +123,7 @@
                         name:"receipt_id"
 
                     }, {
-                        data: "date"
+
                     }
                 ],
                 "preDrawCallback": function () {
