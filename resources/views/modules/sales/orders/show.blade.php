@@ -796,8 +796,8 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            ×
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal" aria-hidden="false">
+                            Kapat
                         </button>
                         <h4 class="modal-title" id="myModalLabel">SEVKİYAT BİLGİSİ </h4>
                     </div>
@@ -833,19 +833,30 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12" style="margin-top: 8px;">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-md-3 f-title">NOT</label>
+                                            <label class="col-md-3 f-title"></label>
                                             <div class="col-md-8 ">
-                                                <input v-model="trans.form.not" type='email' class="form-control">
+                                                <div class="mail-check">
+                                                    <input v-model="trans.form.mail_check" type="checkbox"> Müşteriye mail gönderilsin mi?
+                                                </div>
 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mail-check">
-                                        <input v-model="trans.form.mail_check" type="checkbox"> Müşteriye mail gönderilsin mi?
+                                    <div class="col-md-12" style="margin-top: 8px;">
+                                        <div class="form-group">
+                                            <label class="col-md-3 f-title">NOT</label>
+                                            <div class="col-md-8 ">
+                                                <input v-model="trans.form.not" type='email'  class="form-control">
+
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+
+                                </div><br>
+                                <small class="note">Sevkiyatı yapılan ürün/ürünleri seçin</small>
+
                                 <div
                                         class="table-responsive">
                                     <table class="table">
@@ -879,11 +890,10 @@
 
                                         </tbody>
                                     </table>
-                                    <small class="note">Sevkiyatı yapılan ürün/ürünleri seçin</small>
 
                                 </div>
-                                <div class="pull-right" @click="transferAdd">
-                                    <button type="button" class="btn btn-success">EKLE</button>
+                                <div class="pull-right" >
+                                    <button type="button" id="transferButton"  @click="transferAdd" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Ekleniyor..." class="btn btn-success">EKLE</button>
                                 </div>
                             </form>
                             <div style="background: #fff; margin: 33px -1px 0px 0px;font-size: 13px;font-weight: 600;"
@@ -910,9 +920,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">
-                                VAZGEÇ
-                            </button>
+
                         </div>
                     </form>
                 </div>
@@ -1025,7 +1033,7 @@
                                 transfer_company: "",
                                 transfer_no: "",
                                 mail_check: true,
-                                customer_mail: "{{$order->company["email"]}}",
+                                customer_mail: "{{$order->company->address["email"]}}",
                                 not:"",
                                 products: [],
                             },
@@ -1034,12 +1042,14 @@
                     },
                     methods: {
                         transferAdd: function () {
+                            $("#transferButton").button("loading");
                             $form = this.trans.form;
                             $this = this;
                             if (this.trans.form.transfer_company != "") {
 
 
                                 if (this.trans.form.mail_check == true && this.trans.form.customer_mail == "") {
+                                    $("#transferButton").button("reset");
                                     notification("Hata","Kargo bilgisini mail göndermek istiyorsanız lütfen mail adresini boş bırakmayın.","danger")
                                 } else {
                                     axios.post("{{route("sales.transfer.add",[aid(),$order->id])}}", $form).then(res => {
@@ -1049,12 +1059,16 @@
                                             VueName.trans.form.transfer_company = "";
                                             VueName.trans.form.transfer_no = "";
                                             VueName.trans.form.not = "";
+                                            $("#transModal").modal("hide");
+                                            notification("Başarılı", "İşleminiz başarıyla tamamlandı.","success")
+                                            $("#transferButton").button("reset");
                                         }
 
-                                        this.trans.transfer_list.push(resdata)
+                                        this.trans.transfer_list.push(res.data)
                                     })
                                 }
                             } else {
+                                $("#transferButton").button("reset");
                                 notification("Hata", "Lütfen Sevkiyat bilgisini eksiksiz giriniz.","danger")
                             }
                         },
@@ -1069,6 +1083,7 @@
                         },
                         transferDelete: function ($id, $index) {
 
+                            console.log($id, $index)
                             axios.post("{{route("sales.transfer.delete",aid())}}", {id: $id}).then(res => {
                                 if (res.data != "error") {
                                     VueName.trans.transfer_list.splice($index, 1);
