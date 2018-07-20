@@ -26,14 +26,14 @@
                                     <fieldset class="fixed-title">
                                         <div class="form-group">
                                             <label class="col-md-3 col-sm-3 control-label"> <span
-                                                        style="vertical-align: -9px;">{{trans("general.description") }}</span></label>
+                                                        style="vertical-align: -9px;">{{trans("word.description") }}</span></label>
                                             <div class="col-md-3 col-sm-4 pull-right">
                                                 {{--<a href="{{$form_type == "new" ? route("stock.index",aid()): URL::previous() }}"--}}
-                                                {{--class="btn btn-default btn-lg ">{{trans("general.back")}}--}}
+                                                {{--class="btn btn-default btn-lg ">{{trans("word.back")}}--}}
                                                 {{--</a>--}}
                                                 <button type="button" @click="formSend" href="#"
                                                         class="btn btn-success btn-lg ">
-                                                    {{trans("general.save")}}
+                                                    {{trans("word.save")}}
                                                 </button>
                                             </div>
                                             <div class="col-md-6 col-sm-6">
@@ -51,20 +51,20 @@
                                     <fieldset>
                                         <div class="form-group" :class="{'has-error':errors.has('form.company_id')}">
 
-                                            <label class="col-md-3 control-label">{{trans("general.customer")}}</label>
+                                            <label class="col-md-3 control-label">{{trans("word.customer")}}</label>
                                             <div class="col-md-6">
 
                                                 <v-select
                                                         v-bind:class="{'v-select-error':errors.has('form.company_id')}"
                                                         v-validate="'required'" name="form.company_id" label="text"
-                                                        :filterable="true" placeholder="Choose Company"
+                                                        :filterable="true" placeholder="{{trans("sentence.choose_company")}}"
                                                         :options="options" @search="onSearch"
                                                         transition="fade" v-model="form.company_id">
                                                     <template slot="no-options">
                                                         <a type="button" style="color:white"
                                                            class='btn btn-sm btn-warning' href='#!'
                                                            data-toggle='modal' data-target='#new_company'>
-                                                            {{ trans("general.click") }} {{ trans("general.for") }} {{ trans("general.new") }} {{ trans("general.company")  }}</a>
+                                                            {{ trans("sentence.click_for_a_new_company") }}</a>
                                                     </template>
                                                     <template slot="option" slot-scope="option">
                                                         <div class="d-center">
@@ -79,7 +79,7 @@
 
                                     <fieldset>
                                         <div class="form-group" v-bind:class="{'has-error':errors.has('form.date')}">
-                                            <label class="col-md-3 control-label">{{ trans("general.offer") }} {{ trans("general.date") }}</label>
+                                            <label class="col-md-3 control-label">{{ trans("sentence.offer_date") }}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask @change="setDate(form.date)" :mask="['##.##.####']" type="text" name="form.date"
@@ -95,7 +95,7 @@
                                     <fieldset>
                                         <div class="form-group"
                                              v-bind:class="{'has-error':errors.has('form.expired_date')}">
-                                            <label class="col-md-3 control-label">{{ trans("general.validity") }} {{ trans("general.date") }}</label>
+                                            <label class="col-md-3 control-label">{{ trans("sentence.validity_date") }}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"
@@ -116,8 +116,7 @@
                                 <fieldset >
 
                                     <div class="form-group " id="description_detail" style="    margin-top: -69px;">
-                                        <label class=" control-label" style="margin-left:15px">{{ trans("general.detailed") }}
-                                            {{ trans("general.description") }}</label><br>
+                                        <label class=" control-label" style="margin-left:15px">{{ trans("sentence.detailed_description") }}</label><br>
 
                                         <div class="col-md-6 ">
 

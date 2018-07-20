@@ -39,6 +39,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'word', 'key' => 'suppliers', 'text' => ['en' =>'SUPPLIERS','tr'=>'TEDARİKÇİLER']]);
         LanguageLine::create(['group' => 'word', 'key' => 'expenses', 'text' => ['en' =>'EXPENSES','tr'=>'GİDERLERLER']]);
         LanguageLine::create(['group' => 'word', 'key' => 'account', 'text' => ['en' =>'ACCOUNT','tr'=>'HESAP']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'product', 'text' => ['en' =>'PRODUCT','tr'=>'ÜRÜN']]);
         LanguageLine::create(['group' => 'word', 'key' => 'products', 'text' => ['en' =>'PRODUCTS','tr'=>'ÜRÜNLER']]);
         LanguageLine::create(['group' => 'word', 'key' => 'date', 'text' => ['en' =>'DATE','tr'=>'TARİH']]);
         LanguageLine::create(['group' => 'word', 'key' => 'total', 'text' => ['en' =>'TOTAL','tr'=>'TOPLAM']]);
@@ -99,6 +100,12 @@ class LanguagesTableSeeder extends Seeder
             'tr' =>
                 'Bu açılmış tarayıcıyı kapatarak oturumu kapattıktan sonra güvenliğinizi daha da artırabilirsiniz.']
         ]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'currency_type_information', 'text' => [
+            'en' =>
+                'If you are going to get a payment through fixed exchange rate, you must choose Turkish Lira as the currency type.',
+            'tr' =>
+                'Eğer sabit kur üzerinden ödeme alacaksanız döviz cinsi olarak Türk Lirası seçmelisiniz.']
+        ]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'recent_project', 'text' => ['en' => 'RECENT PROJECT', 'tr' => 'SON PROJELER']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'company_profile', 'text' => ['en' => 'COMPANY PROFILE', 'tr' => 'ŞİRKET PROFİLİ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'user_profile', 'text' => ['en' => 'USER PROFILE', 'tr' => 'KULLANICI PROFİLİ']]);
@@ -126,7 +133,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'total_vat', 'text' => ['en' => 'TOTAL VAT', 'tr' => 'TOPLAM KDV']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'general_total', 'text' => ['en' => 'GENERAL TOTAL', 'tr' => 'GENEL TOPLAM']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'choose_company', 'text' => ['en' => 'CHOOSE COMPANY', 'tr' => 'ŞİRKET SEÇ']]);
-        LanguageLine::create(['group' => 'sentence', 'key' => 'click_for_new_company', 'text' => ['en' => 'CLICK FOR A NEW COMPANY', 'tr' => 'YENİ BİR ŞİRKET İÇİN TIKLAYIN']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'click_for_a_new_company', 'text' => ['en' => 'CLICK FOR A NEW COMPANY', 'tr' => 'YENİ BİR ŞİRKET İÇİN TIKLAYIN']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'add_tag', 'text' => ['en' => 'ADD TAG', 'tr' => 'ETİKET EKLE']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'new_customer', 'text' => ['en' => 'NEW CUSTOMER', 'tr' => 'YENİ MÜŞTERİ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'customer_name', 'text' => ['en' => 'CUSTOMER NAME', 'tr' => 'MÜŞTERİ ADI']]);
@@ -191,6 +198,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'print_offer', 'text' => ['en' => 'PRINT OFFER', 'tr' => 'TEKLİFİ YAZDIR']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'download_offer', 'text' => ['en' => 'DOWNLOAD OFFER', 'tr' => 'TEKLİFİ İNDİR']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'download_pdf_account_summary', 'text' => ['en' => 'DOWNLOAD PDF ACCOUNT SUMMARY', 'tr' => 'EKSTRE PDF OLARAK İNDİR']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'delete_row', 'text' => ['en' => 'DELETE ROW', 'tr' => 'SATIRI SİL']]);
 
 
 
