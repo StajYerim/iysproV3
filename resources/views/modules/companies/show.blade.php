@@ -28,17 +28,17 @@
                                 <li>
                                     <a href="{{route("sales.companies.form",[aid(),'Customer',$company->id,'update'])}}"><i
                                                 class="fa fa-edit" aria-hidden="true"></i>
-                                        {{trans("general.edit")}}</a>
+                                        {{trans("word.edit")}}</a>
                                 </li>
                                 <li>
                                     <a href="#!"  data-toggle="modal" data-target="#transaction"><i
                                                 class="fa fa-edit" aria-hidden="true"></i>
-                                        TAHSİLAT EKLE</a>
+                                        {{trans("sentence.add_collection") }}</a>
                                 </li>
                                 <li>
                                     <a href="#!"  data-toggle="modal" data-target="#transaction_payment"><i
                                                 class="fa fa-edit" aria-hidden="true"></i>
-                                        ÖDEME EKLE</a>
+                                       {{trans("sentence.add_payment")}}</a>
                                 </li>
 
 
@@ -46,7 +46,7 @@
                                 <li>
                                     <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
                                                                                                   aria-hidden="true"></i>
-                                        {{trans("general.delete")}}</a>
+                                        {{trans("word.delete")}}</a>
                                 </li>
 
                             </ul>
@@ -59,12 +59,12 @@
                                 <li>
                                     <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
                                                 class="fa fa-print" aria-hidden="true"></i>
-                                        TEKLİFİ {{trans("general.print")}}</a>
+                                        {{trans("sentence.print_offer")}}</a>
                                 </li>
                                 <li>
                                     <a download="" href="http://demo.iyspro.com/salesmanager/sales-offer/8/printDown"
                                        id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
-                                        TEKLİFİ {{trans("general.download")}}</a>
+                                        {{trans("sentence.download_offer")}}</a>
                                 </li>
 
                             </ul>
@@ -72,7 +72,7 @@
                         </div>
 
                         <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
-                                    class="fa fa-envelope"></i> {{trans("general.share")}}</a>
+                                    class="fa fa-envelope"></i> {{trans("sentence.share")}}</a>
 
                     </div>
 
@@ -91,16 +91,16 @@
                             <div class="row">
                                 <div class="col-sm-8">
 
-                                    <div class="">
+                                    <div class="well">
 
                                         <table class="table table-striped table-condensed table-hover smart-form ">
                                             <thead>
                                             <tr>
-                                                <th width="15%">{{trans("general.operation")}} {{trans("general.type")}}</th>
-                                                <th width="30%">{{trans("general.description")}}</th>
-                                                <th width="10%">{{trans("general.operation")}} {{trans("general.date")}}</th>
-                                                <th width="10%">{{trans("general.sum")}}</th>
-                                                <th width="10%">{{trans("general.balance")}}</th>
+                                                <th width="15%">{{trans("word.type")}}</th>
+                                                <th width="30%">{{trans("word.description")}}</th>
+                                                <th width="10%">{{trans("word.date")}}</th>
+                                                <th width="10%">{{trans("word.sum")}}</th>
+                                                <th width="10%">{{trans("word.balance")}}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -119,23 +119,6 @@
 
 
                                     </div>
-
-                                    <ul id="myTab1" class="nav nav-tabs bordered">
-                                        <li class="active">
-                                        </li>
-
-
-                                    </ul>
-
-                                    <div id="myTabContent1" class="tab-content padding-10">
-                                        <div class="tab-pane fade active in" id="g1">
-                                            <div id="contacts_table">
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
                                 </div>
                                 <div class="col-sm-4" >
                                     {{--payment info --}}
@@ -147,7 +130,7 @@
 
                                             <div class="row">
                                                 <div class="col-sm-12 bottom-info" >
-                                                    {{trans("general.balance")}} <span class="pull-right">@{{remaining}}</span>
+                                                    {{trans("word.balance")}} <span class="pull-right">@{{remaining}}</span>
 
                                                 </div>
                                             </div>
@@ -155,7 +138,7 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <button type="button" class="btn btn-primary btn btn-block">
-                                                        {{trans("general.extract")}} PDF OLARAK {{trans("general.download")}}
+                                                        {{trans("sentence.download_pdf_account_summary")}}
                                                     </button>
                                                 </div>
                                             </div>
@@ -163,7 +146,6 @@
 
                                         </div>
 
-                                        <hr>
 
 
                                     </div>
@@ -220,12 +202,6 @@
 
                                                 </td>
                                                 <td>{{$company->tax_id}}/{{$company->tax_office}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fa fa-bank" aria-hidden="true"></i>
-
-                                                </td>
-                                                <td>{{$company->iban}}</td>
                                             </tr>
 
                                         </table>

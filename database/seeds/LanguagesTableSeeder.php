@@ -52,6 +52,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'word', 'key' => 'save', 'text' => ['en' => 'SAVE', 'tr' => 'KAYDET']]);
         LanguageLine::create(['group' => 'word', 'key' => 'email', 'text' => ['en' => 'E-MAIL', 'tr' => 'E-POSTA']]);
         LanguageLine::create(['group' => 'word', 'key' => 'phone', 'text' => ['en' => 'PHONE', 'tr' => 'TELEFON']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'fax', 'text' => ['en' => 'FAX', 'tr' => 'FAKS']]);
         LanguageLine::create(['group' => 'word', 'key' => 'province', 'text' => ['en' => 'PROVINCE', 'tr' => 'İL']]);
         LanguageLine::create(['group' => 'word', 'key' => 'district', 'text' => ['en' => 'DISTRICT', 'tr' => 'İLÇE']]);
         LanguageLine::create(['group' => 'word', 'key' => 'contact', 'text' => ['en' => 'CONTACT', 'tr' => 'İLETİŞİM']]);
@@ -82,6 +83,13 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'word', 'key' => 'search', 'text' => ['en' => 'SEARCH', 'tr' => 'ARAMA']]);
         LanguageLine::create(['group' => 'word', 'key' => 'api', 'text' => ['en' => 'API', 'tr' => 'API']]);
         LanguageLine::create(['group' => 'word', 'key' => 'filter', 'text' => ['en' => 'FILTER', 'tr' => 'FILTRELE']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'company', 'text' => ['en' => 'COMPANY', 'tr' => 'ŞİRKET']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'balance', 'text' => ['en' => 'BALANCE', 'tr' => 'BAKİYE']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'edit', 'text' => ['en' => 'EDIT', 'tr' => 'DÜZENLE']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'delete', 'text' => ['en' => 'DELETE', 'tr' => 'SİL']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'share', 'text' => ['en' => 'SHARE', 'tr' => 'PAYLAŞ']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'type', 'text' => ['en' => 'TYPE', 'tr' => 'TÜR']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'date', 'text' => ['en' => 'DATE', 'tr' => 'TARİH']]);
 
 
         // sentence area
@@ -176,6 +184,13 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'numune_cikis_fisi', 'text' => ['en' => 'numune_cikis_fisi [en]', 'tr' => 'NUMUNE ÇIKIŞ FİŞİ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'uretime_cikis_fisi', 'text' => ['en' => 'uretime_cikis_fisi [en]', 'tr' => 'ÜRETİME ÇIKIŞ FİŞİ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'add_product', 'text' => ['en' => 'ADD PRODUCT', 'tr' => 'ÜRÜN EKLE']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'edit_profile', 'text' => ['en' => 'EDIT PROFILE', 'tr' => 'PROFİLİ DÜZENLE']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'tax_office_id', 'text' => ['en' => 'TAX OFFICE ID', 'tr' => 'VKN TCKN']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'add_collection', 'text' => ['en' => 'ADD COLLECTION', 'tr' => 'TAHSİLAT EKLE']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'add_payment', 'text' => ['en' => 'ADD PAYMENT', 'tr' => 'ÖDEME EKLE']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'print_offer', 'text' => ['en' => 'PRINT OFFER', 'tr' => 'TEKLİFİ YAZDIR']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'download_offer', 'text' => ['en' => 'DOWNLOAD OFFER', 'tr' => 'TEKLİFİ İNDİR']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'download_pdf_account_summary', 'text' => ['en' => 'DOWNLOAD PDF ACCOUNT SUMMARY', 'tr' => 'EKSTRE PDF OLARAK İNDİR']]);
 
 
 

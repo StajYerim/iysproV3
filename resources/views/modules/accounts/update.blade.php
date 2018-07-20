@@ -4,11 +4,11 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                {{trans("general.company")}} {{trans("general.profile")}}
+                {{trans("sentence.company_profile")}}
             </div>
 
             <div class="card-body">
-                {{trans("general.profile")}} {{trans("general.edit")}}
+                {{trans("sentence.edit_profile")}}
             </div>
         </div>
     </div>
