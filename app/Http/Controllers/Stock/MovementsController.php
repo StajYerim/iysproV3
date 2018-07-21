@@ -25,7 +25,7 @@ class MovementsController extends Controller
     public function index_list()
     {
 
-        $stocks = Stock::with("items")->select("stock_receipts.*")->where("account_id", aid());
+        $stocks = Stock::select("stock_receipts.*")->where("account_id", aid());
 
         return Datatables::of($stocks)
             ->setRowAttr([

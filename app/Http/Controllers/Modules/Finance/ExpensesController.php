@@ -24,14 +24,11 @@ class ExpensesController extends Controller
     public function index_list()
     {
 
-        $expenses = Expenses::with("tags", "bank_item", "bank_item.bank_account")->select("expenses.*")->where("account_id", aid());
+        $expenses = Expenses::with("tags", "bank")->select(["expenses.*"])->where("account_id", aid())->get();
 
         return Datatables::of($expenses)
-            ->editColumn("balance", function ($expense) {
-                return $expense->balance;
-            })
             ->editColumn("date", function ($expense) {
-                return $expense->bank_item["date"];
+                return $expense->date;
             })
             ->setRowClass("row-title")
             ->make(true);

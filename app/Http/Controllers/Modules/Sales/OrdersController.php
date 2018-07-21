@@ -32,7 +32,7 @@ class OrdersController extends Controller
     public function index_list()
     {
 
-        $orders = SalesOrders::with("company")->select("sales_orders.*")->where("account_id", aid());
+        $orders = SalesOrders::with("company")->select("sales_orders.*")->where("account_id", aid())->get();
 
         return Datatables::of($orders)
             ->setRowAttr([
