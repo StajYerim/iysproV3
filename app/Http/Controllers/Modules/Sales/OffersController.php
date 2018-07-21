@@ -21,7 +21,7 @@ class OffersController extends Controller
     public function index_list()
     {
 
-        $offers = SalesOffers::with("company")->select("sales_offers.*")->where("account_id", aid());
+        $offers = SalesOffers::with("company")->select("sales_offers.*")->where("account_id", aid())->get();
 
         return Datatables::of($offers)
             ->setRowAttr([
