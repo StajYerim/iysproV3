@@ -21,9 +21,9 @@ class Stock extends Model
 
     public function getDateAttribute()
     {
-     $explode = explode("-",$this->attributes["date"]);
-     $dt = Carbon::create($explode[0],$explode[1],$explode[2]);
-     return $dt->format("d.m.Y H:i:s");
+//     $explode = explode("-",);
+     $dt = Carbon::createFromFormat("Y-m-d H:i:s",$this->attributes["date"]);
+     return $dt->format("d.m.Y");
     }
 
     public function company(){
