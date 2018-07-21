@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Modules\Sales;
 use App\Bankabble;
 use App\Language;
 use App\Mail\Share\Sales\Order;
+use App\Mail\Share\Sales\Transfer;
+use App\Mail\Share\Sales\Waybill;
 use App\Model\Sales\OrderWaybill;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
@@ -13,6 +15,7 @@ use App\Model\Sales\SalesTransferInfo;
 use App\Model\Sales\WaybillItems;
 use App\Taggable;
 use App\Tags;
+use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
@@ -199,6 +202,10 @@ class OrdersController extends Controller
             }
         }
 
+       $owner = auth()->user()->memberOfAccount["id"];
+        $user = User::where("account_id",$owner)->where("role_id",2)->get();
+        $mail =  Mail::to($user["email"])->send(new Waybill($waybill));
+
         return $waybill->id;
     }
 
@@ -268,13 +275,13 @@ class OrdersController extends Controller
             ]);
 
         $order = SalesOrders::find($id);
-        if($order->company["email"] == null && $transfer->customer_email){
+        if($order->company->address["email"] == null && $transfer->customer_email){
 
-            $order->company->update(["email"=>$transfer->customer_email]);
+            $order->company->address->update(["email"=>$transfer->customer_email]);
         }
 
         if($request->mail_check && $transfer->customer_email){
-            $mail =  Mail::to($transfer->customer_email)->send(new TransferMailSend($transfer,$request->products));
+            $mail =  Mail::to($transfer->customer_email)->send(new Transfer($transfer,$request->products));
         }
 
         if ($transfer) {
