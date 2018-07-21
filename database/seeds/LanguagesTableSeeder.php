@@ -26,9 +26,9 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'word', 'key' => 'applications', 'text' => ['en' => 'APPLICATIONS', 'tr' => 'UYGULAMALAR']]);
         LanguageLine::create(['group' => 'word', 'key' => 'users', 'text' => ['en' => 'USERS', 'tr' => 'KULLANICILAR']]);
         LanguageLine::create(['group' => 'word', 'key' => 'logout', 'text' => ['en' => 'LOGOUT', 'tr' => 'ÇIKIŞ']]);
-        LanguageLine::create(['group' => 'word', 'key' => 'no', 'text' => ['en' =>'No','tr'=>'Hayır']]);
-        LanguageLine::create(['group' => 'word', 'key' => 'yes', 'text' => ['en' =>'Yes','tr'=>'Evet']]);
-        LanguageLine::create(['group' => 'word', 'key' => 'okay', 'text' => ['en' =>'Okay','tr'=>'Tamam']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'no', 'text' => ['en' =>'NO','tr'=>'HAYIR']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'yes', 'text' => ['en' =>'YES','tr'=>'EVET']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'okay', 'text' => ['en' =>'OKAY','tr'=>'TAMAM']]);
         LanguageLine::create(['group' => 'word', 'key' => 'board', 'text' => ['en' =>'BOARD','tr'=>'PANO']]);
         LanguageLine::create(['group' => 'word', 'key' => 'calendar', 'text' => ['en' =>'CALENDAR','tr'=>'TAKVİM']]);
         LanguageLine::create(['group' => 'word', 'key' => 'offers', 'text' => ['en' =>'OFFERS','tr'=>'TEKLİFLER']]);
