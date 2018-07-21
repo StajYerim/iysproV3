@@ -110,7 +110,7 @@ app()->setLocale($lang);
                                         <b style="line-height: 12px;">{!! account()["name"]!!}</b><br>
                                         <span style="line-height:12px;font-size:10px;">
                                             {!! str_replace("\n","<br>",account()["address"]) !!} {!! account()["town"] !!}/{!! account()["city"] !!}
-                                            <br>V.D {{trans("general.and")}} {{trans("general.number")}} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>{{trans("general.phone")}} {!! account()["phone"] !!}<br>
+                                            <br>V.D {{trans("word.and")}} {{trans("word.number")}} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>{{trans("word.phone")}} {!! account()["phone"] !!}<br>
 
                                     </span>
                                     </td>
@@ -122,10 +122,10 @@ app()->setLocale($lang);
                 </table>
                 {{--{!! $logo->startText !!}--}}
 
-                <span style="text-align:center"><h2>{{trans("general.proforma")}} {{trans("general.invoice")}} / {{trans("general.offer")}} </h2></span>
+                <span style="text-align:center"><h2>{{trans("sentence.proforma_invoice")}} / {{trans("sentence.offer")}} </h2></span>
                 <span style="float:left"><b style="font-size:15px;">
                         {{$offer->company["company_name"]}}
-                    </b> <span style="float:right" >{{trans("general.date")}}:
+                    </b> <span style="float:right" >{{trans("word.date")}}:
                         {{$offer->date}}
                     </span></span>
                 @if($offer->description)  <br>
@@ -137,13 +137,13 @@ app()->setLocale($lang);
 
         <tr class="heading" style="font-size:11px;">
             <td  style="text-align: left;width:340px" >
-                {{trans("general.product")}}/{{trans("general.service")}}
+                {{trans("word.product")}}/{{trans("word.service")}}
             </td>
             <td  style="text-align: right;width:60px" >
-                {{trans("general.quantity")}}
+                {{trans("word.quantity")}}
             </td>
             <td style="text-align: right;width:120px">
-                {{ trans("general.unit") }} {{trans("general.price")}}
+                {{ trans("word.unit") }} {{trans("word.price")}}
             </td>
             {{--@if($offer->Items->sum("OfferItemDiscount") > 0)--}}
                 {{--<td  style="text-align: right;width:20px" >--}}
@@ -158,7 +158,7 @@ app()->setLocale($lang);
                 KDV
             </td>
             <td style="text-align:right;width:140px">
-                {{trans("general.amount")}}(KDV {{trans("general.excuding")}})
+                {{trans("word.amount")}}({{trans("sentence.excluding_vat")}})
             </td>
         </tr>
 
@@ -197,7 +197,7 @@ app()->setLocale($lang);
         @empty
             <tr class="item">
                 <td colspan="6">
-                    {{trans("general.offer")}} {{trans("general.movement")}} bulunmamaktadır.
+                    {{trans("sentence.there_is_no_offer_movement")}}
                 </td>
             </tr>
         @endforelse
@@ -240,12 +240,11 @@ app()->setLocale($lang);
             <td></td>
             <td></td>
             <td colspan="1" style="text-align: right">
-              <div style=";font-size:10px;">  @if(KdvTotal($offer->items,1) > 0)%1 KDV<br>@endif
-                @if(KdvTotal($offer->items,8) > 0) %8 KDV<br>@endif
-                @if(KdvTotal($offer->items,18) > 0) %18 KDV<br>@endif
+              <div style=";font-size:10px;">  @if(KdvTotal($offer->items,1) > 0)%1 {{trans("word.vat")}}<br>@endif
+                @if(KdvTotal($offer->items,8) > 0) %8 {{trans("word.vat")}}<br>@endif
+                @if(KdvTotal($offer->items,18) > 0) %18 {{trans("word.vat")}}<br>@endif
               </div>
-                {{trans("general.total"}} KDV:
-
+                {{trans("general.total_vat"}} :
             </td>
             <td colspan="1" style="text-align: right">
                 <div style=";font-size:10px;">   @if(KdvTotal($offer->items,1) > 0)  {{KdvTotal($offer->items,1)}} {!! $offer->currency_icon!!}<br>@endif
@@ -261,7 +260,7 @@ app()->setLocale($lang);
             <td></td>
             <td></td>
             <td colspan="1" style="text-align: right;width:140px;">
-                {{trans("general.general")}} {{trans("general.amount")}}:
+                {{trans("sentence.general_amount")}} :
             </td>
             <td colspan="1" style="text-align: right;width:120px;">
                 {{$offer->grand_total}} {!! $offer->currency_icon!!}

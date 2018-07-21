@@ -7,14 +7,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">{{trans("general.product")}} {{trans("general.add")}}</h4>
+        <h4 class="modal-title" id="myModalLabel">{{trans("sentence.add_product")}}</h4>
       </div>
       <div class="modal-body">
         <form id="add-product-form" action="{{ route('ecommerce.products.add_product', [ aid() ]) }}" method="POST">
           @csrf
           <input type="hidden" name="category">
           <div id="wizard">
-            <h1>{{trans("general.category")}}</h1>
+            <h1>{{trans("word.category")}}</h1>
             <div>
               <div class="form-group">
                 <select class="form-control" id="n11-category-list" size="5"></select>
@@ -37,30 +37,30 @@
               </div>
             </div>
 
-            <h1>{{trans("general.product")}} {{trans("general.detail")}}</h1>
+            <h1>{{trans("sentence.product_detail")}}</h1>
             <div>
               <div class="form-group">
-                <label>{{trans("general.product")}} {{trans("general.choose")}}</label>
+                <label>{{trans("sentence.choose_product")}}</label>
                 <select name="product" class="form-control" id="product-list" size="5"></select>
               </div>
               <div class="form-group">
-                <label>{{trans("general.shop")}} {{trans("general.code")}}</label>
+                <label>{{trans("sentence.shop_code")}}</label>
                 <input type="text" name="store_code" placeholder="000000" autocomplete="OFF" class="form-control">
               </div>
               <div class="form-group">
-                <label>{{trans("general.sales")}} {{trans("general.price")}}</label>
+                <label>{{trans("sentence.sales_price")}}</label>
                 <input type="text" name="price" value="0,00" autocomplete="OFF" class="form-control">
               </div>
               <div class="form-group">
-                <label>{{trans("general.stock")}} {{trans("general.number")}}</label>
+                <label>{{trans("sentencel.stock_number")}}</label>
                 <input type="text" name="stock" value="1" autocomplete="OFF" class="form-control">
               </div>
             </div>
             
-            <h1>Açıklama</h1>
+            <h1>{{trans("word.description")}}</h1>
             <div>
               <div class="form-group">
-                <label>{{trans("general.description")}}</label>
+                <label>{{trans("word.description")}}</label>
                 <textarea name="description" class="form-control" rows="5"></textarea>
               </div>
             </div>
@@ -68,7 +68,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">{{trans("word.close")}}</button>
       </div>
     </div>
   </div>
@@ -102,11 +102,11 @@
                             <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{trans("general.code")}}</th>
-                                    <th>{{trans("general.name")}}</th>
-                                    <th>API</th>
-                                    <th>{{trans("general.stock")}} {{trans("general.quantity")}}</th>
-                                    <th>{{trans("general.sales")}} {{trans("general.price")}}</th>
+                                    <th>{{trans("word.code")}}</th>
+                                    <th>{{trans("word.name")}}</th>
+                                    <th>{{trans("word.api")}}</th>
+                                    <th>{{trans("sentence.stock_quantity")}}</th>
+                                    <th>{{trans("sentence.sales_price")}}</th>
                                 </tr>
                             </thead>
                         </table>

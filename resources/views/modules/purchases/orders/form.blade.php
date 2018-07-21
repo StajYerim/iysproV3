@@ -25,14 +25,14 @@
                                     <fieldset class="fixed-title">
                                         <div class="form-group">
                                             <label class="col-md-3 col-sm-3 control-label"> <span
-                                                        style="vertical-align: -9px;">{{trans("general.description") }}</span></label>
+                                                        style="vertical-align: -9px;">{{trans("WORD.description") }}</span></label>
                                             <div class="col-md-3 col-sm-4 pull-right">
                                                 {{--<a href="{{$form_type == "new" ? route("stock.index",aid()): URL::previous() }}"--}}
                                                 {{--class="btn btn-default btn-lg ">{{trans("general.back")}}--}}
                                                 {{--</a>--}}
                                                 <button type="button" @click="formSend" href="#"
                                                         class="btn btn-success btn-lg ">
-                                                    {{trans("general.save")}}
+                                                    {{trans("WORD.save")}}
                                                 </button>
                                             </div>
                                             <div class="col-md-6 col-sm-6">
@@ -50,7 +50,7 @@
                                     <fieldset>
                                         <div class="form-group" :class="{'has-error':errors.has('form.company_id')}">
 
-                                            <label class="col-md-3 control-label">{{trans("general.supplier")}}</label>
+                                            <label class="col-md-3 control-label">{{trans("WORD.supplier")}}</label>
                                             <div class="col-md-6">
 
                                                 <v-select
@@ -62,8 +62,7 @@
                                                     <template slot="no-options">
                                                         <a type="button" style="color:white"
                                                            class='btn btn-sm btn-warning' href='#!'
-                                                           data-toggle='modal' data-target='#new_supplier'>{{trans("general.click")}} {{trans("general.for")}} {{trans("general.new")}}
-                                                            {{trans("general.company")}} </a>
+                                                           data-toggle='modal' data-target='#new_supplier'>{{trans("sentence.click_for_a_new_company")}} </a>
                                                     </template>
                                                     <template slot="option" slot-scope="option">
                                                         <div class="d-center">
@@ -78,7 +77,7 @@
 
                                     <fieldset>
                                         <div class="form-group" v-bind:class="{'has-error':errors.has('form.date')}">
-                                            <label class="col-md-3 control-label">{{trans("general.order")}} {{trans("general.date")}}</label>
+                                            <label class="col-md-3 control-label">{{trans("sentence.order_date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask @change="setDate(form.date)" :mask="['##.##.####']" type="text" name="form.date"
@@ -93,7 +92,7 @@
                                     <fieldset>
                                         <div class="form-group"
                                              v-bind:class="{'has-error':errors.has('form.due_date')}">
-                                            <label class="col-md-3 control-label">{{trans("general.payable")}} {{trans("general.date")}}</label>
+                                            <label class="col-md-3 control-label">{{trans("sentence.payable_date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"

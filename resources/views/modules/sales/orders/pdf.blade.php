@@ -111,7 +111,7 @@
                                         <span style="line-height:12px;font-size:10px;">
                                             {!! str_replace("\n","<br>",account()["address"]) !!} {!! account()["town"] !!}/{!! account()["city"] !!}
 
-                                            <br>V.D {{trans("general.and")}} {{trans("general.number")}} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>{{trans("general.phone")}} {!! account()["phone"] !!}<br>
+                                            <br>V.D {{trans("word.and")}} {{trans("word.number")}} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>{{trans("word.phone")}} {!! account()["phone"] !!}<br>
 
                                     </span>
                                     </td>
@@ -126,7 +126,7 @@
                 <span style="text-align:center"><h2>{{trans("general.satis")}} {{trans("general.order")}}</h2></span>
                 <span style="float:left"><b style="font-size:15px;">
                         {{$order->company["company_name"]}}
-                    </b> <span style="float:right" >{{trans("general.date")}}:
+                    </b> <span style="float:right" >{{trans("word.date")}}:
                         {{$order->date}}
                     </span></span>
                 @if($order->description)  <br>
@@ -138,13 +138,13 @@
 
         <tr class="heading" style="font-size:11px;">
             <td  style="text-align: left;width:340px" >
-                {{trans("general.product")}}/{{trans("general.service")}}
+                {{trans("word.product")}}/{{trans("word.service")}}
             </td>
             <td  style="text-align: right;width:60px" >
-                {{trans("general.quantity")}}
+                {{trans("word.quantity")}}
             </td>
             <td style="text-align: right;width:120px">
-                {{trans("general.unity")}} {{trans("general.price")}}
+                {{trans("word.unity_price")}}
             </td>
             {{--@if($order->Items->sum("OfferItemDiscount") > 0)--}}
                 {{--<td  style="text-align: right;width:20px" >--}}
@@ -156,10 +156,10 @@
                 {{--</td>--}}
             {{--@endif--}}
             <td  style="text-align: right;width:40px" >
-                KDV
+                {{trans("word.vat")}}
             </td>
             <td style="text-align:right;width:140px">
-                {{trans("general.amount")}}(KDV {{trans("general.excluding")}})
+                {{trans("word.amount")}}({{trans("sentence.excluding_Vat")}})
             </td>
         </tr>
 
@@ -198,7 +198,7 @@
         @empty
             <tr class="item">
                 <td colspan="6">
-                    {{trans("general.offer")}} {{trans("general.movement")}} bulunmamaktadır.
+                    {{trans("sentence.there_is_no_offer_movement")}}
                 </td>
             </tr>
         @endforelse
@@ -241,11 +241,11 @@
             <td></td>
             <td></td>
             <td colspan="1" style="text-align: right">
-              <div style=";font-size:10px;">  @if(KdvTotal($order->items,1) > 0)%1 KDV<br>@endif
-                @if(KdvTotal($order->items,8) > 0) %8 KDV<br>@endif
-                @if(KdvTotal($order->items,18) > 0) %18 KDV<br>@endif
+              <div style=";font-size:10px;">  @if(KdvTotal($order->items,1) > 0)%1 {{trans("word.vat")}}<br>@endif
+                @if(KdvTotal($order->items,8) > 0) %8 {{trans("word.vat")}}<br>@endif
+                @if(KdvTotal($order->items,18) > 0) %18 {{trans("word.vat")}}<br>@endif
               </div>
-                {{trans("general.total")}} KDV:
+                {{trans("sentence.total_vat")}} :
 
             </td>
             <td colspan="1" style="text-align: right">
@@ -262,7 +262,7 @@
             <td></td>
             <td></td>
             <td colspan="1" style="text-align: right;width:140px;">
-                {{trans("general.general")}} {{trans("general.total")}}:
+                {{trans("sentence.general_total")}} :
             </td>
             <td colspan="1" style="text-align: right;width:120px;">
                 {{$order->grand_total}} {!! $order->currency_icon!!}
