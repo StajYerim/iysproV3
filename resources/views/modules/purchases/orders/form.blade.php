@@ -180,7 +180,7 @@
                             loading(true);
                             this.search(loading, search, this);
                         }, search: _.debounce(function (loading, search, vm) {
-                            axios.get("{{route("company.source",aid())}}?q=" + escape(search)).then(function (res) {
+                            axios.get("{{route("company.source",aid())}}?q=" + search).then(function (res) {
                                 Companies.form.company_name = search;
                                 vm.options = res.data;
                                 loading(false)
