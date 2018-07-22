@@ -165,7 +165,7 @@
 
     </section>
 
-    @include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0,$act=$action])
+    @include("components.modals.companies",[$option="supplier",$title="New Company",$type = "new_company",$message="Company Form",$id=0,$act=$action])
     {{--@include("components.modals.products",[$title="New Product",$type = "new_product",$message="Product Form",$id=0])--}}
 
     @push("style")

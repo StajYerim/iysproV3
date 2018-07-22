@@ -38,7 +38,7 @@ class StockController extends Controller
                 },
             ])
             ->editColumn("inventory_tracking",function($product){
-                return "tester";
+                return $product->stock_count."/".$product->order_count." ".$product->unit["short_name"];
             })
             ->setRowClass("row-title")
             ->make(true);

@@ -44,9 +44,9 @@
                                     <th width="1px">#</th>
                                     <th>{{trans("general.code")}}</th>
                                     <th>{{trans("general.name")}}</th>
-                                    <th>{{trans("general.stock")}} {{trans("general.quantity")}}</th>
-                                    <th>{{trans("general.purchase")}} {{trans("general.price")}}</th>
-                                    <th>{{trans("general.sales")}} {{trans("general.price")}}</th>
+                                    <th>{{trans("general.stock")}}/{{trans("general.order")}}</th>
+                                    {{--<th>{{trans("general.purchase")}} {{trans("general.price")}}</th>--}}
+                                    {{--<th>{{trans("general.sales")}} {{trans("general.price")}}</th>--}}
                                 </tr>
                                 </thead>
 
@@ -110,11 +110,13 @@
                     }, {
                         data: "inventory_tracking",
                         name:"inventory_tracking"
-                    }, {
-                        data: "buying_price"
-                    }, {
-                        data: "list_price"
-                    }
+                    },
+//                    {
+//                        data: "buying_price"
+//                    },
+//                    {
+//                        data: "list_price"
+//                    }
                 ]
             });
 
