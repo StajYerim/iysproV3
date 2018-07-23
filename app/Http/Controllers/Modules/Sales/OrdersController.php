@@ -39,17 +39,22 @@ class OrdersController extends Controller
                 'onclick' => function ($orders) {
                     return "product_update($orders->id)";
                 },
-            ])
-            ->editColumn('sub_total',function($orders){
-                if($orders->remaining == "0,00"){
-                    return "ÖDENDİ";
-                }else if($orders->remaining == $orders->grand_total){
-                    return "ÖDENMEDİ";
-                }else{
-                    return "KISMİ ÖDENDİ";
-                }
+            ])->editColumn('company_area',function($orders){
+                return $orders["company"]["company_name"]."<br>".$orders->description;
             })
-            ->rawColumns(["grand_total", "status"])
+            ->editColumn('date',function($orders){
+                return $orders->date."<br>".$orders->due_date;
+            })
+            ->editColumn('grand_total',function($orders){
+
+                return $orders->grand_total."<br>".get_money(money_db_format($orders->grand_total)-money_db_format($orders->remaining));
+            })
+            ->editColumn('sub_total',function($orders){
+
+                return $orders->status_label."<br>".$orders->collect_label;
+
+            })
+            ->rawColumns(["grand_total", "status","company_area",'sub_total',"date"])
             ->setRowClass("row-title")
             ->make(true);
     }

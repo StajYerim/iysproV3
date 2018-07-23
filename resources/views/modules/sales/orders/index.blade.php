@@ -95,11 +95,14 @@
                             return '<i class="fa fa-file-text-o fa-3x"></i>';
                         },
                     }, {
-                        data: "company.company_name",
+                          name:"company_area",
+                        data:"company_area"
                     }, {
+                    name:"date",
                         data: "date"
 
                     }, {
+                          name:'grand_total',
                         data: "grand_total"
                     }, {
                         data: "sub_total"

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Model\Stock;
+use App\Model\Purchases\PurchaseOrderItems;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,14 @@ class Stock extends Model
 
     public function items(){
         return $this->hasMany("App\Model\Stock\StockItems");
+    }
+
+    public function order_items(){
+        if($this->status == 0){
+            return  $this->hasMany(PurchaseOrderItems::class,"id","doc_id");
+        }else{
+//            return  $this->hasMany(PurchaseOrderItems::class,"id","doc_id");
+        }
     }
 
     public function setDateAttribute($value)
