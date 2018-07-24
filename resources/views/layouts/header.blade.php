@@ -57,9 +57,12 @@
 
         <!-- logout button -->
         <div id="logout" class="btn-header transparent pull-right">
-            <span> <a href="/logout" title="Sign Out" data-action="userLogout"
+            <span>
+                <a href="/logout" title="Sign Out" data-action="userLogout"
                       data-logout-msg="{{ trans("sentence.security_further_after_logging_out") }}"><i
-                            class="fa fa-sign-out"></i></a> </span>
+                            class="fa fa-sign-out"></i>
+                </a>
+            </span>
         </div>
         <!-- end logout button -->
 

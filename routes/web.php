@@ -69,8 +69,8 @@ Route::middleware('admin')->group(function() {
 Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
 
 
-    Route::get('dashboard', 'HomeController@index')->name('dashboard');
-    Route::get('company-profile', 'AccountsController@profile')->name('company.profile');
+    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    Route::get('/company-profile', 'AccountsController@profile')->name('company.profile');
 
     Route::post("user/{id}/permission/update","AccountUsersController@permission_update")->name("settings.users.permission.update");
 
