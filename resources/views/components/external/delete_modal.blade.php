@@ -11,8 +11,8 @@
                 <p>{{$message}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans("general.cancel") }}</button>
-                <button type="button" class="btn btn-danger" data-loading-text="Waiting" v-on:click="delete_data({{$id}})" >{{ trans("general.delete") }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans("word.cancel") }}</button>
+                <button type="button" class="btn btn-danger" data-loading-text="Waiting" v-on:click="delete_data({{$id}})" >{{ trans("word.delete") }}</button>
 
             </div>
         </div>

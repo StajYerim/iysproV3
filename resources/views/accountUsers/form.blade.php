@@ -34,7 +34,7 @@
                         @endif
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">NAME SURNAME :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">{{ trans("sentence.name_and_surname") }} :</label>
 
                             <div class="col-md-9">
                                 <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user->name or old('name') }}" required autofocus>
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">E-MAIL :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">{{trans("word.email")}} :</label>
 
                             <div class="col-md-9">
                                 <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $user->email or old('email') }}" required>
@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">MOBILE NO :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">{{ trans("sentence.mobile_number") }} :</label>
 
                             <div class="col-md-9">
                                 <input type="text" class="form-control{{ $errors->has('mobile') ? ' is-invalid' : '' }}" name="mobile" value="{{ $user->mobile or old('mobile') }}">
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">LANGUAGE :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">{{ trans("word.language") }} :</label>
 
                             <div class="col-md-9">
                                 <select class="form-control{{ $errors->has('language') ? ' is-invalid' : '' }}" name="language" required>
@@ -101,7 +101,7 @@
                             <label class="col-sm-3 col-form-label text-md-right"></label>
 
                             <div class="col-md-9">
-                                <button type="button" class="btn btn-danger" id="permission">PERMISSIONS</button>
+                                <button type="button" class="btn btn-danger" id="permission">{{ trans("word.permissions") }}</button>
                             </div>
                         </div>
                             @endif
@@ -109,14 +109,14 @@
 
 
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label text-md-right">COMPANY ACCESS :</label>
+                                <label class="col-sm-3 col-form-label text-md-right">{{ trans("sentence.company_access") }} :</label>
 
                                 <div class="col-md-9">
                                     <select class="form-control{{ $errors->has('language') ? ' is-invalid' : '' }}" name="company_access" required>
                                         {{-- TODO: extend of module-role-permissions is required--}}
-                                        <option value="1"{{ old('company_access') == 1 || (isset($user) && $user->hasPermissions(1)) ? ' selected=selected' : '' }}>No Access</option>
-                                        <option value="2"{{ old('company_access') == 2 || (isset($user) && $user->hasPermissions(2)) ? ' selected=selected' : '' }}>View Only</option>
-                                        <option value="3"{{ old('company_access') == 3 || (isset($user) && $user->hasPermissions(3)) ? ' selected=selected' : '' }}>Full Access View/Edit</option>
+                                        <option value="1"{{ old('company_access') == 1 || (isset($user) && $user->hasPermissions(1)) ? ' selected=selected' : '' }}>{{ trans("sentence.no_access") }}</option>
+                                        <option value="2"{{ old('company_access') == 2 || (isset($user) && $user->hasPermissions(2)) ? ' selected=selected' : '' }}>{{ trans("sentence.only_view") }}</option>
+                                        <option value="3"{{ old('company_access') == 3 || (isset($user) && $user->hasPermissions(3)) ? ' selected=selected' : '' }}>{{ trans("sentence.full_access") }} ({{ trans("word.view") }}/{{ trans("word.edit") }})</option>
                                     </select>
 
                                     @if ($errors->has('company_access'))
@@ -131,8 +131,8 @@
 
                         <div class="form-group row">
                             <div class="col-sm-12 col-form-label text-md-right">
-                                <a href="{{ \App\User::getIndexRoute() }}" class="btn btn-outline-dark">CANCEL</a>
-                                <button type="submit" class="btn btn-primary">SUBMIT</button>
+                                <a href="{{ \App\User::getIndexRoute() }}" class="btn btn-outline-dark">{{ trans("word.cancel") }}</a>
+                                <button type="submit" class="btn btn-primary">{{ trans("word.submit") }}</button>
                             </div>
                         </div>
                     </form>

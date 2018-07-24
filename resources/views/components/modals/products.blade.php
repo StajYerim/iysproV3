@@ -6,7 +6,7 @@
                 <fieldset style="top: 10px;">
                     <div class="form-group" :class="{'has-error': errors.has('form.name') }">
                         <label class="col-md-3 col-sm-3 control-label"> <span
-                                   >{{trans('general.product')}} {{trans("general.name") }}</span></label>
+                                   >{{trans('sentence.product_name')}} </span></label>
 
                         <div class="col-md-9 col-sm-6">
                             <div class="input-group">
@@ -30,12 +30,12 @@
 
                 <fieldset>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">{{trans("general.barcode")}}</label>
+                        <label class="col-md-3 control-label">{{trans("word.barcode")}}</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" v-model="form.barcode"/>
                         </div>
 
-                        <label class="col-md-1 control-label">{{trans("general.code")}}</label>
+                        <label class="col-md-1 control-label">{{trans("word.code")}}</label>
                         <div class="col-md-3">
                             <input type="text" class="form-control" v-model="form.code"/>
                         </div>
@@ -44,7 +44,7 @@
 
                 <fieldset>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">{{trans("general.category")}}</label>
+                        <label class="col-md-3 control-label">{{trans("word.category")}}</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <div class="dropdown" style="margin-top: 9px;"><a
@@ -80,7 +80,7 @@
                             </div>
                         </div>
 
-                        <label class="col-md-1 control-label">{{trans("general.unit")}}</label>
+                        <label class="col-md-1 control-label">{{trans("word.unit")}}</label>
                         <div class="col-md-3">
                             @php $units = \App\Account::find(aid())->units;@endphp
                             <select v-model="form.unit_id" style="width:100%" class="form-control">
@@ -121,17 +121,23 @@
                 </fieldset>
                 <fieldset>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Stok Takibi</label>
+                        <label class="col-md-3 control-label">
+                            {{ trans("sentence.stock_follow_up") }}
+                        </label>
                         <div class="col-md-9">
                             <label class="radio radio-inline">
                                 <input type="radio" class="radiobox" value="1"
                                        v-model="form.inventory_tracking">
-                                <span>YAPILSIN</span>
+                                <span>
+                                    {{ trans("sentence.it_can_be_done") }}
+                                </span>
                             </label>
                             <label class="radio radio-inline">
                                 <input type="radio" class="radiobox style-3" value="0" checked="checked"
                                        v-model="form.inventory_tracking">
-                                <span>YAPILMASIN</span>
+                                <span>
+                                    {{ trans("sentence.it_can_not_be_done") }}
+                                </span>
                             </label>
                         </div>
                     </div>
@@ -140,7 +146,9 @@
                 <fieldset>
                     <div class="form-group">
 
-                        <label class="col-md-3 control-label">Stok Türü</label>
+                        <label class="col-md-3 control-label">
+                            {{ trans("sentence.stock_type") }}
+                        </label>
                         <div class="col-md-4">
                             <select class="form-control" v-model="form.type_id">
                                 @foreach(product_type_list() as $type)
@@ -191,7 +199,7 @@
                         <div class="col-md-2">
                             <div class="form-group"
                                  :class="{'has-error': errors.has('form.vat_rate') }">
-                                <label> Vergi</label>
+                                <label> {{ trans("word.tax") }}</label>
                                 <select type="text" v-validate="'required'" name="form.vat_rate"
                                         class="form-control" v-model="form.vat_rate">
                                     <option disabled value="">Vat Select</option>
@@ -204,9 +212,9 @@
                     </div>
                 </fieldset>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans("word.cancel") }}</button>
                     <button type="submit" class="btn btn-success"  v-on:click="formSend">
-                        Save
+                        {{ trans("word.save") }}
                     </button>
 
                 </div>

@@ -11,34 +11,33 @@
             <div class="col-lg-4 col-sm-4">
                    <span class="pull-right">
                                          <div class="btn-group">
-                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{trans("general.other")}}
-                                {{trans("general.operations")}} <span class="caret"></span> </a>
+                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{trans("sentence.other_transactions")}} <span class="caret"></span> </a>
                             <ul class="dropdown-menu">
                                 @php $parasut = auth()->user()->memberOfAccount; @endphp
                                 @if($parasut["parasut_callback_url"] != null && $parasut["parasut_client_id"] != null && $parasut["parasut_client_secret"] != null && $parasut["parasut_username"] != null && $parasut["parasut_password"] != null && $parasut["parasut_company_id"] != null)
                                                                    <li>
-                                    <a href="{{ route('stock.product.sync', [ aid(), $product->id ]) }}"><i class="fa fa-send"></i> PARAŞÜT'e {{trans("general.send")}}</a>
+                                    <a href="{{ route('stock.product.sync', [ aid(), $product->id ]) }}"><i class="fa fa-send"></i> {{trans("sentence.send_to_parasut")}}</a>
                                 </li>
                                 @endif
                                                                    <li>
                                     <a href="#" data-toggle="modal" data-target="#openStartReceipt"><i
-                                                class="fa fa-plus " aria-hidden="true"></i> {{trans("general.opening")}} {{trans("general.receipt")}} {{trans("general.create")}}</a>
+                                                class="fa fa-plus " aria-hidden="true"></i> {{trans("sentence.create_opening_receipt")}}</a>
                                 </li>
                                                                 <li>
-                                    <a href="#" id="productArchive"><i class="fa fa-archive" aria-hidden="true"></i> {{trans("general.archive")}}</a>
+                                    <a href="#" id="productArchive"><i class="fa fa-archive" aria-hidden="true"></i> {{trans("word.archive")}}</a>
                                     <a href="#" style="display:none" id="productArchiveOut"><i class="fa fa-archive"
-                                                                                               aria-hidden="true"></i> {{trans("general.archive")}} {{trans("general.remove")}}</a>
+                                                                                               aria-hidden="true"></i> {{trans("sentence.remove_archive")}}</a>
                                 </li>
                                 <li>
                                     <a href="#!" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
-                                                                                                   aria-hidden="true"> </i> {{trans("general.delete")}}</a>
+                                                                                                   aria-hidden="true"> </i> {{trans("word.delete")}}</a>
                                 </li>
                             </ul>
                         </div>
 
                             <a class="btn btn-default "
                                href="{{route("stock.product.form",[aid(),$product->id,"update"])}}"><i
-                                        class="fa fa-edit"></i> {{trans("general.edit")}}</a>
+                                        class="fa fa-edit"></i> {{trans("word.edit")}}</a>
 
                         </span>
             </div>
@@ -84,21 +83,21 @@
                 <!-- end widget -->
                 <ul id="myTab1" class="nav nav-tabs bordered">
                     <li class="active">
-                        <a href="#g1" data-toggle="tab" aria-expanded="true">{{trans("general.informations")}}</a>
+                        <a href="#g1" data-toggle="tab" aria-expanded="true">{{trans("wrd.informations")}}</a>
                     </li>
 
                     <li>
-                        <a href="#g2" data-toggle="tab">{{trans("general.stock")}} {{trans("general.movements")}}</a>
+                        <a href="#g2" data-toggle="tab">{{trans("sentence.stock_movements")}}</a>
                     </li>
                 </ul>
                 <div id="myTabContent1" class="tab-content padding-10" style="background-color: #fff">
                     <div class="tab-pane fade" id="g1">
                         <small style="font-size:13px;">
                             ----- </small>
-                        <br> <small style="font-size:14px;font-weight: 600;"> {{trans("general.sales")}} {{trans("general.order")}}: 0,00</small>
-                        <br><small style="font-size:14px;font-weight: 600;"> {{trans("general.purchase")}} {{trans("general.order")}}: </small>
-                        <br> <small style="font-weight: 600">{{trans("general.purchase")}}/{{trans("general.cost")}} :</small> <small style="color:#886650!important;font-size:14px;font-weight: 600;">0,00<i class="fa fa-try"></i></small>
-                        <br>  <small style="font-weight: 600"> {{trans("general.list")}} {{trans("general.price")}} :</small> <small style="color:#2AC!important;font-size:14px;font-weight: 600;">135,00<i class="fa fa-try"></i></small>
+                        <br> <small style="font-size:14px;font-weight: 600;"> {{trans("sentence.sales_order")}}: 0,00</small>
+                        <br><small style="font-size:14px;font-weight: 600;"> {{trans("sentence.purchase_order")}}: </small>
+                        <br> <small style="font-weight: 600">{{trans("word.purchase")}}/{{trans("word.cost")}} :</small> <small style="color:#886650!important;font-size:14px;font-weight: 600;">0,00<i class="fa fa-try"></i></small>
+                        <br>  <small style="font-weight: 600"> {{trans("sentence.list_price")}} :</small> <small style="color:#2AC!important;font-size:14px;font-weight: 600;">135,00<i class="fa fa-try"></i></small>
 
                     </div>
 
@@ -106,7 +105,9 @@
                     <div class="tab-pane fade active in" id="g2">
                         <div>
                             <div class="alert alert-info">
-                                <span class="fa fa-info-circle"></span>  Hizmet / Ürünün işlem geçmişi yok, geçmiş işlemleri burada görebileceksiniz.
+                                <span class="fa fa-info-circle">
+                                    {{trans("sentence.service_product_transaction_history")}}
+                                </span>
                             </div>
                         </div>
                     </div>

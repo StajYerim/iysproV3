@@ -44,9 +44,9 @@ class MovementsController extends Controller
     {
         $stock = $type != "new" ? Stock::find($id) : "";
         $form_type = $type;
-        $action = $process != "in" ? "0" : "1";
+        $action = $process == "in" ? "0" : "1";
         $units = Account::find(aid())->units;
-        $products = Product::All();
+        $products = Product::where("account_id",aid())->get();
         return view("modules.stock.movements.form", compact("form_type", "stock", "action", "units", "products"));
 
     }

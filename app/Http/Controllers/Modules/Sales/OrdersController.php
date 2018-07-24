@@ -11,8 +11,11 @@ use App\Model\Sales\OrderWaybill;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
 use App\Model\Sales\SalesOrderInvoice;
+use App\Model\Sales\SalesOrderItems;
 use App\Model\Sales\SalesTransferInfo;
 use App\Model\Sales\WaybillItems;
+use App\Model\Stock\Stock;
+use App\Model\Stock\StockItems;
 use App\Taggable;
 use App\Tags;
 use App\User;
@@ -39,17 +42,22 @@ class OrdersController extends Controller
                 'onclick' => function ($orders) {
                     return "product_update($orders->id)";
                 },
-            ])
-            ->editColumn('sub_total',function($orders){
-                if($orders->remaining == "0,00"){
-                    return "ÖDENDİ";
-                }else if($orders->remaining == $orders->grand_total){
-                    return "ÖDENMEDİ";
-                }else{
-                    return "KISMİ ÖDENDİ";
-                }
+            ])->editColumn('company_area',function($orders){
+                return $orders["company"]["company_name"]."<br>".$orders->description;
             })
-            ->rawColumns(["grand_total", "status"])
+            ->editColumn('date',function($orders){
+                return $orders->date."<br>".$orders->due_date;
+            })
+            ->editColumn('grand_total',function($orders){
+
+                return $orders->grand_total."<br>".get_money(money_db_format($orders->grand_total)-money_db_format($orders->remaining));
+            })
+            ->editColumn('sub_total',function($orders){
+
+                return $orders->status_label."<br>".$orders->collect_label;
+
+            })
+            ->rawColumns(["grand_total", "status","company_area",'sub_total',"date"])
             ->setRowClass("row-title")
             ->make(true);
     }
@@ -172,6 +180,8 @@ class OrdersController extends Controller
 
         $sales_order->delete();
 
+        Stock::where("sales_order_id",$id)->delete();
+
         flash()->overlay("Sales Order Deleted", 'Success')->success();
         sleep(1);
         return ["message" => "success", 'type' => "offer"];
@@ -181,45 +191,80 @@ class OrdersController extends Controller
     {
         $order = SalesOrders::find($request->id);
 
-
-        //Add waybill
-        $waybill = OrderWaybill::create([
-            "order_id" => $order->id,
-            "description" => $request->description,
-            "dispatch_date" => $request->dispatch_date,
-            "edit_date" => $request->edit_date,
-            "number" => $request->number
-        ]);
+        //Add waybill movements
+        $waybill = Stock::create(
+            [
+                "description" => $request->description,
+                "number" => $request->number,
+                "dispatch_date" => $request->dispatch_date,
+                "sales_order_id" => $order->id,
+                "receipt_id" => 3,
+                "doc_id" => $order->id,
+                "status" => 1,
+                "date" => $request->edit_date,
+                "account_id" => aid(),
+                "company_id" => $order->company_id
+            ]
+        );
 
         foreach ($request->items as $item) {
+            $sitem = SalesOrderItems::find($item["id"]);
 
 
             if ($item["selected"] == true) {
-                WaybillItems::create([
-                    "waybill_id" => $waybill["id"],
-                    "order_item_id"=>$item["id"]
+                StockItems::create([
+                    "stock_id" => $waybill->id,
+                    "product_id" => $sitem->product["id"],
+                    "unit_id" => $sitem->unit_id,
+                    "quantity" => $sitem->quantity,
+                    "sales_order_item_id" => $sitem->id,
+                    "notes" => ""
                 ]);
             }
         }
 
-       $owner = auth()->user()->memberOfAccount["id"];
-        $user = User::where("account_id",$owner)->where("role_id",2)->get();
-        $mail =  Mail::to($user["email"])->send(new Waybill($waybill));
 
+//
+//        //Add waybill
+//        $waybill = OrderWaybill::create([
+//            "order_id" => $order->id,
+//            "description" => $request->description,
+//            "dispatch_date" => $request->dispatch_date,
+//            "edit_date" => $request->edit_date,
+//            "number" => $request->number
+//        ]);
+//
+//
+//
+//        foreach ($request->items as $item) {
+//
+//
+//            if ($item["selected"] == true) {
+//                WaybillItems::create([
+//                    "waybill_id" => $waybill["id"],
+//                    "order_item_id"=>$item["id"]
+//                ]);
+//            }
+//        }
+//
+//       $owner = auth()->user()->memberOfAccount["id"];
+//        $user = User::where("account_id",$owner)->where("role_id",2)->get();
+//        $mail =  Mail::to($user["email"])->send(new Waybill($waybill));
+//
         return $waybill->id;
     }
 
     public function waybill_print($aid,$id)
     {
 
-        $waybill = OrderWaybill::find($id);
+        $waybill = Stock::find($id);
 
         $pdf = PDF::loadView('modules.sales.orders.waybill', compact("waybill"))->setPaper('A4');
         return $pdf->stream($waybill->number == null ? $waybill->id:$waybill->number);
     }
 
     public function waybill_delete($aid,$id){
-        OrderWaybill::destroy($id);
+        Stock::destroy($id);
     }
 
     public function invoice_add($aid, $id, Request $request)

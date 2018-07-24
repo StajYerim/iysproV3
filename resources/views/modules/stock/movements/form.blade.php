@@ -16,13 +16,13 @@
                                 <fieldset class="fixed-title">
                                     <div class="form-group">
                                         <label class="col-md-3 col-sm-3 control-label"> <span
-                                                    style="vertical-align: -9px;">{{trans("general.description") }}</span></label>
+                                                    style="vertical-align: -9px;">{{trans("word.description") }}</span></label>
                                         <div class="col-md-3 col-sm-4 pull-right">
                                             <a href="{{$form_type == "new" ? route("stock.index",aid()): URL::previous() }}"
-                                               class="btn btn-default btn-lg ">{{trans("general.back")}}
+                                               class="btn btn-default btn-lg ">{{trans("word.back")}}
                                             </a>
                                             <button type="submit" href="#" class="btn btn-success btn-lg ">
-                                                {{trans("general.save")}}
+                                                {{trans("word.save")}}
                                             </button>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
@@ -39,7 +39,7 @@
                                 <fieldset>
                                     <div class="form-group">
 
-                                        <label class="col-md-3 control-label">{{$action == 0  ? trans("general.customer"):trans("general.supplier")}}</label>
+                                        <label class="col-md-3 control-label">{{$action == 0  ? trans("word.customer"):trans("word.supplier")}}</label>
                                         <div class="col-md-6">
 
                                             <v-select label="text" :filterable="true" placeholder="Choose Company"
@@ -47,8 +47,7 @@
                                                       transition="fade" v-model="form.company_id">
                                                 <template slot="no-options">
                                                     <a type="button" style="color:white" class='btn btn-sm btn-warning' href='#!'
-                                                       data-toggle='modal' data-target='#new_company'>{{trans("general.click")}} {{trans("general.for")}} {{trans("general.new")}}
-                                                        {{trans("general.company")}} </a>
+                                                       data-toggle='modal' data-target='#new_company'>{{trans("sentence.click_for_a_new_company")}}</a>
                                                 </template>
                                                 <template slot="option" slot-scope="option">
                                                     <div class="d-center">
@@ -66,7 +65,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("general.arrangement")}} {{trans("general.date")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("sentence.edit_date")}}</label>
                                         <div class="col-md-2 ">
                                             <div class="input-group">
                                                 <input type="text" class="form-control datepicker" v-model="form.date">
@@ -77,12 +76,11 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("general.receipt")}} {{trans("general.type")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("sentence.receipt_type")}}</label>
                                         <div class="col-md-3">
                                             <select v-model="form.receipt_id" class="form-control">
                                                 <option disabled value="">
-                                                    {{trans("general.choose")}} {{trans("general.receipt")}} {{trans("general.type")}}
-                                                </option>
+                                                    {{trans("sentence.choose_receipt_type")}} </option>
                                                 @foreach(movements_type($action) as $receipt)
                                                     <option value="{{$receipt["id"]}}">{{$receipt["name"]}}</option>
                                                 @endforeach
@@ -96,9 +94,9 @@
                                     <table class="table  table-hover table-condensed" id="invoice-table">
                                         <tbody>
                                         <tr>
-                                            <th width="33%">{{trans("general.service")}} / {{trans("general.product")}}</th>
-                                            <th width="10%">{{trans("general.quantity")}}</th>
-                                            <th width="10%">{{trans("general.umity")}}</th>
+                                            <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
+                                            <th width="10%">{{trans("word.quantity")}}</th>
+                                            <th width="10%">{{trans("word.unity")}}</th>
                                             <th width="7%"></th>
                                         </tr>
                                         </tbody>
@@ -114,7 +112,7 @@
                                                               v-model="item.product_id">
                                                         <template slot="no-options">
                                                         <a href="#!" type="button" style="color:white"
-                                                           data-toggle='modal' data-target='#new_product' class="btn btn-warning">{{trans("general.add")}} {{trans("general.new")}} {{trans("general.product")}}</a></template>
+                                                           data-toggle='modal' data-target='#new_product' class="btn btn-warning">{{trans("sentence.add_new_product")}}</a></template>
                                                     </v-select>
 
                                                 </div>
@@ -147,7 +145,7 @@
                                         </tbody>
                                     </table>
 
-                                    <button class="btn btn-default" type="button" @click="addRow">{{trans("general.new")}} {{trans("general.row")}}</button>
+                                    <button class="btn btn-default" type="button" @click="addRow">{{trans("sentence.new_row")}}</button>
 
                                 </div>
                             </form>
@@ -165,7 +163,7 @@
 
     </section>
 
-    @include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0,$act=$action])
+    @include("components.modals.companies",[$option="supplier",$title="New Company",$type = "new_company",$message="Company Form",$id=0,$act=$action])
     {{--@include("components.modals.products",[$title="New Product",$type = "new_product",$message="Product Form",$id=0])--}}
 
     @push("style")
@@ -249,7 +247,7 @@
                             loading(true);
                             this.search(loading, search, this);
                         }, search: _.debounce(function (loading, search, vm) {
-                            axios.get("{{route("company.source",aid())}}?q=" + escape(search)).then(function (res) {
+                            axios.get("{{route("company.source",aid())}}?q=" + search).then(function (res) {
                                 Companies.form.company_name = search;
                                 vm.options = res.data;
 

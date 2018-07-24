@@ -9,11 +9,11 @@
 
             <header role="heading" class="ui-sortable-handle">
                 <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                <h2>   Account Users</h2>
+                <h2>{{ trans("sentence.account_users") }}</h2>
                 <div class="pull-right">
 
                     <a href="{{route("users.create",aid())}}" >
-                        <span class="btn btn-success btn-sm">New Invite</span>
+                        <span class="btn btn-success btn-sm">{{ trans("sentence.new_invite") }}</span>
                     </a>
                 </div>
                 <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
@@ -35,11 +35,11 @@
                                 @admin
                                 <th>ID</th>
                                 @endadmin
-                                <th>NAME SURNAME</th>
-                                <th>E-MAIL</th>
-                                <th>STATUS</th>
-                                <th>ROLE</th>
-                                <th>EDIT</th>
+                                <th>{{ trans("sentence.name_and_surname") }}</th>
+                                <th>{{ trans("word.email") }}</th>
+                                <th>{{ trans("word.status") }}</th>
+                                <th>{{ trans("word.role") }}</th>
+                                <th>{{ trans("word.edit") }}</th>
                             </tr>
                             </thead>
                             <tbody>

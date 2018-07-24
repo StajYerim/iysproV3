@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="info-title"><span v-on:click="details = !details" class="pull-right"
-                                                                  style="cursor: pointer;">{{trans("general.all")}} {{trans("general.informations")}}</span></div>
+                                                                  style="cursor: pointer;">{{trans("sentence.all_informations")}}</span></div>
                                 </div>
                             @endif
                             <br>
@@ -67,8 +67,7 @@
                                         <tr>
                                             <td>
                                                 <div class="info-title"><i class="fa fa-bank" aria-hidden="true"></i>
-                                                    {{trans("general.bank")}}
-                                                    {{trans("general.and")}} {{trans("general.branch")}}
+                                                    {{trans("sentence.bank_and_branches")}}
                                                 </div>
                                             </td>
                                             <td>{{$account->bank_name }} {{$account->bank_branch}}</td>
@@ -77,8 +76,7 @@
                                             <td>
                                                 <div class="info-title"><i class="fa fa-exchange"
                                                                            aria-hidden="true"></i>
-                                                    {{trans("general.currency")}}
-                                                    {{trans("general.type")}}
+                                                    {{trans("sentence.currency_type")}}
                                                 </div>
                                             </td>
                                             <td> {{$account->cur_info["code"]}}
@@ -87,7 +85,7 @@
                                         <tr>
                                             <td>
                                                 <div class="info-title"><i class="fa fa-hashtag" aria-hidden="true"></i>
-                                                    {{trans("general.account")}} {{trans("general.number")}}
+                                                    {{trans("sentence.account_number")}}
                                                 </div>
                                             </td>
                                             <td>{{$account->bank_no}}</td>
@@ -95,7 +93,7 @@
                                         <tr>
                                             <td>
                                                 <div class="info-title"><i class="fa fa-hashtag" aria-hidden="true"></i>
-                                                    IBAN {{trans("general.number")}}
+                                                    {{trans("sentenec.iban_number")}}
                                                 </div>
                                             </td>
                                             <td>{{$account->bank_iban}}</td>
@@ -120,12 +118,12 @@
                             <table class="table table-hover">
                                 <tbody>
                                 <tr>
-                                    <th width="20%">{{trans("general.operation")}} {{trans("general.type")}}</th>
-                                    <th width="20%">{{trans("general.operation")}} {{trans("general.date")}}</th>
-                                    <th style="text-align:right" width="10%">{{trans("general.customer")}}/{{trans("general.supplier")}}</th>
-                                    <th style="text-align:right" width="15%">{{trans("general.description")}}</th>
-                                    <th style="text-align:right" width="20%">{{trans("general.sum")}}</th>
-                                    <th style="text-align:right" width="20%">{{trans("general.balance")}}</th>
+                                    <th width="20%">{{trans("word.type")}}</th>
+                                    <th width="20%">{{trans("word.date")}}</th>
+                                    <th style="text-align:right" width="10%">{{trans("word.customer")}}/{{trans("word.supplier")}}</th>
+                                    <th style="text-align:right" width="15%">{{trans("word.description")}}</th>
+                                    <th style="text-align:right" width="20%">{{trans("word.sum")}}</th>
+                                    <th style="text-align:right" width="20%">{{trans("word.balance")}}</th>
                                 </tr>
                                 </tbody>
                                 <tbody id="tablo" style="font-size: 11px;">
@@ -167,7 +165,7 @@
                                 <div class="col-sm-12">
                                     <button v-on:click="other_transfer" type="button"
                                             class="btn  btn-block bg-color-blueDark txt-color-white ">
-                                        DİĞER HESABA TRANSFER YAP
+                                        {{trans("sentence.transfer_to_other_account")}}
                                     </button>
 
                                 </div>
@@ -177,17 +175,17 @@
 
                                     <div class="btn-group btn-block">
                                         <button class="btn btn-block bg-color-blueDark txt-color-white dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                            PARA GİRİŞİ EKLE <span class="caret"></span>
+                                            {{trans("sentence.add_money_input")}} <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" style="min-width:293px;text-align:center;font-size:15px;">
                                             <li>
                                                 <a href="javascript:void(0);" v-on:click="money_in"><i
-                                                            class="fa fa-sign-in fa-rotate-90"></i> PARA GİRİŞİ EKLE</a>
+                                                            class="fa fa-sign-in fa-rotate-90"></i> {{trans("sentence.add_money_input")}}</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);" v-on:click="money_out"><i
-                                                            class="fa fa-sign-out fa-rotate-270"></i> PARA ÇIKIŞI
-                                                    EKLE</a>
+                                                            class="fa fa-sign-out fa-rotate-270"></i> {{trans("sentence.add_money_out")}}
+                                                </a>
                                             </li>
 
                                         </ul>
@@ -199,7 +197,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="button" class="btn btn-block bg-color-blueLight txt-color-white">
-                                        DİĞER HESAP İŞLEMLERİ
+                                        {{trans("sentence.other_account_transactions")}}
                                     </button>
                                 </div>
                             </div>
@@ -208,14 +206,14 @@
                         <div v-show="other_transfer_show">
                             <form @submit.prevent="money_in_send(3)" class="form-horizontal bv-form"
                                   novalidate="novalidate">
-                                <h1><i class="fa fa-1x c-textLight fa-share-square-o"></i> <span class="semi-bold">HESABA TRANSFER</span>
+                                <h1><i class="fa fa-1x c-textLight fa-share-square-o"></i> <span class="semi-bold">{{trans("sentence.transfer_to_account")}}</span>
                                 </h1>
 
                                 <input type="hidden" value="4" name="thisAccId">
                                 <fieldset>
                                     <div class="form-group "  :class="{'has-error': errors.has('money_form.bank_account_id') }">
                                         <label class="col-sm-4 control-label">
-                                            <span>HESAP</span>
+                                            <span>{{trans("word.account")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -232,7 +230,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>TARİH</span>
+                                            <span>{{trans("word.date")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
@@ -247,7 +245,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>MEBLAĞ</span>
+                                            <span>{{trans("word.sum")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -262,7 +260,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>AÇIKLAMA</span>
+                                            <span>{{trans("word.description")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -273,11 +271,11 @@
                                 </fieldset>
                                 <footer>
                                     <button type="button" v-on:click="cancel" class="btn pull-left ">
-                                        VAZGEÇ
+                                        {{trans("word.cancel")}}
                                     </button>
 
                                     <button type="submit" :disabled="money_form.amount == 0 || money_form.bank_account_id == '' " class="btn btn btn-danger pull-right" >
-                                        TRANSFER ET
+                                        {{trans("word.transfer")}}
                                     </button>
                                     <br><br>
                                 </footer>
@@ -288,11 +286,11 @@
                         <div v-show="money_in_show">
                             <form class="form-horizontal bv-form" novalidate="novalidate"
                                   @submit.prevent="money_in_send(1)">
-                                <h1><i class="fa fa-sign-in fa-rotate-90"></i> <span class="semi-bold">PARA GİRİŞİ</span></h1>
+                                <h1><i class="fa fa-sign-in fa-rotate-90"></i> <span class="semi-bold">{{trans("sentence.money_input")}}</span></h1>
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>TARİH</span>
+                                            <span>{{trans("word.date")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
@@ -308,7 +306,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>MEBLAĞ</span>
+                                            <span>{{trans("word.sum")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -323,7 +321,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>AÇIKLAMA</span>
+                                            <span>{{trans("word.decscription")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -335,12 +333,12 @@
                                 </fieldset>
                                 <footer>
                                     <button type="button" v-on:click="cancel" class="btn pull-left backAccountDetail">
-                                        VAZGEÇ
+                                        {{trans("word.cancel")}}
                                     </button>
 
                                     <button type="submit" class="btn btn btn-danger pull-right"
                                             :disabled="money_form.amount == 0">
-                                        EKLE
+                                        {{trans("word.add")}}
                                     </button>
                                     <br><br>
                                 </footer>
@@ -351,12 +349,12 @@
                         <div v-show="money_out_show">
                             <form @submit.prevent="money_in_send(0)" class="form-horizontal bv-form"
                                   novalidate="novalidate">
-                                <h1><i class="fa fa-sign-out fa-rotate-270"></i> <span class="semi-bold">PARA ÇIKIŞI</span></h1>
+                                <h1><i class="fa fa-sign-out fa-rotate-270"></i> <span class="semi-bold">{{trans("sentence.money_out")}}</span></h1>
 
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>TARİH</span>
+                                            <span>{{trans("word.date")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
@@ -372,7 +370,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>MEBLAĞ</span>
+                                            <span>{{trans("word.sum")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -387,7 +385,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>AÇIKLAMA</span>
+                                            <span>{{trans("word.description")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -399,12 +397,12 @@
                                 </fieldset>
                                 <footer>
                                     <button type="button" v-on:click="cancel" class="btn pull-left ">
-                                        VAZGEÇ
+                                        {{trans("word.cancel")}}
                                     </button>
 
                                     <button type="submit" class="btn btn btn-danger pull-right"
                                             :disabled="money_form.amount == 0">
-                                        EKLE
+                                        {{trans("word.add")}}
                                     </button>
                                     <br><br>
                                 </footer>
@@ -415,7 +413,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <span style="color:gray;font-weight: 600;">BAKİYE <span style="font-size:15px;"
+                                    <span style="color:gray;font-weight: 600;">{{trans("word.balance")}} <span style="font-size:15px;"
                                                                                             class="pull pull-right">@{{ balance }}  <i
                                                     class="fa fa-{{strtolower($account->cur_info["code"] == "TRL" ? "try":$account->cur_info["code"])}}"></i></span></span>
                                 </div>

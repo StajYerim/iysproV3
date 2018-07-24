@@ -18,11 +18,11 @@
                         class="nav nav-tabs flex-wrap">
                         <li class="active" style="text-align: center;flex:1;">
                             <a href="#s1" data-toggle="tab"
-                               aria-expanded="false">NAKİT {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
+                               aria-expanded="false">{{ trans("word.cash") }} {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
                         </li>
                         <li style="text-align: center;flex:1;">
                             <a href="#s2" data-toggle="tab"
-                               aria-expanded="true">ÇEK-SENET {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
+                                   aria-expanded="true">{{ trans("sentence.cheque_promissory_note") }} {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
                         </li>
                     </ul>
 
@@ -35,7 +35,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <div class="bottom-info">TARİH</div>
+                                            <div class="bottom-info">{{ trans("word.date") }}</div>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
@@ -54,7 +54,7 @@
                                     <div class="form-group"
                                          :class="{'has-error':errors.has('collection.form.bank_account_id')}">
                                         <label class="col-sm-4 control-label">
-                                            <div class="bottom-info">HESAP</div>
+                                            <div class="bottom-info">{{ trans("word.account") }}</div>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -70,7 +70,7 @@
 
                                                 </select>
                                                 <span v-if="errors.has('collection.form.bank_account_id')"
-                                                      class="error mini">Lütfen kasa seçimi yapınız.</span>
+                                                      class="error mini">{{ trans("sentence.choose_a_safe") }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <div class="bottom-info">MEBLAĞ</div>
+                                            <div class="bottom-info">{{ trans("word.sum") }}</div>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -97,7 +97,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <div class="bottom-info">AÇIKLAMA</div>
+                                            <div class="bottom-info">{{ trans("word.description") }}</div>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -110,7 +110,7 @@
 
                             </form>
                             <button type="button" class="btn btn-default" data-dismiss="modal">
-                                İPTAL
+                                {{ trans("word.cancel") }}
                             </button>
                             <button @click="collectionFormSend" :disabled="collection.collect_send_btn" type="button"
                                     class="btn btn btn-danger pull-right">
@@ -129,7 +129,9 @@
                                     <fieldset>
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">EVRAK TÜRÜ</div>
+                                                <div class="bottom-info">
+                                                    {{ trans("sentence.document_type") }}
+                                                </div>
                                             </label>
 
                                             <div class="col-sm-8 ">
@@ -137,13 +139,13 @@
 
                                                     <input type="radio" class="radiobox" :value="0" checked
                                                            v-model="cheque_collect.form.doc_type">
-                                                    <span>ÇEK</span>
+                                                    <span>{{ trans("word.cheque") }}</span>
 
                                                 </label>
                                                 <label class="radio radio-inline">
                                                     <input type="radio" class="radiobox" :value="1"
                                                            v-model="cheque_collect.form.doc_type">
-                                                    <span>SENET</span>
+                                                    <span>{{ trans("sentence.promissory_note") }}</span>
                                                 </label>
 
                                             </div>
@@ -153,7 +155,7 @@
                                     <fieldset>
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">BANKA ADI</div>
+                                                <div class="bottom-info">{{ trans("sentence.bank_name") }}</div>
                                             </label>
                                             <div class="col-sm-8 ">
                                                 <div class="input-group" style="width:100%">
@@ -167,7 +169,7 @@
                                     <fieldset>
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">ŞUBESİ</div>
+                                                <div class="bottom-info">{{ trans("sentence.bank_branch") }}</div>
                                             </label>
                                             <div class="col-sm-8 ">
                                                 <div class="input-group" style="width:100%">
@@ -181,7 +183,9 @@
                                     <fieldset>
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">EVRAK NO</div>
+                                                <div class="bottom-info">
+                                                    {{ trans("sentence.document_number") }}
+                                                </div>
                                             </label>
                                             <div class="col-sm-8 ">
                                                 <div class="input-group" style="width:100%">
@@ -194,7 +198,9 @@
                                     <fieldset>
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">TARİH</div>
+                                                <div class="bottom-info">
+                                                    {{ trans("word.date") }}
+                                                </div>
                                             </label>
                                             <div class="col-sm-8 ">
                                                 <div class="input-group">
@@ -211,7 +217,9 @@
                                     <fieldset>
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">VADE TARİHİ</div>
+                                                <div class="bottom-info">
+                                                    {{ trans("sentence.expiry_date") }}
+                                                </div>
                                             </label>
                                             <div class="col-sm-8 ">
                                                 <div class="input-group">
@@ -228,7 +236,9 @@
                                     <fieldset>
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">MEBLAĞ</div>
+                                                <div class="bottom-info">
+                                                    {{ trans("word.sum") }}
+                                                </div>
                                             </label>
                                             <div class="col-sm-8 ">
                                                 <div class="input-group" style="width:100%">
@@ -246,7 +256,9 @@
                                     <fieldset>
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">AÇIKLAMA</div>
+                                                <div class="bottom-info">
+                                                    {{ trans("word.description") }}
+                                                </div>
                                             </label>
                                             <div class="col-sm-8 ">
                                                 <div class="input-group" style="width:100%">
@@ -258,11 +270,11 @@
                                     </fieldset>
                                 </form>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                                    İPTAL
+                                    {{ trans("word.cancel") }}
                                 </button>
                                 <button type="button" @click="chequeCollectFormSend" :disabled="cheque_collect.cheque_send_btn"
                                         class="btn btn btn-primary pull-right">
-                                    TAHSİLAT EKLE
+                                    {{ trans("sentence.add_collection") }}
                                 </button>
 
 
@@ -494,6 +506,7 @@
                                     $("#transaction").modal("hide");
                                     notification("Success", "Çek Alım işlemi başarıyla gerçekleşti.", "success");
                                     VueName.statement();
+                                   location.reload()
                                 }
 
 

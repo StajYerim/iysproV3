@@ -6,6 +6,8 @@ use App\Companies;
 use App\Currency;
 use App\Model\Finance\BankItems;
 use App\Model\Finance\Cheques;
+use App\Model\Stock\Stock;
+use App\Model\Stock\StockItems;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -163,24 +165,18 @@ class SalesOrders extends Model
 
     public function waybills()
     {
-        return $this->hasMany(OrderWaybill::class, "order_id", "id");
+        return $this->hasMany(Stock::class, "sales_order_id", "id");
     }
 
     public function getNoWaybillsAttribute()
     {
+        $stok_item = StockItems::select("sales_order_item_id")->get();
+         $item =  $this->items()->whereNotIn("id",$stok_item)->get();
 
-        $data = array();
-        foreach ($this->items as $item) {
-          if(!$item->waybill_item){
+         return $item;
 
-             array_push($data, array("name" => $item->product->named["name"],
-                 "quantity" => $item->quantity,
-                 "unit" => $item->unit["short_name"],
-                 "id" => $item->id));
-          }
-        }
 
-        return $data;
+
     }
 
     public function invoice(){
@@ -190,5 +186,25 @@ class SalesOrders extends Model
     public function transfers()
     {
         return $this->hasMany(SalesTransferInfo::class, "sales_order_id", "id");
+    }
+
+    public function getStatusLabelAttribute()
+    {
+        if ($this->invoice) {
+            return '<span class="label label-success">FATURA EDİLDİ</span>';
+        } else {
+            return '<span class="label label-warning">AÇIK</span>';
+        }
+    }
+
+    public function getCollectLabelAttribute()
+    {
+        if($this->remaining == "0,00"){
+            return '<span class="label label-danger">ÖDENDİ</span>';
+        }else if($this->remaining == $this->grand_total){
+            return '<span class="label label-danger">ÖDENMEDİ</span>';
+        }else{
+            return '<span class="label label-primary">KISMİ ÖDENDİ</span>';
+        }
     }
 }

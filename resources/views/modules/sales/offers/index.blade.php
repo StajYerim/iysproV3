@@ -36,7 +36,7 @@
                             <div class="pull-right new-button">
 
                                 <a href="{{route("sales.offers.form",[aid(),0,"new"])}}">
-                                <span class="btn btn-success">{{ trans("general.new") }} {{trans('general.offer')}}</span>
+                                <span class="btn btn-success">{{ trans("sentence.new_offer") }}</span>
                                 </a>
                             </div>
 
@@ -44,10 +44,10 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{ trans("general.customer") }}</th>
-                                    <th>{{ trans("general.date") }}</th>
-                                    <th>{{ trans("general.total") }}</th>
-                                    <th>{{ trans("general.status") }}</th>
+                                    <th>{{ trans("word.customer") }}</th>
+                                    <th>{{ trans("word.date") }}</th>
+                                    <th>{{ trans("word.total") }}</th>
+                                    <th>{{ trans("word.status") }}</th>
                                 </tr>
                                 </thead>
 

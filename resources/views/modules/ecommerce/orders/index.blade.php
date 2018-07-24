@@ -12,7 +12,7 @@
                     <span class="widget-icon">
                         <i class="fa fa-info"></i>
                     </span>
-                    <h2>{{trans("general.order")}} </h2>
+                    <h2>{{trans("word.order")}} </h2>
 
                 </header>
                 <!-- widget div-->
@@ -23,10 +23,10 @@
                             <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{trans("general.status")}}</th>
-                                    <th>{{trans("general.date")}}</th>
-                                    <th>{{trans("general.customer")}}</th>
-                                    <th>{{trans("general.total")}}</th>
+                                    <th>{{trans("word.status")}}</th>
+                                    <th>{{trans("word.date")}}</th>
+                                    <th>{{trans("word.customer")}}</th>
+                                    <th>{{trans("word.total")}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,7 +35,7 @@
                         </table>
                         <div class="dt-toolbar-footer">
                           <div class="col-sm-6 col-xs-12 hidden-xs">
-                            <div class="dataTables_info" id="table_info" role="status" aria-live="polite">{{trans("general.total")}} 0 {{trans("general.order")}}</div>
+                            <div class="dataTables_info" id="table_info" role="status" aria-live="polite">{{trans("sentence.total_order")}} : 0 </div>
                           </div>
                           <div class="col-sm-6 col-xs-12">
                             <div class="dataTables_paginate paging_simple_numbers">
@@ -60,7 +60,7 @@
                       <span class="widget-icon">
                           <i class="fa fa-info"></i>
                       </span>
-                      <h2>{{trans("general.search")}} </h2>
+                      <h2>{{trans("word.search")}} </h2>
 
                   </header>
                   <!-- widget div-->
@@ -68,14 +68,14 @@
                       <!-- widget content -->
                       <div class="widget-body">
                         <ul class="nav nav-pills nav-stacked" id="order-status">
-                          <li role="presentation" class="active"><a href="#">All</a></li>
-                          <li role="presentation"><a href="#">{{trans("general.new")}}</a></li>
-                          <li role="presentation"><a href="#">{{trans("general.approved")}}</a></li>
-                          <li role="presentation"><a href="#">{{trans("general.rejected")}}</a></li>
-                          <li role="presentation"><a href="#">{{trans("general.shipped")}}</a></li>
-                          <li role="presentation"><a href="#">{{trans("general.delivered")}}</a></li>
-                          <li role="presentation"><a href="#">{{trans("general.completed")}}</a></li>
-                          <li role="presentation"><a href="#">{{trans("general.claimed")}}</a></li>
+                          <li role="presentation" class="active"><a href="#">{{trans("word.all")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("word.new")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("word.approved")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("word.rejected")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("word.shipped")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("word.delivered")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("word.completed")}}</a></li>
+                          <li role="presentation"><a href="#">{{trans("word.claimed")}}</a></li>
                         </ul>
                      </div>
                       <!-- end widget content -->

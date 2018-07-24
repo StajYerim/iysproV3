@@ -172,7 +172,7 @@ function product_img_url($img)
 
 function movements_type($action = 7)
 {
-    if ($action == 1) {
+    if ($action == 0) {
         return array(
             [
                 "id" => 0,
@@ -188,7 +188,7 @@ function movements_type($action = 7)
             ]
         );
 
-    } elseif($action == 0){
+    } elseif($action == 1){
         return array(
             [
                 "id" => 3,

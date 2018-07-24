@@ -16,13 +16,13 @@
                                 <fieldset class="fixed-title">
                                     <div class="form-group" :class="{'has-error': errors.has('form.name') }">
                                         <label class="col-md-3 col-sm-3 control-label"> <span
-                                                    style="vertical-align: -9px;">{{trans("general.account")." ".trans("general.name")}}</span></label>
+                                                    style="vertical-align: -9px;">{{trans("sentence.account_name")}}</span></label>
                                         <div class="col-md-3 col-sm-4 pull-right">
                                             <a href="{{$form_type == "new" ? route("finance.accounts.index",aid()): URL::previous() }}"
-                                               class="btn btn-default btn-lg ">{{trans("general.back")}}
+                                               class="btn btn-default btn-lg ">{{trans("word.back")}}
                                             </a>
                                             <button type="submit" href="#" class="btn btn-success btn-lg ">
-                                                {{trans("general.save")}}
+                                                {{trans("word.save")}}
                                             </button>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
@@ -37,7 +37,7 @@
                                 @if($id == 0 and $form_type == "new")
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("general.currency")}} {{trans("general.type")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("sentence.currency_type")}}</label>
                                         <div class="col-md-4 ">
                                             <div class="">
                                                 <select v-model="form.currency" class="form-control">
@@ -52,7 +52,7 @@
                                 @else
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">{{trans("general.currency")}} {{trans("general.currency")}} </label>
+                                            <label class="col-md-3 control-label">{{trans("word.currency")}}</label>
                                             <label class=" control-label">{{$account->cur_info["icon"]." ".$account->cur_info["code"]}} - {{$account->cur_info["name"]}}</label>
 
                                         </div>
@@ -63,7 +63,7 @@
                                 @if($id == 0 and $form_type == "new")
                                 <fieldset >
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("general.opening")}} {{trans("general.balance")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("sentence.opening_balance")}}</label>
                                         <div class="col-md-4 ">
                                             <div>
                                                 <money v-bind="money" class="form-control "
@@ -75,7 +75,7 @@
 
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("general.opening")}} {{trans("general.balance")}} {{trans("general.date")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("sentence.opening_balance_date")}}</label>
                                         <div class="col-md-4 ">
                                             <div >
                                                 <input type="text" class="form-control datepicker"
@@ -94,7 +94,7 @@
                                                 <label>
                                                     <input type="checkbox" v-model="form.cheque"
                                                            class="checkbox style-3">
-                                                    <span>{{trans("general.check")}} Kullanılabilir</span>
+                                                    <span>{{trans("sentence.check_is_available")}}</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@
                                 <fieldset>
 
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("general.bank")}} {{trans("general.name")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("sentence.bank_name")}}</label>
                                         <div class="col-md-4 ">
                                             <div >
                                                 <input type="text" class="form-control " v-model="form.bank_name">
@@ -114,7 +114,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("general.banj")}} {{trans("general.branch")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("sentence.bank_branch")}}</label>
                                         <div class="col-md-4 ">
                                             <div >
                                                 <input type="text" class="form-control " v-model="form.bank_branch">
@@ -124,7 +124,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("general.account")}} {{trans("general.number")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("sentence.account_number")}}</label>
                                         <div class="col-md-4 ">
                                             <div >
                                                 <input type="text" class="form-control " v-model="form.bank_no">
@@ -134,7 +134,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">IBAN</label>
+                                        <label class="col-md-3 control-label">{{trans("word.iban")}}</label>
                                         <div class="col-md-4">
                                             <div >
                                                 <input type="text" class="form-control " v-model="form.bank_iban">

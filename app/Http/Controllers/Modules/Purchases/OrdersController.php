@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Modules\Purchases;
 
 //use App\Model\Purchases\PurchaseOffers;
 use App\Model\Purchases\PurchaseOrders;
+use App\Model\Stock\Stock;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -69,7 +70,7 @@ class OrdersController extends Controller
     {
 
 
-
+        //Satınalma oluştur
         $order = PurchaseOrders::updateOrCreate(["id" => $id], [
 //            "sales_offer_id"=>$request->form["sales_offer_id"],
             "description" => $request->form["description"],
@@ -83,6 +84,18 @@ class OrdersController extends Controller
             "grand_total" => $request->form["grand_total"]
         ]);
 
+        //Giriş irsaliyesi fişi ->
+        $movement = Stock::updateOrcreate(["doc_id"=>$order->id,"status"=>0],
+            [
+                "description" => $order->description,
+                "receipt_id"=>2,
+                "doc_id"=>$order->id,
+                "status"=>0,
+                "date"=>$order->date,
+                "account_id"=>aid(),
+                "company_id"=>$order->company_id
+            ]
+        );
 
         $whereNot = Array();
         foreach ($request->items as $key => $value) {
@@ -99,8 +112,10 @@ class OrdersController extends Controller
                     "note" => isset($value["description"]) == true ? $value["description"] : ""
                 ]
             );
+
             array_push($whereNot, $ret->id);
         }
+
         $order->items()->whereNotIn("id", $whereNot)->delete();
 
 

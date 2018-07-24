@@ -2,11 +2,11 @@
     <form action="{{route("admin.locale.store",$type!=0 ? $line->id:0)}}" method="post">
         @csrf
         <div class="form-group">
-            <label for="group" class="col-form-label">Grup</label>
+            <label for="group" class="col-form-label">{{ trans("word.group") }}</label>
             <input type="text" name="group" class="form-control" value="{{$type != 0 ? $line->group:""}}" id="group">
         </div>
         <div class="form-group">
-            <label for="key" class="col-form-label">Key</label>
+            <label for="key" class="col-form-label">{{ trans("word.key") }}</label>
             <input type="text" name="key" class="form-control" value="{{$type != 0 ? $line->key:""}}" id="key" >
         </div>
         <hr>
@@ -30,8 +30,8 @@
             </div>
         @endforeach
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-            <button type="submit" class="btn btn-primary">Gönder</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans("word.close") }}</button>
+            <button type="submit" class="btn btn-primary">{{ trans("word.submit") }}</button>
         </div>
     </form>
 </fieldset>

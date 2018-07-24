@@ -19,7 +19,7 @@
                         <div class="widget-body no-padding">
                             <!-- search mobile button (this is hidden till mobile view port) -->
                             <div id="search-mobile" class="btn-header transparent pull-right">
-                                <span> <a href="javascript:void(0)" title="Search"><i
+                                <span> <a href="javascript:void(0)" title="{{trans("word.search")}}"><i
                                                 class="fa fa-search"></i></a> </span>
                             </div>
 
@@ -28,7 +28,7 @@
                                 <button type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
-                                <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i
+                                <a href="javascript:void(0);" id="cancel-search-js" title="{{trans("sentence.cancel_search")}}"><i
                                             class="fa fa-times"></i></a>
                                 <button type="submit">
                                     <i class="fa fa-search"></i>
@@ -42,11 +42,11 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{trans("general.code")}}</th>
-                                    <th>{{trans("general.name")}}</th>
-                                    <th>{{trans("general.stock")}} {{trans("general.quantity")}}</th>
-                                    <th>{{trans("general.purchase")}} {{trans("general.price")}}</th>
-                                    <th>{{trans("general.sales")}} {{trans("general.price")}}</th>
+                                    <th>{{trans("word.code")}}</th>
+                                    <th>{{trans("word.name")}}</th>
+                                    <th>{{trans("sentence.stock_quantity")}}</th>
+                                    <th>{{trans("sentence.purchase_price")}}</th>
+                                    <th>{{trans("sentence.sales_price")}}</th>
                                 </tr>
                                 </thead>
 
@@ -97,24 +97,19 @@
                     }, {
                         data: "code",
                     }, {
-                        data: "named.name",
-                        render: function ($name, d, s) {
-                            if (s.category === null) {
-                                return $name;
-                            } else {
-                                return $name + " <span class='badge' style='background-color:" + s.category.color + "'>" + s.category.name + "</span>";
-
-                            }
-                        }
+                        data: "id",
+                        name: "id"
 
                     }, {
                         data: "inventory_tracking",
                         name:"inventory_tracking"
-                    }, {
-                        data: "buying_price"
-                    }, {
-                        data: "list_price"
-                    }
+                    },
+//                    {
+//                        data: "buying_price"
+//                    },
+//                    {
+//                        data: "list_price"
+//                    }
                 ]
             });
 

@@ -8,7 +8,7 @@
 
             <header role="heading" class="ui-sortable-handle">
                 <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                <h2>   {{trans("general.company")}} List</h2>
+                <h2>   {{trans("sentence.company_list")}}</h2>
 
                 <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
 
@@ -24,13 +24,13 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>COMPANY NAME</th>
-                            <th>NAME SURNAME</th>
-                            <th>MOBILE</th>
-                            <th>SECTOR</th>
-                            <th>EXPIRY</th>
-                            <th>EDIT</th>
-                            <th>INVITE</th>
+                            <th>{{ trans("sentence.company_name") }}</th>
+                            <th>{{ trans("sentence.name_and_surname") }}</th>
+                            <th>{{ trans("sentence.mobile_number") }}</th>
+                            <th>{{ trans("word.sector") }}</th>
+                            <th>{{ trans("sentence.expiry_date") }}</th>
+                            <th>{{ trans("sentence.edit_date") }}</th>
+                            <th>{{ trans("word.invite") }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -43,8 +43,8 @@
                                 <td>{{ $company->owner->mobile }}</td>
                                 <td>{{ $company->sector->name }}</td>
                                 <td style="{{$company->is_active == 0 ? "font-weight:600":""}}">{{ $company->expiry_date->format("d.m.Y H:i") }}</td>
-                                <td><a href="{{ route('companies.edit', ['company' => $company]) }}">Edit</a></td>
-                                <td><a href="{{ route('users.create', ['company' => $company]) }}">Invite</a></td>
+                                <td><a href="{{ route('companies.edit', ['company' => $company]) }}">{{ trans("word.edit") }}</a></td>
+                                <td><a href="{{ route('users.create', ['company' => $company]) }}">{{ trans("word.invite") }}</a></td>
                             </tr>
                         @endforeach
 

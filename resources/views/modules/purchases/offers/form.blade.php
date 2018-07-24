@@ -25,14 +25,14 @@
                                     <fieldset class="fixed-title">
                                         <div class="form-group">
                                             <label class="col-md-3 col-sm-3 control-label"> <span
-                                                        style="vertical-align: -9px;">{{trans("general.description") }}</span></label>
+                                                        style="vertical-align: -9px;">{{trans("word.description") }}</span></label>
                                             <div class="col-md-3 col-sm-4 pull-right">
                                                 {{--<a href="{{$form_type == "new" ? route("stock.index",aid()): URL::previous() }}"--}}
                                                 {{--class="btn btn-default btn-lg ">{{trans("general.back")}}--}}
                                                 {{--</a>--}}
                                                 <button type="button" @click="formSend" href="#"
                                                         class="btn btn-success btn-lg ">
-                                                    {{trans("general.save")}}
+                                                    {{trans("word.save")}}
                                                 </button>
                                             </div>
                                             <div class="col-md-6 col-sm-6">
@@ -50,7 +50,7 @@
                                     <fieldset>
                                         <div class="form-group" :class="{'has-error':errors.has('form.company_id')}">
 
-                                            <label class="col-md-3 control-label">{{trans("general.customer")}}</label>
+                                            <label class="col-md-3 control-label">{{trans("word.customer")}}</label>
                                             <div class="col-md-6">
 
                                                 <v-select
@@ -78,7 +78,7 @@
 
                                     <fieldset>
                                         <div class="form-group" v-bind:class="{'has-error':errors.has('form.date')}">
-                                            <label class="col-md-3 control-label">{{trans("general.offer")}} {{trans("general.date")}}</label>
+                                            <label class="col-md-3 control-label">{{trans("sentence.offer_date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask @change="setDate(form.date)" :mask="['##.##.####']" type="text" name="form.date"
@@ -93,7 +93,7 @@
                                     <fieldset>
                                         <div class="form-group"
                                              v-bind:class="{'has-error':errors.has('form.expired_date')}">
-                                            <label class="col-md-3 control-label">{{trans("general.validity")}} {{trans("general.date")}}</label>
+                                            <label class="col-md-3 control-label">{{trans("sentence.validity_date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"
@@ -184,7 +184,7 @@
                             loading(true);
                             this.search(loading, search, this);
                         }, search: _.debounce(function (loading, search, vm) {
-                            axios.get("{{route("company.source",aid())}}?q=" + escape(search)).then(function (res) {
+                            axios.get("{{route("company.source",aid())}}?q=" + search).then(function (res) {
                                 Companies.form.company_name = search;
                                 vm.options = res.data;
 

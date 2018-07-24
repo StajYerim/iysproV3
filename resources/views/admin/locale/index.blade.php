@@ -10,11 +10,11 @@
             <header role="heading" class="ui-sortable-handle">
                 <div class="col-md-6">
                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                    <h2> Lang Description List</h2>
+                    <h2> {{ trans("sentence.language_description_list") }}</h2>
                     <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
                 </div>
                 <div class="col-md-6 text-right">
-                    <button type="button" class="btn btn-success text-right row_modal" data-id="0">Ekle</button>
+                    <button type="button" class="btn btn-success text-right row_modal" data-id="0">{{ trans("word.add") }}</button>
                 </div>
             </header>
 
@@ -39,12 +39,12 @@
                                 <thead>
                                 <tr>
                                     {{--<th>ID</th>--}}
-                                    <th>Group</th>
-                                    <th>Key</th>
+                                    <th>{{ trans("word.group") }}</th>
+                                    <th>{{ trans("word.key") }}</th>
                                     @foreach($langs as $l)
                                         <th>{{$l->name}}</th>
                                     @endforeach
-                                    <th>İşlemler</th>
+                                    <th>{{ trans("word.transactions") }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -62,18 +62,18 @@
                                                 @if(isset($dizi->$d))
                                                     {{$dizi->$d}}
                                                 @else
-                                                    Bu dil için kayıt yok
+                                                    {{ trans("sentence.no_record_for_this_language") }}
                                                 @endif
                                             </td>
                                         @endforeach
                                         <td width="250">
                                             <button type="button" class="btn btn-primary row_modal"
-                                                    data-id="{{$language_line->id}}">Düzenle
+                                                    data-id="{{$language_line->id}}">{{ trans("word.edit") }}
                                             </button>
                                             <form id="delete-form-{{$language_line->id}}" method="post" action="{{ route('admin.locale.destroy',$language_line->id) }}">
                                                 @csrf
                                                 @method("DELETE")
-                                                <button type="button" onclick="if(confirm('Are you sure?')){event.preventDefault();document.getElementById('delete-form-{{$language_line->id}}').submit()}else{event.preventDefault();}" class="btn btn-danger">Sil</button>
+                                                <button type="button" onclick="if(confirm('Are you sure?')){event.preventDefault();document.getElementById('delete-form-{{$language_line->id}}').submit()}else{event.preventDefault();}" class="btn btn-danger">{{ trans("word.delete") }}</button>
                                             </form>
 
                                         </td>
@@ -85,7 +85,7 @@
                                 </tbody>
                             </table>
                         @else
-                            Eklenmiş data yok
+                            {{ trans("sentence.no_data_added") }}
                         @endif
                     </div>
                 </div>

@@ -33,7 +33,7 @@
                         @endif
 
                         <div class="form-group row">
-                            <label for="company_name" class="col-md-4 col-form-label text-md-right">Commercial title</label>
+                            <label for="company_name" class="col-md-4 col-form-label text-md-right">{{ trans("sentence.commercial_title") }}</label>
 
                             <div class="col-md-6">
                                 <input id="company_name" type="text" class="form-control{{ $errors->has('company_name') ? ' is-invalid' : '' }}" name="company_name" value="{{ $company->company_name or old('company_name') }}" required autofocus>
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="company_name" class="col-md-4 col-form-label text-md-right">Sector</label>
+                            <label for="company_name" class="col-md-4 col-form-label text-md-right">{{ trans("word.sector") }}</label>
 
                             <div class="col-md-6">
                                 <select name="sector" id="sector" class="form-control{{ $errors->has('sector') ? ' is-invalid' : '' }}" required>
@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Full Name</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ trans("sentence.name_and_surname") }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $company->owner->name or old('name') }}" required>
@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ trans("word.email") }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $company->owner->email or old('email') }}" required>
@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="mobile" class="col-md-4 col-form-label text-md-right">Mobile</label>
+                            <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ trans("word.mobile_number") }}</label>
 
                             <div class="col-md-6">
                                 <input id="mobile" type="text" class="form-control{{ $errors->has('mobile') ? ' is-invalid' : '' }}" name="mobile" value="{{ $company->owner->mobile or old('mobile') }}" required>
@@ -110,7 +110,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="expiry_date" class="col-md-4 col-form-label text-md-right">Expiry Date</label>
+                            <label for="expiry_date" class="col-md-4 col-form-label text-md-right">{{ trans("sentence.expiry_date") }}</label>
 
                             <div class="col-md-6">
                                 <input id="expiry_date"
@@ -133,7 +133,7 @@
                                 {{ isset($company) ? 'UPDATE' : 'CREATE' }}
                             </button>
                             <button href="{{ route('companies.index') }}" type="button" class="btn btn-default" onclick="window.history.back();">
-                            Cancel
+                                {{ trans("word.cancel") }}
                             </button>
                         </footer>
                     </form>

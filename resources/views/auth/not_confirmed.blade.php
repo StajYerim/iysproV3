@@ -8,19 +8,16 @@
             <form action="{{ route('activation.resend') }}" method="POST"  id="smart-form-register" class="smart-form client-form">
                 @csrf
                 <header>
-                    Email confirmation is required
+                    {{trans("sentence.email_confirmation_is_required")}}
                 </header>
 
                 <fieldset>
-
-                    Please confirm your email via link sent to your email. <br>
-                    If it is not in your inbox, please check spam folder or <br>
-
+                    {{ trans("sentence.confirm_email_via_link") }}
                 </fieldset>
 
                 <footer>
                     <button type="submit" class="btn btn-primary">
-                        RESEND CONFIRMATION LINK
+                        {{ trans("sentence.resend_confirmation_link") }}
                     </button>
 
                 </footer>

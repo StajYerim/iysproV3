@@ -26,7 +26,7 @@
                     -->
                     <header>
                         <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-                        <h2>My Data </h2>
+                        <h2>{{ trans("sentence.my_data") }} </h2>
                     </header>
 
                     <!-- widget div-->
@@ -44,21 +44,21 @@
 
                             <div id="nestable-menu">
                                 <a type="button" href="{{route("admin.menu.create")}}" class=" btn btn-success pull-left">
-                                    New Route
+                                   {{ trans("sentence.new_route") }}
                                 </a>
 
                                 <button type="button" class="btn btn-default pull-right" data-action="expand-all">
-                                    Expand All
+                                    {{ trans("sentence.expand_all") }}
                                 </button>
                                 <button type="button" class="btn btn-default pull-right" data-action="collapse-all">
-                                    Collapse All
+                                    {{ trans("sentence.collapse_all") }}
                                 </button>
                             </div>
                             <div class="row"><br>
                                 <hr>
                                 <div class="col-sm-6 col-lg-6">
 
-                                    <h6>Admin Menu #1</h6>
+                                    <h6>{{ trans("sentence.admin_menu") }} #1</h6>
                                     <div class="dd" id="nestable2">
                                         <ol class="dd-list">
                                             @foreach($menus_admin as $menu)
@@ -89,7 +89,7 @@
                                 <div class="col-sm-6 col-lg-6">
 
 
-                                    <h6>Owner & User Menu</h6>
+                                    <h6>{{ trans("sentence.owner_and_user_menu") }}</h6>
 
                                     <div class="dd" id="nestable">
                                         <ol class="dd-list">

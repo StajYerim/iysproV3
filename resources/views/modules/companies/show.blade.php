@@ -26,7 +26,7 @@
                                         class="fa fa-reorder"></span> &nbsp;<span class="caret"></span> </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{route("sales.companies.form",[aid(),'Customer',$company->id,'update'])}}"><i
+                                    <a href="{{route("sales.companies.form",[aid(),'customer',$company->id,'update'])}}"><i
                                                 class="fa fa-edit" aria-hidden="true"></i>
                                         {{trans("word.edit")}}</a>
                                 </li>

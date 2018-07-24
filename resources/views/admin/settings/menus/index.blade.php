@@ -14,7 +14,7 @@
 
                     <header>
                         <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-                        <h2>My Data </h2>
+                        <h2> {{ trans("sentence.my_data") }} </h2>
                     </header>
 
                     <!-- widget div-->
@@ -50,14 +50,15 @@
 
                 <fieldset>
                     <legend>
-                        Add New Admin Route <span class="pull-right">
+                        {{ trans("sentence.add_new_admin_route") }}
+                        <span class="pull-right">
                             <button class="btn btn-success" type="submit">
                                 <i class="fa fa-save"></i>
-                                Save
+                                {{ trans("word.save") }}
                             </button>
                             <router-link to="/" class="btn btn-primary">
                                 <i class="fa fa-back"></i>
-                                Cancel
+                                {{ trans("word.cancel") }}
                             </router-link>
                         </span>
                     </legend>
@@ -65,18 +66,18 @@
 
                         <div class="row">
                             <div class="col-md-4 has-feedback">
-                                <label class="control-label">Name</label>
+                                <label class="control-label"> {{ trans("word.name") }}</label>
                                 <input type="text" class="form-control" name="title" v-model="route.name">
                             </div>
                             <div class="col-sm-12 col-md-4 has-feedback">
-                                <label class="control-label">Route Name or Url(ex:/sales_order)</label>
+                                <label class="control-label">{{ trans("sentence.route_name_or_url") }}{{ trans("sentence.example_sales_orders") }}</label>
                                 <input type="text" class="form-control" name="route" v-model="route.url">
                             </div>
 
                             <div class="col-sm-12 col-md-4 has-feedback">
-                                <label class="control-label">Select Top Menu</label>
+                                <label class="control-label">{{ trans("sentence.select_top_menu") }}</label>
                                 <select class="form-control" name="top_menu" v-model="route.top_menu">
-                                    <option value="" selected>No, Select</option>
+                                    <option value="" selected>{{ trans("sentence.do_not_select") }}</option>
                                     @foreach($menus_admin as $item)
                                         <option value="{{$item->id}}">{{$item->lang}}</option>
                                     @endforeach
@@ -90,20 +91,37 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-12 col-md-4 has-feedback">
-                                <label class="control-label">Icon</label>
+                                <label class="control-label">{{ trans("word.icon") }}</label>
                                 <input type="text" class="form-control" name="icon"  v-model="route.icon">
-                                <small class="help-block" data-bv-validator="notEmpty" data-bv-for="writer" data-bv-result="NOT_VALIDATED" style="display: none;">The writer name is required</small><small class="help-block" data-bv-validator="stringLength" data-bv-for="writer" data-bv-result="NOT_VALIDATED" style="display: none;">The writer name must be less than 80 characters long</small></div>
+                                <small class="help-block" data-bv-validator="notEmpty" data-bv-for="writer" data-bv-result="NOT_VALIDATED" style="display: none;">
+                                    {{ trans("sentence.the_writer_name_is_required") }}
+                                </small>
+                                <small class="help-block" data-bv-validator="stringLength" data-bv-for="writer" data-bv-result="NOT_VALIDATED" style="display: none;">
+                                    {{ trans("sentence.the_writer_name_must_be_less_than_that_characters") }}
+                                </small>
+                            </div>
 
                             <div class="col-sm-12 col-md-4 has-feedback">
-                                <label class="control-label">Order</label>
+                                <label class="control-label">{{ trans("word.order") }}</label>
                                 <input type="text" class="form-control" name="order"  v-model="route.order">
-                                <small class="help-block" data-bv-validator="notEmpty" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">The producer name is required</small><small class="help-block" data-bv-validator="stringLength" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">The producer name must be less than 80 characters long</small></div>
+                                <small class="help-block" data-bv-validator="notEmpty" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">
+                                    {{ trans("sentence.the_producer_name_is_required") }}
+                                </small>
+                                <small class="help-block" data-bv-validator="stringLength" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">
+                                    {{ trans("sentence.the_producer_name_must_be_less_than_that_characters") }}
+                                </small>
+                            </div>
 
                             <div class="col-sm-12 col-md-4 has-feedback">
-                                <label class="control-label">is Route</label>
+                                <label class="control-label">{{ trans("word.route") }}</label>
                                 <input type="checkbox"  name="is_route" v-model="route.is_route">
-                                <small class="help-block" data-bv-validator="notEmpty" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">The producer name is required</small><small class="help-block" data-bv-validator="stringLength" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">The producer name must be less than 80 characters long</small></div>
-
+                                <small class="help-block" data-bv-validator="notEmpty" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">
+                                    {{ trans("sentence.the_producer_name_is_required") }}
+                                </small>
+                                <small class="help-block" data-bv-validator="stringLength" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">
+                                    {{ trans("sentence.the_producer_name_must_be_less_than_that_characters") }}
+                                </small>
+                            </div>
 
                         </div>
                     </div>
@@ -120,32 +138,34 @@
                 {{ csrf_field() }}
                 <fieldset>
                     <legend>
-                        Add New Owner Route <span class="pull-right">
+                        {{ trans("sentence.add_new_owner_route") }}<span class="pull-right">
                             <button class="btn btn-success" type="submit">
                                 <i class="fa fa-save"></i>
-                                Save
+                                {{ trans("word.save") }}
                             </button>
                             <router-link to="/" class="btn btn-primary">
                                 <i class="fa fa-back"></i>
-                                Cancel
+                                {{ trans("word.cancel") }}
                             </router-link>
                         </span>
                     </legend>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-4 has-feedback">
-                                <label class="control-label">Name</label>
+                                <label class="control-label">{{ trans("word.name") }}</label>
                                 <input type="text" class="form-control" name="title" v-model="route.name">
                             </div>
                             <div class="col-sm-12 col-md-4 has-feedback">
-                                <label class="control-label">Route Name or Url(ex:/sales_order)</label>
+                                <label class="control-label">
+                                    {{ trans("sentence.route_name_or_url") }}{{ trans("sentence.example_sales_orders") }}
+                                </label>
                                 <input type="text" class="form-control" name="route" v-model="route.url">
                            </div>
 
                             <div class="col-sm-12 col-md-4 has-feedback">
-                                <label class="control-label">Select Top Menu</label>
+                                <label class="control-label">{{ trans("sentence.select_top_menu") }}</label>
                                 <select class="form-control" name="top_menu" v-model="route.top_menu">
-                                    <option value="" selected >No, Select</option>
+                                    <option value="" selected >{{ trans("sentence.do_not_select") }}</option>
                                     @foreach($menus_owner as $item)
                                         <option value="{{$item->id}}">{{$item}}</option>
                                     @endforeach
@@ -160,14 +180,26 @@
                         <div class="row">
 
                             <div class="col-sm-12 col-md-4 has-feedback">
-                                <label class="control-label">Icon</label>
+                                <label class="control-label">{{ trans("word.icon") }}</label>
                                 <input type="text" class="form-control" name="icon"  v-model="route.icon">
-                                <small class="help-block" data-bv-validator="notEmpty" data-bv-for="writer" data-bv-result="NOT_VALIDATED" style="display: none;">The writer name is required</small><small class="help-block" data-bv-validator="stringLength" data-bv-for="writer" data-bv-result="NOT_VALIDATED" style="display: none;">The writer name must be less than 80 characters long</small></div>
+                                <small class="help-block" data-bv-validator="notEmpty" data-bv-for="writer" data-bv-result="NOT_VALIDATED" style="display: none;">
+                                    {{ trans("sentence.the_writer_name_is_required") }}
+                                </small>
+                                <small class="help-block" data-bv-validator="stringLength" data-bv-for="writer" data-bv-result="NOT_VALIDATED" style="display: none;">
+                                    {{ trans("sentence.the_writer_name_must_be_less_than_that_characters") }}
+                                </small>
+                            </div>
 
                             <div class="col-sm-12 col-md-4 has-feedback">
-                                <label class="control-label">Order</label>
+                                <label class="control-label">{{ trans("word.icon") }}</label>
                                 <input type="text" class="form-control" name="order"  v-model="route.order">
-                                <small class="help-block" data-bv-validator="notEmpty" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">The producer name is required</small><small class="help-block" data-bv-validator="stringLength" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">The producer name must be less than 80 characters long</small></div>
+                                <small class="help-block" data-bv-validator="notEmpty" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">
+                                    {{ trans("sentence.the_producer_name_is_required") }}
+                                </small>
+                                <small class="help-block" data-bv-validator="stringLength" data-bv-for="producer" data-bv-result="NOT_VALIDATED" style="display: none;">
+                                    {{ trans("sentence.the_producer_name_must_be_less_than_that_characters") }}
+                                </small>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -179,17 +211,20 @@
         <div class="section">
             <div id="nestable-menu">
                 <button type="button" class="btn btn-default pull-right" data-action="expand-all">
-                    Expand All
+                    {{ trans("sentence.expand_all") }}
                 </button>
                 <button type="button" class="btn btn-default pull-right" id="collapseAll" data-action="collapse-all">
-                    Collapse All
+                    {{ trans("sentence.collapse_all") }}
                 </button>
             </div>
             <br>
             <hr>
             <div class="col-sm-6 col-lg-6">
 
-                <h6>Admin Menu <router-link class=" btn btn-sm btn-success pull-right" :to="{path: '/add-admin-route'}"> New Admin Route</router-link>
+                <h6>{{ trans("sentence.admin_menu") }}
+                    <router-link class=" btn btn-sm btn-success pull-right" :to="{path: '/add-admin-route'}">
+                        {{ trans("sentence.new_admin_route") }}
+                    </router-link>
                 </h6>
                 <div class="dd" id="nestable2">
                     <ol class="dd-list">
@@ -224,7 +259,10 @@
             <div class="col-sm-6 col-lg-6">
 
 
-                <h6>{{trans("general.account_menu")}} <router-link class=" btn btn-sm btn-success pull-right" :to="{path: '/add-owner-route'}"> New Owner Route</router-link>
+                <h6>{{trans("sentence.account_menu")}}
+                    <router-link class=" btn btn-sm btn-success pull-right" :to="{path: '/add-owner-route'}">
+                        {{ trans("sentence.new_owner_route") }}
+                    </router-link>
                 </h6>
                 <div class="dd" id="nestable">
                     <ol class="dd-list">

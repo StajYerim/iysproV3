@@ -16,7 +16,7 @@
                         <div class="widget-body no-padding">
                             <!-- search mobile button (this is hidden till mobile view port) -->
                             <div id="search-mobile" class="btn-header transparent pull-right">
-                                <span> <a href="javascript:void(0)" title="Search"><i
+                                <span> <a href="javascript:void(0)" title="{{trans("word.search")}}"><i
                                                 class="fa fa-search"></i></a> </span>
                             </div>
 
@@ -25,7 +25,7 @@
                                 <button type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
-                                <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i
+                                <a href="javascript:void(0);" id="cancel-search-js" title="{{trans("sentence.cancel_search")}}"><i
                                             class="fa fa-times"></i></a>
                                 <button type="submit">
                                     <i class="fa fa-search"></i>
@@ -36,7 +36,7 @@
                             <div class="pull-right new-button">
 
                                 <a href="{{route("sales.orders.form",[aid(),0,"new"])}}">
-                                <span class="btn btn-success">{{trans("general.new")}} {{trans("general.order")}}</span>
+                                <span class="btn btn-success">{{trans("trans.new_order")}}</span>
                                 </a>
                             </div>
 
@@ -44,10 +44,10 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{trans("general.customer")}}</th>
-                                    <th>{{trans("general.date")}}</th>
-                                    <th>{{trans("general.total")}}</th>
-                                    <th>{{trans("general.status")}}</th>
+                                    <th>{{trans("word.customer")}}</th>
+                                    <th>{{trans("word.date")}}</th>
+                                    <th>{{trans("word.total")}}</th>
+                                    <th>{{trans("word.status")}}</th>
                                 </tr>
                                 </thead>
 
@@ -95,11 +95,14 @@
                             return '<i class="fa fa-file-text-o fa-3x"></i>';
                         },
                     }, {
-                        data: "company.company_name",
+                          name:"company_area",
+                        data:"company_area"
                     }, {
+                    name:"date",
                         data: "date"
 
                     }, {
+                          name:'grand_total',
                         data: "grand_total"
                     }, {
                         data: "sub_total"

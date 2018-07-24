@@ -33,9 +33,9 @@
                             </div>
 
                             <div class="pull-right new-button">
-                                <a href="{{route("finance.accounts.form",[aid(),0,1,"new"])}}"><span class="btn btn-success">KASA EKLE</span></a>
-                                <a href="{{route("finance.accounts.form",[aid(),0,2,"new"])}}"><span class="btn btn-success">BANKA EKLE</span></a>
-                                <a href="{{route("finance.accounts.form",[aid(),0,3,"new"])}}"> <span class="btn btn-success">KREDİ HESABI EKLE</span></a>
+                                <a href="{{route("finance.accounts.form",[aid(),0,1,"new"])}}"><span class="btn btn-success">{{trans("sentence.add_safe")}}</span></a>
+                                <a href="{{route("finance.accounts.form",[aid(),0,2,"new"])}}"><span class="btn btn-success">{{trans("sentence.add_bank")}}</span></a>
+                                <a href="{{route("finance.accounts.form",[aid(),0,3,"new"])}}"> <span class="btn btn-success">{{trans("sentence.add_credit_account")}}</span></a>
                                 <!-- Suggestion: populate this list with fetch and push technique -->
                             </div>
 
@@ -43,10 +43,10 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{trans("general.account")}} {{trans("general.name")}}</th>
+                                    <th>{{trans("sentence.account_name")}}</th>
                                     <th>IBAN</th>
-                                    <th>{{trans("general.currency")}}</th>
-                                    <th>{{trans("general.balance")}}</th>
+                                    <th>{{trans("word.currency")}}</th>
+                                    <th>{{trans("word.balance")}}</th>
                                 </tr>
                                 </thead>
 

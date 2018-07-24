@@ -7,7 +7,7 @@
         <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
 
             <header role="heading" class="ui-sortable-handle"> <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                <h2>     {{trans("general.edit")}} {{trans("general.user")}}</h2>
+                <h2>     {{trans("sentence.edit_user")}}</h2>
 
                 <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
 
@@ -31,7 +31,7 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">{{trans("general.name")}} {{trans("general.surname")}} :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">{{trans("sentence.name_and_surname")}} :</label>
 
                             <div class="col-md-9">
                                 <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user->name or old('name') }}" required autofocus>
@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">{{trans("general.email")}} :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">{{trans("word.email")}} :</label>
 
                             <div class="col-md-9">
                                 <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $user->email or old('email') }}" required>
@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">{{trans("general.mobile")}} {{trans("general.number")}} :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">{{trans("sentence.mobile_number")}} :</label>
 
                             <div class="col-md-9">
                                 <input type="text" class="form-control{{ $errors->has('mobile') ? ' is-invalid' : '' }}" name="mobile" value="{{ $user->mobile or old('mobile') }}">
@@ -73,7 +73,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">{{trans("general.language")}} :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">{{trans("word.language")}} :</label>
 
                             <div class="col-md-9">
                                 <select class="form-control{{ $errors->has('language') ? ' is-invalid' : '' }}" name="language" required>
@@ -96,7 +96,7 @@
                                 <label class="col-sm-3 col-form-label text-md-right"></label>
 
                                 <div class="col-md-9">
-                                    <button type="button" class="btn btn-danger" id="permission">{{trans("general.permissions")}}</button>
+                                    <button type="button" class="btn btn-danger" id="permission">{{trans("word.permissions")}}</button>
                                 </div>
                             </div>
                         @endif
@@ -107,8 +107,8 @@
 
                         <div class="form-group row">
                             <div class="col-sm-12 col-form-label text-md-right">
-                                <a href="{{ route("settings.users.index",aid())}}" class="btn btn-outline-dark">{{trans("general.cancel")}}</a>
-                                <button type="submit" class="btn btn-primary">{{trans("general.submit")}}</button>
+                                <a href="{{ route("settings.users.index",aid())}}" class="btn btn-outline-dark">{{trans("word.cancel")}}</a>
+                                <button type="submit" class="btn btn-primary">{{trans("word.submit")}}</button>
                             </div>
                         </div>
                     </form>
@@ -144,7 +144,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             ×
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">{{trans("general.user")}} {{trans("general.permissions")}}</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{trans("sentence.user_permissions")}}</h4>
                     </div>
                     <div class="modal-body" style="padding:2px !important;">
                         <div class="tabs-left">
@@ -165,15 +165,15 @@
 
 
                                         <div class="table-responsive">
-                                            <h1>{{$item->lang}} {{trans("general.module")}}</h1>
+                                            <h1>{{$item->lang}} {{trans("word.module")}}</h1>
                                             <table class="table">
                                                 <thead>
                                                 <tr>
 
-                                                    <th width="120px">{{trans("general.name")}}</th>
-                                                    <th width="10px">{{trans("general.read")}}</th>
-                                                    <th width="10px">{{trans("general.create")}}/{{trans("general.edit")}}</th>
-                                                    <th width="10px">{{trans("general.delete")}}</th>
+                                                    <th width="120px">{{trans("word.name")}}</th>
+                                                    <th width="10px">{{trans("word.read")}}</th>
+                                                    <th width="10px">{{trans("word.create")}}/{{trans("word.edit")}}</th>
+                                                    <th width="10px">{{trans("word.delete")}}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>

@@ -17,17 +17,17 @@
                             <li>
                                 <a href="{{route("sales.orders.form",[aid(),$order->id,"update"])}}"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
-                                    {{trans("general.edit")}}</a>
+                                    {{trans("word.edit")}}</a>
                             </li>
                             <li>
                                 <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
-                                    {{trans("general.collection")}} {{trans("general.add")}}</a>
+                                    {{trans("sentence.add_collection")}}</a>
                             </li>
                             <li>
                                 <a href="{{route("sales.orders.form",[aid(),$order->id,"copy"])}}"><i class="fa fa-copy"
                                                                                                       aria-hidden="true"></i>
-                                    {{trans("general.copy")}} {{trans("general.create")}}</a>
+                                    {{trans("sentence.create_copy")}}</a>
                             </li>
 
                             <li>
@@ -37,13 +37,13 @@
                             <li>
                                 <a onclick="$(this).orderReturn()" data-id="0" id="orderReturn" href="#"><i
                                             class="fa fa-reply " aria-hidden="true"></i>
-                                    {{trans("general.order")}} {{trans("general.convert")}}</a>
+                                    {{trans("sentence.convert_to_order")}}</a>
                             </li>
                             <li class="divider"></li>
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
                                                                                               aria-hidden="true"></i>
-                                    {{trans("general.delete")}}</a>
+                                    {{trans("word.delete")}}</a>
                             </li>
 
                         </ul>
@@ -54,7 +54,7 @@
                                     class="fa fa-print"></span> {{trans("general.print")}} <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> SİPARİŞİ YAZDIR</a>
+                                <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.print_order")}}</a>
                                 <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
                                     @foreach($langs as $lang)
                                         <li><a tabindex="-1" target="_blank" href="{{route("sales.orders.pdf",[aid(),$order->id,"url",$lang->lang_code])}}"> <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
@@ -62,7 +62,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="test" tabindex="-1" href="#">   <i class="fa fa-print" aria-hidden="true"></i> SİPARİŞİ İNDİR </a>
+                                <a class="test" tabindex="-1" href="#">   <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.download_order")}} </a>
                                 <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
                                     @foreach($langs as $lang)
                                         <li><a tabindex="-1" target="_blank" href="{{route("sales.orders.pdf",[aid(),$order->id,"url",$lang->lang_code])}}" > <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
@@ -70,18 +70,18 @@
                                 </ul>
                             </li>
                             <li class="">
-                                <a class="test" tabindex="-1"  data-toggle="modal" data-target="#waybillModal" href="#">   <i class="fa fa-print" aria-hidden="true"></i> İRSALİYE YAZDIR </a>
+                                <a class="test" tabindex="-1"  data-toggle="modal" data-target="#waybillModal" href="#">   <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentece.print_waybill")}} </a>
                             </li>
                             <li class="">
                                 <a class="test" tabindex="-1" data-toggle="modal" data-target="#invoiceModal" href="#">
-                                    <i class="fa fa-print" aria-hidden="true"></i> FATURA YAZDIR </a>
+                                    <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.print_invoice")}} </a>
                             </li>
                         </ul>
 
                     </div>
 
                     <a href="#" data-toggle="modal" data-target="#shareModal" class="btn btn-default"><i
-                                class="fa fa-envelope"></i> {{trans("general.share")}}</a>
+                                class="fa fa-envelope"></i> {{trans("word.share")}}</a>
 
                 </div>
 
@@ -117,11 +117,11 @@
 
                                             <tbody>
                                             <tr>
-                                                <th width="33%">{{trans("general.service")}} / {{trans("general.product")}}</th>
-                                                <th width="14%">{{trans("general.quantity")}}</th>
-                                                <th width="10%" style="text-align:right">{{trans("general.unit")}} F.</th>
-                                                <th width="10%" style="text-align:right">KDV</th>
-                                                <th width="10%" style="text-align:right">{{trans("general.total")}}</th>
+                                                <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
+                                                <th width="14%">{{trans("word.quantity")}}</th>
+                                                <th width="10%" style="text-align:right">{{trans("word.unit")}} F.</th>
+                                                <th width="10%" style="text-align:right">{{trans("word.vat")}}</th>
+                                                <th width="10%" style="text-align:right">{{trans("word.total")}}</th>
                                             </tr>
 
                                             </tbody>
@@ -139,8 +139,6 @@
                                                 <td style="text-align:right"> @{{ item.total }} <i
                                                             class="fa fa-{{$order->currency}}"></i></td>
                                             </tr>
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -153,7 +151,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">{{trans("general.subtotal")}}</div>
+                                                        <div class="bottom-info">{{trans("sentence.sub_total")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info">{{$order->sub_total}} <i
@@ -166,7 +164,7 @@
                                                     v-if="vato.total!=0">
 
                                                     <td style="border-top: 0px;">
-                                                        <div class="bottom-info" style="font-size: 11px" >{{trans("general.total")}} KDV @{{
+                                                        <div class="bottom-info" style="font-size: 11px" >{{trans("sentence.total_vat")}} @{{
                                                             vato.name }}
                                                         </div>
                                                     </td>
@@ -178,7 +176,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">{{trans("general.total")}} KDV</div>
+                                                        <div class="bottom-info">{{trans("sentence.total_vat")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info">{{$order->vat_total}} <i
@@ -187,7 +185,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">{{trans("general.general")}} {{trans("general.total")}}</div>
+                                                        <div class="bottom-info">{{trans("sentence.general_total")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info"
@@ -198,7 +196,7 @@
                                                 @if($order->currency != "try")
                                                     <tr>
                                                         <td>
-                                                            <div class="bottom-info">TL {{trans("general.provision")}}</div>
+                                                            <div class="bottom-info">TL KARŞILIĞI</div>
                                                         </td>
                                                         <td style="text-align:right">
                                                             <div class="bottom-info"
@@ -228,7 +226,7 @@
                                                     <td width="5%"></td>
                                                     <td width="40%"></td>
                                                     <td></td>
-                                                    <td>{{trans("general.remaining")}}</td>
+                                                    <td>{{trans("word.remaining")}}</td>
                                                     <td><span class="pull-right">@{{ remaining }} <i class="fa fa-{{$order->currency}}"></i></span></td>
                                                 </tr>
                                                 </tfoot>
@@ -266,18 +264,18 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">{{trans("general.order")}} {{trans("general.amount")}}<span class="pull-right"
+                                        <div class="bottom-info">{{trans("sentence.order_amount")}}<span class="pull-right"
                                                                                    style="font-size:15px;color:#2AC!important">{{$order->grand_total}}
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">{{trans("general.remaining")}} {{trans("general.amount")}}<span class="pull-right"
+                                        <div class="bottom-info">{{trans("sentence.remaining_amount")}}<span class="pull-right"
                                                                                      style="font-size:15px;color:#2AC!important">@{{ remaining }}
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">{{trans("general.account")}} {{trans("trans.balance")}}<span class="pull-right"
+                                        <div class="bottom-info">{{trans("sentence.account_balance")}} <span class="pull-right"
                                                                                    style="font-size:15px;color:#2AC!important">@{{ company_balance }}
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
@@ -308,7 +306,7 @@
 
                                 @if($order->offer)
                                     <div class="col-sm-12">
-                                        {{trans("general.offer")}}
+                                        {{trans("word.offer")}}
                                         <br>
                                         <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? "SATIŞ TEKLİFİ":$order->offer["description"]}}
                                             (#{{$order->offer["id"]}})</a><br>
@@ -322,9 +320,9 @@
                                         <table class="table table-condensed table-hover">
                                             <thead>
                                             <tr>
-                                                <th>İrsaliye No</th>
-                                                <th>Düzenleme</th>
-                                                <th>Sevk</th>
+                                                <th>{{trans("sentence.waybill_number")}}</th>
+                                                <th>{{trans("sentence.edit_date")}}</th>
+                                                <th>{{trans("word.dispatch")}}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -363,7 +361,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             ×
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">İrsaliye Yazdır</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{trans("sentence.print_waybill")}}</h4>
                     </div>
                     <div class="modal-body modal-body-content">
                         @if(count($order->no_waybills))
@@ -374,15 +372,15 @@
                                             <ul class="bootstrapWizard form-wizard" style="width: 127%;">
                                                 <li class="active" data-target="#step1">
                                                     <a href="#tab1" data-toggle="tab"> <span class="step">1</span> <span
-                                                                class="title">Ürün Seçimi</span> </a>
+                                                                class="title">{{trans("sentence.product_selection")}}</span> </a>
                                                 </li>
                                                 <li data-target="#step2">
                                                     <a href="#tab2" data-toggle="tab"> <span class="step">2</span> <span
-                                                                class="title">İrsaliye Bilgileri</span> </a>
+                                                                class="title">{{trans("sentence.waybill_informations")}}</span> </a>
                                                 </li>
                                                 <li data-target="#step3">
                                                     <a href="#tab3" data-toggle="tab"> <span class="step">3</span> <span
-                                                                class="title">Yazdır</span> </a>
+                                                                class="title">{{trans("word.print")}}</span> </a>
                                                 </li>
 
                                             </ul>
@@ -436,7 +434,9 @@
                                                 <div class="row">
                                                     <fieldset>
                                                         <div class="form-group">
-                                                            <label class="col-md-4 control-label">İRSALİYE NO</label>
+                                                            <label class="col-md-4 control-label">
+                                                                {{trans("sentence.waybill_number")}}
+                                                            </label>
                                                             <div class="col-md-6 ">
                                                                 <div class="input-group">
                                                                     <input style="width: 266px;" type="text"
@@ -450,8 +450,9 @@
                                                     <hr>
                                                     <fieldset>
                                                         <div class="form-group">
-                                                            <label class="col-md-4 control-label">DÜZENLEME
-                                                                TARİHİ</label>
+                                                            <label class="col-md-4 control-label">
+                                                                {{trans("sentence.edit_date")}}
+                                                            </label>
                                                             <div class="col-md-6 ">
                                                                 <div class="input-group">
                                                                     <the-mask @change="setDate(waybill.edit_date)" :mask="['##.##.####']" type="text" name="waybill.edit_date"
@@ -467,7 +468,9 @@
                                                         <hr>
                                                     <fieldset>
                                                         <div class="form-group">
-                                                            <label class="col-md-4 control-label">SEVK TARİHİ</label>
+                                                            <label class="col-md-4 control-label">
+                                                                {{trans("sentence.dispatch_date")}}
+                                                            </label>
                                                             <div class="col-md-6 ">
                                                                 <div class="input-group">
                                                                     <the-mask @change="setDate(waybill.edit_date)" :mask="['##.##.####']" type="text" name="waybill.dispatch_date"
@@ -483,8 +486,8 @@
                                                     <hr>
                                                     <fieldset>
                                                         <div class="form-group">
-                                                            <label for="" class="col-md-4 control-label">İRSALİYE NOTU
-
+                                                            <label for="" class="col-md-4 control-label">
+                                                                {{trans("sentence.waybill_note")}}
                                                             </label>
                                                             <div class="col-md-6">
                                                                 <div class="input-group">
@@ -509,7 +512,7 @@
                                                                @click="waybill_print"
                                                                data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> İşlem Tamamlandı. Yazdırılıyor..."
                                                                id="WaybillButton"><i class="fa fa-check"></i>
-                                                                Yazdır</a>
+                                                                {{trans("word.print")}}</a>
                                                         </center>
                                                     </strong></h1>
                                                 <br>
@@ -527,14 +530,14 @@
                                                             <li class="previous disabled">
                                                                 <a href="javascript:void(0);"
                                                                    class="btn btn-lg btn-default">
-                                                                    Geri </a>
+                                                                    {{trans("word.back")}} </a>
                                                             </li>
                                                             <!--<li class="next last">
                                                             <a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
                                                             </li>-->
                                                             <li class="next">
                                                                 <a href="javascript:void(0);"
-                                                                   class="btn btn-lg txt-color-darken"> İleri </a>
+                                                                   class="btn btn-lg txt-color-darken"> {{trans("word.next")}} </a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -547,8 +550,7 @@
 
                             </div>
                         @else
-                            TÜM ÜRÜNLERİN İRSALİYELERİ YAZDIRILMIŞTIR.
-                            YENİDEN YAZDIRMAK İÇİN İRSALİYE LİSTESİNE BAKIN
+                            {{trans("sentence.waybills_of_all_products")}}
                         @endif
 
 
@@ -567,7 +569,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             ×
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">Fatura Yazdır</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{trans("print.invoice")}}</h4>
                     </div>
                     <div class="modal-body modal-body-content">
 
@@ -578,11 +580,11 @@
                                         <ul class="bootstrapWizard form-wizard" style="width: 200%;">
                                             <li class="active" data-target="#step6">
                                                 <a href="#tab6" data-toggle="tab"> <span class="step">1</span> <span
-                                                            class="title">Fatura Bilgileri</span> </a>
+                                                            class="title">{{trans("sentence.billing_informations")}}</span> </a>
                                             </li>
                                             <li data-target="#step7">
                                                 <a href="#tab7" data-toggle="tab"> <span class="step">2</span> <span
-                                                            class="title">Yazdır</span> </a>
+                                                            class="title">{{trans("word.print")}}</span> </a>
                                             </li>
                                         </ul>
                                         <div class="clearfix"></div>
@@ -594,11 +596,12 @@
                                             <br>
                                             <div class="row">
                                                 <div class="form-group">
-                                                    <label style="top:6px;" class="col-md-3 control-label">FATURA
-                                                        NO</label>
+                                                    <label style="top:6px;" class="col-md-3 control-label">
+                                                        {{trans("sentence.invoice_number")}}
+                                                    </label>
                                                     <div class="col-md-3">
                                                         <div class="input-group">
-                                                            <span class="input-group-addon">SERİ</span>
+                                                            <span class="input-group-addon">{{trans("word.serial")}}</span>
                                                             <input class="form-control" v-model="invoice.seri"
                                                                    value="{{$order->SalesInvoiceSeri}}" type="text">
                                                         </div>
@@ -617,7 +620,7 @@
                                                 <hr>
                                                 <div class="form-group">
                                                     <label style="top:6px;"
-                                                           class="col-md-3 control-label">TARİH/SAAT</label>
+                                                           class="col-md-3 control-label">{{trans("word.date")}}/{{trans("word.hour")}}</label>
                                                     <div class="col-md-4">
                                                         <div class="input-group">
                                                             <the-mask @change="setDate(invoice.date)"
@@ -647,7 +650,9 @@
 
                                                 <fieldset>
                                                     <div class="form-group">
-                                                        <label class="col-md-3 control-label">VADE TARİHİ</label>
+                                                        <label class="col-md-3 control-label">
+                                                            {{trans("sentence.expiry_date")}}
+                                                        </label>
                                                         <div class="col-md-7 ">
                                                             <div class="input-group">
                                                                 <the-mask @change="setDate(invoice.due_date)"
@@ -679,8 +684,8 @@
 
                                                 <fieldset>
                                                     <div class="form-group">
-                                                        <label for="" class="col-md-3 control-label">FATURA NOTU
-
+                                                        <label for="" class="col-md-3 control-label">
+                                                            {{trans("sentence.invoice_note")}}
                                                         </label>
                                                         <div class="col-md-6">
                                                             <div class="input-group">
@@ -699,12 +704,12 @@
                                                     <table class="table table-condensed table-hover">
                                                         <thead>
                                                         <tr>
-                                                            <td colspan="3"><h4>BAĞLI İRSALİYELER</h4></td>
+                                                            <td colspan="3"><h4>{{trans("sentence.bound_waybills")}}</h4></td>
                                                         </tr>
                                                         <tr>
-                                                            <th>İrsaliye No</th>
-                                                            <th>Düzenleme</th>
-                                                            <th>Sevk</th>
+                                                            <th>{{ trans("sentence.waybill_number") }}</th>
+                                                            <th>{{ trans("sentence.edit_date") }}</th>
+                                                            <th>{{ trans("sentence.dispatch_date") }}</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -724,8 +729,7 @@
                                                 @else
                                                     <hr>
                                                     <div class="alert alert-info"><i class="fa fa-info-circle"></i>
-                                                        Faturasını oluşturmak istediğiniz sipariş için irsaliye <b>oluşturulmamıştır.</b>
-                                                        <br>Bu durum fatura kesmenize engel değildir.
+                                                        {{ trans("sentence.not_created_waybill") }}
                                                     </div>
                                                 @endif
 
@@ -748,8 +752,7 @@
                                                 <center>
                                                     <a type="button" class="btn btn-success btn-lg" @click="invoiceAdd"
                                                        data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> İşlem Onaylandı. Yazdırılıyor..."
-                                                       id="InvoiceCheckPrint"><i class="fa fa-check"></i> Onayla ve
-                                                        Yazdır</a></center>
+                                                       id="InvoiceCheckPrint"><i class="fa fa-check"></i> {{ trans("sentence.confirm_and_print") }}</a></center>
                                                 <br>
                                             </div>
                                         </div>
@@ -763,14 +766,14 @@
                                                         <li class="previous disabled">
                                                             <a href="javascript:void(0);"
                                                                class="btn btn-lg btn-default">
-                                                                Geri </a>
+                                                                {{ trans("word.back") }} </a>
                                                         </li>
                                                         <!--<li class="next last">
                                                         <a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
                                                         </li>-->
                                                         <li class="next">
                                                             <a href="javascript:void(0);"
-                                                               class="btn btn-lg txt-color-darken"> İleri </a>
+                                                               class="btn btn-lg txt-color-darken"> {{ trans("word.next") }} </a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -860,14 +863,14 @@
                                 <div
                                         class="table-responsive">
                                     <table class="table">
-                                        <thread>
+                                        <th>
                                             <th>KOD</th>
                                             <th>ÜRÜN</th>
 
                                             <th>MİKTAR</th>
                                             <th>BİRİM</th>
                                             <th>#</th>
-                                        </thread>
+                                        </th>
                                         <tbody>
                                         <tr v-for="(item,index) in trans.form.products">
                                             <td>@{{item.code}}</td>
@@ -1010,10 +1013,10 @@
                             description: "",
                             items: [@foreach($order->no_waybills as $item)
                             {
-                                id: "{{$item["id"]}}",
-                                product: "{{$item["name"]}}",
-                                quantity: "{{$item["quantity"]}}",
-                                unit: "{{$item["unit"]}}",
+                                id: "{{$item->id}}",
+                                product: "{{$item->product->named["name"]}}",
+                                quantity: "{{$item->quantity}}",
+                                unit: "{{$item->unit["short_name"]}}",
                                 selected: true,
                             },
                                 @endforeach ],

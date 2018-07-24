@@ -18,11 +18,11 @@
                         class="nav nav-tabs flex-wrap">
                         <li class="active" style="text-align: center;flex:1;">
                             <a href="#s3" data-toggle="tab"
-                               aria-expanded="false">NAKİT {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
+                               aria-expanded="false">{{ trans("word.cash") }} {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
                         </li>
                         <li style="text-align: center;flex:1;">
                             <a href="#s4" data-toggle="tab"
-                               aria-expanded="true">ÇEK-SENET {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
+                               aria-expanded="true">{{ trans("sentence.cheque_promissory_note") }} {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
                         </li>
                     </ul>
 
@@ -35,7 +35,9 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <div class="bottom-info">TARİH</div>
+                                            <div class="bottom-info">
+                                                {{ trans("word.date") }}
+                                            </div>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
@@ -54,7 +56,9 @@
                                     <div class="form-group"
                                          :class="{'has-error':errors.has('payment.form.bank_account_id')}">
                                         <label class="col-sm-4 control-label">
-                                            <div class="bottom-info">HESAP</div>
+                                            <div class="bottom-info">
+                                                {{ trans("word.account") }}
+                                            </div>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -69,7 +73,9 @@
 
                                                 </select>
                                                 <span v-if="errors.has('payment.form.bank_account_id')"
-                                                      class="error mini">Lütfen kasa seçimi yapınız.</span>
+                                                      class="error mini">
+                                                    {{ trans("sentence.choose_a_safe") }}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -78,7 +84,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <div class="bottom-info">MEBLAĞ</div>
+                                            <div class="bottom-info">{{ trans("word.sum") }}</div>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -96,7 +102,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <div class="bottom-info">AÇIKLAMA</div>
+                                            <div class="bottom-info">{{ trans("word.description") }}</div>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
@@ -109,7 +115,7 @@
 
                             </form>
                             <button type="button" class="btn btn-default" data-dismiss="modal">
-                                İPTAL
+                                {{ trans("word.cancel") }}
                             </button>
                             <button @click="collectionFormSend" :disabled="payment.collect_send_btn" type="button"
                                     class="btn btn btn-danger pull-right">
@@ -127,14 +133,20 @@
                                     <fieldset>
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">ÇEK TÜRÜ</div>
+                                                <div class="bottom-info">
+                                                    {{ trans("sentence.document_type") }}
+                                                </div>
                                             </label>
                                             <div class="col-sm-8 ">
                                                 <div class="input-group" style="width:100%">
 
                                                     <select class="form-control"  v-model="cheque_payment.form.cheque_type">
-                                                        <option selected value="0">BANKA ÇEKİ</option>
-                                                        <option value="1">MÜŞTERİ ÇEKİ</option>
+                                                        <option selected value="0">
+                                                            {{ trans("sentence.bank_cheque") }}
+                                                        </option>
+                                                        <option value="1">
+                                                            {{ trans("sentence.customer_cheque") }}
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -144,11 +156,12 @@
                                     <fieldset v-show="cheque_payment.form.cheque_type == 0" >
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
-                                                <div class="bottom-info">BANKALAR</div>
+                                                <div class="bottom-info">
+                                                    {{ trans("word.BANKS") }}
+                                                </div>
                                             </label>
                                             <div class="col-sm-8 " v-if="cheque_payment.no_banks">
-                                                Çek verebileceğiniz banka hesabınız bulunmuyor.
-
+                                                {{ trans("sentence.you_do_not_have_a_bank_account") }}
                                             </div>
                                             <div class="col-sm-8 " v-else="!cheque_payment.no_banks">
                                                 <div class="input-group" style="width:100%">
@@ -160,7 +173,9 @@
                                                                 :value="accd.id">@{{accd.name}} ()@{{ accd.balance }}</option>
 
                                                     </select>
-                                                    <span v-if="cheque_payment.cash_error" class="error mini">Lütfen kasa seçimi yapınız.</span>
+                                                    <span v-if="cheque_payment.cash_error" class="error mini">
+                                                        {{ trans("sentence.choose_a_safe") }}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -170,11 +185,12 @@
                                         <fieldset v-show="cheque_payment.form.cheque_type == 1" >
                                             <div class="form-group has-feedback">
                                                 <label class="col-sm-4 control-label">
-                                                    <div class="bottom-info">ÇEKLER</div>
+                                                    <div class="bottom-info">
+                                                        {{ trans("word.cheques") }}
+                                                    </div>
                                                 </label>
                                                 <div class="col-sm-8 " v-if="cheque_payment.no_cheqs">
-                                                    Kullanabileceğiniz müşteri çeki bulunmuyor.
-
+                                                    {{trans("sentence.there_are_no_customer_cheque")}}
                                                 </div>
                                                 <div class="col-sm-8 " v-else="!cheque_payment.no_cheqs">
                                                     <select v-model="cheque_payment.form.cheques_id"
@@ -192,7 +208,9 @@
                                         <fieldset>
                                             <div class="form-group has-feedback">
                                                 <label class="col-sm-4 control-label">
-                                                    <div class="bottom-info">TARİH</div>
+                                                    <div class="bottom-info">
+                                                        {{ trans("word.date") }}
+                                                    </div>
                                                 </label>
                                                 <div class="col-sm-8 ">
                                                     <div class="input-group">
@@ -210,7 +228,9 @@
                                         <fieldset>
                                             <div class="form-group has-feedback">
                                                 <label class="col-sm-4 control-label">
-                                                    <div class="bottom-info">VADE TARİHİ</div>
+                                                    <div class="bottom-info">
+                                                        {{ trans("sentence.expiry_date") }}
+                                                    </div>
                                                 </label>
                                                 <div class="col-sm-8 ">
                                                     <div class="input-group">
@@ -227,7 +247,9 @@
                                         <fieldset>
                                             <div class="form-group has-feedback">
                                                 <label class="col-sm-4 control-label">
-                                                    <div class="bottom-info">MEBLAĞ</div>
+                                                    <div class="bottom-info">
+                                                        {{ trans("word.sum") }}
+                                                    </div>
                                                 </label>
                                                 <div class="col-sm-8 ">
                                                     <div class="input-group" style="width:100%">
@@ -245,7 +267,9 @@
                                         <fieldset>
                                             <div class="form-group has-feedback">
                                                 <label class="col-sm-4 control-label">
-                                                    <div class="bottom-info">AÇIKLAMA</div>
+                                                    <div class="bottom-info">
+                                                        {{ trans("word.description") }}
+                                                    </div>
                                                 </label>
                                                 <div class="col-sm-8 ">
                                                     <div class="input-group" style="width:100%">
@@ -259,11 +283,11 @@
                                     </div>
                                 </form>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                                    İPTAL
+                                    {{ trans("word.cancel") }}
                                 </button>
                             <button type="button" @click="chequeCollectFormSend"
                                     class="btn btn btn-danger pull-right">
-                                    ÖDEME EKLE
+                                    {{ trans("sentence.add_payment") }}
                                 </button>
 
                         </div>
@@ -448,7 +472,7 @@
 
                                         if (res.data.message == "success") {
                                             VueName.remaining = res.data.remaining;
-                                            VueName.statement();
+//                                            VueName.statement();
                                             VuePayment.payment.form.amount = res.data.remaining;
                                             VueName.collect_items.push({
                                                 type:"payment",
@@ -482,7 +506,7 @@
 
                                             $("#transaction_payment").modal("hide");
                                             VueName.remaining = res.data.remaining;
-                                            VueName.statement();
+//                                            VueName.statement();
                                             VuePayment.loading = false;
 
                                             notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
@@ -524,7 +548,7 @@
                                         VuePayment.loading = false;
 
                                         notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
-
+                                        location.reload()
 
                                     }
                                 })
@@ -571,46 +595,6 @@
                             }
                         }
 
-
-
-
-
-
-
-
-
-
-
-                        {{--if(amount>!0){--}}
-
-                        {{--this.cheque_payment.cheque_send_btn = true;--}}
-
-                        {{--this.loading = true;--}}
-
-
-                        {{--axios.post("{{route("finance.accounts.transaction_company",aid())}}", this.cheque_payment.form).then(function (res) {--}}
-
-                        {{--if (res.data.message == "success") {--}}
-                        {{--VueName.remaining = res.data.remaining;--}}
-                        {{--VuePayment.payment.form.amount = res.data.remaining;--}}
-                        {{--VuePayment.loading = false;--}}
-                        {{--$("#transaction_payment").modal("hide");--}}
-                        {{--notification("Success", "Çek Alım işlemi başarıyla gerçekleşti.", "success");--}}
-
-                        {{--}--}}
-
-
-                        {{--}).catch(function (e) {--}}
-                        {{--console.log(e)--}}
-                        {{--VuePayment.loading = false;--}}
-                        {{--VuePayment.cheque_payment.cheque_send_btn = false;--}}
-                        {{--});--}}
-
-                        {{--}else {--}}
-
-
-
-                        {{--}--}}
 
                     }
                 }
