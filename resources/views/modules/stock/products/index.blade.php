@@ -44,9 +44,7 @@
                                     <th width="1px">#</th>
                                     <th>{{trans("word.code")}}</th>
                                     <th>{{trans("word.name")}}</th>
-                                    <th>{{trans("sentence.stock_quantity")}}</th>
-                                    <th>{{trans("sentence.purchase_price")}}</th>
-                                    <th>{{trans("sentence.sales_price")}}</th>
+                                    <th>{{trans("word.stock")}}/{{trans("word.orders")}}</th>
                                 </tr>
                                 </thead>
 
@@ -97,8 +95,8 @@
                     }, {
                         data: "code",
                     }, {
-                        data: "id",
-                        name: "id"
+                        data: "named.name",
+                        name: "named.name"
 
                     }, {
                         data: "inventory_tracking",

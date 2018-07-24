@@ -17,22 +17,22 @@ class MenuDescriptionsTableSeeder extends Seeder
             [
                 'lang_code' => "en",
                 'menu_id' => 1,
-                'name' => 'Dashboard',
+                'name' => 'DASHBOARD',
             ],
             [
                 'lang_code' => "tr",
                 'menu_id' => 1,
-                'name' => 'Gösterge Paneli',
+                'name' => 'GÖSTERGE PANELİ',
             ],
             [
                 'lang_code' => "en",
                 'menu_id' => 2,
-                'name' => 'Tasks',
+                'name' => 'TASKS',
             ],
             [
                 'lang_code' => "tr",
                 'menu_id' => 2,
-                'name' => 'İş Listesi',
+                'name' => 'İŞ LİSTESİ',
             ],
             [
                 'lang_code' => "en",
@@ -57,12 +57,12 @@ class MenuDescriptionsTableSeeder extends Seeder
             [
                 'lang_code' => "en",
                 'menu_id' => 5,
-                'name' => 'Sales',
+                'name' => 'SALES',
             ],
             [
                 'lang_code' => "tr",
                 'menu_id' => 5,
-                'name' => 'Satış',
+                'name' => 'SATIŞ',
             ],
             [
                 'lang_code' => "en",
@@ -118,12 +118,12 @@ class MenuDescriptionsTableSeeder extends Seeder
             [
                 'lang_code' => "en",
                 'menu_id' => 11,
-                'name' => 'Purchases',
+                'name' => 'PURCHASES',
             ],
             [
                 'lang_code' => "tr",
                 'menu_id' => 11,
-                'name' => 'Satın Alma',
+                'name' => 'SATIN ALMA',
             ],
             [
                 'lang_code' => "en",
@@ -178,12 +178,12 @@ class MenuDescriptionsTableSeeder extends Seeder
             [
                 'lang_code' => "en",
                 'menu_id' => 17,
-                'name' => 'Finance',
+                'name' => 'FINANCE',
             ],
             [
                 'lang_code' => "tr",
                 'menu_id' => 17,
-                'name' => 'Finans',
+                'name' => 'FİNANS',
             ],
             [
                 'lang_code' => "en",
@@ -238,12 +238,12 @@ class MenuDescriptionsTableSeeder extends Seeder
             [
                 'lang_code' => "en",
                 'menu_id' => 23,
-                'name' => 'Stocks',
+                'name' => 'STOCKS',
             ],
             [
                 'lang_code' => "tr",
                 'menu_id' => 23,
-                'name' => 'Stok',
+                'name' => 'STOK',
             ],
             [
                 'lang_code' => "en",
@@ -278,12 +278,12 @@ class MenuDescriptionsTableSeeder extends Seeder
             [
                 'lang_code' => "en",
                 'menu_id' => 27,
-                'name' => 'E-Commerce',
+                'name' => 'E-COMMERCE',
             ],
             [
                 'lang_code' => "tr",
                 'menu_id' => 27,
-                'name' => 'E-Ticaret',
+                'name' => 'E-TİCARET',
             ],
             [
                 'lang_code' => "en",

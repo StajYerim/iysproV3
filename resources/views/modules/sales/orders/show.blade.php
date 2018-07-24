@@ -51,7 +51,7 @@
                     </div>
                     <div class="btn-group">
                         <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
-                                    class="fa fa-print"></span> {{trans("general.print")}} <span class="caret"></span> </a>
+                                    class="fa fa-print"></span> {{trans("word.print")}} <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
                                 <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.print_order")}}</a>
@@ -274,11 +274,7 @@
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
 
-                                    <div class="col-sm-12">
-                                        <div class="bottom-info">{{trans("sentence.account_balance")}} <span class="pull-right"
-                                                                                   style="font-size:15px;color:#2AC!important">@{{ company_balance }}
-                                                <i class="fa fa-{{$order->currency}}"></i></span></div>
-                                    </div>
+
                                 </div>
                               <hr>
 
@@ -329,7 +325,7 @@
                                             @foreach($order->waybills as $waybill)
                                                 <tr onmouseover="this.style.cursor='pointer'" @click="waybill_process('{{$waybill->id}}','{{$waybill->number}}')" style="cursor: pointer;">
                                                     <td>{{$waybill->number}}</td>
-                                                    <td>{{$waybill->edit_date}}</td>
+                                                    <td>{{$waybill->date}}</td>
                                                     <td>{{$waybill->dispatch_date}}</td>
                                                 </tr>
                                             @endforeach

@@ -15,6 +15,11 @@ class StockItems extends Model
         $this->attributes['quantity'] = money_db_format($value);
     }
 
+    public function getQuantityAttribute(){
+        return get_money($this->attributes["quantity"]);
+
+    }
+
 
     public function product(){
         return $this->hasOne(Product::class,"id","product_id");
