@@ -30,7 +30,7 @@
                         </div>
 
                             <a class="btn btn-default "
-                               href="{{route("stock.movements.form",[aid(),$stock->id,"update","in"])}}"><i
+                               href="{{route("stock.movements.form",[aid(),$stock->id,"update",$stock->status == 0 ? "in":"out"])}}"><i
                                         class="fa fa-edit"></i> {{trans("general.edit")}}</a>
 
                         </span>

@@ -28,7 +28,6 @@ class StockController extends Controller
 
     public function index_list()
     {
-
         $products = Product::with("stock_receipts","named", "category")->select("products.*")->where("account_id", aid());
 
         return Datatables::of($products)
@@ -37,9 +36,14 @@ class StockController extends Controller
                     return "product_update($product->id)";
                 },
             ])
+            ->editColumn("id",function($product){
+                return $product->named["name"]." <span class='badge' style='background-color:".$product->category["color"]."'>".$product->category["name"]."</span>";
+
+            })
             ->editColumn("inventory_tracking",function($product){
                 return $product->stock_count."/".$product->order_count." ".$product->unit["short_name"];
             })
+            ->rawColumns(["id"])
             ->setRowClass("row-title")
             ->make(true);
     }

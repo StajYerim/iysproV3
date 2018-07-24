@@ -3,6 +3,8 @@
 namespace App\Model\Sales;
 
 use App\Model\Stock\Product\Product;
+use App\Model\Stock\Stock;
+use App\Model\Stock\StockItems;
 use App\Units;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -68,7 +70,13 @@ class SalesOrderItems extends Model
         return get_money(money_db_format($this->price)*money_db_format($this->quantity));
     }
 
-    public function waybill_item(){
-        return $this->hasOne(WaybillItems::class,"order_item_id","id");
+    public function waybill_item()
+    {
+        return $this->hasOne( StockItems::class,"sales_order_item_id","id");
     }
+
+
+
+
+
 }

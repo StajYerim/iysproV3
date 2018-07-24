@@ -524,7 +524,7 @@
                                         VuePayment.loading = false;
 
                                         notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
-
+                                        location.reload()
 
                                     }
                                 })

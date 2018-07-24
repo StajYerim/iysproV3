@@ -139,8 +139,6 @@
                                                 <td style="text-align:right"> @{{ item.total }} <i
                                                             class="fa fa-{{$order->currency}}"></i></td>
                                             </tr>
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -860,14 +858,14 @@
                                 <div
                                         class="table-responsive">
                                     <table class="table">
-                                        <thread>
+                                        <th>
                                             <th>KOD</th>
                                             <th>ÜRÜN</th>
 
                                             <th>MİKTAR</th>
                                             <th>BİRİM</th>
                                             <th>#</th>
-                                        </thread>
+                                        </th>
                                         <tbody>
                                         <tr v-for="(item,index) in trans.form.products">
                                             <td>@{{item.code}}</td>
@@ -1010,10 +1008,10 @@
                             description: "",
                             items: [@foreach($order->no_waybills as $item)
                             {
-                                id: "{{$item["id"]}}",
-                                product: "{{$item["name"]}}",
-                                quantity: "{{$item["quantity"]}}",
-                                unit: "{{$item["unit"]}}",
+                                id: "{{$item->id}}",
+                                product: "{{$item->product->named["name"]}}",
+                                quantity: "{{$item->quantity}}",
+                                unit: "{{$item->unit["short_name"]}}",
                                 selected: true,
                             },
                                 @endforeach ],

@@ -102,7 +102,7 @@
                     {
                         data: 'status',
                         render: function (status) {
-                            if (status == 0) {
+                            if (status == 1) {
                                 return '<i class="fa fa-truck fa-2x fa-flip-horizontal fa-2x"></i>';
                             } else {
                                 return '<i class="fa fa-truck fa-2x "></i>';
@@ -113,7 +113,7 @@
                         data: "description",
                         render: function (description,d,s) {
                             if (description == null) {
-                             return   (s.status) === 0 ? "Stock Out":"Stock In";
+                             return   (s.status) === 0 ? "Stock In":"Stock Out";
                             } else {
                                 return description;
                             }

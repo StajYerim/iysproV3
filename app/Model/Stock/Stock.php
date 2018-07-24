@@ -30,9 +30,21 @@ class Stock extends Model
 
     public function getDateAttribute()
     {
-//     $explode = explode("-",);
+
      $dt = Carbon::createFromFormat("Y-m-d H:i:s",$this->attributes["date"]);
      return $dt->format("d.m.Y");
+    }
+
+    public function setDispatchDateAttribute($value)
+    {
+        $this->attributes['dispatch_date'] = date_convert($value);
+    }
+
+    public function getDispatchDateAttribute()
+    {
+
+        $dt = Carbon::createFromFormat("Y-m-d H:i:s",$this->attributes["dispatch_date"]);
+        return $dt->format("d.m.Y");
     }
 
     public function company(){

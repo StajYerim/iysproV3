@@ -97,15 +97,8 @@
                     }, {
                         data: "code",
                     }, {
-                        data: "named.name",
-                        render: function ($name, d, s) {
-                            if (s.category === null) {
-                                return $name;
-                            } else {
-                                return $name + " <span class='badge' style='background-color:" + s.category.color + "'>" + s.category.name + "</span>";
-
-                            }
-                        }
+                        data: "id",
+                        name: "id"
 
                     }, {
                         data: "inventory_tracking",

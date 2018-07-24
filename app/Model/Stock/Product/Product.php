@@ -4,6 +4,7 @@ namespace App\Model\Stock\Product;
 
 
 use App\Model\Purchases\PurchaseOrderItems;
+use App\Model\Sales\SalesOrders;
 use App\Model\Sales\SalesOrderItems;
 use App\Model\Stock\Stock;
 use App\Model\Stock\StockItems;
@@ -130,12 +131,28 @@ class Product extends Model
       return  ($in-$out)+$porder_in;
     }
 
-    public function order(){
-        return $this->hasMany(SalesOrderItems::class,"product_id","id");
+    public function order_items()
+    {
+        return $this->hasMany(SalesOrderItems::class, "product_id",  "id");
+    }
+
+    public function waybills()
+    {
+        $this->hasMany(StockItems::class, "product_id", "id");
     }
 
     public function getOrderCountAttribute(){
-        return $this->order()->sum("quantity");
+        $toplam_sipariler = $items = $this->order_items;
+        $order = $items = $this->order_items()->sum("quantity");
+
+        $waybill = 0;
+//        foreach ($toplam_sipariler as $sip) {
+//
+//            $waybill += $sip->waybill_item;
+//        }
+
+        return $order-$waybill;
+
     }
 
     public function unit(){
