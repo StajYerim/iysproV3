@@ -146,10 +146,10 @@ class Product extends Model
         $order = $items = $this->order_items()->sum("quantity");
 
         $waybill = 0;
-//        foreach ($toplam_sipariler as $sip) {
-//
-//            $waybill += $sip->waybill_item;
-//        }
+        foreach ($toplam_sipariler as $sip) {
+
+            $waybill += $sip->waybill_item["quantity"];
+        }
 
         return $order-$waybill;
 

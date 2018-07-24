@@ -36,7 +36,7 @@
                             <div class="pull-right new-button">
 
                                 <a href="{{route("sales.orders.form",[aid(),0,"new"])}}">
-                                <span class="btn btn-success">{{trans("trans.new_order")}}</span>
+                                <span class="btn btn-success">{{trans("sentence.new_order")}}</span>
                                 </a>
                             </div>
 

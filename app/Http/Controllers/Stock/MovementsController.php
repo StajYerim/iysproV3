@@ -61,6 +61,7 @@ class MovementsController extends Controller
     public function store($aid, $id, Request $request)
     {
 
+
         $stock = Stock::updateOrCreate(["id" => $id],
             [
                 "account_id" => aid(),
@@ -81,7 +82,7 @@ class MovementsController extends Controller
           $ret =  $stock->items()->updateOrCreate(
                 ["id" => $item["id"]]
                 , [
-                    'product_id' =>  $item["product_id"]["value"],
+                    'product_id' =>  $item["tetra"]["product_id"],
                     'unit_id' => $item["unit_id"],
                     'quantity' => $item["quantity"]
 
