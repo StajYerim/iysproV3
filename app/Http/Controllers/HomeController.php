@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Model\Finance\BankAccounts;
+use App\Model\Finance\BankItems;
+use App\Model\Purchases\PurchaseOrders;
+use App\Model\Sales\SalesOrders;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +21,13 @@ class HomeController extends Controller
      * @param Account $company
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Account $company)
+    public function index()
     {
-        return view('dashboard');
+        $bank_accounts = BankAccounts::where("account_id",aid())->paginate(6);
+        $sales_orders  = SalesOrders::whereDate("due_date","<",Carbon::now()->addDays(7))->paginate(10);
+        $purchase_orders = PurchaseOrders::whereDate("due_date","<",Carbon::now()->addDays(7))->paginate(10);
+        $bank_account_items = BankItems::orderBy("date","desc")->paginate(10);
+        return view('dashboard', compact('bank_accounts','sales_orders','purchase_orders','bank_account_items'));
     }
   
     public function profil_update($aid){

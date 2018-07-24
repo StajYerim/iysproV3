@@ -2,79 +2,180 @@
 
 @section('content')
 
-    <!-- widget grid -->
     <section id="widget-grid" class="">
-
-        <!-- row -->
         <div class="row">
 
-            <!-- NEW WIDGET START -->
-            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                <!-- Widget ID (each widget will need unique ID)-->
+            <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div class="jarviswidget" id="wid-id-0">
-                    <!-- widget options:
-                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
-                        data-widget-colorbutton="false"
-                        data-widget-editbutton="false"
-                        data-widget-togglebutton="false"
-                        data-widget-deletebutton="false"
-                        data-widget-fullscreenbutton="false"
-                        data-widget-custombutton="false"
-                        data-widget-collapsed="true"
-                        data-widget-sortable="false"
-
-                    -->
                     <header>
-                        <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-
+                        <span>
+                            <i class="fa fa-table"></i>
+                            Kasa ve Hesaplar
+                        </span>
                     </header>
 
-                    <!-- widget div-->
                     <div>
-
-                        <!-- widget edit box -->
                         <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
                             <input class="form-control" type="text">
                         </div>
-                        <!-- end widget edit box -->
 
-                        <!-- widget content -->
                         <div class="widget-body">
-
-                            <!-- this is what the user will see -->
-
+                            <ul>
+                            @foreach($bank_accounts as $bank_account)
+                                <li>
+                                    {{ $bank_account->name }}
+                                     <i class="fa fa-{{ $bank_account->currency }}"></i>{{ $bank_account->balance }}</li>
+                            @endforeach
+                            </ul>
                         </div>
-                        <!-- end widget content -->
+                    </div>
+                </div>
+            </article>
+
+            <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="jarviswidget" id="wid-id-0">
+
+                    <header>
+                        <span>
+                            <i class="fa fa-table"></i>
+                            Vadesi Gelen Tahsilatlar
+                        </span>
+                    </header>
+
+                    <div>
+                        <div class="jarviswidget-editbox">
+                            <input class="form-control" type="text">
+                        </div>
+
+                        <div class="widget-body">
+                            <ul>
+                                @foreach($sales_orders as $sales_order)
+
+                                    @if(money_db_format($sales_order->remaining) > 0)
+                                        <li>
+                                            {{ $sales_order->company->company_name }} -
+                                            {{ $sales_order->due_date }} -
+                                            {{ $sales_order->remaining }}
+                                            <i class="fa fa-{{ $sales_order->currency }}"></i>
+
+                                        </li>
+                                    {{--@else--}}
+                                            {{--Herhangi bir yaklaşan tahsilat yok--}}
+                                    @endif
+
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="jarviswidget" id="wid-id-0">
+
+                    <header>
+                        <span>
+                            <i class="fa fa-table"></i>
+                            Vadesi Gelen Ödemeler
+                        </span>
+                    </header>
+
+                    <div>
+                        <div class="jarviswidget-editbox">
+                            <input class="form-control" type="text">
+                        </div>
+
+                        <div class="widget-body">
+                            <ul>
+                                @foreach($purchase_orders as $purchase_order)
+
+                                    @if(money_db_format($purchase_order->remaining) > 0)
+                                        <li>
+                                            {{ $purchase_order->company->company_name }} -
+                                            {{ $purchase_order->due_date }} -
+                                            {{ $purchase_order->remaining }}
+                                            <i class="fa fa-{{ $purchase_order->currency }}"></i>
+
+                                        </li>
+                                    @else
+                                        Herhangi bir yaklaşan ödeme yok
+                                    @endif
+
+
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="jarviswidget" id="wid-id-0">
+
+                    <header>
+                        <span>
+                            <i class="fa fa-table"></i> Ödeme Geçmişi
+                        </span>
+                    </header>
+
+                    <div>
+                        <div class="jarviswidget-editbox">
+                            <input class="form-control" type="text">
+                        </div>
+
+                        <div class="widget-body">
+                            <table id="table" class="table table-striped table-hover" width="100%">
+                                <thead>
+                                <tr>
+                                    <th width="1px">#</th>
+                                    <th>Firma</th>
+                                    <th>Tarih</th>
+                                    <th>Bakiye</th>
+                                    <th>Durum</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($bank_account_items as $bank_account_item)
+                                    <tr>
+                                        <td>...</td>
+                                        <td>{{ $bank_account_item->company->company_name }}</td>
+                                        <td>{{ $bank_account_item->date }}</td>
+                                        <td>
+                                            {{ $bank_account_item->amount }}
+                                            <i class="fa fa-{{ $bank_account_item->currency }}"></i>
+                                        </td>
+                                        <td>
+                                            @if($bank_account_item->action_type == 1)
+                                                <span style="color:green">
+                                                    GİRİŞ
+                                                </span>
+                                                @else
+                                                <span style="color:red">
+                                                    ÇIKIŞ
+                                                </span>
+                                                @endif
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+
+                            </table>
+                            <ul>
+
+
+
+
+                            </ul>
+                        </div>
 
                     </div>
-                    <!-- end widget div -->
-
                 </div>
-                <!-- end widget -->
-
             </article>
-            <!-- WIDGET END -->
+
+
 
         </div>
-
-        <!-- end row -->
-
-        <!-- row -->
-
-        <div class="row">
-
-            <!-- a blank row to get started -->
-            <div class="col-sm-12">
-                <!-- your contents here -->
-            </div>
-
-        </div>
-
-        <!-- end row -->
-
     </section>
-    <!-- end widget grid -->
 @endsection
