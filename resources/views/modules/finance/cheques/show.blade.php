@@ -125,7 +125,7 @@
                                 <div class="col-sm-12">
                                     <button v-on:click="other_transfer" type="button"
                                             class="btn  btn-block bg-color-blue txt-color-white ">
-                                        {{trans("word.charge")}} {{$cheq->cheque_status }}
+                                        {{trans("word.charge")}}
                                     </button>
 
                                 </div>

@@ -44,9 +44,7 @@
                                     <th width="1px">#</th>
                                     <th>{{trans("word.code")}}</th>
                                     <th>{{trans("word.name")}}</th>
-                                    <th>{{trans("sentence.stock_quantity")}}</th>
-                                    <th>{{trans("sentence.purchase_price")}}</th>
-                                    <th>{{trans("sentence.sales_price")}}</th>
+                                    <th>{{trans("word.stock")}}/{{trans("word.orders")}}</th>
                                 </tr>
                                 </thead>
 
@@ -98,23 +96,18 @@
                         data: "code",
                     }, {
                         data: "named.name",
-                        render: function ($name, d, s) {
-                            if (s.category === null) {
-                                return $name;
-                            } else {
-                                return $name + " <span class='badge' style='background-color:" + s.category.color + "'>" + s.category.name + "</span>";
-
-                            }
-                        }
+                        name: "named.name"
 
                     }, {
                         data: "inventory_tracking",
                         name:"inventory_tracking"
-                    }, {
-                        data: "buying_price"
-                    }, {
-                        data: "list_price"
-                    }
+                    },
+//                    {
+//                        data: "buying_price"
+//                    },
+//                    {
+//                        data: "list_price"
+//                    }
                 ]
             });
 

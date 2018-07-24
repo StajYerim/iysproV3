@@ -17,7 +17,7 @@
                                 <fieldset class="fixed-title">
                                     <div class="form-group" :class="{'has-error': errors.has('form.company_name') }">
                                         <label class="col-md-3 control-label"> <span
-                                                    style="vertical-align: -9px;">{{$company_type}} {{trans("word.name") }}</span></label>
+                                                    style="vertical-align: -9px;">{{$company_type == "customer" ?  trans("word.customer"):trans("word.supplier")}} {{trans("word.name") }}</span></label>
                                         <div class="col-md-3 pull-right">
                                             <a href="{{$form_type == "new" ? route($company_type=="customer"?"sales.companies.customer":"purchases.companies.supplier",aid()): URL::previous() }}"
                                                class="btn btn-default btn-lg ">{{trans("word.back")}}
@@ -84,7 +84,7 @@
                                                        class="radiobox "
                                                        v-bind:checked="form.address_abroad == 1"
                                                 />
-                                                <span>{{trans("yes")}}</span> </label>
+                                                <span>{{trans("word.yes")}}</span> </label>
 
                                             <label class="radio radio-inline">
                                                 <input type="radio" v-model="form.address_abroad" value="0"
@@ -92,7 +92,7 @@
                                                        class="radiobox"
                                                        v-bind:checked="form.address_abroad == 0"
                                                 />
-                                                <span>{{trans("no")}}</span> </label>
+                                                <span>{{trans("word.no")}}</span> </label>
                                         </div>
                                         <label class="col-md-2 control-label">{{trans("sentence.ebilling_taxpayer")}}</label>
                                         <div class=" col-md-3">
@@ -101,13 +101,13 @@
                                                 <input type="radio" v-model="form.e_invoice_registered" value="1"
                                                        class="radiobox "
                                                        v-bind:checked="form.e_invoice_registered == 1">
-                                                <span>{{trans("yes")}}</span> </label>
+                                                <span>{{trans("word.yes")}}</span> </label>
 
                                             <label class="radio radio-inline">
                                                 <input type="radio" v-model="form.e_invoice_registered" value="0"
                                                        v-bind:checked="form.e_invoice_registered == 0"
                                                        class="radiobox "/>
-                                                <span>{{trans("no")}}</span> </label>
+                                                <span>{{trans("word.no")}}</span> </label>
 
 
                                         </div>

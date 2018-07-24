@@ -198,7 +198,7 @@
                     company_short_name: "",
                     char_code: "",
                     email: "",
-                    option: '{{isset($option)== true ? $option:$act == "in" ? "supplier":"customer"}}',
+                    option: '{{$option}}',
                     tax_office: "",
                     tax_id: "",
                     e_invoice_registered: 0,

@@ -12,7 +12,7 @@
                     <div>
                         <!-- widget content -->
                         <div class="widget-body ">
-                            <form @submit.prevent="formSend" class="form-horizontal">
+                            <form id="form" @submit.prevent="formSend" class="form-horizontal">
                                 <fieldset class="fixed-title">
                                     <div class="form-group">
                                         <label class="col-md-3 col-sm-3 control-label"> <span
@@ -43,7 +43,7 @@
                                         <div class="col-md-6">
 
                                             <v-select label="text" :filterable="true" placeholder="Choose Company"
-                                                      :options="options" @search="onSearch"
+                                                      :options="options_company" @search="onSearch"
                                                       transition="fade" v-model="form.company_id">
                                                 <template slot="no-options">
                                                     <a type="button" style="color:white" class='btn btn-sm btn-warning' href='#!'
@@ -106,27 +106,26 @@
                                             <td>
                                                 <div class=""
                                                      :class="{'has-error': errors.has('item.product_id') }">
-                                                    <v-select placeholder="Choose Product" v-validate="'required'"
-                                                              transition="fade"
-                                                              :options="[@foreach($products as $pro){label: '{{$pro->name}}', value: '{{$pro->id}}'},  @endforeach]"
-                                                              v-model="item.product_id">
-                                                        <template slot="no-options">
-                                                        <a href="#!" type="button" style="color:white"
-                                                           data-toggle='modal' data-target='#new_product' class="btn btn-warning">{{trans("sentence.add_new_product")}}</a></template>
-                                                    </v-select>
+                                                    <v-select :ref="'field-'+index" label="text" v-model="item.tetra"
+                                                              v-bind:class="{'v-select-error':errors.has('item.tetra'+index)}"
+
+                                                              v-validate="'required'" :filterable="true"
+                                                              placeholder="{{ trans("sentence.choose_product") }}"
+                                                              :options="options" :name="'item.tetra'+index"
+                                                              @input="function(val) { consoleCallback(index, val); }">
 
                                                 </div>
                                             </td>
                                             <td>
-                                                <money v-model="item.quantity"
-                                                       v-bind="money"
-                                                       class="form-control " :value="1"></money>
+                                                <input v-on:keypress="isNumber" v-model.lazy="item.quantity"
+                                                       class="form-control"
+                                                       style="text-align: right"/>
 
                                             </td>
 
                                             <td><select class="form-control" v-model="item.unit_id">
                                                     @foreach($units as $unit)
-                                                        <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                                        <option value="{{$unit->id}}">{{$unit->short_name}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -163,7 +162,7 @@
 
     </section>
 
-    @include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0,$act=$action])
+    @include("components.modals.companies",[$option="supplier",$title="New Company",$type = "new_company",$message="Company Form",$id=0,$act=$action])
     {{--@include("components.modals.products",[$title="New Product",$type = "new_product",$message="Product Form",$id=0])--}}
 
     @push("style")
@@ -182,7 +181,15 @@
                  VueName = new Vue({
                     el: "#stock",
                     data: () => ({
-                        options: [],
+                        load: false,
+                        options: [@foreach($products as $product) {
+                            product_id: "{{$product->id}}",
+                            text: "{{$product->named["name"]}}",
+                            vat_id: "{{$product->vat_rate}}",
+                            price: "{{$product->list_price}}",
+                            unit_id: "{{$product->unit_id}}"
+                        }, @endforeach],
+                        options_company: [],
                         money: {
                             decimal: ',',
                             thousands: '.',
@@ -200,55 +207,115 @@
                                 {
                                     id: 0,
                                     product_id: "",
-                                    quantity: 1,
+                                    quantity: "1,00",
                                     unit_id: 1,
+                                    tetra: "",
                                 },
                                 @endif
                             ],
-                        },
+                        }
                     }),
 
                     mounted: function () {
+
                         money_per();
+                        money_clear();
                         @if($form_type == "update")
 
                             this.form.company_id = {
                             id: '{{$stock->company["id"]}}',
                             text: '{{$stock->company["company_name"]}}'
                         };
+
                         @foreach($stock->items as $item)
                             this.form.items.push({
                             id: "{{$item->id}}",
-                            product_id: {value: "{{$item->product_id}}", label: "{{$item->product["name"]}}"},
+                            product_id: "{{$item->product_id}}",
                             quantity: "{{$item->quantity}}",
+                            tetra: {id: '{{$item->product_id}}', product_id: '{{$item->product_id}}',text: "{{$item->product->named["name"]}}"},
                             unit_id: "{{$item->unit_id}}"
                         });
                         @endforeach
                         @endif
 
                         datePicker();
+
+                        window.addEventListener("keypress", function (e) {
+                            if (e.keyCode == 43) {
+                                VueName.addRow();
+                            } else if (e.keyCode == 45) {
+                                VueName.removeRow(VueName.items.length - 1);
+
+                                console.log(VueName.items.lenght)
+                            }
+
+                        }.bind(this));
                     },
+                     watch: {
+                         items: {
+                             handler(newVal, oldVal) {
+
+                                 let changedIndex;
+                                 newVal.forEach((item, idx) => {
+                                     console.log("data");
+                                     item.quantity = (money_clear(newVal[idx].quantity)).toLocaleString('tr-TR', {
+                                         minimumFractionDigits: 0,
+                                         maximumFractionDigits: 2
+                                     });
+
+                                     console.log(item.quantity, idx)
+
+                                 })
+                             },
+                             deep: true
+
+                         }
+                     },
                     methods: {
+                        consoleCallback: function (val, tag) {
+
+                            if (this.load == true) {
+
+
+                                this.form.items[val].unit_id = tag.unit_id
+                                if (tag.product_id != 'undefined' && tag.product_id != '' && tag.product_id != null) {
+
+
+                                }
+                            } else {
+                                console.log("ilk hamle çalışmadı")
+                                this.load = true;
+                            }
+                        },
                         addRow: function () {
-                            this.form.items.push({
+                            this.items.push({
                                 id: 0,
                                 product_id: "",
-                                quantity: 1,
+                                quantity: "1,00",
                                 unit_id: 1
                             });
                         },
                         removeRow: function (index) {
                             if (index != 0) {
-                                this.form.items.splice(index, 1);
+                                this.items.splice(index, 1);
+                            }
+                        },
+                        isNumber: function (evt) {
+                            evt = (evt) ? evt : window.event;
+                            var charCode = (evt.which) ? evt.which : evt.keyCode;
+                            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode != 8 && charCode != 44 && charCode != 46) {
+                                evt.preventDefault();
+                            } else {
+                                return true;
                             }
                         },
                         onSearch(search, loading) {
                             loading(true);
                             this.search(loading, search, this);
                         }, search: _.debounce(function (loading, search, vm) {
-                            axios.get("{{route("company.source",aid())}}?q=" + escape(search)).then(function (res) {
-                                Companies.form.company_name = search;
-                                vm.options = res.data;
+                            axios.get("{{route("company.source",aid())}}?q=" + search).then(function (res) {
+                                Companies.company_name = search;
+                                vm.options_company = res.data;
 
                                 loading(false)
                             });
@@ -259,6 +326,7 @@
                             this.$validator.validate().then((result) => {
                                 if (result) {
                                     fullLoading();
+
                                     axios.post('{{route("stock.movements.store",[aid(),$form_type == "update" ? $stock->id:0])}}', this.form)
                                         .then(function (response) {
                                             if (response.data.message) {

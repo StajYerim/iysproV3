@@ -472,7 +472,7 @@
 
                                         if (res.data.message == "success") {
                                             VueName.remaining = res.data.remaining;
-                                            VueName.statement();
+//                                            VueName.statement();
                                             VuePayment.payment.form.amount = res.data.remaining;
                                             VueName.collect_items.push({
                                                 type:"payment",
@@ -506,7 +506,7 @@
 
                                             $("#transaction_payment").modal("hide");
                                             VueName.remaining = res.data.remaining;
-                                            VueName.statement();
+//                                            VueName.statement();
                                             VuePayment.loading = false;
 
                                             notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
@@ -548,7 +548,7 @@
                                         VuePayment.loading = false;
 
                                         notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
-
+                                        location.reload()
 
                                     }
                                 })
@@ -595,46 +595,6 @@
                             }
                         }
 
-
-
-
-
-
-
-
-
-
-
-                        {{--if(amount>!0){--}}
-
-                        {{--this.cheque_payment.cheque_send_btn = true;--}}
-
-                        {{--this.loading = true;--}}
-
-
-                        {{--axios.post("{{route("finance.accounts.transaction_company",aid())}}", this.cheque_payment.form).then(function (res) {--}}
-
-                        {{--if (res.data.message == "success") {--}}
-                        {{--VueName.remaining = res.data.remaining;--}}
-                        {{--VuePayment.payment.form.amount = res.data.remaining;--}}
-                        {{--VuePayment.loading = false;--}}
-                        {{--$("#transaction_payment").modal("hide");--}}
-                        {{--notification("Success", "Çek Alım işlemi başarıyla gerçekleşti.", "success");--}}
-
-                        {{--}--}}
-
-
-                        {{--}).catch(function (e) {--}}
-                        {{--console.log(e)--}}
-                        {{--VuePayment.loading = false;--}}
-                        {{--VuePayment.cheque_payment.cheque_send_btn = false;--}}
-                        {{--});--}}
-
-                        {{--}else {--}}
-
-
-
-                        {{--}--}}
 
                     }
                 }

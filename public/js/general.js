@@ -159,7 +159,7 @@ function HarfleriBuyut() {
     })(jQuery);
 }
 
-// HarfleriBuyut();
+HarfleriBuyut();
 
 
 

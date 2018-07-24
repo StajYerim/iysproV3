@@ -3,8 +3,12 @@
 namespace App\Model\Stock\Product;
 
 
+use App\Model\Purchases\PurchaseOrderItems;
+use App\Model\Sales\SalesOrders;
+use App\Model\Sales\SalesOrderItems;
 use App\Model\Stock\Stock;
 use App\Model\Stock\StockItems;
+use App\Units;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -109,13 +113,51 @@ class Product extends Model
     }
 
     public function stock_receipts(){
-        return $this->hasManyThrough(StockItems::class,Stock::class,"id","stock_id","product_id","id");
+        return $this->belongsToMany(Stock::class,"stock_items");
+    }
+
+    public function porder(){
+        return $this->hasMany(PurchaseOrderItems::class,"product_id","id");
     }
 
     public function getStockCountAttribute(){
-       return $out = $this->stock_receipts();
-        $in = $this->stock_receipts()->where("status",1)->items()->sum("quantity");
 
+        //Porder
+            $porder_in = $this->porder()->sum("quantity");
+        //Stock Hareketleri
+         $in = $this->stock_receipts()->where("status", "=",0)->sum("quantity");
+         $out = $this->stock_receipts()->where("status", "=",1)->sum("quantity");
+
+      return  ($in-$out)+$porder_in;
+    }
+
+    public function order_items()
+    {
+        return $this->hasMany(SalesOrderItems::class, "product_id",  "id");
+    }
+
+    public function waybills()
+    {
+        $this->hasMany(StockItems::class, "product_id", "id");
+    }
+
+    public function getOrderCountAttribute(){
+        $toplam_sipariler = $items = $this->order_items;
+        $order = $items = $this->order_items()->sum("quantity");
+
+        $waybill = 0;
+        foreach ($toplam_sipariler as $sip) {
+
+            $waybill += $sip->waybill_item["quantity"];
+        }
+
+        return $order-$waybill;
 
     }
+
+    public function unit(){
+        return $this->hasOne(Units::class,"id","unit_id");
+    }
+
+
 }

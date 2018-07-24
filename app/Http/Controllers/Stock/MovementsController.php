@@ -25,7 +25,7 @@ class MovementsController extends Controller
     public function index_list()
     {
 
-        $stocks = Stock::with("items")->select("stock_receipts.*")->where("account_id", aid());
+        $stocks = Stock::select("stock_receipts.*")->where("account_id", aid());
 
         return Datatables::of($stocks)
             ->setRowAttr([
@@ -44,9 +44,9 @@ class MovementsController extends Controller
     {
         $stock = $type != "new" ? Stock::find($id) : "";
         $form_type = $type;
-        $action = $process != "in" ? "0" : "1";
+        $action = $process == "in" ? "0" : "1";
         $units = Account::find(aid())->units;
-        $products = Product::All();
+        $products = Product::where("account_id",aid())->get();
         return view("modules.stock.movements.form", compact("form_type", "stock", "action", "units", "products"));
 
     }
@@ -60,6 +60,7 @@ class MovementsController extends Controller
 
     public function store($aid, $id, Request $request)
     {
+
 
         $stock = Stock::updateOrCreate(["id" => $id],
             [
@@ -81,7 +82,7 @@ class MovementsController extends Controller
           $ret =  $stock->items()->updateOrCreate(
                 ["id" => $item["id"]]
                 , [
-                    'product_id' =>  $item["product_id"]["value"],
+                    'product_id' =>  $item["tetra"]["product_id"],
                     'unit_id' => $item["unit_id"],
                     'quantity' => $item["quantity"]
 

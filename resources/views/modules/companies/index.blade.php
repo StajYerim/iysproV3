@@ -36,14 +36,14 @@
 
                             </div>
 
-                            <a href="{{route($type=="supplier"?"purchases.companies.form":"sales.companies.form"."",[aid(),$type,"0","new"])}}" style="margin-top: 8px;margin-right: 4px;float: right;" class="btn btn-success">{{ trans("word.new") }} {{strtoupper($type)}}</a>
+                            <a href="{{route($type=="supplier" ? "purchases.companies.form":"sales.companies.form"."",[aid(),$type,"0","new"])}}" style="margin-top: 8px;margin-right: 4px;float: right;" class="btn btn-success">{{ trans("word.new") }} {{$type == "customer" ? trans("word.customer"):trans("word.supplier")}}</a>
 
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
                                     <th>{{ strtoupper($type)}}</th>
-                                    <th>{{trans("word   .balance")}}</th>
+                                    <th>{{trans("word.balance")}}</th>
                                 </tr>
                                 </thead>
 

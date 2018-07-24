@@ -34,7 +34,7 @@
                                                 {{--</a>--}}
                                                 <button type="button" @click="formSend" href="#"
                                                         class="btn btn-success btn-lg ">
-                                                    {{trans("general.save")}}
+                                                    {{trans("word.save")}}
                                                 </button>
                                             </div>
                                             <div class="col-md-6 col-sm-6">
@@ -80,7 +80,7 @@
 
                                     <fieldset>
                                         <div class="form-group" v-bind:class="{'has-error':errors.has('form.date')}">
-                                            <label class="col-md-3 control-label">{{trans("sentence.offer_date")}}</label>
+                                            <label class="col-md-3 control-label">{{trans("sentence.order_date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask @change="setDate(form.date)" :mask="['##.##.####']" type="text" name="form.date"
@@ -203,7 +203,7 @@
                             loading(true);
                             this.search(loading, search, this);
                         }, search: _.debounce(function (loading, search, vm) {
-                            axios.get("{{route("company.source",aid())}}?q=" + escape(search)).then(function (res) {
+                            axios.get("{{route("company.source",aid())}}?q=" + search).then(function (res) {
                                 Companies.form.company_name = search;
                                 vm.options = res.data;
                                 loading(false)
