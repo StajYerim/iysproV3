@@ -36,9 +36,9 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>Düzenleyen/{{trans("general.location")}}</th>
-                                    <th>{{trans("general.expiry")}} {{trans("general.date")}}/{{trans("general.type")}}</th>
-                                    <th>{{trans("general.sum")}}</th>
+                                    <th>{{trans("word.editor")}}/{{trans("word.location")}}</th>
+                                    <th>{{trans("sentence.expiry_date")}}/{{trans("word.type")}}</th>
+                                    <th>{{trans("word.sum")}}</th>
                                 </tr>
                                 </thead>
 

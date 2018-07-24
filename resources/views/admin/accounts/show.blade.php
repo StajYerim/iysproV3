@@ -28,7 +28,7 @@
                     -->
                     <header>
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                        <h2>Account Info</h2>
+                        <h2>{{ trans("sentence.account_informations") }}</h2>
 
                     </header>
 
@@ -44,12 +44,12 @@
 
                         <!-- widget content -->
                         <div class="widget-body">
-                            COMMERCIAL TITLE : {{ $company->company_name }}<br>
-                            SECTOR : {{ $company->sector->name }}<br>
-                            FULL NAME : {{ $company->owner->name }}<br>
-                            E-MAIL : {{ $company->owner->email }}<br>
-                            PHONE : {{ $company->owner->mobile }}<br>
-                            EXPIRY : {{ $company->expiry_date->format('d.m.Y') }}
+                            {{ trans("sentence.commercial_title") }} : {{ $company->company_name }}<br>
+                            {{ trans("word.sector") }} : {{ $company->sector->name }}<br>
+                            {{ trans("sentence.name_and_surname") }} : {{ $company->owner->name }}<br>
+                            {{ trans("word.email") }} : {{ $company->owner->email }}<br>
+                            {{ trans("word.mobile_number") }} : {{ $company->owner->mobile }}<br>
+                            {{ trans("sentence.expiry_date") }} : {{ $company->expiry_date->format('d.m.Y') }}
                         </div>
                         <!-- end widget content -->
 
@@ -71,7 +71,7 @@
 
                     <header>
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                        <h2>Moduler List </h2>
+                        <h2>{{ trans("sentence.moduller_list") }} </h2>
 
                     </header>
 
@@ -95,8 +95,8 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Modul Name</th>
-                                            <th>Status</th>
+                                            <th>{{ trans("sentence.modul_name") }}</th>
+                                            <th>{{ trans("word.status") }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -154,7 +154,7 @@
                     -->
                     <header>
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                        <h2>Account Users</h2>
+                        <h2>{{ trans("sentence.account_users") }}</h2>
 
                     </header>
 
@@ -178,9 +178,9 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th><i class="fa fa-building"></i> Name</th>
-                                        <th><i class="fa fa-calendar"></i> Email</th>
-                                        <th><i class="glyphicon glyphicon-send"></i> Status</th>
+                                        <th><i class="fa fa-building"></i> {{ trans("word.name") }}</th>
+                                        <th><i class="fa fa-calendar"></i> {{ trans("word.email") }}</th>
+                                        <th><i class="glyphicon glyphicon-send"></i> {{ trans("word.status") }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>

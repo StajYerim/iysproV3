@@ -5,7 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Admin {{trans("general.dashboard")}}</div>
+                    <div class="card-header">
+                        {{trans("sentence.admin_dashboard")}}
+                    </div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -15,19 +17,19 @@
                         @endif
 
                         <p>
-                            Company Accounts:
+                            {{ trans("sentence.company_accounts") }} :
                             {{ \App\Account::getActiveCountAttribute() }} Active
                             | {{ \App\Account::getExpiredCountAttribute() }} Expired
                         </p>
 
                         <p>
-                            Account Users:
+                            {{ trans("sentence.account_users") }} :
                             {{ \App\User::getPendingCount() }} Pending
                             | {{ \App\User::getActiveCount() }} Active
                             | {{ \App\User::getPassiveCount() }} Passive
                         </p>
 
-                        You are logged in as Admin!
+                        {{ trans("sentence.you_are_logged_in_as_admi") }}
                     </div>
                 </div>
             </div>

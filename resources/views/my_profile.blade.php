@@ -8,10 +8,10 @@
             </div>
 
             <div class="card-body">
-                {{trans("general.name")}} {{trans("general.surname")}} : {{ $user->name }}<br>
-                {{trans("general.email")}} : {{ $user->email }}<br>
-                {{trans("general.password")}} : ********<br>
-                {{trans("general.mobile")}} : {{ $user->mobile }}
+                {{trans("sentence.name_and_surname")} : {{ $user->name }}<br>
+                {{trans("word.email")}} : {{ $user->email }}<br>
+                {{trans("word.password")}} : ********<br>
+                {{trans("word.mobile")}} : {{ $user->mobile }}
             </div>
         </div>
     </div>

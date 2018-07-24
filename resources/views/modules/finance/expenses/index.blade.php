@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="pull-right new-button"  onclick="update(0)">
-                                <span class="btn btn-success">{{trans("general.expense")}} {{trans("general.add")}}</span>
+                                <span class="btn btn-success">{{trans("sentence.add_expense")}}</span>
 
                             </div>
 
@@ -44,11 +44,11 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{trans("general.name")}}</th>
-                                    <th>{{trans("general.description")}}</th>
-                                    <th>{{trans("general.account")}}</th>
-                                    <th>{{trans("general.date")}}</th>
-                                    <th>{{trans("general.action")}}</th>
+                                    <th>{{trans("word.name")}}</th>
+                                    <th>{{trans("word.description")}}</th>
+                                    <th>{{trans("word.account")}}</th>
+                                    <th>{{trans("word.date")}}</th>
+                                    <th>{{trans("word.action")}}</th>
                                 </tr>
                                 </thead>
 
@@ -68,7 +68,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        {{trans("general.expenses")}}
+                        {{trans("word.expenses")}}
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -77,7 +77,7 @@
                     <div class="modal-body">
                                 <fieldset>
                                     <div class="form-group" :class="{'has-error': errors.has('form.name') }">
-                                        <label class="col-md-3 control-label">{{trans("general.expense")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("word.expense")}}</label>
                                         <div class="col-md-6 ">
                                             <div >
                                                 <input  v-validate="'required'" type="text" class="form-control "
@@ -88,7 +88,7 @@
                                 </fieldset>
                             <fieldset>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{trans("general.date")}}</label>
+                                    <label class="col-md-3 control-label">{{trans("word.date")}}</label>
                                     <div class="col-md-6 ">
                                         <div>
                                             <input type="text" class="form-control datepicker"
@@ -100,7 +100,7 @@
 
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("general.description")}} </label>
+                                        <label class="col-md-3 control-label">{{trans("word.description")}} </label>
                                         <div class="col-md-6">
                                            <textarea class="form-control" v-model="form.description" rows="2"> </textarea>
                                         </div>
@@ -108,7 +108,7 @@
                                 </fieldset>
                             <fieldset>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{trans("general.expense")}} {{trans("general.type")}}</label>
+                                    <label class="col-md-3 control-label">{{trans("sentence.expense_type")}}</label>
                                     <div class="col-md-6">
                                         <div>
                                             <vue-tags-input
@@ -124,7 +124,7 @@
 
                             <fieldset>
                                 <div class="form-group" :class="{'has-error': errors.has('form.amount') }">
-                                    <label class="col-md-3 control-label">{{trans("general.amount")}}</label>
+                                    <label class="col-md-3 control-label">{{trans("word.amount")}}</label>
                                     <div class="col-md-6 ">
                                         <div >
                                             <money v-bind="money"  v-validate="'required'" class="form-control "
@@ -136,7 +136,7 @@
 
                             <fieldset>
                                 <div class="form-group" :class="{'has-error': errors.has('form.bank_account_id') }">
-                                    <label class="col-md-3 control-label">{{trans("general.paid")}} {{trans("general.account")}}</label>
+                                    <label class="col-md-3 control-label">{{trans("sentence.paid_account")}}</label>
                                     <div class="col-md-6 ">
                                         <div >
                                            <select class="form-control"  v-validate="'required'" name="form.bank_account_id" v-model="form.bank_account_id">
@@ -150,8 +150,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans("general.close")}}</button>
-                        <button type="submit" class="btn btn-primary">{{trans("general.save")}} </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans("word.close")}}</button>
+                        <button type="submit" class="btn btn-primary">{{trans("word.save")}} </button>
                     </div>
                     </form>
                 </div>

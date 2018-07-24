@@ -16,7 +16,7 @@
                         <div class="widget-body no-padding">
                             <!-- search mobile button (this is hidden till mobile view port) -->
                             <div id="search-mobile" class="btn-header transparent pull-right">
-                                <span> <a href="javascript:void(0)" title="Search"><i
+                                <span> <a href="javascript:void(0)" title="{{ trans("word.search") }}"><i
                                                 class="fa fa-search"></i></a> </span>
                             </div>
 
@@ -25,7 +25,7 @@
                                 <button type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
-                                <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i
+                                <a href="javascript:void(0);" id="cancel-search-js" title="{{ trans("sentence.cancel_search") }}"><i
                                             class="fa fa-times"></i></a>
                                 <button type="submit">
                                     <i class="fa fa-search"></i>
@@ -37,15 +37,15 @@
 
 
                                 <span class="btn btn-success  dropdown-toggle" data-toggle="dropdown"
-                                      aria-expanded="false">{{trans("general.new")}} {{trans("general.action")}}
+                                      aria-expanded="false">{{trans("sentence.new_action")}}
             <i class="fa fa-angle-down"></i></span>
                                 <!-- Suggestion: populate this list with fetch and push technique -->
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{route("stock.movements.form",[aid(),0,"new","in"])}}">IN STOCK </a>
+                                        <a href="{{route("stock.movements.form",[aid(),0,"new","in"])}}">{{ trans("sentence.in_stock") }} </a>
                                     </li>
                                     <li>
-                                        <a href="{{route("stock.movements.form",[aid(),0,"new","out"])}}">OUT STOCK </a>
+                                        <a href="{{route("stock.movements.form",[aid(),0,"new","out"])}}">{{ trans("sentence.out_stock") }} </a>
                                     </li>
                                 </ul>
 

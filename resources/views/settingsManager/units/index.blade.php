@@ -19,10 +19,10 @@
                             <table class="table  table-hover table-condensed table-striped">
                                 <thead class="fixed-title">
                                 <tr>
-                                    <th>{{trans("general.widget")}} {{trans("general.name")}}</th>
-                                    <th>{{trans("general.short")}}</th>
-                                    <th>{{trans("general.group")}}</th>
-                                    <th>{{trans("general.show")}}</th>
+                                    <th>{{trans("sentence.widget_name")}}</th>
+                                    <th>{{trans("word.short")}}</th>
+                                    <th>{{trans("word.group")}}</th>
+                                    <th>{{trans("word.show")}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

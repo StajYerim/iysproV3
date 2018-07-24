@@ -16,23 +16,23 @@
                             <li>
                                 <a href="{{route("sales.offers.form",[aid(),$offer->id,"update"])}}"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
-                                    {{trans("general.edit")}}</a>
+                                    {{trans("word.edit")}}</a>
                             </li>
                             <li>
                                 <a href="{{route("sales.offers.form",[aid(),$offer->id,"copy"])}}"><i class="fa fa-copy"
                                                                                                       aria-hidden="true"></i>
-                                    KOPYASINI OLUŞTUR</a>
+                                    {{trans("sentence.create_copy")}}</a>
                             </li>
                             <li>
                                 <a href="{{route("sales.orders.form",[aid(),$offer->id,"offers"])}}"><i
                                             class="fa fa-reply " aria-hidden="true"></i>
-                                    SİPARİŞE DÖNÜŞTÜR</a>
+                                    {{trans("sentence.convert_to_order")}}</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
-                                                                                              aria-hidden="true"></i>
-                                    {{trans("general.delete")}}</a>
+                                <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    {{trans("word.delete")}}
+                                </a>
                             </li>
 
                         </ul>
@@ -40,10 +40,10 @@
                     </div>
                     <div class="btn-group">
                         <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
-                                    class="fa fa-print"></span> {{trans("general.print")}} <span class="caret"></span> </a>
+                                    class="fa fa-print"></span> {{trans("word.print")}} <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> TEKLİFİ YAZDIR</a>
+                                <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.print_offer")}}</a>
                                 <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
                                    @foreach($langs as $lang)
                                     <li><a tabindex="-1" target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url",$lang->lang_code])}}"> <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
@@ -51,7 +51,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="test" tabindex="-1" href="#">   <i class="fa fa-print" aria-hidden="true"></i> TEKLİFİ İNDİR </a>
+                                <a class="test" tabindex="-1" href="#">   <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.download_offer")}} </a>
                                 <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
                                     @foreach($langs as $lang)
                                         <li><a tabindex="-1" target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url",$lang->lang_code])}}" > <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
@@ -64,7 +64,7 @@
                     </div>
 
                     <a href="#!" data-toggle="modal" data-target="#shareModal" class="btn btn-default"><i
-                                class="fa fa-envelope"></i> {{trans("general.share")}}</a>
+                                class="fa fa-envelope"></i> {{trans("word.share")}}</a>
 
                 </div>
 
@@ -100,11 +100,11 @@
 
                                             <tbody>
                                             <tr>
-                                                <th width="33%">{{trans("general.service")}} / {{trans("general.product")}}</th>
-                                                <th width="14%">{{trans("general.quantitu")}}</th>
-                                                <th width="10%" style="text-align:right">{{trans("general.unit")}} F.</th>
-                                                <th width="10%" style="text-align:right">KDV</th>
-                                                <th width="10%" style="text-align:right">{{trans("general.total")}}</th>
+                                                <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
+                                                <th width="14%">{{trans("word.quantitu")}}</th>
+                                                <th width="10%" style="text-align:right">{{trans("word.unit")}} F.</th>
+                                                <th width="10%" style="text-align:right">{{trans("word.vat")}}</th>
+                                                <th width="10%" style="text-align:right">{{trans("word.total")}}</th>
                                             </tr>
 
                                             </tbody>
@@ -136,7 +136,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">{{trans("general.subtotal")}}</div>
+                                                        <div class="bottom-info">{{trans("sentence.sub_total")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info">{{$offer->sub_total}} <i
@@ -149,7 +149,7 @@
                                                     v-if="vato.total!=0">
 
                                                     <td style="border-top: 0px;">
-                                                        <div class="bottom-info" style="font-size: 11px" >{{trans("general.total")}} KDV @{{
+                                                        <div class="bottom-info" style="font-size: 11px" >{{trans("sentence.total_vat")}} @{{
                                                             vato.name }}
                                                         </div>
                                                     </td>
@@ -161,7 +161,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">{{trans("general.total")}} KDV</div>
+                                                        <div class="bottom-info">{{trans("sentence.total_vat")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info">{{$offer->vat_total}} <i
@@ -170,7 +170,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">{{trans("general.general")}} {{trans("general.total")}}</div>
+                                                        <div class="bottom-info">{{trans("sentence.general_total")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info"
@@ -219,7 +219,7 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">{{trans("general.offer")}} {{trans("general.amount")}}<span class="pull-right"
+                                        <div class="bottom-info">{{trans("sentence.offer_amount")}}<span class="pull-right"
                                                                                      style="font-size:15px;color:#2AC!important">{{$offer->grand_total}}
                                                 <i class="fa fa-{{$offer->currency}}"></i></span></div>
                                     </div>
@@ -243,7 +243,7 @@
                                 <div class="row">
                                     @if($offer->orders->count() >0)
                                     <div class="col-sm-12">
-                                        TEKLİFTEN OLUŞTURULAN SİPARİŞLER
+                                        {{trans("sentence.orders_created_from_offer")}}
                                         <br>
                                         @foreach($offer->orders as $order)
                                         <a href="{{route("sales.orders.show",[aid(),$order->id])}}"> {{$order->description == null ? "SATIŞ SİPARİŞİ": $order->description}}

@@ -10,28 +10,27 @@
             <div class="col-lg-4 col-sm-4">
                    <span class="pull-right">
                                          <div class="btn-group">
-                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{trans("general.other")}}
-                                {{trans("general.operations")}} <span class="caret"></span> </a>
+                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{trans("sentence.other_transactions")}} <span class="caret"></span> </a>
                             <ul class="dropdown-menu">
                                                                    <li>
                                     <a href="#" data-toggle="modal" data-target="#openStartReceipt"><i
-                                                class="fa fa-plus " aria-hidden="true"></i> {{trans("general.opening")}} {{trans("general.receipt")}} {{trans("general.create")}}</a>
+                                                class="fa fa-plus " aria-hidden="true"></i> {{trans("sentence.create_opening_receipt")}}</a>
                                 </li>
                                                                 <li>
-                                    <a href="#" id="productArchive"><i class="fa fa-archive" aria-hidden="true"></i> {{trans("general.archive")}}</a>
+                                    <a href="#" id="productArchive"><i class="fa fa-archive" aria-hidden="true"></i> {{trans("word.archive")}}</a>
                                     <a href="#" style="display:none" id="productArchiveOut"><i class="fa fa-archive"
-                                                                                               aria-hidden="true"></i> {{trans("general.archive")}} {{trans("general.remove")}}</a>
+                                                                                               aria-hidden="true"></i> {{trans("sentence.remove_archive")}}</a>
                                 </li>
                                 <li>
                                     <a href="#!" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
-                                                                                                   aria-hidden="true"> </i> {{trans("general.delete")}}</a>
+                                                                                                   aria-hidden="true"> </i> {{trans("word.delete")}}</a>
                                 </li>
                             </ul>
                         </div>
 
                             <a class="btn btn-default "
-                               href="{{route("stock.movements.form",[aid(),$stock->id,"update",$stock->status == 0 ? "in":"out"])}}"><i
-                                        class="fa fa-edit"></i> {{trans("general.edit")}}</a>
+                               href="{{route("stock.movements.form",[aid(),$stock->id,"update","in"])}}"><i
+                                        class="fa fa-edit"></i> {{trans("word.edit")}}</a>
 
                         </span>
             </div>
@@ -64,8 +63,8 @@
 
                                         <tbody>
                                         <tr>
-                                            <th width="33%">{{trans("general.service")}} / {{trans("general.product")}}</th>
-                                            <th width="10%">{{trans("general.quantity")}}</th>
+                                            <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
+                                            <th width="10%">{{trans("word.quantity")}}</th>
                                         </tr>
 
                                         </tbody>

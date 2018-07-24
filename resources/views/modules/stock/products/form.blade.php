@@ -16,13 +16,13 @@
                                 <fieldset class="fixed-title">
                                     <div class="form-group" :class="{'has-error': errors.has('form.name') }">
                                         <label class="col-md-3 col-sm-3 control-label"> <span
-                                                    style="vertical-align: -9px;">{{trans('general.product')}} {{trans("general.name") }}</span></label>
+                                                    style="vertical-align: -9px;">{{trans('sentence.product_name')}}</span></label>
                                         <div class="col-md-3 col-sm-4 pull-right">
                                             <a href="{{$form_type == "new" ? route("stock.index",aid()): URL::previous() }}"
-                                               class="btn btn-default btn-lg ">{{trans("general.back")}}
+                                               class="btn btn-default btn-lg ">{{trans("word.back")}}
                                             </a>
                                             <button type="submit" href="#" class="btn btn-success btn-lg ">
-                                                {{trans("general.save")}}
+                                                {{trans("word.save")}}
                                             </button>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
@@ -48,12 +48,12 @@
                                 <fieldset>
                                     <div class="form-group">
 
-                                        <label class="col-md-3 control-label">{{trans("general.barcode")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("word.barcode")}}</label>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" v-model="form.barcode"/>
                                         </div>
 
-                                        <label class="col-md-1 control-label">{{trans("general.code")}}</label>
+                                        <label class="col-md-1 control-label">{{trans("word.code")}}</label>
                                         <div class="col-md-2">
                                             <input type="text" class="form-control" v-model="form.code"/>
                                         </div>
@@ -62,7 +62,7 @@
 
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("general.category")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("word.category")}}</label>
                                         <div class="col-md-3">
                                             <div class="input-group">
 
@@ -82,7 +82,7 @@
                                                                 <div class="input-group-btn">
                                                                     <button class="btn btn-default new_cat_send"
                                                                             type="button">
-                                                                        {{trans("general.new")}}
+                                                                        {{trans("word.new")}}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -99,7 +99,7 @@
                                             </div>
                                         </div>
 
-                                        <label class="col-md-1 control-label">{{trans("general.unit")}}</label>
+                                        <label class="col-md-1 control-label">{{trans("word.unit")}}</label>
                                         <div class="col-md-2">
                                             <select v-model="form.unit_id" style="width:100%" class="select2">
                                                 <optgroup>
@@ -115,8 +115,7 @@
 
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label" style="margin-top: 34px;">{{trans("general.product")}}
-                                            {{trans("general.image")}} </label>
+                                        <label class="col-md-3 control-label" style="margin-top: 34px;">{{trans("word.product_image")}}</label>
                                         <div class="col-md-2">
                                             <div class="upload-preview">
                                                 <img width="156px" height="117px"
@@ -132,14 +131,14 @@
                                                     @endif @else style="display:none" @endif
                                                     @click="onFileDelete"
                                                     class="btn btn-xs btn-danger"><span class="fa fa-trash"></span>
-                                                {{trans("general.image")}} {{trans("general.delete")}}
+                                                {{trans("sentence.remove_image")}}
                                             </button>
                                         </div>
                                     </div>
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("general.stock")}} {{trans("general.track")}}</label>
+                                        <label class="col-md-3 control-label">{{trans("sentence.stock_follow_up")}}</label>
                                         <div class="col-md-9">
                                             <label class="radio radio-inline">
                                                 <input type="radio" class="radiobox" value="1"
@@ -149,7 +148,7 @@
                                             <label class="radio radio-inline">
                                                 <input type="radio" class="radiobox style-3" value="0" checked="checked"
                                                        v-model="form.inventory_tracking">
-                                                <span>{{trans("general.no")}}</span>
+                                                <span>{{trans("word.number")}}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -171,7 +170,7 @@
                                         <div class="col-md-3"></div>
                                         <div class="col-md-2"
                                              v-show="form.type_id === '3' || form.type_id === '1' || form.type_id ==='4'">
-                                            <label> {{trans("general.purchase")}} {{trans("general.price")}}</label>
+                                            <label> {{trans("sentence.purchase_price")}}</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control " value="0,00"
                                                        autocomplete="OFF" v-model.lazy="form.buying_price">
@@ -188,7 +187,7 @@
 
                                         <div class="col-md-2"
                                              v-show="form.type_id === '3' || form.type_id === '2'">
-                                            <label> {{trans("general.sales")}} {{trans("general.price")}}</label>
+                                            <label> {{trans("sentence.sales_price")}}</label>
                                             <div class="input-group">
                                                 <input type="text" v-on:keypress="isNumber" class="form-control" value="0,00"
                                                        autocomplete="OFF" v-model.lazy="form.list_price">
@@ -208,10 +207,10 @@
                                         <div class="col-md-2">
                                             <div class="form-group"
                                                  :class="{'has-error': errors.has('form.vat_rate') }">
-                                                <label> {{trans("general.tax")}}</label>
+                                                <label> {{trans("word.tax")}}</label>
                                                 <select type="text" v-validate="'required'" name="form.vat_rate"
                                                         class="form-control" v-model="form.vat_rate">
-                                                    <option disabled value="">{{trans("general.vat")}} {{trans("general.select")}}</option>
+                                                    <option disabled value="">{{trans("sentence.select_vat")}}</option>
                                                     @foreach(vat_list() as $vat)
                                                         <option value="{{$vat["id"]}}">{{$vat["name"]}}</option>
                                                     @endforeach
