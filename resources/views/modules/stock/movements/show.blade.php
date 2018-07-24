@@ -4,7 +4,7 @@
     <section id="show" v-cloak>
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
-                <h1><i class="fa fa-truck "></i> <span class="semi-bold">Stok Grişi</span></h1>
+                <h1><i class="fa fa-truck "></i> <span class="semi-bold">{{$stock->description == null ? $stock->status == 0 ? "Stok Girişi":"Stock Çıkışı":$stock->description}}</span></h1>
 
             </div>
             <div class="col-lg-4 col-sm-4">
@@ -41,14 +41,14 @@
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-8">
 
                         <div class="well">
 
                             <div class="row">
                                 <div class="col-sm-6" style="font-weight: 400;font-size:15px;"><i
                                             class="fa fa-building-o"></i> <a
-                                            href="{{$stock->company["id" == null ? "#!":route("sales.companies.show",[aid(),$stock->company["id"]])]}}">{{$stock->company["company_name"] == null ? "Belirtilmedi":$stock->company["company_name"]}}</a>
+                                            href="{{$stock->company["id"] == null ? "#!":route("sales.companies.show",[aid(),$stock->company["id"]])}}">{{$stock->company["company_name"] == null ? "Belirtilmedi":$stock->company["company_name"]}}</a>
                                 </div>
                                 <div class="col-sm-4" style="font-weight: 400;font-size:15px;"><i
                                             class="fa fa-calendar"></i> {{$stock->date}}</div>
@@ -56,7 +56,7 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="col-sm-12">
                                 <div class="table-responsive ">
 
                                     <table class="table table-hover">
@@ -69,12 +69,13 @@
 
                                         </tbody>
                                         <tbody>
-                                        @foreach($stock->items as $item)
+
+                                        @foreach($stock->items == "[]" ? $stock->order_items:$stock->items as $item)
                                         <tr>
                                             <td>
                                                 <a href="{{route("stock.product.show",[aid(),$item->product["id"]])}}"> {{$item->product["name"]}}</a>
                                             </td>
-                                            <td>{{$item->quantity}} {{$item->unit}}</td>
+                                            <td>{{$item->quantity}} {{$item->unit["short_name"]}}</td>
                                         </tr>
                                             @endforeach
 
@@ -86,7 +87,17 @@
                         </div>
 
                     </div>
+                    <div class="col-sm-4">
 
+                        <div class="well">
+
+                            <div class="row">
+                               test
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
 
 

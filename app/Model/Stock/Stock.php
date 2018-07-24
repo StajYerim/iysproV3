@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Model\Stock;
+use App\Model\Purchases\PurchaseOrderItems;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,14 @@ class Stock extends Model
         return $this->hasMany("App\Model\Stock\StockItems");
     }
 
+    public function order_items(){
+        if($this->status == 0){
+            return  $this->hasMany(PurchaseOrderItems::class,"id","doc_id");
+        }else{
+//            return  $this->hasMany(PurchaseOrderItems::class,"id","doc_id");
+        }
+    }
+
     public function setDateAttribute($value)
     {
         $this->attributes['date'] = date_convert($value);
@@ -21,9 +30,21 @@ class Stock extends Model
 
     public function getDateAttribute()
     {
-     $explode = explode("-",$this->attributes["date"]);
-     $dt = Carbon::create($explode[0],$explode[1],$explode[2]);
+
+     $dt = Carbon::createFromFormat("Y-m-d H:i:s",$this->attributes["date"]);
      return $dt->format("d.m.Y");
+    }
+
+    public function setDispatchDateAttribute($value)
+    {
+        $this->attributes['dispatch_date'] = date_convert($value);
+    }
+
+    public function getDispatchDateAttribute()
+    {
+
+        $dt = Carbon::createFromFormat("Y-m-d H:i:s",$this->attributes["dispatch_date"]);
+        return $dt->format("d.m.Y");
     }
 
     public function company(){

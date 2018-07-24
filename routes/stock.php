@@ -27,11 +27,12 @@ Route::group(['prefix'=>'{company_id}/stocks','middleware'=>'not.admin'],functio
 
     //Movements
     Route::get("movements","Stock\MovementsController@index")->name("stock.movements.index");
+
+    Route::get("movement/index_list/list","Stock\MovementsController@index_list")->name("stock.movements.index_list");
     Route::get("movements/{id}/show","Stock\MovementsController@show")->name("stock.movements.show");
     Route::get("movements/{id}/{type}/{process}","Stock\MovementsController@form")->name("stock.movements.form");
     Route::post("movements/{id}/store","Stock\MovementsController@store")->name("stock.movements.store");
-    Route::get("movements//index_list","Stock\MovementsController@index_list")->name("stock.movements.index_list");
-    Route::delete("movements/{id}/destroy","Stock\MovementsController@destroy")->name("stock.movements.destroy");
+   Route::delete("movements/{id}/destroy","Stock\MovementsController@destroy")->name("stock.movements.destroy");
 
     //Parasut Sync
     Route::get("/product/{id}/sync","Stock\StockController@sync_with_parasut")->name("stock.product.sync");

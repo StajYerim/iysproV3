@@ -120,7 +120,7 @@
                                             <td>
                                                 <money v-model="item.quantity"
                                                        v-bind="money"
-                                                       class="form-control " :value="1"></money>
+                                                       class="form-control" :value="1"></money>
 
                                             </td>
 
@@ -163,7 +163,7 @@
 
     </section>
 
-    @include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0,$act=$action])
+    @include("components.modals.companies",[$option="supplier",$title="New Company",$type = "new_company",$message="Company Form",$id=0,$act=$action])
     {{--@include("components.modals.products",[$title="New Product",$type = "new_product",$message="Product Form",$id=0])--}}
 
     @push("style")
@@ -216,6 +216,7 @@
                             id: '{{$stock->company["id"]}}',
                             text: '{{$stock->company["company_name"]}}'
                         };
+
                         @foreach($stock->items as $item)
                             this.form.items.push({
                             id: "{{$item->id}}",
@@ -246,7 +247,7 @@
                             loading(true);
                             this.search(loading, search, this);
                         }, search: _.debounce(function (loading, search, vm) {
-                            axios.get("{{route("company.source",aid())}}?q=" + escape(search)).then(function (res) {
+                            axios.get("{{route("company.source",aid())}}?q=" + search).then(function (res) {
                                 Companies.form.company_name = search;
                                 vm.options = res.data;
 

@@ -290,7 +290,7 @@
                         data: "description"
 
                     }, {
-                        data: "bank_item.bank_account.name"
+                        data: "bank.name"
                     },{
                         data: "date"
                     }

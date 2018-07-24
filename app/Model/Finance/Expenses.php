@@ -4,6 +4,7 @@ namespace App\Model\Finance;
 
 
 use App\Tags;
+use App\Model\Finance\BankAccounts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Carbon;
@@ -52,5 +53,10 @@ class Expenses extends Model
     public function bank_item()
     {
         return $this->hasone(BankItems::class,"doc_id","id");
+    }
+
+    public function bank()
+    {
+        return $this->hasone(BankAccounts::class,"id","bank_account_id");
     }
 }

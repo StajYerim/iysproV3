@@ -29,6 +29,11 @@
                                                                                                       aria-hidden="true"></i>
                                     {{trans("sentence.create_copy")}}</a>
                             </li>
+
+                            <li>
+                                <a tabindex="-1" data-toggle="modal" data-target="#transModal" href="#"><i class="fa fa-truck"  aria-hidden="true"></i>
+                                   Sevkiyat Bilgisi Gönder</a>
+                            </li>
                             <li>
                                 <a onclick="$(this).orderReturn()" data-id="0" id="orderReturn" href="#"><i
                                             class="fa fa-reply " aria-hidden="true"></i>
@@ -134,8 +139,6 @@
                                                 <td style="text-align:right"> @{{ item.total }} <i
                                                             class="fa fa-{{$order->currency}}"></i></td>
                                             </tr>
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -788,6 +791,145 @@
             </div>
         </div>
         {{--Fatura Yazdır--}}
+
+        {{--Sevkiyat Bilgisi Gönder--}}
+        <div class="modal fade" data-focus-on="input:first" id="transModal" role="dialog"
+             aria-labelledby="remoteModalLabel1" aria-hidden="true"
+             style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal" aria-hidden="false">
+                            Kapat
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">SEVKİYAT BİLGİSİ </h4>
+                    </div>
+                    <form>
+
+                        <div class="modal-body modal-body-content">
+                            <form id="transferForm">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-3 f-title">NAKLİYE ŞİRKETİ -</label>
+                                            <div class="col-md-8 ">
+                                                <input v-model="trans.form.transfer_company" type='text' class="form-control">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-3 f-title">TAKİP NO (VARSA)</label>
+                                            <div class="col-md-8 ">
+                                                <input v-model="trans.form.transfer_no" type='text' class="form-control">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-3 f-title">MÜŞTERİ MAİLİ</label>
+                                            <div class="col-md-8 ">
+                                                <input v-model="trans.form.customer_mail" type='email' class="form-control">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-3 f-title"></label>
+                                            <div class="col-md-8 ">
+                                                <div class="mail-check">
+                                                    <input v-model="trans.form.mail_check" type="checkbox"> Müşteriye mail gönderilsin mi?
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-top: 8px;">
+                                        <div class="form-group">
+                                            <label class="col-md-3 f-title">NOT</label>
+                                            <div class="col-md-8 ">
+                                                <input v-model="trans.form.not" type='email'  class="form-control">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><br>
+                                <small class="note">Sevkiyatı yapılan ürün/ürünleri seçin</small>
+
+                                <div
+                                        class="table-responsive">
+                                    <table class="table">
+                                        <th>
+                                            <th>KOD</th>
+                                            <th>ÜRÜN</th>
+
+                                            <th>MİKTAR</th>
+                                            <th>BİRİM</th>
+                                            <th>#</th>
+                                        </th>
+                                        <tbody>
+                                        <tr v-for="(item,index) in trans.form.products">
+                                            <td>@{{item.code}}</td>
+                                            <td>@{{item.name}}</td>
+                                            <td>@{{item.qty}} </td>
+                                            <td>@{{item.unit}} </td>
+                                            <td>
+                                                <div class="checkbox"
+                                                     style="margin-top:0px;margin-bottom:0px;">
+                                                    <label>
+                                                        <input  type="checkbox"
+                                                                :key="index" @click="item.selected = !item.selected"
+                                                                checked="checked"
+                                                                class="checkbox style-3">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="pull-right" >
+                                    <button type="button" id="transferButton"  @click="transferAdd" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Ekleniyor..." class="btn btn-success">EKLE</button>
+                                </div>
+                            </form>
+                            <div style="background: #fff; margin: 33px -1px 0px 0px;font-size: 13px;font-weight: 600;"
+                                 class="table-responsive">
+                                <table class="table table-hover">
+
+                                    <tbody>
+                                    <tr v-for="(transfer,index) in trans.transfer_list">
+                                        <td>@{{ transfer.transfer_company }}</td>
+                                        <td>@{{ transfer.transfer_number }}</td>
+                                        <td>
+                                            <button type="button" @click="transferDelete(transfer.id,index)"
+                                                    class="btn btn-danger btn-xs"><span class="fa fa-trash"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{--Sevkiyat Bilgisi Gönder--}}
     </section>
 
     @include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])
@@ -871,10 +1013,10 @@
                             description: "",
                             items: [@foreach($order->no_waybills as $item)
                             {
-                                id: "{{$item["id"]}}",
-                                product: "{{$item["name"]}}",
-                                quantity: "{{$item["quantity"]}}",
-                                unit: "{{$item["unit"]}}",
+                                id: "{{$item->id}}",
+                                product: "{{$item->product->named["name"]}}",
+                                quantity: "{{$item->quantity}}",
+                                unit: "{{$item->unit["short_name"]}}",
                                 selected: true,
                             },
                                 @endforeach ],
@@ -888,9 +1030,69 @@
                             due_date: "{{$order->invoice ? $order->invoice['due_date']:date_tr()}}",
                             clock: "{{$order->invoice ? $order->invoice['clock']:\Carbon\Carbon::now()->format("H:i")}}",
                             description: "{{$order->invoice ? $order->invoice['description']:""}}"
+                        },
+                        trans:{
+                            form: {
+                                transfer_company: "",
+                                transfer_no: "",
+                                mail_check: true,
+                                customer_mail: "{{$order->company->address["email"]}}",
+                                not:"",
+                                products: [],
+                            },
+                            transfer_list: []
                         }
                     },
                     methods: {
+                        transferAdd: function () {
+                            $("#transferButton").button("loading");
+                            $form = this.trans.form;
+                            $this = this;
+                            if (this.trans.form.transfer_company != "") {
+
+
+                                if (this.trans.form.mail_check == true && this.trans.form.customer_mail == "") {
+                                    $("#transferButton").button("reset");
+                                    notification("Hata","Kargo bilgisini mail göndermek istiyorsanız lütfen mail adresini boş bırakmayın.","danger")
+                                } else {
+                                    axios.post("{{route("sales.transfer.add",[aid(),$order->id])}}", $form).then(res => {
+                                        if (res.data != "error") {
+
+                                         resdata=res.data;
+                                            VueName.trans.form.transfer_company = "";
+                                            VueName.trans.form.transfer_no = "";
+                                            VueName.trans.form.not = "";
+                                            $("#transModal").modal("hide");
+                                            notification("Başarılı", "İşleminiz başarıyla tamamlandı.","success")
+                                            $("#transferButton").button("reset");
+                                        }
+
+                                        this.trans.transfer_list.push(res.data)
+                                    })
+                                }
+                            } else {
+                                $("#transferButton").button("reset");
+                                notification("Hata", "Lütfen Sevkiyat bilgisini eksiksiz giriniz.","danger")
+                            }
+                        },
+                        transferList: function () {
+
+                            axios.get("{{route("sales.transfer.list",[aid(),$order->id])}}").then(res => {
+                                VueName.trans.transfer_list = res.data;
+
+                            })
+
+
+                        },
+                        transferDelete: function ($id, $index) {
+
+                            console.log($id, $index)
+                            axios.post("{{route("sales.transfer.delete",aid())}}", {id: $id}).then(res => {
+                                if (res.data != "error") {
+                                    VueName.trans.transfer_list.splice($index, 1);
+                                }
+                            })
+                        },
                         deleteInvoice: function ($id) {
                             swal({
                                 title: "Fatura Silme İşlemini Onayla!",
@@ -934,7 +1136,6 @@
                             })
                         },
                         waybill_print: function ($id) {
-
                             $("#WaybillButton").button("loading");
                             axios.post("{{route("sales.waybill.add",aid())}}", this.waybill).then(res => {
 
@@ -991,7 +1192,6 @@
                             }
 
                         },
-
                         delete_data: function ($id) {
                             fullLoading();
                             axios.delete('{{route("sales.orders.destroy",[aid(),$order->id])}}')
@@ -1085,6 +1285,21 @@
                     },
                     mounted: function () {
                         datePicker();
+
+                        this.transferList();
+
+                        @foreach($order->items as $item)
+                            this.trans.form.products.push({
+                            id: "{{$item->id}}",
+                            code: '{{$item->product["code"]}}',
+                            name: '{{$item->product->named["name"]}}',
+                            qty: '{{$item->quantity}}',
+                            unit: '{{$item->unit["shorname"]}}',
+                            selected:true,
+                        });
+                        @endforeach
+
+
                         $('#clockpicker').clockpicker({
                             placement: 'top',
                             donetext: 'Done'
@@ -1200,6 +1415,29 @@
                                 }
                             }
                         });
+
+
+                        // Vade tarihi için gün eklemeleri
+                        $("#day7").click(function () {
+                            VueName.invoice.due_date = tariheGunEkle(VueName.invoice.date, 7);
+                        });
+
+                        $("#day14").click(function () {
+                            VueName.invoice.due_date = tariheGunEkle(VueName.invoice.date, 14);
+                        });
+
+                        $("#day30").click(function () {
+                            VueName.invoice.due_date = tariheGunEkle(VueName.invoice.date, 30);
+                        });
+
+                        $("#day60").click(function () {
+                            VueName.invoice.due_date = tariheGunEkle(VueName.invoice.date, 60);
+                        });
+
+                        $("#today").click(function () {
+                            VueName.invoice.due_date = VueName.invoice.date;
+                        });
+
                     }
                 });
             });

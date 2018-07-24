@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>{{$waybill->order->company["company_name"]}} </title>
+    <title>{{$waybill->company["company_name"]}} </title>
     <style>
         body
         {
@@ -22,9 +22,9 @@
         <tr>
             <td width="300px">
                 <div id="CompanyDetails">
-                    <div>{{$waybill->order->company["company_name"]}}</div>
-                    <div>{{$waybill->order->company->addresss }}</div>
-                    <div>{{$waybill->order->company->town}} / {{$waybill->order->company->city}}</div>
+                    <div>{{$waybill->company["company_name"]}}</div>
+                    <div>{{$waybill->company->addresss }}</div>
+                    <div>{{$waybill->company->town}} / {{$waybill->company->city}}</div>
                 </div>
 
             </td>
@@ -37,14 +37,14 @@
         <tr>
             <td width="330px">
                 <div id="CompanyTaxDetails">
-                    {{$waybill->order->company["tax_id"]}} |
-                    {{$waybill->order->company["tax_office"]}}
+                    {{$waybill->company["tax_id"]}} |
+                    {{$waybill->company["tax_office"]}}
                 </div>
 
             </td>
             <td>
                 <div>
-                    <div style="height:40px">{{$waybill->edit_date}}</div>
+                    <div style="height:40px">{{$waybill->date}}</div>
                     <div style="height:30px"></div>
                 </div>
 
@@ -66,9 +66,9 @@
         <tbody>
         @foreach($waybill->items as $item)
             <tr>
-                <td width="450px" class="service">{{$item->order_item->product->named["name"]}}</td>
-                <td width="180px"  align="right"><span style="margin-right:-5px;">{{$item->order_item["quantity"]}}</span></td>
-                <td width="90px"> <span >&nbsp;&nbsp; {{$item->order_item->product->unit["short_name"]}}</span></td>
+                <td width="450px" class="service">{{$item->product->named["name"]}}</td>
+                <td width="180px"  align="right"><span style="margin-right:-5px;">{{$item->quantity}}</span></td>
+                <td width="90px"> <span >&nbsp;&nbsp; {{$item->product->unit["short_name"]}}</span></td>
             </tr>
         @endforeach
 
