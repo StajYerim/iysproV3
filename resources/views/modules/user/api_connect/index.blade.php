@@ -23,7 +23,7 @@
 
                                 <fieldset>
                                     <legend>
-                                        N11 API {{trans("general.informations")}}
+                                        N11 {{trans("sentence.api_informations")}}
                                     </legend>
 
                                 </fieldset>
@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-12 ">
-                                                <label class="control-label">API {{trans("general.key")}}</label>
+                                                <label class="control-label">API {{trans("sentence.api_key")}}</label>
                                                 <input type="text" class="form-control" v-model="n11_form.api_key">
 
                                             </div>
@@ -44,7 +44,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-12 ">
-                                                <label class="control-label">API {{trans("general.password")}}</label>
+                                                <label class="control-label">API {{trans("sentence.api_password")}}</label>
                                                 <input type="text" class="form-control" v-model="n11_form.api_password" >
 
                                             </div>
@@ -57,7 +57,7 @@
                                         <div class="col-md-12">
                                             <button class="btn btn-default" @click="n11_form_send" type="button">
                                                 <i class="fa fa-eye"></i>
-                                                {{trans("general.save")}}
+                                                {{trans("word.save")}}
                                             </button>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
 
                                 <fieldset>
                                     <legend>
-                                        PARAŞÜT APİ {{trans("general.informations")}}
+                                        PARAŞÜT {{trans("sentence.api_informations")}}
                                     </legend>
 
                                 </fieldset>
@@ -136,7 +136,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6 ">
-                                            <label class="control-label">{{trans("general.user")}} {{trans("general.name")}}</label>
+                                            <label class="control-label">{{trans("sentence.user_name")}}</label>
                                             <input type="password" class="form-control"  v-model="parasut_form.password">
 
                                         </div>
@@ -148,7 +148,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-6 ">
-                                                <label class="control-label">{{trans("general.company")}} ID</label>
+                                                <label class="control-label">{{trans("word.company")}} ID</label>
                                                 <input type="text" class="form-control"  v-model="parasut_form.company_id">
 
                                             </div>
@@ -160,7 +160,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-6 ">
-                                                <label class="control-label">CALLBACK URL</label>
+                                                <label class="control-label">{{trans("sentence.callback_url")}}</label>
                                                 <input type="text" class="form-control"  v-model="parasut_form.callback_url">
 
                                             </div>
@@ -173,7 +173,7 @@
                                         <div class="col-md-12">
                                             <button class="btn btn-default" @click="parasut_form_send" type="button">
                                                 <i class="fa fa-eye"></i>
-                                                {{trans("general.save")}}
+                                                {{trans("word.save")}}
                                             </button>
                                         </div>
                                     </div>

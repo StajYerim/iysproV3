@@ -7,8 +7,11 @@
 
                     <fieldset>
                         <div class="form-group" :class="{'has-error': errors.has('form.company_name') }">
-                            <label class="col-md-3 control-label"> <span
-                                >{{trans('general.customer')}} {{trans("general.name") }}</span></label>
+                            <label class="col-md-3 control-label">
+                                <span>
+                                    {{trans('sentence.customer_name')}}
+                                </span>
+                            </label>
                             <div class="col-md-9">
                                 <input v-validate="'required'"
                                        v-model="form.company_name"
@@ -22,12 +25,14 @@
 
                     <fieldset>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">{{trans("general.short")}} {{trans("general.name")}}</label>
+                            <label class="col-md-3 control-label">{{trans("sentence.short_name")}}</label>
                             <div class="col-md-3">
                                 <input type="text" class="form-control" v-model="form.company_short_name"/>
                             </div>
 
-                            <label class="col-md-3 control-label">Cari Kodu</label>
+                            <label class="col-md-3 control-label">
+                                {{trans('sentence.current_code')}}
+                            </label>
                             <div class="col-md-3">
                                 <input type="text" class="form-control" v-model="form.char_code"/>
                             </div>
@@ -36,7 +41,7 @@
 
                     <fieldset>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">{{trans("Email")}}</label>
+                            <label class="col-md-3 control-label">{{trans("word.email")}}</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" v-model="form.email"/>
                             </div>
@@ -44,13 +49,13 @@
                     </fieldset>
                     <fieldset>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">{{trans("PhoneNumber")}}</label>
+                            <label class="col-md-3 control-label">{{trans("word.phone")}}</label>
                             <div class="col-md-3">
                                 <phone class="form-control" v-model="form.phone_number"></phone>
                             </div>
 
 
-                            <label class="col-md-3 control-label">{{trans("FaxNumber")}}</label>
+                            <label class="col-md-3 control-label">{{trans("word.fax")}}</label>
                             <div class="col-md-3">
                                 <phone class="form-control" v-model="form.fax_number"></phone>
                             </div>
@@ -58,7 +63,7 @@
                     </fieldset>
                     <fieldset>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">{{trans("AddressAbroad")}}</label>
+                            <label class="col-md-3 control-label">{{trans("sentence.abroad_address")}}</label>
                             <div class="col-md-3">
 
                                 <label class="radio radio-inline no-margin">
@@ -66,7 +71,7 @@
                                            class="radiobox "
                                            v-bind:checked="form.address_abroad == 1"
                                     />
-                                    <span>{{trans("yes")}}</span> </label>
+                                    <span>{{trans("word.yes")}}</span> </label>
 
                                 <label class="radio radio-inline">
                                     <input type="radio" v-model="form.address_abroad" value="0"
@@ -74,22 +79,22 @@
                                            class="radiobox"
                                            v-bind:checked="form.address_abroad == 0"
                                     />
-                                    <span>{{trans("no")}}</span> </label>
+                                    <span>{{trans("word.no")}}</span> </label>
                             </div>
-                            <label class="col-md-3 control-label">{{trans("EbillingTaxpayer")}}</label>
+                            <label class="col-md-3 control-label">{{trans("sentence.ebilling_taxpayer")}}</label>
                             <div class=" col-md-3">
 
                                 <label class="radio radio-inline no-margin">
                                     <input type="radio" v-model="form.e_invoice_registered" value="1"
                                            class="radiobox "
                                            v-bind:checked="form.e_invoice_registered == 1">
-                                    <span>{{trans("yes")}}</span> </label>
+                                    <span>{{trans("word.yes")}}</span> </label>
 
                                 <label class="radio radio-inline">
                                     <input type="radio" v-model="form.e_invoice_registered" value="0"
                                            v-bind:checked="form.e_invoice_registered == 0"
                                            class="radiobox "/>
-                                    <span>{{trans("no")}}</span> </label>
+                                    <span>{{trans("word.no")}}</span> </label>
 
 
                             </div>
@@ -97,11 +102,11 @@
                     </fieldset>
                     <fieldset>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">{{trans("Town")}}</label>
+                            <label class="col-md-3 control-label">{{trans("word.district")}}</label>
                             <div class="col-md-3">
                                 <input type="text" class="form-control" v-model="form.town" id="county"/>
                             </div>
-                            <label class="col-md-3 control-label">{{trans("City")}}</label>
+                            <label class="col-md-3 control-label">{{trans("word.province")}}</label>
                             <div class="col-md-3">
                                 <input type="text" class="form-control" v-model="form.city" id="city"/>
                             </div>
@@ -110,7 +115,7 @@
                     </fieldset>
                     <fieldset>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">{{trans("ContactAddress")}}</label>
+                            <label class="col-md-3 control-label">{{trans("sentence.contact_address")}}</label>
                             <div class="col-md-9">
                                 <textarea class="form-control" v-model="form.address" rows="2"></textarea>
                             </div>
@@ -118,32 +123,22 @@
                     </fieldset>
                     <fieldset>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">{{trans("VKN_TCKN")}}</label>
+                            <label class="col-md-3 control-label">{{trans("sentence.tax_office_id")}}</label>
                             <div class="col-md-3">
                                 <input type="text" class="form-control" v-model="form.tax_id"/>
                             </div>
 
-                            <label class="col-md-3 control-label">{{trans("TaxOffice")}}</label>
+                            <label class="col-md-3 control-label">{{trans("sentence.tax_office")}}</label>
                             <div class="col-md-3">
                                 <input type="text" class="form-control" v-model="form.tax_office"/>
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">{{trans("IbanNo")}}</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" v-model="form.iban">
-                            </div>
-                        </div>
-                    </fieldset>
-
-
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans("word.cancel") }}</button>
                     <button type="submit" class="btn btn-success" data-dismiss="modal" v-on:click="formCompanySend">
-                        Save
+                        {{ trans("word.save") }}
                     </button>
 
                 </div>

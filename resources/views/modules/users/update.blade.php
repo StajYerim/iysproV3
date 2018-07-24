@@ -8,14 +8,14 @@
           <div class="widget-body ">
             <fieldset>
               <legend>
-                Profile
+                {{trans("word.profile")}}
               </legend>
             </fieldset>
             <fieldset>
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">{{trans("general.name")}}</label>
+                    <label class="control-label">{{trans("word.name")}}</label>
                     <input type="text" class="form-control" v-model="profile_form.name">
                   </div>
                 </div>
@@ -23,7 +23,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">{{trans("general.email")}}</label>
+                    <label class="control-label">{{trans("word.email")}}</label>
                     <input type="text" class="form-control" v-model="profile_form.email">
                   </div>
                 </div>
@@ -31,7 +31,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">{{trans("general.mobile")}}</label>
+                    <label class="control-label">{{trans("word.mobile")}}</label>
                     <input type="text" class="form-control" v-model="profile_form.mobile">
                   </div>
                 </div>
@@ -41,7 +41,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <button class="btn btn-success" @click="profile_form_send" type="button">
-                    <i class="fa fa-send"></i> {{trans("general.save")}}
+                    <i class="fa fa-send"></i> {{trans("word.save")}}
                   </button>
                 </div>
               </div>
@@ -56,14 +56,14 @@
           <div class="widget-body ">
             <fieldset>
               <legend>
-                {{trans("general.password")}} {{trans("general.update")}}
+                {{trans("sentence.update_password")}}
               </legend>
             </fieldset>
             <fieldset>
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">{{trans("general.old")}} {{trans("general.password")}}</label>
+                    <label class="control-label">{{trans("sentence.old_password")}}</label>
                     <input type="password" class="form-control" v-model="password_form.old_password">
                   </div>
                 </div>
@@ -71,7 +71,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">{{trans("general.new")}} {{trans("general.password")}}</label>
+                    <label class="control-label">{{trans("sentence.new_password")}}</label>
                     <input type="password" class="form-control" v-model="password_form.new_password">
                   </div>
                 </div>
@@ -79,7 +79,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12 col-md-12">
-                    <label class="control-label">{{trans("general.new")}} {{trans("general.password")}} {{trans("general.confirmation")}}</label>
+                    <label class="control-label">{{trans("sentence.new_password_confirmation")}}</label>
                     <input type="password" class="form-control" v-model="password_form.new_password_confirmation">
                   </div>
                 </div>
@@ -89,7 +89,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <button class="btn btn-success" @click="password_form_send" type="button">
-                    <i class="fa fa-send"></i> {{trans("general.save")}}
+                    <i class="fa fa-send"></i> {{trans("word.save")}}
                   </button>
                 </div>
               </div>

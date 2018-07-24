@@ -7,42 +7,42 @@
             <form method="POST" action="{{ route('activation.post', ['code' => $code]) }}"  id="smart-form-register" class="smart-form client-form">
                 @csrf
                 <header>
-                    Activation
+                    {{ trans("word.activation") }}
                 </header>
 
                 <input type="hidden" name="code" value="{{$code}}">
                 <fieldset>
-                    COMMERCIAL TITLE : {{ $user->memberOfAccount["company_name"] }}<br>
+                     : {{ $user->memberOfAccount["company_name"] }}<br>
                     {{--SECTOR : {{ $user->memberOfAccount->sector["name"] }}<br>--}}
                     <br>
-                    FULL NAME : {{ $user->name }}<br>
-                    E-MAIL : {{ $user->email }}<br>
-                    PHONE : {{ $user->mobile }}<br><br>
+                    {{ trans("sentence.name_and_surname") }} : {{ $user->name }}<br>
+                    {{ trans("word.email") }} : {{ $user->email }}<br>
+                    {{ trans("word.mobile") }} : {{ $user->mobile }}<br><br>
 
                     <section>
                         <label class="input"> <i class="icon-append fa fa-lock"></i>
-                            <input id="password" type="password" placeholder="Password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                            <input id="password" type="password" placeholder="{{ trans("word.password") }}" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
                             @if ($errors->has('password'))
                                 <span class="invalid-feedback">
                                 <strong>{{ $errors->first('password') }}</strong>
                             </span>
                             @endif
-                            <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
+                            <b class="tooltip tooltip-bottom-right">{{ trans("sentence.do_not_forget_your_password") }}</b> </label>
                     </section>
 
                     <section>
                         <label class="input"> <i class="icon-append fa fa-lock"></i>
-                            <input id="password-confirm" type="password" placeholder="Password Confirmation" class="form-control" name="password_confirmation" required>
-                            <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
+                            <input id="password-confirm" type="password" placeholder="{{ trans("sentence.password_confirmation") }}" class="form-control" name="password_confirmation" required>
+                            <b class="tooltip tooltip-bottom-right">{{ trans("sentence.do_not_forget_your_password") }}</b> </label>
                     </section>
                 </fieldset>
 
                 <footer>
                     <button type="submit" class="btn btn-primary">
-                        Submit
+                        {{ trans("word.submit") }}
                     </button>
                     <a href="{{route("login")}}" class="btn btn-danger pull-left">
-                        Cancel
+                        {{ trans("word.cancel") }}
                     </a>
                 </footer>
 

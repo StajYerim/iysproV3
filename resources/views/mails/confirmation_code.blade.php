@@ -6,10 +6,10 @@
     </p>
 
     <p>
-        Please follow
+        {{ trans("sentence.please_follow_link_for_email_confirmation") }} <br>
         <a href="{{ route('activation', ['code' => $user->confirmation_code]) }}">
             {{ route('activation', ['code' => $user->confirmation_code]) }}
         </a>
-        link for email confirmation and password setup.
+
     </p>
 @endsection

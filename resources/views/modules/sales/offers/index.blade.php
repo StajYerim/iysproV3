@@ -44,10 +44,10 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{ trans("row.customer") }}</th>
-                                    <th>{{ trans("row.date") }}</th>
-                                    <th>{{ trans("row.total") }}</th>
-                                    <th>{{ trans("row.status") }}</th>
+                                    <th>{{ trans("word.customer") }}</th>
+                                    <th>{{ trans("word.date") }}</th>
+                                    <th>{{ trans("word.total") }}</th>
+                                    <th>{{ trans("word.status") }}</th>
                                 </tr>
                                 </thead>
 

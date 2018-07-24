@@ -701,12 +701,12 @@
                                                     <table class="table table-condensed table-hover">
                                                         <thead>
                                                         <tr>
-                                                            <td colspan="3"><h4>BAĞLI İRSALİYELER</h4></td>
+                                                            <td colspan="3"><h4>{{trans("sentence.bound_waybills")}}</h4></td>
                                                         </tr>
                                                         <tr>
-                                                            <th>İrsaliye No</th>
-                                                            <th>Düzenleme</th>
-                                                            <th>Sevk</th>
+                                                            <th>{{ trans("sentence.waybill_number") }}</th>
+                                                            <th>{{ trans("sentence.edit_date") }}</th>
+                                                            <th>{{ trans("sentence.dispatch_date") }}</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -726,8 +726,7 @@
                                                 @else
                                                     <hr>
                                                     <div class="alert alert-info"><i class="fa fa-info-circle"></i>
-                                                        Faturasını oluşturmak istediğiniz sipariş için irsaliye <b>oluşturulmamıştır.</b>
-                                                        <br>Bu durum fatura kesmenize engel değildir.
+                                                        {{ trans("sentence.not_created_waybill") }}
                                                     </div>
                                                 @endif
 
@@ -750,8 +749,7 @@
                                                 <center>
                                                     <a type="button" class="btn btn-success btn-lg" @click="invoiceAdd"
                                                        data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> İşlem Onaylandı. Yazdırılıyor..."
-                                                       id="InvoiceCheckPrint"><i class="fa fa-check"></i> Onayla ve
-                                                        Yazdır</a></center>
+                                                       id="InvoiceCheckPrint"><i class="fa fa-check"></i> {{ trans("sentence.confirm_and_print") }}</a></center>
                                                 <br>
                                             </div>
                                         </div>
@@ -765,14 +763,14 @@
                                                         <li class="previous disabled">
                                                             <a href="javascript:void(0);"
                                                                class="btn btn-lg btn-default">
-                                                                Geri </a>
+                                                                {{ trans("word.back") }} </a>
                                                         </li>
                                                         <!--<li class="next last">
                                                         <a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
                                                         </li>-->
                                                         <li class="next">
                                                             <a href="javascript:void(0);"
-                                                               class="btn btn-lg txt-color-darken"> İleri </a>
+                                                               class="btn btn-lg txt-color-darken"> {{ trans("word.next") }} </a>
                                                         </li>
                                                     </ul>
                                                 </div>

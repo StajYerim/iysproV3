@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     ×
                 </button>
-                <h4 class="modal-title" id="myModalLabel">{{$title}} {{ trans("general.share") }}</h4>
+                <h4 class="modal-title" id="myModalLabel">{{$title}} {{ trans("word.share") }}</h4>
             </div>
             <div class="modal-body">
 
@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="col-md-3 ">{{ trans("general.receiver") }} *</label>
+                                <label class="col-md-3 ">{{ trans("word.receiver") }} *</label>
                                 <div class="col-md-9">
                                     <input id='magicsuggest' name="shareEmail" type='text' v-model="form.receivers">
                                 </div>
@@ -24,10 +24,10 @@
                         <HR>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="col-md-3 ">KONU *</label>
+                                <label class="col-md-3 ">{{ trans("word.subject") }} *</label>
                                 <div class="col-md-9 ">
                                     <input name="shareThread" class="form-control " v-model="form.thread"
-                                           placeholder="Konu">
+                                           placeholder="{{ trans("word.subject") }} ">
 
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                                </textarea>
                         </div>
                         <div class="col-md-12">
-                            <div class="form-group"><label class="col-md-3 ">Paylaşım Dili</label>
+                            <div class="form-group"><label class="col-md-3 ">{{ trans("sentence.share_language") }}</label>
                                 <div class="col-md-4"><select v-model="form.lang" class="form-control">
                                         @foreach($langs as $lang)
                                             <option value="{{$lang->lang_code}}">{{$lang->name}}</option>
@@ -57,7 +57,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
-                    Vazgeç
+                    {{ trans("word.cancel") }}
                 </button>
                 <button type="button" v-on:click="formSend" :disabled="btnDisable == true"
                         data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Gönderiliyor"

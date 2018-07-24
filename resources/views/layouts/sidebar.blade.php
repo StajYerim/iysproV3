@@ -51,7 +51,7 @@
 
             @empty
                 <li>
-                    <a href="#">Don't use menu item</a>
+                    <a href="#">{{ trans("sentence.do_not_use_menu_item") }}</a>
                 </li>
             @endforelse
 

@@ -23,7 +23,7 @@
 
                                 <fieldset>
                                     <legend>
-                                        N11 API {{trans("general.informations")}}
+                                        N11 API BİLGİLERİ
                                     </legend>
 
                                 </fieldset>

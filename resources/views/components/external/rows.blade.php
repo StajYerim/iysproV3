@@ -152,7 +152,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                                   v-model="item.termin_date">
 
                         <div class="input-group-btn">
-                            <button type="button" placeholder="Termin {{ trans("general.date") }}" class="btn btn-default"
+                            <button type="button" placeholder="Termin {{ trans("word.date") }}" class="btn btn-default"
                                     @click="item.termin_show = false" tabindex="-1">X
                             </button>
                         </div>

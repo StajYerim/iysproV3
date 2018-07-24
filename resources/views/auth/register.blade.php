@@ -7,25 +7,28 @@
             <form method="POST" action="{{ route('register') }}" id="smart-form-register" class="smart-form client-form">
                @csrf
                 <header>
-                    Registration is FREE*
+                    {{ trans("sentence.registration_is_free") }}
                 </header>
 
                 <fieldset>
                     <section>
                         <label class="input"> <i class="icon-append fa fa-building"></i>
-                            <input type="text" name="company_name" placeholder="Commercial title" {{ old('company_name') }} >
+                            <input type="text" name="company_name" placeholder="{{ trans("sentence.commercial_title") }}" {{ old('company_name') }} >
                             @if ($errors->has('company_name'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('company_name') }}</strong>
                                     </span>
                             @endif
-                            <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
+                            <b class="tooltip tooltip-bottom-right">
+                                {{trans("sentence.needed_to_enter_the_website")}}
+                            </b>
+                        </label>
                     </section>
 
                     <section>
                         <label class="select">
                             <select name="sector" aria-required="true" aria-invalid="false" class="valid">
-                                <option selected="" disabled="">Sector</option>
+                                <option selected="" disabled="">{{trans("word.sector")}}</option>
                                 @foreach($sectors as $sector)
                                     <option value="{{ $sector->id }}"{{ $sector->id == old('sector') ? 'selected=selected' : '' }}>{{ $sector->name }}</option>
                                 @endforeach
@@ -40,27 +43,33 @@
                     </section>
                     <section>
                         <label class="input"> <i class="icon-append fa fa-building"></i>
-                            <input type="text" name="name" placeholder="Full Name" {{ old('name') }}  >
+                            <input type="text" name="name" placeholder="{{ trans("sentence.name_and_surname") }}" {{ old('name') }}  >
                             @if ($errors->has('name'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                             @endif
-                            <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
+                            <b class="tooltip tooltip-bottom-right">
+                                {{trans("sentence.needed_to_enter_the_website")}}
+                            </b>
+                        </label>
                     </section>
                     <section>
                         <label class="input"> <i class="icon-append fa fa-envelope"></i>
-                            <input type="email" name="email" placeholder="Email address">
+                            <input type="email" name="email" placeholder="{{trans("word.email")}}">
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                             @endif
-                            <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
+                            <b class="tooltip tooltip-bottom-right">
+                                {{trans("sentence.needed_to_verify_your_account")}}
+                            </b>
+                        </label>
                     </section>
                     <section>
                         <label class="input"> <i class="icon-append fa fa-phone"></i>
-                            <input type="text" name="mobile" placeholder="Mobile" {{ old('mobile') }} >
+                            <input type="text" name="mobile" placeholder="{{ trans("sentence.mobile_number") }}" {{ old('mobile') }} >
                             @if ($errors->has('mobile'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('mobile') }}</strong>
@@ -71,35 +80,41 @@
 
                     <section>
                         <label class="input"> <i class="icon-append fa fa-lock"></i>
-                            <input type="password" name="password" placeholder="Password" id="password">
+                            <input type="password" name="password" placeholder=" {{ trans("word.password") }}" id="password">
                             @if ($errors->has('mobile'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                             @endif
-                            <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
+                            <b class="tooltip tooltip-bottom-right">
+                                {{ trans("sentence.do_not_forget_your_password") }}
+                            </b>
+                        </label>
                     </section>
 
                     <section>
                         <label class="input"> <i class="icon-append fa fa-lock"></i>
-                            <input type="password" name="password_confirmation" placeholder="Confirm password">
-                            <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
+                            <input type="password" name="password_confirmation" placeholder="{{ trans("sentence.confirm_password") }}">
+                            <b class="tooltip tooltip-bottom-right">
+                                {{ trans("sentence.do_not_forget_your_password") }}
+                            </b>
+                        </label>
                     </section>
                 </fieldset>
 
                 <footer>
                     <button type="submit" class="btn btn-primary">
-                        Register
+                        {{ trans("word.register") }}
                     </button>
                     <a href="{{route("login")}}" class="btn btn-danger pull-left">
-                        Login
+                        {{ trans("word.login") }}
                     </a>
                 </footer>
 
                 <div class="message">
                     <i class="fa fa-check"></i>
                     <p>
-                        Thank you for your registration!
+                        {{ trans("sentence.thank_you_for_your_registration") }}
                     </p>
                 </div>
             </form>
