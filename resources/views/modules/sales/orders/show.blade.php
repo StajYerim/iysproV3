@@ -274,11 +274,7 @@
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
 
-                                    <div class="col-sm-12">
-                                        <div class="bottom-info">{{trans("sentence.account_balance")}} <span class="pull-right"
-                                                                                   style="font-size:15px;color:#2AC!important">@{{ company_balance }}
-                                                <i class="fa fa-{{$order->currency}}"></i></span></div>
-                                    </div>
+
                                 </div>
                               <hr>
 
