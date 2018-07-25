@@ -3,6 +3,7 @@
 namespace App\Model\Stock;
 
 use App\Model\Stock\Product\Product;
+use App\Units;
 use Illuminate\Database\Eloquent\Model;
 
 class StockItems extends Model
@@ -26,6 +27,9 @@ class StockItems extends Model
     }
 
     public function receipt(){
-        return $this->hasOne(Stock::class);
+        return $this->hasOne(Stock::class,"id","stock_id");
+    }
+    public function unit(){
+        return $this->hasOne(Units::class,"id","unit_id");
     }
 }

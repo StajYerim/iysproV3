@@ -17,8 +17,10 @@ Route::group(['prefix'=>'{company_id}/stocks','middleware'=>'not.admin'],functio
     Route::post("/product/image/upload","Stock\StockController@image_upload")->name("stock.image.upload");
     Route::post("/product/image/delete","Stock\StockController@image_delete")->name("stock.image.delete");
 
-    //Stock Search
+    //Stock->movements
+    Route::get("/product/{id}/movements", "Stock\StockController@movements")->name("stock.product.movements");
 
+    //Stock Search
     Route::get("/product/{id}/show","Stock\StockController@show")->name("stock.product.show");
     Route::delete("/product/{id}/destroy","Stock\StockController@destroy")->name("stock.product.destroy");
     Route::post("/product/new/category","Stock\StockController@new_category")->name("stock.product.new_category");
@@ -32,7 +34,7 @@ Route::group(['prefix'=>'{company_id}/stocks','middleware'=>'not.admin'],functio
     Route::get("movements/{id}/show","Stock\MovementsController@show")->name("stock.movements.show");
     Route::get("movements/{id}/{type}/{process}","Stock\MovementsController@form")->name("stock.movements.form");
     Route::post("movements/{id}/store","Stock\MovementsController@store")->name("stock.movements.store");
-   Route::delete("movements/{id}/destroy","Stock\MovementsController@destroy")->name("stock.movements.destroy");
+    Route::delete("movements/{id}/destroy","Stock\MovementsController@destroy")->name("stock.movements.destroy");
 
     //Parasut Sync
     Route::get("/product/{id}/sync","Stock\StockController@sync_with_parasut")->name("stock.product.sync");

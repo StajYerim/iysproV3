@@ -10,6 +10,7 @@ class Stock extends Model
     protected $table = "stock_receipts";
     protected $guarded = [];
     protected $dates = ["date"];
+    protected $appends = ['type_name'];
 
     public function items(){
         return $this->hasMany("App\Model\Stock\StockItems");
