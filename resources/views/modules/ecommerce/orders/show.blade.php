@@ -1,11 +1,8 @@
 @extends('layouts.master') 
 
 @section('content')
-<!-- widget grid -->
 <section id="widget-grid" class="">
-  <!-- row -->
   <div class="row">
-    <!-- NEW WIDGET START -->
     <article class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
       <div class="jarviswidget" id="wid-id-0">
         <header>
@@ -14,9 +11,7 @@
           </span>
           <h2>{{trans("word.order")}} # {{ $order->id }} </h2>
         </header>
-        <!-- widget div-->
         <div>
-          <!-- widget content -->
           <div class="widget-body no-padding">
             <table class="table table-hover">
               <thead>
@@ -62,33 +57,24 @@
               </tbody>
             </table>
           </div>
-          <!-- end widget content -->
         </div>
-        <!-- end widget div -->
       </div>
-      <!-- end widget -->
     </article>
-    <!-- WIDGET END -->
-    <!-- NEW WIDGET START -->
     <article class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
       <div class="jarviswidget" id="wid-id-0">
         <header>
           <span class="widget-icon">
             <i class="fa fa-user"></i>
           </span>
-          <h2>{{trans("general.customer_informations")}}</h2>
+          <h2>{{trans("sentence.customer_informations")}}</h2>
         </header>
-        <!-- widget div-->
         <div>
-          <!-- widget content -->
           <div class="widget-body text-center">
             <h3 style="margin:0">{{ $order->buyer->fullName }}</h3>
             <h4>{{ $order->buyer->tcId }}</h4>
             <span>{{ $order->buyer->email }}</span>
           </div>
-          <!-- end widget content -->
         </div>
-        <!-- end widget div -->
       </div>
       <div class="jarviswidget" id="wid-id-0">
         <header>
@@ -97,18 +83,14 @@
           </span>
           <h2>{{trans("sentence.billing_address")}}</h2>
         </header>
-        <!-- widget div-->
         <div>
-          <!-- widget content -->
           <div class="widget-body">
             <h4 style="font-weight:bold">{{ $order->billingAddress->fullName }}</h4>
             <p>{{ $order->billingAddress->address }}</p>
             <p>{{ $order->billingAddress->city }}, {{ $order->billingAddress->district }}</p>
             <p>{{ $order->billingAddress->gsm }}</p>
           </div>
-          <!-- end widget content -->
         </div>
-        <!-- end widget div -->
       </div>
       <div class="jarviswidget" id="wid-id-0">
         <header>
@@ -117,25 +99,18 @@
           </span>
           <h2>{{trans("sentence.shipping_address")}}</h2>
         </header>
-        <!-- widget div-->
         <div>
-          <!-- widget content -->
           <div class="widget-body">
             <h4 style="font-weight:bold">{{ $order->shippingAddress->fullName }}</h4>
             <p>{{ $order->shippingAddress->address }}</p>
             <p>{{ $order->shippingAddress->city }}, {{ $order->shippingAddress->district }}</p>
             <p>{{ $order->shippingAddress->gsm }}</p>
           </div>
-          <!-- end widget content -->
         </div>
-        <!-- end widget div -->
       </div>
     </article>
-    <!-- WIDGET END -->
   </div>
-  <!-- end row -->
 </section>
-<!-- end widget grid -->
 @push('scripts')
 <script>
 </script>

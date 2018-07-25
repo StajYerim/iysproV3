@@ -7,91 +7,104 @@
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("general",aid()) }}">
-                            <i class="fa fa-cogs"></i> Genel Ayarlar
+                            <i class="fa fa-cogs"></i>
+                            {{ trans("sentence.general_settings") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("offer",aid()) }}">
-                            <i class="fa fa-list-alt"></i> Teklif Ayarları
+                            <i class="fa fa-list-alt"></i>
+                            {{ trans("sentence.offer_settings") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("sales",aid()) }}">
-                            <i class="fa fa-money"></i> Satış Ayarları
+                            <i class="fa fa-money"></i>
+                            {{ trans("sentence.sales_settings") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("purchase",aid()) }}">
-                            <i class="fa fa-money"></i> Satın Alma Ayarları
+                            <i class="fa fa-money"></i>
+                            {{ trans("sentence.purchase_settings") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("product", aid()) }}">
-                            <i class="fa fa-shopping-cart"></i> Ürün Ayarları
+                            <i class="fa fa-shopping-cart"></i>
+                            {{ trans("sentence.product_settings") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("account", aid()) }}">
-                            <i class="fa fa-suitcase"></i> Cari Hesap Ayarları
+                            <i class="fa fa-suitcase"></i>
+                            {{ trans("sentence.current_account_settings") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("user", aid()) }}">
-                            <i class="fa fa-user"></i> Kullanıcı Ayarları
+                            <i class="fa fa-user"></i>
+                            {{ trans("sentence.user_settings") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("print", aid()) }}">
-                            <i class="fa fa-print"></i> Yazdırma Şablonları
+                            <i class="fa fa-print"></i>
+                            {{ trans("sentence.printing_templates") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("planning", aid()) }}">
-                            <i class="fa fa-bar-chart-o"></i> Üretim Planlama Ayarları
+                            <i class="fa fa-bar-chart-o"></i>
+                            {{ trans("sentence.production_planning_settings") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("store", aid()) }}">
-                            <i class="fa fa-archive"></i> Depo Ayarları
+                            <i class="fa fa-archive"></i>
+                            {{ trans("sentence.warehouse_settings") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("email", aid()) }}">
-                            <i class="fa fa-send-o"></i> Eposta Ayarları
+                            <i class="fa fa-send-o"></i>
+                            {{ trans("sentence.email_settings") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("categoryandtags", aid()) }}">
-                            <i class="fa fa-tag"></i> Kategori ve Etiketler
+                            <i class="fa fa-tag"></i>
+                            {{ trans("sentence.category_and_tag_settings") }}
                         </a>
                     </h3>
                 </li>
                 <li class="col-md-4">
                     <h3 class="h3 settings-title">
                         <a href="{{ route("invoice", aid()) }}">
-                            <i class="fa fa-tag"></i> Fatura/İrsaliye
+                            <i class="fa fa-tag"></i>
+                            {{ trans("sentence.invoice_waybill_settings") }}
                         </a>
                     </h3>
                 </li>

@@ -123,12 +123,18 @@
                 </table>
                 {{--{!! $logo->startText !!}--}}
 
-                <span style="text-align:center"><h2>{{trans("general.satis")}} {{trans("general.order")}}</h2></span>
-                <span style="float:left"><b style="font-size:15px;">
+                <span style="text-align:center">
+                    <h2>{{trans("sentence.sales_order")}} </h2>
+                </span>
+                <span style="float:left">
+                    <b style="font-size:15px;">
                         {{$order->company["company_name"]}}
-                    </b> <span style="float:right" >{{trans("word.date")}}:
+                    </b>
+                    <span style="float:right" >
+                        {{trans("word.date")}} :
                         {{$order->date}}
-                    </span></span>
+                    </span>
+                </span>
                 @if($order->description)  <br>
                 <span style="text-align:left;"><h4>{{$order->description}}</h4> </span>@else <h4>&nbsp;</h4> @endif
 
@@ -159,7 +165,7 @@
                 {{trans("word.vat")}}
             </td>
             <td style="text-align:right;width:140px">
-                {{trans("word.amount")}}({{trans("sentence.excluding_Vat")}})
+                {{trans("word.amount")}}({{trans("sentence.excluding_vat")}})
             </td>
         </tr>
 
@@ -215,7 +221,7 @@
             <td></td>
 
             <td colspan="1" style="text-align: right">
-                {{trans("general.total")}}:
+                {{trans("word.total")}}:
             </td>
             <td colspan="1" style="text-align: right">
                 {{$order->sub_total}} {!! $order->currency_icon!!}

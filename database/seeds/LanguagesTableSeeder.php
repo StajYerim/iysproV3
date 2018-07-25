@@ -141,6 +141,8 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'word', 'key' => 'invoice', 'text' => ['en' => 'INVOICE', 'tr' => 'FATURA']]);
         LanguageLine::create(['group' => 'word', 'key' => 'icon', 'text' => ['en' => 'ICON', 'tr' => 'İKON']]);
         LanguageLine::create(['group' => 'word', 'key' => 'route', 'text' => ['en' => 'ROUTE', 'tr' => 'ROTA']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'change', 'text' => ['en' => 'CHANGE', 'tr' => 'DEĞİŞTİR']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'test', 'text' => ['en' => 'TEST', 'tr' => 'TEST']]);
 
 
         // sentence area
@@ -261,7 +263,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'purchase_settings', 'text' => ['en' => 'PURCHASE SETTINGS', 'tr' => 'SATIN ALMA AYARLARI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'product_settings', 'text' => ['en' => 'PRODUCT SETTINGS', 'tr' => 'ÜRÜN AYARLARI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'user_settings', 'text' => ['en' => 'USER SETTINGS', 'tr' => 'KULLANICI AYARLARI']]);
-        LanguageLine::create(['group' => 'sentence', 'key' => 'current_account_ settings', 'text' => ['en' => 'CURRENT ACCOUNT SETTINGS', 'tr' => 'CARİ HESAP AYARLARI']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'current_account_settings', 'text' => ['en' => 'CURRENT ACCOUNT SETTINGS', 'tr' => 'CARİ HESAP AYARLARI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'application_settings', 'text' => ['en' => 'APPLICATIN SETTINGS', 'tr' => 'UYGULAMA AYARLARI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'api_informations', 'text' => ['en' => 'API INFORMATIONS', 'tr' => 'API BİLGİLERİ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'api_key', 'text' => ['en' => 'API KEY', 'tr' => 'API ANAHTARI']]);
@@ -304,7 +306,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'iban_number', 'text' => ['en' => 'IBAN NUMBER', 'tr' => 'IBAN NUMARASI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'vkn_tckn', 'text' => ['en' => 'VKN_TCKN', 'tr' => 'VKN_TCKN']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'order_date', 'text' => ['en' => 'ORDER DATE', 'tr' => 'SİPARİŞ TARİHİ']]);
-        LanguageLine::create(['group' => 'sentence', 'key' => 'payable_date', 'text' => ['en' => 'PAYABLE DATE', 'tr' => 'BORÇ TARİHİ']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'payable_date', 'text' => ['en' => 'PAYABLE DATE', 'tr' => 'ÖDEME TARİHİ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'add_expense', 'text' => ['en' => 'ADD EXPENSE', 'tr' => 'GİDER EKLE']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'expense_type', 'text' => ['en' => 'EXPENSE TYPE', 'tr' => 'GİDER TÜRÜ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'paid_account', 'text' => ['en' => 'PAID ACCOUNT', 'tr' => 'ÖDENECEK HESAP']]);
@@ -421,6 +423,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'warehouse_settings', 'text' => ['en' => 'WAREHOUSE SETTINGS','tr' => "DEPO AYARLARI"]]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'email_settings', 'text' => ['en' => 'E-MAIL SETTINGS','tr' => "E-POSTA AYARLARI"]]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'category_and_tag_settings', 'text' => ['en' => 'CATEGORY AND TAG SETTINGS','tr' => "KATEGORİ VE ETİKET AYARLARI"]]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'invoice_waybill_settings', 'text' => ['en' => 'INVOICE/WAYBILL SETTINGS','tr' => "FATURA/İRSALİYE AYARLARI"]]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'name_and_surname', 'text' => ['en' => 'NAME AND SURNAME','tr' => "AD VE SOYAD"]]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'mobile_number', 'text' => ['en' => 'MOBILE NUMBER','tr' => "CEP TELEFONU NUMARASI"]]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'only_view', 'text' => ['en' => 'ONLY VIEW','tr' => "SADECE GÖRÜNTÜLEME"]]);
@@ -507,6 +510,16 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'you_are_logged_in_as_admin', 'text' => ['en' => 'YOU ARE LOGGED IN AS ADMIN','tr' => 'YÖNETİCİ OLARAK GİRİŞ YAPTINIZ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'company_accounts', 'text' => ['en' => 'COMPANY ACCOUNTS','tr' => 'ŞİRKET HESAPLARI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'account_users', 'text' => ['en' => 'ACCOUNT USERS','tr' => 'HESAP KULLANICILARI']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'return_summary_informations', 'text' => ['en' => 'RETURN SUMMARY INFORMATIONS','tr' => 'ÖZET BİLGİLERİ GERİ DÖNDÜR']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'cheque_collection', 'text' => ['en' => 'CHEQUE COLLECTION','tr' => 'ÇEK TAHSİLATI']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'offer_amount', 'text' => ['en' => 'OFFER AMOUNT','tr' => 'TEKLİF TUTARI']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'effective_date', 'text' => ['en' => 'EFFECTIVE DATE','tr' => 'EFEKTİF TARİHİ']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'provision_for_tl', 'text' => ['en' => 'PROVISION FOR TL','tr' => 'TL KARŞILIĞI']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'tracking_number', 'text' => ['en' => 'TRACKING NUMBER','tr' => 'TAKİP NUMARASI']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'client_id', 'text' => ['en' => 'CLIENT ID','tr' => 'MÜŞTERİ NUMARASI']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'client_secret', 'text' => ['en' => 'CLIENT SECRET','tr' => 'MÜŞTERİ ŞİFRESİ']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'company_id', 'text' => ['en' => 'COMPANY ID','tr' => 'ŞİRKET NUMARASI']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'model_header', 'text' => ['en' => 'MODEL HEADER','tr' => 'MODEL BAŞLIĞI']]);
 
 
     }

@@ -7,17 +7,11 @@
 
                 @endphp
         @endif
-    <!-- widget grid -->
     <section>
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET ROW START -->
             <div class="col-sm-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false">
-                    <!-- widget div-->
                     <div>
-                        <!-- widget content -->
                         <div class="widget-body ">
 
                             <form class="form-horizontal">
@@ -25,10 +19,10 @@
                                     <fieldset class="fixed-title">
                                         <div class="form-group">
                                             <label class="col-md-3 col-sm-3 control-label"> <span
-                                                        style="vertical-align: -9px;">{{trans("WORD.description") }}</span></label>
+                                                        style="vertical-align: -9px;">{{trans("word.description") }}</span></label>
                                             <div class="col-md-3 col-sm-4 pull-right">
                                                 {{--<a href="{{$form_type == "new" ? route("stock.index",aid()): URL::previous() }}"--}}
-                                                {{--class="btn btn-default btn-lg ">{{trans("general.back")}}--}}
+                                                {{--class="btn btn-default btn-lg ">{{trans("word.back")}}--}}
                                                 {{--</a>--}}
                                                 <button type="button" @click="formSend" href="#"
                                                         class="btn btn-success btn-lg ">
@@ -37,9 +31,7 @@
                                             </div>
                                             <div class="col-md-6 col-sm-6">
 
-                                                <input
-
-                                                        type="text" v-model="form.description" class="form-control"
+                                                <input type="text" v-model="form.description" class="form-control"
                                                         AUTOCOMPLETE="OFF"
                                                         style="padding: 22px 12px">
                                             </div>
@@ -50,7 +42,7 @@
                                     <fieldset>
                                         <div class="form-group" :class="{'has-error':errors.has('form.company_id')}">
 
-                                            <label class="col-md-3 control-label">{{trans("WORD.supplier")}}</label>
+                                            <label class="col-md-3 control-label">{{trans("word.supplier")}}</label>
                                             <div class="col-md-6">
 
                                                 <v-select

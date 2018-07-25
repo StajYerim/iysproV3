@@ -5,7 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{trans("sentence.app_settings_manager")}} </div>
+                    <div class="card-header">
+                        {{trans("sentence.app_settings_manager")}}
+                    </div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -30,7 +32,7 @@
                                 </a>
                             </div>
                         </div><br>
-                            <button type="submit" >{{trans("sentence.save")}}!</button>
+                            <button type="submit" >{{trans("word.save")}}!</button>
                     </div>
                 </div>
             </div>

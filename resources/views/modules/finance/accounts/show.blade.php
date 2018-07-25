@@ -23,10 +23,13 @@
             <div class="col-sm-8">
                 <div class="well">
                     <h1>
-                        <span class="semi-bold">{{$account->name}}</span> <span class="pull-right">
-                            <a class="btn btn-default"
-                               href="{{route("finance.accounts.form",[aid(),$account->id,$account->type,"update"])}}">{{trans("general.edit")}}
-					</a>
+                        <span class="semi-bold">
+                            {{$account->name}}
+                        </span>
+                        <span class="pull-right">
+                            <a class="btn btn-default" href="{{route("finance.accounts.form",[aid(),$account->id,$account->type,"update"])}}">
+                                {{trans("word.edit")}}
+					        </a>
                             <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><span
                                         class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -104,8 +107,10 @@
 
                                 </div>
                                 <div class="col-sm-3">
-                                    <div class="info-title"><span v-on:click="details = !details" class="pull-right"
-                                                                  style="cursor: pointer;">{{trans("general.summary")}} {{trans("general.informations")}} {{trans("general.return")}}</span>
+                                    <div class="info-title">
+                                        <span v-on:click="details = !details" class="pull-right" style="cursor: pointer;">
+                                            {{trans("sentence.return_summary_informations")}}
+                                        </span>
                                     </div>
                                 </div>
                         </div>

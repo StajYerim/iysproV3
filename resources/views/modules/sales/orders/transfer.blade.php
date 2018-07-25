@@ -245,15 +245,15 @@
 
                 <tr>
                     <td class="body" width="100%" cellpadding="0" cellspacing="0">
-                        FİRMA : {{$transfer_company}}<BR>
-                        TAKİP NO : {{$transfer_number}}<br>
-                        NOT : {{$not}}
+                        {{ trans("word.company") }} : {{$transfer_company}}<BR>
+                        {{ trans("sentence.tracking_number") }} : {{$transfer_number}}<br>
+                        {{ trans("word.note") }}: {{$not}}
                         <br><BR>
                         <table class="inner-body" align="left" width="500" cellpadding="0" cellspacing="0" >
                             <tr style="padding:0px;">
-                                <th style="text-align: left;">KODU</th>
-                                <th style="text-align: left;">HİZMET/ÜRÜN</th>
-                                <th style="text-align: right;">MİKTAR</th>
+                                <th style="text-align: left;">{{ trans("word.code") }}</th>
+                                <th style="text-align: left;">{{ trans("word.service") }}/{{ trans("word.product" }}</th>
+                                <th style="text-align: right;">{{ trans("word.quantity") }}</th>
                             </tr>
                             @foreach($order as $item)
                                 @if($item["selected"])

@@ -60,8 +60,8 @@
                                             <i class="fa fa-{{ $sales_order->currency }}"></i>
 
                                         </li>
-                                    {{--@else--}}
-                                            {{--Herhangi bir yaklaşan tahsilat yok--}}
+                                    @else
+                                            Herhangi bir yaklaşan tahsilat yok
                                     @endif
 
                                 @endforeach

@@ -9,17 +9,11 @@
 
         @endphp
     @endif
-    <!-- widget grid -->
     <section>
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET ROW START -->
             <div class="col-sm-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false">
-                    <!-- widget div-->
                     <div>
-                        <!-- widget content -->
                         <div class="widget-body ">
 
                             <form class="form-horizontal">
@@ -30,7 +24,7 @@
                                                         style="vertical-align: -9px;">{{trans("word.description") }}</span></label>
                                             <div class="col-md-3 col-sm-4 pull-right">
                                                 {{--<a href="{{$form_type == "new" ? route("stock.index",aid()): URL::previous() }}"--}}
-                                                {{--class="btn btn-default btn-lg ">{{trans("general.back")}}--}}
+                                                {{--class="btn btn-default btn-lg ">{{trans("word.back")}}--}}
                                                 {{--</a>--}}
                                                 <button type="button" @click="formSend" href="#"
                                                         class="btn btn-success btn-lg ">
@@ -58,14 +52,15 @@
                                                 <v-select
                                                         v-bind:class="{'v-select-error':errors.has('form.company_id')}"
                                                         v-validate="'required'" name="form.company_id" label="text"
-                                                        :filterable="true" placeholder="Choose Company"
+                                                        :filterable="true" placeholder="{{ trans("sentence.choose_company") }}"
                                                         :options="options" @search="onSearch"
                                                         transition="fade" v-model="form.company_id">
                                                     <template slot="no-options">
                                                         <a type="button" style="color:white"
                                                            class='btn btn-sm btn-warning' href='#!'
-                                                           data-toggle='modal' data-target='#new_company'>Click for New
-                                                            Company </a>
+                                                           data-toggle='modal' data-target='#new_company'>
+                                                            {{ trans("sentence.click_for_a_new_company") }}
+                                                        </a>
                                                     </template>
                                                     <template slot="option" slot-scope="option">
                                                         <div class="d-center">
@@ -86,8 +81,9 @@
                                                     <the-mask @change="setDate(form.date)" :mask="['##.##.####']" type="text" name="form.date"
                                                               v-validate="'required'" class="form-control datepicker"
                                                               v-model="form.date"></the-mask>
-                                                    <span class="input-group-addon"><i
-                                                                class="fa fa-calendar"></i></span>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,10 +97,12 @@
                                                     <the-mask :mask="['##.##.####']" type="text"
                                                               name="form.due_date" v-validate="'required'"
                                                               class="form-control datepicker"
-                                                              v-model="form.due_date"></the-mask>
+                                                              v-model="form.due_date">
+                                                    </the-mask>
 
-                                                    <span class="input-group-addon"><i
-                                                                class="fa fa-calendar"></i></span>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -117,15 +115,11 @@
 
 
                         </div>
-                        <!-- end widget content -->
 
                     </div>
-                    <!-- end widget div -->
 
                 </div>
-                <!-- end widget -->
             </div>
-            <!-- WIDGET ROW END -->
         </div>
         @include("components.modals.companies",[$option="customer",$title="New Company",$type = "new_company",$message="Company Form",$id=0])
     </section>

@@ -3,22 +3,15 @@
 @section('content')
 
 
-    <!-- widget grid -->
     <section id="expenses" class="">
 
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET START -->
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget " id="wid-id-0" data-widget-editbutton="false">
-                    <!-- widget div-->
                     <div>
-                        <!-- widget content -->
                         <div class="widget-body no-padding">
-                            <!-- search mobile button (this is hidden till mobile view port) -->
                             <div id="search-mobile" class="btn-header transparent pull-right">
-                                <span> <a href="javascript:void(0)" title="Search"><i
+                                <span> <a href="javascript:void(0)" title="{{ trans("word.search") }}"><i
                                                 class="fa fa-search"></i></a> </span>
                             </div>
 
@@ -27,7 +20,7 @@
                                 <button type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
-                                <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i
+                                <a href="javascript:void(0);" id="cancel-search-js" title="{{ trans("sentence.cancel_search") }}"><i
                                             class="fa fa-times"></i></a>
                                 <button type="submit">
                                     <i class="fa fa-search"></i>
@@ -37,7 +30,6 @@
 
                             <div class="pull-right new-button"  onclick="update(0)">
                                 <span class="btn btn-success">{{trans("sentence.add_expense")}}</span>
-
                             </div>
 
                             <table id="table" class="table table-striped table-hover" width="100%">
@@ -55,11 +47,8 @@
                             </table>
 
                         </div>
-                        <!-- end widget content -->
                     </div>
-                    <!-- end widget div -->
                 </div>
-                <!-- end widget -->
             </article>
         </div>
 
@@ -75,17 +64,17 @@
                     </div>
                     <form id="expense_form" @submit.prevent="expense_send" class="form-horizontal bv-form">
                     <div class="modal-body">
-                                <fieldset>
-                                    <div class="form-group" :class="{'has-error': errors.has('form.name') }">
-                                        <label class="col-md-3 control-label">{{trans("word.expense")}}</label>
-                                        <div class="col-md-6 ">
-                                            <div >
-                                                <input  v-validate="'required'" type="text" class="form-control "
-                                                       v-model="form.name" name="form.name">
-                                            </div>
+                            <fieldset>
+                                <div class="form-group" :class="{'has-error': errors.has('form.name') }">
+                                    <label class="col-md-3 control-label">{{trans("word.expense")}}</label>
+                                    <div class="col-md-6 ">
+                                        <div >
+                                            <input  v-validate="'required'" type="text" class="form-control "
+                                                   v-model="form.name" name="form.name">
                                         </div>
                                     </div>
-                                </fieldset>
+                                </div>
+                            </fieldset>
                             <fieldset>
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">{{trans("word.date")}}</label>
@@ -160,7 +149,6 @@
 
 
     </section>
-    <!-- end widget grid -->
     @push('scripts')
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="/js/plugin/datatables/jquery.dataTables.min.js"></script>
