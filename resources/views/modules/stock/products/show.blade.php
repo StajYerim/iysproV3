@@ -97,7 +97,7 @@
                 <ul id="myTab1" class="nav nav-tabs bordered">
                     <li class="active">
                         <a href="#g1" data-toggle="tab" aria-expanded="true">
-                            {{trans("wrd.informations")}}
+                            {{trans("word.informations")}}
                         </a>
                     </li>
 
@@ -146,8 +146,8 @@
                                         </td>
                                         <td>@{{ item.receipt.date }}</td>
                                         <td>@{{ item.quantity }} @{{ item.unit.short_name }}</td>
-                                        <td>@{{ item.product.list_price }} <i class="fa fa-try"></i> </td>
-                                        <td>-<i class="fa fa-try"></i></td>
+                                        <td>@{{ item.order_item.price }} <i v-if="item.order_item.price != null" class="fa fa-try"></i></td>
+                                        <td><span v-if="item.order_item.prices != null">@{{ formatPrice(item.order_item.prices*item.quantitys) }} <i class="fa fa-try"></i></span></td>
                                     </tr>
                                     </tbody>
                                     <tfoot>
@@ -197,7 +197,13 @@
                     details: false,
                     stock:[]
                 },
-                methods: {
+               methods: {
+                   formatPrice: function (val) {
+               return    val.toLocaleString('tr-TR', {
+                           minimumFractionDigits: 2,
+                           maximumFractionDigits: 2
+                       });
+                   },
                     movements:function($page=1){
 
                         axios.get("/{{aid()}}/stocks/product/{{$id}}/movements?page="+$page).then(res=>{

@@ -209,8 +209,6 @@ class OrdersController extends Controller
 
         foreach ($request->items as $item) {
             $sitem = SalesOrderItems::find($item["id"]);
-
-
             if ($item["selected"] == true) {
                 StockItems::create([
                     "stock_id" => $waybill->id,

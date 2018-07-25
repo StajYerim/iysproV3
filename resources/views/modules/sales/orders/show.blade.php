@@ -73,7 +73,7 @@
                                 </ul>
                             </li>
                             <li class="">
-                                <a class="test" tabindex="-1"  data-toggle="modal" data-target="#waybillModal" href="#">   <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentece.print_waybill")}} </a>
+                                <a class="test" tabindex="-1"  data-toggle="modal" data-target="#waybillModal" href="#">   <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.print_waybill")}} </a>
                             </li>
                             <li class="">
                                 <a class="test" tabindex="-1" data-toggle="modal" data-target="#invoiceModal" href="#">

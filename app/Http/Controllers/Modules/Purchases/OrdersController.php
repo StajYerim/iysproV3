@@ -98,6 +98,7 @@ class OrdersController extends Controller
         );
 
         $whereNot = Array();
+        $whereNots = Array();
         foreach ($request->items as $key => $value) {
 
             $ret = $order->items()->updateOrCreate(
@@ -113,10 +114,24 @@ class OrdersController extends Controller
                 ]
             );
 
+
+            $set = $movement->items()->updateOrCreate(
+                ["purchase_order_item_id" => $ret->id],
+                [
+                    "product_id" => $value["product_id"],
+                    "purchase_order_item_id" => $ret->id,
+                    "quantity" => $value["quantity"],
+                    "unit_id" => $value["unit"],
+                    "notes" => isset($value["description"]) == true ? $value["description"] : ""
+                ]
+            );
+
             array_push($whereNot, $ret->id);
+            array_push($whereNots, $set->id);
         }
 
         $order->items()->whereNotIn("id", $whereNot)->delete();
+        $movement->items()->whereNotIn("id", $whereNots)->delete();
 
 
         $order->company->open_receipts_payment_set($order->company->popen_receipts,$order->company->popen_cheques,$order);

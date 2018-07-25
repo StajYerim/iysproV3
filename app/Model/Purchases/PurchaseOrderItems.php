@@ -11,6 +11,7 @@ class PurchaseOrderItems extends Model
 {
     protected $guarded = [];
     public $timestamps = false;
+    protected $appends = ["prices"];
     public function setQuantityAttribute($value)
     {
         $this->attributes['quantity'] = money_db_format($value);
@@ -37,6 +38,9 @@ class PurchaseOrderItems extends Model
 
     public function getPriceAttribute(){
         return get_money($this->attributes["price"]);
+    }
+    public function getPricesAttribute(){
+        return $this->attributes["price"];
     }
 
     public function getTotalAttribute(){
