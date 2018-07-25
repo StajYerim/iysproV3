@@ -17,6 +17,7 @@ class StockReceiptsAddFieldDispatchDate extends Migration
             $table->datetime('dispatch_date')->default(\Carbon\Carbon::now())->nullable();
             $table->string('number')->nullable();
             $table->integer('sales_order_id')->nullable();
+            $table->integer('purchase_order_id')->nullable();
 
         });
     }
@@ -31,7 +32,7 @@ class StockReceiptsAddFieldDispatchDate extends Migration
         Schema::table('stock_receipts', function ($table) {
             $table->dropColumn('dispatch_date');
             $table->dropColumn('number');
-            $table->dropColumn('sales_order_id');
+            $table->dropColumn('purchase_order_id');
         });
     }
 }

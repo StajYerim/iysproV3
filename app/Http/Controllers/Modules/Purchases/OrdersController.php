@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Modules\Purchases;
 //use App\Model\Purchases\PurchaseOffers;
 use App\Model\Purchases\PurchaseOrders;
 use App\Model\Stock\Stock;
+use App\Taggable;
+use App\Tags;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -89,6 +91,7 @@ class OrdersController extends Controller
             [
                 "description" => $order->description,
                 "receipt_id"=>2,
+                "purchase_order_id"=>$order->id,
                 "doc_id"=>$order->id,
                 "status"=>0,
                 "date"=>$order->date,
@@ -132,6 +135,17 @@ class OrdersController extends Controller
 
         $order->items()->whereNotIn("id", $whereNot)->delete();
         $movement->items()->whereNotIn("id", $whereNots)->delete();
+
+        Taggable::where("taggable_type","App\Model\Purchases\PurchaseOrders")->where("taggable_id",$order->id)->delete();
+
+        if ($request->tagsd) {
+
+            foreach ($request->tagsd as $tag) {
+                $tag = Tags::firstOrCreate(["account_id"=>aid(),"type"=>"purchases_orders","title"=>$tag["text"]], ["type" => "purchases_orders", "bg_color" => rand_color()]);
+                $order->tags()->save($tag);
+
+            }
+        }
 
 
         $order->company->open_receipts_payment_set($order->company->popen_receipts,$order->company->popen_cheques,$order);

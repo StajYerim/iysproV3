@@ -150,27 +150,21 @@
                                         <td><span v-if="item.order_item.prices != null">@{{ formatPrice(item.order_item.prices*item.quantitys) }} <i class="fa fa-try"></i></span></td>
                                     </tr>
                                     </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td colspan="7">
-                                            <ul class="pagination pagination-xs no-margin">
-                                                <li class="prev ">
-                                                    <a href="#!" @click="movements(1)">First</a>
-                                                </li>
-                                                <li  v-for="i in (3, stock.last_page)" @click="movements(i)" :class="{active:stock.current_page == i}">
-                                                    <a href="javascript:void(0);">@{{ i }}</a>
-                                                </li>
-                                                <li class="next">
-                                                    <a href="#!" @click="movements(stock.last_page)">Last</a>
-                                                </li>
-                                            </ul>
 
-                                        </td>
-                                    </tr>
-                                    </tfoot>
                                 </table>
 
                             </div>
+                            <ul style="bottom:5px" class="pagination pagination-xs no-margin">
+                                <li class="prev ">
+                                    <a href="#!" @click="movements(1)">First</a>
+                                </li>
+                                <li  v-for="i in (3, stock.last_page)" @click="movements(i)" :class="{active:stock.current_page == i}">
+                                    <a href="javascript:void(0);">@{{ i }}</a>
+                                </li>
+                                <li class="next">
+                                    <a href="#!" @click="movements(stock.last_page)">Last</a>
+                                </li>
+                            </ul>
 
                             <div class="alert alert-info" v-else="stock.data.length < 0">
                                 <span class="fa fa-info-circle">

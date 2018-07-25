@@ -101,19 +101,16 @@ Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
 });
 
 
-Route::get("/add-lang/{name}/{eng}/{tr}",function($name,$eng,$tr){
+Route::get("/tester",function(){
+
+$kategori = \App\Model\Stock\Product\Category::All();
+
+foreach($kategori as $kat){
+    echo $kat->name."->".$kat->total_order."<br>";
+}
 
 
 
-  $add =   Spatie\TranslationLoader\LanguageLine::create([
-        'group' => 'general',
-        'key' => $name,
-        'text' => ['en' => $eng, 'tr' => $tr],
-    ]);
-
-  if($add){
-      return "add language";
-  }
 
 });
 

@@ -8,6 +8,7 @@ use App\Model\Finance\BankItems;
 use App\Model\Finance\Cheques;
 use App\Model\Stock\Stock;
 use App\Model\Stock\StockItems;
+use App\Tags;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -210,5 +211,10 @@ class SalesOrders extends Model
         }else{
             return '<span class="label label-primary">KISMİ ÖDENDİ</span>';
         }
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tags::class, 'taggable');
     }
 }
