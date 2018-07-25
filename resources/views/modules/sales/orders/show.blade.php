@@ -1,11 +1,14 @@
 @extends('layouts.master')
 @section('content')
-    <!-- widget grid -->
     <section id="show" v-cloak>
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
-                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$order->descriptions}}</span></h1>
-
+                <h1>
+                    <i class="fa fa-file-text-o"></i>
+                    <span class="semi-bold">
+                        {{$order->descriptions}}
+                    </span>
+                </h1>
             </div>
             <div class="col-lg-4 col-sm-4">
 
@@ -196,7 +199,9 @@
                                                 @if($order->currency != "try")
                                                     <tr>
                                                         <td>
-                                                            <div class="bottom-info">TL KARŞILIĞI</div>
+                                                            <div class="bottom-info">
+                                                                {{ trans("sentence.provision_for_tl") }}
+                                                            </div>
                                                         </td>
                                                         <td style="text-align:right">
                                                             <div class="bottom-info"
@@ -453,7 +458,8 @@
                                                                 <div class="input-group">
                                                                     <the-mask @change="setDate(waybill.edit_date)" :mask="['##.##.####']" type="text" name="waybill.edit_date"
                                                                               v-validate="'required'" class="form-control datepicker"
-                                                                              v-model="waybill.edit_date"></the-mask>
+                                                                              v-model="waybill.edit_date">
+                                                                    </the-mask>
                                                                     <span class="input-group-addon"><i
                                                                                 class="fa fa-calendar"></i></span>
 
@@ -471,9 +477,11 @@
                                                                 <div class="input-group">
                                                                     <the-mask @change="setDate(waybill.edit_date)" :mask="['##.##.####']" type="text" name="waybill.dispatch_date"
                                                                               v-validate="'required'" class="form-control datepicker"
-                                                                              v-model="waybill.dispatch_date"></the-mask>
-                                                                    <span class="input-group-addon"><i
-                                                                                class="fa fa-calendar"></i></span>
+                                                                              v-model="waybill.dispatch_date">
+                                                                    </the-mask>
+                                                                    <span class="input-group-addon">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                         </div>

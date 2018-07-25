@@ -2,19 +2,13 @@
 
 @section('content')
 
-    <!-- widget grid -->
     <section id="widget-grid" class="">
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET START -->
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
 
-                    <!-- widget div-->
                     <div>
 
-                        <!-- widget content -->
                         <div class="widget-body no-padding">
                             <table class="table  table-hover table-condensed table-striped">
                                 <thead class="fixed-title">
@@ -28,16 +22,26 @@
                                 <tbody>
                                 @foreach($units as $unit)
                                     <tr>
-                                        <td>{{$unit->name}}</td>
-                                        <td>{{$unit->short_name}}</td>
-                                        <td>{{$unit->type}}</td>
-                                        <td><span class="onoffswitch">
+                                        <td>
+                                            {{$unit->name}}
+                                        </td>
+                                        <td>
+                                            {{$unit->short_name}}
+                                        </td>
+                                        <td>
+                                            {{$unit->type}}
+                                        </td>
+                                        <td>
+                                            <span class="onoffswitch">
 												<input type="checkbox" name="unit_status"  onchange="switcher({{$unit->id}})"
                                                        class="onoffswitch-checkbox" {{$unit->account_unit == 1 ? "checked":""}} id="{{$unit->id}}">
 												<label class="onoffswitch-label" for="{{$unit->id}}">
 													<span class="onoffswitch-inner" data-swchon-text="ON"
-                                                          data-swchoff-text="OFF"></span>
-								<span class="onoffswitch-switch"></span> </label> </span>
+                                                          data-swchoff-text="OFF">
+                                                    </span>
+								                <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -46,13 +50,10 @@
 
 
                         </div>
-                        <!-- end widget content -->
 
                     </div>
-                    <!-- end widget div -->
 
                 </div>
-                <!-- end widget -->
 
             </article>
         </div>

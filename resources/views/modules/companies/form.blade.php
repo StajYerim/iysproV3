@@ -1,26 +1,23 @@
 @extends('layouts.master')
 @section('content')
-    <!-- widget grid -->
     <section id="customer" v-cloak>
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET ROW START -->
             <div class="col-sm-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false">
-                    <!-- widget div-->
                     <div>
-
-                        <!-- widget content -->
                         <div class="widget-body ">
                             <form @submit.prevent="formSend" class="form-horizontal">
                                 <fieldset class="fixed-title">
                                     <div class="form-group" :class="{'has-error': errors.has('form.company_name') }">
-                                        <label class="col-md-3 control-label"> <span
-                                                    style="vertical-align: -9px;">{{$company_type == "customer" ?  trans("word.customer"):trans("word.supplier")}} {{trans("word.name") }}</span></label>
+                                        <label class="col-md-3 control-label">
+                                            <span style="vertical-align: -9px;">
+                                                {{$company_type == "customer" ?  trans("word.customer"):trans("word.supplier")}} {{trans("word.name") }}
+                                            </span>
+                                        </label>
                                         <div class="col-md-3 pull-right">
                                             <a href="{{$form_type == "new" ? route($company_type=="customer"?"sales.companies.customer":"purchases.companies.supplier",aid()): URL::previous() }}"
-                                               class="btn btn-default btn-lg ">{{trans("word.back")}}
+                                               class="btn btn-default btn-lg ">
+                                                {{trans("word.back")}}
                                             </a>
                                             <button type="submit" href="#" class="btn btn-success btn-lg ">
                                                 {{trans("word.save")}}
@@ -39,12 +36,16 @@
 
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("sentence.short_name")}}</label>
+                                        <label class="col-md-3 control-label">
+                                            {{trans("sentence.short_name")}}
+                                        </label>
                                         <div class="col-md-3">
                                             <input type="text" class="form-control" v-model="form.company_short_name"/>
                                         </div>
 
-                                        <label class="col-md-1 control-label">{{trans("sentence.current_code")}}</label>
+                                        <label class="col-md-1 control-label">
+                                            {{trans("sentence.current_code")}}
+                                        </label>
                                         <div class="col-md-2">
                                             <input type="text" class="form-control" v-model="form.char_code"/>
                                         </div>
@@ -53,7 +54,9 @@
 
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("word.email")}}</label>
+                                        <label class="col-md-3 control-label">
+                                            {{trans("word.email")}}
+                                        </label>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" v-model="form.email"/>
                                         </div>
@@ -61,13 +64,17 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("word.phone")}}</label>
+                                        <label class="col-md-3 control-label">
+                                            {{trans("word.phone")}}
+                                        </label>
                                         <div class="col-md-2">
                                             <phone class="form-control" v-model="form.phone_number"></phone>
                                         </div>
 
 
-                                        <label class="col-md-2 control-label">{{trans("word.fax")}}</label>
+                                        <label class="col-md-2 control-label">
+                                            {{trans("word.fax")}}
+                                        </label>
                                         <div class="col-md-2">
                                             <phone class="form-control" v-model="form.fax_number"></phone>
                                         </div>
@@ -76,7 +83,9 @@
                                 <fieldset>
                                     <div class="form-group">
 
-                                        <label class="col-md-3 control-label">{{trans("sentence.abroad_address")}}</label>
+                                        <label class="col-md-3 control-label">
+                                            {{trans("sentence.abroad_address")}}
+                                        </label>
                                         <div class=" col-md-2">
 
                                             <label class="radio radio-inline no-margin">
@@ -84,7 +93,8 @@
                                                        class="radiobox "
                                                        v-bind:checked="form.address_abroad == 1"
                                                 />
-                                                <span>{{trans("word.yes")}}</span> </label>
+                                                <span>{{trans("word.yes")}}</span>
+                                            </label>
 
                                             <label class="radio radio-inline">
                                                 <input type="radio" v-model="form.address_abroad" value="0"
@@ -92,9 +102,12 @@
                                                        class="radiobox"
                                                        v-bind:checked="form.address_abroad == 0"
                                                 />
-                                                <span>{{trans("word.no")}}</span> </label>
+                                                <span>{{trans("word.no")}}</span>
+                                            </label>
                                         </div>
-                                        <label class="col-md-2 control-label">{{trans("sentence.ebilling_taxpayer")}}</label>
+                                        <label class="col-md-2 control-label">
+                                            {{trans("sentence.ebilling_taxpayer")}}
+                                        </label>
                                         <div class=" col-md-3">
 
                                             <label class="radio radio-inline no-margin">
@@ -150,15 +163,11 @@
                                 @includeIf('components.external.tags', [$type="companies"])
                             </form>
                         </div>
-                        <!-- end widget content -->
 
                     </div>
-                    <!-- end widget div -->
 
                 </div>
-                <!-- end widget -->
             </div>
-            <!-- WIDGET ROW END -->
 
         </div>
 

@@ -74,28 +74,23 @@
   </div>
 </div>
 
-<!-- widget grid -->
 <section id="widget-grid" class="">
-    <!-- row -->
     <div class="row">
         <a href="#" data-toggle="modal" data-target="#myModal" style="margin-top:8px;margin-right:13px;margin-bottom:8px;float: right;" class="btn btn-success">
-          <i class="fa fa-plus"></i> {{trans("general.product")}} {{trans("general.add")}}
+          <i class="fa fa-plus"></i> {{trans("sentence.add_product")}}
         </a>
         <a href="#" style="margin-top:8px;margin-right:8px;margin-bottom:8px;float: right;" class="btn btn-default">
-          <i class="fa fa-filter"></i> {{trans("general.filter")}}
+          <i class="fa fa-filter"></i> {{trans("word.filter")}}
         </a>
-        <!-- NEW WIDGET START -->
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="jarviswidget" id="wid-id-0">
                 <header>
                     <span class="widget-icon">
                         <i class="fa fa-comments"></i>
                     </span>
-                    <h2>{{trans("general.product")}} </h2>
+                    <h2>{{trans("word.product")}} </h2>
                 </header>
-                <!-- widget div-->
                 <div style="padding:5px 13px 0">
-                    <!-- widget content -->
                     <div class="widget-body no-padding">
                         
                         <table id="table" class="table table-striped table-hover" width="100%">
@@ -112,17 +107,11 @@
                         </table>
 
                     </div>
-                    <!-- end widget content -->
                 </div>
-                <!-- end widget div -->
             </div>
-            <!-- end widget -->
         </article>
-        <!-- WIDGET END -->
     </div>
-    <!-- end row -->
 </section>
-<!-- end widget grid -->
     @push('scripts')
         <script src="/js/plugin/datatables/jquery.dataTables.min.js"></script>
         <script src="/js/plugin/datatables/dataTables.colVis.min.js"></script>

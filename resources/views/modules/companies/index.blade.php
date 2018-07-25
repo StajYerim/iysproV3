@@ -2,25 +2,18 @@
 
 @section('content')
 
-    <!-- widget grid -->
     <section id="widget-grid" class="">
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET START -->
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-
-
-                    <!-- widget div-->
                     <div>
-
-                        <!-- widget content -->
                         <div class="widget-body no-padding">
-                            <!-- search mobile button (this is hidden till mobile view port) -->
                             <div id="search-mobile" class="btn-header transparent pull-right">
-                                <span> <a href="javascript:void(0)" title="Search"><i
-                                                class="fa fa-search"></i></a> </span>
+                                <span>
+                                    <a href="javascript:void(0)" title="{{ trans("word.search") }}">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </span>
                             </div>
 
                             <div class="header-search pull-left" style="margin: 0px 0px 5px 7px;">
@@ -28,7 +21,7 @@
                                 <button type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
-                                <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i
+                                <a href="javascript:void(0);" id="cancel-search-js" title="{{ trans("sentence.cancel_search") }}"><i
                                             class="fa fa-times"></i></a>
                                 <button type="submit">
                                     <i class="fa fa-search"></i>
@@ -50,20 +43,16 @@
                             </table>
 
                         </div>
-                        <!-- end widget content -->
 
                     </div>
-                    <!-- end widget div -->
 
                 </div>
-                <!-- end widget -->
 
             </article>
         </div>
 
 
     </section>
-    <!-- end widget grid -->
     @push('scripts')
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="/js/plugin/datatables/jquery.dataTables.min.js"></script>

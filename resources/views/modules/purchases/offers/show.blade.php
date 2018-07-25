@@ -175,7 +175,9 @@
                                                 @if($offer->currency != "try")
                                                     <tr>
                                                         <td>
-                                                            <div class="bottom-info">TL KARŞILIĞI</div>
+                                                            <div class="bottom-info">
+                                                                {{ trans("sentence.provision_for_tl") }}
+                                                            </div>
                                                         </td>
                                                         <td style="text-align:right">
                                                             <div class="bottom-info"
@@ -215,9 +217,12 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">{{trans("general.offer")}} {{trans("general.amount")}} <span class="pull-right"
-                                                                                     style="font-size:15px;color:#2AC!important">{{$offer->grand_total}}
-                                                <i class="fa fa-{{$offer->currency}}"></i></span></div>
+                                        <div class="bottom-info">
+                                            {{trans("sentence.offer_amount")}}
+                                            <span class="pull-right" style="font-size:15px;color:#2AC!important">{{$offer->grand_total}}
+                                                <i class="fa fa-{{$offer->currency}}"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr>
@@ -238,10 +243,9 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        TEKLİFTEN OLUŞTURULAN SİPARİŞLER
+                                        {{ trans("sentence.orders_created_from_offer") }}
                                         <br>
-                                        <a href="http://demo.iyspro.com/salesmanager/sales-orders/22"> {{trans("general.sales")}} {{trans("general.order")}}
-                                            &nbsp;(#22)</a><br>
+                                        <a href="http://demo.iyspro.com/salesmanager/sales-orders/22"> {{trans("sentence.sales_order")}}                                            &nbsp;(#22)</a><br>
                                     </div>
 
                                 </div>
@@ -268,14 +272,14 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             ×
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">{{trans("general.change")}}</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{trans("word.change")}}</h4>
                     </div>
                     <div class="modal-body modal-body-content">
                         <form id="StatusForm">
                             <div class="row">
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">{{trans("general.status")}}</label>
+                                        <label class="col-md-4 control-label">{{trans("word.status")}}</label>
                                         <div class="col-md-6 ">
                                             <div class="input-group">
                                                 <select v-model="form.status" class="form-control">
@@ -289,7 +293,7 @@
                                 <HR>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">{{trans("general.effective")}} {{trans("general.date")}}</label>
+                                        <label class="col-md-4 control-label">{{trans("sentence.effective_date")}}</label>
                                         <div class="col-md-4 ">
                                             <div class="input-group">
                                                 <input type="text"
@@ -308,7 +312,7 @@
                                 <hr>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">{{trans("general.description")}}</label>
+                                        <label class="col-md-4 control-label">{{trans("word.description")}}</label>
                                         <div class="col-md-6 ">
                                             <div class="input-group">
                                                 <textarea v-model="form.note" rows="3" cols="25"
@@ -323,10 +327,10 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">
-                            {{trans("general.cancel")}}
+                            {{trans("word.cancel")}}
                         </button>
                         <button type="button" class="btn btn-primary" v-on:click="status_send">
-                            {{trans("general.save")}}
+                            {{trans("word.save")}}
                         </button>
                     </div>
                 </div>

@@ -3,35 +3,31 @@
 @section('content')
     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-8 sortable-grid ui-sortable">
 
-        <!-- Widget ID (each widget will need unique ID)-->
         <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
 
             <header role="heading" class="ui-sortable-handle"> <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                <h2>     {{trans("sentence.edit_user")}}</h2>
+                <h2>
+                    {{trans("sentence.edit_user")}}
+                </h2>
 
                 <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
 
-            <!-- widget div-->
             <div role="content">
 
-                <!-- widget edit box -->
                 <div class="jarviswidget-editbox">
-                    <!-- This area used as dropdown edit box -->
 
                 </div>
-                <!-- end widget edit box -->
 
-                <!-- widget content -->
                 <div class="widget-body">
-                    {{-- find required POST route --}}
                     <form action="{{ route('settings.users.update', [aid(), $user->id])}}"
                           method="POST">
                         @csrf
-@method('PATCH')
-
+                        @method('PATCH')
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">{{trans("sentence.name_and_surname")}} :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">
+                                {{trans("sentence.name_and_surname")}} :
+                            </label>
 
                             <div class="col-md-9">
                                 <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user->name or old('name') }}" required autofocus>
@@ -45,7 +41,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">{{trans("word.email")}} :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">
+                                {{trans("word.email")}} :
+                            </label>
 
                             <div class="col-md-9">
                                 <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $user->email or old('email') }}" required>
@@ -53,13 +51,15 @@
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
                                             <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
+                                    </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">{{trans("sentence.mobile_number")}} :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">
+                                {{trans("sentence.mobile_number")}} :
+                            </label>
 
                             <div class="col-md-9">
                                 <input type="text" class="form-control{{ $errors->has('mobile') ? ' is-invalid' : '' }}" name="mobile" value="{{ $user->mobile or old('mobile') }}">
@@ -73,7 +73,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label text-md-right">{{trans("word.language")}} :</label>
+                            <label class="col-sm-3 col-form-label text-md-right">
+                                {{trans("word.language")}} :
+                            </label>
 
                             <div class="col-md-9">
                                 <select class="form-control{{ $errors->has('language') ? ' is-invalid' : '' }}" name="language" required>
@@ -96,7 +98,9 @@
                                 <label class="col-sm-3 col-form-label text-md-right"></label>
 
                                 <div class="col-md-9">
-                                    <button type="button" class="btn btn-danger" id="permission">{{trans("word.permissions")}}</button>
+                                    <button type="button" class="btn btn-danger" id="permission">
+                                        {{trans("word.permissions")}}
+                                    </button>
                                 </div>
                             </div>
                         @endif
@@ -107,20 +111,21 @@
 
                         <div class="form-group row">
                             <div class="col-sm-12 col-form-label text-md-right">
-                                <a href="{{ route("settings.users.index",aid())}}" class="btn btn-outline-dark">{{trans("word.cancel")}}</a>
-                                <button type="submit" class="btn btn-primary">{{trans("word.submit")}}</button>
+                                <a href="{{ route("settings.users.index",aid())}}" class="btn btn-outline-dark">
+                                    {{trans("word.cancel")}}
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    {{trans("word.submit")}}
+                                </button>
                             </div>
                         </div>
                     </form>
 
                 </div>
-                <!-- end widget content -->
 
             </div>
-            <!-- end widget div -->
 
         </div>
-        <!-- end widget -->
 
 
     </article>

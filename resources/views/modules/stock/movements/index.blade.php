@@ -2,22 +2,18 @@
 
 @section('content')
 
-    <!-- widget grid -->
     <section id="widget-grid" class="">
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET START -->
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-                    <!-- widget div-->
                     <div>
-                        <!-- widget content -->
                         <div class="widget-body no-padding">
-                            <!-- search mobile button (this is hidden till mobile view port) -->
                             <div id="search-mobile" class="btn-header transparent pull-right">
-                                <span> <a href="javascript:void(0)" title="{{ trans("word.search") }}"><i
-                                                class="fa fa-search"></i></a> </span>
+                                <span>
+                                    <a href="javascript:void(0)" title="{{ trans("word.search") }}">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </span>
                             </div>
 
                             <div class="header-search pull-left" style="margin: 0px 0px 5px 7px;min-width: 360px;">
@@ -25,8 +21,9 @@
                                 <button type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
-                                <a href="javascript:void(0);" id="cancel-search-js" title="{{ trans("sentence.cancel_search") }}"><i
-                                            class="fa fa-times"></i></a>
+                                <a href="javascript:void(0);" id="cancel-search-js" title="{{ trans("sentence.cancel_search") }}">
+                                    <i class="fa fa-times"></i>
+                                </a>
                                 <button type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
@@ -36,16 +33,20 @@
                             <div class="pull-right new-button">
 
 
-                                <span class="btn btn-success  dropdown-toggle" data-toggle="dropdown"
-                                      aria-expanded="false">{{trans("sentence.new_action")}}
-            <i class="fa fa-angle-down"></i></span>
-                                <!-- Suggestion: populate this list with fetch and push technique -->
+                                <span class="btn btn-success  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    {{trans("sentence.new_action")}}
+                                    <i class="fa fa-angle-down"></i>
+                                </span>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{route("stock.movements.form",[aid(),0,"new","in"])}}">{{ trans("sentence.in_stock") }} </a>
+                                        <a href="{{route("stock.movements.form",[aid(),0,"new","in"])}}">
+                                            {{ trans("sentence.in_stock") }}
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="{{route("stock.movements.form",[aid(),0,"new","out"])}}">{{ trans("sentence.out_stock") }} </a>
+                                        <a href="{{route("stock.movements.form",[aid(),0,"new","out"])}}">
+                                            {{ trans("sentence.out_stock") }}
+                                        </a>
                                     </li>
                                 </ul>
 
@@ -55,24 +56,18 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{trans("general.description")}}</th>
-                                    <th>{{trans("general.type")}}</th>
-                                    <th>{{trans("general.edition")}} {{trans("general.date")}}</th>
+                                    <th>{{trans("word.description")}}</th>
+                                    <th>{{trans("word.type")}}</th>
+                                    <th>{{trans("sentence.edit_date")}}</th>
                                 </tr>
                                 </thead>
-
                             </table>
-
                         </div>
-                        <!-- end widget content -->
                     </div>
-                    <!-- end widget div -->
                 </div>
-                <!-- end widget -->
             </article>
         </div>
     </section>
-    <!-- end widget grid -->
     @push('scripts')
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="/js/plugin/datatables/jquery.dataTables.min.js"></script>

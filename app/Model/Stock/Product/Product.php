@@ -144,7 +144,6 @@ class Product extends Model
     public function getOrderCountAttribute(){
         $toplam_sipariler = $items = $this->order_items;
         $order = $items = $this->order_items()->sum("quantity");
-
         $waybill = 0;
         foreach ($toplam_sipariler as $sip) {
 
@@ -159,5 +158,9 @@ class Product extends Model
         return $this->hasOne(Units::class,"id","unit_id");
     }
 
+    public function movements()
+    {
+        return $this->hasMany(StockItems::class, "product_id", "id");
+    }
 
 }

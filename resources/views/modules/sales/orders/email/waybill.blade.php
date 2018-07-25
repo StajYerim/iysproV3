@@ -257,15 +257,22 @@
                         <br><BR>
                         <table class="inner-body" align="center" width="700" cellpadding="0" cellspacing="0">
                             <tr style="padding:0px;">
-                                <th style="text-align: left;">HİZMET/ÜRÜN</th>
-                                <th style="text-align: left;">MİKTAR</th>
-                                <th style="text-align: left;">VERGİ</th>
+                                <th style="text-align: left;">{{ trans("word.service") }}/{{ trans("word.product") }}</th>
+                                <th style="text-align: left;">{{ trans("word.quantity") }}</th>
+                                <th style="text-align: left;">{{ trans("word.tax") }}</th>
                             </tr>
                             @foreach($waybill->items as $item)
                                 <tr>
-                                    <td width="430px" class="service">{{$item->order_item->product->named["name"]}}</td>
-                                    <td width="180px"  align="right"><span style="margin-right:-5px;">{{$item->order_item["quantity"]}} {{$item->order_item->product->unit["short_name"]}}</span></td>
-                                    <td width="120px"> %{{$item->order_item["vat"]}}</td>
+                                    <td width="430px" class="service">
+                                        {{$item->order_item->product->named["name"]}}
+                                    </td>
+                                    <td width="180px"  align="right">
+                                        <span style="margin-right:-5px;">
+                                            {{$item->order_item["quantity"]}} {{$item->order_item->product->unit["short_name"]}}
+                                        </span></td>
+                                    <td width="120px">
+                                        %{{$item->order_item["vat"]}}
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>

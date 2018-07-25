@@ -126,9 +126,9 @@ class StockController extends Controller
 
     public function show($aid, $id)
     {
-
         $product = Product::find($id);
-        return view("modules.stock.products.show", compact("product"));
+        $movements = $product->movements()->paginate(5);
+        return view("modules.stock.products.show", compact("product","movements"));
     }
 
     public function image_upload($aid, Request $request)
@@ -266,5 +266,11 @@ class StockController extends Controller
         ]);
       }
       return redirect()->route('stock.product.show', [ $aid, $id ]);
+    }
+
+    public function movements($aid,$id){
+      $product=  Product::find($id);
+
+      return  response()->json($product->movements()->with("receipt","receipt.company","unit","product")->paginate(5));
     }
 }

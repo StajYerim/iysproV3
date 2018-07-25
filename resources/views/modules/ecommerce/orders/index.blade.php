@@ -1,11 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-<!-- widget grid -->
 <section id="widget-grid" class="">
-    <!-- row -->
     <div class="row">
-        <!-- NEW WIDGET START -->
         <article class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             <div class="jarviswidget" id="wid-id-0">
                 <header>
@@ -13,11 +10,8 @@
                         <i class="fa fa-info"></i>
                     </span>
                     <h2>{{trans("word.order")}} </h2>
-
                 </header>
-                <!-- widget div-->
                 <div>
-                    <!-- widget content -->
                     <div class="widget-body no-padding">
                       <table id="table" class="table table-striped table-hover" width="100%">
                             <thead>
@@ -35,7 +29,9 @@
                         </table>
                         <div class="dt-toolbar-footer">
                           <div class="col-sm-6 col-xs-12 hidden-xs">
-                            <div class="dataTables_info" id="table_info" role="status" aria-live="polite">{{trans("sentence.total_order")}} : 0 </div>
+                            <div class="dataTables_info" id="table_info" role="status" aria-live="polite">
+                                {{trans("sentence.total_order")}} : 0
+                            </div>
                           </div>
                           <div class="col-sm-6 col-xs-12">
                             <div class="dataTables_paginate paging_simple_numbers">
@@ -46,14 +42,9 @@
                           </div>
                         </div>
                    </div>
-                    <!-- end widget content -->
                 </div>
-                <!-- end widget div -->
             </div>
-            <!-- end widget -->
         </article>
-        <!-- WIDGET END -->
-        <!-- NEW WIDGET START -->
           <article class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
               <div class="jarviswidget" id="wid-id-0">
                   <header>
@@ -63,9 +54,7 @@
                       <h2>{{trans("word.search")}} </h2>
 
                   </header>
-                  <!-- widget div-->
                   <div>
-                      <!-- widget content -->
                       <div class="widget-body">
                         <ul class="nav nav-pills nav-stacked" id="order-status">
                           <li role="presentation" class="active"><a href="#">{{trans("word.all")}}</a></li>
@@ -78,18 +67,12 @@
                           <li role="presentation"><a href="#">{{trans("word.claimed")}}</a></li>
                         </ul>
                      </div>
-                      <!-- end widget content -->
                   </div>
-                  <!-- end widget div -->
               </div>
-              <!-- end widget -->
           </article>
-          <!-- WIDGET END -->
 
     </div>
-    <!-- end row -->
 </section>
-<!-- end widget grid -->
     @push('scripts')
       <script>
         window.status = "";

@@ -1,19 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-    <!-- widget grid -->
     <section id="widget-grid" class="">
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET START -->
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-                    <!-- widget div-->
                     <div>
-                        <!-- widget content -->
                         <div class="widget-body no-padding">
-                            <!-- search mobile button (this is hidden till mobile view port) -->
                             <div id="search-mobile" class="btn-header transparent pull-right">
                                 <span> <a href="javascript:void(0)" title="Search"><i
                                                 class="fa fa-search"></i></a> </span>
@@ -33,10 +26,21 @@
                             </div>
 
                             <div class="pull-right new-button">
-                                <a href="{{route("finance.accounts.form",[aid(),0,1,"new"])}}"><span class="btn btn-success">{{trans("sentence.add_safe")}}</span></a>
-                                <a href="{{route("finance.accounts.form",[aid(),0,2,"new"])}}"><span class="btn btn-success">{{trans("sentence.add_bank")}}</span></a>
-                                <a href="{{route("finance.accounts.form",[aid(),0,3,"new"])}}"> <span class="btn btn-success">{{trans("sentence.add_credit_account")}}</span></a>
-                                <!-- Suggestion: populate this list with fetch and push technique -->
+                                <a href="{{route("finance.accounts.form",[aid(),0,1,"new"])}}">
+                                    <span class="btn btn-success">
+                                        {{trans("sentence.add_safe")}}
+                                    </span>
+                                </a>
+                                <a href="{{route("finance.accounts.form",[aid(),0,2,"new"])}}">
+                                    <span class="btn btn-success">
+                                        {{trans("sentence.add_bank")}}
+                                    </span>
+                                </a>
+                                <a href="{{route("finance.accounts.form",[aid(),0,3,"new"])}}">
+                                    <span class="btn btn-success">
+                                        {{trans("sentence.add_credit_account")}}
+                                    </span>
+                                </a>
                             </div>
 
                             <table id="table" class="table table-striped table-hover" width="100%">
@@ -44,7 +48,7 @@
                                 <tr>
                                     <th width="1px">#</th>
                                     <th>{{trans("sentence.account_name")}}</th>
-                                    <th>IBAN</th>
+                                    <th>{{trans("word.iban")}}</th>
                                     <th>{{trans("word.currency")}}</th>
                                     <th>{{trans("word.balance")}}</th>
                                 </tr>
@@ -53,15 +57,11 @@
                             </table>
 
                         </div>
-                        <!-- end widget content -->
                     </div>
-                    <!-- end widget div -->
                 </div>
-                <!-- end widget -->
             </article>
         </div>
     </section>
-    <!-- end widget grid -->
     @push('scripts')
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="/js/plugin/datatables/jquery.dataTables.min.js"></script>

@@ -45,9 +45,13 @@ Route::group(['prefix'=>'{company_id}/sales','middleware'=>['not.admin','permiss
     Route::get("orders/invoice-print/{id}","Modules\Sales\OrdersController@invoice_print")->name("sales.invoice.print");
     Route::post("orders/invoice-delete/{id}","Modules\Sales\OrdersController@invoice_delete")->name("sales.invoice.delete");
 
+    //Sales Order -> Transfers
     Route::get("/orders/transfer/{id}/list","Modules\Sales\OrdersController@transfer_list")->name("sales.transfer.list");
     Route::post("/orders/transfer/{id}/add","Modules\Sales\OrdersController@transfer_add")->name("sales.transfer.add");
     Route::post("/orders/transfer/delete","Modules\Sales\OrdersController@transfer_delete")->name("sales.transfer.delete");
 
+
+    //Sales Orders -> Sales Report
+    Route::get("/orders/sales-report","Modules\Sales\SalesReportController@index")->name("sales.sales_report.index");
 
 });
