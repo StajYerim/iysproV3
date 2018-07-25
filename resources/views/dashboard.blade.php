@@ -137,6 +137,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($bank_account_items as $bank_account_item)
+                                    @if($bank_account_item->company_id != null)
                                     <tr>
                                         <td>...</td>
                                         <td>{{ $bank_account_item->company->company_name }}</td>
@@ -158,6 +159,7 @@
 
                                         </td>
                                     </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
 
@@ -173,9 +175,6 @@
                     </div>
                 </div>
             </article>
-
-
-
         </div>
     </section>
 @endsection

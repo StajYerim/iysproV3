@@ -91,7 +91,7 @@
                     </li>
                 </ul>
                 <div id="myTabContent1" class="tab-content padding-10" style="background-color: #fff">
-                    <div class="tab-pane fade" id="g1">
+                    <div class="tab-pane fade  active in" id="g1">
                         <small style="font-size:13px;">
                             ----- </small>
                         <br> <small style="font-size:14px;font-weight: 600;"> {{trans("sentence.sales_order")}}: 0,00</small>
@@ -102,9 +102,59 @@
                     </div>
 
 
-                    <div class="tab-pane fade active in" id="g2">
+                    <div class="tab-pane fade" id="g2">
                         <div>
-                            <div class="alert alert-info">
+                            <div class="table-responsive" v-if="stock.data.length > 0">
+
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>İŞLEM TÜRÜ</th>
+                                        <th>AÇIKLAMA</th>
+                                        <th>MÜŞTERİ / TEDARİKÇİ</th>
+                                        <th>İŞLEM TARİHİ</th>
+                                        <th>MİKTAR</th>
+                                        <th>BİRİM FİYATI</th>
+                                        <th>TOPLAM FİYAT</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="item in stock.data">
+                                        <td> @{{item.receipt.type_name}}</td>
+                                        <td>@{{ item.receipt.description }}</td>
+                                        <td>
+
+                                            <span v-if="item.receipt.company == null">-</span>
+                                            <span v-if="item.receipt.company != null">@{{ item.receipt.company.company_name}}</span>
+                                        </td>
+                                        <td>@{{ item.receipt.date }}</td>
+                                        <td>@{{ item.quantity }} @{{ item.unit.short_name }}</td>
+                                        <td>@{{ item.product.list_price }} <i class="fa fa-try"></i> </td>
+                                        <td>-<i class="fa fa-try"></i></td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="7">
+                                            <ul class="pagination pagination-xs no-margin">
+                                                <li class="prev ">
+                                                    <a @click="movements(stock.per_page)">First</a>
+                                                </li>
+                                                <li  v-for="i in (3, stock.last_page)" @click="movements(i)" :class="{active:stock.current_page == i}">
+                                                    <a href="javascript:void(0);">@{{ i }}</a>
+                                                </li>
+
+                                                <li class="next">
+                                                    <a href="#!" @click="movements(stock.last_page)">Next</a>
+                                                </li>
+                                            </ul></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+
+                            <div class="alert alert-info" v-else="stock.data.length < 0">
                                 <span class="fa fa-info-circle">
                                     {{trans("sentence.service_product_transaction_history")}}
                                 </span>
@@ -123,12 +173,20 @@
 
     @push('scripts')
         <script>
-            new Vue({
+           $stock = new Vue({
                 el: "#show",
                 data: {
-                    details: false
+                    details: false,
+                    stock:[]
                 },
                 methods: {
+                    movements:function($page=1){
+
+                        axios.get("/{{aid()}}/stocks/product/{{$id}}/movements?page="+$page).then(res=>{
+
+                            $stock.stock = res.data
+                        })
+                    },
                     delete_data: function ($id) {
                         fullLoading();
                         axios.delete('{{route("stock.product.destroy",[aid(),$id])}}')
@@ -142,6 +200,9 @@
                         });
                     },
 
+                },
+                mounted(){
+                    this.movements(1);
                 }
             });
         </script>
