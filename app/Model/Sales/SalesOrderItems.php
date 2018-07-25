@@ -15,6 +15,7 @@ class SalesOrderItems extends Model
     protected $guarded = [];
     protected $dates = ["termin_date"];
     public $timestamps = false;
+    protected $appends = ["prices"];
 
 
 
@@ -51,6 +52,10 @@ class SalesOrderItems extends Model
 
     public function getPriceAttribute(){
         return get_money($this->attributes["price"]);
+    }
+
+    public function getPricesAttribute(){
+        return $this->attributes["price"];
     }
 
     public function getTotalAttribute(){

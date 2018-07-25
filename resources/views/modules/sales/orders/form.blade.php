@@ -165,7 +165,7 @@
                     }),
                     mounted: function () {
                         @if($form_type == "Update")
-                            this.form.tagsd.push(@foreach($company->tags as $tag)
+                            this.form.tagsd.push(@foreach($order->tags as $tag)
                             {
                                 style: "background-color:{{$tag->bg_color}}", text: "{{$tag->title}}"
                             },

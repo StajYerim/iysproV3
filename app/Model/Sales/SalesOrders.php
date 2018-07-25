@@ -8,6 +8,7 @@ use App\Model\Finance\BankItems;
 use App\Model\Finance\Cheques;
 use App\Model\Stock\Stock;
 use App\Model\Stock\StockItems;
+use App\Tags;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -171,12 +172,16 @@ class SalesOrders extends Model
     public function getNoWaybillsAttribute()
     {
         $stok_item = StockItems::select("sales_order_item_id")->get();
-         $item =  $this->items()->whereNotIn("id",$stok_item)->get();
+        $whereNot = Array();
+        foreach($stok_item as $item){
+            if($item["sales_order_item_id"] != null)
+                array_push($whereNot,$item["sales_order_item_id"]);
+        }
 
-         return $item;
 
+        $item =  $this->items()->whereNotIn("id",$whereNot)->get();
 
-
+        return $item;
     }
 
     public function invoice(){
@@ -206,5 +211,10 @@ class SalesOrders extends Model
         }else{
             return '<span class="label label-primary">KISMİ ÖDENDİ</span>';
         }
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tags::class, 'taggable');
     }
 }
