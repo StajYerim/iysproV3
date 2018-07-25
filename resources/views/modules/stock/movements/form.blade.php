@@ -1,25 +1,23 @@
 @extends('layouts.master')
 @section('content')
-    <!-- widget grid -->
     <section id="stock" v-cloak>
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET ROW START -->
             <div class="col-sm-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false">
-                    <!-- widget div-->
                     <div>
-                        <!-- widget content -->
                         <div class="widget-body ">
                             <form id="form" @submit.prevent="formSend" class="form-horizontal">
                                 <fieldset class="fixed-title">
                                     <div class="form-group">
-                                        <label class="col-md-3 col-sm-3 control-label"> <span
-                                                    style="vertical-align: -9px;">{{trans("word.description") }}</span></label>
+                                        <label class="col-md-3 col-sm-3 control-label">
+                                            <span style="vertical-align: -9px;">
+                                                {{trans("word.description") }}
+                                            </span>
+                                        </label>
                                         <div class="col-md-3 col-sm-4 pull-right">
                                             <a href="{{$form_type == "new" ? route("stock.index",aid()): URL::previous() }}"
-                                               class="btn btn-default btn-lg ">{{trans("word.back")}}
+                                               class="btn btn-default btn-lg ">
+                                                {{trans("word.back")}}
                                             </a>
                                             <button type="submit" href="#" class="btn btn-success btn-lg ">
                                                 {{trans("word.save")}}
@@ -42,12 +40,14 @@
                                         <label class="col-md-3 control-label">{{$action == 0  ? trans("word.customer"):trans("word.supplier")}}</label>
                                         <div class="col-md-6">
 
-                                            <v-select label="text" :filterable="true" placeholder="Choose Company"
+                                            <v-select label="text" :filterable="true" placeholder="{{ trans('sentence.choose_company') }}"
                                                       :options="options_company" @search="onSearch"
                                                       transition="fade" v-model="form.company_id">
                                                 <template slot="no-options">
                                                     <a type="button" style="color:white" class='btn btn-sm btn-warning' href='#!'
-                                                       data-toggle='modal' data-target='#new_company'>{{trans("sentence.click_for_a_new_company")}}</a>
+                                                       data-toggle='modal' data-target='#new_company'>
+                                                        {{trans("sentence.click_for_a_new_company")}}
+                                                    </a>
                                                 </template>
                                                 <template slot="option" slot-scope="option">
                                                     <div class="d-center">
@@ -65,7 +65,9 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("sentence.edit_date")}}</label>
+                                        <label class="col-md-3 control-label">
+                                            {{trans("sentence.edit_date")}}
+                                        </label>
                                         <div class="col-md-2 ">
                                             <div class="input-group">
                                                 <input type="text" class="form-control datepicker" v-model="form.date">
@@ -76,7 +78,9 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{trans("sentence.receipt_type")}}</label>
+                                        <label class="col-md-3 control-label">
+                                            {{trans("sentence.receipt_type")}}
+                                        </label>
                                         <div class="col-md-3">
                                             <select v-model="form.receipt_id" class="form-control">
                                                 <option disabled value="">
@@ -144,20 +148,18 @@
                                         </tbody>
                                     </table>
 
-                                    <button class="btn btn-default" type="button" @click="addRow">{{trans("sentence.new_row")}}</button>
+                                    <button class="btn btn-default" type="button" @click="addRow">
+                                        {{trans("sentence.new_row")}}
+                                    </button>
 
                                 </div>
                             </form>
                         </div>
-                        <!-- end widget content -->
 
                     </div>
-                    <!-- end widget div -->
 
                 </div>
-                <!-- end widget -->
             </div>
-            <!-- WIDGET ROW END -->
         </div>
 
     </section>

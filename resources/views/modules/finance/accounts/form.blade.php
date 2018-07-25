@@ -1,16 +1,10 @@
 @extends('layouts.master')
 @section('content')
-    <!-- widget grid -->
     <section id="account" v-cloak>
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET ROW START -->
             <div class="col-sm-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false">
-                    <!-- widget div-->
                     <div>
-                        <!-- widget content -->
                         <div class="widget-body ">
                             <form @submit.prevent="formSend" class="form-horizontal">
                                 <fieldset class="fixed-title">
@@ -145,15 +139,11 @@
                                     @endif
                             </form>
                         </div>
-                        <!-- end widget content -->
 
                     </div>
-                    <!-- end widget div -->
 
                 </div>
-                <!-- end widget -->
             </div>
-            <!-- WIDGET ROW END -->
         </div>
 
     </section>

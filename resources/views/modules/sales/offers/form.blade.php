@@ -7,17 +7,11 @@
 
                 @endphp
         @endif
-    <!-- widget grid -->
     <section>
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET ROW START -->
             <div class="col-sm-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false">
-                    <!-- widget div-->
                     <div>
-                        <!-- widget content -->
                         <div class="widget-body ">
 
                             <form class="form-horizontal">
@@ -130,15 +124,11 @@
 
 
                         </div>
-                        <!-- end widget content -->
 
                     </div>
-                    <!-- end widget div -->
 
                 </div>
-                <!-- end widget -->
             </div>
-            <!-- WIDGET ROW END -->
         </div>
 
         @include("components.modals.companies",[$option="customer",$title="New Company",$type = "new_company",$message="Company Form",$id=0])

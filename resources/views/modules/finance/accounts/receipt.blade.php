@@ -22,7 +22,11 @@
                                 class="semi-bold"> {{$receipt->type}}
                              </span>
 
-                        <span class="pull-right"><a  href="#!" data-toggle="modal" data-target="#deleteModal" class="btn btn-default btn-lg "> {{trans("word.delete")}}</a></span>
+                        <span class="pull-right">
+                            <a  href="#!" data-toggle="modal" data-target="#deleteModal" class="btn btn-default btn-lg ">
+                                {{trans("word.delete")}}
+                            </a>
+                        </span>
                     </h1>
                     <hr>
                     <div class="row">
@@ -37,19 +41,33 @@
                                             <div class="bottom-info"><i class="fa fa-building-o" aria-hidden="true"></i> {{trans("word.customer")}}
                                             </div>
                                         </td>
-                                        <td><a href="{{route("sales.companies.show",[aid(),$receipt->company["id"]])}}">{{$receipt->company["company_name"]}}</a></td>
+                                        <td>
+                                            <a href="{{route("sales.companies.show",[aid(),$receipt->company["id"]])}}">
+                                                {{$receipt->company["company_name"]}}
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td width="200px">
-                                            <div class="bottom-info"><i class="fa fa-calendar" aria-hidden="true"></i> {{trans("word.date")}}</div>
+                                            <div class="bottom-info">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                {{trans("word.date")}}
+                                            </div>
                                         </td>
                                         <td>{{$receipt->date}}</td>
                                     </tr>
                                     <tr>
                                         <td width="200px">
-                                            <div class="bottom-info"><i class="fa fa-bank" aria-hidden="true"></i> {{trans("sentence.account_processed")}}</div>
+                                            <div class="bottom-info">
+                                                <i class="fa fa-bank" aria-hidden="true"></i>
+                                                {{trans("sentence.account_processed")}}
+                                            </div>
                                         </td>
-                                        <td><a href="{{route("finance.accounts.show",[aid(),$receipt->bank_account["id"]])}}">{{$receipt->bank_account["name"]}}</a></td>
+                                        <td>
+                                            <a href="{{route("finance.accounts.show",[aid(),$receipt->bank_account["id"]])}}">
+                                                {{$receipt->bank_account["name"]}}
+                                            </a>
+                                        </td>
                                     </tr>
 
                                     </tr>
@@ -63,8 +81,11 @@
                         <div class="col-sm-8" style="font-weight: 400;font-size:15px;">
                         </div>
 
-                        <div class="col-sm-4" style="font-weight: 600;font-size:15px;"> {{trans("sentence.collected_sum")}} <span class="pull-right">{{$receipt->amount}} <i
-                                        class="fa fa-try"></i> </span>
+                        <div class="col-sm-4" style="font-weight: 600;font-size:15px;">
+                            {{trans("sentence.collected_sum")}}
+                            <span class="pull-right">{{$receipt->amount}}
+                                <i class="fa fa-try"></i>
+                            </span>
                         </div>
                     </div>
                     <br>
@@ -76,7 +97,12 @@
                                     <td width="5%"></td>
                                     <td></td>
                                     <td style="text-align:right" >{{trans("word.remaining")}}</td>
-                                    <td><span class="pull-right">{{$receipt->remaining}} <i class="fa fa-{{$receipt->currency}}"></i></span></td>
+                                    <td>
+                                        <span class="pull-right">
+                                            {{$receipt->remaining}}
+                                            <i class="fa fa-{{$receipt->currency}}"></i>
+                                        </span>
+                                    </td>
                                 </tr>
                                 </tfoot>
                                 <tbody>

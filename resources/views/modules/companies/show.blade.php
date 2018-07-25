@@ -7,14 +7,15 @@
         }
 
     </style>
-    <!-- widget grid -->
     <section id="show" v-cloak>
-        <!-- row -->
         <div class="row">
             <div class="col-lg-12 new-title">
                 <div class="col-lg-8 col-sm-8">
-                    <h1><i class="fa fa-building-o"></i> <span class="semi-bold">{{$company->company_name}}
-                                                </span>
+                    <h1>
+                        <i class="fa fa-building-o"></i>
+                        <span class="semi-bold">
+                            {{$company->company_name}}
+                        </span>
                     </h1>
 
                 </div>
@@ -22,39 +23,45 @@
 
                     <div class="btn-group btn-group-justified pull-right option-menu">
                         <div class="btn-group ">
-                            <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
-                                        class="fa fa-reorder"></span> &nbsp;<span class="caret"></span> </a>
+                            <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="fa fa-reorder"></span> &nbsp;<span class="caret"></span>
+                            </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{route("sales.companies.form",[aid(),'customer',$company->id,'update'])}}"><i
-                                                class="fa fa-edit" aria-hidden="true"></i>
-                                        {{trans("word.edit")}}</a>
+                                    <a href="{{route("sales.companies.form",[aid(),'customer',$company->id,'update'])}}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                        {{trans("word.edit")}}
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#!"  data-toggle="modal" data-target="#transaction"><i
-                                                class="fa fa-edit" aria-hidden="true"></i>
-                                        {{trans("sentence.add_collection") }}</a>
+                                    <a href="#!"  data-toggle="modal" data-target="#transaction">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                        {{trans("sentence.add_collection") }}
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#!"  data-toggle="modal" data-target="#transaction_payment"><i
-                                                class="fa fa-edit" aria-hidden="true"></i>
-                                       {{trans("sentence.add_payment")}}</a>
+                                    <a href="#!"  data-toggle="modal" data-target="#transaction_payment">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                       {{trans("sentence.add_payment")}}
+                                    </a>
                                 </li>
 
 
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
-                                                                                                  aria-hidden="true"></i>
-                                        {{trans("word.delete")}}</a>
+                                    <a href="#" data-toggle="modal" data-target="#deleteModal">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        {{trans("word.delete")}}
+                                    </a>
                                 </li>
 
                             </ul>
 
                         </div>
                         <div class="btn-group">
-                            <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
-                                        class="fa fa-print"></span> {{trans("general.print")}} <span class="caret"></span> </a>
+                            <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="fa fa-print"></span>
+                                {{trans("word.print")}} <span class="caret"></span> </a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
@@ -79,13 +86,10 @@
 
                 </div>
             </div>
-            <!-- NEW WIDGET START -->
+
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div >
-                    <!-- widget div-->
                     <div>
-                        <!-- widget content -->
                         <div class="">
 
                             <div class="row">
@@ -121,16 +125,15 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4" >
-                                    {{--payment info --}}
                                     <div id="order_info" class="well">
-
-
 
                                         <div id="short_info" class="col-12">
 
                                             <div class="row">
-                                                <div class="col-sm-12 bottom-info" >
-                                                    {{trans("word.balance")}} <span class="pull-right">@{{remaining}}</span>
+                                                <div class="col-sm-12 bottom-info">
+                                                    {{trans("word.balance")}}
+                                                    <span class="pull-right">@{{remaining}}
+                                                    </span>
 
                                                 </div>
                                             </div>
@@ -143,10 +146,7 @@
                                                 </div>
                                             </div>
 
-
-                                        </div>
-
-
+                                       </div>
 
                                     </div>
 
@@ -156,50 +156,44 @@
                                                width="100%"
                                                border="0">
                                             <tr>
-                                                <td width="10"><i class="fa fa-building-o" aria-hidden="true"></i>
-
-
+                                                <td width="10">
+                                                    <i class="fa fa-building-o" aria-hidden="true"></i>
                                                 </td>
                                                 <td>{{$company->company_name}}</td>
                                             </tr>
                                             <tr>
-                                                <td><i class="fa fa-info-circle" aria-hidden="true"></i>
-
+                                                <td>
+                                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
                                                 </td>
                                                 <td>{{$company->company_short_name}}</td>
                                             </tr>
                                             <tr>
-                                                <td><i class="fa fa-envelope" aria-hidden="true"></i>
-
-
+                                                <td>
+                                                    <i class="fa fa-envelope" aria-hidden="true"></i>
                                                 </td>
                                                 <td>{{$company->email}}</td>
                                             </tr>
                                             <tr>
-                                                <td><i class="fa fa-phone" aria-hidden="true"></i>
-
-
+                                                <td>
+                                                    <i class="fa fa-phone" aria-hidden="true"></i>
                                                 </td>
                                                 <td>{{$company->phone}}</td>
                                             </tr>
                                             <tr>
-                                                <td><i class="fa fa-fax" aria-hidden="true"></i>
-
-
+                                                <td>
+                                                    <i class="fa fa-fax" aria-hidden="true"></i>
                                                 </td>
                                                 <td>{{$company->fax}}</td>
                                             </tr>
                                             <tr>
-                                                <td><i class="fa fa-map-marker" aria-hidden="true"></i>
-
-
+                                                <td>
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
                                                 </td>
                                                 <td>{{$company->addresss  }}</td>
                                             </tr>
                                             <tr>
-                                                <td><i class="fa fa-gavel" aria-hidden="true"></i>
-
-
+                                                <td>
+                                                    <i class="fa fa-gavel" aria-hidden="true"></i>
                                                 </td>
                                                 <td>{{$company->tax_id}}/{{$company->tax_office}}</td>
                                             </tr>
@@ -213,13 +207,10 @@
 
 
                         </div>
-                        <!-- end widget content -->
 
                     </div>
-                    <!-- end widget div -->
 
                 </div>
-                <!-- end widget -->
 
             </article>
         </div>

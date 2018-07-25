@@ -2,16 +2,12 @@
 
 @section('content')
 
-    <!-- widget grid -->
     <section id="tester" class="">
 
-        <!-- row -->
         <div class="row">
 
-            <!-- NEW WIDGET START -->
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-0">
                     <!-- widget options:
                         usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
@@ -31,22 +27,15 @@
 
                     </header>
 
-                    <!-- widget div-->
-                    <div>
 
-                        <!-- widget edit box -->
-                        <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
-                            <input class="form-control" type="text">
                         </div>
-                        <!-- end widget edit box -->
-
-                        <!-- widget content -->
-                        <div class="widget-body">
                             <div class="table-responsive">
-<form @submit.prevent="form_send">
-    <input type="form-control" v-model="new_item">
-    <button class="btn btn-suuccess" type="submit">{{trans("word.send")}}</button></form>
+                                <form @submit.prevent="form_send">
+                                    <input type="form-control" v-model="new_item">
+                                    <button class="btn btn-suuccess" type="submit">
+                                        {{trans("word.send")}}
+                                    </button>
+                                </form>
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
@@ -57,46 +46,41 @@
                                     <tbody>
                                     <tr v-for="item in list">
                                         <td>@{{item}}</td>
-                                        <td><button class="btn btn-danger" v-on:click="delete">{{trans("WORD.delete")}}</button> </td>
+                                        <td>
+                                            <button class="btn btn-danger" v-on:click="delete">
+                                                {{trans("word.delete")}}
+                                            </button>
+                                        </td>
                                     </tr>
 
                                     </tbody>
                                 </table>
 
+
                             </div>
-                            <!-- this is what the user will see -->
 
                         </div>
-                        <!-- end widget content -->
 
                     </div>
-                    <!-- end widget div -->
 
                 </div>
-                <!-- end widget -->
 
             </article>
-            <!-- WIDGET END -->
 
         </div>
 
-        <!-- end row -->
 
-        <!-- row -->
 
         <div class="row">
 
-            <!-- a blank row to get started -->
             <div class="col-sm-12">
 
             </div>
 
         </div>
 
-        <!-- end row -->
 
     </section>
-    <!-- end widget grid -->
 
     <script>
         new Vue({

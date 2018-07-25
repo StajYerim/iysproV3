@@ -4,24 +4,29 @@
     <section id="show" v-cloak>
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
-                <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$order->descriptions}}</span></h1>
-
+                <h1>
+                    <i class="fa fa-file-text-o"></i>
+                    <span class="semi-bold">{{$order->descriptions}}</span>
+                </h1>
             </div>
             <div class="col-lg-4 col-sm-4">
 
                 <div class="btn-group btn-group-justified pull-right option-menu">
                     <div class="btn-group ">
-                        <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
-                                    class="fa fa-reorder"></span> &nbsp;<span class="caret"></span> </a>
+                        <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <span  class="fa fa-reorder"></span>
+                            <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{route("purchases.orders.form",[aid(),$order->id,"update"])}}"><i
-                                            class="fa fa-edit" aria-hidden="true"></i>
-                                    {{trans("word.edit")}}</a>
+                                <a href="{{route("purchases.orders.form",[aid(),$order->id,"update"])}}">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                    {{trans("word.edit")}}
+                                </a>
                             </li>
                             <li>
-                                <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction_payment"><i
-                                            class="fa fa-edit" aria-hidden="true"></i>
+                                <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction_payment">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
                                     {{trans("sentence.add_payment")}}</a>
                             </li>
                             <li>
@@ -177,7 +182,9 @@
                                                 @if($order->currency != "try")
                                                     <tr>
                                                         <td>
-                                                            <div class="bottom-info">TL KARŞILIĞI</div>
+                                                            <div class="bottom-info">
+                                                                {{ trans("sentence.provision_for_tl") }}
+                                                            </div>
                                                         </td>
                                                         <td style="text-align:right">
                                                             <div class="bottom-info"
@@ -207,7 +214,7 @@
                                                     <td width="5%"></td>
                                                     <td width="40%"></td>
                                                     <td></td>
-                                                    <td>{{trans("general.remaining")}}</td>
+                                                    <td>{{trans("word.remaining")}}</td>
                                                     <td><span class="pull-right">@{{ remaining }} <i class="fa fa-{{$order->currency}}"></i></span></td>
                                                 </tr>
                                                 </tfoot>

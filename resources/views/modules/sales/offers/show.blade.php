@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('content')
-    <!-- widget grid -->
     <section id="show" v-cloak>
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
@@ -181,7 +180,9 @@
                                                 @if($offer->currency != "try")
                                                     <tr>
                                                         <td>
-                                                            <div class="bottom-info">TL KARŞILIĞI</div>
+                                                            <div class="bottom-info">
+                                                                {{ trans("sentence.provision_for_tl") }}
+                                                            </div>
                                                         </td>
                                                         <td style="text-align:right">
                                                             <div class="bottom-info"
@@ -276,14 +277,14 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             ×
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">{{trans("general.change")}}</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{trans("word.change")}}</h4>
                     </div>
                     <div class="modal-body modal-body-content">
                         <form id="StatusForm">
                             <div class="row">
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">{{trans("general.status")}}</label>
+                                        <label class="col-md-4 control-label">{{trans("word.status")}}</label>
                                         <div class="col-md-6 ">
                                             <div class="input-group">
                                                 <select v-model="form.status" class="form-control">
@@ -297,7 +298,7 @@
                                 <HR>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">{{trans("general.effective")}} {{trans("general.date")}}</label>
+                                        <label class="col-md-4 control-label">{{trans("sentence.effective_date")}}</label>
                                         <div class="col-md-4 ">
                                             <div class="input-group">
                                                 <input type="text"
@@ -316,7 +317,7 @@
                                 <hr>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">{{trans("general.description")}}</label>
+                                        <label class="col-md-4 control-label">{{trans("word.description")}}</label>
                                         <div class="col-md-6 ">
                                             <div class="input-group">
                                                 <textarea v-model="form.note" rows="3" cols="25"

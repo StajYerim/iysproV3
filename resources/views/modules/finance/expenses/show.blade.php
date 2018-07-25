@@ -104,8 +104,10 @@
 
                                 </div>
                                 <div class="col-sm-3">
-                                    <div class="info-title"><span v-on:click="details = !details" class="pull-right"
-                                                                  style="cursor: pointer;">{{trans("general.summary")}} {{trans("general.informations")}} {{trans("general.return")}}</span>
+                                    <div class="info-title">
+                                        <span v-on:click="details = !details" class="pull-right" style="cursor: pointer;">
+                                            {{trans("sentence.return_summary_informations")}}
+                                        </span>
                                     </div>
                                 </div>
                         </div>
@@ -184,9 +186,10 @@
                                                             class="fa fa-sign-in fa-rotate-90"></i> {{trans("sentence.add_money_input")}} </a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0);" v-on:click="money_out"><i
-                                                            class="fa fa-sign-out fa-rotate-270"></i> {{trans("sentence.add_money_input")}}
-                                                    {{trans("general.add")}}</a>
+                                                <a href="javascript:void(0);" v-on:click="money_out">
+                                                    <i class="fa fa-sign-out fa-rotate-270"></i>
+                                                    {{trans("sentence.add_money_input")}}
+                                                </a>
                                             </li>
 
                                         </ul>
@@ -350,7 +353,12 @@
                         <div v-show="money_out_show">
                             <form @submit.prevent="money_in_send(0)" class="form-horizontal bv-form"
                                   novalidate="novalidate">
-                                <h1><i class="fa fa-sign-out fa-rotate-270"></i> <span class="semi-bold">{{trans("word.money")}} {{trans("general.out")}}</span></h1>
+                                <h1>
+                                    <i class="fa fa-sign-out fa-rotate-270"></i>
+                                    <span class="semi-bold">
+                                        {{trans("sentence.money_out")}}
+                                    </span>
+                                </h1>
 
                                 <fieldset>
                                     <div class="form-group has-feedback">

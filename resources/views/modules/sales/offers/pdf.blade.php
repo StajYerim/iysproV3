@@ -110,7 +110,9 @@ app()->setLocale($lang);
                                         <b style="line-height: 12px;">{!! account()["name"]!!}</b><br>
                                         <span style="line-height:12px;font-size:10px;">
                                             {!! str_replace("\n","<br>",account()["address"]) !!} {!! account()["town"] !!}/{!! account()["city"] !!}
-                                            <br>V.D {{trans("word.and")}} {{trans("word.number")}} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>{{trans("word.phone")}} {!! account()["phone"] !!}<br>
+                                            <br>V.D {{trans("word.and")}} {{trans("word.number")}} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}
+                                            <br>
+                                            {{trans("word.phone")}} {!! account()["phone"] !!}<br>
 
                                     </span>
                                     </td>
@@ -214,7 +216,7 @@ app()->setLocale($lang);
             <td></td>
 
             <td colspan="1" style="text-align: right">
-                {{trans("general.total")}}:
+                {{trans("word.total")}}:
             </td>
             <td colspan="1" style="text-align: right">
                 {{$offer->sub_total}} {!! $offer->currency_icon!!}
@@ -244,7 +246,7 @@ app()->setLocale($lang);
                 @if(KdvTotal($offer->items,8) > 0) %8 {{trans("word.vat")}}<br>@endif
                 @if(KdvTotal($offer->items,18) > 0) %18 {{trans("word.vat")}}<br>@endif
               </div>
-                {{trans("general.total_vat"}} :
+                {{trans("sentence.total_vat"}} :
             </td>
             <td colspan="1" style="text-align: right">
                 <div style=";font-size:10px;">   @if(KdvTotal($offer->items,1) > 0)  {{KdvTotal($offer->items,1)}} {!! $offer->currency_icon!!}<br>@endif

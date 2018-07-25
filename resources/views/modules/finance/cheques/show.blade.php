@@ -40,7 +40,7 @@
                                     <i class="fa fa-calendar"></i> {{trans("sentence.received_date")}}, {{trans("word.customer")}}<br><br>
                                     <i class="fa fa-calendar"></i> {{trans("sentence.given_date")}}, {{trans("word.supplier")}}<br><br>
                                 @endif
-                                <i class="fa fa-calendar"></i> {{trans("general.expiry")}} {{trans("general.date")}}<br><br>
+                                <i class="fa fa-calendar"></i> {{trans("sentence.expiry_date")}}<br><br>
                                 <div v-if="collect_cheque_show == true"><i class="fa fa-calendar"></i> TAHSİL EDİLDİĞİ HESAP <br><br></div>
                             </div>
 
@@ -143,7 +143,9 @@
                         <div v-show="other_transfer_show">
                             <form @submit.prevent="cheuqe_collection_send" class="form-horizontal bv-form"
                                   novalidate="novalidate">
-                                <h1><i class="fa fa-1x c-textLight fa-share-square-o"></i> <span class="semi-bold">{{trans("general.check")}} {{trans("general.collection")}}</span>
+                                <h1>
+                                    <i class="fa fa-1x c-textLight fa-share-square-o"></i>
+                                    <span class="semi-bold">{{trans("sentence.cheque_collection")}} </span>
                                 </h1>
 
                                 <input type="hidden" value="4" name="thisAccId">
@@ -198,15 +200,22 @@
                         <div class="row">
                             @if($cheq->cheque_status == 1)
                             <div class="col-sm-12">
-                                <div class="bottom-info">{{trans("word.status")}} <span class="pull-right" style="font-size:15px;color:#7a7c71!important">
-                                                                             @{{ collect_statu }}
-
-                                    </span></div>
+                                <div class="bottom-info">
+                                    {{trans("word.status")}}
+                                    <span class="pull-right" style="font-size:15px;color:#7a7c71!important">
+                                        @{{ collect_statu }}
+                                    </span>
+                                </div>
                             </div>
                             @endif
                             <div class="col-sm-12">
-                                <div class="bottom-info">{{trans("sentence.total_cheque")}}<span class="pull-right" style="font-size:15px;color:#2AC!important">
-                                    {{$cheq->amount}}   <i class="fa fa-try"></i></span></div>
+                                <div class="bottom-info">
+                                    {{trans("sentence.total_cheque")}}
+                                    <span class="pull-right" style="font-size:15px;color:#2AC!important">
+                                    {{$cheq->amount}}
+                                        <i class="fa fa-try"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
