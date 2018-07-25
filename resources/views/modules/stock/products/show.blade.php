@@ -155,16 +155,17 @@
                                         <td colspan="7">
                                             <ul class="pagination pagination-xs no-margin">
                                                 <li class="prev ">
-                                                    <a @click="movements(stock.per_page)">First</a>
+                                                    <a href="#!" @click="movements(1)">First</a>
                                                 </li>
                                                 <li  v-for="i in (3, stock.last_page)" @click="movements(i)" :class="{active:stock.current_page == i}">
                                                     <a href="javascript:void(0);">@{{ i }}</a>
                                                 </li>
-
                                                 <li class="next">
-                                                    <a href="#!" @click="movements(stock.last_page)">Next</a>
+                                                    <a href="#!" @click="movements(stock.last_page)">Last</a>
                                                 </li>
-                                            </ul></td>
+                                            </ul>
+
+                                        </td>
                                     </tr>
                                     </tfoot>
                                 </table>

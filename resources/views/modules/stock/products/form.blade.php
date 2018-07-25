@@ -120,7 +120,7 @@
                                 <fieldset>
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" style="margin-top: 34px;">
-                                            {{trans("word.product_image")}}
+                                            {{trans("sentence.product_image")}}
                                         </label>
                                         <div class="col-md-2">
                                             <div class="upload-preview">

@@ -351,7 +351,7 @@
 
             </article>
         </div>
-
+{{$order->nos_waybills}}
         @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales order ?",$id=$order->id])
         {{--İrsaliye Yazdır--}}
         <div class="modal fade" id="waybillModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
@@ -365,7 +365,7 @@
                         <h4 class="modal-title" id="myModalLabel">{{trans("sentence.print_waybill")}}</h4>
                     </div>
                     <div class="modal-body modal-body-content">
-                        @if(count($order->no_waybills))
+                        @if($order->no_waybills != "[]")
                             <div class="row">
                                 <form id="wizard-1" novalidate="novalidate">
                                     <div id="bootstrap-wizard-1" class="col-sm-12">

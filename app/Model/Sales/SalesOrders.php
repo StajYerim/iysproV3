@@ -171,12 +171,16 @@ class SalesOrders extends Model
     public function getNoWaybillsAttribute()
     {
         $stok_item = StockItems::select("sales_order_item_id")->get();
-         $item =  $this->items()->whereNotIn("id",$stok_item)->get();
+        $whereNot = Array();
+        foreach($stok_item as $item){
+            if($item["sales_order_item_id"] != null)
+                array_push($whereNot,$item["sales_order_item_id"]);
+        }
 
-         return $item;
 
+        $item =  $this->items()->whereNotIn("id",$whereNot)->get();
 
-
+        return $item;
     }
 
     public function invoice(){

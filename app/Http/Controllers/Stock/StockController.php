@@ -271,6 +271,6 @@ class StockController extends Controller
     public function movements($aid,$id){
       $product=  Product::find($id);
 
-      return  response()->json($product->movements()->with("receipt","receipt.company","unit","product")->paginate(5));
+      return  response()->json($product->movements()->with("receipt","receipt.company","unit","product")->paginate(2));
     }
 }

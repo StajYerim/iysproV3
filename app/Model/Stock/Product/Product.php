@@ -147,7 +147,7 @@ class Product extends Model
         $waybill = 0;
         foreach ($toplam_sipariler as $sip) {
 
-            $waybill += $sip->waybill_item["quantity"];
+          return intval($sip->waybill_item["quantity"]);
         }
 
         return $order-$waybill;
