@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Model\Stock;
+use App\Model\Purchases\PurchaseOrders;
 use App\Model\Purchases\PurchaseOrderItems;
+use App\Model\Sales\SalesOrders;
+use App\Model\Sales\SalesOrderItems;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -56,5 +59,27 @@ class Stock extends Model
           }
       }
 
+    }
+
+    public function getOtherReceiptAttribute()
+    {
+        if($this->sales_order_id != null){
+           $fis =  SalesOrders::find($this->sales_order_id);
+           $url = route("sales.orders.show",[aid(),$fis->id]);
+           $ok = true;
+        }else if($this->purchase_order_id != null){
+            $fis =  PurchaseOrders::find($this->purchase_order_id);
+            $url = route("purchases.orders.show",[aid(),$fis->id]);
+        $ok = true;
+        }else{
+            $ok = false;
+        }
+
+
+        if($ok == true){
+        return  "Bu fiş <a href='".$url."' href='_blank'>#".$fis->id."</a> numaralı siparişe aittir. Düzenleme veya silme işlemi yapılamaz.";
+        }else{
+            return "Bu stok fişi için düzenleme veya silme işlemini buradan gerçekleştirebilirsiniz.";
+        }
     }
 }

@@ -97,7 +97,7 @@
                 <ul id="myTab1" class="nav nav-tabs bordered">
                     <li class="active">
                         <a href="#g1" data-toggle="tab" aria-expanded="true">
-                            {{trans("wrd.informations")}}
+                            {{trans("word.informations")}}
                         </a>
                     </li>
 
@@ -146,30 +146,25 @@
                                         </td>
                                         <td>@{{ item.receipt.date }}</td>
                                         <td>@{{ item.quantity }} @{{ item.unit.short_name }}</td>
-                                        <td>@{{ item.product.list_price }} <i class="fa fa-try"></i> </td>
-                                        <td>-<i class="fa fa-try"></i></td>
+                                        <td>@{{ item.order_item.price }} <i v-if="item.order_item.price != null" class="fa fa-try"></i></td>
+                                        <td><span v-if="item.order_item.prices != null">@{{ formatPrice(item.order_item.prices*item.quantitys) }} <i class="fa fa-try"></i></span></td>
                                     </tr>
                                     </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td colspan="7">
-                                            <ul class="pagination pagination-xs no-margin">
-                                                <li class="prev ">
-                                                    <a @click="movements(stock.per_page)">First</a>
-                                                </li>
-                                                <li  v-for="i in (3, stock.last_page)" @click="movements(i)" :class="{active:stock.current_page == i}">
-                                                    <a href="javascript:void(0);">@{{ i }}</a>
-                                                </li>
 
-                                                <li class="next">
-                                                    <a href="#!" @click="movements(stock.last_page)">Next</a>
-                                                </li>
-                                            </ul></td>
-                                    </tr>
-                                    </tfoot>
                                 </table>
 
                             </div>
+                            <ul style="bottom:5px" class="pagination pagination-xs no-margin">
+                                <li class="prev ">
+                                    <a href="#!" @click="movements(1)">First</a>
+                                </li>
+                                <li  v-for="i in (3, stock.last_page)" @click="movements(i)" :class="{active:stock.current_page == i}">
+                                    <a href="javascript:void(0);">@{{ i }}</a>
+                                </li>
+                                <li class="next">
+                                    <a href="#!" @click="movements(stock.last_page)">Last</a>
+                                </li>
+                            </ul>
 
                             <div class="alert alert-info" v-else="stock.data.length < 0">
                                 <span class="fa fa-info-circle">
@@ -196,7 +191,13 @@
                     details: false,
                     stock:[]
                 },
-                methods: {
+               methods: {
+                   formatPrice: function (val) {
+               return    val.toLocaleString('tr-TR', {
+                           minimumFractionDigits: 2,
+                           maximumFractionDigits: 2
+                       });
+                   },
                     movements:function($page=1){
 
                         axios.get("/{{aid()}}/stocks/product/{{$id}}/movements?page="+$page).then(res=>{

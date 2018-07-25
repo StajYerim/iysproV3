@@ -11,6 +11,9 @@
                 </h1>
             </div>
             <div class="col-lg-4 col-sm-4">
+
+
+                @if($stock->sales_order_id == null && $stock->purchase_order_id == null)
                    <span class="pull-right">
                        <div class="btn-group">
                             <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -19,19 +22,9 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#" data-toggle="modal" data-target="#openStartReceipt">
-                                        <i class="fa fa-plus " aria-hidden="true"></i>
-                                        {{trans("sentence.create_opening_receipt")}}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" id="productArchive">
-                                        <i class="fa fa-archive" aria-hidden="true"></i>
-                                        {{trans("word.archive")}}
-                                    </a>
-                                    <a href="#" style="display:none" id="productArchiveOut">
-                                        <i class="fa fa-archive" aria-hidden="true"></i>
-                                        {{trans("sentence.remove_archive")}}
+                                    <a href="{{route("stock.movements.form",[aid(),$stock->id,"update",$stock->status == 0 ? "in":"out"])}}">
+                                        <i class="fa fa-edit" aria-hidden="true"> </i>
+                                        {{trans("word.edit")}}
                                     </a>
                                 </li>
                                 <li>
@@ -43,12 +36,9 @@
                             </ul>
                         </div>
 
-                            <a class="btn btn-default "
-                               href="{{route("stock.movements.form",[aid(),$stock->id,"update",$stock->status == 0 ? "in":"out"])}}">
-                                <i class="fa fa-edit"></i>
-                                {{trans("word.edit")}}
-                            </a>
+
                         </span>
+                     @endif
                     </div>
         </div>
         <div class="row">
@@ -114,9 +104,10 @@
                     <div class="col-sm-4">
 
                         <div class="well">
-
                             <div class="row">
-                               {{ trans("word.test") }}
+                        <div class="alert alert-warning">
+                          {!! $stock->other_receipt !!}
+                        </div>
                             </div>
 
                         </div>
@@ -156,6 +147,5 @@
                 }
             });
         </script>
-
     @endpush
 @endsection
