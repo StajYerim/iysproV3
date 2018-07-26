@@ -111,8 +111,8 @@ class MenuTableSeeder extends Seeder
                         'order' => 5,
                         'permission' => 2,
                         'icon' => '',
-                        'route' => '',
-                        'is_route' => 0
+                        'route' => 'sales.collect_report.index',
+                        'is_route' => 1
                     ],
             [
                 'id'=>11,

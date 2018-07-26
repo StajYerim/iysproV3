@@ -85,9 +85,6 @@ class OrdersController extends Controller
     public function store($aid, $id, Request $request)
     {
 
-
-
-
         $order = SalesOrders::updateOrCreate(["id" => $id], [
             "sales_offer_id"=>$request->form["sales_offer_id"],
             "description" => $request->form["description"],
@@ -110,13 +107,9 @@ class OrdersController extends Controller
                 $tag = Tags::firstOrCreate(
                     ["account_id"=>aid(),"type"=>"sales_orders","title"=>$tag["text"]],
                     ["type" => "sales_orders", "bg_color" => rand_color()]);
-
-                $order->tags()->attach($tag);
-
+                $order->tags()->save($tag);
             }
         }
-
-
 
 
         $whereNot = Array();
@@ -139,19 +132,6 @@ class OrdersController extends Controller
             array_push($whereNot, $ret->id);
         }
         $order->items()->whereNotIn("id", $whereNot)->delete();
-
-        Taggable::where("taggable_type","App\Model\Sales\SalesOrders")->where("taggable_id",$order->id)->delete();
-
-        if ($request->tagsd) {
-
-            foreach ($request->tagsd as $tag) {
-                $tag = Tags::firstOrCreate(["account_id"=>aid(),"type"=>"sales_orders","title"=>$tag["text"]], ["type" => "sales_orders", "bg_color" => rand_color()]);
-                $order->tags()->save($tag);
-
-            }
-        }
-
-
 
         $order->company->open_receipts_set($order->company->open_receipts,$order->company->open_cheques,$order);
 

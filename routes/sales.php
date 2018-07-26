@@ -55,4 +55,9 @@ Route::group(['prefix'=>'{company_id}/sales','middleware'=>['not.admin','permiss
     Route::get("/orders/sales-report","Modules\Sales\SalesReportController@index")->name("sales.sales_report.index");
 //    Route::get("/orders/sales-report","Modules\Sales\SalesReportController@index")->name("sales.sales_report.grafik");
 
+
+
+
+    //Sales Orders-> Collect Reports
+    Route::get("/reports/sales-reports","Modules\Sales\CollectReportController@index")->name("sales.collect_report.index");
 });

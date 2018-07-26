@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Modules\Sales;
 use App\Language;
+use App\Taggable;
+use App\Tags;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOfferItems;
@@ -45,8 +47,9 @@ class OffersController extends Controller
 
         $form_type = $type;
         $offer = $id == 0 ? "" : SalesOffers::find($id);
+        $tags = Tags::where("account_id",aid())->where("type", "sales_offers")->get();
 
-        return view("modules.sales.offers.form", compact("form_type", "offer"));
+        return view("modules.sales.offers.form", compact("form_type", "offer","tags"));
 
     }
 
@@ -68,6 +71,19 @@ class OffersController extends Controller
             "grand_total" => $request->form["grand_total"]
         ]);
 
+
+        Taggable::where("taggable_type","App\Model\Sales\SalesOffers")->where("taggable_id",$offer->id)->delete();
+
+        if ($request->form["tagsd"]) {
+
+            foreach ($request->form["tagsd"] as $tag) {
+
+                $tag = Tags::firstOrCreate(
+                    ["account_id"=>aid(),"type"=>"sales_offers","title"=>$tag["text"]],
+                    ["type" => "sales_orders", "bg_color" => rand_color()]);
+                $offer->tags()->save($tag);
+            }
+        }
 
         $whereNot = Array();
         foreach ($request->items as $key => $value) {

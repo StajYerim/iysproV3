@@ -4,6 +4,7 @@ namespace App\Model\Sales;
 
 use App\Companies;
 use App\Currency;
+use App\Tags;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -232,6 +233,11 @@ class SalesOffers extends Model
     public function orders()
     {
         return $this->hasMany(SalesOrders::class, "sales_offer_id", "id");
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tags::class, 'taggable');
     }
 
 

@@ -35,7 +35,7 @@
 
                             <li>
                                 <a tabindex="-1" data-toggle="modal" data-target="#transModal" href="#"><i class="fa fa-truck"  aria-hidden="true"></i>
-                                   Sevkiyat Bilgisi Gönder</a>
+                                   SEVKİYAT BİLGİSİ GÖNDER</a>
                             </li>
                             <li>
                                 <a onclick="$(this).orderReturn()" data-id="0" id="orderReturn" href="#"><i
