@@ -95,6 +95,17 @@ class Cheques extends Model
 
     }
 
+    public function getPaymentStatuAttribute(){
+        $collect =  $this->collect;
+
+        if($collect == null){
+            return 0;
+        }else{
+            return 1;
+        }
+
+    }
+
     public function getChequeStatusAttribute()
     {
         if ($this->company_id != null && $this->transfer_company_id != null) {

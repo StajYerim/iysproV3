@@ -49,10 +49,12 @@ class CollectReportController extends Controller
             }
         }
 
-
         $expiry_total_collect = get_money($expiry_remaining+$cheques_total_expiry);
 
+        $export_collect= [];
+        $export_collect["sales_orders"] = $orders;
+        $export_collect["cheques"] = $cheques;
 
-        return view("modules.sales.collect_report.index", compact('oran', 'total', "expiry_total_collect", "total_collect", "list"));
+        return view("modules.sales.collect_report.index", compact( "expiry_total_collect", "total_collect", "export_collect"));
     }
 }

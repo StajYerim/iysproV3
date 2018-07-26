@@ -20,7 +20,7 @@
     <!-- SmartAdmin RTL Support  -->
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/smartadmin-rtl.min.css")}}">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/iys.css")}}"> &nbsp;
+
 
     <!-- FAVICONS -->
     <link rel="shortcut icon" href="{{asset("img/favicon/favicon.ico")}}" type="image/x-icon">
@@ -44,7 +44,7 @@
     <link rel="apple-touch-startup-image" href="{{asset("img/splash/ipad-portrait.png")}}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
     <link rel="apple-touch-startup-image" href="{{asset("img/splash/iphone.png")}}" media="screen and (max-device-width: 320px)">
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset("js/full-loading/loading.css")}}">
-
+    <link rel="stylesheet" type="text/css" media="screen" href="{{asset("css/iys.css")}}"> &nbsp;
 
     <!-- VueJs -->
     <script src="{{asset("js/vue/vue.js")}}"></script>
