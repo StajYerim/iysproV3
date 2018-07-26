@@ -62,8 +62,8 @@ class OrdersController extends Controller
             $order = $id == 0 ? "" : PurchaseOrders::find($id);
             $offer_id = null;
         }
-
-        return view("modules.purchases.orders.form", compact("form_type", "order","copy","id","offer_id"));
+        $tags = Tags::where("account_id",aid())->where("type", "purchases_orders")->get();
+        return view("modules.purchases.orders.form", compact("form_type", "order","copy","id","offer_id","tags"));
 
     }
 
@@ -85,6 +85,17 @@ class OrdersController extends Controller
             "vat_total" => $request->form["vat_total"],
             "grand_total" => $request->form["grand_total"]
         ]);
+
+        Taggable::where("taggable_type","App\Model\Purchases\PurchaseOrders")->where("taggable_id",$order->id)->delete();
+
+        if ($request->form["tagsd"]) {
+
+            foreach ($request->form["tagsd"] as $tag) {
+                $tag = Tags::firstOrCreate(["account_id"=>aid(),"type"=>"purchases_orders","title"=>$tag["text"]], ["type" => "purchases_orders", "bg_color" => rand_color()]);
+                $order->tags()->save($tag);
+
+            }
+        }
 
         //Giriş irsaliyesi fişi ->
         $movement = Stock::updateOrcreate(["doc_id"=>$order->id,"status"=>0],
@@ -136,16 +147,7 @@ class OrdersController extends Controller
         $order->items()->whereNotIn("id", $whereNot)->delete();
         $movement->items()->whereNotIn("id", $whereNots)->delete();
 
-        Taggable::where("taggable_type","App\Model\Purchases\PurchaseOrders")->where("taggable_id",$order->id)->delete();
 
-        if ($request->tagsd) {
-
-            foreach ($request->tagsd as $tag) {
-                $tag = Tags::firstOrCreate(["account_id"=>aid(),"type"=>"purchases_orders","title"=>$tag["text"]], ["type" => "purchases_orders", "bg_color" => rand_color()]);
-                $order->tags()->save($tag);
-
-            }
-        }
 
 
         $order->company->open_receipts_payment_set($order->company->popen_receipts,$order->company->popen_cheques,$order);

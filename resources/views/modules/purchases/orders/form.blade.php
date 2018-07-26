@@ -98,6 +98,7 @@
                                             </div>
                                         </div>
                                     </fieldset>
+                                    @includeIf('components.external.tags', [$type="purchases_order"])
                                 </div>
                                 @includeIf("components.external.rows",[$offer = $order,$proccess_type = "purchases"])
                             </form>
@@ -137,6 +138,10 @@
                             precision: 2,
                             masked: false
                         },
+                        autocompleteItems: [@foreach($tags as $tag) {
+                            text: '{{$tag->title}}',
+                            style: 'background-color:{{$tag->bg_color}}',
+                        }, @endforeach],
                         form: {
                             description: "{{$form_type == "update" ? $order->description:""}}",
                             company_id: @if($form_type == "update") { id:'{{$order->company["id"]}}',text:'{{$order->company["company_name"]}}' } @else "" @endif,
@@ -147,11 +152,27 @@
                             vat_total: "{{$form_type == "update" ? $order->vat_total:"0,00"}}",
                             currency: "{{$form_type == "update" ? $order->currency:"try"}}",
                             currency_value: "{{$form_type == "update" ? $order->currency_value:"0,00"}}",
+                            tag: '',
+                            tagsd: [],
                         }
                     }),
                     mounted: function () {
+                        @if($form_type == "update")
+                                @foreach($order->tags as $tag)
+                            this.form.tagsd.push(
+                            {
+                                style: "background-color:{{$tag->bg_color}}", text: "{{$tag->title}}"
+                            },
+                        );
+                        @endforeach
+                        @endif()
                         money_per();
                       datePicker();
+                    },
+                    computed: {
+                        filteredItems() {
+                            return this.autocompleteItems.filter(i => new RegExp(this.tag, 'i').test(i.text));
+                        },
                     },
                     methods: {
                         addRow: function () {

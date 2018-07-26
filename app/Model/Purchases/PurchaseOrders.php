@@ -7,6 +7,7 @@ use App\Currency;
 use App\Model\Finance\BankItems;
 use App\Model\Finance\Cheques;
 use App\Model\Sales\SalesOfferItems;
+use App\Tags;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -159,6 +160,10 @@ class PurchaseOrders extends Model
         return get_money((money_db_format($this->grand_total) - $total));
     }
 
+    public function tags()
+    {
+        return $this->morphToMany(Tags::class, 'taggable');
+    }
 
 
 
