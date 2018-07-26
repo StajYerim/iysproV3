@@ -9,10 +9,9 @@
                 <div class="jarviswidget" id="wid-id-0">
 
                     <header>
-                        <span>
-                            <i class="fa fa-table"></i>
-                            Kasa ve Hesaplar
-                        </span>
+                        <div align="center">
+                            <b>KASA VE HESAPLAR</b>
+                        </div>
                     </header>
 
                     <div>
@@ -21,13 +20,33 @@
                         </div>
 
                         <div class="widget-body">
-                            <ul>
-                            @foreach($bank_accounts as $bank_account)
-                                <li>
-                                    {{ $bank_account->name }}
-                                     <i class="fa fa-{{ $bank_account->currency }}"></i>{{ $bank_account->balance }}</li>
-                            @endforeach
-                            </ul>
+                            <table id="table" class="table table-striped table-hover" width="100%">
+                                <thead>
+                                <tr>
+                                    <th width="1px">#</th>
+                                    <th>Firma</th>
+                                    <th>Tarih</th>
+                                    <th>Bakiye</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($bank_accounts as $bank_account)
+                                    @if($bank_account->account_id != null)
+                                        <tr>
+                                            <td>...</td>
+                                            <td>{{ $bank_account->name }}</td>
+                                            <td>{{ $bank_account->currency }}</td>
+                                            <td>
+                                                {{ $bank_account->balance }}
+                                                <i class="fa fa-{{ $bank_account->currency }}"></i>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                                </tbody>
+
+
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -37,10 +56,9 @@
                 <div class="jarviswidget" id="wid-id-0">
 
                     <header>
-                        <span>
-                            <i class="fa fa-table"></i>
-                            Vadesi Gelen Tahsilatlar
-                        </span>
+                        <div align="center">
+                            <b>VADESİ GELEN TAHSİLATLAR</b>
+                        </div>
                     </header>
 
                     <div>
@@ -49,23 +67,36 @@
                         </div>
 
                         <div class="widget-body">
-                            <ul>
+                            <table id="table" class="table table-striped table-hover" width="100%">
+                                <thead>
+                                <tr>
+                                    <th width="1px">#</th>
+                                    <th>Firma</th>
+                                    <th>Tarih</th>
+                                    <th>Bakiye</th>
+                                </tr>
+                                </thead>
+                                <tbody>
                                 @foreach($sales_orders as $sales_order)
-
                                     @if(money_db_format($sales_order->remaining) > 0)
-                                        <li>
-                                            {{ $sales_order->company->company_name }} -
-                                            {{ $sales_order->due_date }} -
-                                            {{ $sales_order->remaining }}
-                                            <i class="fa fa-{{ $sales_order->currency }}"></i>
-
-                                        </li>
-                                    @else
-                                            Herhangi bir yaklaşan tahsilat yok
+                                        <tr>
+                                            <td>...</td>
+                                            <td>
+                                                {{ $sales_order->company->company_name }}
+                                            </td>
+                                            <td>
+                                                {{ $sales_order->due_date }}
+                                            </td>
+                                            <td>
+                                                {{ $sales_order->remaining }}
+                                                <i class="fa fa-{{ $bank_account->currency }}"></i>
+                                            </td>
+                                        </tr>
                                     @endif
-
                                 @endforeach
-                            </ul>
+                                </tbody>
+
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -75,10 +106,9 @@
                 <div class="jarviswidget" id="wid-id-0">
 
                     <header>
-                        <span>
-                            <i class="fa fa-table"></i>
-                            Vadesi Gelen Ödemeler
-                        </span>
+                        <div align="center">
+                            <b>VADESİ GELEN ÖDEMELER</b>
+                        </div>
                     </header>
 
                     <div>
@@ -87,24 +117,36 @@
                         </div>
 
                         <div class="widget-body">
-                            <ul>
+                            <table id="table" class="table table-striped table-hover" width="100%">
+                                <thead>
+                                <tr>
+                                    <th width="1px">#</th>
+                                    <th>Firma</th>
+                                    <th>Tarih</th>
+                                    <th>Bakiye</th>
+                                </tr>
+                                </thead>
+                                <tbody>
                                 @foreach($purchase_orders as $purchase_order)
-
                                     @if(money_db_format($purchase_order->remaining) > 0)
-                                        <li>
-                                            {{ $purchase_order->company->company_name }} -
-                                            {{ $purchase_order->due_date }} -
-                                            {{ $purchase_order->remaining }}
-                                            <i class="fa fa-{{ $purchase_order->currency }}"></i>
-
-                                        </li>
-                                    @else
-                                        Herhangi bir yaklaşan ödeme yok
+                                        <tr>
+                                            <td>...</td>
+                                            <td>
+                                                {{ $purchase_order->company->company_name }}
+                                            </td>
+                                            <td>
+                                                {{ $purchase_order->due_date }}
+                                            </td>
+                                            <td>
+                                                {{ $purchase_order->remaining }}
+                                                <i class="fa fa-{{ $purchase_order->currency }}"></i>
+                                            </td>
+                                        </tr>
                                     @endif
-
-
                                 @endforeach
-                            </ul>
+                                </tbody>
+
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -114,9 +156,9 @@
                 <div class="jarviswidget" id="wid-id-0">
 
                     <header>
-                        <span>
-                            <i class="fa fa-table"></i> Ödeme Geçmişi
-                        </span>
+                        <div align="center">
+                            <b>ÖDEME GEÇMİŞİ</b>
+                        </div>
                     </header>
 
                     <div>
@@ -177,4 +219,5 @@
             </article>
         </div>
     </section>
+
 @endsection
