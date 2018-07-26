@@ -79,7 +79,7 @@
                         </div>
 
                         <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
-                                    class="fa fa-envelope"></i> {{trans("sentence.share")}}</a>
+                                    class="fa fa-envelope"></i> {{trans("word.share")}}</a>
 
                     </div>
 
