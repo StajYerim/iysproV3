@@ -121,6 +121,7 @@
                 </div>
             </div>
         </div>
+
         @include("components.modals.companies",[$option="customer",$title="New Company",$type = "new_company",$message="Company Form",$id=0])
     </section>
 
@@ -164,12 +165,14 @@
                         }
                     }),
                     mounted: function () {
-                        @if($form_type == "Update")
-                            this.form.tagsd.push(@foreach($order->tags as $tag)
+                        @if($form_type == "update")
+                                @foreach($order->tags as $tag)
+                        this.form.tagsd.push(
                             {
                                 style: "background-color:{{$tag->bg_color}}", text: "{{$tag->title}}"
                             },
-                                @endforeach());
+                        );
+                        @endforeach()
                         @endif
                         money_per();
                       datePicker();

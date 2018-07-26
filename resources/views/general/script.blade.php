@@ -1,5 +1,5 @@
-        @if(auth()->user()->isAdmin() == false)
-            {{--<script>--}}
+@if(auth()->user()->isAdmin() == false)
+        {{--<script>--}}
         function city_and_county() {
 
 
@@ -9,11 +9,11 @@
         autoSelectFirst: true,
         triggerSelectOnValidInput: false,
         onInvalidateSelection: function () {
-            $(this).val("");
+        $(this).val("");
 
         },
         onSelect: function (suggestion) {
-            $city = $('#county').val("");
+        $city = $('#county').val("");
         },
 
 
@@ -23,15 +23,15 @@
         serviceUrl: '{{route("county.search",aid())}}',
         minChars: 1,
         autoSelectFirst: true,
-            triggerSelectOnValidInput: false,
-            onInvalidateSelection: function () {
-                $(this).val("");
-            },
+        triggerSelectOnValidInput: false,
+        onInvalidateSelection: function () {
+        $(this).val("");
+        },
         onSelect: function (suggestion) {
         $city = $('#city').val(suggestion.city);
 
         if($city == null){
-            $(this).val("");
+        $(this).val("");
         }
 
         },
@@ -78,4 +78,4 @@
         }
 
 
-        @endif
+@endif

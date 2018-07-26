@@ -3,12 +3,13 @@
 namespace App;
 
 use App\Model\Finance\Expenses;
+use App\Model\Sales\SalesOrders;
 use Illuminate\Database\Eloquent\Model;
 
 class Tags extends Model
 {
-  protected $guarded = [];
-  public $timestamps = false;
+    protected $guarded = [];
+    public $timestamps = false;
 
     public function save(array $options = array())
     {
@@ -19,7 +20,20 @@ class Tags extends Model
         parent::save($options);
     }
 
-    public function expenses(){
+    public function expenses()
+    {
         return $this->morphToMany("App\Tags", 'taggable');
     }
+
+    public function sales_orders()
+    {
+        return $this->morphedByMany(SalesOrders::class, 'taggable');
+    }
+
+    public function getSalesOrdersAmountAttribute()
+    {
+        return  get_money($this->sales_orders()->sum("grand_total"));
+    }
+
+
 }

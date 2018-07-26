@@ -103,6 +103,7 @@
                                             </div>
                                         </div>
                                     </fieldset>
+                                    @includeIf('components.external.tags', [$type="sales_offers"])
                                 </div>
 
                                 @includeIf("components.external.rows",[$offer,$proccess_type = "sales"])
@@ -169,6 +170,10 @@
                             precision: 2,
                             masked: false
                         },
+                        autocompleteItems: [@foreach($tags as $tag) {
+                            text: '{{$tag->title}}',
+                            style: 'background-color:{{$tag->bg_color}}',
+                        }, @endforeach],
                         form: {
                             description_detail:  "{!! $form_type == "update" ? str_replace( array( "\n", "\r" ), array( "\\n", "\\r" ), $offer->description_detail ):"" !!}",
                             description: "{{$form_type == "update" ? $offer->description:""}}",
@@ -180,6 +185,8 @@
                             vat_total: "{{$form_type == "update" ? $offer->vat_total:"0,00"}}",
                             currency: "{{$form_type == "update" ? $offer->currency:"try"}}",
                             currency_value: "{{$form_type == "update" ? $offer->currency_value:"0,00"}}",
+                            tag: '',
+                            tagsd: [],
 
                         }
                     }),
@@ -188,6 +195,20 @@
                         money_per();
                         datePicker();
                         autosize($('textarea'));
+                        @if($form_type == "update")
+                                @foreach($offer->tags as $tag)
+                            this.form.tagsd.push(
+                            {
+                                style: "background-color:{{$tag->bg_color}}", text: "{{$tag->title}}"
+                            },
+                        );
+                        @endforeach()
+                        @endif
+                    },
+                    computed: {
+                        filteredItems() {
+                            return this.autocompleteItems.filter(i => new RegExp(this.tag, 'i').test(i.text));
+                        },
                     },
                     methods: {
                         addRow: function () {

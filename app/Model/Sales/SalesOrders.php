@@ -18,6 +18,8 @@ class SalesOrders extends Model
 
     protected $dates = ["date", "due_date"];
 
+    protected $appends = ["grand_totals"];
+
 
     public function save(array $options = array())
     {
@@ -84,6 +86,11 @@ class SalesOrders extends Model
     public function getGrandTotalAttribute()
     {
         return get_money($this->attributes['grand_total']);
+    }
+
+    public function getGrandTotalsAttribute()
+    {
+        return $this->attributes['grand_total'];
     }
 
     public function getSubTotalAttribute()
