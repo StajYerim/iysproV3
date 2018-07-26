@@ -19,7 +19,8 @@ class Category extends Model
     {
         $total = 0;
 
-        foreach ($this->products as $product) {
+        foreach ($this->products as $product)
+        {
             $total += $product->order_items()->sum("price")*$product->order_items()->sum("quantity");
         }
 

@@ -143,6 +143,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'word', 'key' => 'route', 'text' => ['en' => 'ROUTE', 'tr' => 'ROTA']]);
         LanguageLine::create(['group' => 'word', 'key' => 'change', 'text' => ['en' => 'CHANGE', 'tr' => 'DEĞİŞTİR']]);
         LanguageLine::create(['group' => 'word', 'key' => 'test', 'text' => ['en' => 'TEST', 'tr' => 'TEST']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'purchase', 'text' => ['en' => 'PURCHASE', 'tr' => 'SATIN ALMA']]);
 
 
         // sentence area

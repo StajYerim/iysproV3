@@ -19,7 +19,6 @@ Route::get('/logout', 'Auth\LoginController@logout');
 // Multi Languages
 Route::get('lang/{lang}', 'LangController@index')->name("lang");
 
-
 // Route for email confirmation
 Route::post('/activation/resend', 'Auth\RegisterController@resendCode')->name('activation.resend');
 Route::get('/activation/{code}', 'Auth\RegisterController@activateByCode')->name('activation');
@@ -118,5 +117,6 @@ foreach($kategori as $kat){
 Route::get("/general/script.js","GeneralController@script")->name("general.script");
 
 Route::post("/get",'GeneralController@test')->name("general.test");
+Route::post("/get",'GeneralController@test')->name("sales.collect_report.index");
 
 
