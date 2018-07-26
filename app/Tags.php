@@ -22,4 +22,5 @@ class Tags extends Model
     public function expenses(){
         return $this->morphToMany("App\Tags", 'taggable');
     }
+
 }
