@@ -10,6 +10,7 @@
                 <div class="jarviswidget " id="wid-id-0" data-widget-editbutton="false">
                     <div>
                         <div class="widget-body no-padding">
+
                             <div id="search-mobile" class="btn-header transparent pull-right">
                                 <span> <a href="javascript:void(0)" title="{{ trans("word.search") }}"><i
                                                 class="fa fa-search"></i></a> </span>
@@ -66,7 +67,8 @@
                     <div class="modal-body">
                             <fieldset>
                                 <div class="form-group" :class="{'has-error': errors.has('form.name') }">
-                                    <label class="col-md-3 control-label">{{trans("word.expense")}}</label>
+                                    <label class="col-md-3 control-label">
+                                        {{trans("word.expense")}}</label>
                                     <div class="col-md-6 ">
                                         <div >
                                             <input  v-validate="'required'" type="text" class="form-control "
@@ -97,7 +99,9 @@
                                 </fieldset>
                             <fieldset>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{trans("sentence.expense_type")}}</label>
+                                    <label class="col-md-3 control-label">
+                                        {{trans("sentence.expense_type")}}
+                                    </label>
                                     <div class="col-md-6">
                                         <div>
                                             <vue-tags-input
@@ -107,6 +111,50 @@
                                                     @tags-changed="newTags => form.tagsd = newTags"
                                             />
                                         </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+
+
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">
+                                        {{ trans("sentence.expense_status") }}
+                                    </label>
+                                    <div class="col-md-9">
+                                        <a href="#odendi" id="odendi_button" data-toggle="tab" class="active btn btn-success">
+                                            {{ trans("word.paid") }}
+                                        </a>
+                                        <a href="#odenecek" id="odenecek_button"  data-toggle="tab" class="btn btn-warning">
+                                            {{ trans("word.payable") }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset id="tarih_fieldset">
+                                <div class="form-group" :class="{'has-error': errors.has('form.amount') }">
+                                    <label class="col-md-3 control-label">
+                                        TARİH
+                                    </label>
+                                    <div class="col-md-6 ">
+                                        <input id="tarih_input" name="tarih_input_value" type="hidden" value="1">
+                                        <input style="width: 270px" type="text" class="form-control datepicker"
+                                               v-model="form.date">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset id="hesap_sec_fieldset">
+                                <div class="form-group" :class="{'has-error': errors.has('form.amount') }">
+                                    <label class="col-md-3 control-label">
+                                        HESAP SEÇ
+                                    </label>
+                                    <div class="col-md-6 ">
+                                        <select class="form-control"  v-validate="'required'" name="form.bank_account_id" v-model="form.bank_account_id">
+                                            <option v-for="item in accounts" :value="item.id">@{{ item.name }}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </fieldset>
@@ -123,18 +171,18 @@
                                 </div>
                             </fieldset>
 
-                            <fieldset>
-                                <div class="form-group" :class="{'has-error': errors.has('form.bank_account_id') }">
-                                    <label class="col-md-3 control-label">{{trans("sentence.paid_account")}}</label>
-                                    <div class="col-md-6 ">
-                                        <div >
-                                           <select class="form-control"  v-validate="'required'" name="form.bank_account_id" v-model="form.bank_account_id">
-                                               <option v-for="item in accounts" :value="item.id">@{{ item.name }}</option>
-                                           </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
+                            {{--<fieldset>--}}
+                                {{--<div class="form-group" :class="{'has-error': errors.has('form.bank_account_id') }">--}}
+                                    {{--<label class="col-md-3 control-label">{{trans("sentence.paid_account")}}</label>--}}
+                                    {{--<div class="col-md-6 ">--}}
+                                        {{--<div>--}}
+                                           {{--<select class="form-control"  v-validate="'required'" name="form.bank_account_id" v-model="form.bank_account_id">--}}
+                                               {{--<option v-for="item in accounts" :value="item.id">@{{ item.name }}</option>--}}
+                                           {{--</select>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</fieldset>--}}
 
 
                     </div>
@@ -195,6 +243,18 @@
                     },
                     mounted: function () {
                         datePicker();
+
+                        $("#odendi_button").on("click",function(){
+                            $("#tarih_input").val("1");
+                            $("#hesap_sec_fieldset").show();
+                        });
+
+                        $("#odenecek_button").on("click",function(){
+                            $("#tarih_input").val("0");
+                            $("#hesap_sec_fieldset").hide();
+
+                        });
+
                     },
                     methods: {
                         expense_send: function () {
