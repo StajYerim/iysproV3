@@ -19,7 +19,7 @@
                     <h1>
                         <i style="vertical-align: -7px;color:#2AC!important"
                            class="fa fa-sign-in fa-rotate-90 fa-2x "></i> <span
-                                class="semi-bold"> {{$receipt->type}}
+                                class="semi-bold"> {{$receipt->status_text}}
                              </span>
 
                         <span class="pull-right">
