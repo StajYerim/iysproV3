@@ -17,13 +17,16 @@ class SalesReportController extends Controller
     {
 
         $kategoriler = Category::where("account_id",aid())->get();
+
         $tags = Tags::where("type","sales_orders")->get();
-        $company_tags = Tags::where("type","companies")->get();
+
+        $company_tags = Tags::where("type","sales_orders")->where("type","companies")->get();
 
         $products = Product::where("account_id",aid())->get();
 
-        $companies = Companies::where("account_id",aid())->where("type","companies")->get();
+        $companies = Companies::where("account_id",aid())->where("customer",1)->get();
 
+        $sales_orders = SalesOrders::where("account_id",aid())->get();
 
         $product_dont_category = 0;
         foreach($products as $product){
@@ -36,6 +39,9 @@ class SalesReportController extends Controller
         }
 
 
-        return view("modules.sales.sales_reports.index",compact("kategoriler","tags","companies","company_tags",'product_dont_category','products'));
+        return view("modules.sales.sales_reports.index",
+            compact(
+                "kategoriler","tags","companies","company_tags",'product_dont_category','products',"sales_orders"
+            ));
     }
 }

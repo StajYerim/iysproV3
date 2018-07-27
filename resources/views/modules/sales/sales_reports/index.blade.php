@@ -146,17 +146,19 @@
                     <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
-                            <th width="33%">ID</th>
-                            <th width="33%">fATURA KATEGORİSİ</th>
-                            <th width="33%">TÜR</th>
+                            <th width="25">ID</th>
+                            <th width="33%">AÇIKLAMA</th>
+                            <th width="33%">DÜZENLENME TARİHİ</th>
+                            <th width="33%">BAKİYE</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($tags as $tg)
+                        @foreach($sales_orders as $sale)
                         <tr>
-                            <td>{{ $tg->id }}</td>
-                            <td>{{ $tg->title }}</td>
-                            <td>{{ $tg->sales_orders_amount }}</td>
+                            <td>{{ $sale->id }}</td>
+                            <td>{{ ($sale->description == "") ? "FATURA" : $sale->description }}</td>
+                            <td>{{ $sale->date }}</td>
+                            <td>{{ $sale->grand_total }}</td>
                         </tr>
                         @endforeach
                         </tbody>
@@ -167,16 +169,16 @@
                         <thead>
                         <tr>
                             <th width="33%">ID</th>
-                            <th width="33%">CUSTOMER</th>
-                            <th width="33%">TUTAR</th>
+                            <th width="33%">ŞİRKET ADI</th>
+                            <th width="33%">BAKİYE</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($company_tags as $ct)
+                        @foreach($companies as $com)
                         <tr>
-                            <td>{{ $ct->id}}</td>
-                            <td>{{ $ct->title }}</td>
-                            <td>{{ $ct->companies_amount }}</td>
+                            <td>{{ $com->id}}</td>
+                            <td>{{ $com->company_name }}</td>
+                            <td>{{ $com->balance }}</td>
                         </tr>
                         @endforeach
                         </tbody>
