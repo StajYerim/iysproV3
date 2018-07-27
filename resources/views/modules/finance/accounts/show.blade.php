@@ -30,11 +30,7 @@
                             <a class="btn btn-default" href="{{route("finance.accounts.form",[aid(),$account->id,$account->type,"update"])}}">
                                 {{trans("word.edit")}}
 					        </a>
-                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><span
-                                        class="caret"></span></a>
-                        <ul class="dropdown-menu">
 
-                        </ul>
                         </span>
                     </h1>
 

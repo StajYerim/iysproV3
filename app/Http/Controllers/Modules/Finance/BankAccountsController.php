@@ -111,7 +111,7 @@ class BankAccountsController extends Controller
             $results[] =
                 array(
                     "id" => $item->id,
-                    "type" => $item->type,
+                    "type" => $item->status_text,
                     "company" => $item->company["company_name"],
                     "date" => $item->date,
                     "description" => $item->description,

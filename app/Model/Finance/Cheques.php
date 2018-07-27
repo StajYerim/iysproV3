@@ -87,7 +87,9 @@ class Cheques extends Model
     public function getCollectStatuAttribute(){
         $collect =  $this->collect;
 
-        if($collect == null){
+        if($this->transfer_company != null){
+            return 2;
+        }elseif($collect == null){
             return 0;
         }else{
             return 1;

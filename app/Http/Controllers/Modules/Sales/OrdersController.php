@@ -98,6 +98,9 @@ class OrdersController extends Controller
             "grand_total" => $request->form["grand_total"]
         ]);
 
+        Bankabble::where("bankabble_id", $order->id)->where("bankabble_type", "App\Model\Sales\SalesOrders")->delete();
+
+
         Taggable::where("taggable_type","App\Model\Sales\SalesOrders")->where("taggable_id",$order->id)->delete();
 
         if ($request->form["tagsd"]) {

@@ -32,7 +32,7 @@ class PaymentReportController extends Controller
         $total_payment = get_money($remaining);
 
         //Vadesi geçen Ödemeler
-        $order_expiry_date = PurchaseOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now())->get();
+        $order_expiry_date = PurchaseOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->subDay(1))->get();
         $expiry_remaining = 0;
 
         foreach ($order_expiry_date as $order) {

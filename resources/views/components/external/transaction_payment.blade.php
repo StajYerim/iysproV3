@@ -541,14 +541,14 @@
                                 //Banka Çeki
                                 axios.post('{{route("finance.accounts.transaction_company",aid())}}',$form).then(res=>{
                                     if (res.data.message == "success") {
-
+                                        return  window.location.href="{{Request::url() }}";
                                         $("#transaction_payment").modal("hide");
                                         VueName.remaining = res.data.remaining;
                                         VueName.statement();
                                         VuePayment.loading = false;
 
                                         notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
-                                        location.reload()
+
 
                                     }
                                 })
@@ -585,7 +585,7 @@
                                         VuePayment.loading = false;
 
                                         notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
-
+                                        return  window.location.href="{{Request::url() }}";
 
                                     }
                                 })

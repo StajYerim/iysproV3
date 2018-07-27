@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Modules\Finance;
 
+use App\Bankabble;
 use App\Model\Finance\BankAccounts;
 use App\Model\Finance\Cheques;
 use Yajra\DataTables\Facades\DataTables;
@@ -26,11 +27,20 @@ class ChequesController extends Controller
                     return "product_update($cheq->id)";
                 },
             ])
+            ->editColumn("company.company_name", function ($cheq) {
+
+                if ($cheq->cheque_status == 1) {
+                    return $cheq->company["company_name"] . '<br><small class="note">Portföyde</small>';
+                } else if ($cheq->cheque_status == 0) {
+                    return $cheq->transfer_company["company_name"] . '<br><small class="note">Portföyde</small>';
+                }
+
+            })
             ->editColumn("payment_date",function($cheq){
                 return $cheq->payment_date."<br><span class='note'>".$cheq->status_text."</span>";
             })
             ->setRowClass("row-title")
-            ->rawColumns(["payment_date"])
+            ->rawColumns(["payment_date", "company.company_name"])
             ->make(true);
     }
 
@@ -45,6 +55,7 @@ class ChequesController extends Controller
     {
         Cheques::destroy($id);
         flash()->overlay("Cheque Deleted", 'Success')->success();
+        Bankabble::where("cheques_id",$id)->delete();
         sleep(1);
         return ["message" => "success", 'type' => "cheque"];
     }

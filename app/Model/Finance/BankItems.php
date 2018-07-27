@@ -85,5 +85,26 @@ class BankItems extends Model
 
     }
 
+    public function getStatusTextAttribute()
+    {
+        if($this->type=="start_balance"){
+            return  "Açılış Bakiyesi";
+        }else if($this->type =="money_in"){
+            return "Para Girişi";
+        }else if($this->type == "money_out"){
+            return "Para Çıkışı";
+        }else if($this->type == "collect") {
+            return "Tahsilat";
+        }else if($this->type=="payment"){
+            return "Ödeme";
+        }else if($this->type=="cheque_payment"){
+            return "Çek Ödemesi";
+        }else if($this->type == "cheque_collect"){
+            return "Çek Tahsilatı";
+        }else if($this->type == "account_transfer"){
+            return "Para Transferi";
+        }
+    }
+
 
 }

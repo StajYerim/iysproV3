@@ -83,9 +83,6 @@
                         },
                     }, {
                         data: "company.company_name",
-                        render:function(company_name){
-                            return company_name+'<br><small class="note">Portföyde</small>';
-                        }
                     }, {
                         data: "payment_date",
                         render:function(payment_date,s,d){

@@ -94,7 +94,7 @@
                                         @endif
                                         @endforeach
                                         @foreach($export_collect["cheques"] as $cheque)
-                                            @if($cheque->cheque_statu == 1)
+                                            @if($cheque->collect_statu == 0)
                                             <tr style="cursor:pointer" onclick="window.location.href='{{route("finance.cheques.show",[aid(),$cheque->id])}}'">
                                                 <td>{{$cheque->payment_date}}</td>
                                                 <td>{{$cheque->date}}</td>
@@ -120,6 +120,14 @@
     <!-- END MAIN CONTENT -->
 
     @push("scripts")
+        <!-- PAGE RELATED PLUGIN(S) -->
+        {{--<script src="/js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>--}}
+        {{--<script src="/js/plugin/moment/moment.min.js"></script>--}}
+        {{--<script src="/js/plugin/chartjs/chart.min.js"></script>--}}
+        {{--<script src="/js/plugin/morris/raphael.min.js"></script>--}}
+        {{--<script src="/js/plugin/morris/morris.min.js"></script>--}}
+        {{--<script src="/js/plugin/daterangepicker/daterangepicker.js"></script>--}}
+        {{--<link rel="stylesheet" href="/js/plugin/daterangepicker/daterangepicker.css">--}}
 
         <script type="text/javascript">
 
