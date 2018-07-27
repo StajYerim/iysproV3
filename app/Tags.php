@@ -32,8 +32,24 @@ class Tags extends Model
 
     public function getSalesOrdersAmountAttribute()
     {
-        return  get_money($this->sales_orders()->sum("grand_total"));
+        return get_money($this->sales_orders()->sum("grand_total"));
     }
 
+    public function companies()
+    {
+        return $this->morphedByMany('App\Companies', 'taggable');
+    }
+
+    public function getCompaniesAmountAttribute()
+    {
+
+        $total = 0;
+        foreach ($this->companies as $company) {
+                 $total += $company->sales_orders()->sum("grand_total");
+        }
+
+        return get_money($total);
+
+    }
 
 }

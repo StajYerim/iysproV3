@@ -45,34 +45,38 @@
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>FATURA KATEGORİLERİ</b></div>
                                         <canvas id="pieChart" height="160"></canvas>
-                                        <div class="active-cart">
-                                            {{--<div class="col-md-12">--}}
-                                                {{--<label class="pull-left label label-success">Kategorisiz</label>--}}
-                                                {{--<label class="pull-right" id="fatura_kategori"><b>500</b> <i class="fa fa-try"></i></label>--}}
-                                            {{--</div>--}}
-
-                                            <div class="col-md-12">
-                                                <label class="pull-left label label-default">Kategorisiz</label>
-                                                <label class="pull-right"><b>0</b>₺</label>
-                                            </div>
-                                                @foreach($tags as $tag)
-                                                    <div class="col-md-12">
-                                                        <label class="pull-left label" style="background-color: {{ $tag->bg_color }}">
-                                                            {{ $tag->title }}
-                                                        </label>
-                                                        <label class="pull-right"><b>{{ $tag->sales_orders_amount }}</b> <i class="fa fa-try"></i></label>
-                                                    </div>
-                                                @endforeach
+                                        <div class="col-md-12">
+                                            <label class="pull-left label label-default">Kategorisiz</label>
+                                            <label class="pull-right"><b>0</b>₺</label>
                                         </div>
+                                        @foreach($tags as $tag)
+                                            @if($tag->sales_orders_amount != "0,00")
+                                                <div class="col-md-12">
+                                                    <label class="pull-left label" style="background-color: {{ $tag->bg_color }}">
+                                                        {{ $tag->title }}
+                                                    </label>
+                                                    <label class="pull-right"><b>{{ $tag->sales_orders_amount }}</b> <i class="fa fa-try"></i></label>
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>MÜŞTERİ KATEGORİLERİ</b></div>
                                         <canvas id="pieChart2" height="160"></canvas>
-                                        <label class="pull-left label label-default">Category</label>
-                                        <label class="pull-right"><b>64.29</b>,21$</label>
-                                        <br /><br /><br />
-                                        <label class="pull-left label label-success">OSGB</label>
-                                        <label class="pull-right"><b>64.29</b>,21$</label>
+                                        <div class="col-md-12">
+                                            <label class="pull-left label label-default">Kategorisiz</label>
+                                            <label class="pull-right"><b>0</b>₺</label>
+                                        </div>
+                                        @foreach($company_tags as $company_tag)
+                                            @if($company_tag->companies_amount != "0,00")
+                                                <div class="col-md-12">
+                                                    <label class="pull-left label" style="background-color: {{ $company_tag->bg_color }}">
+                                                        {{ $company_tag->title }}
+                                                    </label>
+                                                    <label class="pull-right"><b>{{ $company_tag->companies_amount }}</b> <i class="fa fa-try"></i></label>
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>HİZMET/ÜRÜN KATEGORİLERİ</b></div>
@@ -80,16 +84,18 @@
 
                                         <div class="col-md-12">
                                             <label class="pull-left label label-default">Kategorisiz</label>
-                                            <label class="pull-right"><b>0</b>₺</label>
+                                            <label class="pull-right"><b>{{ get_money($product_dont_category)}}</b>₺</label>
                                         </div>
 
                                         @foreach($kategoriler as $kategori)
-                                            <div class="col-md-12">
-                                                <label class="pull-left label" style="background-color: {{ $kategori->color }}">
-                                                    {{ $kategori->name }}
-                                                </label>
-                                                <label class="pull-right"><b>{{$kategori->totalOrder}}</b>₺</label>
-                                            </div>
+                                            @if($kategori->totalOrder != "0,00")
+                                                <div class="col-md-12">
+                                                    <label class="pull-left label" style="background-color: {{ $kategori->color }}">
+                                                        {{ $kategori->name }}
+                                                    </label>
+                                                    <label class="pull-right"><b>{{$kategori->totalOrder}}</b>₺</label>
+                                                </div>
+                                            @endif
                                         @endforeach
 
                                     </div>
@@ -99,209 +105,115 @@
                     </div>
                 </article>
             </div>
-            {{--<div class="row">--}}
-                {{--<article class="col-sm-12">--}}
-                    {{--<div class="jarviswidget well" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">--}}
-                        {{--<div class="widget-body">--}}
-                            {{--<div class="widget-body-toolbar st">--}}
-                                {{--<div class="row">--}}
-                                    {{--<div class="col-sm-12">--}}
-                                        {{--<h2>Bar Chart</h2>--}}
-                                    {{--</div>--}}
+            <div class="row">
+            <article class="col-sm-12">
+            <div class="jarviswidget well" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+            <div class="widget-body">
+            <div class="widget-body-toolbar st">
+            <div class="row">
+            <div class="col-sm-12">
+            <h2>Bar Chart</h2>
+            </div>
 
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-sm-12">--}}
-                                {{--<div id="normal-bar-graph" class="chart no-padding"></div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</article>--}}
-            {{--</div>--}}
-            {{--<div class="row">--}}
-                {{--<article class="col-sm-12">--}}
-                    {{--<div class="jarviswidget well" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">--}}
-                        {{--<div class="widget-body">--}}
-                            {{--<div class="widget-body-toolbar st">--}}
-                                {{--<div class="row">--}}
-                                    {{--<div class="col-sm-8" style="margin-top:-20px;"><h2>Table 1</h2></div>--}}
-                                    {{--<div class="col-sm-4">--}}
-                                        {{--<div class="btn-group btn-group-justified">--}}
-                                            {{--<a href="javascript:void(0);" class="btn btn-default">Button1</a>--}}
-                                            {{--<a href="javascript:void(0);" class="btn btn-default">Button2</a>--}}
-                                            {{--<a href="javascript:void(0);" class="btn btn-default">Button3</a>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="row">--}}
-                                {{--<div class="col-sm-12">--}}
-                                    {{--<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">--}}
-                                        {{--<thead>--}}
-                                        {{--<tr>--}}
-                                            {{--<th width="33%">ID</th>--}}
-                                            {{--<th width="33%">Name</th>--}}
-                                            {{--<th width="33%">Phone</th>--}}
-                                        {{--</tr>--}}
-                                        {{--</thead>--}}
-                                        {{--<tbody>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>1</td>--}}
-                                            {{--<td>Jennifer</td>--}}
-                                            {{--<td>1-342-463-8341</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>91</td>--}}
-                                            {{--<td>Neil</td>--}}
-                                            {{--<td>1-550-664-4050</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>92</td>--}}
-                                            {{--<td>Hunter</td>--}}
-                                            {{--<td>1-637-483-4408</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>93</td>--}}
-                                            {{--<td>Marcia</td>--}}
-                                            {{--<td>1-512-896-6301</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>94</td>--}}
-                                            {{--<td>Lavinia</td>--}}
-                                            {{--<td>1-222-745-5312</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>95</td>--}}
-                                            {{--<td>Cynthia</td>--}}
-                                            {{--<td>1-392-134-2788</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>96</td>--}}
-                                            {{--<td>Lee</td>--}}
-                                            {{--<td>1-128-816-7274</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>97</td>--}}
-                                            {{--<td>Linda</td>--}}
-                                            {{--<td>1-546-735-8920</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>98</td>--}}
-                                            {{--<td>Wayne</td>--}}
-                                            {{--<td>1-744-647-6144</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>99</td>--}}
-                                            {{--<td>Liberty</td>--}}
-                                            {{--<td>1-841-489-1665</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>100</td>--}}
-                                            {{--<td>Cathleen</td>--}}
-                                            {{--<td>1-883-567-6065</td>--}}
-                                        {{--</tr>--}}
-                                        {{--</tbody>--}}
-                                    {{--</table>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</article>--}}
-            {{--</div>--}}
-            {{--<div class="row">--}}
-                {{--<article class="col-sm-12">--}}
-                    {{--<div class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">--}}
-                        {{--<div class="widget-body">--}}
-                            {{--<div class="widget-body-toolbar st">--}}
-                                {{--<div class="row">--}}
-                                    {{--<div class="col-sm-8" style="margin-top:-20px;"><h2>Table 1</h2></div>--}}
-                                    {{--<div class="col-sm-4">--}}
-                                        {{--<div class="btn-group btn-group-justified">--}}
-                                            {{--<a href="javascript:void(0);" class="btn btn-default">Button1</a>--}}
-                                            {{--<a href="javascript:void(0);" class="btn btn-default">Button2</a>--}}
-                                            {{--<a href="javascript:void(0);" class="btn btn-default">Button3</a>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="row">--}}
-                                {{--<div class="col-sm-12">--}}
-                                    {{--<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">--}}
-                                        {{--<thead>--}}
-                                        {{--<tr>--}}
-                                            {{--<th width="33%">ID</th>--}}
-                                            {{--<th width="33%">Name</th>--}}
-                                            {{--<th width="33%">Phone</th>--}}
-                                        {{--</tr>--}}
-                                        {{--</thead>--}}
-                                        {{--<tbody>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>1</td>--}}
-                                            {{--<td>Jennifer</td>--}}
-                                            {{--<td>1-342-463-8341</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>91</td>--}}
-                                            {{--<td>Neil</td>--}}
-                                            {{--<td>1-550-664-4050</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>92</td>--}}
-                                            {{--<td>Hunter</td>--}}
-                                            {{--<td>1-637-483-4408</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>93</td>--}}
-                                            {{--<td>Marcia</td>--}}
-                                            {{--<td>1-512-896-6301</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>94</td>--}}
-                                            {{--<td>Lavinia</td>--}}
-                                            {{--<td>1-222-745-5312</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>95</td>--}}
-                                            {{--<td>Cynthia</td>--}}
-                                            {{--<td>1-392-134-2788</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>96</td>--}}
-                                            {{--<td>Lee</td>--}}
-                                            {{--<td>1-128-816-7274</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>97</td>--}}
-                                            {{--<td>Linda</td>--}}
-                                            {{--<td>1-546-735-8920</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>98</td>--}}
-                                            {{--<td>Wayne</td>--}}
-                                            {{--<td>1-744-647-6144</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>99</td>--}}
-                                            {{--<td>Liberty</td>--}}
-                                            {{--<td>1-841-489-1665</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>100</td>--}}
-                                            {{--<td>Cathleen</td>--}}
-                                            {{--<td>1-883-567-6065</td>--}}
-                                        {{--</tr>--}}
-                                        {{--</tbody>--}}
-                                    {{--</table>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</article>--}}
-            {{--</div>--}}
+            </div>
+            </div>
+            <div class="col-sm-12">
+            <div id="normal-bar-graph" class="chart no-padding"></div>
+            </div>
+            </div>
+            </div>
+            </article>
+            </div>
+            <div class="row">
+            <article class="col-sm-12">
+            <div class="jarviswidget well" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+            <div class="widget-body">
+            <div class="widget-body-toolbar st">
+            <div class="row">
+                <div class="col-sm-8" style="margin-top:-20px;"><h2>Table 1</h2></div>
+                    <div class="col-sm-4">
+                        <div class="btn-group btn-group-justified nav nav-tabs">
+                            <button style="width:100px!important;" data-toggle="tab" href="#invoice_table" class="btn btn-default">FATURA</button>
+                            <button style="width:100px!important;" data-toggle="tab" href="#customer_table" class="btn btn-default">MÜŞTERİ</button>
+                            <button style="width:100px!important;" data-toggle="tab" href="#product_table" class="btn btn-default">ÜRÜN</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-sm-12 tab-content">
+                <div id="invoice_table" class="tab-pane fade in active">
+                    <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th width="33%">ID</th>
+                            <th width="33%">fATURA KATEGORİSİ</th>
+                            <th width="33%">TÜR</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($tags as $tg)
+                        <tr>
+                            <td>{{ $tg->id }}</td>
+                            <td>{{ $tg->title }}</td>
+                            <td>{{ $tg->sales_orders_amount }}</td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div id="customer_table" class="tab-pane fade">
+                    <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th width="33%">ID</th>
+                            <th width="33%">CUSTOMER</th>
+                            <th width="33%">TUTAR</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($company_tags as $ct)
+                        <tr>
+                            <td>{{ $ct->id}}</td>
+                            <td>{{ $ct->title }}</td>
+                            <td>{{ $ct->companies_amount }}</td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div id="product_table" class="tab-pane fade">
+                    <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th width="33%">ID</th>
+                            <th width="33%">ÜRÜN</th>
+                            <th width="33%">ADET</th>
+                            <th width="33%">TUTAR</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($products as $pr)
+                        <tr>
+                            <td>{{ $pr->id }}</td>
+                            <td>{{ $pr->name }}</td>
+                            <td>{{ $pr->order_items()->sum("quantity") }}</td>
+                            <td>{{ get_money($pr->order_items()->sum("price")*$pr->order_items()->sum("quantity")) }}</td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </article>
+            </div>
+
+            {{----}}
         </section>
-        <!-- end widget grid -->
     </div>
-    <!-- END MAIN CONTENT -->
 
     @push("scripts")
         <!-- PAGE RELATED PLUGIN(S) -->
@@ -331,90 +243,92 @@
                     return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
                 };
 
-                @php
-                    $labels = "";
-                    $data   = "";
-                    $backgroundColor = "";
-                    foreach($tags as $tag)
-                    {
-                        $labels   .= "\"$tag->title\", ";
-                        $data     .= "$tag->sales_orders_amount,";
-                        $backgroundColor   .= "\"$tag->bg_color\", ";
-                    }
-                @endphp
+                        @php
+                            $labels_tag = "";
+                            $data_tag   = "";
+                            $backgroundColor_tag = "";
+                            foreach($tags as $tag)
+                            {
+                                $labels_tag   .= "\"$tag->title\", ";
+                                $data_tag     .= "$tag->sales_orders_amount,";
+                                $backgroundColor_tag   .= "\"$tag->bg_color\", ";
+                            }
+                        @endphp
 
                 var PieConfig = {
-                    type: 'pie',
-                    data: {
-                        datasets: [{
-                            data: [ {!! $data !!} ],
-                            backgroundColor: [ {!! $backgroundColor !!} ],
-                        }],
-                        labels: [{!! $labels !!}]
-                    },
-                    options: {
-                        responsive: true,
-                        legend: {
-                            display: false
+                        type: 'pie',
+                        data: {
+                            datasets: [{
+                                data: [ {!! $data_tag !!} ],
+                                backgroundColor: [ {!! $backgroundColor_tag !!} ],
+                            }],
+                            labels: [ {!! $labels_tag !!} ]
                         },
-                    },
-                };
+                        options: {
+                            responsive: true,
+                            legend: {
+                                display: false
+                            },
+                        },
+                    };
+
+                        @php
+                            $labels_company_tag = "";
+                            $data_company_tag  = "";
+                            $backgroundColor_company_tag = "";
+                            foreach($company_tags as $company_tag)
+                            {
+                                $labels_company_tag   .= "\"$company_tag->title\", ";
+                                $data_company_tag     .= "$company_tag->companies_amount,";
+                                $backgroundColor_company_tag   .= "\"$company_tag->bg_color\", ";
+                            }
+                        @endphp
 
                 var PieConfig2 = {
-                    type: 'pie',
-                    data: {
-                        datasets: [{
-                            data: [
-                                {{ $oran }},
-                            ],
-                            backgroundColor: [
-                                "#949FB1",
-                                "#46BFBD",
-                                "#FDB45C",
-                                "#F7464A",
-                                "#4D5360",
-                            ],
-                        }],
-                        labels: [
-                            "Kategorisiz",
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        legend: {
-                            display: false
+                        type: 'pie',
+                        data: {
+                            datasets: [{
+                                data: [ {!! $data_company_tag !!} ],
+                                backgroundColor: [ {!! $backgroundColor_company_tag !!} ],
+                            }],
+                            labels: [ {!! $labels_company_tag !!} ]
+                        },
+                        options: {
+                            responsive: true,
+                            legend: {
+                                display: false
+                            }
                         }
-                    }
-                };
+                    };
 
-                @php
-                    $labels = "";
-                    $data   = "";
-                    $backgroundColor = "";
-                    foreach($kategoriler as $category)
-                    {
-                        $labels   .= "\"$category->name\", ";
-                        $data     .= "$category->totalOrder,";
-                        $backgroundColor   .= "\"$category->color\", ";
-                    }
-                @endphp
+                        @php
+                            $labels_category = "";
+                            $data_category   = "";
+                            $backgroundColor_category = "";
+                            foreach($kategoriler as $category)
+                            {
+                                $labels_category            .= "\"$category->name\", ";
+                                $data_category              .= "$category->totalOrder,";
+                                $backgroundColor_category   .= "\"$category->color\", ";
+                            }
+                        @endphp
 
                 var PieConfig3 = {
-                    type: 'pie',
-                    data: {
-                        datasets: [{
-                            data: [ {!! $data !!} ],
-                            backgroundColor: [{!! $backgroundColor !!}]
-                        }],
-                        labels: [{!! $labels !!}]
-                    },
-                    options: {
-                        responsive: true,
-                        legend: {
-                            display: false
+                        type: 'pie',
+                        data: {
+                            datasets: [{
+                                data: [ {!! $data_category !!} ],
+                                backgroundColor: [{!! $backgroundColor_category !!}]
+                            }],
+                            labels: [{!! $labels_category !!}]
+                        },
+                        options: {
+                            responsive: true,
+                            legend: {
+                                display: false
+                            }
                         }
-                    }
-                };
+                    };
 
                 // Use Morris.Bar
                 if ($('#normal-bar-graph').length) {

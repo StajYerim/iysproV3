@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Modules\Sales;
 
+use App\Companies;
 use App\Model\Sales\SalesOrders;
 use App\Model\Sales\SalesOrderItems;
 use App\Model\Stock\Product\Category;
@@ -14,13 +15,27 @@ class SalesReportController extends Controller
 {
     public function index()
     {
-//        $total = SalesOrders::all()->sum('grand_totals');
-//        $oran = money_db_format($total)/money_db_format($total)*100;
-        $kategoriler = Category::all();
-        $urunler = Product::all();
-        $sales_order_items=SalesOrderItems::where("product_id",1)->get();
-        $tags = Tags::where("type","sales_orders")->get();
 
-        return view("modules.sales.sales_reports.index",compact("kategoriler","tags"));
+        $kategoriler = Category::where("account_id",aid())->get();
+        $tags = Tags::where("type","sales_orders")->get();
+        $company_tags = Tags::where("type","companies")->get();
+
+        $products = Product::where("account_id",aid())->get();
+
+        $companies = Companies::where("account_id",aid())->where("type","companies")->get();
+
+
+        $product_dont_category = 0;
+        foreach($products as $product){
+
+
+            if($product->category == null){
+
+                return  $product->order_items()->sum("price")*$product->order_items()->sum("quantity");
+            }
+        }
+
+
+        return view("modules.sales.sales_reports.index",compact("kategoriler","tags","companies","company_tags",'product_dont_category','products'));
     }
 }
