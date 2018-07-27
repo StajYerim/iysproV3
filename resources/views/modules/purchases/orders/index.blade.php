@@ -89,6 +89,7 @@
                         },
                     }, {
                         data: "company.company_name",
+                        name: "company.company_name",
                     }, {
                         data: "date"
 
