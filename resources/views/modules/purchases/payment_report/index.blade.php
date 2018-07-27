@@ -72,17 +72,18 @@
                                             <td>{{$order->remaining}}  <i class="fa fa-try"></i></td>
                                         </tr>
                                         @endif
-                                        {{--@endforeach--}}
-                                        {{--@foreach($export_collect["cheques"] as $cheque)--}}
-                                            {{--@if($cheque->cheque_statu == 1)--}}
-                                            {{--<tr style="cursor:pointer" onclick="window.location.href='{{route("finance.cheques.show",[aid(),$cheque->id])}}'">--}}
-                                                {{--<td>{{$cheque->payment_date}}</td>--}}
-                                                {{--<td>{{$cheque->date}}</td>--}}
-                                                {{--<td>{{$cheque->company_id != null ? $cheque->company["company_name"]:"-"}}</td>--}}
-                                                {{--<td>ÇEK</td>--}}
-                                                {{--<td>{{$cheque->amount}} <i class="fa fa-try"></i></td>--}}
-                                            {{--</tr>--}}
-                                            {{--@endif--}}
+                                        @endforeach
+                                        @foreach($export_collect["cheques"] as $cheque)
+                                            @if ($cheque->cheques_status == 0 && $cheque->show_button == "verilen0" )
+
+                                            <tr style="cursor:pointer" onclick="window.location.href='{{route("finance.cheques.show",[aid(),$cheque->id])}}'">
+                                                <td>{{$cheque->payment_date}}</td>
+                                                <td>{{$cheque->date}}</td>
+                                                <td>{{$cheque->company_id != null ? $cheque->company["company_name"]:"-"}}</td>
+                                                <td>ÇEK</td>
+                                                <td>{{$cheque->amount}} <i class="fa fa-try"></i></td>
+                                            </tr>
+                                            @endif
                                         @endforeach
 
 
