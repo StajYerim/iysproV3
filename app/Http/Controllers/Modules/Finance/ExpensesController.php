@@ -38,6 +38,7 @@ class ExpensesController extends Controller
     {
 
 
+
         $expense = Expenses::updateOrCreate(["id" => $request->id],
             [
                 "name" => $request->name,
