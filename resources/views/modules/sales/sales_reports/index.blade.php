@@ -315,6 +315,7 @@
                             {
                                 $labels_company_tag   .= "\"$company_tag->title\", ";
                                 $data_company_tag     .= "$company_tag->companies_amount,";
+                                $data_company_tag = (float) $data_company_tag;
                                 $backgroundColor_company_tag   .= "\"$company_tag->bg_color\", ";
                             }
                         @endphp

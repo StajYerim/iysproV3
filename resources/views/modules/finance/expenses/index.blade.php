@@ -10,6 +10,7 @@
                 <div class="jarviswidget " id="wid-id-0" data-widget-editbutton="false">
                     <div>
                         <div class="widget-body no-padding">
+
                             <div id="search-mobile" class="btn-header transparent pull-right">
                                 <span> <a href="javascript:void(0)" title="{{ trans("word.search") }}"><i
                                                 class="fa fa-search"></i></a> </span>
@@ -111,6 +112,50 @@
                                 </div>
                             </fieldset>
 
+
+
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">{{ trans("sentence.expense_status") }}</label>
+                                    <div class="col-md-9">
+                                        <div class="nav nav-tabs">
+                                            <a href="#odendi" data-toggle="tab" class="active btn btn-success">
+                                                {{ trans("word.paid") }}
+                                            </a>
+                                            <a href="#odenecek" data-toggle="tab" class="btn btn-warning">
+                                                {{ trans("word.payable") }}
+                                            </a>
+                                        </div>
+                                        <br>
+                                        <div class="tab-content">
+                                            <div id="odendi" class="tab-pane fade in active">
+                                                <input type="hidden" value="1">
+                                                <label class="control-label">
+                                                    {{ trans("word.date") }}
+                                                </label>
+                                                <input style="width: 270px" type="text" class="form-control datepicker"
+                                                       v-model="form.date">
+                                                <br>
+                                                <label class="control-label">
+                                                    {{ trans("sentence.choose_account") }}
+                                                </label>
+                                                <select style="width: 270px" class="form-control"  v-validate="'required'" name="form.bank_account_id" v-model="form.bank_account_id">
+                                                    <option v-for="item in accounts" :value="item.id">@{{ item.name }}</option>
+                                                </select>
+                                            </div>
+                                            <div id="odenecek" class="tab-pane fade">
+                                                <input type="hidden" value="0">
+                                                <label class="control-label">
+                                                    {{ trans("word.date") }}
+                                                </label>
+                                                <input style="width: 270px" type="text" class="form-control datepicker"
+                                                       v-model="form.date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
                             <fieldset>
                                 <div class="form-group" :class="{'has-error': errors.has('form.amount') }">
                                     <label class="col-md-3 control-label">{{trans("word.amount")}}</label>
@@ -123,18 +168,18 @@
                                 </div>
                             </fieldset>
 
-                            <fieldset>
-                                <div class="form-group" :class="{'has-error': errors.has('form.bank_account_id') }">
-                                    <label class="col-md-3 control-label">{{trans("sentence.paid_account")}}</label>
-                                    <div class="col-md-6 ">
-                                        <div >
-                                           <select class="form-control"  v-validate="'required'" name="form.bank_account_id" v-model="form.bank_account_id">
-                                               <option v-for="item in accounts" :value="item.id">@{{ item.name }}</option>
-                                           </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
+                            {{--<fieldset>--}}
+                                {{--<div class="form-group" :class="{'has-error': errors.has('form.bank_account_id') }">--}}
+                                    {{--<label class="col-md-3 control-label">{{trans("sentence.paid_account")}}</label>--}}
+                                    {{--<div class="col-md-6 ">--}}
+                                        {{--<div>--}}
+                                           {{--<select class="form-control"  v-validate="'required'" name="form.bank_account_id" v-model="form.bank_account_id">--}}
+                                               {{--<option v-for="item in accounts" :value="item.id">@{{ item.name }}</option>--}}
+                                           {{--</select>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</fieldset>--}}
 
 
                     </div>
