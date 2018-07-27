@@ -212,7 +212,7 @@ class SalesOrders extends Model
     public function getCollectLabelAttribute()
     {
         if($this->remaining == "0,00"){
-            return '<span class="label label-danger">ÖDENDİ</span>';
+            return '<span class="label label-success">ÖDENDİ</span>';
         }else if($this->remaining == $this->grand_total){
             return '<span class="label label-danger">ÖDENMEDİ</span>';
         }else{
