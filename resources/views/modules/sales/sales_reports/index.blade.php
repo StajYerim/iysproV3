@@ -15,7 +15,7 @@
     <!-- MAIN CONTENT -->
     <div id="content">
 
-        <section id="widget-grid">
+        <section id="sales_report" v-cloak>
             <div class="row">
                 <article class="col-sm-12">
                     <div class="jarviswidget well" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
@@ -44,59 +44,59 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>FATURA KATEGORİLERİ</b></div>
-                                        <canvas id="pieChart" height="160"></canvas>
+                                        <canvas id="ordersChart" height="160"></canvas>
                                         <div class="col-md-12">
                                             <label class="pull-left label label-default">Kategorisiz</label>
                                             <label class="pull-right"><b>0</b>₺</label>
                                         </div>
-                                        @foreach($tags as $tag)
-                                            @if($tag->sales_orders_amount != "0,00")
-                                                <div class="col-md-12">
-                                                    <label class="pull-left label" style="background-color: {{ $tag->bg_color }}">
-                                                        {{ $tag->title }}
+
+
+                                        <div v-for='(item,index) in order_pie' :key="index" class="col-md-12">
+                                            <label class="pull-left label"
+                                                   v-bind:style="{'background-color':item.bgcolor}">
+                                                @{{ item.labels}}
                                                     </label>
-                                                    <label class="pull-right"><b>{{ $tag->sales_orders_amount }}</b> <i class="fa fa-try"></i></label>
+                                            <label class="pull-right"><b>@{{item.data}}</b> <i
+                                                        class="fa fa-try"></i></label>
                                                 </div>
-                                            @endif
-                                        @endforeach
+
+
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>MÜŞTERİ KATEGORİLERİ</b></div>
-                                        <canvas id="pieChart2" height="160"></canvas>
+                                        <canvas id="customersChart" height="160"></canvas>
                                         <div class="col-md-12">
                                             <label class="pull-left label label-default">Kategorisiz</label>
                                             <label class="pull-right"><b>0</b>₺</label>
                                         </div>
-                                        @foreach($company_tags as $company_tag)
-                                            @if($company_tag->companies_amount != "0,00")
-                                                <div class="col-md-12">
-                                                    <label class="pull-left label" style="background-color: {{ $company_tag->bg_color }}">
-                                                        {{ $company_tag->title }}
+
+                                        <div v-for="(item,index) in customer_pie" class="col-md-12">
+                                            <label class="pull-left label"
+                                                   v-bind:style="{'background-color':item.bgcolor}">
+                                                @{{ item.labels }}
                                                     </label>
-                                                    <label class="pull-right"><b>{{ $company_tag->companies_amount }}</b> <i class="fa fa-try"></i></label>
+                                            <label class="pull-right"><b>@{{ item.data }}</b> <i class="fa fa-try"></i></label>
                                                 </div>
-                                            @endif
-                                        @endforeach
+
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>HİZMET/ÜRÜN KATEGORİLERİ</b></div>
-                                        <canvas id="pieChart3" height="160"></canvas>
+                                        <canvas id="productChart" height="160"></canvas>
 
                                         <div class="col-md-12">
                                             <label class="pull-left label label-default">Kategorisiz</label>
-                                            <label class="pull-right"><b>{{ get_money($product_dont_category)}}</b>₺</label>
+                                            <label class="pull-right"><b></b>₺</label>
                                         </div>
 
-                                        @foreach($kategoriler as $kategori)
-                                            @if($kategori->totalOrder != "0,00")
-                                                <div class="col-md-12">
-                                                    <label class="pull-left label" style="background-color: {{ $kategori->color }}">
-                                                        {{ $kategori->name }}
+
+                                                <div v-for="(item,index) in product_pie" class="col-md-12">
+                                                    <label class="pull-left label"
+                                                           v-bind:style="{'background-color':item.bgcolor}">
+                                                        @{{ item.labels }}
                                                     </label>
-                                                    <label class="pull-right"><b>{{$kategori->totalOrder}}</b>₺</label>
+                                                    <label class="pull-right"><b>@{{ item.data }}</b> <i class="fa fa-try"></i></label>
                                                 </div>
-                                            @endif
-                                        @endforeach
+
 
                                     </div>
                                 </div>
@@ -105,27 +105,6 @@
                     </div>
                 </article>
             </div>
-            {{--<div class="row">--}}
-            {{--<article class="col-sm-12">--}}
-            {{--<div class="jarviswidget well" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">--}}
-            {{--<div class="widget-body">--}}
-            {{--<div class="widget-body-toolbar st">--}}
-            {{--<div class="row">--}}
-            {{--<div class="col-sm-12">--}}
-            {{--<h2>Bar Chart</h2>--}}
-            {{--</div>--}}
-
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="col-sm-12">--}}
-            {{--<div id="normal-bar-graph" class="chart no-padding"></div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</article>--}}
-            {{--</div>--}}
-
-
 
             <div class="row">
             <article class="col-sm-12">
@@ -264,227 +243,143 @@
 
 
             $(document).ready(function () {
-
-                pageSetUp();
-
-                var randomScalingFactor = function () {
-                    return Math.round(Math.random() * 100);
-                    //return 0;
-                };
-                var randomColorFactor = function () {
-                    return Math.round(Math.random() * 255);
-                };
-                var randomColor = function (opacity) {
-                    return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
-                };
-
-                        @php
-                            $labels_tag = "";
-                            $data_tag   = "";
-                            $backgroundColor_tag = "";
-                            foreach($tags as $tag)
-                            {
-                                $labels_tag   .= "\"$tag->title\", ";
-                                $data_tag     .= "$tag->sales_orders_amount,";
-                                $backgroundColor_tag   .= "\"$tag->bg_color\", ";
-                            }
-                        @endphp
-
-                var PieConfig = {
-                        type: 'pie',
-                        data: {
-                            datasets: [{
-                                data: [ {!! $data_tag !!} ],
-                                backgroundColor: [ {!! $backgroundColor_tag !!} ],
-                            }],
-                            labels: [ {!! $labels_tag !!} ]
-                        },
-                        options: {
-                            responsive: true,
-                            legend: {
-                                display: false
-                            },
-                        },
-                    };
-
-                        @php
-                            $labels_company_tag = "";
-                            $data_company_tag  = "";
-                            $backgroundColor_company_tag = "";
-                            foreach($company_tags as $company_tag)
-                            {
-                                $labels_company_tag   .= "\"$company_tag->title\", ";
-                                $data_company_tag     .= "$company_tag->companies_amount,";
-                                $backgroundColor_company_tag   .= "\"$company_tag->bg_color\", ";
-                            }
-                        @endphp
-
-                var PieConfig2 = {
-                        type: 'pie',
-                        data: {
-                            datasets: [{
-                                data: [ {!! $data_company_tag !!} ],
-                                backgroundColor: [ {!! $backgroundColor_company_tag !!} ],
-                            }],
-                            labels: [ {!! $labels_company_tag !!} ]
-                        },
-                        options: {
-                            responsive: true,
-                            legend: {
-                                display: false
-                            }
-                        }
-                    };
-
-                        @php
-                            $labels_category = "";
-                            $data_category   = "";
-                            $backgroundColor_category = "";
-                            foreach($kategoriler as $category)
-                            {
-                                $labels_category            .= "\"$category->name\", ";
-                                $data_category              .= "$category->totalOrder,";
-                                $backgroundColor_category   .= "\"$category->color\", ";
-                            }
-                        @endphp
-
-                var PieConfig3 = {
-                        type: 'pie',
-                        data: {
-                            datasets: [{
-                                data: [ {!! $data_category !!} ],
-                                backgroundColor: [{!! $backgroundColor_category !!}]
-                            }],
-                            labels: [{!! $labels_category !!}]
-                        },
-                        options: {
-                            responsive: true,
-                            legend: {
-                                display: false
-                            }
-                        }
-                    };
-
-                // Use Morris.Bar
-                if ($('#normal-bar-graph').length) {
-
-                    Morris.Bar({
-                        element: 'normal-bar-graph',
-                        data: [{
-                            x: '2011',
-                            y: 10
-                        }, {
-                            x: '2012',
-                            y: 30
-                        }, {
-                            x: '2013',
-                            y: 40
-                        }, {
-                            x: '2014',
-                            y: 20
-                        }],
-                        xkey: 'x',
-                        ykeys: ['y'],
-                        labels: ['Y']
-                    });
-
-                }
-
-
-                window.onload = function () {
-                    window.myPie = new Chart(document.getElementById("pieChart"), PieConfig);
-                    window.myPie2 = new Chart(document.getElementById("pieChart2"), PieConfig2);
-                    window.myPie3 = new Chart(document.getElementById("pieChart3"), PieConfig3);
-                };
-
-                @php
-                    $start = new \Carbon\Carbon('first day of last month');
-                    $end = new \Carbon\Carbon('last day of last month');
-                @endphp
-
-                $('#demo').daterangepicker({
-                    "locale": {
-                        "format": "DD-MM-YYYY",
-                        "separator": " / ",
-                        "applyLabel": "Uygula",
-                        "cancelLabel": "İptal",
-                        "fromLabel": "From",
-                        "toLabel": "To",
-                        "customRangeLabel": "Özel Tarih",
-                        "daysOfWeek": [
-                            "Pt",
-                            "Sa",
-                            "Ça",
-                            "Pe",
-                            "Cu",
-                            "Ct",
-                            "Pa"
-                        ],
-                        "monthNames": [
-                            "Ocak",
-                            "Şubat",
-                            "Mart",
-                            "Nisan",
-                            "Mayıs",
-                            "Haziran",
-                            "Temmuz",
-                            "Ağustos",
-                            "Eylül",
-                            "Ekim",
-                            "Kasım",
-                            "Aralık"
-                        ],
-                        "firstDay": 1
+                sales_report = new Vue({
+                    el: "#sales_report",
+                    data: {
+                        order_pie: [],
+                        customer_pie: [],
+                        product_pie: []
                     },
-                    "ranges": {
-                        "Bugün": [
-                            "{{ \Carbon\Carbon::now()->format('d-m-Y') }}",
-                            "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
-                        ],
-                        "Dün": [
-                            "{{ \Carbon\Carbon::yesterday()->format('d-m-Y') }}",
-                            "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
-                        ],
-                        "Son 7 Gün": [
-                            "{{ \Carbon\Carbon::now()->subDays(7)->format('d-m-Y') }}",
-                            "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
-                        ],
-                        "Son 30 Gün": [
-                            "{{ \Carbon\Carbon::now()->subDays(30)->format('d-m-Y') }}",
-                            "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
-                        ],
-                        "Bu Ay": [
-                            "{{ \Carbon\Carbon::now()->startOfMonth()->format('d-m-Y') }}",
-                            "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
-                        ],
-                        "Geçen Ay": [
-                            "{{ $start->format('d-m-Y') }}",
-                            "{{ $end->format('d-m-Y') }}"
-                        ]
+                    mounted() {
+
+
+                        this.pies_data();
+
+
                     },
-                    "alwaysShowCalendars": true,
-                    "startDate": "{{ \Carbon\Carbon::now()->subDay(1)->format('d-m-Y') }}",
-                    "endDate": "{{ \Carbon\Carbon::now()->format('d-m-Y') }}",
-                }, function(start, end, label) {
-                    start = start.format('DD-MM-YYYY');
-                    end = end.format('DD-MM-YYYY');
-                    $.ajax({
-                        method: "POST",
-                        {{--url: "{{ route('sales-report.grafik') }}",--}}
-                        data: {start: start,end:end},
-                        dataType:"JSON",
-                        success: function (data) {
-                            PieConfig.data.datasets.forEach(function (dataset) {
-                                dataset.data = dataset.data.map(function () {
-                                    return data.oran;
+                    methods: {
+                        pies_data: function () {
+                            axios.get("{{route("sales.pies.data",aid())}}").then(res => {
+
+
+                                let order_pie = {
+                                    type: 'pie',
+                                    data: {
+                                        datasets: [{
+                                            data: [],
+                                            backgroundColor: [],
+                                        }],
+                                        labels: []
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        legend: {
+                                            display: false
+                                        },
+                                    },
+                                };
+
+                                let customers_pie = {
+                                    type: 'pie',
+                                    data: {
+                                        datasets: [{
+                                            data: [],
+                                            backgroundColor: [],
+                                        }],
+                                        labels: []
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        legend: {
+                                            display: false
+                                        },
+                                    },
+                                };
+
+                                let product_pie = {
+                                    type: 'pie',
+                                    data: {
+                                        datasets: [{
+                                            data: [],
+                                            backgroundColor: [],
+                                        }],
+                                        labels: []
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        legend: {
+                                            display: false
+                                        },
+                                    },
+                                };
+
+                                orders = new Chart(document.getElementById("ordersChart"), order_pie);
+                                customers = new Chart(document.getElementById("customersChart"), customers_pie);
+                                products = new Chart(document.getElementById("productChart"), product_pie);
+
+
+                                jQuery.each(res.data["orders"]["labels"], function (index, value) {
+
+                                    $labels = res.data["orders"]["labels"][index];
+                                    $data = res.data["orders"]["data"][index];
+                                    $bgcolor = res.data["orders"]["bgcolor"][index];
+
+                                    sales_report.addData(orders, $labels, $data, $bgcolor);
+
+                                    sales_report.order_pie.push({
+                                        labels: $labels,
+                                        data: $data,
+                                        bgcolor: $bgcolor
+                                    })
                                 });
-                            });
-                            $("#fatura_kategori b").html(moneyDecimal(data.total));
-                            window.myPie.update();
-                        }
 
-                    });
+                                jQuery.each(res.data["customers"]["labels"], function (index, value) {
+                                    $labels = res.data["customers"]["labels"][index];
+                                    $data = res.data["customers"]["data"][index];
+                                    $bgcolor = res.data["customers"]["bgcolor"][index];
+
+                                    sales_report.addData(customers, $labels, $data, $bgcolor);
+
+                                    sales_report.customer_pie.push({
+                                        labels: $labels,
+                                        data: $data,
+                                        bgcolor: $bgcolor
+                                    })
+                                });
+
+                                jQuery.each(res.data["products"]["labels"], function (index, value) {
+                                    $labels = res.data["products"]["labels"][index];
+                                    $data = res.data["products"]["data"][index];
+                                    $bgcolor = res.data["products"]["bgcolor"][index];
+
+
+                                    sales_report.addData(products, $labels, $data, $bgcolor);
+
+                                    sales_report.product_pie.push({
+                                        labels: $labels,
+                                        data: $data,
+                                        bgcolor: $bgcolor
+                                    })
+
+
+                                });
+
+
+                            })
+                        },
+                        addData: function (chart, label, data, bgcolor) {
+
+                            chart.data.labels.push(label);
+                            chart.data.datasets.forEach((dataset) => {
+                                dataset.data.push(data);
+                                dataset.backgroundColor.push(bgcolor);
+                            });
+                            chart.update();
+                        }
+                    }
                 });
+
+
 
             });
 
