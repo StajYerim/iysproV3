@@ -166,6 +166,17 @@ class PurchaseOrders extends Model
     }
 
 
+    public function getPaymentLabelAttribute()
+    {
+        if($this->remaining == "0,00"){
+            return '<span class="label label-danger">ÖDENDİ</span>';
+        }else if($this->remaining == $this->grand_total){
+            return '<span class="label label-danger">ÖDENMEDİ</span>';
+        }else{
+            return '<span class="label label-primary">KISMİ ÖDENDİ</span>';
+        }
+    }
+
 
 
 
