@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Modules\Purchases;
 
 //use App\Model\Purchases\PurchaseOffers;
+use App\Bankabble;
 use App\Model\Purchases\PurchaseOrders;
 use App\Model\Stock\Stock;
 use App\Taggable;
@@ -71,7 +72,6 @@ class OrdersController extends Controller
     public function store($aid, $id, Request $request)
     {
 
-
         //Satınalma oluştur
         $order = PurchaseOrders::updateOrCreate(["id" => $id], [
 //            "sales_offer_id"=>$request->form["sales_offer_id"],
@@ -85,6 +85,7 @@ class OrdersController extends Controller
             "vat_total" => $request->form["vat_total"],
             "grand_total" => $request->form["grand_total"]
         ]);
+
 
         Taggable::where("taggable_type","App\Model\Purchases\PurchaseOrders")->where("taggable_id",$order->id)->delete();
 

@@ -36,4 +36,6 @@ Route::group(['prefix'=>'{company_id}/purchases','middleware'=>'not.admin'],func
     Route::get("orders/{id}/show","Modules\Purchases\OrdersController@show")->name("purchases.orders.show");
     Route::delete("orders/{id}/destroy","Modules\Purchases\OrdersController@destroy")->name("purchases.orders.destroy");
 
+    //Purcahase Payment Report
+    Route::get("/reports/payment-reports","Modules\Purchases\PaymentReportController@index")->name("purchases.payment_report.index");
 });

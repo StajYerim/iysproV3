@@ -101,7 +101,7 @@ Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
 
 
 Route::get("/tester",function(){
-
+    Request::url();
 $kategori = \App\Model\Stock\Product\Category::All();
 
 foreach($kategori as $kat){

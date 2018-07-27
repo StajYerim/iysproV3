@@ -48,18 +48,18 @@
                             <div class="col-sm-6" style="font-weight: 400;font-size:15px;">
                                 @if($cheq->cheque_status == 1)
                                     {{$cheq->date}}, <a
-                                            href="{{route("sales.companies.show",[aid(),$cheq->company["id"]])}}"> {{$cheq->company["company_name"]}}</a>
+                                            href="{{route("sales.companies.show",[aid(),$cheq->company["id"]])}}"> {{short($cheq->company["company_name"],25)}}</a>
                                     <br><br>
                                 @elseif($cheq->cheque_status == 0)
                                     {{$cheq->date}}, <a
-                                            href="{{route("sales.companies.show",[aid(),$cheq->transfer_company["id"]])}}"> {{$cheq->transfer_company["company_name"]}}</a>
+                                            href="{{route("sales.companies.show",[aid(),$cheq->transfer_company["id"]])}}"> {{short($cheq->transfer_company["company_name"],25)}}</a>
                                     <br><br>
                                 @elseif($cheq->cheque_status == 2)
                                     <a
-                                            href="{{route("sales.companies.show",[aid(),$cheq->company["id"]])}}"> {{$cheq->company["company_name"]}}</a>
+                                            href="{{route("sales.companies.show",[aid(),$cheq->company["id"]])}}"> {{short($cheq->company["company_name"],25)}}</a>
                                     <br><br>
                                     {{$cheq->date}}, <a
-                                            href="{{route("sales.companies.show",[aid(),$cheq->transfer_company["id"]])}}"> {{$cheq->transfer_company["company_name"]}}</a>
+                                            href="{{route("sales.companies.show",[aid(),$cheq->transfer_company["id"]])}}"> {{short($cheq->transfer_company["company_name"])}}</a>
                                     <br><br>
                                 @endif
 
@@ -89,7 +89,6 @@
                                     <th width="20%">{{trans("word.status")}}</th>
                                     <th style="text-align:right" width="10%">{{trans("word.sum")}}</th>
                                     <th style="text-align:right" width="15%">{{trans("sentence.transacted_sum")}}</th>
-
                                 </tr>
                                 </tbody>
                                 <tbody id="tablo" style="font-size: 11px;">

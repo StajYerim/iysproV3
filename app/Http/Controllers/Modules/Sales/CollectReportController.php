@@ -27,21 +27,24 @@ class CollectReportController extends Controller
         $cheques_total = 0;
         foreach ($cheques as $cheq) {
             if ($cheq->collect_statu == 0) {
+                 $cheq->collect_statu;
                 $cheques_total += money_db_format($cheq->amount);
             }
         }
 
+
+
         $total_collect = get_money($remaining + $cheques_total);
 
         //Vadesi geçen tahsilatlar
-        $order_expiry_date = SalesOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now())->get();
+        $order_expiry_date = SalesOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->subDay(1))->get();
         $expiry_remaining = 0;
 
         foreach ($order_expiry_date as $order) {
             $expiry_remaining += money_db_format($order->remaining);
         }
 
-        $cheques_expiry = Cheques::where("account_id", aid())->whereDate("payment_date","<",Carbon::now())->get();
+        $cheques_expiry = Cheques::where("account_id", aid())->whereDate("payment_date","<",Carbon::now()->subDay(1))->get();
         $cheques_total_expiry = 0;
         foreach ($cheques_expiry as $cheq) {
             if ($cheq->collect_statu == 0) {
@@ -49,10 +52,12 @@ class CollectReportController extends Controller
             }
         }
 
-
         $expiry_total_collect = get_money($expiry_remaining+$cheques_total_expiry);
 
+        $export_collect= [];
+        $export_collect["sales_orders"] = $orders;
+        $export_collect["cheques"] = $cheques;
 
-        return view("modules.sales.collect_report.index", compact('oran', 'total', "expiry_total_collect", "total_collect", "list"));
+        return view("modules.sales.collect_report.index", compact( "expiry_total_collect", "total_collect", "export_collect"));
     }
 }

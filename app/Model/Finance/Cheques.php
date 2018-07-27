@@ -87,6 +87,32 @@ class Cheques extends Model
     public function getCollectStatuAttribute(){
         $collect =  $this->collect;
 
+        if($this->transfer_company != null){
+            return 2;
+        }elseif($collect == null){
+            return 0;
+        }else{
+            return 1;
+        }
+
+    }
+
+    public function getCollectStatusTextAttribute(){
+        $collect =  $this->collect;
+
+        if($this->transfer_company != null){
+            return 2;
+        }elseif($collect == null){
+            return "Tahsil Edilecek";
+        }else{
+            return "Tahsil Edildi";
+        }
+
+    }
+
+    public function getPaymentStatuAttribute(){
+        $collect =  $this->collect;
+
         if($collect == null){
             return 0;
         }else{

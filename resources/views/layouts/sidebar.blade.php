@@ -6,11 +6,11 @@
     <div class="login-info">
 				<span> <!-- User image size is adjusted inside CSS, it should stay as it -->
 					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-						<img src="{{asset("img/avatars/sunny.png")}}" alt="me" class="online" />
+						{{--<img src="{{asset("img/avatars/sunny.png")}}" alt="me" class="online" />--}}
 						<span>
 							{{auth()->user()->name}}
 						</span>
-						<i class="fa fa-angle-down"></i>
+						{{--<i class="fa fa-angle-down"></i>--}}
 					</a>
 				</span>
     </div>

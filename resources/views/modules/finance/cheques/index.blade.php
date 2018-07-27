@@ -75,17 +75,8 @@
                 columns: [
                     {
                         data: 'id',
-                        render: function (type) {
-
-                                return '<i class="fa fa-cubes fa-2x"></i>';
-
-
-                        },
                     }, {
                         data: "company.company_name",
-                        render:function(company_name){
-                            return company_name+'<br><small class="note">Portföyde</small>';
-                        }
                     }, {
                         data: "payment_date",
                         render:function(payment_date,s,d){

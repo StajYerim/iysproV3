@@ -16,7 +16,7 @@ class CreateChequesTable extends Migration
         Schema::create('cheques', function (Blueprint $table) {
             $table->increments('id');
             $table->integer("account_id")->unsigned();
-            $table->integer("company_id")->unsigned();
+            $table->integer("company_id")->nullable();
             $table->integer("transfer_company_id")->nullable()->comment("Alınan çek, hangi müşteriye verildi.");
             $table->datetime("transfer_date")->nullable()->comment("Alınan çekin müşteriye verildiği tarih.");
             $table->integer("type")->comment("0-Çek 1-Senet");
@@ -29,7 +29,6 @@ class CreateChequesTable extends Migration
             $table->decimal("amount",12,2);
             $table->integer("status")->comment("0->Tahsil Edilmemiş 1->Tahsil Edildi.");
             $table->foreign("account_id")->on("app_accounts")->references("id")->onDelete("cascade");
-            $table->foreign("company_id")->on("company_list")->references("id")->onDelete("cascade");
             $table->timestamps();
         });
     }
