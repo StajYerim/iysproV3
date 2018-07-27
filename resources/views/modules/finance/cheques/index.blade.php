@@ -75,12 +75,6 @@
                 columns: [
                     {
                         data: 'id',
-                        render: function (type) {
-
-                                return '<i class="fa fa-cubes fa-2x"></i>';
-
-
-                        },
                     }, {
                         data: "company.company_name",
                     }, {
