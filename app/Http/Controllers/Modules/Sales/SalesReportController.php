@@ -22,6 +22,9 @@ class SalesReportController extends Controller
 
         $products = Product::where("account_id",aid())->get();
 
+        $companies = Companies::where("account_id",aid())->where("type","companies")->get();
+
+
         $product_dont_category = 0;
         foreach($products as $product){
 
@@ -33,6 +36,6 @@ class SalesReportController extends Controller
         }
 
 
-        return view("modules.sales.sales_reports.index",compact("kategoriler","tags","companies","company_tags",'product_dont_category'));
+        return view("modules.sales.sales_reports.index",compact("kategoriler","tags","companies","company_tags",'product_dont_category','products'));
     }
 }
