@@ -526,11 +526,11 @@ class BankAccountsController extends Controller
         $cheq = Cheques::find($request->cheque_id);
 
         $detail = $account->items()->save(new BankItems([
-            "type" => $request->type,
+            "type" => $request->cheque_money_type == 0 ? "cheque_payment":"cheque_collect",
             "cheque_id" => $request->cheque_id,
             "date" => $request->date,
             "amount" => $cheq->amount,
-            "action_type" => 1,
+            "action_type" => $request->cheque_money_type,
             "doc_id" => null
         ]));
 

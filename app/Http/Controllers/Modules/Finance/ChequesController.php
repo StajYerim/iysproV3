@@ -54,7 +54,7 @@ class ChequesController extends Controller
                 if ($cheq->cheque_status == 1) {
                     return $cheq->amount . '<br><small class="note">'.$cheq->collect_status_text.'</small>';
                 } else if ($cheq->cheque_status == 0) {
-                    return $cheq->amount.'<br><small class="note"></small>';
+                    return $cheq->amount.'<br><small class="note">'.$cheq->collect_status_text.'</small>';
                 }else if($cheq->cheque_status == 2){
                     return $cheq->amount . '<br><small class="note">Transfer Edildi</small>';
                 }

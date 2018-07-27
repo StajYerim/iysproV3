@@ -98,28 +98,43 @@ class Cheques extends Model
     }
 
     public function getCollectStatusTextAttribute(){
-        $collect =  $this->collect;
+      $type =  $this->collect; //1 giriş  / 0 çıkış
 
-        if($this->transfer_company != null){
-            return 2;
-        }elseif($collect == null){
-            return "Tahsil Edilecek";
-        }else{
-            return "Tahsil Edildi";
+        if($this->cheque_status == 0){
+            if($type == null){
+                return "ÖDEME YAPILACAK";
+            }else{
+                return "ÖDEME YAPILDI";
+            }
+        }else if($this->cheque_status == 1){
+            if($type == null){
+                return "TAHSİLAT YAPILACAK";
+            }else{
+                return "TAHSİLAT YAPILDI";
+            }
         }
 
     }
 
-    public function getPaymentStatuAttribute(){
-        $collect =  $this->collect;
+    public function getShowButtonAttribute(){
+        $type =  $this->collect; //1 giriş  / 0 çıkış
 
-        if($collect == null){
-            return 0;
-        }else{
-            return 1;
+        if($this->cheque_status == 0){
+            if($type == null){
+                return "verilen0";
+            }else{
+                return "verilen1";
+            }
+        }else if($this->cheque_status == 1){
+            if($type == null){
+                return "alinan0";
+            }else{
+                return "alinan1";
+            }
         }
 
     }
+
 
     public function getChequeStatusAttribute()
     {

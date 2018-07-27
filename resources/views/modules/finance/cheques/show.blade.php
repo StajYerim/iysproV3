@@ -120,7 +120,7 @@
 
                         <div v-show="transfer_info">
                             <div class="row" v-if="collect_button == true">
-                                @if($cheq->cheque_status  == 1)
+                                @if($cheq->show_button  == "alinan0")
                                 <div class="col-sm-12">
                                     <button v-on:click="other_transfer" type="button"
                                             class="btn  btn-block bg-color-blue txt-color-white ">
@@ -129,16 +129,25 @@
 
                                 </div>
                             </div><br>
-                            @endif
-                            <div class="row">
+                            @elseif($cheq->show_button == "verilen0")
                                 <div class="col-sm-12">
-                                    <button type="button" data-toggle="modal" data-target="#deleteModal" class="btn btn-block bg-color-red txt-color-white">
-                                        {{trans("sentence.delete_cheque")}}
+                                    <button v-on:click="other_transfer" type="button"
+                                            class="btn  btn-block bg-color-blue txt-color-white ">
+                                        ÖDEME EKLE
                                     </button>
-                                </div>
-                            </div>
-                        </div>
 
+                                </div>
+                        </div><br>
+                                @endif
+
+                        </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" data-toggle="modal" data-target="#deleteModal" class="btn btn-block bg-color-red txt-color-white">
+                                {{trans("sentence.delete_cheque")}}
+                            </button>
+                        </div>
+                    </div>
                         <div v-show="other_transfer_show">
                             <form @submit.prevent="cheuqe_collection_send" class="form-horizontal bv-form"
                                   novalidate="novalidate">
@@ -197,7 +206,7 @@
 
                             <hr>
                         <div class="row">
-                            @if($cheq->cheque_status == 1)
+
                             <div class="col-sm-12">
                                 <div class="bottom-info">
                                     {{trans("word.status")}}
@@ -206,7 +215,7 @@
                                     </span>
                                 </div>
                             </div>
-                            @endif
+
                             <div class="col-sm-12">
                                 <div class="bottom-info">
                                     {{trans("sentence.total_cheque")}}
@@ -242,7 +251,7 @@
                 data: {
                     collect_cheque_show:"{{$cheq->collect_statu == 1 ? true:false}}",
                     bank_name:"{{$cheq->collect_statu == 1 ? $cheq->collect->bank_account["name"]:false}}",
-                    collect_statu:"{{$cheq->collect_statu == 1 ? "TAHSİL EDİLDİ":"TAHSİL EDİLECEK"}}",
+                    collect_statu:"{{$cheq->collect_status_text}}",
                     collect_button:"{{$cheq->collect_statu == 1 ? false:true}}",
                     orders:[],
                     balance: "",
@@ -260,6 +269,7 @@
                     money_form: {
                         date: "{{date_tr()}}",
                         bank_account_id:"",
+                        cheque_money_type:"{{$cheq->cheque_status == 0 ? 0:1}}",
                         cheque_id:"{{$cheq->id}}",
                         type:"cheque_collect",
                     },
@@ -300,7 +310,7 @@
                                 axios.post("{{route("finance.accounts.cheque",aid())}}",VueName.money_form).then(function(res){
                                    VueName.bank_name = res.data.bank_name
                                    VueName.collect_button = false;
-                                   VueName.collect_statu = "TAHSİL EDİLDİ";
+                                   VueName.collect_statu = "{{$cheq->cheque_status == 0 ? "ÖDEME YAPILDI":"TAHSİL EDİLDİ"}}";
                                     VueName.collect_cheque_show = true;
                                     VueName.cancel();
                                 })
