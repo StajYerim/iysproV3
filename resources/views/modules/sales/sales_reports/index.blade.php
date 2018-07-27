@@ -105,32 +105,40 @@
                     </div>
                 </article>
             </div>
-            <div class="row">
-            <article class="col-sm-12">
-            <div class="jarviswidget well" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
-            <div class="widget-body">
-            <div class="widget-body-toolbar st">
-            <div class="row">
-            <div class="col-sm-12">
-            <h2>Bar Chart</h2>
-            </div>
+            {{--<div class="row">--}}
+            {{--<article class="col-sm-12">--}}
+            {{--<div class="jarviswidget well" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">--}}
+            {{--<div class="widget-body">--}}
+            {{--<div class="widget-body-toolbar st">--}}
+            {{--<div class="row">--}}
+            {{--<div class="col-sm-12">--}}
+            {{--<h2>Bar Chart</h2>--}}
+            {{--</div>--}}
 
-            </div>
-            </div>
-            <div class="col-sm-12">
-            <div id="normal-bar-graph" class="chart no-padding"></div>
-            </div>
-            </div>
-            </div>
-            </article>
-            </div>
+            {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="col-sm-12">--}}
+            {{--<div id="normal-bar-graph" class="chart no-padding"></div>--}}
+            {{--</div>--}}
+            {{--</div>--}}
+            {{--</div>--}}
+            {{--</article>--}}
+            {{--</div>--}}
+
+
+
             <div class="row">
             <article class="col-sm-12">
             <div class="jarviswidget well" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
             <div class="widget-body">
             <div class="widget-body-toolbar st">
-            <div class="row">
-                <div class="col-sm-8" style="margin-top:-20px;"><h2>Table 1</h2></div>
+
+
+
+
+
+                <div class="row">
+                <div class="col-sm-8" style="margin-top:-20px;"><h2>Satış Rapoları Tablosu</h2></div>
                     <div class="col-sm-4">
                         <div class="btn-group btn-group-justified nav nav-tabs">
                             <button style="width:100px!important;" data-toggle="tab" href="#invoice_table" class="btn btn-default">FATURA</button>
@@ -140,23 +148,36 @@
                     </div>
                 </div>
             </div>
+
+
+
             <div class="row">
             <div class="col-sm-12 tab-content">
                 <div id="invoice_table" class="tab-pane fade in active">
                     <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
-                            <th width="33%">ID</th>
-                            <th width="33%">fATURA KATEGORİSİ</th>
-                            <th width="33%">TÜR</th>
+                            <th>#</th>
+                            <th width="33%">AÇIKLAMA</th>
+                            <th width="33%">DÜZENLENME TARİHİ</th>
+                            <th width="33%">BAKİYE</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($tags as $tg)
+                        @foreach($sales_orders as $sale)
                         <tr>
-                            <td>{{ $tg->id }}</td>
-                            <td>{{ $tg->title }}</td>
-                            <td>{{ $tg->sales_orders_amount }}</td>
+                            <td width="25">
+                                <i class="fa fa-file-text-o fa-3x"></i>
+                            </td>
+                            <td>
+                                <b>{{ $sale->company->company_name}}</b> <br>
+                                {{ ($sale->description == "") ? "FATURA" : $sale->description }}
+                            </td>
+                            <td>{{ $sale->date }}</td>
+                            <td>
+                                {!! $sale->collect_label !!} <br>
+                                <b>{{ $sale->grand_total }}</b> <i class="fa fa-{{ $sale->currency }}"></i>
+                            </td>
                         </tr>
                         @endforeach
                         </tbody>
@@ -166,18 +187,25 @@
                     <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
-                            <th width="33%">ID</th>
-                            <th width="33%">CUSTOMER</th>
-                            <th width="33%">TUTAR</th>
+                            <th>#</th>
+                            <th width="50%">ŞİRKET ADI</th>
+                            <th width="45%">BAKİYE</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($company_tags as $ct)
+                        @foreach($companies as $com)
+                        @if($com->balance != "0,00")
                         <tr>
-                            <td>{{ $ct->id}}</td>
-                            <td>{{ $ct->title }}</td>
-                            <td>{{ $ct->companies_amount }}</td>
+                            <td width="25">
+                                <i class="fa fa-building-o fa-3x"></i>
+                            </td>
+                            <td>{{ $com->company_name }}</td>
+                            <td>
+                                <b>{{ $com->balance }}</b>
+                                <i class="fa fa-{{ $sale->currency }}"></i>
+                            </td>
                         </tr>
+                        @endif
                         @endforeach
                         </tbody>
                     </table>
@@ -186,7 +214,7 @@
                     <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
-                            <th width="33%">ID</th>
+                            <th width="25">#</th>
                             <th width="33%">ÜRÜN</th>
                             <th width="33%">ADET</th>
                             <th width="33%">TUTAR</th>
@@ -194,12 +222,19 @@
                         </thead>
                         <tbody>
                         @foreach($products as $pr)
+                        @if($pr->order_items()->sum("price") != 0)
                         <tr>
-                            <td>{{ $pr->id }}</td>
+                            <td>
+                                <i class="fa fa-cube fa-2x"></i>
+                            </td>
                             <td>{{ $pr->name }}</td>
-                            <td>{{ $pr->order_items()->sum("quantity") }}</td>
-                            <td>{{ get_money($pr->order_items()->sum("price")*$pr->order_items()->sum("quantity")) }}</td>
+                            <td>{{ $pr->order_items()->sum("quantity") }} {{ $pr->unit["short_name"] }}</td>
+                            <td>
+                                <b>{{ get_money($pr->order_items()->sum("price")*$pr->order_items()->sum("quantity")) }}</b>
+                                <i class="fa fa-{{ $sale->currency }}"></i>
+                            </td>
                         </tr>
+                        @endif
                         @endforeach
                         </tbody>
                     </table>
