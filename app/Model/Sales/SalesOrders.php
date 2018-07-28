@@ -220,6 +220,8 @@ class SalesOrders extends Model
         }
     }
 
+
+
     public function tags()
     {
         return $this->morphToMany(Tags::class, 'taggable');

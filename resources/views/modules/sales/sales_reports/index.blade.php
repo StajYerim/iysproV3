@@ -33,9 +33,9 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4 text-right">
-                                        <select class="form-control">
-                                            <option>VERGİLER DAHİL</option>
-                                            <option>VERGILER HARİÇ</option>
+                                        <select v-model='vat' @change="updateData()" class="form-control">
+                                            <option value="1">VERGİLER DAHİL</option>
+                                            <option value="0">VERGİLER HARİÇ</option>
                                         </select>
                                     </div>
                                 </div>
@@ -45,11 +45,6 @@
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>FATURA KATEGORİLERİ</b></div>
                                         <canvas id="ordersChart" height="160"></canvas>
-                                        <div class="col-md-12">
-                                            <label class="pull-left label label-default">Kategorisiz</label>
-                                            <label class="pull-right"><b>0</b>₺</label>
-                                        </div>
-
 
                                         <div v-for='(item,index) in order_pie' :key="index" class="col-md-12">
                                             <label class="pull-left label"
@@ -65,10 +60,6 @@
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>MÜŞTERİ KATEGORİLERİ</b></div>
                                         <canvas id="customersChart" height="160"></canvas>
-                                        <div class="col-md-12">
-                                            <label class="pull-left label label-default">Kategorisiz</label>
-                                            <label class="pull-right"><b>0</b>₺</label>
-                                        </div>
 
                                         <div v-for="(item,index) in customer_pie" class="col-md-12">
                                             <label class="pull-left label"
@@ -82,13 +73,6 @@
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>HİZMET/ÜRÜN KATEGORİLERİ</b></div>
                                         <canvas id="productChart" height="160"></canvas>
-
-                                        <div class="col-md-12">
-                                            <label class="pull-left label label-default">Kategorisiz</label>
-                                            <label class="pull-right"><b></b>₺</label>
-                                        </div>
-
-
                                                 <div v-for="(item,index) in product_pie" class="col-md-12">
                                                     <label class="pull-left label"
                                                            v-bind:style="{'background-color':item.bgcolor}">
@@ -204,7 +188,7 @@
                         @if($pr->order_items()->sum("price") != 0)
                         <tr>
                             <td>
-                                <i class="fa fa-cube fa-2x"></i>
+                                <i class="fa fa-cube fa-3x"></i>
                             </td>
                             <td>{{ $pr->name }}</td>
                             <td>{{ $pr->order_items()->sum("quantity") }} {{ $pr->unit["short_name"] }}</td>
@@ -248,19 +232,24 @@
                     data: {
                         order_pie: [],
                         customer_pie: [],
-                        product_pie: []
+                        product_pie: [],
+                        vat:"1"
                     },
                     mounted() {
 
-
                         this.pies_data();
-
 
                     },
                     methods: {
-                        pies_data: function () {
-                            axios.get("{{route("sales.pies.data",aid())}}").then(res => {
+                        updateData:function(){
+                          this.pies_data();
 
+                        },
+                        pies_data: function () {
+                            axios.post("{{route("sales.pies.data",aid())}}",{vat:this.vat}).then(res => {
+                                sales_report.order_pie = [];
+                                sales_report.customer_pie = [];
+                                sales_report.product_pie = [];
 
                                 let order_pie = {
                                     type: 'pie',
@@ -352,7 +341,6 @@
                                     $data = res.data["products"]["data"][index];
                                     $bgcolor = res.data["products"]["bgcolor"][index];
 
-
                                     sales_report.addData(products, $labels, $data, $bgcolor);
 
                                     sales_report.product_pie.push({
@@ -376,6 +364,7 @@
                             });
                             chart.update();
                         }
+
                     }
                 });
 

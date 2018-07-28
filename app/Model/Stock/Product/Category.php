@@ -19,6 +19,22 @@ class Category extends Model
     {
         $total = 0;
 
+        //todo:tek satirda kdv hesaplamasi yapilacak
+        //$this->products->order_items->
+
+/*        foreach ($this->products as $product)
+        {
+            $total += $product->order_items()->sum("price")*$product->order_items()->sum("quantity");
+        }
+*/
+        return $total;
+    }
+
+
+    public function getTotalOrderSafeAttribute()
+    {
+        $total = 0;
+
         foreach ($this->products as $product)
         {
             $total += $product->order_items()->sum("price")*$product->order_items()->sum("quantity");
