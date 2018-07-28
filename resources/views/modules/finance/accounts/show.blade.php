@@ -50,7 +50,10 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="info-title"><span v-on:click="details = !details" class="pull-right"
-                                                                  style="cursor: pointer;">{{trans("sentence.all_informations")}}</span></div>
+                                                                  style="cursor: pointer;">
+                                            {{trans("sentence.all_informations")}}
+                                        </span>
+                                    </div>
                                 </div>
                             @endif
                             <br>
@@ -132,16 +135,22 @@
                                     <td>
                                         @{{ item.type }}
                                     </td>
-                                    <td>@{{ item.date }}</td>
-                                    <td>@{{ item.company }} @{{ item.contact }} </td>
-                                    <td align="right">@{{ item.description }}</td>
-                                    <td align="right">
-                                        @{{ item.action_type }} @{{ item.amount }} <i
-                                                class="fa fa-{{strtolower($account->cur_info["code"] == "TRL" ? "try":$account->cur_info["code"])}}"></i>
+                                    <td>
+                                        @{{ item.date }}
+                                    </td>
+                                    <td>
+                                        @{{ item.company }} @{{ item.contact }}
                                     </td>
                                     <td align="right">
-                                        @{{ item.last_balance }} <i
-                                                class="fa fa-{{strtolower($account->cur_info["code"] == "TRL" ? "try":$account->cur_info["code"])}}"></i>
+                                        @{{ item.description }}
+                                    </td>
+                                    <td align="right">
+                                        @{{ item.action_type }} @{{ item.amount }}
+                                        <i class="fa fa-{{strtolower($account->cur_info["code"] == "TRL" ? "try":$account->cur_info["code"])}}"></i>
+                                    </td>
+                                    <td align="right">
+                                        @{{ item.last_balance }}
+                                        <i class="fa fa-{{strtolower($account->cur_info["code"] == "TRL" ? "try":$account->cur_info["code"])}}"></i>
                                     </td>
                                 </tr>
                                 </tbody>

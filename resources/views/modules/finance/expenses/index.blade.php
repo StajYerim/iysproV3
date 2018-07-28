@@ -171,20 +171,6 @@
                                 </div>
                             </fieldset>
 
-                            {{--<fieldset>--}}
-                                {{--<div class="form-group" :class="{'has-error': errors.has('form.bank_account_id') }">--}}
-                                    {{--<label class="col-md-3 control-label">{{trans("sentence.paid_account")}}</label>--}}
-                                    {{--<div class="col-md-6 ">--}}
-                                        {{--<div>--}}
-                                           {{--<select class="form-control"  v-validate="'required'" name="form.bank_account_id" v-model="form.bank_account_id">--}}
-                                               {{--<option v-for="item in accounts" :value="item.id">@{{ item.name }}</option>--}}
-                                           {{--</select>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</fieldset>--}}
-
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans("word.close")}}</button>
