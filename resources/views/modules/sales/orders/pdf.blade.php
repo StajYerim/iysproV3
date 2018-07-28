@@ -111,7 +111,8 @@
                                         <span style="line-height:12px;font-size:10px;">
                                             {!! str_replace("\n","<br>",account()["address"]) !!} {!! account()["town"] !!}/{!! account()["city"] !!}
 
-                                            <br>V.D {{trans("word.and")}} {{trans("word.number")}} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>{{trans("word.phone")}} {!! account()["phone"] !!}<br>
+                                            <br>
+                                            {{ trans('sentence.t_office_no') }} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}<br>{{trans("word.phone")}} {!! account()["phone"] !!}<br>
 
                                     </span>
                                     </td>
@@ -150,7 +151,7 @@
                 {{trans("word.quantity")}}
             </td>
             <td style="text-align: right;width:120px">
-                {{trans("word.unity_price")}}
+                {{trans("sentence.unity_price")}}
             </td>
             {{--@if($order->Items->sum("OfferItemDiscount") > 0)--}}
                 {{--<td  style="text-align: right;width:20px" >--}}

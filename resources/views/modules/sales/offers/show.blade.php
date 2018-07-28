@@ -100,7 +100,7 @@
                                             <tbody>
                                             <tr>
                                                 <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
-                                                <th width="14%">{{trans("word.quantitu")}}</th>
+                                                <th width="14%">{{trans("word.quantity")}}</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.unit")}} F.</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.vat")}}</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.total")}}</th>
@@ -153,18 +153,22 @@
                                                         </div>
                                                     </td>
                                                     <td style="text-align:right">
-                                                        <div class="bottom-info" style="font-size: 11px"><span
-                                                                    id="total-vat-1">@{{ vato.total }}</span> <i
-                                                                    class="fa fa-{{$offer->currency}}"></i></div>
+                                                        <div class="bottom-info" style="font-size: 11px">
+                                                            <span id="total-vat-1">@{{ vato.total }}</span>
+                                                            <i class="fa fa-{{$offer->currency}}"></i>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <div class="bottom-info">{{trans("sentence.total_vat")}}</div>
+                                                        <div class="bottom-info">
+                                                            {{trans("sentence.total_vat")}}
+                                                        </div>
                                                     </td>
                                                     <td style="text-align:right">
-                                                        <div class="bottom-info">{{$offer->vat_total}} <i
-                                                                    class="fa fa-{{$offer->currency}}"></i></div>
+                                                        <div class="bottom-info">{{$offer->vat_total}}
+                                                            <inclass="fa fa-{{$offer->currency}}"></i>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -220,9 +224,12 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">{{trans("sentence.offer_amount")}}<span class="pull-right"
-                                                                                     style="font-size:15px;color:#2AC!important">{{$offer->grand_total}}
-                                                <i class="fa fa-{{$offer->currency}}"></i></span></div>
+                                        <div class="bottom-info">{{ trans("sentence.offer_amount")}}
+                                            <span class="pull-right" style="font-size:15px;color:#2AC!important">
+                                                {{$offer->grand_total}}
+                                                <i class="fa fa-{{$offer->currency}}"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr>
@@ -266,7 +273,7 @@
             <div id="ms-emails"></div>
         </div>
 
-        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales offer ?",$id=$offer->id])
+        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans('sentence.are_you_sure_delete_sales_offer'),$id=$offer->id])
 
         {{-- Durum Modal--}}
         <div class="modal fade" id="statusModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
@@ -277,7 +284,9 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             ×
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">{{trans("word.change")}}</h4>
+                        <h4 class="modal-title" id="myModalLabel">
+                            {{trans("word.change")}}
+                        </h4>
                     </div>
                     <div class="modal-body modal-body-content">
                         <form id="StatusForm">
@@ -298,7 +307,9 @@
                                 <HR>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">{{trans("sentence.effective_date")}}</label>
+                                        <label class="col-md-4 control-label">
+                                            {{trans("sentence.effective_date")}}
+                                        </label>
                                         <div class="col-md-4 ">
                                             <div class="input-group">
                                                 <input type="text"
@@ -332,10 +343,10 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">
-                            VAZGEÇ
+                            {{ trans('word.cancel') }}
                         </button>
                         <button type="button" class="btn btn-primary" v-on:click="status_send">
-                            KAYDET
+                            {{ trans('word.save') }}
                         </button>
                     </div>
                 </div>
@@ -348,8 +359,8 @@
 
     </section>
     @include("components.external.share",[
-    $title="Teklif",
-    $thread="Satış Teklifi : ".$offer->company["company_name"],
+    $title=trans('word.offer'),
+    $thread=trans('sentence.sales_offer').' : ' .$offer->company["company_name"],
     $message="Merhaba,<br>Satış Teklifi detaylarınız ektedir indirerek inceleyebilirsiniz.<br>İyi çalışmalar.<br><br><b>".account()["name"]."</b>",
     $type="share.offer",
     $data = $offer])

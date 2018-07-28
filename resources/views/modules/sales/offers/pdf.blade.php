@@ -246,7 +246,7 @@ app()->setLocale($lang);
                 @if(KdvTotal($offer->items,8) > 0) %8 {{trans("word.vat")}}<br>@endif
                 @if(KdvTotal($offer->items,18) > 0) %18 {{trans("word.vat")}}<br>@endif
               </div>
-                {{trans("sentence.total_vat"}} :
+                {{ trans("sentence.total_vat") }} :
             </td>
             <td colspan="1" style="text-align: right">
                 <div style=";font-size:10px;">   @if(KdvTotal($offer->items,1) > 0)  {{KdvTotal($offer->items,1)}} {!! $offer->currency_icon!!}<br>@endif

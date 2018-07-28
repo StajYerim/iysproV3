@@ -50,7 +50,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'word', 'key' => 'currency', 'text' => ['en' => 'CURRENCY', 'tr' => 'DÖVİZ']]);
         LanguageLine::create(['group' => 'word', 'key' => 'service', 'text' => ['en' => 'SERVICE', 'tr' => 'HİZMET']]);
         LanguageLine::create(['group' => 'word', 'key' => 'quantity', 'text' => ['en' => 'QUANTITY', 'tr' => 'MİKTAR']]);
-        LanguageLine::create(['group' => 'word', 'key' => 'unit', 'text' => ['en' => 'UNIT', 'tr' => 'BİRİM']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'unity', 'text' => ['en' => 'UNIT', 'tr' => 'BİRİM']]);
         LanguageLine::create(['group' => 'word', 'key' => 'vat', 'text' => ['en' => 'VAT', 'tr' => 'KDV']]);
         LanguageLine::create(['group' => 'word', 'key' => 'save', 'text' => ['en' => 'SAVE', 'tr' => 'KAYDET']]);
         LanguageLine::create(['group' => 'word', 'key' => 'email', 'text' => ['en' => 'E-MAIL', 'tr' => 'E-POSTA']]);
@@ -147,6 +147,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'word', 'key' => 'expense', 'text' => ['en' => 'EXPENSE', 'tr' => 'GİDER']]);
         LanguageLine::create(['group' => 'word', 'key' => 'paid', 'text' => ['en' => 'PAID', 'tr' => 'ODENDİ']]);
         LanguageLine::create(['group' => 'word', 'key' => 'payable', 'text' => ['en' => 'PAYABLE', 'tr' => 'ODENECEK']]);
+        LanguageLine::create(['group' => 'word', 'key' => 'offer', 'text' => ['en' => 'OFFER', 'tr' => 'TEKLİF']]);
 
 
         // sentence area
@@ -419,6 +420,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'remove_image', 'text' => ['en' => 'REMOVE IMAGE', 'tr' => 'RESMİ KALDIR']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'send_to_parasut', 'text' => ['en' => 'SEND TO PARAŞÜT','tr' => "PARAŞÜT'E GÖNDER"]]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'sales_order', 'text' => ['en' => 'SALES ORDER','tr' => "SATIŞ SİPARİŞİ"]]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'sales_offer', 'text' => ['en' => 'SALES OFFER','tr' => "SATIŞ TEKLİFİ"]]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'purchase_order', 'text' => ['en' => 'PURCHASE ORDER','tr' => "ALIŞ SİPARİŞİ"]]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'list_price', 'text' => ['en' => 'LIST PRICE','tr' => "LİSTE FİYATI"]]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'callback_url', 'text' => ['en' => 'CALLBACK URL','tr' => "GERİ DÖNÜŞ URL ADRESİ"]]);
@@ -462,7 +464,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'contact_address', 'text' => ['en' => 'CONTACT ADDRESS','tr' => 'İLETİŞİM ADRESİ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'cheque_promissory_note', 'text' => ['en' => 'CHEQUE-PROMISSORY NOTE','tr' => 'ÇEK-SENET']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'choose_a_safe', 'text' => ['en' => 'PLEASE, CHOOSE A SAFE','tr' => 'LÜTFEN, KASA SEÇİMİ YAPINIZ']]);
-        LanguageLine::create(['group' => 'sentence', 'key' => 'promissory note', 'text' => ['en' => 'PROMISSORY NOTE','tr' => 'SENET']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'promissory_note', 'text' => ['en' => 'PROMISSORY NOTE','tr' => 'SENET']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'document_type', 'text' => ['en' => 'DOCUMENT TYPE','tr' => 'EVRAK TÜRÜ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'document_number', 'text' => ['en' => 'DOCUMENT NUMBER','tr' => 'EVRAK NUMARASI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'bank_cheque', 'text' => ['en' => 'BANK CHEQUE','tr' => 'BANKA ÇEKİ']]);
@@ -527,7 +529,22 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'expense_status', 'text' => ['en' => 'EXPENSE STATUS','tr' => 'GİDER DURUMU']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'choose_account', 'text' => ['en' => 'CHOOSE ACCOUNT','tr' => 'HESAP SEÇ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'turkish_lira', 'text' => ['en' => 'TRY - TURKISH LIRA','tr' => 'TRY - TÜRK LİRASI']]);
-
+        LanguageLine::create(['group' => 'sentence', 'key' => 'are_you_sure', 'text' => ['en' => 'ARE YOU SURE?','tr' => 'EMİN MİSİNİZ?']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'are_you_sure_delete_sales_offer', 'text' => ['en' => 'ARE YOU SURE DELETE SALES OFFER ?','tr' => 'SATIŞ TEKLİFİNİ SİLMEK Mİ İSTİYORSUNUZ?']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'unit_price', 'text' => ['en' => 'UNIT PRICE','tr' => 'BİRİM FİYATI']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'word_and_number', 'text' => ['en' => 'UNIT PRICE','tr' => 'BİRİM FİYATI']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 't_office_no', 'text' => ['en' => 'T.OFFICE NO','tr' => 'V.D NO']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'are_you_sending_mail_to_the_customer', 'text' => ['en' => 'ARE YOU SENDING MAIL TO THE CUSTOMER?','tr' => 'MÜŞTERİYE MAİL GÖNDERİLSİN Mİ?']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'select_the_product_products_being_shipped', 'text' => ['en' => 'SELECT THE PRODUCT/PRODUCTS BEING SHIPPED','tr' => 'SEVKİYATI YAPILAN ÜRÜN/ÜRÜNLERİ SEÇİN']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'seven_days', 'text' => ['en' => '7 DAYS','tr' => '7 GÜN']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'fourteen_days', 'text' => ['en' => '14 DAYS','tr' => '14 GÜN']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'thirty_days', 'text' => ['en' => '30 DAYS','tr' => '30 GÜN']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'sixty_days', 'text' => ['en' => '60 DAYS','tr' => '60 GÜN']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'shipment_information', 'text' => ['en' => 'SHIPMENT INFORMATION','tr' => 'SEVKİYAT BİLGİSİ']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'shipping_company', 'text' => ['en' => 'SHIPPING COMPANY','tr' => 'NAKLİYE ŞİRKETİ']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'if_there_is', 'text' => ['en' => 'IF THERE IS','tr' => 'VARSA']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'customer_email', 'text' => ['en' => 'CUSTOMER E-MAIL','tr' => 'MÜŞTERİ E-POSTA']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'sales_offer_details_by_downloading_the_summary', 'text' => ['en' => 'HELLO, YOU CAN REVIEW THE SALES OFFER DETAILS BY DOWNLOADING THE SUMMARY',' tr' => 'MERHABA, SATIŞ TEKİLFİ DETAYLARINIZ EKTEDİR, İNDİREREK İNCELEYEBİLİRSİNİZ.']]);
 
     }
 }

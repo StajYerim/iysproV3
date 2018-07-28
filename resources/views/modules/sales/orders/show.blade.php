@@ -352,7 +352,7 @@
             </article>
         </div>
 {{$order->nos_waybills}}
-        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales order ?",$id=$order->id])
+        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans('sentence.are_you_sure_delete_sales_offer'),$id=$order->id])
         {{--İrsaliye Yazdır--}}
         <div class="modal fade" id="waybillModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
              style="display: none;">
@@ -573,7 +573,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             ×
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">{{trans("print.invoice")}}</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{ trans("word.invoice") }}</h4>
                     </div>
                     <div class="modal-body modal-body-content">
 
@@ -624,7 +624,9 @@
                                                 <hr>
                                                 <div class="form-group">
                                                     <label style="top:6px;"
-                                                           class="col-md-3 control-label">{{trans("word.date")}}/{{trans("word.hour")}}</label>
+                                                           class="col-md-3 control-label">
+                                                        {{trans("word.date")}}/{{trans("word.hour")}}
+                                                    </label>
                                                     <div class="col-md-4">
                                                         <div class="input-group">
                                                             <the-mask @change="setDate(invoice.date)"
@@ -664,21 +666,30 @@
                                                                           name="invoice.due_date"
                                                                           v-validate="'required'"
                                                                           class="form-control datepicker"
-                                                                          v-model="invoice.due_date"></the-mask>
+                                                                          v-model="invoice.due_date">
+                                                                </the-mask>
                                                                 <div class="btn-group btn-group-justified">
 
                                                                     <a href="javascript:void(0);" id="day7"
-                                                                       class="btn btn-default">7
-                                                                        GÜN</a>
+                                                                       class="btn btn-default">
+                                                                        {{ trans('sentence.seven_days') }}
+                                                                    </a>
                                                                     <a href="javascript:void(0);" id="day14"
-                                                                       class="btn btn-default">14 GÜN</a>
+                                                                       class="btn btn-default">
+                                                                        {{ trans('sentence.fourteen_days') }}
+                                                                    </a>
                                                                     <a href="javascript:void(0);" id="day30"
-                                                                       class="btn btn-default">30 GÜN</a>
+                                                                       class="btn btn-default">
+                                                                        {{ trans('sentence.thirty_days') }}
+                                                                    </a>
                                                                     <a href="javascript:void(0);" id="day60"
-                                                                       class="btn btn-default">60 GÜN</a>
+                                                                       class="btn btn-default">
+                                                                        {{ trans('sentence.sixty_days') }}
+                                                                    </a>
                                                                 </div>
-                                                                <span class="input-group-addon"><i
-                                                                            class="fa fa-calendar"></i></span>
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -756,7 +767,10 @@
                                                 <center>
                                                     <a type="button" class="btn btn-success btn-lg" @click="invoiceAdd"
                                                        data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> İşlem Onaylandı. Yazdırılıyor..."
-                                                       id="InvoiceCheckPrint"><i class="fa fa-check"></i> {{ trans("sentence.confirm_and_print") }}</a></center>
+                                                       id="InvoiceCheckPrint"><i class="fa fa-check"></i>
+                                                        {{ trans("sentence.confirm_and_print") }}
+                                                    </a>
+                                                </center>
                                                 <br>
                                             </div>
                                         </div>
@@ -804,9 +818,11 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="btn btn-default pull-right" data-dismiss="modal" aria-hidden="false">
-                            Kapat
+                            {{ trans('word.close') }}
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">SEVKİYAT BİLGİSİ </h4>
+                        <h4 class="modal-title" id="myModalLabel">
+                            {{ trans('sentence.shipment_information') }}
+                        </h4>
                     </div>
                     <form>
 
@@ -815,7 +831,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-md-3 f-title">NAKLİYE ŞİRKETİ -</label>
+                                            <label class="col-md-3 f-title">
+                                                {{ trans('sentence.shipping_company') }}
+                                            </label>
                                             <div class="col-md-8 ">
                                                 <input v-model="trans.form.transfer_company" type='text' class="form-control">
 
@@ -824,7 +842,10 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-md-3 f-title">TAKİP NO (VARSA)</label>
+                                            <label class="col-md-3 f-title">
+                                                {{ trans('sentence.tracking_number') }}
+                                                ({{ trans('sentence.if_there_is') }})
+                                            </label>
                                             <div class="col-md-8 ">
                                                 <input v-model="trans.form.transfer_no" type='text' class="form-control">
 
@@ -833,7 +854,9 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-md-3 f-title">MÜŞTERİ MAİLİ</label>
+                                            <label class="col-md-3 f-title">
+                                                {{ trans('sentence.customer_email') }}
+                                            </label>
                                             <div class="col-md-8 ">
                                                 <input v-model="trans.form.customer_mail" type='email' class="form-control">
 
@@ -845,7 +868,8 @@
                                             <label class="col-md-3 f-title"></label>
                                             <div class="col-md-8 ">
                                                 <div class="mail-check">
-                                                    <input v-model="trans.form.mail_check" type="checkbox"> Müşteriye mail gönderilsin mi?
+                                                    <input v-model="trans.form.mail_check" type="checkbox">
+                                                    {{ trans('sentence.are_you_sending_mail_to_the_customer') }}
                                                 </div>
 
                                             </div>
@@ -853,7 +877,9 @@
                                     </div>
                                     <div class="col-md-12" style="margin-top: 8px;">
                                         <div class="form-group">
-                                            <label class="col-md-3 f-title">NOT</label>
+                                            <label class="col-md-3 f-title">
+                                                {{ trans('word.note') }}
+                                            </label>
                                             <div class="col-md-8 ">
                                                 <input v-model="trans.form.not" type='email'  class="form-control">
 
@@ -862,17 +888,18 @@
                                     </div>
 
                                 </div><br>
-                                <small class="note">Sevkiyatı yapılan ürün/ürünleri seçin</small>
+                                <small class="note">
+                                    {{ trans('sentence.select_the_product_products_being_shipped') }}
+                                </small>
 
                                 <div
                                         class="table-responsive">
                                     <table class="table">
                                         <th>
-                                            <th>KOD</th>
-                                            <th>ÜRÜN</th>
-
-                                            <th>MİKTAR</th>
-                                            <th>BİRİM</th>
+                                            <th>{{ trans('word.code') }}</th>
+                                            <th>{{ trans('word.product') }}</th>
+                                            <th>{{ trans('word.quantity') }}</th>
+                                            <th>{{ trans('word.unity') }}</th>
                                             <th>#</th>
                                         </th>
                                         <tbody>
@@ -900,7 +927,9 @@
 
                                 </div>
                                 <div class="pull-right" >
-                                    <button type="button" id="transferButton"  @click="transferAdd" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Ekleniyor..." class="btn btn-success">EKLE</button>
+                                    <button type="button" id="transferButton"  @click="transferAdd" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Ekleniyor..." class="btn btn-success">
+                                        {{ trans('word.add') }}
+                                    </button>
                                 </div>
                             </form>
                             <div style="background: #fff; margin: 33px -1px 0px 0px;font-size: 13px;font-weight: 600;"
