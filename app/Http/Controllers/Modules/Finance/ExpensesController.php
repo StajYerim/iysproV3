@@ -37,8 +37,6 @@ class ExpensesController extends Controller
     public function store($aid, $id, Request $request)
     {
 
-
-
         $expense = Expenses::updateOrCreate(["id" => $request->id],
             [
                 "name" => $request->name,

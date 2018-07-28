@@ -380,7 +380,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'all_informations', 'text' => ['en' => 'ALL INFORMATIONS', 'tr' => 'TÜM BİLGİLER']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'bank_and_branches', 'text' => ['en' => 'BANK AND BRANCHES', 'tr' => 'BANKA VE ŞUBELERİ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'transfer_to_other_account', 'text' => ['en' => 'TRANSFER TO OTHER ACCOUNT', 'tr' => 'DİĞER HESABA TRANSFER YAP']]);
-        LanguageLine::create(['group' => 'sentence', 'key' => 'add_money_inpur', 'text' => ['en' => 'ADD MONEY INPUT', 'tr' => 'PARA GİRİŞİ EKLE']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'add_money_input', 'text' => ['en' => 'ADD MONEY INPUT', 'tr' => 'PARA GİRİŞİ EKLE']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'add_money_out', 'text' => ['en' => 'ADD MONEY OUT', 'tr' => 'PARA ÇIKIŞI EKLE']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'other_account_transactions', 'text' => ['en' => 'OTHER ACCOUNT TRANSACTIONS', 'tr' => 'DİĞER HESAB İŞLEMLERİ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'transfer_to_account', 'text' => ['en' => 'TRANSFER TO ACCOUNT', 'tr' => 'HESABA TRANSFER YAP']]);
@@ -526,6 +526,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'model_header', 'text' => ['en' => 'MODEL HEADER','tr' => 'MODEL BAŞLIĞI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'expense_status', 'text' => ['en' => 'EXPENSE STATUS','tr' => 'GİDER DURUMU']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'choose_account', 'text' => ['en' => 'CHOOSE ACCOUNT','tr' => 'HESAP SEÇ']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'turkish_lira', 'text' => ['en' => 'TRY - TURKISH LIRA','tr' => 'TRY - TÜRK LİRASI']]);
 
 
     }
