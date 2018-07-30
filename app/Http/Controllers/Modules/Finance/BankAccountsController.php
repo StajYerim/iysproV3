@@ -14,6 +14,7 @@ use App\Model\Purchases\PurchaseOrders;
 use App\Model\Sales\SalesOrders;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class BankAccountsController extends Controller
 {
@@ -361,6 +362,9 @@ class BankAccountsController extends Controller
                 }
 
             }
+
+
+            Session::flash("cheque_status","Çek Alım işlemi başarıyla gerçekleşti.");
 
             return ["message" => "success", "remaining" => $company->balance];
 

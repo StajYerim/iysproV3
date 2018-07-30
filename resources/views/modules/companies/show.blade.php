@@ -239,6 +239,11 @@
                 },
                     mounted: function () {
                        this.statement();
+                        <?php
+                        if (session()->has('cheque_status')) {?>
+                        notification("Success", "Çek Alım işlemi başarıyla gerçekleşti.", "success");
+                        <?php          }
+                        ?>
                     },
                     computed: {
                         reverseItems() {
