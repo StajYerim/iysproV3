@@ -17,6 +17,7 @@ class Product extends Model
 
     protected $guarded = [];
 
+
     public $rules = [
         'name' => 'required|max:200',
         'barcode' => 'max:100',

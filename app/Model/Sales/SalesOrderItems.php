@@ -80,6 +80,10 @@ class SalesOrderItems extends Model
         return $this->hasOne( StockItems::class,"sales_order_item_id","id");
     }
 
+    public function order(){
+        return  $this->hasOne(SalesOrders::class,"id","sales_order_id");
+    }
+
 
 
 

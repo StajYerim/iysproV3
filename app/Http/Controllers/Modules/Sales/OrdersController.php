@@ -43,7 +43,11 @@ class OrdersController extends Controller
                     return "product_update($orders->id)";
                 },
             ])->editColumn('company_area',function($orders){
-                return $orders["company"]["company_name"]."<br>".$orders->description;
+                $tags_span = "";
+                foreach($orders->tags as $tag) {
+                    $tags_span .= "<span class='badge' style='background-color:".$tag["bg_color"]."' > ".$tag["title"]."</span >";
+                }
+                return $orders["company"]["company_name"]." ".$tags_span."<br>".$orders->description;
             })
             ->editColumn('date',function($orders){
                 return $orders->date."<br>".$orders->due_date;
