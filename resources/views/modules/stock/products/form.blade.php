@@ -225,7 +225,7 @@
                                                 <label>
                                                     {{trans("word.tax")}}
                                                 </label>
-                                                <select type="text" v-validate="'required'" name="form.vat_rate"
+                                                <select type="text" v-validate="'required|numeric|max:2|excluded:0,1,8,18'" name="form.vat_rate"
                                                         class="form-control" v-model="form.vat_rate">
                                                     <option disabled value="">
                                                         {{trans("sentence.select_vat")}}
