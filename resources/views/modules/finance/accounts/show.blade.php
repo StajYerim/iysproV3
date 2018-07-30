@@ -331,7 +331,7 @@
                                 <fieldset>
                                     <div class="form-group has-feedback">
                                         <label class="col-sm-4 control-label">
-                                            <span>{{trans("word.decscription")}}</span>
+                                            <span>{{trans("word.description")}}</span>
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">

@@ -179,7 +179,7 @@
             </article>
         </div>
 
-        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete product ?",$id=$product->id])
+        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans("sentece.are_you_sure_delete_product"),$id=$product->id])
 
     </section>
 

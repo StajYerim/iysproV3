@@ -280,7 +280,7 @@
             </article>
         </div>
 
-        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete purchase order ?",$id=$order->id])
+        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans('sentence.are_you_sure_delete_purchase_order'),$id=$order->id])
 
     </section>
     @include("components.external.transaction_payment",[$type="payment",$local="purchase_orders",$detail = $order,$abble="App\\\Model\\\Purchases\\\PurchaseOrders"])

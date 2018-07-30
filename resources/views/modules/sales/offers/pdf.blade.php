@@ -110,11 +110,10 @@ app()->setLocale($lang);
                                         <b style="line-height: 12px;">{!! account()["name"]!!}</b><br>
                                         <span style="line-height:12px;font-size:10px;">
                                             {!! str_replace("\n","<br>",account()["address"]) !!} {!! account()["town"] !!}/{!! account()["city"] !!}
-                                            <br>V.D {{trans("word.and")}} {{trans("word.number")}} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}
+                                            <br>{{ trans('sentence.t_office_no') }}{{account()["tax_office"]}} / {!! account()["tax_id"] !!}
                                             <br>
                                             {{trans("word.phone")}} {!! account()["phone"] !!}<br>
-
-                                    </span>
+                                        </span>
                                     </td>
                                 </tr>
                             </table>
@@ -124,7 +123,7 @@ app()->setLocale($lang);
                 </table>
                 {{--{!! $logo->startText !!}--}}
 
-                <span style="text-align:center"><h2>{{trans("sentence.proforma_invoice")}} / {{trans("sentence.offer")}} </h2></span>
+                <span style="text-align:center"><h2>{{trans("sentence.proforma_invoice")}} / {{trans("word.offer")}} </h2></span>
                 <span style="float:left"><b style="font-size:15px;">
                         {{$offer->company["company_name"]}}
                     </b> <span style="float:right" >{{trans("word.date")}}:

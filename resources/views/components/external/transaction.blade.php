@@ -18,7 +18,8 @@
                         class="nav nav-tabs flex-wrap">
                         <li class="active" style="text-align: center;flex:1;">
                             <a href="#s1" data-toggle="tab"
-                               aria-expanded="false">{{ trans("word.cash") }} {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
+                               aria-expanded="false">{{ trans("word.cash") }} {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}
+                            </a>
                         </li>
                         <li style="text-align: center;flex:1;">
                             <a href="#s2" data-toggle="tab"

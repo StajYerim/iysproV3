@@ -32,7 +32,7 @@
                             <div class="table-responsive">
                                 <form @submit.prevent="form_send">
                                     <input type="form-control" v-model="new_item">
-                                    <button class="btn btn-suuccess" type="submit">
+                                    <button class="btn btn-success" type="submit">
                                         {{trans("word.send")}}
                                     </button>
                                 </form>
