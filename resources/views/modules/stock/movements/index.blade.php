@@ -34,7 +34,7 @@
 
 
                                 <span class="btn btn-success  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    {{trans("sentence.new_action")}}
+                                    {{trans("sentence.new_transaction")}}
                                     <i class="fa fa-angle-down"></i>
                                 </span>
                                 <ul class="dropdown-menu">

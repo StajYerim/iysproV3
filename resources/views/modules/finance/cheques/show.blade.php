@@ -236,7 +236,7 @@
         </div>
 
 
-        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete cheque ?",$id=$cheq->id])
+        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans('sentence.are_you_sure_delete_cheque'),$id=$cheq->id])
 
 
     </section>

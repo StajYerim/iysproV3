@@ -260,7 +260,7 @@
             </article>
         </div>
 
-        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete sales offer ?",$id=$offer->id])
+        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans('sentence.are_you_sure_delete_sales_offer'),$id=$offer->id])
 
 
         {{-- Durum Modal--}}
