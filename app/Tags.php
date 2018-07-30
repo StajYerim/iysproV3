@@ -35,6 +35,11 @@ class Tags extends Model
         return get_money($this->sales_orders()->sum("grand_total"));
     }
 
+    public function getSalesOrdersAmountSafeAttribute()
+    {
+        return get_money($this->sales_orders()->sum("sub_total"));
+    }
+
     public function companies()
     {
         return $this->morphedByMany('App\Companies', 'taggable');
@@ -46,6 +51,18 @@ class Tags extends Model
         $total = 0;
         foreach ($this->companies as $company) {
                  $total += $company->sales_orders()->sum("grand_total");
+        }
+
+        return get_money($total);
+
+    }
+
+    public function getCompaniesAmountSafeAttribute()
+    {
+
+        $total = 0;
+        foreach ($this->companies as $company) {
+            $total += $company->sales_orders()->sum("sub_total");
         }
 
         return get_money($total);

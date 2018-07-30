@@ -18,7 +18,7 @@ class SalesOrders extends Model
 
     protected $dates = ["date", "due_date"];
 
-    protected $appends = ["grand_totals"];
+    protected $appends = ["grand_totals","collect_label"];
 
 
     public function save(array $options = array())
@@ -219,6 +219,8 @@ class SalesOrders extends Model
             return '<span class="label label-primary">KISMİ ÖDENDİ</span>';
         }
     }
+
+
 
     public function tags()
     {

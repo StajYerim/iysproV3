@@ -500,13 +500,12 @@
                             axios.post("{{route("finance.accounts.transaction_company",aid())}}", this.cheque_collect.form).then(function (res) {
 
                                 if (res.data.message == "success") {
+                                    $("#transaction").modal("hide");
+
                                     return  window.location.href="{{Request::url() }}";
                                     VueName.remaining = res.data.remaining;
-
                                     VueCollect.collection.form.amount = res.data.remaining;
                                     VueCollect.loading = false;
-                                    $("#transaction").modal("hide");
-                                    notification("Success", "Çek Alım işlemi başarıyla gerçekleşti.", "success");
 //                                    VueName.statement();
 
                                 }

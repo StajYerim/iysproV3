@@ -224,7 +224,7 @@ class SalesOffers extends Model
     public function getCurrencyNameAttribute(){
         $currencies = Currency::All();
         foreach($currencies as $cur){
-            if(strtoupper($cur->code) === strtoupper($this->currency)){
+            if($cur->code === strtoupper($this->currency)){
                 return strtoupper($cur->name);
             }
         }

@@ -3,6 +3,7 @@
 namespace App\Model\Stock\Product;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Category extends Model
 {
@@ -21,10 +22,24 @@ class Category extends Model
 
         foreach ($this->products as $product)
         {
-            $total += $product->order_items()->sum("price")*$product->order_items()->sum("quantity");
+            $total += $product->order_items()->sum("total");
         }
 
-        return $total;
+        return get_money($total);
+    }
+
+
+    public function getTotalOrderSafeAttribute()
+    {
+        $total = 0;
+
+        foreach ($this->products as $product)
+        {
+            $total += $product->order_items()->sum(DB::raw('quantity * price'));
+
+        }
+
+        return get_money($total);
 
 
     }

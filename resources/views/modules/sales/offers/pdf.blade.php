@@ -269,7 +269,7 @@ app()->setLocale($lang);
         </tr>
     </table>
     <br>
-    <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2, $offer->currency_name, "KRŞ", "", null, null, null)}}
+    <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2,$offer->currency_name, "KRŞ", "", null, null, null)}}
     </span>
     <br><br><br>
     {{--{!! $logo->endText !!}--}}
