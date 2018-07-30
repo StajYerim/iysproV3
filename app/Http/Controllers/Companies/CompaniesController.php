@@ -36,14 +36,18 @@ class CompaniesController extends Controller
 
     public function customer_data($aid,$type)
     {
-        $companies = Companies::where("account_id",aid())->where($type,1)->get();
+        $companies = Companies::where("account_id",aid())->with("tags")->where($type,1)->get();
 
         return Datatables::of($companies)
             ->addColumn("balance",function($company){
                 return $company->balance."<br>".$company->money_status;
             })
             ->editColumn("company_name",function($company){
-                return "<span class='row-title'>".$company->company_name."</span><br>".$company->phone_number;
+                $tags_span = "";
+                   foreach($company->tags as $tag) {
+                        $tags_span .= "<span class='badge' style='background-color:".$tag["bg_color"]."' > ".$tag["title"]."</span >";
+                   }
+                return "<span class='row-title'>".$company->company_name."</span> ".$tags_span." <br>".$company->phone_number;
             })
             ->setRowAttr([
                 'style' => 'cursor:pointer',

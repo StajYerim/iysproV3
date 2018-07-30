@@ -18,7 +18,7 @@ class SalesOrders extends Model
 
     protected $dates = ["date", "due_date"];
 
-    protected $appends = ["grand_totals"];
+    protected $appends = ["grand_totals","collect_label"];
 
 
     public function save(array $options = array())

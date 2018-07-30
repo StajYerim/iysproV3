@@ -14,6 +14,7 @@ class Companies extends Model
   protected $guarded = [];
 
   protected $table = "company_list";
+  protected $appends = ["balance"];
 
     public $rules = [
         'company_name' => 'required|max:150',

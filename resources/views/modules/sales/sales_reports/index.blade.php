@@ -1,17 +1,6 @@
 @extends('layouts.master')
 @section("title","SATIŞ RAPORLARI")
 @section('content')
-    @php $oran = 0; @endphp
-    <style>
-        .active-cart{
-            width: 100%;
-            height: 16px;
-            background: #e3e3e3;
-            padding: 0px 10px;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-    </style>
     <!-- MAIN CONTENT -->
     <div id="content">
 
@@ -96,10 +85,6 @@
             <div class="widget-body">
             <div class="widget-body-toolbar st">
 
-
-
-
-
                 <div class="row">
                 <div class="col-sm-8" style="margin-top:-20px;"><h2>Satış Rapoları Tablosu</h2></div>
                     <div class="col-sm-4">
@@ -127,22 +112,25 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($sales_orders as $sale)
-                        <tr>
+
+                        <tr v-for="order in order_list">
                             <td width="25">
                                 <i class="fa fa-file-text-o fa-3x"></i>
                             </td>
                             <td>
-                                <b>{{ $sale->company->company_name}}</b> <br>
-                                {{ ($sale->description == "") ? "FATURA" : $sale->description }}
+                                <b>@{{order.company.company_name}}</b> <br>
+                                 <span v-if="order.description != null"> @{{ order.description }}</span>
+                                 <span v-if="order.description == null"> FATURA</span>
                             </td>
-                            <td>{{ $sale->date }}</td>
                             <td>
-                                {!! $sale->collect_label !!} <br>
-                                <b>{{ $sale->grand_total }}</b> <i class="fa fa-{{ $sale->currency }}"></i>
+                                @{{ order.date }}
+                            </td>
+                            <td>
+                              <span v-html="order.collect_label"></span> <br>
+                                <b>@{{ order.grand_total }}</b> <i class="fa fa-try"></i>
                             </td>
                         </tr>
-                        @endforeach
+
                         </tbody>
                     </table>
                 </div>
@@ -156,20 +144,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($companies as $com)
-                        @if($com->balance != "0,00")
-                        <tr>
+
+
+                        <tr v-for="customer in customer_list">
                             <td width="25">
                                 <i class="fa fa-building-o fa-3x"></i>
                             </td>
-                            <td>{{ $com->company_name }}</td>
+                            <td>@{{ customer[0]["company"]["company_name"] }}</td>
                             <td>
-                                <b>{{ $com->balance }}</b>
-                                <i class="fa fa-{{ $sale->currency }}"></i>
+                                <b>@{{ customer[0]["company"]["balance"]  }}</b>
+                                <i class="fa fa-try"></i>
                             </td>
                         </tr>
-                        @endif
-                        @endforeach
+
                         </tbody>
                     </table>
                 </div>
@@ -184,21 +171,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $pr)
-                        @if($pr->order_items()->sum("price") != 0)
-                        <tr>
+
+                        <tr v-for="product in product_list">
                             <td>
                                 <i class="fa fa-cube fa-3x"></i>
                             </td>
-                            <td>{{ $pr->name }}</td>
-                            <td>{{ $pr->order_items()->sum("quantity") }} {{ $pr->unit["short_name"] }}</td>
+                            <td>@{{ product.named.name }}</td>
+                            <td>@{{ product.total_quantity }} @{{ product.unit.short_name }}</td>
                             <td>
-                                <b>{{ get_money($pr->order_items()->sum("price")*$pr->order_items()->sum("quantity")) }}</b>
-                                <i class="fa fa-{{ $sale->currency }}"></i>
+                                <b>@{{ product.total_amount }}</b>
+                                <i class="fa fa-try"></i>
                             </td>
                         </tr>
-                        @endif
-                        @endforeach
+
                         </tbody>
                     </table>
                 </div>
@@ -215,13 +200,10 @@
 
     @push("scripts")
         <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="/js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
-        <script src="/js/plugin/moment/moment.min.js"></script>
-        <script src="/js/plugin/chartjs/chart.min.js"></script>
-        <script src="/js/plugin/morris/raphael.min.js"></script>
-        <script src="/js/plugin/morris/morris.min.js"></script>
-        <script src="/js/plugin/daterangepicker/daterangepicker.js"></script>
-        <link rel="stylesheet" href="/js/plugin/daterangepicker/daterangepicker.css">
+        <script src="{{asset("/js/plugin/moment/moment.min.js")}}"></script>
+        <script src="{{asset("/js/plugin/chartjs/chart.min.js")}}"></script>
+        <script src="{{asset("/js/plugin/daterangepicker/daterangepicker.js")}}"></script>
+        <link rel="stylesheet" href="{{asset("/js/plugin/daterangepicker/daterangepicker.css")}}">
 
         <script type="text/javascript">
 
@@ -233,23 +215,33 @@
                         order_pie: [],
                         customer_pie: [],
                         product_pie: [],
-                        vat:"1"
+                        order_list:[],
+                        customer_list:[],
+                        product_list:[],
+                        vat:"1",
+                        start:"{{ \Carbon\Carbon::now()->subDays(30)->format('Y-m-d') }}",
+                        end: "{{ \Carbon\Carbon::now()->format('Y-m-d') }}",
                     },
                     mounted() {
 
-                        this.pies_data();
+                        this.pies_data(this.start,this.end);
 
                     },
                     methods: {
                         updateData:function(){
-                          this.pies_data();
+                          this.pies_data(this.start,this.end);
 
                         },
-                        pies_data: function () {
-                            axios.post("{{route("sales.pies.data",aid())}}",{vat:this.vat}).then(res => {
+                        pies_data: function (start,end) {
+                            axios.post("{{route("sales.pies.data",aid())}}",{vat:this.vat,start:start,end:end}).then(res => {
                                 sales_report.order_pie = [];
                                 sales_report.customer_pie = [];
                                 sales_report.product_pie = [];
+                                sales_report.customer_list = [];
+
+                                sales_report.customer_list = res.data["customer_order_list"];
+                                sales_report.order_list = res.data["sales_order_list"];
+                                sales_report.product_list = res.data["product_list"];
 
                                 let order_pie = {
                                     type: 'pie',
@@ -302,25 +294,26 @@
                                     },
                                 };
 
+
                                 orders = new Chart(document.getElementById("ordersChart"), order_pie);
                                 customers = new Chart(document.getElementById("customersChart"), customers_pie);
                                 products = new Chart(document.getElementById("productChart"), product_pie);
 
 
-                                jQuery.each(res.data["orders"]["labels"], function (index, value) {
+                                    jQuery.each(res.data["orders"]["labels"], function (index, value) {
 
-                                    $labels = res.data["orders"]["labels"][index];
-                                    $data = res.data["orders"]["data"][index];
-                                    $bgcolor = res.data["orders"]["bgcolor"][index];
+                                        $labels = res.data["orders"]["labels"][index];
+                                        $data = res.data["orders"]["data"][index];
+                                        $bgcolor = res.data["orders"]["bgcolor"][index];
 
-                                    sales_report.addData(orders, $labels, $data, $bgcolor);
+                                        sales_report.addData(orders, $labels, $data, $bgcolor);
 
-                                    sales_report.order_pie.push({
-                                        labels: $labels,
-                                        data: $data,
-                                        bgcolor: $bgcolor
-                                    })
-                                });
+                                        sales_report.order_pie.push({
+                                            labels: $labels,
+                                            data: $data,
+                                            bgcolor: $bgcolor
+                                        })
+                                    });
 
                                 jQuery.each(res.data["customers"]["labels"], function (index, value) {
                                     $labels = res.data["customers"]["labels"][index];
@@ -353,15 +346,94 @@
                                 });
 
 
-                            })
+                            });
+
+
+
+                            @php
+                                $start = new \Carbon\Carbon('first day of last month');
+                                $end = new \Carbon\Carbon('last day of last month');
+                            @endphp
+
+                            $('#demo').daterangepicker({
+                                "locale": {
+                                    "format": "DD-MM-YYYY",
+                                    "separator": " / ",
+                                    "applyLabel": "Uygula",
+                                    "cancelLabel": "İptal",
+                                    "fromLabel": "From",
+                                    "toLabel": "To",
+                                    "customRangeLabel": "Özel Tarih",
+                                    "daysOfWeek": [
+                                        "Pt",
+                                        "Sa",
+                                        "Ça",
+                                        "Pe",
+                                        "Cu",
+                                        "Ct",
+                                        "Pa"
+                                    ],
+                                    "monthNames": [
+                                        "Ocak",
+                                        "Şubat",
+                                        "Mart",
+                                        "Nisan",
+                                        "Mayıs",
+                                        "Haziran",
+                                        "Temmuz",
+                                        "Ağustos",
+                                        "Eylül",
+                                        "Ekim",
+                                        "Kasım",
+                                        "Aralık"
+                                    ],
+                                    "firstDay": 1
+                                },
+                                "ranges": {
+                                    "Bugün": [
+                                        "{{ \Carbon\Carbon::now()->format('d-m-Y') }}",
+                                        "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
+                                    ],
+                                    "Dün": [
+                                        "{{ \Carbon\Carbon::yesterday()->format('d-m-Y') }}",
+                                        "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
+                                    ],
+                                    "Son 7 Gün": [
+                                        "{{ \Carbon\Carbon::now()->subDays(7)->format('d-m-Y') }}",
+                                        "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
+                                    ],
+                                    "Son 30 Gün": [
+                                        "{{ \Carbon\Carbon::now()->subDays(30)->format('d-m-Y') }}",
+                                        "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
+                                    ],
+                                    "Bu Ay": [
+                                        "{{ \Carbon\Carbon::now()->startOfMonth()->format('d-m-Y') }}",
+                                        "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
+                                    ],
+                                    "Geçen Ay": [
+                                        "{{ $start->format('d-m-Y') }}",
+                                        "{{ $end->format('d-m-Y') }}"
+                                    ]
+                                },
+                                "alwaysShowCalendars": true,
+                                "startDate": "{{ \Carbon\Carbon::now()->subDay(1)->format('d-m-Y') }}",
+                                "endDate": "{{ \Carbon\Carbon::now()->format('d-m-Y') }}",
+                            }, function(start, end, label) {
+                                start = start.format('YYYY-MM-DD');
+                                end = end.format('YYYY-MM-DD');
+                                sales_report.end = end;
+                                sales_report.start = start;
+
+                                sales_report.pies_data(start,end);
+
+                            });
                         },
                         addData: function (chart, label, data, bgcolor) {
-
-                            chart.data.labels.push(label);
-                            chart.data.datasets.forEach((dataset) => {
-                                dataset.data.push(data);
-                                dataset.backgroundColor.push(bgcolor);
-                            });
+                                chart.data.labels.push(label);
+                                chart.data.datasets.forEach((dataset) => {
+                                    dataset.data.push(parseFloat(data));
+                                    dataset.backgroundColor.push(bgcolor);
+                                });
                             chart.update();
                         }
 

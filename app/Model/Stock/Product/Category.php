@@ -3,6 +3,7 @@
 namespace App\Model\Stock\Product;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Category extends Model
 {
@@ -19,15 +20,12 @@ class Category extends Model
     {
         $total = 0;
 
-        //todo:tek satirda kdv hesaplamasi yapilacak
-        //$this->products->order_items->
-
-/*        foreach ($this->products as $product)
+        foreach ($this->products as $product)
         {
-            $total += $product->order_items()->sum("price")*$product->order_items()->sum("quantity");
+            $total += $product->order_items()->sum("total");
         }
-*/
-        return $total;
+
+        return get_money($total);
     }
 
 
@@ -37,10 +35,11 @@ class Category extends Model
 
         foreach ($this->products as $product)
         {
-            $total += $product->order_items()->sum("price")*$product->order_items()->sum("quantity");
+            $total += $product->order_items()->sum(DB::raw('quantity * price'));
+
         }
 
-        return $total;
+        return get_money($total);
 
 
     }
