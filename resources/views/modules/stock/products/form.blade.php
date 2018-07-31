@@ -185,7 +185,7 @@
                                                 {{trans("sentence.purchase_price")}}
                                             </label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control " value="0,00"
+                                                <input type="text" class="form-control" v-on:keypress="isNumber" value="0,00"
                                                        autocomplete="OFF" v-model.lazy="form.buying_price">
                                                 <div class="input-group-btn">
                                                     <select v-model="form.buying_currency" class="buying_currency">
@@ -225,7 +225,7 @@
                                                 <label>
                                                     {{trans("word.tax")}}
                                                 </label>
-                                                <select type="text" v-validate="'required|numeric|max:2|excluded:0,1,8,18'" name="form.vat_rate"
+                                                <select type="text" v-validate="'required|numeric|max:2'" name="form.vat_rate"
                                                         class="form-control" v-model="form.vat_rate">
                                                     <option disabled value="">
                                                         {{trans("sentence.select_vat")}}
