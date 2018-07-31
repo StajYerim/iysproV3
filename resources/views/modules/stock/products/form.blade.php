@@ -130,7 +130,7 @@
                                         </div>
                                         <div class="col-md-6" style="margin-top: 34px;">
                                             <input type="file" ref="image" name="fileObj" @change="onFileUpload"
-                                                   class="btn btn-default" id="image-upload" v-validate="{required:true,mimes: ['image/jpeg' ,'image/png']}"
+                                                   class="btn btn-default" id="image-upload" v-validate="{mimes: ['image/jpeg' ,'image/png']}"
                                                    accept="image/x-png,image/gif,image/jpeg" >
                                             @{{ errors.first('file') }}
                                             <button type="button" ref="delete" id="removeImg"
