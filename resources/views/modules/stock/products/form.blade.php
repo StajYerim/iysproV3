@@ -186,7 +186,7 @@
                                                 {{trans("sentence.purchase_price")}}
                                             </label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control " value="0,00"
+                                                <input type="text" class="form-control" v-on:keypress="isNumber" value="0,00"
                                                        autocomplete="OFF" v-model.lazy="form.buying_price">
                                                 <div class="input-group-btn">
                                                     <select v-model="form.buying_currency" class="buying_currency">

@@ -22,8 +22,8 @@ class Product extends Model
         'name' => 'required|max:200',
         'barcode' => 'max:100',
         'code' => 'max:100',
-        'buying_currency' => 'max:15',
-        'buying_price' => 'max:15',
+        'buying_price' => 'max:12',
+        'list_price' => 'max:12',
 
     ];
 
