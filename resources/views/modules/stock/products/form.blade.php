@@ -289,10 +289,16 @@
                     }),
                     watch: {
                         "form.buying_price": function (yeni, eski) {
+                            console.log(yeni)
+
                             this.form.buying_price = money_clear(yeni).toLocaleString('tr-TR', {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 4
                             });
+                            if(yeni == "NaN"){
+                                this.form.buying_price = "0,00";
+                            }
+
                         },
                         "form.list_price": function (yeni, eski) {
 
@@ -301,6 +307,9 @@
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 4
                             });
+                            if(yeni == 'NaN'){
+                                this.form.list_price = "0,00";
+                            }
                         }
                     },
                     mounted: function () {
