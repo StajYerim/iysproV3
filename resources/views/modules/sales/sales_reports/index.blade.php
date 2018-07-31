@@ -50,7 +50,7 @@
                                         <div class="text-center"><b>MÜŞTERİ KATEGORİLERİ</b></div>
                                         <canvas id="customersChart" height="160"></canvas>
 
-                                        <div v-for="(item,index) in customer_pie" class="col-md-12">
+                                        <div v-for="(item) in customer_pie" class="col-md-12">
                                             <label class="pull-left label"
                                                    v-bind:style="{'background-color':item.bgcolor}">
                                                 @{{ item.labels }}
