@@ -53,12 +53,13 @@
                                 </fieldset>
 
                                 <fieldset>
-                                    <div class="form-group">
+                                    <div class="form-group"  :class="{'has-error': errors.has('form.email') }">
                                         <label class="col-md-3 control-label">
                                             {{trans("word.email")}}
                                         </label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" v-model="form.email"/>
+                                            <input type="text" class="form-control" v-model="form.email" name="form.email" v-validate="'email'"/>
+                                            @{{ errors.first('form.email') }}
                                         </div>
                                     </div>
                                 </fieldset>
@@ -182,6 +183,18 @@
 
         <script>
             window.addEventListener("load", () => {
+                const dictionary = {
+                    en: {
+                        messages: {
+                            email: function () {
+                                return "Lütfen geçerli bir mail adresi giriniz."
+                            }
+                        }
+                    }
+                };
+                VeeValidate.Validator.updateDictionary(dictionary);
+                Vue.use(VeeValidate);
+                Vue.config.debug = true;
                 Vue.component('phone', {
                     template: '#phone',
                     props: {
@@ -300,6 +313,8 @@
                     }
                 });
             });
+
+
         </script>
     @endpush
 
