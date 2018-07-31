@@ -129,9 +129,10 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6" style="margin-top: 34px;">
-                                            <input type="file" ref="image" @change="onFileUpload"
-                                                   class="btn btn-default" id="image-upload"
-                                                   accept="image/x-png,image/gif,image/jpeg">
+                                            <input type="file" ref="image" name="fileObj" @change="onFileUpload"
+                                                   class="btn btn-default" id="image-upload" v-validate="{required:true,mimes: ['image/jpeg' ,'image/png']}"
+                                                   accept="image/x-png,image/gif,image/jpeg" >
+                                            @{{ errors.first('file') }}
                                             <button type="button" ref="delete" id="removeImg"
                                                     @if($form_type == "update") @if($product->images == "[]") style='display:none'
                                                     @endif @else style="display:none" @endif
@@ -225,7 +226,7 @@
                                                 <label>
                                                     {{trans("word.tax")}}
                                                 </label>
-                                                <select type="text" v-validate="'required|numeric|max:2|excluded:0,1,8,18'" name="form.vat_rate"
+                                                <select type="text" v-validate="'required|numeric|max:2'" name="form.vat_rate"
                                                         class="form-control" v-model="form.vat_rate">
                                                     <option disabled value="">
                                                         {{trans("sentence.select_vat")}}
@@ -260,7 +261,9 @@
         <script src="{{asset("/js/flager/js/jquery.flagstrap.min.js")}}"></script>
         <script src="{{asset("/js/boost-select/js/bootstrap-select.js")}}"></script>
         <script>
+
             window.addEventListener("load", () => {
+                Vue.use(VeeValidate);
                 let stock = new Vue({
                     el: "#customer",
                     data: () => ({
@@ -437,7 +440,10 @@
                                     stock.form.image_id = response.data[0]["id"];
                                 })
                                 .catch(function (error) {
-                                    console.log(error);
+                                    $("#image-upload").val("");
+                                    $("#removeImg").hide();
+                                    notification("Hata","Geçersiz resim dosyası","danger");
+                                    $(".upload-preview").html('<img width="156px" height="117px" src="/img/noimage.gif">');
                                 });
 
                             if (this.image_name != null) {
