@@ -28,7 +28,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{route($type == "supplier" ? "purchases.companies.form":"sales.companies.form",[aid(),$type,$company->id,'update'])}}">
+                                    <a href="{{route($company_type == "supplier" ? "purchases.companies.form":"sales.companies.form",[aid(),$company_type,$company->id,'update'])}}">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                         {{trans("word.edit")}}
                                     </a>
@@ -275,7 +275,7 @@
                         axios.post('{{route("sales.companies.destroy",[aid(),$id])}}')
                             .then(function (response) {
                                 if(response.data.message == "success"){
-                                    window.location.href = '{{route("sales.companies.customer",aid())}}';
+                                    window.location.href = '{{route($company_type=="supplier"?"purchases.companies.supplier":"sales.companies.customer",aid())}}';
                                 }
                             }).catch(function (error) {
                             notification("Error", error.response.data.message, "danger");
