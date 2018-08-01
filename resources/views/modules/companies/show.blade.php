@@ -28,7 +28,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{route("sales.companies.form",[aid(),'customer',$company->id,'update'])}}">
+                                    <a href="{{route($type == "supplier" ? "purchases.companies.form":"sales.companies.form",[aid(),$type,$company->id,'update'])}}">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                         {{trans("word.edit")}}
                                     </a>
