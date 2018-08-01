@@ -146,8 +146,10 @@ class CompaniesController extends Controller
 
     public function show($company_id, $id)
     {
+
         $company = Companies::find($id);
-        return view("modules.companies.show", compact("company"));
+        $type =  $company->supplier == 1 ? "supplier":"customer";
+        return view("modules.companies.show", compact("company","type"));
     }
 
     public function destroy($company_id, $id)
