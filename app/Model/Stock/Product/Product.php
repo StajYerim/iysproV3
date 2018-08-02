@@ -33,6 +33,11 @@ class Product extends Model
         return $this->hasOne(Category::class, "id", "category_id");
     }
 
+    public function description()
+    {
+        return $this->hasOne(ProductDescriptions::class, "product_id", "id");
+    }
+
     //All barcodes
     public function barcodes()
     {

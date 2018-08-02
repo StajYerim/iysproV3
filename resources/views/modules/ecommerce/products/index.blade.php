@@ -52,7 +52,7 @@
                 <input type="text" name="price" value="0,00" autocomplete="OFF" class="form-control">
               </div>
               <div class="form-group">
-                <label>{{trans("sentencel.stock_number")}}</label>
+                <label>{{trans("sentence.stock_number")}}</label>
                 <input type="text" name="stock" value="1" autocomplete="OFF" class="form-control">
               </div>
             </div>

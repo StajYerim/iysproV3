@@ -10,8 +10,8 @@ $factory->define(\App\Model\Companies\Address::class, function (Faker $faker) {
         'email' => $faker->companyEmail,
         'phone_number' => $faker->numberBetween(10),
         'fax_number' => $faker->numberBetween(10),
-        'company_id' => function () {
-            return factory(\App\Companies::class)->create()->id;
-        }
+//        'company_id' => function () {
+//            return factory(\App\Companies::class)->create()->id;
+//        }
     ];
 });
