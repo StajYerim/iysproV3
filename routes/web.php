@@ -116,7 +116,5 @@ foreach($kategori as $kat){
 //General Scripts
 Route::get("/general/script.js","GeneralController@script")->name("general.script");
 
-Route::post("/get",'GeneralController@test')->name("general.test");
-Route::post("/get",'GeneralController@test')->name("sales.collect_report.index");
 
 

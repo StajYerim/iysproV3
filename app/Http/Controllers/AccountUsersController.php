@@ -25,7 +25,7 @@ class AccountUsersController extends Controller
         $users = auth()->user()
             ->memberOfAccount
             ->users()
-            ->paginate(50);
+            ->paginate(20);
 
         // return view with users
         return view('accountUsers.index', [
@@ -242,7 +242,11 @@ class AccountUsersController extends Controller
     }
     public function user_edit($aid,$id)
     {
-        $user = User::where("account_id",aid())->where("id",$id)->first();
+        $user = User::where([
+            "account_id" => aid(),
+            "id" => $id
+        ])
+            ->first();
         // return view with user
         return view('modules.settings.users.form', [
             'languages' => Language::all(),

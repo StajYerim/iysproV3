@@ -28,7 +28,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{route("sales.companies.form",[aid(),'customer',$company->id,'update'])}}">
+                                    <a href="{{route($company_type == "supplier" ? "purchases.companies.form":"sales.companies.form",[aid(),$company_type,$company->id,'update'])}}">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                         {{trans("word.edit")}}
                                     </a>
@@ -58,29 +58,6 @@
                             </ul>
 
                         </div>
-                        <div class="btn-group">
-                            <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <span class="fa fa-print"></span>
-                                {{trans("word.print")}} <span class="caret"></span> </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
-                                                class="fa fa-print" aria-hidden="true"></i>
-                                        {{trans("sentence.print_offer")}}</a>
-                                </li>
-                                <li>
-                                    <a download="" href="http://demo.iyspro.com/salesmanager/sales-offer/8/printDown"
-                                       id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
-                                        {{trans("sentence.download_offer")}}</a>
-                                </li>
-
-                            </ul>
-
-                        </div>
-
-                        <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
-                                    class="fa fa-envelope"></i> {{trans("word.share")}}</a>
-
                     </div>
 
 
@@ -275,7 +252,7 @@
                         axios.post('{{route("sales.companies.destroy",[aid(),$id])}}')
                             .then(function (response) {
                                 if(response.data.message == "success"){
-                                    window.location.href = '{{route("sales.companies.customer",aid())}}';
+                                    window.location.href = '{{route($company_type=="supplier"?"purchases.companies.supplier":"sales.companies.customer",aid())}}';
                                 }
                             }).catch(function (error) {
                             notification("Error", error.response.data.message, "danger");

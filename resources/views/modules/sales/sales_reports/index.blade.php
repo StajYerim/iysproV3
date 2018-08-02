@@ -40,7 +40,7 @@
                                                    v-bind:style="{'background-color':item.bgcolor}">
                                                 @{{ item.labels}}
                                                     </label>
-                                            <label class="pull-right"><b>@{{item.data}}</b> <i
+                                            <label class="pull-right"><b>@{{formatPrice(item.data)}}</b> <i
                                                         class="fa fa-try"></i></label>
                                                 </div>
 
@@ -50,12 +50,12 @@
                                         <div class="text-center"><b>MÜŞTERİ KATEGORİLERİ</b></div>
                                         <canvas id="customersChart" height="160"></canvas>
 
-                                        <div v-for="(item,index) in customer_pie" class="col-md-12">
+                                        <div v-for="(item) in customer_pie" class="col-md-12">
                                             <label class="pull-left label"
                                                    v-bind:style="{'background-color':item.bgcolor}">
                                                 @{{ item.labels }}
                                                     </label>
-                                            <label class="pull-right"><b>@{{ item.data }}</b> <i class="fa fa-try"></i></label>
+                                            <label class="pull-right"><b>@{{formatPrice(item.data)}}</b> <i class="fa fa-try"></i></label>
                                                 </div>
 
                                     </div>
@@ -67,7 +67,7 @@
                                                            v-bind:style="{'background-color':item.bgcolor}">
                                                         @{{ item.labels }}
                                                     </label>
-                                                    <label class="pull-right"><b>@{{ item.data }}</b> <i class="fa fa-try"></i></label>
+                                                    <label class="pull-right"><b>@{{formatPrice(item.data)}}</b> <i class="fa fa-try"></i></label>
                                                 </div>
 
 
@@ -231,6 +231,12 @@
                         updateData:function(){
                           this.pies_data(this.start,this.end);
 
+                        },
+                        formatPrice($value){
+                          return $value.toLocaleString('tr-TR', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2
+                          });
                         },
                         pies_data: function (start,end) {
                             axios.post("{{route("sales.pies.data",aid())}}",{vat:this.vat,start:start,end:end}).then(res => {

@@ -112,7 +112,10 @@ class AccountsController extends Controller
      */
     public function show(Account $company)
     {
-        $modules = Menu::where("parent_id", null)->where("permission", 2)->get();
+        $modules = Menu::where([
+            "parent_id"=>null,
+            "permission"=> 2])
+            ->get();
         return view('admin.accounts.show', [
             'company' => $company,
             'modules' => $modules,

@@ -23,54 +23,58 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $bank_accounts = BankAccounts::where("account_id",aid())->paginate(6);
-        $sales_orders  = SalesOrders::whereDate("due_date","<",Carbon::now()->addDays(7))->paginate(10);
-        $purchase_orders = PurchaseOrders::whereDate("due_date","<",Carbon::now()->addDays(7))->paginate(10);
-        $bank_account_items = BankItems::orderBy("date","desc")->paginate(10);
+        $bank_accounts = BankAccounts::where("account_id", aid())->select("name", "currency")->paginate(6);
+        $sales_orders = SalesOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->addDays(7))->paginate(10);
+        $purchase_orders = PurchaseOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->addDays(7))->paginate(10);
+        $bank_account_items = BankItems::has("bank_account")->orderBy("date", "desc")->paginate(10);
         return view('dashboard', compact('bank_accounts','sales_orders','purchase_orders','bank_account_items'));
     }
-  
+
+    /*User profile update page*/
     public function profil_update($aid){
       $user = auth()->user();
       return view("modules.users.update", ['user' => $user]);
     }
-  
+
+    /*User profile update */
     public function profil_update_save(Request $request){
       $user = Auth::user();
-      $user->name = $request->name;      
-      $user->email = $request->email;      
-      $user->mobile = $request->mobile;      
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->mobile = $request->mobile;
       $user->save();
-      
+
       return response()->json([
         "message" => "Successfully Updated!"
       ]);
     }
-  
-    /* TODO: Add Validation */
+
+    /* User password change save */
     public function profil_password_save(Request $request){
       $user = Auth::user();
-      
-      if(!Hash::check($request->old_password, $user->password)) {
+
+        if (!Hash::check($request->old_password, $user->password)) {
         return response()->json([
           "status" => 403,
           "message" => "Old Password Error!"
-        ]);  
-      } 
-      
+        ]);
+        }
+
       $user->password = Hash::make($request->new_password);
       $user->save();
-      
-      return response()->json([
+
+        return response()->json([
         "status" => 200,
         "message" => "Successfully Updated!"
       ]);
     }
-  
+
+    /*Account update page*/
     public function account_update($aid){
       return view("modules.accounts.update");
     }
 
+    /*Profile page*/
     public function myProfile() {
         $user = auth()->user();
         return view('my_profile', [
