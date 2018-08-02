@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 
 class ExchangeController extends Controller
 {
+
+    /*Exchange - instant currency price*/
     public function exchange($aid,Request $request){
 
-
-        $doviz = new \Teknomavi\Tcmb\Doviz();
-        $result = $doviz->kurAlis(strtoupper($request->code));
+        $exchange = new \Teknomavi\Tcmb\Doviz();
+        $result = $exchange->kurAlis(strtoupper($request->code));
 
         return number_format($result,"4",",",".");
 

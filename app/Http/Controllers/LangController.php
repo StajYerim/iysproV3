@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 
 class LangController extends Controller
 {
+
+    /*Languages switch */
     public function index(Request $request, $lang)
     {
         // Standart dil değişkenleri

@@ -31,7 +31,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($bank_accounts as $bank_account)
-                                    @if($bank_account->account_id != null)
+
                                         <tr>
                                             <td>...</td>
                                             <td>{{ $bank_account->name }}</td>
@@ -41,7 +41,7 @@
                                                 <i class="fa fa-{{ $bank_account->currency }}"></i>
                                             </td>
                                         </tr>
-                                    @endif
+
                                 @endforeach
                                 </tbody>
 

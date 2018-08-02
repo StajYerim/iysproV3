@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CompaniesController extends Controller
 {
+    /*Sales Order -> Customer page*/
     public function customer()
     {
         $type="customer";
@@ -26,14 +27,14 @@ class CompaniesController extends Controller
         return view("modules.companies.index", compact("companies", "type","route"));
 
     }
-
+    /*Purchase Order -> Supplier page*/
     public function supplier()
     {
         $type="supplier";
         $route = "purchases.companies.supplier.data";
         return view("modules.companies.index", compact("companies", "type","route"));
     }
-
+    /*Sales Order -> Customer Datatable server side*/
     public function customer_data($aid,$type)
     {
         $companies = Companies::where("account_id",aid())->with("tags")->where($type,1)->get();
@@ -58,7 +59,7 @@ class CompaniesController extends Controller
             ->rawColumns(["balance","company_name"])
             ->make(true);
     }
-
+    /*Purchase Order -> Supplier Datatable server side*/
     public function supplier_data($aid,$type)
     {
         $companies = Companies::where("account_id",aid())->where($type,1)->get();
@@ -79,7 +80,12 @@ class CompaniesController extends Controller
             ->rawColumns(["balance","company_name"])
             ->make(true);
     }
-
+    /*
+        Customer or Supplier Create&Update Form
+        $option = "customer" or "supplier"
+        $id = "companies"
+        $type = "new" or "update"
+    */
     public function form($aid, $option, $id, $type)
     {
         $company = $type != "new" ? Companies::find($id):"";
@@ -88,7 +94,9 @@ class CompaniesController extends Controller
         $form_type = $type == "new" ? "New" : "Update";
         return view("modules.companies.form", compact("form_type", "company_type","company","tags"));
     }
-
+    /*
+           Customer or Supplier Save new or update
+       */
     public function store($aid,Request $request, $id)
     {
 
@@ -144,6 +152,7 @@ class CompaniesController extends Controller
 
     }
 
+    /*Customer or supplier show page*/
     public function show($company_id, $id)
     {
 
@@ -152,6 +161,7 @@ class CompaniesController extends Controller
         return view("modules.companies.show", compact("company","company_type"));
     }
 
+    /*Customer or supplier delete data*/
     public function destroy($company_id, $id)
     {
         Companies::destroy($id);
@@ -163,6 +173,7 @@ class CompaniesController extends Controller
 
     }
 
+    /*Company search select*/
     public function company_source($aid, Request $request)
     {
 
@@ -179,7 +190,7 @@ class CompaniesController extends Controller
     }
 
 
-
+    /*New company quick save*/
     public function quick_company(Request $request, $id)
     {
 
@@ -215,12 +226,7 @@ class CompaniesController extends Controller
 
     }
 
-    public function quick_form($aid,$id,$type)
-    {
-        $form_type = "new";
-    return view("components.modals.companies_remote",compact("type","form_type"));
-    }
-
+    /*Companies actions*/
     public function items($aid, $id)
     {
         $company = Companies::find($id);
