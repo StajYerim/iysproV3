@@ -12,6 +12,7 @@
 
                         <div class="widget-body no-padding">
 test 2
+                          Purchase report
                         </div>
 
                     </div>
