@@ -58,29 +58,6 @@
                             </ul>
 
                         </div>
-                        <div class="btn-group">
-                            <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <span class="fa fa-print"></span>
-                                {{trans("word.print")}} <span class="caret"></span> </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
-                                                class="fa fa-print" aria-hidden="true"></i>
-                                        {{trans("sentence.print_offer")}}</a>
-                                </li>
-                                <li>
-                                    <a download="" href="http://demo.iyspro.com/salesmanager/sales-offer/8/printDown"
-                                       id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
-                                        {{trans("sentence.download_offer")}}</a>
-                                </li>
-
-                            </ul>
-
-                        </div>
-
-                        <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
-                                    class="fa fa-envelope"></i> {{trans("word.share")}}</a>
-
                     </div>
 
 
