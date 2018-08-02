@@ -53,7 +53,7 @@ class Tags extends Model
                  $total += $company->sales_orders()->sum("grand_total");
         }
 
-        return get_money($total);
+        return ($total);
 
     }
 
@@ -65,7 +65,7 @@ class Tags extends Model
             $total += $company->sales_orders()->sum("sub_total");
         }
 
-        return get_money($total);
+        return ($total);
 
     }
 
