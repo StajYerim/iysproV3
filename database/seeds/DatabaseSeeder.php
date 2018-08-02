@@ -13,20 +13,25 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            RolesTableSeeder::class,
-            AppLanguagesTableSeeder::class,
-            UsersTableSeeder::class,
-            ListSectorsTableSeeder::class,
-            AppAccountsTableSeeder::class,
-            ModuleTableSeeder::class,
-            PermissionsTableSeeder::class,
-            MenuDescriptionsTableSeeder::class,
-            MenuTableSeeder::class,
-            CitiesTableSeeder::class,
-            CountyTableSeeder::class,
-            UnitsTableSeeder::class,
-            CurrencyTableSeeder::class,
-            LanguagesTableSeeder::class
+//            UsersTableSeeder::class,
+//            RolesTableSeeder::class,
+//            AppLanguagesTableSeeder::class,
+//            ListSectorsTableSeeder::class,
+//            AppAccountsTableSeeder::class,
+//            ModuleTableSeeder::class,
+//            PermissionsTableSeeder::class,
+//            MenuDescriptionsTableSeeder::class,
+//            MenuTableSeeder::class,
+//            CitiesTableSeeder::class,
+//            CountyTableSeeder::class,
+//            UnitsTableSeeder::class,
+//            CurrencyTableSeeder::class,
+//            LanguagesTableSeeder::class,
+//            CompaniesTableSeeder::class,
+//            TagsTableSeeder::class,
+//            ProductTableSeeder::class,
+            SalesOrdersTableSeeder::class,
+            PurchaseOrderTableSeeder::class,
 
 
         ]);

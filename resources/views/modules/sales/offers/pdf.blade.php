@@ -144,7 +144,7 @@ app()->setLocale($lang);
                 {{trans("word.quantity")}}
             </td>
             <td style="text-align: right;width:120px">
-                {{ trans("word.unit") }} {{trans("word.price")}}
+                {{ trans("sentence.unit_price") }}
             </td>
             {{--@if($offer->Items->sum("OfferItemDiscount") > 0)--}}
                 {{--<td  style="text-align: right;width:20px" >--}}
@@ -156,7 +156,7 @@ app()->setLocale($lang);
                 {{--</td>--}}
             {{--@endif--}}
             <td  style="text-align: right;width:40px" >
-                KDV
+                {{trans("word.vat")}}
             </td>
             <td style="text-align:right;width:140px">
                 {{trans("word.amount")}}({{trans("sentence.excluding_vat")}})

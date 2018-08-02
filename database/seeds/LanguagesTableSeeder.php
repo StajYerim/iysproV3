@@ -332,7 +332,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'account_number', 'text' => ['en' => 'ACCOUNT NUMBER', 'tr' => 'HESAP NUMARASI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'cheque_available', 'text' => ['en' => 'CHEQUE AVAILABLE', 'tr' => 'ÇEK KULLANILABİLİR']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'expiry_date', 'text' => ['en' => 'EXPIRY DATE', 'tr' => 'SON KULLANMA TARİHİ']]);
-        LanguageLine::create(['group' => 'sentence', 'key' => 'stock_quantity', 'text' => ['en' => 'STOCK QUANTITY', 'tr' => 'STOCK MİKTARI']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'stock_quantity', 'text' => ['en' => 'STOCK QUANTITY', 'tr' => 'STOK MİKTARI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'purchase_price', 'text' => ['en' => 'PURCHASE PRICE', 'tr' => 'ALIŞ FİYATI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'sales_price', 'text' => ['en' => 'SALES PRICE', 'tr' => 'SATIŞ FİYATI']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'new_product', 'text' => ['en' => 'NEW PRODUCT', 'tr' => 'YENİ ÜRÜN']]);
@@ -553,10 +553,11 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group' => 'sentence', 'key' => 'shipping_company', 'text' => ['en' => 'SHIPPING COMPANY','tr' => 'NAKLİYE ŞİRKETİ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'if_there_is', 'text' => ['en' => 'IF THERE IS','tr' => 'VARSA']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'customer_email', 'text' => ['en' => 'CUSTOMER E-MAIL','tr' => 'MÜŞTERİ E-POSTA']]);
-        LanguageLine::create(['group' => 'sentence', 'key' => 'sales_offer_details_by_downloading_the_summary', 'text' => ['en' => 'HELLO, YOU CAN REVIEW THE SALES OFFER DETAILS BY DOWNLOADING THE SUMMARY',' tr' => 'MERHABA, SATIŞ TEKİLFİ DETAYLARINIZ EKTEDİR, İNDİREREK İNCELEYEBİLİRSİNİZ.']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'sales_offer_details_by_downloading_the_summary', 'text' => ['en' => 'HELLO, YOU CAN REVIEW THE SALES OFFER DETAILS BY DOWNLOADING THE SUMMARY. ',' tr' => 'MERHABA, SATIŞ TEKİLFİ DETAYLARINIZ EKTEDİR, İNDİREREK İNCELEYEBİLİRSİNİZ. ']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'you_do_not_have_permission_to_visit_this_page', 'text' => ['en' => 'YOU DO NOT HAVE PERMISSION TO VISIT THIS PAGE',' tr' => 'BU SAYFAYI ZİYARET ETME İZNİNİZ YOK']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'new_transaction', 'text' => ['en' => 'NEW TRANSACTION',' tr' => 'YENİ İŞLEM']]);
         LanguageLine::create(['group' => 'sentence', 'key' => 'new_row', 'text' => ['en' => 'NEW ROW',' tr' => 'YENİ SATIR']]);
+        LanguageLine::create(['group' => 'sentence', 'key' => 'processed_invoice', 'text' => ['en' => 'PROCESSED INVOICE',' tr' => 'İŞLENMİŞ FATURA']]);
 
     }
 }

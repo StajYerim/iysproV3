@@ -101,7 +101,7 @@
                                             <tr>
                                                 <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
                                                 <th width="14%">{{trans("word.quantity")}}</th>
-                                                <th width="10%" style="text-align:right">{{trans("word.unit")}} F.</th>
+                                                <th width="10%" style="text-align:right">{{trans("sentence.unit_price")}}</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.vat")}}</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.total")}}</th>
                                             </tr>
@@ -138,8 +138,9 @@
                                                         <div class="bottom-info">{{trans("sentence.sub_total")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
-                                                        <div class="bottom-info">{{$offer->sub_total}} <i
-                                                                    class="fa fa-{{$offer->currency}}"></i></div>
+                                                        <div class="bottom-info">{{$offer->sub_total}}
+                                                            <i class="fa fa-{{$offer->currency}}"></i>
+                                                        </div>
                                                     </td>
                                                 </tr>
 
@@ -167,7 +168,7 @@
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info">{{$offer->vat_total}}
-                                                            <inclass="fa fa-{{$offer->currency}}"></i>
+                                                            <i class="fa fa-{{$offer->currency}}"></i>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -224,7 +225,8 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">{{ trans("sentence.offer_amount")}}
+                                        <div class="bottom-info">
+                                            {{ trans("sentence.offer_amount")}}
                                             <span class="pull-right" style="font-size:15px;color:#2AC!important">
                                                 {{$offer->grand_total}}
                                                 <i class="fa fa-{{$offer->currency}}"></i>
@@ -328,7 +330,9 @@
                                 <hr>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">{{trans("word.description")}}</label>
+                                        <label class="col-md-4 control-label">
+                                            {{trans("word.description")}}
+                                        </label>
                                         <div class="col-md-6 ">
                                             <div class="input-group">
                                                 <textarea v-model="form.note" rows="3" cols="25"
@@ -361,7 +365,7 @@
     @include("components.external.share",[
     $title=trans('word.offer'),
     $thread=trans('sentence.sales_offer').' : ' .$offer->company["company_name"],
-    $message="Merhaba,<br>Satış Teklifi detaylarınız ektedir indirerek inceleyebilirsiniz.<br>İyi çalışmalar.<br><br><b>".account()["name"]."</b>",
+    $message=trans('sentence.sales_offer_details_by_downloading_the_summary')." ".account()["name"]."</b>",
     $type="share.offer",
     $data = $offer])
 
