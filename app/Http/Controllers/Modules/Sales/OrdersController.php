@@ -102,9 +102,6 @@ class OrdersController extends Controller
             "grand_total" => $request->form["grand_total"]
         ]);
 
-        Bankabble::where("bankabble_id", $order->id)->where("bankabble_type", "App\Model\Sales\SalesOrders")->delete();
-
-
         Taggable::where("taggable_type","App\Model\Sales\SalesOrders")->where("taggable_id",$order->id)->delete();
 
         if ($request->form["tagsd"]) {
@@ -140,10 +137,9 @@ class OrdersController extends Controller
         }
         $order->items()->whereNotIn("id", $whereNot)->delete();
 
+        Bankabble::where("bankabble_id", $order->id)->where("bankabble_type", "App\Model\Sales\SalesOrders")->delete();
+
         $order->company->open_receipts_set($order->company->open_receipts,$order->company->open_cheques,$order);
-
-
-
 
         flash()->overlay($id == 0 ? "New Sales Order" : "Sales Order Updated", 'Success')->success();
         sleep(1);

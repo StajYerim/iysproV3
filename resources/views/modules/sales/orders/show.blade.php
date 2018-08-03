@@ -8,7 +8,11 @@
                     <span class="semi-bold">
                         {{$order->descriptions}}
                     </span>
+                    @if($order->tags->count() != 0)
+                        <span class="pull-right">@foreach($order->tags as $tag) <span  class="badge" style="background-color:{{$tag->bg_color}}">{{$tag->title}}</span>@endforeach</span>
+                    @endif
                 </h1>
+
             </div>
             <div class="col-lg-4 col-sm-4">
 

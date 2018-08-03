@@ -16,6 +16,9 @@
                         <span class="semi-bold">
                             {{$company->company_name}}
                         </span>
+                        @if($company->tags->count() != 0)
+                            <span class="pull-right">@foreach($company->tags as $tag) <span  class="badge" style="background-color:{{$tag->bg_color}}">{{$tag->title}}</span>@endforeach</span>
+                        @endif
                     </h1>
 
                 </div>

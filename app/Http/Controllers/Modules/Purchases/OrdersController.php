@@ -22,7 +22,7 @@ class OrdersController extends Controller
     public function index_list()
     {
 
-        $orders = PurchaseOrders::with("company")->select("purchase_orders.*")->where("account_id", aid());
+        $orders = PurchaseOrders::with("company","tags")->select("purchase_orders.*")->where("account_id", aid());
 
         return Datatables::of($orders)
             ->setRowAttr([
@@ -34,7 +34,11 @@ class OrdersController extends Controller
                 return $orders->date."<br>".$orders->due_date;
             })
             ->editColumn('company.company_name',function($orders){
-             return   $orders->company["company_name"]."<br>".$orders->description;
+                $tags_span = "";
+                foreach($orders->tags as $tag) {
+                    $tags_span .= "<span class='badge' style='background-color:".$tag["bg_color"]."' > ".$tag["title"]."</span >";
+                }
+             return   $orders->company["company_name"]." ".$tags_span."<br>".$orders->description;
             })
             ->editColumn("grand_total",function($orders){
                 return $orders->grand_total."<br>".get_money(money_db_format($orders->grand_total)-money_db_format($orders->remaining));
@@ -152,6 +156,8 @@ class OrdersController extends Controller
         $movement->items()->whereNotIn("id", $whereNots)->delete();
 
 
+
+        Bankabble::where("bankabble_id", $order->id)->where("bankabble_type", "App\Model\Purchases\PurchaseOrders")->delete();
 
 
         $order->company->open_receipts_payment_set($order->company->popen_receipts,$order->company->popen_cheques,$order);
