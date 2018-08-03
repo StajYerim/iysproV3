@@ -435,11 +435,13 @@
                             });
                         },
                         addData: function (chart, label, data, bgcolor) {
+                            chart.clear()
                                 chart.data.labels.push(label);
                                 chart.data.datasets.forEach((dataset) => {
                                     dataset.data.push(parseFloat(data));
                                     dataset.backgroundColor.push(bgcolor);
                                 });
+
                             chart.update();
                         }
 

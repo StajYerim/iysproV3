@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             CountyTableSeeder::class,
             UnitsTableSeeder::class,
             CurrencyTableSeeder::class,
-//            LanguagesTableSeeder::class,
+            LanguagesTableSeeder::class,
 //            CompaniesTableSeeder::class,
 //            TagsTableSeeder::class,
 //            ProductTableSeeder::class,
