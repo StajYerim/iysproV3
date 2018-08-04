@@ -107,11 +107,12 @@
                         </table>
                     </div>
                 </div>
+            </article>
 
         </div>
 
-
-
+        <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -124,12 +125,7 @@
                     <!-- widget div-->
                     <div>
 
-                        <!-- widget edit box -->
-                        <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
-                            <input type="text">
-                        </div>
-                        <!-- end widget edit box -->
+
 
                         <!-- widget content -->
                         <div class="widget-body no-padding">
@@ -231,13 +227,6 @@
                     <!-- widget div-->
                     <div>
 
-                        <!-- widget edit box -->
-                        <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
-                            <input type="text">
-                        </div>
-                        <!-- end widget edit box -->
-
                         <!-- widget content -->
                         <div class="widget-body no-padding">
 
@@ -246,11 +235,7 @@
                                     <div class="text-center">
                                         <b>TOPLAM</b>
                                     </div>
-                                    <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
 
-                                    </div>
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
@@ -336,15 +321,11 @@
                     </header>
 
                     <div>
-                        <div class="jarviswidget-editbox">
-                            <input class="form-control" type="text">
-                        </div>
 
-                        <div class="widget-body">
+                        <div class="widget-body no-padding">
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th width="1px">#</th>
                                     <th>Firma</th>
                                     <th>Tarih</th>
                                     <th>Bakiye</th>
@@ -354,7 +335,6 @@
                                 @foreach($bank_accounts as $bank_account)
 
                                     <tr>
-                                        <td>...</td>
                                         <td>{{ $bank_account->name }}</td>
                                         <td>{{ $bank_account->currency }}</td>
                                         <td>
@@ -383,15 +363,10 @@
                     </header>
 
                     <div>
-                        <div class="jarviswidget-editbox">
-                            <input class="form-control" type="text">
-                        </div>
-
-                        <div class="widget-body">
+                        <div class="widget-body no-padding">
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th width="1px">#</th>
                                     <th>Firma</th>
                                     <th>Tarih</th>
                                     <th>Bakiye</th>
@@ -401,7 +376,6 @@
                                 @foreach($sales_orders as $sales_order)
                                     @if(money_db_format($sales_order->remaining) > 0)
                                         <tr>
-                                            <td>...</td>
                                             <td>
                                                 {{ $sales_order->company->company_name }}
                                             </td>
@@ -433,15 +407,11 @@
                     </header>
 
                     <div>
-                        <div class="jarviswidget-editbox">
-                            <input class="form-control" type="text">
-                        </div>
 
-                        <div class="widget-body">
+                        <div class="widget-body no-padding">
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th width="1px">#</th>
                                     <th>Firma</th>
                                     <th>Tarih</th>
                                     <th>Bakiye</th>
@@ -451,7 +421,6 @@
                                 @foreach($purchase_orders as $purchase_order)
                                     @if(money_db_format($purchase_order->remaining) > 0)
                                         <tr>
-                                            <td>...</td>
                                             <td>
                                                 {{ $purchase_order->company->company_name }}
                                             </td>
@@ -483,15 +452,11 @@
                     </header>
 
                     <div>
-                        <div class="jarviswidget-editbox">
-                            <input class="form-control" type="text">
-                        </div>
 
-                        <div class="widget-body">
+                        <div class="widget-body no-padding">
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th width="1px">#</th>
                                     <th>Firma</th>
                                     <th>Tarih</th>
                                     <th>Bakiye</th>
@@ -502,7 +467,6 @@
                                 @foreach($bank_account_items as $bank_account_item)
                                     @if($bank_account_item->company_id != null)
                                         <tr>
-                                            <td>...</td>
                                             <td>{{ $bank_account_item->company->company_name }}</td>
                                             <td>{{ $bank_account_item->date }}</td>
                                             <td>
@@ -549,7 +513,6 @@
     <script>
 
         $(document).ready(function(){
-            pageSetUp();
             if ($('#total_collection').length) {
                 Morris.Donut({
                     element : 'total_collection',
