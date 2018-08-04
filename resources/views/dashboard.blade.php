@@ -7,8 +7,112 @@
         <div class="row">
 
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="highchart-container3"></div>
+                <div class="col-sm-12 well">
+                    <div class="col-sm-12 ">
+                        <div class="highchart-container3"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <table style="display:none" class="highchart table table-hover table-bordered" data-graph-container=".. .. .highchart-container3" data-graph-type="column">
+                            <caption>NAKİT AKIŞI</caption>
+                            <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Cash Available</th>
+                                <th data-graph-type="area">Payments</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>80000</td>
+                                <td>20000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>120000</td>
+                                <td>30000</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>180000</td>
+                                <td>40000</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>200000</td>
+                                <td>120000</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>25000</td>
+                                <td>50000</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>70000</td>
+                                <td>40000</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>90000</td>
+                                <td>45000</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>125000</td>
+                                <td>50000</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>195000</td>
+                                <td>70000</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>125000</td>
+                                <td>50000</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>22500</td>
+                                <td>5000</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>52500</td>
+                                <td>5000</td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td>92500</td>
+                                <td>50000</td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>82500</td>
+                                <td>50000</td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td>12500</td>
+                                <td>5000</td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td>42500</td>
+                                <td>5000</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                <!-- Widget ID (each widget will need unique ID)-->
+        </div>
+
+
+
+        <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
                     <header>
@@ -437,7 +541,8 @@
         </div>
 
     </section>
-
+    <script src="/js/plugin/highChartCore/highcharts-custom.min.js"></script>
+    <script src="/js/plugin/highchartTable/jquery.highchartTable.min.js"></script>
     <script src="/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
     <script src="/js/plugin/morris/raphael.min.js"></script>
     <script src="/js/plugin/morris/morris.min.js"></script>
@@ -543,6 +648,14 @@
                 });
             }
         });
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $('table.highchart').highchartTable();
+        })
+
     </script>
 
 @endsection
