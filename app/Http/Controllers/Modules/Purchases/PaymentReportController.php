@@ -21,6 +21,7 @@ class PaymentReportController extends Controller
             $remaining += money_db_format($order->remaining);
         }
 
+
         $cheques = Cheques::where("account_id", aid())->get();
         $cheques_total = 0;
         foreach ($cheques as $cheq) {
