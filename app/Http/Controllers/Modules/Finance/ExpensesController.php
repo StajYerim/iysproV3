@@ -11,6 +11,7 @@ use phpDocumentor\Reflection\DocBlock\Tag;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class ExpensesController extends Controller
 {
@@ -24,24 +25,50 @@ class ExpensesController extends Controller
     public function index_list()
     {
 
-        $expenses = Expenses::with("tags", "bank")->select(["expenses.*"])->where("account_id", aid())->get();
+        $expenses = Expenses::with("tags")->select(["expenses.*"])->where("account_id", aid())->get();
 
         return Datatables::of($expenses)
             ->editColumn("date", function ($expense) {
                 return $expense->date;
             })
+            ->setRowAttr(['onclick' => function ($expense) {
+                return 'update(' . $expense->id . ')';
+            }])
+            ->editColumn("bank_item", function ($expense) {
+                return $expense->bank_item["bank_account"]["name"];
+            })
+            ->editColumn("date", function ($expense) {
+                return $expense->date . "<br>" . $expense->payment_date;
+            })
+            ->addColumn("payment_status", function ($expense) {
+                if ($expense->payment_status) {
+                    return '<span class="label label-success">ÖDENDİ</span>';
+                } else {
+                    return '<span class="label label-danger">ÖDENMEDİ</span>';
+                }
+            })
             ->setRowClass("row-title")
+            ->rawColumns(["date", "payment_status"])
             ->make(true);
     }
 
     public function store($aid, $id, Request $request)
     {
 
+        $model = new Expenses();
+        $validator = Validator::make($request->all(), $model->rules);
+
+        if ($validator->fails()) {
+            return view("validate_error")->withErrors($validator);
+        }
+
+
         $expense = Expenses::updateOrCreate(["id" => $request->id],
             [
                 "name" => $request->name,
                 "description" => $request->description,
                 "date" => $request->date,
+                "payment_date" => $request->payment_date,
                 "amount" => $request->amount,
                 "bank_account_id" => $request->bank_account_id
             ]
@@ -58,11 +85,11 @@ class ExpensesController extends Controller
             }
         }
 
-        if ($request->amount > 0) {
+        if ($request->pay_status == 1) {
             BankItems::updateOrcreate(["id"=>$expense->bank_item["id"]],[
                 "bank_account_id" => $request->bank_account_id,
                 "type" => "expenses",
-                "date" => $request->date,
+                "date" => $request->payment_date,
                 "doc_id" => $expense->id,
                 "amount" => $request->amount,
                 "description" => "GİDER FİŞİ ÖDEMESİ",
@@ -97,5 +124,10 @@ class ExpensesController extends Controller
 
         return $data["data"];
 
+    }
+
+    function payment_delete($aid, Request $request)
+    {
+     return   $delete = BankItems::where(["doc_id" => $request->id, "type" => "expenses"])->delete();
     }
 }
