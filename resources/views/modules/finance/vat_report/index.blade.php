@@ -23,18 +23,22 @@
                             <tbody>
                             <?php
 
-                            for($i=1; $i<=12; $i++)
+                            for($i=12; $i>=1; $i--)
                             {
-                            $sales= \App\Model\Sales\SalesOrders::where("account_id",aid())->whereMonth("date",$i)->sum('vat_total');
-                            $purchase= \App\Model\Purchases\PurchaseOrders::where("account_id",aid())->whereMonth('date',$i)->sum('vat_total');
-                            $net_vat = $sales-$purchase;
+                                $sales= \App\Model\Sales\SalesOrders::where("account_id",aid())->whereMonth("date",$i)->sum('vat_total');
+                                $purchase= \App\Model\Purchases\PurchaseOrders::where("account_id",aid())->whereMonth('date',$i)->sum('vat_total');
+                                $net_vat = $sales-$purchase;
+
                             ?>
-                            <tr data-month="{{$i}}" class="month">
-                                <td>{{give_me_month_name($i)}}</td>
-                                <td>{{get_money($sales)}}</td>
-                                <td>{{get_money($purchase)}}</td>
-                                <td>{{get_money($net_vat)}}</td>
-                            </tr>
+                           @if(get_money($sales) != "0,00" || get_money($purchase) != "0,00")
+
+                               <tr data-month="{{$i}}" class="month">
+                                   <td><b>{{give_me_month_name($i)}}</b></td>
+                                   <td>{{get_money($sales)}}</td>
+                                   <td>{{get_money($purchase)}}</td>
+                                   <td>{{get_money($net_vat)}}</td>
+                               </tr>
+                            @endif
                             <?php } ?>
                             </tbody>
 
@@ -43,6 +47,7 @@
                 </div>
             </div>
         </section>
+
         <section class="col-sm-12 section_sales_expenses" id="widget-grid" style="margin-bottom: 50px; display: none;">
             <div class="jarviswidget">
                 <header style="padding-left:10px;">
@@ -143,9 +148,12 @@
                                     '<td>'+response.sales[index].date+'</td>' +
                                     '<td>'+response.sales[index].vat_total+'</td>' +
 
-                                    '</tr>';
+                                    '</tr> ';
                             });
                         }
+
+
+
 
                         if(response.purchase.length == 0)
                         {

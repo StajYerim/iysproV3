@@ -12,8 +12,9 @@ class VatReportController extends Controller
 {
     public function index()
     {
-//        $a=SalesOrders::where('created_at', '>=', Carbon::now()->subMonth())->orderByDesc('created_at')->get();
-//        dd($a);
+//        $date=SalesOrders::orderByDesc('date')->where("account_id",aid())->where("date",">", Carbon::now()->subMonths(12))->sum('vat_total');
+//        dd($date);
+//        $sales= \App\Model\Sales\SalesOrders::where("account_id",aid())->whereMonth("date",$i)->sum('vat_total');
         return view("modules.finance.vat_report.index");
     }
 
