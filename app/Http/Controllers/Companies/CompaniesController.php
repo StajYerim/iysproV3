@@ -9,7 +9,6 @@ use App\ProductImage;
 use App\TagData;
 use App\Taggable;
 use App\Tags;
-
 use App\User;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;

@@ -31,7 +31,7 @@ Route::group(['prefix'=>'{company_id}/finance','middleware'=>'not.admin'],functi
     Route::get("expenses/index/list","Modules\Finance\ExpensesController@index_list")->name("finance.expenses.index_list");
     Route::post("expenses/{id}/store","Modules\Finance\ExpensesController@store")->name("finance.expenses.store");
     Route::get("expenses/info","Modules\Finance\ExpensesController@row_info")->name("finance.expenses.info");
-
+    Route::post("expenses/payment/delete","Modules\Finance\ExpensesController@payment_delete")->name("finance.expenses.payment.delete");
 
     //Cheques
     Route::get("cheques","Modules\Finance\ChequesController@index")->name("finance.cheques.index");
