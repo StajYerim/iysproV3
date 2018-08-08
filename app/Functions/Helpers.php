@@ -17,6 +17,25 @@ function sortFunction( $a, $b ) {
     return   strtotime($a->datem)-strtotime($b->datem);
 }
 
+
+function give_me_month_name($month)
+{
+    $month_name='';
+    $month_name .= ($month == 1) ? 'OCAK' : '';
+    $month_name .= ($month == 2) ? 'ŞUBAT' : '';
+    $month_name .= ($month == 3) ? 'MART' : '';
+    $month_name .= ($month == 4) ? 'NİSAN' : '';
+    $month_name .= ($month == 5) ? 'MAYIS' : '';
+    $month_name .= ($month == 6) ? 'HAZİRAN' : '';
+    $month_name .= ($month == 7) ? 'TEMMUZ' : '';
+    $month_name .= ($month == 8) ? 'AĞUSTOS' : '';
+    $month_name .= ($month == 9) ? 'EYLÜL' : '';
+    $month_name .= ($month == 10) ? 'EKİM' : '';
+    $month_name .= ($month == 11) ? 'KASIM' : '';
+    $month_name .= ($month == 12) ? 'ARALIK' : '';
+    return $month_name;
+}
+
 function create_a_random_date()
 {
     $day = rand(1,28);

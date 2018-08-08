@@ -39,4 +39,8 @@ Route::group(['prefix'=>'{company_id}/finance','middleware'=>'not.admin'],functi
     Route::get("cheques/{id}/show","Modules\Finance\ChequesController@show")->name("finance.cheques.show");
     Route::delete("cheques/{id}/destroy","Modules\Finance\ChequesController@destroy")->name("finance.cheques.destroy");
 
+    //Vat Reports
+    Route::get("vat-report","Modules\Finance\VatReportController@index")->name("finance.vat_report.index");
+    Route::post("vat-report","Modules\Finance\VatReportController@month")->name("finance.vat_report.month");
+
 });
