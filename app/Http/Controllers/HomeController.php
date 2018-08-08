@@ -8,7 +8,9 @@ use App\Model\Finance\BankItems;
 use App\Model\Purchases\PurchaseOrders;
 use App\Model\Sales\SalesOrders;
 use Carbon\Carbon;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\User;
@@ -136,8 +138,70 @@ class HomeController extends Controller
         $purchase_export_collect["cheques"] = $purchase_cheques;
 
 
+        //Cash - Flow
+
+        $tillDate = Carbon::now()->subWeek(1);
+        $carbon = Carbon::now();
+
+        $cash_bank = BankAccounts::where("account_id")->get();
+        $bank_total = 0;
+        foreach($cash_bank as $cash){
+            $bank_total += money_db_format($cash->remaining);
+        }
+
+
+
+        $cash_flow = array();
+     for($i=-1;$i<16;$i++) {
+        $weekOfYear = Carbon::now()->addWeek($i)->weekOfYear;
+
+        //PURCHASE ORDERS
+          $porderes = PurchaseOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i-1)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
+         $porderes_total = 0;
+
+         foreach($porderes as $pordered){
+             $porderes_total += $pordered->safe_remaining;
+         }
+
+         $cheques = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i-1)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
+         $cheques_total = 0;
+         foreach ($cheques as $cheq) {
+             if ($cheq->cheques_status == 0) {
+                 if($cheq->show_button == "verilen0")
+                     $cheques_total += money_db_format($cheq->amount);
+             }
+         }
+
+
+         //SALES ORDERS
+          $orderes = SalesOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i-1)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
+          $orderes_total = 0;
+
+          foreach($orderes as $ordered){
+              $orderes_total += $ordered->safe_remaining;
+          }
+
+          //COLLECT CHEQ
+         $cheques_collect = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i-1)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
+         $cheques_total_collect = 0;
+         foreach ($cheques_collect as $cheq) {
+             if ($cheq->collect_statu == 0) {
+                 $cheq->collect_statu;
+                 $cheques_total += money_db_format($cheq->amount);
+             }
+         }
+
+
+
+         $between =  Carbon::now()->addWeek($i-1)->format("d.m.Y")."<br>".Carbon::now()->addWeek($i)->format("d.m.Y");
+
+         array_push($cash_flow,array("porder_total"=>$porderes_total,"week_id"=>$weekOfYear,"order_total"=>$orderes_total,"between"=>$between,"cheq_total"=>$cheques_total_collect,"cheq_payment"=>$cheques_total,"bank_total"=>$bank_total));
+
+     }
+
+
         return view('dashboard',
-            compact('bank_accounts',
+            compact('bank_accounts',"cash_flow",
                 'sales_orders',
                 'purchase_orders',
                 'bank_account_items',
@@ -154,7 +218,9 @@ class HomeController extends Controller
                 "purchase_expiry_total_collect",
                 "overdue_payment",
                 "unplanning_collect",
-                "unplanning_remaining"
+                "unplanning_remaining",
+                "last_week",
+                "carbon"
             )
         );
     }
