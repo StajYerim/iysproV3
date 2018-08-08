@@ -44,7 +44,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapSettingsRoutes(); // Settings Routers
         $this->mapCompaniesRoutes(); // Company Routers
         $this->mapFinanceRoutes(); // Finance Routers
-        $this->mapPurchasesRoutes(); // Purchases    Routers
+        $this->mapPurchasesRoutes(); // Purchases  Routers
+        $this->mapProductionRoutes(); // Production Routers
 
         //
     }
@@ -118,6 +119,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/purchases.php'));
+    }
+
+    protected function mapProductionRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/production.php'));
     }
 
     /**

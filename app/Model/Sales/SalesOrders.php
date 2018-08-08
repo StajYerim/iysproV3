@@ -18,7 +18,7 @@ class SalesOrders extends Model
 
     protected $dates = ["date", "due_date"];
 
-    protected $appends = ["grand_totals","collect_label"];
+    protected $appends = ["grand_totals","collect_label","remaining"];
 
 
     public function save(array $options = array())
@@ -139,6 +139,14 @@ class SalesOrders extends Model
         $cheq = $this->cheques->sum("pivot.amount");
         $total = $pay+$cheq;
         return get_money((money_db_format($this->grand_total) - $total));
+    }
+
+    public function getSafeRemainingAttribute()
+    {
+        $pay = $this->payments->sum("pivot.amount");
+        $cheq = $this->cheques->sum("pivot.amount");
+        $total = $pay+$cheq;
+        return money_db_format($this->grand_total) - $total;
     }
 
     public function getStatusAttribute()

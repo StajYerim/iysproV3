@@ -67,8 +67,11 @@ Route::middleware('admin')->group(function() {
 // If user is authenticated and he is not admin
 Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
 
-
+    //Dashboard
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    Route::get("/dashboard/cash-flow");
+
+    //Company Profile
     Route::get('/company-profile', 'AccountsController@profile')->name('company.profile');
 
     Route::post("user/{id}/permission/update","AccountUsersController@permission_update")->name("settings.users.permission.update");

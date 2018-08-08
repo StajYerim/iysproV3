@@ -3,7 +3,6 @@
 @section('content')
     <!-- MAIN CONTENT -->
     <div id="content">
-
         <section id="sales_report" v-cloak>
             <div class="row">
                 <article class="col-sm-12">
@@ -78,7 +77,6 @@
                     </div>
                 </article>
             </div>
-
             <div class="row">
             <article class="col-sm-12">
             <div class="jarviswidget well" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">

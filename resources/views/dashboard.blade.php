@@ -17,92 +17,20 @@
                             <caption>NAKİT AKIŞI</caption>
                             <thead>
                             <tr>
-                                <th>Month</th>
-                                <th>Cash Available</th>
-                                <th data-graph-type="area">Payments</th>
+                                <th>HAFTA</th>
+                                <th>TAHSİLATLAR</th>
+                                <th data-graph-type="area">ÖDEMELER</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($cash_flow as $cash)
                             <tr>
-                                <td>1</td>
-                                <td>80000</td>
-                                <td>20000</td>
+                                <td>{!!$cash["week_id"] !!}</td>
+                                <td>{{$cash["order_total"]+$cash["cheq_total"]+$cash["bank_total"]}}</td>
+                                <td>{{$cash["porder_total"]+$cash["cheq_payment"]}}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>120000</td>
-                                <td>30000</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>180000</td>
-                                <td>40000</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>200000</td>
-                                <td>120000</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>25000</td>
-                                <td>50000</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>70000</td>
-                                <td>40000</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>90000</td>
-                                <td>45000</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>125000</td>
-                                <td>50000</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>195000</td>
-                                <td>70000</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>125000</td>
-                                <td>50000</td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>22500</td>
-                                <td>5000</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>52500</td>
-                                <td>5000</td>
-                            </tr>
-                            <tr>
-                                <td>13</td>
-                                <td>92500</td>
-                                <td>50000</td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td>82500</td>
-                                <td>50000</td>
-                            </tr>
-                            <tr>
-                                <td>15</td>
-                                <td>12500</td>
-                                <td>5000</td>
-                            </tr>
-                            <tr>
-                                <td>16</td>
-                                <td>42500</td>
-                                <td>5000</td>
-                            </tr>
+                            @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -124,9 +52,6 @@
 
                     <!-- widget div-->
                     <div>
-
-
-
                         <!-- widget content -->
                         <div class="widget-body no-padding">
 
