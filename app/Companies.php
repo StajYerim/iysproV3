@@ -29,6 +29,12 @@ class Companies extends Model
         'email' => 'max:50',
 
     ];
+
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->where("account_id", '=', aid());
+    }
+
     public function scopeList($query, $type, $aid)
     {
         if ($type == 'customer') {

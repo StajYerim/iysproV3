@@ -20,6 +20,10 @@ class SalesOrders extends Model
 
     protected $appends = ["grand_totals","collect_label","remaining"];
 
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->where("account_id", '=', aid());
+    }
 
     public function save(array $options = array())
     {

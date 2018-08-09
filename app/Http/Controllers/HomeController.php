@@ -140,7 +140,7 @@ class HomeController extends Controller
 
         //Cash - Flow
 
-        $tillDate = Carbon::now()->subWeek(1);
+
         $carbon = Carbon::now();
 
         $cash_bank = BankAccounts::where("account_id")->get();
