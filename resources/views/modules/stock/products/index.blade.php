@@ -63,6 +63,7 @@
 
 
     </section>
+
     @push('scripts')
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="/js/plugin/datatables/jquery.dataTables.min.js"></script>
