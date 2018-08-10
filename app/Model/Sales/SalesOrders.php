@@ -51,6 +51,18 @@ class SalesOrders extends Model
         return $dt->format("d.m.Y");
     }
 
+    public function setTerminDateAttribute($value)
+    {
+        $this->attributes['termin_date'] = date_convert($value);
+    }
+
+    public function getTerminDateAttribute()
+    {
+
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["termin_date"]);
+        return $dt->format("d.m.Y");
+    }
+
     public function getDatemAttribute()
     {
         return $this->attributes["date"];
