@@ -38,4 +38,8 @@ Route::group(['prefix'=>'{company_id}/stocks','middleware'=>'not.admin'],functio
 
     //Parasut Sync
     Route::get("/product/{id}/sync","Stock\StockController@sync_with_parasut")->name("stock.product.sync");
+
+    //Report of stock in product
+    Route::get("/stock-in-report","Stock\StockInProductReportController@index")->name("stock.stock_in_report.index");
+    Route::get("/report","Stock\StockInProductReportController@index_list")->name("stock.report.index_list");
 });
