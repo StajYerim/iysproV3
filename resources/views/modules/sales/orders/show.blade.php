@@ -42,6 +42,10 @@
                                    SEVKİYAT BİLGİSİ GÖNDER</a>
                             </li>
                             <li>
+                                <a tabindex="-1" v-if="!planning" @click="orderPlanningSend" href="#"><i class="fa fa-industry"  aria-hidden="true"></i>
+                                    ÜRETİME GÖNDER</a>
+                            </li>
+                            <li>
                                 <a onclick="$(this).orderReturn()" data-id="0" id="orderReturn" href="#"><i
                                             class="fa fa-reply " aria-hidden="true"></i>
                                     {{trans("sentence.convert_to_order")}}</a>
@@ -126,7 +130,7 @@
                                             <tr>
                                                 <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
                                                 <th width="14%">{{trans("word.quantity")}}</th>
-                                                <th width="10%" style="text-align:right">{{trans("word.unit")}} F.</th>
+                                                <th width="10%" style="text-align:right">{{trans("word.unity")}} F.</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.vat")}}</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.total")}}</th>
                                             </tr>
@@ -1004,6 +1008,7 @@
                 VueName = new Vue({
                     el: "#show",
                     data: {
+                        planning:0,
                         remaining:"{{$order->remaining}}",
                         company_balance:"{{$order->company->balance}}",
                         collect_items:[
@@ -1081,6 +1086,22 @@
                         }
                     },
                     methods: {
+                        orderPlanningSend:function(){
+                            swal({
+                                title: "Üretim Onayı",
+                                text: "Bu sipariş üretim planlanmasına dahil edilecektir.",
+                                icon: "warning",
+                                buttons:["VAZGEÇ","ONAYLA"],
+                                dangerMode: true,
+                            })
+                                .then((willCheck) => {
+                                    if (willCheck) {
+                                        swal("Sipariş başarıyla üretim planlanama bölümüne gönderildi.", {
+                                            icon: "success",
+                                        });
+                                    }
+                                });
+                        },
                         transferAdd: function () {
                             $("#transferButton").button("loading");
                             $form = this.trans.form;

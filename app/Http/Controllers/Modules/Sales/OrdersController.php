@@ -95,6 +95,7 @@ class OrdersController extends Controller
             "company_id" => $request->form["company_id"]["id"],
             "date" => $request->form["date"],
             "due_date" => $request->form["due_date"],
+            "termin_date" => $request->form["termin_date"],
             "currency" => $request->form["currency"],
             "currency_value" => $request->form["currency_value"],
             "sub_total" => $request->form["sub_total"],

@@ -27,6 +27,7 @@ class CreateSalesOrdersTable extends Migration
             $table->integer('discount_type')->nullable();
             $table->datetime('date');
             $table->datetime('due_date')->nullable();
+            $table->datetime('termin_date')->nullable();
             $table->foreign("account_id")->on("app_accounts")->references("id")->onDelete("cascade");
             $table->foreign("company_id")->on("company_list")->references("id")->onDelete("cascade");
             $table->timestamps();

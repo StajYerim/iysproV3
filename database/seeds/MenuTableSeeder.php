@@ -368,6 +368,36 @@ class MenuTableSeeder extends Seeder
                 'route' => 'admin.locale.index',
                 'is_route' => 1
             ],
+            [
+                'id'=>36,
+                'parent_id' => null,
+                'group'=>'production',
+                'order' => 6,
+                'permission' => 2,
+                'icon' => 'industry',
+                'route' => '',
+                'is_route' => 0
+            ],
+            [
+                'id'=>37,
+                'parent_id' => 36,
+                'group'=>'production',
+                'order' => 1,
+                'permission' => 2,
+                'icon' => '',
+                'route' => 'production.orders.index',
+                'is_route' => 1
+            ],
+            [
+                'id'=>38,
+                'parent_id' => 36,
+                'group'=>'production',
+                'order' => 2,
+                'permission' => 2,
+                'icon' => '',
+                'route' => 'production.calendar.index',
+                'is_route' => 1
+            ],
 
 
         ]);
