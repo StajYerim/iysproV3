@@ -40,93 +40,76 @@
     <section id="widget-grid" class="">
         <div class="row">
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-                    <div>
-                        <div class="widget-body no-padding">
+                <div class="jarviswidget" id="wid-id-0">
 
+                    <header>
+                        <div style="padding-left: 12px;">
+                            <b>STOKTAKİ ÜRÜNLER LİSTESİ</b>
+                        </div>
+                    </header>
+
+                    <div>
+
+                        <div class="widget-body no-padding">
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
-                                <tr>
-                                    <th width="1px">#</th>
-                                    <th>
-                                        {{trans("word.code")}}
-                                    </th>
-                                    <th>
-                                        {{trans("word.name")}}
-                                    </th>
-                                    <TH>
-                                        {{trans('sentence.stock_quantity')}}
-                                    </TH>
-                                    <th>
-                                        {{trans('sentence.purchase_price')}}
-                                    </th>
-                                    <th>
-                                        {{trans('sentence.sales_price')}}
-                                    </th>
-                                </tr>
+                                    <tr>
+                                        <th>ÜRÜN KODU</th>
+                                        <th>ÜRÜN ADI</th>
+                                        <th>STOK MİKTARI</th>
+                                        <th>ALIŞ FİYATI</th>
+                                        <th>SATIŞ FİYATI</th>
+                                        <th>STOK MALİYETİ</th>
+                                        <th>SATIŞ DEĞERİ</th>
+                                        <th>SATIŞ KARI</th>
+                                    </tr>
                                 </thead>
+                                <tbody>
+                                @foreach($products as $product)
+                                    @if($product->stock_count != 0)
+                                        <tr>
+                                            <td>{{ $product->code }}</td>
+                                            <td>
+                                                <b>{{ $product->named->name }}</b>
+                                                <span class='badge' style='background-color:{{ $product->category->color }}'>{{ $product->category->name }}</span>
+                                                <span class="badge bg-color-green">{{ $product->type_name }}</span>
+                                            </td>
+                                            <td><b>{{ $product->stock_count }} / {{ $product->unit->short_name }}</b></td>
+                                            <td><b>{{ $product->buying_price }} <i class="fa fa-{{ $product->purchase_currency->code }}"></i></b> </td>
+                                            <td>
+                                                <b>{{ $product->list_price }} <i class="fa fa-{{ $product->sales_currency->code }}"></i></b>
+                                            </td>
+                                            <td>
+                                                <b>
+                                                    {{ get_money(money_db_format(get_money($product->stock_count)) * money_db_format($product->buying_price)) }} <i class="fa fa-{{ $product->purchase_currency->code }}"></i>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <b>
+                                                    {{ get_money(money_db_format(get_money($product->stock_count)) * money_db_format($product->list_price))  }} <i class="fa fa-{{ $product->sales_currency->code }}"></i>
+                                                </b>
+                                            </td>
+                                            <td>
+                                              <b>
+                                                  {{
+                                            get_money(($product->stock_count * money_db_format($product->list_price))-($product->stock_count * money_db_format($product->buying_price)))
+                                                  }} <i class="fa fa-try"></i>
+                                              </b>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                                </tbody>
 
                             </table>
-
                         </div>
 
                     </div>
-
                 </div>
-
             </article>
         </div>
 
 
     </section>
-    @push('scripts')
-        <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="/js/plugin/datatables/jquery.dataTables.min.js"></script>
-        <script src="/js/plugin/datatables/dataTables.colVis.min.js"></script>
-        <script src="/js/plugin/datatables/dataTables.tableTools.min.js"></script>
-        <script src="/js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-        <script src="/js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script type="text/javascript">
-            tables = $('#table').DataTable({
-                "sDom": "t" +
-                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                "oLanguage": {
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-                },
-                "autoWidth": true,
-                stateSave: true,
-                responsive: true,
-                stateDuration: 45,
-                processing: true,
-                serverSide: true,
-                ajax: '{!! route('stock.report.index_list',aid()) !!}',
-                columns: [
-                    {
-                        data: 'id',
-                        render: function ($name) {
-                            return '<i class="fa fa-cube fa-2x"></i>';
-                        },
-                    }, {
-                        data: "code",
-                    }, {
-                        data: "named.name",
-                        name: "named.name"
 
-                    }, {
-                        data: "inventory_tracking",
-                        name:"inventory_tracking"
-                    },
-                   {
-                       data: "buying_price"
-                   },
-                   {
-                       data: "list_price"
-                   }
-                ]
-            });
-
-            table_search(tables)
-
-        </script>
-    @endpush
 @endsection

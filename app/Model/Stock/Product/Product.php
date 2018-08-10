@@ -2,7 +2,7 @@
 
 namespace App\Model\Stock\Product;
 
-
+use App\Currency;
 use App\Model\Purchases\PurchaseOrderItems;
 use App\Model\Sales\SalesOrders;
 use App\Model\Sales\SalesOrderItems;
@@ -167,6 +167,16 @@ class Product extends Model
     public function movements()
     {
         return $this->hasMany(StockItems::class, "product_id", "id");
+    }
+
+    public function purchase_currency()
+    {
+        return $this->hasOne(Currency::class,'id','buying_currency');
+    }
+
+    public function sales_currency()
+    {
+        return $this->hasOne(Currency::class,'id','currency');
     }
 
 }
