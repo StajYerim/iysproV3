@@ -68,10 +68,14 @@
                                 @foreach($products as $product)
                                     @if($product->stock_count != 0)
                                         <tr>
-                                            <td>{{ $product->code }}</td>
+                                            <td >{{ $product->code }}</td>
                                             <td>
-                                                <b>{{ $product->named->name }}</b>
+                                                <a href="{{ route('stock.product.show',[aid(),$product->id]) }}">
+                                                    <b>{{ $product->named->name }}</b>
+                                                </a>
+                                                @if($product->category != [])
                                                 <span class='badge' style='background-color:{{ $product->category->color }}'>{{ $product->category->name }}</span>
+                                                @endif
                                                 <span class="badge bg-color-green">{{ $product->type_name }}</span>
                                             </td>
                                             <td><b>{{ $product->stock_count }} / {{ $product->unit->short_name }}</b></td>
