@@ -27,9 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         $bank_accounts = BankAccounts::where("account_id", aid())->select("name", "currency")->paginate(6);
-        $sales_orders = SalesOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->addDays(7))->paginate(10);
-        $purchase_orders = PurchaseOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->addDays(7))->paginate(10);
-        $bank_account_items = BankItems::has("bank_account")->orderBy("date", "desc")->paginate(10);
+        $sales_orders = SalesOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->addDays(7))->paginate(6);
+        $purchase_orders = PurchaseOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->addDays(7))->paginate(6);
+        $bank_account_items = BankItems::has("bank_account")->orderBy("date", "desc")->whereRaw('company_id != null')->paginate(6);
 
         //Toplam Tahsilatlar
         $orders = SalesOrders::where("account_id", aid())->get();
