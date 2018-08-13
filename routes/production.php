@@ -10,6 +10,11 @@ Route::group(['prefix'=>'{company_id}/production','middleware'=>['not.admin','pe
 
     //Orders
     Route::get("/orders","OrdersController@index")->name("production.orders.index");
+
+    /*Calendar*/
     Route::get("/calendar","CalendarController@index")->name("production.calendar.index");
+    Route::post("/calendar/production-detail","CalendarController@detail")->name("production.calendar.detail");
+    Route::post("/calendar/production-list","CalendarController@list")->name("production.calendar.list");
+    Route::post("/calendar/production-save","CalendarController@save")->name("production.calendar.save");
 
 });

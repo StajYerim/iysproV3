@@ -224,6 +224,8 @@ function datePicker() {
                     }else if(data == "invoice.due_date"){
 
                         VueName.invoice.due_date = date;
+                    }else if(data =="production.start_date"){
+                        VueName.production.start_date = date;
                     }
 
 console.log(data);
