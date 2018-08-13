@@ -7,7 +7,7 @@
             <!-- new widget -->
             <div class="jarviswidget jarviswidget-color-blueDark">
                 <header>
-                    <h2> BEKLEYEN SİPARİŞLER </h2>
+                    <h2> BEKLEYEN SİPARİŞLER <span class="badge bg-color-red"></span></h2>
                 </header>
 
                 <!-- widget div-->
@@ -18,7 +18,7 @@
 
                         <div v-for="item in production_list" v-if="item.status == 0">
                             <a href="#!" @click="detail(item.id)">
-                                (@{{item.order.id}}) @{{item.order.description}}
+                               @{{item.order.company.company_name}}
                             </a>
                             <br>
                         </div>
@@ -34,20 +34,28 @@
             <!-- new widget -->
             <div class="jarviswidget jarviswidget-color-blueDark">
                 <header>
-                    <h2> TAMAMLANANLAR </h2>
+                    <h2> TAMAMLANAN SİPARİŞLER </h2>
                 </header>
 
                 <!-- widget div-->
                 <div>
 
-                    <div class="widget-body">
+                    <div class="widget-body" style="min-height: 0px;">
                         <!-- content goes here -->
 
                         <div v-for="item in production_list" v-if="item.status == 2">
                             <a href="#!" @click="detail(item.id)">
-                                (@{{item.order.id}}) @{{item.order.description}}
+                                (@{{item.order.id}}) @{{item.order.company.company_name}}
                             </a>
                             <br>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="{{route("production.orders.index",aid())}}" class="btn btn-xs btn-default"> TÜM SİPARİŞLER</a>
+                                </div>
+                            </div>
                         </div>
                         <!-- end content -->
                     </div>
@@ -103,8 +111,7 @@
 
                 -->
                 <header>
-                    <span class="widget-icon"> <i class="fa fa-calendar"></i> </span>
-                    <h2> My Events </h2>
+                    <h2> ÜRETİM TAKVİMİ </h2>
                     <div class="widget-toolbar">
                         <!-- add: non-hidden - to disable auto hide -->
                         <div class="btn-group">
@@ -113,7 +120,7 @@
                             </button>
                             <ul class="dropdown-menu js-status-update pull-right">
                                 <li>
-                                    <a href="javascript:void(0);" id="mt">Month</a>
+                                    <a href="javascript:void(0);" id="mt">AYLIK</a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0);" id="ag">Agenda</a>
@@ -163,19 +170,65 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             ×
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">SİPARİŞ DETAYI</h4>
+                        <h4 class="modal-title" id="myModalLabel">SİPARİŞ DETAYI (#@{{ production.order.id }})</h4>
                     </div>
                     <div class="modal-body modal-body-content">
+                        <b>MÜŞTERİ :</b>@{{ production.order.company.company_name }} <br>
                         <b>SİPARİŞ AÇIKLAMASI :</b>@{{ production.order.description }} <br>
                         <b>TARİH :</b>@{{ production.order.date }}<br>
                         <b>TERMİN TARİHİ :</b>@{{ production.order.termin_date }}<br>
-                        <b>ÜRÜNLER</b><br>
-                        <div v-for="item in production.order.items">
-                            @{{ item.product.named.name }}
-                            <br>
-                        </div>
+                   <br>
+                        <table class="table table-hover table-condensed table-no-padding">
+
+                            <tbody>
+                            <tr>
+                                <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
+                                <th width="14%">{{trans("word.quantity")}}</th>
+                            </tr>
+
+                            </tbody>
+                            <tbody>
+
+                            <tr v-for="item in production.order.items" >
+                                <td>
+                                    @{{ item.product.named.name }}
+                                </td>
+
+                                <td>@{{ item.quantity }} @{{ item.unit.name }}</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
                         <hr>
                         <div class="form-group">
+
+                                {{--<fieldset>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label>RENK SEÇİMİ</label>--}}
+                                        {{--<div class="btn-group btn-group-justified btn-select-tick" data-toggle="buttons">--}}
+                                            {{--<label class="btn bg-color-darken active">--}}
+                                                {{--<input type="radio" name="priority" v-model="production.priority"  id="option1" value="bg-color-darken txt-color-white" checked>--}}
+                                                {{--<i class="fa fa-check txt-color-white"></i> </label>--}}
+                                            {{--<label class="btn bg-color-blue">--}}
+                                                {{--<input type="radio" name="priority" v-model="production.priority"  id="option2" value="bg-color-blue txt-color-white">--}}
+                                                {{--<i class="fa fa-check txt-color-white"></i> </label>--}}
+                                            {{--<label class="btn bg-color-orange">--}}
+                                                {{--<input type="radio" name="priority" v-model="production.priority" id="option3" value="bg-color-orange txt-color-white">--}}
+                                                {{--<i class="fa fa-check txt-color-white"></i> </label>--}}
+                                            {{--<label class="btn bg-color-greenLight">--}}
+                                                {{--<input type="radio" name="priority" v-model="production.priority"  id="option4" value="bg-color-greenLight txt-color-white">--}}
+                                                {{--<i class="fa fa-check txt-color-white"></i> </label>--}}
+                                            {{--<label class="btn bg-color-blueLight">--}}
+                                                {{--<input type="radio" name="priority" v-model="production.priority"  id="option5" value="bg-color-blueLight txt-color-white">--}}
+                                                {{--<i class="fa fa-check txt-color-white"></i> </label>--}}
+                                            {{--<label class="btn bg-color-red">--}}
+                                                {{--<input type="radio" name="priority" v-model="production.priority"  id="option6" value="bg-color-red txt-color-white">--}}
+                                                {{--<i class="fa fa-check txt-color-white"></i> </label>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+
+                                {{--</fieldset>--}}
+
                             <div class="row">
                                 <div class="col-sm-12 col-md-4 has-feedback">
                                     <label class="control-label">DURUM</label>
@@ -226,22 +279,28 @@
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function() {
+        window.addEventListener("load", function(event) {
             VueName = new Vue({
                 el: "#production",
                 data: {
                     production: {
-                        order: {}
+                        order: {
+                            company:{}
+                        }
                     },
-                    production_list: []
+                    production_list: [],
+                    calendar_list:[]
                 },
                 methods: {
                     productionUpdate() {
                         axios.post("{{route("production.calendar.list",aid())}}").then(res => {
                             VueName.production_list = res.data;
-                        })
+                        });
+
+
                     },
                     productionSave() {
+                        fullLoading();
                         axios.post("{{route("production.calendar.save",aid())}}", {
                             production_id: this.production.id,
                             start_date: this.production.start_date,
@@ -249,8 +308,10 @@
                             day: this.production.day
                         }).then(res => {
                             if (res.data == "ok") {
-                                VueName.productionUpdate();
                                 $("#production_detail").modal("hide");
+                                $("#calendar").fullCalendar("refetchEvents");
+                                VueName.productionUpdate();
+                                fullLoadingClose();
                                 notification("Başarılı", "İşlem başarıyla kaydedildi.", "success");
 
                             }
@@ -281,68 +342,23 @@
                         center: 'month,agendaWeek,agendaDay',
                         right: 'prev,today,next'
                     };
-
-                    var initDrag = function (e) {
-                        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-                        // it doesn't need to have a start or end
-
-                        var eventObject = {
-                            title: $.trim(e.children().text()), // use the element's text as the event title
-                            description: $.trim(e.children('span').attr('data-description')),
-                            icon: $.trim(e.children('span').attr('data-icon')),
-                            className: $.trim(e.children('span').attr('class')) // use the element's children as the event class
-                        };
-                        // store the Event Object in the DOM element so we can get to it later
-                        e.data('eventObject', eventObject);
-
-                        // make the event draggable using jQuery UI
-                        e.draggable({
-                            zIndex: 999,
-                            revert: false, // will cause the event to go back to its
-                            revertDuration: 0 //  original position after the drag
-                        });
-                    };
-
-                    var addEvent = function (title, priority, description, icon) {
-                        title = title.length === 0 ? "Untitled Event" : title;
-                        description = description.length === 0 ? "No Description" : description;
-                        icon = icon.length === 0 ? " " : icon;
-                        priority = priority.length === 0 ? "label label-default" : priority;
-
-                        var html = $('<li><span class="' + priority + '" data-description="' + description + '" data-icon="' +
-                            icon + '">' + title + '</span></li>').prependTo('ul#external-events').hide().fadeIn();
-
-                        $("#event-container").effect("highlight", 800);
-
-                        initDrag(html);
-                    };
-
-                    /* initialize the external events
-                     -----------------------------------------------------------------*/
-
-                    $('#external-events > li').each(function () {
-                        initDrag($(this));
-                    });
-
-                    $('#add-event').click(function () {
-                        var title = $('#title').val(),
-                            priority = $('input:radio[name=priority]:checked').val(),
-                            description = $('#description').val(),
-                            icon = $('input:radio[name=iconselect]:checked').val();
-
-                        addEvent(title, priority, description, icon);
-                    });
-
                     /* initialize the calendar
                      -----------------------------------------------------------------*/
-
                     $('#calendar').fullCalendar({
+                        eventClick: function(calEvent, jsEvent, view) {
+                            VueName.detail(calEvent.id);
+                            // alert('Event: ' + calEvent.id);
+                            // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                            // alert('View: ' + view.name);
 
+                            // change the border color just for fun
+                            // $(this).css('border-color', 'red');
+
+                        },
                         displayEventTime :false,
                         header: hdr,
                         editable: false,
                         droppable: false, // this allows things to be dropped onto the calendar !!!
-
                         drop: function (date, allDay) { // this function is called when something is dropped
 
                             // retrieve the dropped element's stored Event Object
@@ -382,18 +398,26 @@
                         },
 
 
-                        events: [
-                                @foreach($productions_process as $product)
-                            {
-                                title: '{{$product->order["description"]}}',
-                                start: new Date(y, m, 1),
-                                end: new Date(y, m, d - 2),
-                                className: ["event", "bg-color-redLight"],
-                                icon: 'fa-industry'
-                            },
+                        events: function(start, end, timezone, callback) {
+                            // axios.post("").then(res => {
+                            //     VueName.calendar_list = res.data;
+                            // })
+                            $.ajax({
+                                method:"POST",
+                                url: '{{route("production.calendar.calendar_list",aid())}}',
 
-                    @endforeach()
-                    ],
+                                data: {
+                                    // our hypothetical feed requires UNIX timestamps
+                                    // start: start.unix(),
+                                    // end: end.unix()
+                                },
+                                success: function(doc) {
+                                    var events = doc;
+
+                                    callback(events);
+                                }
+                            });
+                        },
 
                     eventRender: function (event, element, icon) {
                         if (!event.description == "") {
@@ -448,5 +472,9 @@
         })
 
     </script>
-
+    <style>
+        .fc-event{
+            cursor: pointer;
+        }
+    </style>
 @endsection

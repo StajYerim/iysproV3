@@ -295,6 +295,7 @@
                                         DURUM : {{$order->order_planning == true ? $order->order_planning->status_text:"BEKLEMEDE"}}
                                     </div>
                                 </div>
+                                <hr>
                                 @if($order->invoice)
 
                                     <div class="row">
@@ -318,11 +319,13 @@
                                 @endif
 
                                 @if($order->offer)
-                                    <div class="col-sm-12">
-                                        {{trans("word.offer")}}
-                                        <br>
-                                        <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? "SATIŞ TEKLİFİ":$order->offer["description"]}}
-                                            (#{{$order->offer["id"]}})</a><br>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {{trans("word.offer")}}
+                                            <br>
+                                            <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? "SATIŞ TEKLİFİ":$order->offer["description"]}}
+                                                (#{{$order->offer["id"]}})</a><br>
+                                        </div>
                                     </div>
                                     <hr>
                                 @endif
