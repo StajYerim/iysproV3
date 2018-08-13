@@ -287,10 +287,14 @@
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
 
-
                                 </div>
                               <hr>
-
+                                <div class="row" v-if="planning">
+                                    <div class="col-sm-12">
+                                        <strong>SİPARİŞ ÜRETİME GÖNDERİLDİ</strong><br>
+                                        DURUM : {{$order->order_planning == true ? $order->order_planning->status_text:"BEKLEMEDE"}}
+                                    </div>
+                                </div>
                                 @if($order->invoice)
 
                                     <div class="row">
@@ -890,7 +894,6 @@
                                             </label>
                                             <div class="col-md-8 ">
                                                 <input v-model="trans.form.not" type='email'  class="form-control">
-
                                             </div>
                                         </div>
                                     </div>
@@ -1008,7 +1011,7 @@
                 VueName = new Vue({
                     el: "#show",
                     data: {
-                        planning:0,
+                        planning:{{$order->order_planning == true ? 1:0}},
                         remaining:"{{$order->remaining}}",
                         company_balance:"{{$order->company->balance}}",
                         collect_items:[
@@ -1096,9 +1099,20 @@
                             })
                                 .then((willCheck) => {
                                     if (willCheck) {
-                                        swal("Sipariş başarıyla üretim planlanama bölümüne gönderildi.", {
-                                            icon: "success",
-                                        });
+                                        fullLoading("Lütfen Bekleyiniz.");
+
+                                         axios.post("{{route("sales.planning.send",aid())}}",{order_id:"{{$order->id}}"}).then(res=>{
+                                             VueName.planning =1;
+                                             swal("Sipariş başarıyla üretim planlanama bölümüne gönderildi.", {
+                                                 icon: "success",
+                                             });
+                                                     fullLoadingClose()
+                                         }).catch(error=>{
+                                             fullLoadingClose()
+                                             swal("İşlem hatalı lütfen daha sonra tekrar deneyiniz.", {
+                                                 icon: "error",
+                                             });
+                                         });
                                     }
                                 });
                         },

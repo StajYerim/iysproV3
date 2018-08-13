@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="row">
+    <div class="row" id="production" v-cloak>
 
         <div class="col-sm-12 col-md-12 col-lg-3">
             <!-- new widget -->
             <div class="jarviswidget jarviswidget-color-blueDark">
                 <header>
-                    <h2> Add Events </h2>
+                    <h2> BEKLEYEN SİPARİŞLER </h2>
                 </header>
 
                 <!-- widget div-->
@@ -16,78 +16,13 @@
                     <div class="widget-body">
                         <!-- content goes here -->
 
-                        <form id="add-event-form">
-                            <fieldset>
+                        <div v-for="item in production_list" v-if="item.status == 0">
+                            <a href="#!" @click="detail(item.id)">
+                                (@{{item.order.id}}) @{{item.order.description}}
+                            </a>
+                            <br>
+                        </div>
 
-                                <div class="form-group">
-                                    <label>Select Event Icon</label>
-                                    <div class="btn-group btn-group-sm btn-group-justified" data-toggle="buttons">
-                                        <label class="btn btn-default active">
-                                            <input type="radio" name="iconselect" id="icon-1" value="fa-info" checked>
-                                            <i class="fa fa-info text-muted"></i> </label>
-                                        <label class="btn btn-default">
-                                            <input type="radio" name="iconselect" id="icon-2" value="fa-warning">
-                                            <i class="fa fa-warning text-muted"></i> </label>
-                                        <label class="btn btn-default">
-                                            <input type="radio" name="iconselect" id="icon-3" value="fa-check">
-                                            <i class="fa fa-check text-muted"></i> </label>
-                                        <label class="btn btn-default">
-                                            <input type="radio" name="iconselect" id="icon-4" value="fa-user">
-                                            <i class="fa fa-user text-muted"></i> </label>
-                                        <label class="btn btn-default">
-                                            <input type="radio" name="iconselect" id="icon-5" value="fa-lock">
-                                            <i class="fa fa-lock text-muted"></i> </label>
-                                        <label class="btn btn-default">
-                                            <input type="radio" name="iconselect" id="icon-6" value="fa-clock-o">
-                                            <i class="fa fa-clock-o text-muted"></i> </label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Event Title</label>
-                                    <input class="form-control"  id="title" name="title" maxlength="40" type="text" placeholder="Event Title">
-                                </div>
-                                <div class="form-group">
-                                    <label>Event Description</label>
-                                    <textarea class="form-control" placeholder="Please be brief" rows="3" maxlength="40" id="description"></textarea>
-                                    <p class="note">Maxlength is set to 40 characters</p>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Select Event Color</label>
-                                    <div class="btn-group btn-group-justified btn-select-tick" data-toggle="buttons">
-                                        <label class="btn bg-color-darken active">
-                                            <input type="radio" name="priority" id="option1" value="bg-color-darken txt-color-white" checked>
-                                            <i class="fa fa-check txt-color-white"></i> </label>
-                                        <label class="btn bg-color-blue">
-                                            <input type="radio" name="priority" id="option2" value="bg-color-blue txt-color-white">
-                                            <i class="fa fa-check txt-color-white"></i> </label>
-                                        <label class="btn bg-color-orange">
-                                            <input type="radio" name="priority" id="option3" value="bg-color-orange txt-color-white">
-                                            <i class="fa fa-check txt-color-white"></i> </label>
-                                        <label class="btn bg-color-greenLight">
-                                            <input type="radio" name="priority" id="option4" value="bg-color-greenLight txt-color-white">
-                                            <i class="fa fa-check txt-color-white"></i> </label>
-                                        <label class="btn bg-color-blueLight">
-                                            <input type="radio" name="priority" id="option5" value="bg-color-blueLight txt-color-white">
-                                            <i class="fa fa-check txt-color-white"></i> </label>
-                                        <label class="btn bg-color-red">
-                                            <input type="radio" name="priority" id="option6" value="bg-color-red txt-color-white">
-                                            <i class="fa fa-check txt-color-white"></i> </label>
-                                    </div>
-                                </div>
-
-                            </fieldset>
-                            <div class="form-actions">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button class="btn btn-default" type="button" id="add-event" >
-                                            Add Event
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
 
                         <!-- end content -->
                     </div>
@@ -96,34 +31,58 @@
                 <!-- end widget div -->
             </div>
             <!-- end widget -->
+            <!-- new widget -->
+            <div class="jarviswidget jarviswidget-color-blueDark">
+                <header>
+                    <h2> TAMAMLANANLAR </h2>
+                </header>
 
-            <div class="well well-sm" id="event-container">
-                <form>
-                    <fieldset>
-                        <legend>
-                            Draggable Events
-                        </legend>
-                        <ul id='external-events' class="list-unstyled">
-                            <li>
-                                <span class="bg-color-darken txt-color-white" data-description="Currently busy" data-icon="fa-time">Office Meeting</span>
-                            </li>
-                            <li>
-                                <span class="bg-color-blue txt-color-white" data-description="No Description" data-icon="fa-pie">Lunch Break</span>
-                            </li>
-                            <li>
-                                <span class="bg-color-red txt-color-white" data-description="Urgent Tasks" data-icon="fa-alert">URGENT</span>
-                            </li>
-                        </ul>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="drop-remove" class="checkbox style-0" checked="checked">
-                                <span>remove after drop</span> </label>
+                <!-- widget div-->
+                <div>
 
+                    <div class="widget-body">
+                        <!-- content goes here -->
+
+                        <div v-for="item in production_list" v-if="item.status == 2">
+                            <a href="#!" @click="detail(item.id)">
+                                (@{{item.order.id}}) @{{item.order.description}}
+                            </a>
+                            <br>
                         </div>
-                    </fieldset>
-                </form>
+                        <!-- end content -->
+                    </div>
 
+                </div>
+                <!-- end widget div -->
             </div>
+            {{--<!-- end widget -->--}}
+            {{--<div class="well well-sm" id="event-container">--}}
+            {{--<form>--}}
+            {{--<fieldset>--}}
+            {{--<legend>--}}
+            {{--Draggable Events--}}
+            {{--</legend>--}}
+            {{--<ul id='external-events' class="list-unstyled">--}}
+            {{--<li>--}}
+            {{--<span class="bg-color-darken txt-color-white" data-description="Currently busy" data-icon="fa-time">Office Meeting</span>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+            {{--<span class="bg-color-blue txt-color-white" data-description="No Description" data-icon="fa-pie">Lunch Break</span>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+            {{--<span class="bg-color-red txt-color-white" data-description="Urgent Tasks" data-icon="fa-alert">URGENT</span>--}}
+            {{--</li>--}}
+            {{--</ul>--}}
+            {{--<div class="checkbox">--}}
+            {{--<label>--}}
+            {{--<input type="checkbox" id="drop-remove" class="checkbox style-0" checked="checked">--}}
+            {{--<span>remove after drop</span> </label>--}}
+
+            {{--</div>--}}
+            {{--</fieldset>--}}
+            {{--</form>--}}
+
+            {{--</div>--}}
         </div>
         <div class="col-sm-12 col-md-12 col-lg-9">
 
@@ -194,6 +153,71 @@
 
         </div>
 
+        {{--Detail Modal--}}
+        <div class="modal fade" id="production_detail" role="dialog" aria-labelledby="remoteModalLabel"
+             aria-hidden="true"
+             style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">SİPARİŞ DETAYI</h4>
+                    </div>
+                    <div class="modal-body modal-body-content">
+                        <b>SİPARİŞ AÇIKLAMASI :</b>@{{ production.order.description }} <br>
+                        <b>TARİH :</b>@{{ production.order.date }}<br>
+                        <b>TERMİN TARİHİ :</b>@{{ production.order.termin_date }}<br>
+                        <b>ÜRÜNLER</b><br>
+                        <div v-for="item in production.order.items">
+                            @{{ item.product.named.name }}
+                            <br>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4 has-feedback">
+                                    <label class="control-label">DURUM</label>
+                                    <select class="form-control" v-model="production.status">
+                                        <option value="0">BEKLEMEDE</option>
+                                        <option value="1">ÜRETİMDE</option>
+                                        <option value="2">TAMAMLANDI</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-4 has-feedback">
+                                    <label class="control-label">BAŞLANGIÇ TARİHİ</label>
+                                    <div class="input-group">
+                                        <the-mask @change="setDate(production.start_date)" :mask="['##.##.####']"
+                                                  type="text" name="production.start_date"
+                                                  v-validate="'required'" class="form-control datepicker"
+                                                  v-model="production.start_date">
+                                        </the-mask>
+                                        <span class="input-group-addon"><i
+                                                    class="fa fa-calendar"></i></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 has-feedback">
+                                    <label class="control-label">ÜRETİM SÜRESİ(GÜN)</label>
+                                    <input type="number" v-model:number="production.day" class="form-control">
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">VAZGEÇ</button>
+                        <button type="button" class="btn btn-primary" @click="productionSave()">KAYDET</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {{--Detail Modal--}}
+
     </div>
 
     <script src="/js/plugin/moment/moment.min.js"></script>
@@ -203,218 +227,224 @@
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
         $(document).ready(function() {
+            VueName = new Vue({
+                el: "#production",
+                data: {
+                    production: {
+                        order: {}
+                    },
+                    production_list: []
+                },
+                methods: {
+                    productionUpdate() {
+                        axios.post("{{route("production.calendar.list",aid())}}").then(res => {
+                            VueName.production_list = res.data;
+                        })
+                    },
+                    productionSave() {
+                        axios.post("{{route("production.calendar.save",aid())}}", {
+                            production_id: this.production.id,
+                            start_date: this.production.start_date,
+                            status: this.production.status,
+                            day: this.production.day
+                        }).then(res => {
+                            if (res.data == "ok") {
+                                VueName.productionUpdate();
+                                $("#production_detail").modal("hide");
+                                notification("Başarılı", "İşlem başarıyla kaydedildi.", "success");
 
-            pageSetUp();
+                            }
+
+                        })
+                    },
+                    detail: function ($id) {
+                        axios.post("{{route("production.calendar.detail",aid())}}", {production_id: $id}).then(res => {
+                            console.log(res.data);
+                            VueName.production = res.data;
+                            $('#production_detail').modal("show");
+                        })
+
+                    }
+                },
+                mounted: function () {
+                    datePicker()
+                    this.productionUpdate();
+                    "use strict";
+
+                    var date = new Date();
+                    var d = date.getDate();
+                    var m = date.getMonth();
+                    var y = date.getFullYear();
+
+                    var hdr = {
+                        left: 'title',
+                        center: 'month,agendaWeek,agendaDay',
+                        right: 'prev,today,next'
+                    };
+
+                    var initDrag = function (e) {
+                        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+                        // it doesn't need to have a start or end
+
+                        var eventObject = {
+                            title: $.trim(e.children().text()), // use the element's text as the event title
+                            description: $.trim(e.children('span').attr('data-description')),
+                            icon: $.trim(e.children('span').attr('data-icon')),
+                            className: $.trim(e.children('span').attr('class')) // use the element's children as the event class
+                        };
+                        // store the Event Object in the DOM element so we can get to it later
+                        e.data('eventObject', eventObject);
+
+                        // make the event draggable using jQuery UI
+                        e.draggable({
+                            zIndex: 999,
+                            revert: false, // will cause the event to go back to its
+                            revertDuration: 0 //  original position after the drag
+                        });
+                    };
+
+                    var addEvent = function (title, priority, description, icon) {
+                        title = title.length === 0 ? "Untitled Event" : title;
+                        description = description.length === 0 ? "No Description" : description;
+                        icon = icon.length === 0 ? " " : icon;
+                        priority = priority.length === 0 ? "label label-default" : priority;
+
+                        var html = $('<li><span class="' + priority + '" data-description="' + description + '" data-icon="' +
+                            icon + '">' + title + '</span></li>').prependTo('ul#external-events').hide().fadeIn();
+
+                        $("#event-container").effect("highlight", 800);
+
+                        initDrag(html);
+                    };
+
+                    /* initialize the external events
+                     -----------------------------------------------------------------*/
+
+                    $('#external-events > li').each(function () {
+                        initDrag($(this));
+                    });
+
+                    $('#add-event').click(function () {
+                        var title = $('#title').val(),
+                            priority = $('input:radio[name=priority]:checked').val(),
+                            description = $('#description').val(),
+                            icon = $('input:radio[name=iconselect]:checked').val();
+
+                        addEvent(title, priority, description, icon);
+                    });
+
+                    /* initialize the calendar
+                     -----------------------------------------------------------------*/
+
+                    $('#calendar').fullCalendar({
+
+                        displayEventTime :false,
+                        header: hdr,
+                        editable: false,
+                        droppable: false, // this allows things to be dropped onto the calendar !!!
+
+                        drop: function (date, allDay) { // this function is called when something is dropped
+
+                            // retrieve the dropped element's stored Event Object
+                            var originalEventObject = $(this).data('eventObject');
+
+                            // we need to copy it, so that multiple events don't have a reference to the same object
+                            var copiedEventObject = $.extend({}, originalEventObject);
+
+                            // assign it the date that was reported
+                            copiedEventObject.start = date;
+                            copiedEventObject.allDay = allDay;
+
+                            // render the event on the calendar
+                            // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+                            $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+                            // is the "remove after drop" checkbox checked?
+                            if ($('#drop-remove').is(':checked')) {
+                                // if so, remove the element from the "Draggable Events" list
+                                $(this).remove();
+                            }
+
+                        },
+
+                        select: function (start, end, allDay) {
+                            var title = prompt('Event Title:');
+                            if (title) {
+                                calendar.fullCalendar('renderEvent', {
+                                        title: title,
+                                        start: start,
+                                        end: end,
+                                        allDay: allDay
+                                    }, true // make the event "stick"
+                                );
+                            }
+                            calendar.fullCalendar('unselect');
+                        },
 
 
-            "use strict";
+                        events: [
+                                @foreach($productions_process as $product)
+                            {
+                                title: '{{$product->order["description"]}}',
+                                start: new Date(y, m, 1),
+                                end: new Date(y, m, d - 2),
+                                className: ["event", "bg-color-redLight"],
+                                icon: 'fa-industry'
+                            },
 
-            var date = new Date();
-            var d = date.getDate();
-            var m = date.getMonth();
-            var y = date.getFullYear();
+                    @endforeach()
+                    ],
 
-            var hdr = {
-                left: 'title',
-                center: 'month,agendaWeek,agendaDay',
-                right: 'prev,today,next'
-            };
+                    eventRender: function (event, element, icon) {
+                        if (!event.description == "") {
+                            element.find('.fc-title').append("<br/><span class='ultra-light'>" + event.description +
+                                "</span>");
+                        }
+                        if (!event.icon == "") {
+                            element.find('.fc-title').append("<i class='air air-top-right fa " + event.icon +
+                                " '></i>");
+                        }
+                    },
 
-            var initDrag = function (e) {
-                // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-                // it doesn't need to have a start or end
-
-                var eventObject = {
-                    title: $.trim(e.children().text()), // use the element's text as the event title
-                    description: $.trim(e.children('span').attr('data-description')),
-                    icon: $.trim(e.children('span').attr('data-icon')),
-                    className: $.trim(e.children('span').attr('class')) // use the element's children as the event class
-                };
-                // store the Event Object in the DOM element so we can get to it later
-                e.data('eventObject', eventObject);
-
-                // make the event draggable using jQuery UI
-                e.draggable({
-                    zIndex: 999,
-                    revert: true, // will cause the event to go back to its
-                    revertDuration: 0 //  original position after the drag
+                    windowResize: function (event, ui) {
+                        $('#calendar').fullCalendar('render');
+                    }
                 });
-            };
 
-            var addEvent = function (title, priority, description, icon) {
-                title = title.length === 0 ? "Untitled Event" : title;
-                description = description.length === 0 ? "No Description" : description;
-                icon = icon.length === 0 ? " " : icon;
-                priority = priority.length === 0 ? "label label-default" : priority;
+                    /* hide default buttons */
+                    $('.fc-right, .fc-center').hide();
 
-                var html = $('<li><span class="' + priority + '" data-description="' + description + '" data-icon="' +
-                    icon + '">' + title + '</span></li>').prependTo('ul#external-events').hide().fadeIn();
 
-                $("#event-container").effect("highlight", 800);
+                    $('#calendar-buttons #btn-prev').click(function () {
+                        $('.fc-prev-button').click();
+                        return false;
+                    });
 
-                initDrag(html);
-            };
+                    $('#calendar-buttons #btn-next').click(function () {
+                        $('.fc-next-button').click();
+                        return false;
+                    });
 
-            /* initialize the external events
-             -----------------------------------------------------------------*/
+                    $('#calendar-buttons #btn-today').click(function () {
+                        $('.fc-today-button').click();
+                        return false;
+                    });
 
-            $('#external-events > li').each(function () {
-                initDrag($(this));
-            });
+                    $('#mt').click(function () {
+                        $('#calendar').fullCalendar('changeView', 'month');
+                    });
 
-            $('#add-event').click(function () {
-                var title = $('#title').val(),
-                    priority = $('input:radio[name=priority]:checked').val(),
-                    description = $('#description').val(),
-                    icon = $('input:radio[name=iconselect]:checked').val();
+                    $('#ag').click(function () {
+                        $('#calendar').fullCalendar('changeView', 'agendaWeek');
+                    });
 
-                addEvent(title, priority, description, icon);
-            });
+                    $('#td').click(function () {
+                        $('#calendar').fullCalendar('changeView', 'agendaDay');
+                    });
 
-            /* initialize the calendar
-             -----------------------------------------------------------------*/
 
-            $('#calendar').fullCalendar({
-
-                header: hdr,
-                editable: true,
-                droppable: true, // this allows things to be dropped onto the calendar !!!
-
-                drop: function (date, allDay) { // this function is called when something is dropped
-
-                    // retrieve the dropped element's stored Event Object
-                    var originalEventObject = $(this).data('eventObject');
-
-                    // we need to copy it, so that multiple events don't have a reference to the same object
-                    var copiedEventObject = $.extend({}, originalEventObject);
-
-                    // assign it the date that was reported
-                    copiedEventObject.start = date;
-                    copiedEventObject.allDay = allDay;
-
-                    // render the event on the calendar
-                    // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-                    $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-                    // is the "remove after drop" checkbox checked?
-                    if ($('#drop-remove').is(':checked')) {
-                        // if so, remove the element from the "Draggable Events" list
-                        $(this).remove();
-                    }
-
-                },
-
-                select: function (start, end, allDay) {
-                    var title = prompt('Event Title:');
-                    if (title) {
-                        calendar.fullCalendar('renderEvent', {
-                                title: title,
-                                start: start,
-                                end: end,
-                                allDay: allDay
-                            }, true // make the event "stick"
-                        );
-                    }
-                    calendar.fullCalendar('unselect');
-                },
-
-                events: [{
-                    title: 'All Day Event',
-                    start: new Date(y, m, 1),
-                    description: 'long description',
-                    className: ["event", "bg-color-greenLight"],
-                    icon: 'fa-check'
-                }, {
-                    title: 'Long Event',
-                    start: new Date(y, m, d - 5),
-                    end: new Date(y, m, d - 2),
-                    className: ["event", "bg-color-red"],
-                    icon: 'fa-lock'
-                }, {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d - 3, 16, 0),
-                    allDay: false,
-                    className: ["event", "bg-color-blue"],
-                    icon: 'fa-clock-o'
-                }, {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d + 4, 16, 0),
-                    allDay: false,
-                    className: ["event", "bg-color-blue"],
-                    icon: 'fa-clock-o'
-                }, {
-                    title: 'Meeting',
-                    start: new Date(y, m, d, 10, 30),
-                    allDay: false,
-                    className: ["event", "bg-color-darken"]
-                }, {
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false,
-                    className: ["event", "bg-color-darken"]
-                }, {
-                    title: 'Birthday Party',
-                    start: new Date(y, m, d + 1, 19, 0),
-                    end: new Date(y, m, d + 1, 22, 30),
-                    allDay: false,
-                    className: ["event", "bg-color-darken"]
-                }, {
-                    title: 'Smartadmin Open Day',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    className: ["event", "bg-color-darken"]
-                }],
-
-                eventRender: function (event, element, icon) {
-                    if (!event.description == "") {
-                        element.find('.fc-title').append("<br/><span class='ultra-light'>" + event.description +
-                            "</span>");
-                    }
-                    if (!event.icon == "") {
-                        element.find('.fc-title').append("<i class='air air-top-right fa " + event.icon +
-                            " '></i>");
-                    }
-                },
-
-                windowResize: function (event, ui) {
-                    $('#calendar').fullCalendar('render');
                 }
-            });
-
-            /* hide default buttons */
-            $('.fc-right, .fc-center').hide();
-
-
-            $('#calendar-buttons #btn-prev').click(function () {
-                $('.fc-prev-button').click();
-                return false;
-            });
-
-            $('#calendar-buttons #btn-next').click(function () {
-                $('.fc-next-button').click();
-                return false;
-            });
-
-            $('#calendar-buttons #btn-today').click(function () {
-                $('.fc-today-button').click();
-                return false;
-            });
-
-            $('#mt').click(function () {
-                $('#calendar').fullCalendar('changeView', 'month');
-            });
-
-            $('#ag').click(function () {
-                $('#calendar').fullCalendar('changeView', 'agendaWeek');
-            });
-
-            $('#td').click(function () {
-                $('#calendar').fullCalendar('changeView', 'agendaDay');
-            });
-
+                })
         })
 
     </script>

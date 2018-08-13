@@ -6,6 +6,7 @@ use App\Companies;
 use App\Currency;
 use App\Model\Finance\BankItems;
 use App\Model\Finance\Cheques;
+use App\Model\Production\Production;
 use App\Model\Stock\Stock;
 use App\Model\Stock\StockItems;
 use App\Tags;
@@ -245,9 +246,15 @@ class SalesOrders extends Model
     }
 
 
-
+    /*Tags*/
     public function tags()
     {
         return $this->morphToMany(Tags::class, 'taggable');
     }
+
+    /*Production Planing*/
+    public function order_planning(){
+        return $this->hasOne(Production::class,"sales_order_id","id");
+    }
+
 }
