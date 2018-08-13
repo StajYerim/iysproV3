@@ -10,20 +10,19 @@ class CalendarController extends Controller
 {
     public function index()
     {
-        $productions_process = Production::where("status", [1,2])->get();
 
-        return view('modules.production.calendar.index', compact("productions_process"));
+        return view('modules.production.calendar.index');
     }
 
     public function detail($aid, Request $request)
     {
-        $production = Production::where("id", $request->production_id)->with("order.items.product.named")->first();
+        $production = Production::where("id", $request->production_id)->with("order.items.product.named","order.company","order.items.unit")->first();
         return $production;
     }
 
     public function list($aid)
     {
-        $production = Production::with("order")->get();
+        $production = Production::with("order.company")->get();
         return $production;
     }
 
@@ -34,5 +33,26 @@ class CalendarController extends Controller
        $production->update(["status"=>$request->status,"start_date"=>$request->start_date,"day"=>$request->day]);
 
        return "ok";
+    }
+
+    public function calendar_list($aid){
+        $productions_process = Production::where("status", [1])->get();
+
+        foreach($productions_process as $product) {
+            {
+
+                $data[] = array(
+                    "title" => $product->order->company["company_name"],
+                    "start" => $product->starting_date,
+                    "end" => $product->finish_date,
+                    "className" => ["event", "bg-color-redLight"],
+                    "id" => $product->id,
+                    "icon" => 'fa-industry'
+                );
+            }
+
+        }
+
+        return $data;
     }
 }
