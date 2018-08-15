@@ -9,11 +9,10 @@ use App\ProductImage;
 use App\TagData;
 use App\Taggable;
 use App\Tags;
-use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class CompaniesController extends Controller
@@ -242,7 +241,7 @@ class CompaniesController extends Controller
                 $amount = $item->grand_total;
                 $route=route("sales.orders.show",[aid(),$item->id]);
                 $last_balance = $last_balance + money_db_format($amount);
-                $action_type = "";
+                $action_type = "+";
             } else if ($item->pro_type == "purchase_order") {
                 $amount = $item->grand_total;
                 $route=route("purchases.orders.show",[aid(),$item->id]);
@@ -259,7 +258,7 @@ class CompaniesController extends Controller
                 $route=route("finance.accounts.receipt",[aid(),$item->id]);
                 $amount = $item->amount;
                 $last_balance = $last_balance+money_db_format($amount);
-                $action_type = "";
+                $action_type = "+";
 
             } else if ($item->pro_type == "buy_cheque") {
                 $route=route("finance.cheques.show",[aid(),$item->id]);
@@ -271,7 +270,7 @@ class CompaniesController extends Controller
                 $route=route("finance.cheques.show",[aid(),$item->id]);
                 $amount = $item->amount;
                 $last_balance = $last_balance + money_db_format($amount);
-                $action_type = "";
+                $action_type = "+";
 
             }
 
@@ -290,5 +289,17 @@ class CompaniesController extends Controller
 
         return $results;
 
+    }
+
+    /*Companie summary pdf
+    {$id} = company_id*/
+    public function summary_pdf($aid,$id,$type)
+    {
+        $company = Companies::find($id);
+
+        $items =  $this->items($aid,$id);
+        $pdf = PDF::loadView("modules.companies.print.summary", compact("company","items"))->setPaper('A4');
+        //        return view("companies.print.statement",compact("company","actions"));
+        return $type == "show" ? $pdf->stream():$pdf->download();
     }
 }
