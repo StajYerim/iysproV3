@@ -24,7 +24,7 @@ class PurchaseOffers extends Model
 
     public function getDescriptionsAttribute()
     {
-        return $this->description == null ? "SATIŞ TEKLİFİ" : $this->description;
+        return $this->description == null ? "SATINALMA TALEBİ" : $this->description;
     }
 
     public function setDateAttribute($value)

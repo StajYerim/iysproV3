@@ -352,7 +352,7 @@
     $title=trans('word.offer'),
     $thread=trans('sentence.purchase_offer').' : ' .$offer->company["company_name"],
     $message=trans('sentence.purchase_offer_details_by_downloading_the_summary')." ".account()["name"]."</b>",
-    $type="share.offer",
+    $type="share.purchase_offer",
     $data = $offer])
 
 
