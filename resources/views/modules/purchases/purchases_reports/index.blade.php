@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section("title","SATIŞ RAPORLARI")
+@section("title","SATINALMA RAPORU")
 @section('content')
     <!-- MAIN CONTENT -->
     <div id="content">
@@ -10,7 +10,7 @@
                         <div class="widget-body">
                             <div class="widget-body-toolbar st">
                                 <div class="row">
-                                    <div class="col-sm-4" style="margin-top:-20px;"><h2>Sales Invoices</h2></div>
+                                    <div class="col-sm-4" style="margin-top:-20px;"><h2>SATIN ALMA RAPORLARI</h2></div>
 
                                     <div class="col-sm-4 text-right">
                                         <div class="form-group">
