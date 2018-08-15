@@ -152,6 +152,9 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'word', 'key'=> 'add', 'text'=> ['en'=> 'ADD', 'tr'=> 'EKLE']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'order', 'text'=> ['en'=> 'ORDER', 'tr'=> 'SİPARİŞ']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'price', 'text'=> ['en'=> 'PRICE', 'tr'=> 'FİYAT']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'retail', 'text'=> ['en'=> 'RETAIL', 'tr'=> 'PAREKENDE']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'whosale', 'text'=> ['en'=> 'WHOSALE', 'tr'=> 'TOPTAN']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'production', 'text'=> ['en'=> 'PRODUCTION', 'tr'=> 'ÜRETİM']]);
 
 
         // sentence area
@@ -565,6 +568,8 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'due_date', 'text'=> ['en'=> 'DUE DATE','tr'=> 'VADE TARİHİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'termin_date', 'text'=> ['en'=> 'TERMIN DATE','tr'=> 'TERMİN TARİHİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'back_to_login', 'text'=> ['en'=> 'BACK TO LOGIN','tr'=> 'GİRİŞE GERİ DÖN']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'you_have_been_registered_to', 'text'=> ['en'=> 'You have been registered to ','tr'=> 'Başarıyla kayıt oldunuz ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'confirmation_code', 'text'=> ['en'=> 'CONFIRMATION CODE','tr'=> 'DOĞRULAMA KODU']]);
 
     }
 }

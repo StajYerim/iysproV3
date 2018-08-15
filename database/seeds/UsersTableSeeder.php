@@ -63,6 +63,6 @@ class UsersTableSeeder extends Seeder
 
 //        factory(App\User::class, 400)->create()->make();
 //
-//        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

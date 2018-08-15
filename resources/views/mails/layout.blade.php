@@ -8,7 +8,7 @@
     @yield('content')
 
     <p>
-        This is an automatically generated email.
+        {{ trans('sentence.automatically_generated_email') }}
     </p>
 
 </body>
