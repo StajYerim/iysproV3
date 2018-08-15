@@ -2,36 +2,34 @@
 
 @section('guest')
 
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-        <div class="well no-padding">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-            <form action="{{ route('activation.resend') }}" method="POST"  id="smart-form-register" class="smart-form client-form">
-                @csrf
-                <header>
-                    {{trans("sentence.email_confirmation_is_required")}}
-                </header>
+            <div class="well no-padding">
+                <form action="{{ route('activation.resend') }}" method="POST"  id="smart-form-register" class="smart-form client-form">
+                    @csrf
+                    <header>
+                        {{trans("sentence.email_confirmation_is_required")}}
+                    </header>
 
-                <fieldset>
-                    {{ trans("sentence.confirm_email_via_link") }}
-                </fieldset>
+                    <fieldset>
+                        {{ trans("sentence.confirm_email_via_link") }}
+                    </fieldset>
 
-                <footer>
-                    <button type="submit" class="btn btn-primary">
-                        {{ trans("sentence.resend_confirmation_link") }}
-                    </button>
+                    <footer>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary btn-xs">
+                                {{ trans("sentence.resend_confirmation_link") }}
+                            </button>
+                            <a href="{{ route('login') }}" class="btn btn-primary">
+                                <i class="fa fa-undo"></i> {{ trans('sentence.back_to_login') }}
+                            </a>
+                        </div>
+                    </footer>
 
-                </footer>
-
-                <div class="message">
-                    <i class="fa fa-check"></i>
-                    <p>
-
-                    </p>
-                </div>
-
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-
 
 @endsection
