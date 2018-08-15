@@ -1,10 +1,10 @@
-  <?php
+<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSalesOffersTable extends Migration
+class CreatePurchaseOffersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateSalesOffersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales_offers', function (Blueprint $table) {
+        Schema::create('purchase_offers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('account_id')->unsigned();
             $table->string('description')->nullable();
+            $table->text('description_detail',100000)->nullable();
             $table->integer('company_id')->unsigned();
             $table->integer('contact_id')->nullable()->unsigned();
             $table->string('currency');
@@ -41,6 +42,6 @@ class CreateSalesOffersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales_offers');
+        Schema::dropIfExists('purchase_offers');
     }
 }
