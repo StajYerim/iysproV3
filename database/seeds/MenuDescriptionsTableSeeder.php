@@ -365,6 +365,36 @@ class MenuDescriptionsTableSeeder extends Seeder
                 'menu_id' => 35,
                 'name' => 'Bölgesel Ayarlar',
             ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 36,
+                'name' => 'PRODUCTION PLANNING',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 36,
+                'name' => 'ÜRETİM PLANLAMA',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 37,
+                'name' => 'Orders',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 37,
+                'name' => 'Siparişler',
+            ],
+            [
+                'lang_code' => "en",
+                'menu_id' => 38,
+                'name' => 'Calendar',
+            ],
+            [
+                'lang_code' => "tr",
+                'menu_id' => 38,
+                'name' => 'Takvim',
+            ],
 
 
 

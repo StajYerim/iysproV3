@@ -19,15 +19,16 @@ Route::group(['prefix'=>'{company_id}/purchases','middleware'=>'not.admin'],func
     Route::post("supplier/{id}/store","Companies\CompaniesController@store")->name("purchases.companies.store");
     Route::post("supplier/{id}/destroy","Companies\CompaniesController@destroy")->name("purchases.companies.destroy");
 
-//    //Sales Offers
-//    Route::get('offers', 'Modules\Sales\OffersController@index')->name('sales.offers.index');
-//    Route::get("offers/index_list","Modules\Sales\OffersController@index_list")->name("sales.offers.index_list");
-//    Route::get("offers/form/{id}/{type}","Modules\Sales\OffersController@form")->name("sales.offers.form");
-//    Route::post("{id}/store","Modules\Sales\OffersController@store")->name("sales.offers.store");
-//    Route::get("offers/{id}/show","Modules\Sales\OffersController@show")->name("sales.offers.show");
-//    Route::delete("offers/{id}/destroy","Modules\Sales\OffersController@destroy")->name("sales.offers.destroy");
-//    Route::post("offers/{id}/status-send","Modules\Sales\OffersController@status_send")->name("sales.offers.status_send");
-//
+    //Purchases Offers
+    Route::get('offers', 'Modules\Purchases\OffersController@index')->name('purchases.offers.index');
+    Route::get("offers/index_list","Modules\Purchases\OffersController@index_list")->name("purchases.offers.index_list");
+    Route::get("offers/form/{id}/{type}","Modules\Purchases\OffersController@form")->name("purchases.offers.form");
+    Route::post("offers/{id}/store","Modules\Purchases\OffersController@store")->name("purchases.offers.store");
+    Route::get("offers/{id}/show","Modules\Purchases\OffersController@show")->name("purchases.offers.show");
+    Route::delete("offers/{id}/destroy","Modules\Purchases\OffersController@destroy")->name("purchases.offers.destroy");
+    Route::post("offers/{id}/status-send","Modules\Purchases\OffersController@status_send")->name("purchases.offers.status_send");
+    Route::get("offers/{id}/pdf/{type}/{lang}","Modules\Purchases\OffersController@pdf")->name("purchases.offers.pdf");
+
     //Purchases Orders
     Route::get('orders', 'Modules\Purchases\OrdersController@index')->name('purchases.orders.index');
     Route::get('orders/index_list', 'Modules\Purchases\OrdersController@index_list')->name('purchases.orders.index_list');

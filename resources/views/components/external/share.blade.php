@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <br>
-                        <HR>
+                        <hr>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-md-3 ">{{ trans("word.subject") }} *</label>

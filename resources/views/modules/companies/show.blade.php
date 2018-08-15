@@ -16,6 +16,9 @@
                         <span class="semi-bold">
                             {{$company->company_name}}
                         </span>
+                        @if($company->tags->count() != 0)
+                            <span class="pull-right">@foreach($company->tags as $tag) <span  class="badge" style="background-color:{{$tag->bg_color}}">{{$tag->title}}</span>@endforeach</span>
+                        @endif
                     </h1>
 
                 </div>
@@ -28,7 +31,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{route("sales.companies.form",[aid(),'customer',$company->id,'update'])}}">
+                                    <a href="{{route($company_type == "supplier" ? "purchases.companies.form":"sales.companies.form",[aid(),$company_type,$company->id,'update'])}}">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                         {{trans("word.edit")}}
                                     </a>
@@ -58,29 +61,6 @@
                             </ul>
 
                         </div>
-                        <div class="btn-group">
-                            <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <span class="fa fa-print"></span>
-                                {{trans("word.print")}} <span class="caret"></span> </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
-                                                class="fa fa-print" aria-hidden="true"></i>
-                                        {{trans("sentence.print_offer")}}</a>
-                                </li>
-                                <li>
-                                    <a download="" href="http://demo.iyspro.com/salesmanager/sales-offer/8/printDown"
-                                       id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
-                                        {{trans("sentence.download_offer")}}</a>
-                                </li>
-
-                            </ul>
-
-                        </div>
-
-                        <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
-                                    class="fa fa-envelope"></i> {{trans("word.share")}}</a>
-
                     </div>
 
 
@@ -140,9 +120,9 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <button type="button" class="btn btn-primary btn btn-block">
+                                                    <a href="{{route("company.summary.pdf",[aid(),$company->id,"show"])}}" target="blank"  class="btn btn-primary btn btn-block">
                                                         {{trans("sentence.download_pdf_account_summary")}}
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </div>
 
@@ -215,7 +195,7 @@
             </article>
         </div>
 
-        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete company ?",$id=$company->id])
+        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans('sentence.are_you_sure_delete_company'),$id=$company->id])
 
     </section>
     @include("components.external.transaction",[$type="collect",$local="company",$detail = $company,$abble="App\\\Model\\\Sales\\\SalesOrders"])
@@ -275,7 +255,7 @@
                         axios.post('{{route("sales.companies.destroy",[aid(),$id])}}')
                             .then(function (response) {
                                 if(response.data.message == "success"){
-                                    window.location.href = '{{route("sales.companies.customer",aid())}}';
+                                    window.location.href = '{{route($company_type=="supplier"?"purchases.companies.supplier":"sales.companies.customer",aid())}}';
                                 }
                             }).catch(function (error) {
                             notification("Error", error.response.data.message, "danger");

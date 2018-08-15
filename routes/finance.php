@@ -31,12 +31,16 @@ Route::group(['prefix'=>'{company_id}/finance','middleware'=>'not.admin'],functi
     Route::get("expenses/index/list","Modules\Finance\ExpensesController@index_list")->name("finance.expenses.index_list");
     Route::post("expenses/{id}/store","Modules\Finance\ExpensesController@store")->name("finance.expenses.store");
     Route::get("expenses/info","Modules\Finance\ExpensesController@row_info")->name("finance.expenses.info");
-
+    Route::post("expenses/payment/delete","Modules\Finance\ExpensesController@payment_delete")->name("finance.expenses.payment.delete");
 
     //Cheques
     Route::get("cheques","Modules\Finance\ChequesController@index")->name("finance.cheques.index");
     Route::get("cheques/index/list","Modules\Finance\ChequesController@index_list")->name("finance.cheques.index_list");
     Route::get("cheques/{id}/show","Modules\Finance\ChequesController@show")->name("finance.cheques.show");
     Route::delete("cheques/{id}/destroy","Modules\Finance\ChequesController@destroy")->name("finance.cheques.destroy");
+
+    //Vat Reports
+    Route::get("vat-report","Modules\Finance\VatReportController@index")->name("finance.vat_report.index");
+    Route::post("vat-report","Modules\Finance\VatReportController@month")->name("finance.vat_report.month");
 
 });

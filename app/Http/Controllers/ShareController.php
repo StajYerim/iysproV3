@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Mail;
 
 class ShareController extends Controller
 {
+    /*Sales offer mail share of pdf*/
     public function offer_share($aid,$id,Request $request)
     {
-
 
         $data = [];
         $data["thread"] = $request->thread;
@@ -25,6 +25,22 @@ class ShareController extends Controller
             ->send(new Offer($data));
     }
 
+    /*Purchase Offer mail send*/
+    public function purchase_offer_share($aid,$id,Request $request)
+    {
+
+        $data = [];
+        $data["thread"] = $request->thread;
+        $data["message"] = $request->message;
+        $data["lang"] = $request->lang;
+        $data["offer_id"] = $id;
+
+
+        Mail::to($request->receivers)
+            ->send(new \App\Mail\Share\Purchases\Offer($data));
+    }
+
+    /*Sales order mail share of pdf*/
     public function order_share($aid,$id,Request $request)
     {
 

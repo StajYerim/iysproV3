@@ -7,6 +7,9 @@
                 <h1>
                     <i class="fa fa-file-text-o"></i>
                     <span class="semi-bold">{{$order->descriptions}}</span>
+                    @if($order->tags->count() != 0)
+                        <span class="pull-right">@foreach($order->tags as $tag) <span  class="badge" style="background-color:{{$tag->bg_color}}">{{$tag->title}}</span>@endforeach</span>
+                    @endif
                 </h1>
             </div>
             <div class="col-lg-4 col-sm-4">
@@ -103,7 +106,7 @@
                                             <tr>
                                                 <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
                                                 <th width="14%">{{trans("word.quantity")}}</th>
-                                                <th width="10%" style="text-align:right">{{trans("word.unit")}} F.</th>
+                                                <th width="10%" style="text-align:right">{{trans("sentence.unit_price")}}</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.vat")}}</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.total")}}</th>
                                             </tr>
@@ -280,7 +283,7 @@
             </article>
         </div>
 
-        @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete purchase order ?",$id=$order->id])
+        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans('sentence.are_you_sure_delete_purchase_order'),$id=$order->id])
 
     </section>
     @include("components.external.transaction_payment",[$type="payment",$local="purchase_orders",$detail = $order,$abble="App\\\Model\\\Purchases\\\PurchaseOrders"])

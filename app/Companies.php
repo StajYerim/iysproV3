@@ -14,6 +14,7 @@ class Companies extends Model
   protected $guarded = [];
 
   protected $table = "company_list";
+  protected $appends = ["balance"];
 
     public $rules = [
         'company_name' => 'required|max:150',
@@ -28,6 +29,12 @@ class Companies extends Model
         'email' => 'max:50',
 
     ];
+
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->where("account_id", '=', aid());
+    }
+
     public function scopeList($query, $type, $aid)
     {
         if ($type == 'customer') {
@@ -237,8 +244,8 @@ class Companies extends Model
         //Açık Banka Fişleri
         foreach ($open_receipts as $receipts) {
             $ordersd = SalesOrders::find($order->id);
-            $siparis_total = $ordersd->remaining;
-            $receipt_remaining = $receipts->remaining;
+            $siparis_total = money_db_format($ordersd->remaining);
+            $receipt_remaining = money_db_format($receipts->remaining);
 
             //Banka fişi tutarı sipariş toplamından büyük veya eşit ise sipariş toplamını öde
             if ($siparis_total < $receipt_remaining) {
@@ -247,7 +254,7 @@ class Companies extends Model
                     "bank_items_id" => $receipts->id,
                     "bankabble_type" => "App\Model\Sales\SalesOrders",
                     "bankabble_id" => $ordersd->id,
-                    "amount" => $siparis_total,
+                    "amount" => get_money($siparis_total),
                 ]);
 
 
@@ -257,7 +264,7 @@ class Companies extends Model
                     "bank_items_id" => $receipts->id,
                     "bankabble_type" => "App\Model\Sales\SalesOrders",
                     "bankabble_id" => $ordersd->id,
-                    "amount" => $receipt_remaining
+                    "amount" => get_money($receipt_remaining)
                 ]);
             }else{
 
@@ -265,7 +272,7 @@ class Companies extends Model
                     "bank_items_id" => $receipts->id,
                     "bankabble_type" => "App\Model\Sales\SalesOrders",
                     "bankabble_id" => $ordersd->id,
-                    "amount" =>  $siparis_total
+                    "amount" =>  get_money($siparis_total)
                 ]);
             }
         }
@@ -273,8 +280,8 @@ class Companies extends Model
         //Açık Çekler
         foreach ($open_cheques as $cheque) {
             $orders = SalesOrders::find($order->id);
-            $siparis_toplam = $orders->remaining;
-            $remaining = $cheque->remaining;
+            $siparis_toplam = money_db_format($orders->remaining);
+            $remaining = money_db_format($cheque->remaining);
 
             //Banka fişi tutarı sipariş toplamından büyük veya eşit ise sipariş toplamını öde
             if ($siparis_toplam < $remaining) {
@@ -283,7 +290,7 @@ class Companies extends Model
                     "cheques_id" => $cheque->id,
                     "bankabble_type" => "App\Model\Sales\SalesOrders",
                     "bankabble_id" => $orders->id,
-                    "amount" => $siparis_toplam,
+                    "amount" => get_money($siparis_toplam),
                 ]);
 
 
@@ -293,7 +300,7 @@ class Companies extends Model
                     "cheques_id" => $cheque->id,
                     "bankabble_type" => "App\Model\Sales\SalesOrders",
                     "bankabble_id" => $orders->id,
-                    "amount" => $remaining
+                    "amount" => get_money($remaining)
                 ]);
 
 
@@ -302,7 +309,7 @@ class Companies extends Model
                     "cheques_id" => $cheque->id,
                     "bankabble_type" => "App\Model\Sales\SalesOrders",
                     "bankabble_id" => $orders->id,
-                    "amount" => $siparis_toplam,
+                    "amount" => get_money($siparis_toplam),
                 ]);
             }
         }
@@ -321,9 +328,9 @@ class Companies extends Model
 
             $ordersd = PurchaseOrders::find($order->id);
 
-            $siparis_total = $ordersd->remaining;
+            $siparis_total = money_db_format($ordersd->remaining);
 
-            $receipt_remaining = $receipts->remaining;
+            $receipt_remaining = money_db_format($receipts->remaining);
 
             //Banka fişi tutarı sipariş toplamından büyük veya eşit ise sipariş toplamını öde
             if ($siparis_total < $receipt_remaining) {
@@ -342,7 +349,7 @@ class Companies extends Model
                     "bank_items_id" => $receipts->id,
                     "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
                     "bankabble_id" => $ordersd->id,
-                    "amount" => $receipt_remaining
+                    "amount" => get_money($receipt_remaining)
                 ]);
 
 
@@ -359,8 +366,8 @@ class Companies extends Model
         //Verilen Çekler
         foreach ($open_cheques as $cheque) {
             $orders = PurchaseOrders::find($order->id);
-            $siparis_toplam = $orders->remaining;
-            $remaining = $cheque->remaining;
+            $siparis_toplam = money_db_format($orders->remaining);
+            $remaining = money_db_format($cheque->remaining);
             //Banka fişi tutarı sipariş toplamından büyük veya eşit ise sipariş toplamını öde
             if ($siparis_toplam < $remaining) {
 
@@ -368,7 +375,7 @@ class Companies extends Model
                     "cheques_id" => $cheque->id,
                     "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
                     "bankabble_id" => $orders->id,
-                    "amount" => $siparis_toplam,
+                    "amount" => get_money($siparis_toplam),
                 ]);
 
 
@@ -378,7 +385,7 @@ class Companies extends Model
                     "cheques_id" => $cheque->id,
                     "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
                     "bankabble_id" => $orders->id,
-                    "amount" => $remaining
+                    "amount" => get_money($remaining)
                 ]);
 
 
@@ -387,7 +394,7 @@ class Companies extends Model
                     "cheques_id" => $cheque->id,
                     "bankabble_type" => "App\Model\Purchases\PurchaseOrders",
                     "bankabble_id" => $orders->id,
-                    "amount" => $siparis_toplam,
+                    "amount" => get_money($siparis_toplam),
                 ]);
             }
         }
@@ -407,6 +414,7 @@ class Companies extends Model
         foreach($this->sales_orders as $order){
             $order["pro_type"] = "sales_order";
             $order["type_text"] = "Satış Siparişi";
+            $order["amount_type"] = "-";
             $statements[] = $order;
 
         }
@@ -414,6 +422,7 @@ class Companies extends Model
         foreach ($this->purchase_orders as $order) {
             $order["pro_type"] = "purchase_order";
             $order["type_text"] = "Alış Siparişi";
+            $order["amount_type"] = "+";
             $statements[] = $order;
 
         }
@@ -422,9 +431,11 @@ class Companies extends Model
             if ($collect->action_type == 1) {
                 $collect["pro_type"] = "collect";
                 $collect["type_text"] = "Tahsilat";
+                $order["amount_type"] = "+";
             } else {
                 $collect["pro_type"] = "payment";
                 $collect["type_text"] = "Ödeme";
+                $order["amount_type"] = "-";
             }
             $statements[] = $collect;
 
@@ -434,6 +445,7 @@ class Companies extends Model
         foreach ($this->buy_cheques as $buy_cheque) {
             $buy_cheque["pro_type"] = "buy_cheque";
             $buy_cheque["type_text"] = "Alınan Çek";
+            $order["amount_type"] = "+";
             $statements[] = $buy_cheque;
 
         }
@@ -441,6 +453,7 @@ class Companies extends Model
         foreach ($this->sell_cheques as $sell_cheque) {
             $sell_cheque["pro_type"] = "sell_cheque";
             $sell_cheque["type_text"] = "Verilen Çek";
+            $order["amount_type"] = "-";
             $statements[] = $sell_cheque;
         }
 

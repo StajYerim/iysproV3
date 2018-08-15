@@ -9,16 +9,15 @@ use App\ProductImage;
 use App\TagData;
 use App\Taggable;
 use App\Tags;
-
-use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class CompaniesController extends Controller
 {
+    /*Sales Order -> Customer page*/
     public function customer()
     {
         $type="customer";
@@ -26,24 +25,28 @@ class CompaniesController extends Controller
         return view("modules.companies.index", compact("companies", "type","route"));
 
     }
-
+    /*Purchase Order -> Supplier page*/
     public function supplier()
     {
         $type="supplier";
         $route = "purchases.companies.supplier.data";
         return view("modules.companies.index", compact("companies", "type","route"));
     }
-
+    /*Sales Order -> Customer Datatable server side*/
     public function customer_data($aid,$type)
     {
-        $companies = Companies::where("account_id",aid())->where($type,1)->get();
+        $companies = Companies::where("account_id",aid())->with("tags")->where($type,1)->get();
 
         return Datatables::of($companies)
             ->addColumn("balance",function($company){
                 return $company->balance."<br>".$company->money_status;
             })
             ->editColumn("company_name",function($company){
-                return "<span class='row-title'>".$company->company_name."</span><br>".$company->phone_number;
+                $tags_span = "";
+                   foreach($company->tags as $tag) {
+                        $tags_span .= "<span class='badge' style='background-color:".$tag["bg_color"]."' > ".$tag["title"]."</span >";
+                   }
+                return "<span class='row-title'>".$company->company_name."</span> ".$tags_span." <br>".$company->phone_number;
             })
             ->setRowAttr([
                 'style' => 'cursor:pointer',
@@ -54,7 +57,7 @@ class CompaniesController extends Controller
             ->rawColumns(["balance","company_name"])
             ->make(true);
     }
-
+    /*Purchase Order -> Supplier Datatable server side*/
     public function supplier_data($aid,$type)
     {
         $companies = Companies::where("account_id",aid())->where($type,1)->get();
@@ -75,7 +78,12 @@ class CompaniesController extends Controller
             ->rawColumns(["balance","company_name"])
             ->make(true);
     }
-
+    /*
+        Customer or Supplier Create&Update Form
+        $option = "customer" or "supplier"
+        $id = "companies"
+        $type = "new" or "update"
+    */
     public function form($aid, $option, $id, $type)
     {
         $company = $type != "new" ? Companies::find($id):"";
@@ -84,7 +92,9 @@ class CompaniesController extends Controller
         $form_type = $type == "new" ? "New" : "Update";
         return view("modules.companies.form", compact("form_type", "company_type","company","tags"));
     }
-
+    /*
+           Customer or Supplier Save new or update
+       */
     public function store($aid,Request $request, $id)
     {
 
@@ -140,12 +150,16 @@ class CompaniesController extends Controller
 
     }
 
+    /*Customer or supplier show page*/
     public function show($company_id, $id)
     {
+
         $company = Companies::find($id);
-        return view("modules.companies.show", compact("company"));
+        $company_type =  $company->supplier == 1 ? "supplier":"customer";
+        return view("modules.companies.show", compact("company","company_type"));
     }
 
+    /*Customer or supplier delete data*/
     public function destroy($company_id, $id)
     {
         Companies::destroy($id);
@@ -157,6 +171,7 @@ class CompaniesController extends Controller
 
     }
 
+    /*Company search select*/
     public function company_source($aid, Request $request)
     {
 
@@ -173,7 +188,7 @@ class CompaniesController extends Controller
     }
 
 
-
+    /*New company quick save*/
     public function quick_company(Request $request, $id)
     {
 
@@ -209,12 +224,7 @@ class CompaniesController extends Controller
 
     }
 
-    public function quick_form($aid,$id,$type)
-    {
-        $form_type = "new";
-    return view("components.modals.companies_remote",compact("type","form_type"));
-    }
-
+    /*Companies actions*/
     public function items($aid, $id)
     {
         $company = Companies::find($id);
@@ -231,7 +241,7 @@ class CompaniesController extends Controller
                 $amount = $item->grand_total;
                 $route=route("sales.orders.show",[aid(),$item->id]);
                 $last_balance = $last_balance + money_db_format($amount);
-                $action_type = "";
+                $action_type = "+";
             } else if ($item->pro_type == "purchase_order") {
                 $amount = $item->grand_total;
                 $route=route("purchases.orders.show",[aid(),$item->id]);
@@ -248,7 +258,7 @@ class CompaniesController extends Controller
                 $route=route("finance.accounts.receipt",[aid(),$item->id]);
                 $amount = $item->amount;
                 $last_balance = $last_balance+money_db_format($amount);
-                $action_type = "";
+                $action_type = "+";
 
             } else if ($item->pro_type == "buy_cheque") {
                 $route=route("finance.cheques.show",[aid(),$item->id]);
@@ -260,7 +270,7 @@ class CompaniesController extends Controller
                 $route=route("finance.cheques.show",[aid(),$item->id]);
                 $amount = $item->amount;
                 $last_balance = $last_balance + money_db_format($amount);
-                $action_type = "";
+                $action_type = "+";
 
             }
 
@@ -279,5 +289,17 @@ class CompaniesController extends Controller
 
         return $results;
 
+    }
+
+    /*Companie summary pdf
+    {$id} = company_id*/
+    public function summary_pdf($aid,$id,$type)
+    {
+        $company = Companies::find($id);
+
+        $items =  $this->items($aid,$id);
+        $pdf = PDF::loadView("modules.companies.print.summary", compact("company","items"))->setPaper('A4');
+        //        return view("companies.print.statement",compact("company","actions"));
+        return $type == "show" ? $pdf->stream():$pdf->download();
     }
 }

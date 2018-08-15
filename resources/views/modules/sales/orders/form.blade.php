@@ -91,13 +91,32 @@
                                     <fieldset>
                                         <div class="form-group"
                                              v-bind:class="{'has-error':errors.has('form.due_date')}">
-                                            <label class="col-md-3 control-label">{{trans("word.date")}}</label>
+                                            <label class="col-md-3 control-label">{{trans("sentence.due_date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"
                                                               name="form.due_date" v-validate="'required'"
                                                               class="form-control datepicker"
                                                               v-model="form.due_date">
+                                                    </the-mask>
+
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group"
+                                             v-bind:class="{'has-error':errors.has('form.termin_date')}">
+                                            <label class="col-md-3 control-label">{{trans("sentence.termin_date")}}</label>
+                                            <div class="col-md-2 ">
+                                                <div class="input-group">
+                                                    <the-mask :mask="['##.##.####']" type="text"
+                                                              name="form.termin_date" v-validate="'required'"
+                                                              class="form-control datepicker"
+                                                              v-model="form.termin_date">
                                                     </the-mask>
 
                                                     <span class="input-group-addon">
@@ -155,6 +174,7 @@
                             sales_offer_id: "{{$offer_id}}",
                             date: "{{$form_type == "update" ? $order->date:date_tr()}}",
                             due_date: "{{$form_type == "update" ? $order->due_date:date_tr()}}",
+                            termin_date: "{{$form_type == "update" ? $order->termin_date:date_tr()}}",
                             grand_total: "{{$form_type == "update" ? $order->grand_total:"0,00"}}",
                             sub_total: "{{$form_type == "update" ? $order->sub_total:"0,00"}}",
                             vat_total: "{{$form_type == "update" ? $order->vat_total:"0,00"}}",

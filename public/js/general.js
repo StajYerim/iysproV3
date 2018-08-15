@@ -178,9 +178,11 @@ function datePicker() {
         onSelect: function(date,datePicker,index) {
 
                     data = datePicker.input[0].name;
-console.log(data)
+
                     if(data == "form.date"){
                         VueName.form.date = date;
+                    }else  if(data == "form.payment_date"){
+                        VueName.form.payment_date = date;
                     }else if(data == "form.expired_date"){
                         VueName.form.expired_date = date;
                     }else if(data == "form.effective_date"){
@@ -222,9 +224,11 @@ console.log(data)
                     }else if(data == "invoice.due_date"){
 
                         VueName.invoice.due_date = date;
+                    }else if(data =="production.start_date"){
+                        VueName.production.start_date = date;
                     }
 
-
+console.log(data);
 
 
             console.log(datePicker);

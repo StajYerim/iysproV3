@@ -131,8 +131,8 @@ class MenuTableSeeder extends Seeder
                         'order' => 1,
                         'permission' => 2,
                         'icon' => '',
-                        'route' => '',
-                        'is_route' => 0
+                        'route' => 'purchases.offers.index',
+                        'is_route' => 1
                     ],
                     [
                         'id'=>13,
@@ -231,8 +231,8 @@ class MenuTableSeeder extends Seeder
                         'order' => 5,
                         'permission' => 2,
                         'icon' => '',
-                        'route' => '',
-                        'is_route' => 0
+                        'route' => 'finance.vat_report.index',
+                        'is_route' => 1
                     ],
             [
                 'id'=>23,
@@ -271,8 +271,8 @@ class MenuTableSeeder extends Seeder
                         'order' => 3,
                         'permission' => 2,
                         'icon' => '',
-                        'route' => '',
-                        'is_route' => 0
+                        'route' => 'stock.stock_in_report.index',
+                        'is_route' => 1
                     ],
             [
                 'id'=>27,
@@ -366,6 +366,36 @@ class MenuTableSeeder extends Seeder
                 'permission' => 1,
                 'icon' => 'language',
                 'route' => 'admin.locale.index',
+                'is_route' => 1
+            ],
+            [
+                'id'=>36,
+                'parent_id' => null,
+                'group'=>'production',
+                'order' => 6,
+                'permission' => 2,
+                'icon' => 'industry',
+                'route' => '',
+                'is_route' => 0
+            ],
+            [
+                'id'=>37,
+                'parent_id' => 36,
+                'group'=>'production',
+                'order' => 1,
+                'permission' => 2,
+                'icon' => '',
+                'route' => 'production.orders.index',
+                'is_route' => 1
+            ],
+            [
+                'id'=>38,
+                'parent_id' => 36,
+                'group'=>'production',
+                'order' => 2,
+                'permission' => 2,
+                'icon' => '',
+                'route' => 'production.calendar.index',
                 'is_route' => 1
             ],
 

@@ -2,7 +2,7 @@
 
 namespace App\Model\Stock\Product;
 
-
+use App\Currency;
 use App\Model\Purchases\PurchaseOrderItems;
 use App\Model\Sales\SalesOrders;
 use App\Model\Sales\SalesOrderItems;
@@ -17,12 +17,13 @@ class Product extends Model
 
     protected $guarded = [];
 
+
     public $rules = [
         'name' => 'required|max:200',
         'barcode' => 'max:100',
         'code' => 'max:100',
-        'buying_currency' => 'max:15',
-        'buying_price' => 'max:15',
+        'buying_price' => 'max:12',
+        'list_price' => 'max:12',
 
     ];
 
@@ -30,6 +31,11 @@ class Product extends Model
     public function category()
     {
         return $this->hasOne(Category::class, "id", "category_id");
+    }
+
+    public function description()
+    {
+        return $this->hasOne(ProductDescriptions::class, "product_id", "id");
     }
 
     //All barcodes
@@ -161,6 +167,16 @@ class Product extends Model
     public function movements()
     {
         return $this->hasMany(StockItems::class, "product_id", "id");
+    }
+
+    public function purchase_currency()
+    {
+        return $this->hasOne(Currency::class,'id','buying_currency');
+    }
+
+    public function sales_currency()
+    {
+        return $this->hasOne(Currency::class,'id','currency');
     }
 
 }

@@ -7,6 +7,7 @@ use App\Language;
 use App\Mail\Share\Sales\Order;
 use App\Mail\Share\Sales\Transfer;
 use App\Mail\Share\Sales\Waybill;
+use App\Model\Production\Production;
 use App\Model\Sales\OrderWaybill;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
@@ -43,7 +44,11 @@ class OrdersController extends Controller
                     return "product_update($orders->id)";
                 },
             ])->editColumn('company_area',function($orders){
-                return $orders["company"]["company_name"]."<br>".$orders->description;
+                $tags_span = "";
+                foreach($orders->tags as $tag) {
+                    $tags_span .= "<span class='badge' style='background-color:".$tag["bg_color"]."' > ".$tag["title"]."</span >";
+                }
+                return $orders["company"]["company_name"]." ".$tags_span."<br>".$orders->description;
             })
             ->editColumn('date',function($orders){
                 return $orders->date."<br>".$orders->due_date;
@@ -91,15 +96,13 @@ class OrdersController extends Controller
             "company_id" => $request->form["company_id"]["id"],
             "date" => $request->form["date"],
             "due_date" => $request->form["due_date"],
+            "termin_date" => $request->form["termin_date"],
             "currency" => $request->form["currency"],
             "currency_value" => $request->form["currency_value"],
             "sub_total" => $request->form["sub_total"],
             "vat_total" => $request->form["vat_total"],
             "grand_total" => $request->form["grand_total"]
         ]);
-
-        Bankabble::where("bankabble_id", $order->id)->where("bankabble_type", "App\Model\Sales\SalesOrders")->delete();
-
 
         Taggable::where("taggable_type","App\Model\Sales\SalesOrders")->where("taggable_id",$order->id)->delete();
 
@@ -136,10 +139,9 @@ class OrdersController extends Controller
         }
         $order->items()->whereNotIn("id", $whereNot)->delete();
 
+        Bankabble::where("bankabble_id", $order->id)->where("bankabble_type", "App\Model\Sales\SalesOrders")->delete();
+
         $order->company->open_receipts_set($order->company->open_receipts,$order->company->open_cheques,$order);
-
-
-
 
         flash()->overlay($id == 0 ? "New Sales Order" : "Sales Order Updated", 'Success')->success();
         sleep(1);
@@ -341,6 +343,14 @@ class OrdersController extends Controller
         if(!$transfer){
             return "error";
         }
+    }
+
+    /*Order send product planning*/
+    public function order_send_planning($aid,Request $request){
+
+
+        $sales_order = SalesOrders::find($request->order_id);
+        $sales_order->order_planning()->create(["status"=>0,"account_id"=>aid()]);
     }
 
 }

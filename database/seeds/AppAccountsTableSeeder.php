@@ -28,9 +28,15 @@ class AppAccountsTableSeeder extends Seeder
             ],
         ]);
 
+
         $account = \App\Account::find(1);
         $account->units()->attach(1);
         $account->units()->attach(20);
+
+        DB::table('bank_accounts')->delete();
+        DB::table('bank_accounts')->insert([
+            ["account_id" => 1, "name" => "KASA HESABI","status"=>1,"type"=>1,"currency"=>"TRY"]
+        ]);
 
         $user = \App\User::find(2);
         $user->account_id = 1;

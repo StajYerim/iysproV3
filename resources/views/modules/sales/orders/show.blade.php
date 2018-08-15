@@ -8,7 +8,11 @@
                     <span class="semi-bold">
                         {{$order->descriptions}}
                     </span>
+                    @if($order->tags->count() != 0)
+                        <span class="pull-right">@foreach($order->tags as $tag) <span  class="badge" style="background-color:{{$tag->bg_color}}">{{$tag->title}}</span>@endforeach</span>
+                    @endif
                 </h1>
+
             </div>
             <div class="col-lg-4 col-sm-4">
 
@@ -36,6 +40,10 @@
                             <li>
                                 <a tabindex="-1" data-toggle="modal" data-target="#transModal" href="#"><i class="fa fa-truck"  aria-hidden="true"></i>
                                    SEVKİYAT BİLGİSİ GÖNDER</a>
+                            </li>
+                            <li>
+                                <a tabindex="-1" v-if="!planning" @click="orderPlanningSend" href="#"><i class="fa fa-industry"  aria-hidden="true"></i>
+                                    ÜRETİME GÖNDER</a>
                             </li>
                             <li>
                                 <a onclick="$(this).orderReturn()" data-id="0" id="orderReturn" href="#"><i
@@ -122,7 +130,7 @@
                                             <tr>
                                                 <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
                                                 <th width="14%">{{trans("word.quantity")}}</th>
-                                                <th width="10%" style="text-align:right">{{trans("word.unit")}} F.</th>
+                                                <th width="10%" style="text-align:right">{{trans("sentence.unit_price")}}</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.vat")}}</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.total")}}</th>
                                             </tr>
@@ -279,10 +287,15 @@
                                                 <i class="fa fa-{{$order->currency}}"></i></span></div>
                                     </div>
 
-
                                 </div>
                               <hr>
-
+                                <div class="row" v-if="planning">
+                                    <div class="col-sm-12">
+                                        <strong>SİPARİŞ ÜRETİME GÖNDERİLDİ</strong><br>
+                                        DURUM : {{$order->order_planning == true ? $order->order_planning->status_text:"BEKLEMEDE"}}
+                                    </div>
+                                </div>
+                                <hr>
                                 @if($order->invoice)
 
                                     <div class="row">
@@ -306,11 +319,13 @@
                                 @endif
 
                                 @if($order->offer)
-                                    <div class="col-sm-12">
-                                        {{trans("word.offer")}}
-                                        <br>
-                                        <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? "SATIŞ TEKLİFİ":$order->offer["description"]}}
-                                            (#{{$order->offer["id"]}})</a><br>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {{trans("word.offer")}}
+                                            <br>
+                                            <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? "SATIŞ TEKLİFİ":$order->offer["description"]}}
+                                                (#{{$order->offer["id"]}})</a><br>
+                                        </div>
                                     </div>
                                     <hr>
                                 @endif
@@ -882,7 +897,6 @@
                                             </label>
                                             <div class="col-md-8 ">
                                                 <input v-model="trans.form.not" type='email'  class="form-control">
-
                                             </div>
                                         </div>
                                     </div>
@@ -1000,6 +1014,7 @@
                 VueName = new Vue({
                     el: "#show",
                     data: {
+                        planning:{{$order->order_planning == true ? 1:0}},
                         remaining:"{{$order->remaining}}",
                         company_balance:"{{$order->company->balance}}",
                         collect_items:[
@@ -1077,6 +1092,33 @@
                         }
                     },
                     methods: {
+                        orderPlanningSend:function(){
+                            swal({
+                                title: "Üretim Onayı",
+                                text: "Bu sipariş üretim planlanmasına dahil edilecektir.",
+                                icon: "warning",
+                                buttons:["VAZGEÇ","ONAYLA"],
+                                dangerMode: true,
+                            })
+                                .then((willCheck) => {
+                                    if (willCheck) {
+                                        fullLoading("Lütfen Bekleyiniz.");
+
+                                         axios.post("{{route("sales.planning.send",aid())}}",{order_id:"{{$order->id}}"}).then(res=>{
+                                             VueName.planning =1;
+                                             swal("Sipariş başarıyla üretim planlanama bölümüne gönderildi.", {
+                                                 icon: "success",
+                                             });
+                                                     fullLoadingClose()
+                                         }).catch(error=>{
+                                             fullLoadingClose()
+                                             swal("İşlem hatalı lütfen daha sonra tekrar deneyiniz.", {
+                                                 icon: "error",
+                                             });
+                                         });
+                                    }
+                                });
+                        },
                         transferAdd: function () {
                             $("#transferButton").button("loading");
                             $form = this.trans.form;

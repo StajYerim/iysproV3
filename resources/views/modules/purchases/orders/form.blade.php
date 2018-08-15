@@ -26,7 +26,7 @@
                                                 {{--</a>--}}
                                                 <button type="button" @click="formSend" href="#"
                                                         class="btn btn-success btn-lg ">
-                                                    {{trans("WORD.save")}}
+                                                    {{trans("word.save")}}
                                                 </button>
                                             </div>
                                             <div class="col-md-6 col-sm-6">
@@ -48,7 +48,7 @@
                                                 <v-select
                                                         v-bind:class="{'v-select-error':errors.has('form.company_id')}"
                                                         v-validate="'required'" name="form.company_id" label="text"
-                                                        :filterable="true" placeholder="Choose Company"
+                                                        :filterable="true" placeholder="{{ trans('sentence.choose_company') }}"
                                                         :options="options" @search="onSearch"
                                                         transition="fade" v-model="form.company_id">
                                                     <template slot="no-options">
