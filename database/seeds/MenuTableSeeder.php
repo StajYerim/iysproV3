@@ -131,8 +131,8 @@ class MenuTableSeeder extends Seeder
                         'order' => 1,
                         'permission' => 2,
                         'icon' => '',
-                        'route' => '',
-                        'is_route' => 0
+                        'route' => 'purchases.offers.index',
+                        'is_route' => 1
                     ],
                     [
                         'id'=>13,

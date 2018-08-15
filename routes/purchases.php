@@ -27,7 +27,7 @@ Route::group(['prefix'=>'{company_id}/purchases','middleware'=>'not.admin'],func
     Route::get("offers/{id}/show","Modules\Purchases\OffersController@show")->name("purchases.offers.show");
     Route::delete("offers/{id}/destroy","Modules\Purchases\OffersController@destroy")->name("purchases.offers.destroy");
     Route::post("offers/{id}/status-send","Modules\Purchases\OffersController@status_send")->name("purchases.offers.status_send");
-    Route::get("offers/{id}/pdf/{type}/{lang}","Modules\Sales\OffersController@pdf")->name("purchases.offers.pdf");
+    Route::get("offers/{id}/pdf/{type}/{lang}","Modules\Purchases\OffersController@pdf")->name("purchases.offers.pdf");
 
     //Purchases Orders
     Route::get('orders', 'Modules\Purchases\OrdersController@index')->name('purchases.orders.index');

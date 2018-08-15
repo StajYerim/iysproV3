@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Artisan;
 
-class OffersController extends Controller
+class
+OffersController extends Controller
 {
     public function index()
     {
