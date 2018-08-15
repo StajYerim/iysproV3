@@ -460,7 +460,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'stay_signed_in', 'text'=> ['en'=> 'STAY SIGNED IN','tr'=> 'OTURUMUMU AÇIK TUT']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'create_account', 'text'=> ['en'=> 'CREATE ACCOUNT','tr'=> 'HESAP OLUŞTUR']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'email_confirmation_is_required', 'text'=> ['en'=> 'E-MAIL CONFIRMATIN IS REQUIRED','tr'=> 'E-POSTA DOĞRULAMASI GEREKLİDİR']]);
-        LanguageLine::create(['group'=> 'sentence', 'key'=> 'resend_confirmation_link', 'text'=> ['en'=> 'RESEND CONFIRMATION LINK','tr'=> 'ONAY BAĞLANTISINI TEKRAR GÖNDER']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'resend_confirmation_link', 'text'=> ['en'=> 'RESEND CONFIRMATION LINK','tr'=> 'BAĞLANTIYI TEKRAR GÖNDER']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'commercial_title', 'text'=> ['en'=> 'COMMERCIAL TITLE','tr'=> 'TİCARİ ÜNVAN']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'do_not_forget_your_password', 'text'=> ['en'=> 'DO NOT FORGET YOUR PASSWORD','tr'=> 'ŞİFRENİZİ UNUTMAYIN']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'password_confirmation', 'text'=> ['en'=> 'PASSWORD CONFIRMATION','tr'=> 'ŞİFRE DOĞRULAMA']]);
@@ -564,6 +564,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'processed_invoice', 'text'=> ['en'=> 'PROCESSED INVOICE','tr'=> 'İŞLENMİŞ FATURA']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'due_date', 'text'=> ['en'=> 'DUE DATE','tr'=> 'VADE TARİHİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'termin_date', 'text'=> ['en'=> 'TERMIN DATE','tr'=> 'TERMİN TARİHİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'back_to_login', 'text'=> ['en'=> 'BACK TO LOGIN','tr'=> 'GİRİŞE GERİ DÖN']]);
 
     }
 }

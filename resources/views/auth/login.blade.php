@@ -13,7 +13,7 @@
             </div>
 
         @endif
-        <div class="well no-padding col-xs-12 ">
+        <div class="well no-padding col-xs-12">
             <form action="{{ route('login') }}" method="POST" id="login-form" class="smart-form client-form">
 
                 @csrf
