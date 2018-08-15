@@ -264,7 +264,7 @@
                                         <td>{{ $bank_account->currency }}</td>
                                         <td>
                                             {{ $bank_account->balance }}
-                                            <i class="fa fa-{{ $bank_account->currency }}"></i>
+                                            <i class="fa fa-{{ strtolower($bank_account->currency) }}"></i>
                                         </td>
                                     </tr>
 

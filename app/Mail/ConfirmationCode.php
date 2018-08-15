@@ -32,7 +32,7 @@ class ConfirmationCode extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.confirmation_code')
+        return $this->subject("Kayıt Onay Kodu")->view('mails.confirmation_code')
             ->with([
                 'user' => $this->user
             ]);
