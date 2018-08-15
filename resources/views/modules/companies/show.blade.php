@@ -120,9 +120,9 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <button type="button" class="btn btn-primary btn btn-block">
+                                                    <a href="{{route("company.summary.pdf",[aid(),$company->id,"show"])}}" target="blank"  class="btn btn-primary btn btn-block">
                                                         {{trans("sentence.download_pdf_account_summary")}}
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </div>
 

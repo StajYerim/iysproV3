@@ -231,8 +231,8 @@ class MenuTableSeeder extends Seeder
                         'order' => 5,
                         'permission' => 2,
                         'icon' => '',
-                        'route' => '',
-                        'is_route' => 0
+                        'route' => 'finance.vat_report.index',
+                        'is_route' => 1
                     ],
             [
                 'id'=>23,
@@ -271,8 +271,8 @@ class MenuTableSeeder extends Seeder
                         'order' => 3,
                         'permission' => 2,
                         'icon' => '',
-                        'route' => '',
-                        'is_route' => 0
+                        'route' => 'stock.stock_in_report.index',
+                        'is_route' => 1
                     ],
             [
                 'id'=>27,
