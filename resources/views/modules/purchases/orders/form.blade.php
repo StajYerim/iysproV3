@@ -26,7 +26,7 @@
                                                 {{--</a>--}}
                                                 <button type="button" @click="formSend" href="#"
                                                         class="btn btn-success btn-lg ">
-                                                    {{trans("WORD.save")}}
+                                                    {{trans("word.save")}}
                                                 </button>
                                             </div>
                                             <div class="col-md-6 col-sm-6">

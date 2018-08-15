@@ -28,8 +28,8 @@
 
                             <div class="pull-right new-button">
 
-                                <a href="{{route("sales.offers.form",[aid(),0,"new"])}}">
-                                <span class="btn btn-success">{{trans("sentence.new_offer")}}</span>
+                                <a href="{{route("purchases.offers.form",[aid(),0,"new"])}}">
+                                <span class="btn btn-success">{{ trans("sentence.new_offer") }}</span>
                                 </a>
                             </div>
 
@@ -37,10 +37,10 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{trans("word.customer")}}</th>
-                                    <th>{{trans("word.date")}}</th>
-                                    <th>{{trans("word.total")}}</th>
-                                    <th>{{trans("word.status")}}</th>
+                                    <th>{{ trans("word.customer") }}</th>
+                                    <th>{{ trans("word.date") }}</th>
+                                    <th>{{ trans("word.total") }}</th>
+                                    <th>{{ trans("word.status") }}</th>
                                 </tr>
                                 </thead>
 
@@ -76,7 +76,7 @@
                 stateDuration: 45,
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('sales.offers.index_list',aid()) !!}',
+                ajax: '{!! route('purchases.offers.index_list',aid()) !!}',
                 columns: [
                     {
                         data: 'id',
@@ -111,7 +111,7 @@
             table_search(tables)
 
             function product_update(id) {
-                return window.location.href = '/{{aid()}}/sales/offers/' + id + '/show';
+                return window.location.href = '/{{aid()}}/purchases/offers/' + id + '/show';
             }
 
         </script>

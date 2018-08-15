@@ -55,8 +55,6 @@ class OffersController extends Controller
 
     public function store($aid, $id, Request $request)
     {
-
-
         $offer = SalesOffers::updateOrCreate(["id" => $id], [
             "description" => $request->form["description"],
             "description_detail" => $request->form["description_detail"],
