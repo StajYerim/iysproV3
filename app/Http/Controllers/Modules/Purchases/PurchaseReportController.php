@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Modules\Sales;
+namespace App\Http\Controllers\Modules\Purchases;
 
 use App\Companies;
-use App\Model\Sales\SalesOrders;
-use App\Model\Sales\SalesOrderItems;
+use App\Model\Purchases\PurchaseOrders;
 use App\Model\Stock\Product\Category;
 use App\Model\Stock\Product\Product;
 use App\Tags;
@@ -13,12 +12,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
-class SalesReportController extends Controller
+class PurchaseReportController extends Controller
 {
     /*Sales report index*/
     public function index()
     {
-        return view("modules.sales.sales_reports.index");
+        return view("modules.purchases.purchases_reports.index");
     }
 
     /*Sales report pies data and list*/
@@ -28,48 +27,48 @@ class SalesReportController extends Controller
         $end = Carbon::createFromFormat('Y-m-d', $request->end)->format("Y-m-d");
 
         //Müşteri Etiketleri
-        $customer_tags = Tags::has("companies.sales_orders.items")
-            ->whereHas("companies.sales_orders", function ($query) use ($start, $end) {
+        $customer_tags = Tags::has("companies.purchase_orders.items")
+            ->whereHas("companies.purchase_orders", function ($query) use ($start, $end) {
                 $query->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end]);
             })
             ->get();
 
 
         //Müşteri Etiketsizlerin Fiyatı
-        $customers_sum = Companies::with('tags')
+           $customers_sum = Companies::with('tags')
             ->doesntHave("tags")
-            ->whereHas("sales_orders", function ($query) use ($start, $end) {
+            ->whereHas("purchase_orders", function ($query) use ($start, $end) {
                 $query->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end]);
             })
-            ->where("customer", 1)
+            ->where("supplier", 1)
             ->where("account_id", aid())
             ->get();
 
         $customer_total = 0;
         foreach ($customers_sum as $sum) {
             if ($request->vat == 1) {
-                $customer_total += $sum->sales_orders()->sum("grand_total");
+                $customer_total += $sum->purchase_orders()->sum("grand_total");
             } else {
-                $customer_total += $sum->sales_orders()->sum("sub_total");
+                $customer_total += $sum->purchase_orders()->sum("sub_total");
             }
         }
 
         //Fatura Etiketleri
-        $order_tags = Tags::has("sales_orders.items")
-            ->whereHas("sales_orders", function ($query) use ($start, $end) {
+        $order_tags = Tags::has("purchase_orders.items")
+            ->whereHas("purchase_orders", function ($query) use ($start, $end) {
                 $query->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end]);
             })
             ->get();
 
         // Fatura Etiketsizlerin -> Fiyatları
         if ($request->vat == 1) {
-            $sales_orders_sum = SalesOrders::with('tags')
+            $sales_orders_sum = PurchaseOrders::with('tags')
                 ->doesntHave("tags")
                 ->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end])
                 ->where("account_id", aid())
                 ->sum("grand_total");
         } else {
-            $sales_orders_sum = SalesOrders::with('tags')
+            $sales_orders_sum = PurchaseOrders::with('tags')
                 ->doesntHave("tags")
                 ->where("account_id", aid())
                 ->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end])
@@ -77,27 +76,27 @@ class SalesReportController extends Controller
         }
 
         //Ürün Kategorileri
-        $categories = Category::with("products.order_items")
-            ->has("products.order_items.order")
-            ->whereHas("products.order_items.order", function ($query) use ($start, $end) {
+        $categories = Category::with("products.porder_items")
+            ->has("products.porder_items.order")
+            ->whereHas("products.porder_items.order", function ($query) use ($start, $end) {
                 $query->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end]);
             })
             ->where("account_id", aid())
             ->get();
 
         //Ürün Kategorisiz Fiyatları
-         $products = Product::where("account_id", aid())
+          $products = Product::where("account_id", aid())
             ->doesntHave("category")
-            ->whereHas("order_items.order", function ($query) use ($start, $end) {
+            ->whereHas("porder_items.order", function ($query) use ($start, $end) {
                 $query->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end]);
             })
             ->withCount([
-                'order_items as total' => function ($query) {
+                'porder_items as total' => function ($query) {
                     $query->select(DB::raw("SUM(total) as total"));
                 }
             ])
             ->withCount([
-                'order_items as not_kdv' => function ($query) {
+                'porder_items as not_kdv' => function ($query) {
                     $query->select(DB::raw("SUM(quantity*price) as total"));
                 }
             ])
@@ -114,17 +113,17 @@ class SalesReportController extends Controller
         }
 
 
-        //SALES ORDERS
+        //Purchase ORDERS
         $labels_tag = array();
         $data_tag = array();
         $backgroundColor_tag = array();
         foreach ($order_tags as $tag) {
-            if ($tag->sales_orders_amount != "0,00") {
+            if ($tag->purchase_orders_amount != "0,00") {
                 array_push($labels_tag, $tag->title);
                 if ($request->vat == 1) {
-                    array_push($data_tag, (double)money_db_format($tag->sales_orders_amount));
+                    array_push($data_tag, (double)money_db_format($tag->purchase_orders_amount));
                 } else {
-                    array_push($data_tag, (double)money_db_format($tag->sales_orders_amount_safe));
+                    array_push($data_tag, (double)money_db_format($tag->purchase_orders_amount_safe));
                 }
                 array_push($backgroundColor_tag, $tag->bg_color);
             }
@@ -147,12 +146,12 @@ class SalesReportController extends Controller
         $data_tag_customer = array();
         $backgroundColor_tag_customer = array();
         foreach ($customer_tags as $company_tag) {
-            if (money_db_format($company_tag->companies_amount) != 0) {
+            if (money_db_format($company_tag->companies_purchase_amount) != 0) {
                 array_push($labels_tag_customer, $company_tag->title);
                 if ($request->vat == 1) {
-                    array_push($data_tag_customer, (double)($company_tag->companies_amount));
+                    array_push($data_tag_customer, (double)($company_tag->companies_purchase_amount));
                 } else {
-                    array_push($data_tag_customer, (double)($company_tag->companies_amount_safe));
+                    array_push($data_tag_customer, (double)($company_tag->companies_purchase_amount_safe));
                 }
                 array_push($backgroundColor_tag_customer, $company_tag->bg_color);
             }
@@ -178,9 +177,9 @@ class SalesReportController extends Controller
 
             array_push($labels_tag_product, $category->name);
             if ($request->vat == 1) {
-                array_push($data_tag_product,(double) money_db_format($category->total_order));
+                array_push($data_tag_product,(double) money_db_format($category->total_purchase_order));
             } else {
-                array_push($data_tag_product, (double)money_db_format($category->total_order_safe));
+                array_push($data_tag_product, (double)money_db_format($category->total_purchase_order_safe));
             }
             array_push($backgroundColor_tag_product, $category->color);
 
@@ -199,7 +198,7 @@ class SalesReportController extends Controller
         // CATEGORY PRODUCT
 
         //SALES ORDER LİST
-        $sales_order_list = SalesOrders::with("company")->where("account_id", aid())
+        $sales_order_list = PurchaseOrders::with("company")->where("account_id", aid())
             ->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end])
             ->get();
 
@@ -211,17 +210,17 @@ class SalesReportController extends Controller
 
         //Product List
         $product_list = Product::with("named")->with("unit")->withCount([
-            'order_items as total_quantity' => function ($query) {
+            'porder_items as total_quantity' => function ($query) {
                 $query->select(DB::raw("SUM(quantity) as quantity"));
             }
         ])
             ->withCount([
-                'order_items as total_amount' => function ($query) {
+                'porder_items as total_amount' => function ($query) {
                     $query->select(DB::raw("SUM(total) as total_amount"));
                 }
             ])
-            ->has("order_items")
-            ->whereHas("order_items.order", function ($query) use ($start, $end) {
+            ->has("porder_items")
+            ->whereHas("porder_items.order", function ($query) use ($start, $end) {
                 $query->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end]);
             })
             ->get();

@@ -126,6 +126,10 @@ class Product extends Model
         return $this->hasMany(PurchaseOrderItems::class,"product_id","id");
     }
 
+    public function porder_items(){
+        return $this->hasMany(PurchaseOrderItems::class,"product_id","id");
+    }
+
     public function getStockCountAttribute(){
 
         //Porder

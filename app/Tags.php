@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Model\Finance\Expenses;
+use App\Model\Purchases\PurchaseOrders;
 use App\Model\Sales\SalesOrders;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,9 +31,24 @@ class Tags extends Model
         return $this->morphedByMany(SalesOrders::class, 'taggable');
     }
 
+    public function purchase_orders()
+    {
+        return $this->morphedByMany(PurchaseOrders::class, 'taggable');
+    }
+
     public function getSalesOrdersAmountAttribute()
     {
         return get_money($this->sales_orders()->sum("grand_total"));
+    }
+
+    public function getPurchaseOrdersAmountAttribute()
+    {
+        return get_money($this->purchase_orders()->sum("grand_total"));
+    }
+
+    public function getPurchaseOrdersAmountSafeAttribute()
+    {
+        return get_money($this->purchase_orders()->sum("sub_total"));
     }
 
     public function getSalesOrdersAmountSafeAttribute()
@@ -63,6 +79,31 @@ class Tags extends Model
         $total = 0;
         foreach ($this->companies as $company) {
             $total += $company->sales_orders()->sum("sub_total");
+        }
+
+        return ($total);
+
+    }
+
+
+    public function getCompaniesPurchaseAmountAttribute()
+    {
+
+        $total = 0;
+        foreach ($this->companies as $company) {
+            $total += $company->purchase_orders()->sum("grand_total");
+        }
+
+        return ($total);
+
+    }
+
+    public function getCompaniesPurchaseAmountSafeAttribute()
+    {
+
+        $total = 0;
+        foreach ($this->companies as $company) {
+            $total += $company->purchase_orders()->sum("sub_total");
         }
 
         return ($total);
