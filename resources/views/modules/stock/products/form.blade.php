@@ -497,7 +497,7 @@
                                     });
 
                                 } else {
-                                    notification("Error", "Please required field", "danger");
+                                    notification("Error", "Lütfen gerekli alanları doldurunuz", "danger");
                                 }
                             })
 

@@ -23,6 +23,8 @@ Route::group(['prefix'=>'{company_id}/settings','middleware'=>'not.admin'],funct
         Route::get("/email","EmailController@index")->name("email");
         Route::get("/categoryandtags","CategoryAndTagsController@index")->name("categoryandtags");
         Route::get("/invoice","InvoiceController@index")->name("invoice");
+        Route::get("/company-profile","CompanyProfileController@index")->name("company_profile");
+        Route::post("/company-profile","CompanyProfileController@update")->name("company_profile.update");
     });
 
 
