@@ -111,10 +111,8 @@
                     <div class="tab-pane fade  active in" id="g1">
                         <small style="font-size:13px;">
                             ----- </small>
-                        <br> <small style="font-size:14px;font-weight: 600;"> {{trans("sentence.sales_order")}}: 0,00</small>
-                        <br><small style="font-size:14px;font-weight: 600;"> {{trans("sentence.purchase_order")}}: </small>
-                        <br> <small style="font-weight: 600">{{trans("word.purchase")}}/{{trans("word.cost")}} :</small> <small style="color:#886650!important;font-size:14px;font-weight: 600;">0,00<i class="fa fa-try"></i></small>
-                        <br>  <small style="font-weight: 600"> {{trans("sentence.list_price")}} :</small> <small style="color:#2AC!important;font-size:14px;font-weight: 600;">135,00<i class="fa fa-try"></i></small>
+                        <br> <small style="font-weight: 600">{{trans("word.purchase")}}/{{trans("word.cost")}} :</small> <small style="color:#886650!important;font-size:14px;font-weight: 600;">{{ $product->buying_price }} <i class="fa fa-try"></i></small>
+                        <br>  <small style="font-weight: 600"> {{trans("sentence.list_price")}} :</small> <small style="color:#2AC!important;font-size:14px;font-weight: 600;">{{ $product->list_price }} <i class="fa fa-try"></i></small>
 
                     </div>
 
