@@ -11,7 +11,10 @@ Route::group(['prefix'=>'{company_id}/settings','middleware'=>'not.admin'],funct
     Route::group(["namespace" => "Modules\Settings"],function(){
         Route::get("/","HomeController@index")->name("settings.home");
         Route::get("/general","GeneralController@index")->name("general");
+
         Route::get("/offer","OfferController@index")->name("offer");
+        Route::post("/offer","OfferController@post")->name("offer.post");
+
         Route::get("/sales","SalesController@index")->name("sales");
         Route::get("/purchase","PurchaseController@index")->name("purchase");
         Route::get("/product","ProductController@index")->name("product");
