@@ -46,7 +46,7 @@
 
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="text-center"><b>MÜŞTERİ KATEGORİLERİ</b></div>
+                                        <div class="text-center"><b>TEDARİKÇİ KATEGORİLERİ</b></div>
                                         <canvas id="customersChart" height="160"></canvas>
 
                                         <div v-for="(item) in customer_pie" class="col-md-12">
@@ -84,11 +84,11 @@
             <div class="widget-body-toolbar st">
 
                 <div class="row">
-                <div class="col-sm-8" style="margin-top:-20px;"><h2>Satış Rapoları Tablosu</h2></div>
+                <div class="col-sm-8" style="margin-top:-20px;"><h2>Satın Alma Raporları Tablosu</h2></div>
                     <div class="col-sm-4">
                         <div class="btn-group btn-group-justified nav nav-tabs">
                             <button style="width:100px!important;" data-toggle="tab" href="#invoice_table" class="btn btn-default">FATURA</button>
-                            <button style="width:100px!important;" data-toggle="tab" href="#customer_table" class="btn btn-default">MÜŞTERİ</button>
+                            <button style="width:100px!important;" data-toggle="tab" href="#customer_table" class="btn btn-default">TEDARİKÇİ</button>
                             <button style="width:100px!important;" data-toggle="tab" href="#product_table" class="btn btn-default">ÜRÜN</button>
                         </div>
                     </div>
@@ -237,7 +237,7 @@
                           });
                         },
                         pies_data: function (start,end) {
-                            axios.post("{{route("sales.pies.data",aid())}}",{vat:this.vat,start:start,end:end}).then(res => {
+                            axios.post("{{route("purchases.pies.data",aid())}}",{vat:this.vat,start:start,end:end}).then(res => {
                                 sales_report.order_pie = [];
                                 sales_report.customer_pie = [];
                                 sales_report.product_pie = [];
