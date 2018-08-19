@@ -108,6 +108,14 @@
                         </a>
                     </h3>
                 </li>
+                <li class="col-md-4">
+                    <h3 class="h3 settings-title">
+                        <a href="{{ route("company_profile", aid()) }}">
+                            <i class="fa fa-tag"></i>
+                            {{ trans("sentence.company_profile_settings") }}
+                        </a>
+                    </h3>
+                </li>
             </ol>
 
         </div>

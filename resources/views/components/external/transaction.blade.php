@@ -507,9 +507,7 @@
                                     VueCollect.collection.form.amount = res.data.remaining;
                                     VueCollect.loading = false;
 //                                    VueName.statement();
-
                                 }
-
 
                             }).catch(function (e) {
                                 console.log(e)
@@ -519,10 +517,7 @@
 
                         }else {
 
-
-
                         }
-
                     }
                 }
             })

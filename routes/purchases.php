@@ -39,4 +39,9 @@ Route::group(['prefix'=>'{company_id}/purchases','middleware'=>'not.admin'],func
 
     //Purcahase Payment Report
     Route::get("/reports/payment-reports","Modules\Purchases\PaymentReportController@index")->name("purchases.payment_report.index");
+
+    //Purcahase -> Sales Report
+    Route::get("/reports/purchase-report","Modules\Purchases\PurchaseReportController@index")->name("purchases.purchase_report.index");
+    Route::post("/reports/purchase-pies/data","Modules\Purchases\PurchaseReportController@pies_data")->name("purchases.pies.data");
+
 });
