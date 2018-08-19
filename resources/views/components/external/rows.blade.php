@@ -265,7 +265,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             product_id: "{{$product->id}}",
                             text: "{{$product->named["name"]}}",
                             vat_id: "{{$product->vat_rate}}",
-                            price: "{{$product->list_price}}",
+                            price: "{{$proccess_type == "sales" ? $product->list_price:$product->buying_price}}",
                             unit_id: "{{$product->unit_id}}"
                         }, @endforeach],
                         grand_total: "0,00",
@@ -278,7 +278,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         ],
                         dont_try: false,
                         currency_class: '{{$form_type == "update" ? "fa fa-".$offer->currency."":""}}',
-                        currency: '{{$form_type == "update" ? $offer->currency:"try"}}',
+                        currency: '{{$form_type == "update" ? $offer->currency:"TRY"}}',
                         currency_value: '{{$form_type == "update" ? $offer->_value:"0,00"}}',
                         items: [@if($form_type != "update"){
                             id: 0,
@@ -531,14 +531,15 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         }
                     },
                     currency_process(cur) {
+                        console.log(cur)
                         this.currency_class = "fa fa-" + this.currency;
 
-                        if (cur == "try") {
+                        if (cur == "TRY") {
 
                             this.dont_try = false;
                             this.currency_value = "0,00"
                             VueName.form.currency_value = "0,00";
-                            VueName.form.currency = "try";
+                            VueName.form.currency = "TRY";
 
                         } else {
                             VueName.form.currency = cur;
