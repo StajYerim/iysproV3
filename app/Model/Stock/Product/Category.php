@@ -43,4 +43,32 @@ class Category extends Model
 
 
     }
+
+    public function getTotalPurchaseOrderAttribute()
+    {
+        $total = 0;
+
+        foreach ($this->products as $product)
+        {
+            $total += $product->porder_items()->sum("total");
+        }
+
+        return get_money($total);
+    }
+
+
+    public function getTotalPurchaseOrderSafeAttribute()
+    {
+        $total = 0;
+
+        foreach ($this->products as $product)
+        {
+            $total += $product->porder_items()->sum(DB::raw('quantity * price'));
+
+        }
+
+        return get_money($total);
+
+
+    }
 }

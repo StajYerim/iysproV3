@@ -277,6 +277,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'user_settings', 'text'=> ['en'=> 'USER SETTINGS', 'tr'=> 'KULLANICI AYARLARI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'current_account_settings', 'text'=> ['en'=> 'CURRENT ACCOUNT SETTINGS', 'tr'=> 'CARİ HESAP AYARLARI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'application_settings', 'text'=> ['en'=> 'APPLICATIN SETTINGS', 'tr'=> 'UYGULAMA AYARLARI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'company_profile_settings', 'text'=> ['en'=> 'COMPANY PROFILE SETTINGS', 'tr'=> 'FİRMA PROFİL AYARLARI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'api_informations', 'text'=> ['en'=> 'API INFORMATIONS', 'tr'=> 'API BİLGİLERİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'api_key', 'text'=> ['en'=> 'API KEY', 'tr'=> 'API ANAHTARI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'api_password', 'text'=> ['en'=> 'API PASSWORD', 'tr'=> 'API ŞİFRESİ']]);
@@ -570,6 +571,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'back_to_login', 'text'=> ['en'=> 'BACK TO LOGIN','tr'=> 'GİRİŞE GERİ DÖN']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'you_have_been_registered_to', 'text'=> ['en'=> 'You have been registered to ','tr'=> 'Başarıyla kayıt oldunuz ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'confirmation_code', 'text'=> ['en'=> 'CONFIRMATION CODE','tr'=> 'DOĞRULAMA KODU']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'company', 'text'=> ['en'=> 'CONFIRMATION CODE','tr'=> 'DOĞRULAMA KODU']]);
 
     }
 }

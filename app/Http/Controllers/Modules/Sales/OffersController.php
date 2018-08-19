@@ -116,7 +116,6 @@ class OffersController extends Controller
         $offer = SalesOffers::find($id);
         return view("modules.sales.offers.show", compact("offer","langs"));
     }
-
     public function pdf($aid, $id,$type,$lang)
     {
         Artisan::call('view:clear');

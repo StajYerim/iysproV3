@@ -71,6 +71,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
             <tr>
                 <td>
                     <v-select :ref="'field-'+index" label="text" v-model="item.tetra"
+                              script
                               v-bind:class="{'v-select-error':errors.has('item.tetra'+index)}"
 
                               v-validate="'required'" :filterable="true" placeholder="{{ trans("sentence.choose_product") }}"
@@ -97,7 +98,6 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 
 
                 </td>
-
                 <td>
                     <select v-model="item.unit" disabled class="form-control select-disabled">
                         <option v-for="unit in units" :value="unit.d">@{{ unit.name }}</option>
@@ -489,7 +489,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     );
                     @endforeach
 
-                            @endif
+                   @endif
 
                    this.currency_process(this.currency);
 

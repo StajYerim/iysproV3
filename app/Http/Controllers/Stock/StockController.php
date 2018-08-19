@@ -28,7 +28,7 @@ class StockController extends Controller
 
     public function index_list()
     {
-        $products = Product::with("stock_receipts","named", "category")->select("products.*")->where("account_id", aid());
+        $products = Product::with("stock_receipts","named", "category")->select("products.*")->where("account_id", aid())->get();
 
         return Datatables::of($products)
             ->setRowAttr([

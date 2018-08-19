@@ -171,7 +171,6 @@
             </div>
 
         </div>
-
     </section>
 
     @push("scripts")
@@ -230,7 +229,6 @@
                     }
                 });
 
-
              Companies =    new Vue({
                     el: "#customer",
                     data: () => ({
@@ -272,10 +270,8 @@
                                 @endforeach());
                         @endif
                         city_and_county();
-
                     },
                     methods: {
-
                         formSend: function () {
 
                             this.$validator.validate().then((result) => {
@@ -303,7 +299,7 @@
                                     });
 
                                 } else {
-                                    notification("Error", "Please required field", "danger");
+                                    notification("Error", "Lütfen gerekli alanları doldurunuz", "danger");
 
                                 }
                             })
