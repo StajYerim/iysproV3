@@ -41,11 +41,11 @@
                                                 <div style="float:left" class="col-md-9">
                                                     <label class="radioStyle">
                                                         <input type="radio"
-                                                               class="radiobox style-0" value="0" {{ (!empty($sales_offers) && $sales_offers->logo_show == 0) ? 'checked' : '' }} name="logo_show">
+                                                               class="radiobox style-0" value="0" {{ empty($sales_offers) ? 'checked' : '' }} {{ (!empty($sales_offers) && $sales_offers->logo_show == 0) ? 'checked' : '' }} name="logo_show">
                                                         <span>Hayır</span>
                                                     </label>
                                                     <label class="radioStyle ">
-                                                        <input type="radio" class="radiobox style-0" {{ empty($sales_offers) ? 'checked' : '' }} {{ (!empty($sales_offers) && $sales_offers->logo_show == 1) ? 'checked' : '' }} value="1" name="logo_show">
+                                                        <input type="radio" class="radiobox style-0" {{ (!empty($sales_offers) && $sales_offers->logo_show == 1) ? 'checked' : '' }} value="1" name="logo_show">
                                                         <span>Evet</span>
                                                     </label>
                                                 </div>
