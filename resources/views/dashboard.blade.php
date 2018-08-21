@@ -17,101 +17,30 @@
                             <caption>NAKİT AKIŞI</caption>
                             <thead>
                             <tr>
-                                <th>Month</th>
-                                <th>Cash Available</th>
-                                <th data-graph-type="area">Payments</th>
+                                <th>HAFTA</th>
+                                <th>TAHSİLATLAR</th>
+                                <th data-graph-type="area">ÖDEMELER</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($cash_flow as $cash)
                             <tr>
-                                <td>1</td>
-                                <td>80000</td>
-                                <td>20000</td>
+                                <td>{!!$cash["week_id"] !!}</td>
+                                <td>{{$cash["order_total"]+$cash["cheq_total"]+$cash["bank_total"]}}</td>
+                                <td>{{$cash["porder_total"]+$cash["cheq_payment"]}}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>120000</td>
-                                <td>30000</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>180000</td>
-                                <td>40000</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>200000</td>
-                                <td>120000</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>25000</td>
-                                <td>50000</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>70000</td>
-                                <td>40000</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>90000</td>
-                                <td>45000</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>125000</td>
-                                <td>50000</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>195000</td>
-                                <td>70000</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>125000</td>
-                                <td>50000</td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>22500</td>
-                                <td>5000</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>52500</td>
-                                <td>5000</td>
-                            </tr>
-                            <tr>
-                                <td>13</td>
-                                <td>92500</td>
-                                <td>50000</td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td>82500</td>
-                                <td>50000</td>
-                            </tr>
-                            <tr>
-                                <td>15</td>
-                                <td>12500</td>
-                                <td>5000</td>
-                            </tr>
-                            <tr>
-                                <td>16</td>
-                                <td>42500</td>
-                                <td>5000</td>
-                            </tr>
+                            @endforeach
+
                             </tbody>
                         </table>
                     </div>
                 </div>
+            </article>
 
         </div>
 
-
-
+        <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -123,14 +52,6 @@
 
                     <!-- widget div-->
                     <div>
-
-                        <!-- widget edit box -->
-                        <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
-                            <input type="text">
-                        </div>
-                        <!-- end widget edit box -->
-
                         <!-- widget content -->
                         <div class="widget-body no-padding">
 
@@ -231,13 +152,6 @@
                     <!-- widget div-->
                     <div>
 
-                        <!-- widget edit box -->
-                        <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
-                            <input type="text">
-                        </div>
-                        <!-- end widget edit box -->
-
                         <!-- widget content -->
                         <div class="widget-body no-padding">
 
@@ -246,11 +160,7 @@
                                     <div class="text-center">
                                         <b>TOPLAM</b>
                                     </div>
-                                    <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
 
-                                    </div>
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
@@ -336,15 +246,11 @@
                     </header>
 
                     <div>
-                        <div class="jarviswidget-editbox">
-                            <input class="form-control" type="text">
-                        </div>
 
-                        <div class="widget-body">
+                        <div class="widget-body no-padding">
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th width="1px">#</th>
                                     <th>Firma</th>
                                     <th>Tarih</th>
                                     <th>Bakiye</th>
@@ -354,12 +260,11 @@
                                 @foreach($bank_accounts as $bank_account)
 
                                     <tr>
-                                        <td>...</td>
                                         <td>{{ $bank_account->name }}</td>
                                         <td>{{ $bank_account->currency }}</td>
                                         <td>
                                             {{ $bank_account->balance }}
-                                            <i class="fa fa-{{ $bank_account->currency }}"></i>
+                                            <i class="fa fa-{{ strtolower($bank_account->currency) }}"></i>
                                         </td>
                                     </tr>
 
@@ -383,15 +288,10 @@
                     </header>
 
                     <div>
-                        <div class="jarviswidget-editbox">
-                            <input class="form-control" type="text">
-                        </div>
-
-                        <div class="widget-body">
+                        <div class="widget-body no-padding">
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th width="1px">#</th>
                                     <th>Firma</th>
                                     <th>Tarih</th>
                                     <th>Bakiye</th>
@@ -401,7 +301,6 @@
                                 @foreach($sales_orders as $sales_order)
                                     @if(money_db_format($sales_order->remaining) > 0)
                                         <tr>
-                                            <td>...</td>
                                             <td>
                                                 {{ $sales_order->company->company_name }}
                                             </td>
@@ -433,15 +332,11 @@
                     </header>
 
                     <div>
-                        <div class="jarviswidget-editbox">
-                            <input class="form-control" type="text">
-                        </div>
 
-                        <div class="widget-body">
+                        <div class="widget-body no-padding">
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th width="1px">#</th>
                                     <th>Firma</th>
                                     <th>Tarih</th>
                                     <th>Bakiye</th>
@@ -451,7 +346,6 @@
                                 @foreach($purchase_orders as $purchase_order)
                                     @if(money_db_format($purchase_order->remaining) > 0)
                                         <tr>
-                                            <td>...</td>
                                             <td>
                                                 {{ $purchase_order->company->company_name }}
                                             </td>
@@ -483,15 +377,11 @@
                     </header>
 
                     <div>
-                        <div class="jarviswidget-editbox">
-                            <input class="form-control" type="text">
-                        </div>
 
-                        <div class="widget-body">
+                        <div class="widget-body no-padding">
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th width="1px">#</th>
                                     <th>Firma</th>
                                     <th>Tarih</th>
                                     <th>Bakiye</th>
@@ -502,7 +392,6 @@
                                 @foreach($bank_account_items as $bank_account_item)
                                     @if($bank_account_item->company_id != null)
                                         <tr>
-                                            <td>...</td>
                                             <td>{{ $bank_account_item->company->company_name }}</td>
                                             <td>{{ $bank_account_item->date }}</td>
                                             <td>
@@ -549,7 +438,6 @@
     <script>
 
         $(document).ready(function(){
-            pageSetUp();
             if ($('#total_collection').length) {
                 Morris.Donut({
                     element : 'total_collection',

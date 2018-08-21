@@ -55,8 +55,6 @@ class OffersController extends Controller
 
     public function store($aid, $id, Request $request)
     {
-
-
         $offer = SalesOffers::updateOrCreate(["id" => $id], [
             "description" => $request->form["description"],
             "description_detail" => $request->form["description_detail"],
@@ -118,7 +116,6 @@ class OffersController extends Controller
         $offer = SalesOffers::find($id);
         return view("modules.sales.offers.show", compact("offer","langs"));
     }
-
     public function pdf($aid, $id,$type,$lang)
     {
         Artisan::call('view:clear');

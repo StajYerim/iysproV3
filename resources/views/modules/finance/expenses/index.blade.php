@@ -41,7 +41,7 @@
                                     <th>{{trans("word.description")}}</th>
                                     <th>{{trans("word.account")}}</th>
                                     <th>{{trans("word.date")}}</th>
-                                    <th>{{trans("word.action")}}</th>
+                                    <th>{{trans("word.status")}}</th>
                                 </tr>
                                 </thead>
 
@@ -66,12 +66,12 @@
                     <form id="expense_form" @submit.prevent="expense_send" class="form-horizontal bv-form">
                     <div class="modal-body">
                             <fieldset>
-                                <div class="form-group" :class="{'has-error': errors.has('form.name') }">
+                                <div class="form-group">
                                     <label class="col-md-3 control-label">
                                         {{trans("word.expense")}}</label>
                                     <div class="col-md-6 ">
                                         <div >
-                                            <input  v-validate="'required'" type="text" class="form-control "
+                                            <input type="text" class="form-control "
                                                    v-model="form.name" name="form.name">
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                                     <label class="col-md-3 control-label">{{trans("word.date")}}</label>
                                     <div class="col-md-6 ">
                                         <div>
-                                            <input type="text" class="form-control datepicker"
+                                            <input type="text" class="form-control datepicker" name="form.date"
                                                    v-model="form.date">
                                         </div>
                                     </div>
@@ -115,56 +115,74 @@
                                 </div>
                             </fieldset>
 
-
-
                             <fieldset>
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">
                                         {{ trans("sentence.expense_status") }}
                                     </label>
-                                    <div class="col-md-9">
-                                        <a href="#odendi" id="odendi_button" data-toggle="tab" class="active btn btn-success">
-                                            {{ trans("word.paid") }}
-                                        </a>
-                                        <a href="#odenecek" id="odenecek_button"  data-toggle="tab" class="btn btn-warning">
-                                            {{ trans("word.payable") }}
-                                        </a>
+                                    <div class="col-md-9" v-if="form.payment_status">
+                                        <div class="alert alert-success fade in">
+                                            <b>@{{ form.payment_date }}</b> tarihli <b>@{{ form.bank_item.bank_account.name }}</b> hesabından <b>@{{ form.bank_item.amount }}</b>  ödeme yapıldı.
+                                        </div>
+                                        <button type="button"  onclick="VueName.payment_delete(VueName.form.id)" class="btn btn-danger"><span class="fa fa-trash"></span> ÖDEMEYİ SİL</button>
                                     </div>
-                                </div>
+                                    <div class="col-md-5" v-if="!form.payment_status">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success"
+                                                    onclick="VueName.payStatusChange(1)">
+                                                {{ trans("word.paid") }}
+                                            </button>
+                                            <button type="button" class="btn btn-warning"
+                                                    onclick="VueName.payStatusChange(0)">
+                                                {{ trans("word.payable") }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    </div>
                             </fieldset>
 
-                            <fieldset id="tarih_fieldset">
-                                <div class="form-group" :class="{'has-error': errors.has('form.amount') }">
-                                    <label class="col-md-3 control-label">
-                                        TARİH
+                        <fieldset>
+                            <div class="form-group" v-if="!form.payment_status">
+                                <label class="col-md-3 control-label" v-if="!form.pay_status">
+                                    ÖDENECEĞİ TARİH
                                     </label>
-                                    <div class="col-md-6 ">
-                                        <input id="tarih_input" name="tarih_input_value" type="hidden" value="1">
-                                        <input style="width: 270px" type="text" class="form-control datepicker"
-                                               v-model="form.date">
+
+
+                                <label class="col-md-3 control-label" v-if="form.pay_status">
+                                    ÖDENDİĞİ TARİH
+                                </label>
+
+                                <div class="col-md-6">
+
+                                    <input style="width: 270px" type="text" class="form-control datepicker"
+                                           name="form.payment_date"
+                                           v-model="form.payment_date">
                                     </div>
                                 </div>
-                            </fieldset>
+                        </fieldset>
 
-                            <fieldset id="hesap_sec_fieldset">
-                                <div class="form-group" :class="{'has-error': errors.has('form.amount') }">
+                        <fieldset v-show="form.pay_status" v-if="!form.payment_status">
+                            <div class="form-group">
                                     <label class="col-md-3 control-label">
                                         HESAP SEÇ
                                     </label>
                                     <div class="col-md-6 ">
-                                        <select class="form-control"  v-validate="'required'" name="form.bank_account_id" v-model="form.bank_account_id">
-                                            <option v-for="item in accounts" :value="item.id">@{{ item.name }}</option>
+                                        <select class="form-control" name="form.bank_account_id"
+                                                v-model="form.bank_account_id">
+                                            <option v-for="item in accounts" :value="item.id" :disabled="item.id==0">@{{
+                                                item.name }}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
                             </fieldset>
 
-                            <fieldset>
-                                <div class="form-group" :class="{'has-error': errors.has('form.amount') }">
+                            <fieldset v-if="!form.payment_status">
+                                <div class="form-group">
                                     <label class="col-md-3 control-label">{{trans("word.amount")}}</label>
                                     <div class="col-md-6 ">
                                         <div >
-                                            <money v-bind="money"  v-validate="'required'" class="form-control "
+                                            <money v-bind="money" class="form-control "
                                                    v-model="form.amount"></money>
                                         </div>
                                     </div>
@@ -193,7 +211,7 @@
         <script src="https://unpkg.com/@johmun/vue-tags-input/dist/vue-tags-input.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", () => {
-                $expenses = new Vue({
+                VueName = new Vue({
                     el: "#new_expense",
                     data: {
                         autocompleteItems: [@foreach($tags as $tag) {
@@ -202,18 +220,21 @@
                         }, @endforeach],
                         accounts: [{
                             name: "Select Account",
-                            id: ""
+                            id: 0
                         }, @foreach($accounts as $acc) {name: "{{$acc->name}}", id: "{{$acc->id}}"}, @endforeach],
                         form: {
                             id: 0,
                             name: "",
                             date: "{{date_tr()}}",
+                            payment_date: "{{date_tr()}}",
                             amount: "",
                             expence_category: [],
-                            bank_account_id: "",
+                            bank_account_id: 0,
                             description: "",
                             tag: '',
                             tagsd: [],
+                            payment_status:false,
+                            pay_status: 1
                         },
                         money: {
                             decimal: ',',
@@ -229,24 +250,32 @@
                     },
                     mounted: function () {
                         datePicker();
-
-                        $("#odendi_button").on("click",function(){
-                            $("#tarih_input").val("1");
-                            $("#hesap_sec_fieldset").show();
-                        });
-
-                        $("#odenecek_button").on("click",function(){
-                            $("#tarih_input").val("0");
-                            $("#hesap_sec_fieldset").hide();
-
-                        });
-
                     },
                     methods: {
-                        expense_send: function () {
-                            this.$validator.validate().then((result) => {
-                                if (result) {
+                        payment_delete:function($id){
+                        axios.post("{{route("finance.expenses.payment.delete",aid())}}",{id:$id}).then(res=>{
+                            if(res.data== 1){
+                                VueName.form.pay_status = 0;
+                                VueName.form.payment_status =0;
+                                notification("Success","Bu gider fişinin ödmesini sildiniz.", "success");
+                            }
+                        }).catch(function (error) {
 
+                            notification("Error","Bir hata oluştu", "danger");
+
+                        });
+                        },
+                        payStatusChange: function ($status) {
+
+                            this.form.pay_status = $status
+                            console.log( this.form.pay_status)
+                        },
+                        expense_send: function () {
+                            $this = this;
+
+                            if ($this.form.pay_status == 1) {
+
+                                if ($this.form.bank_account_id != 0) {
                                     axios.post('{{route("finance.expenses.store",[aid(),0])}}', this.form)
                                         .then(function (response) {
                                             if (response.data.message) {
@@ -254,35 +283,57 @@
                                                     $("#new_expense").modal("hide");
                                                     window.location.href = '{{route("finance.expenses.index",aid())}}';
 
+                                                }else{
+                                                    notification("Error", response.data, "danger");
                                                 }
-
                                             } else {
-
-                                                notification("Error", response, "danger");
-
+                                                notification("Error", response.data, "danger");
                                             }
                                         }).catch(function (error) {
 
-                                        notification("Error", error.response.data.message, "danger");
+                                        notification("Error", error, "danger");
 
                                     });
 
                                 } else {
-                                    notification("Error", "Please require fields", "danger");
+                                    notification("Error", "Lütfen ödeme yaptığınız banka hesabını seçin", "danger");
                                 }
-                            })
+                            } else {
 
+                                $this.form.bank_account_id =0
+                                axios.post('{{route("finance.expenses.store",[aid(),0])}}', this.form)
+                                    .then(function (response) {
+                                        if (response.data.message) {
+                                            if (response.data.message == "success") {
+                                                $("#new_expense").modal("hide");
+                                                window.location.href = '{{route("finance.expenses.index",aid())}}';
+
+                                            }else{
+                                                notification("Error", response.data, "danger");
+                                            }
+                                        } else {
+                                            notification("Error", response.data, "danger");
+                                        }
+                                    }).catch(function (error) {
+
+                                    notification("Error", error, "danger");
+
+                                });
+                            }
 
                         },
                         clear: function () {
                             this.form.id = 0;
                             this.form.name = "";
                             this.form.date = "{{date_tr()}}";
+                            this.form.payment_date = "{{date_tr()}}";
                             this.form.amount = "";
-                            this.form.bank_account_id = ""
-                            this.form.description = ""
-                            this.form.tag = ""
-                            this.form.tagsd = []
+                            this.form.bank_account_id = 0;
+                            this.form.description = "";
+                            this.form.tag = "";
+                            this.form.tagsd = [];
+                            this.form.payment_status = false;
+                            this.form.pay_status = 1;
 
                         }
 
@@ -313,10 +364,7 @@
                     {
                         data: 'id',
                         render: function (type) {
-
                                 return '<i class="fa fa-shopping-cart fa-2x"></i>';
-
-
                         },
                     }, {
                         data: "name",
@@ -324,15 +372,13 @@
                         data: "description"
 
                     }, {
-                        data: "bank.name"
+                        data: "bank_item"
                     },{
-                        data: "date"
+                        data: "date",
+                        name: "date"
                     }
                     ,{
-                        data: "id",
-                        render:function($id){
-                            return "<button class='btn btn-warning btn-xs' onclick='update("+$id+")'>Edit</button>";
-                        }
+                        data: "payment_status"
                     }
                 ],
                 "preDrawCallback": function () {
@@ -349,24 +395,23 @@
                 }
             });
 
-            table_search(tables)
+            table_search(tables);
 
             function update(id) {
                 if(id == 0){
-                    $expenses.clear();
+                    VueName.clear();
                     $("#new_expense").modal("show");
 
                 }else{
 
                 axios.get("{{route("finance.expenses.info",aid())}}?id="+id).then(response=>{
-                   $expenses.form = response.data;
+                    VueName.form = response.data;
                    $("#new_expense").modal("show");
 
                 });
 
                 }
             }
-
         </script>
 
 

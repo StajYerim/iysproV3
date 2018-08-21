@@ -55,6 +55,10 @@ class PurchaseOrderItems extends Model
         return $this->hasOne(Units::class,"id","unit_id");
     }
 
+    public function order(){
+        return  $this->hasOne(PurchaseOrders::class,"id","purchase_order_id");
+    }
+
     public function getOnlyPriceAttribute()
     {
         return get_money(money_db_format($this->price)*money_db_format($this->quantity));

@@ -13,7 +13,7 @@
             </div>
 
         @endif
-        <div class="well no-padding">
+        <div class="well no-padding col-xs-12">
             <form action="{{ route('login') }}" method="POST" id="login-form" class="smart-form client-form">
 
                 @csrf
@@ -35,9 +35,9 @@
                     </section>
 
                     <section>
-                        <label class="label">{{trans("word.password")}}</label>
+                        <label class="label ">{{trans("word.password")}}</label>
                         <label class="input"> <i class="icon-append fa fa-lock"></i>
-                            <input type="password" name="password">
+                            <input class="col-sm-9 col-md-9" type="password" name="password">
                             @if ($errors->has('password'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>

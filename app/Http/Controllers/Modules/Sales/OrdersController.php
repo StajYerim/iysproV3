@@ -7,6 +7,7 @@ use App\Language;
 use App\Mail\Share\Sales\Order;
 use App\Mail\Share\Sales\Transfer;
 use App\Mail\Share\Sales\Waybill;
+use App\Model\Production\Production;
 use App\Model\Sales\OrderWaybill;
 use App\Model\Sales\SalesOffers;
 use App\Model\Sales\SalesOrders;
@@ -95,6 +96,7 @@ class OrdersController extends Controller
             "company_id" => $request->form["company_id"]["id"],
             "date" => $request->form["date"],
             "due_date" => $request->form["due_date"],
+            "termin_date" => $request->form["termin_date"],
             "currency" => $request->form["currency"],
             "currency_value" => $request->form["currency_value"],
             "sub_total" => $request->form["sub_total"],
@@ -341,6 +343,14 @@ class OrdersController extends Controller
         if(!$transfer){
             return "error";
         }
+    }
+
+    /*Order send product planning*/
+    public function order_send_planning($aid,Request $request){
+
+
+        $sales_order = SalesOrders::find($request->order_id);
+        $sales_order->order_planning()->create(["status"=>0,"account_id"=>aid()]);
     }
 
 }

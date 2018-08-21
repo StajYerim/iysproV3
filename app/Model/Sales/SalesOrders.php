@@ -6,6 +6,7 @@ use App\Companies;
 use App\Currency;
 use App\Model\Finance\BankItems;
 use App\Model\Finance\Cheques;
+use App\Model\Production\Production;
 use App\Model\Stock\Stock;
 use App\Model\Stock\StockItems;
 use App\Tags;
@@ -18,8 +19,12 @@ class SalesOrders extends Model
 
     protected $dates = ["date", "due_date"];
 
-    protected $appends = ["grand_totals","collect_label"];
+    protected $appends = ["grand_totals","collect_label","remaining"];
 
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->where("account_id", '=', aid());
+    }
 
     public function save(array $options = array())
     {
@@ -44,6 +49,18 @@ class SalesOrders extends Model
     {
 
         $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["date"]);
+        return $dt->format("d.m.Y");
+    }
+
+    public function setTerminDateAttribute($value)
+    {
+        $this->attributes['termin_date'] = date_convert($value);
+    }
+
+    public function getTerminDateAttribute()
+    {
+
+        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["termin_date"]);
         return $dt->format("d.m.Y");
     }
 
@@ -141,6 +158,14 @@ class SalesOrders extends Model
         return get_money((money_db_format($this->grand_total) - $total));
     }
 
+    public function getSafeRemainingAttribute()
+    {
+        $pay = $this->payments->sum("pivot.amount");
+        $cheq = $this->cheques->sum("pivot.amount");
+        $total = $pay+$cheq;
+        return money_db_format($this->grand_total) - $total;
+    }
+
     public function getStatusAttribute()
     {
          if($this->remaining == $this->grand_total){
@@ -221,9 +246,15 @@ class SalesOrders extends Model
     }
 
 
-
+    /*Tags*/
     public function tags()
     {
         return $this->morphToMany(Tags::class, 'taggable');
     }
+
+    /*Production Planing*/
+    public function order_planning(){
+        return $this->hasOne(Production::class,"sales_order_id","id");
+    }
+
 }

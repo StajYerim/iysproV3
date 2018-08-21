@@ -1,5 +1,8 @@
 @php
 app()->setLocale($lang);
+$settings_sales_offer =  \App\Model\Settings\SettingsSalesOffer::where('account_id',aid())->first();
+$app_account = \App\Account::where('id',aid())->first();
+
  @endphp
         <!doctype html>
 <html>
@@ -103,7 +106,13 @@ app()->setLocale($lang);
                             <table>
                                 <tr>
                                     <td>
-
+                                        @if(!empty($settings_sales_offer) && $settings_sales_offer->logo_show == 1)
+                                            @if(!empty($app_account->logo))
+                                                <img src="{{ asset('images/account/'.aid().'/logo/'.$app_account->logo) }}" alt="">
+                                                deneme
+                                            @endif
+                                        @endif
+                                        td kısmı
                                     </td>
                                     <td style="margin-left:15px;text-align:right;width:35%">
 

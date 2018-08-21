@@ -6,6 +6,7 @@ use App\Language;
 use Closure;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
 class NotAdmin
@@ -19,6 +20,10 @@ class NotAdmin
      */
     public function handle($request, Closure $next)
     {
+
+        if(auth()->check() && !auth()->user()->isAdmin() && aid() != Request::segment(1)){
+            return response()->view('errors.404', [], 404);
+        }
         if (auth()->check() && !auth()->user()->isAdmin()) {
 
             session()->put("company_id",auth()->user()->id);

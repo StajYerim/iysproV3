@@ -51,12 +51,10 @@
 
 </head>
 
-<body class="animated fadeInDown" >
-<div  role="main" class="login" >
+<body>
+<div role="main" class="login">
 
 @yield('guest')
-
-
 
 </div>
 <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->

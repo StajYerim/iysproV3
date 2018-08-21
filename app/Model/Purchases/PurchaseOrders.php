@@ -160,6 +160,15 @@ class PurchaseOrders extends Model
         return get_money((money_db_format($this->grand_total) - $total));
     }
 
+    public function getSafeRemainingAttribute()
+    {
+        $pay = $this->payments->sum("pivot.amount");
+        $cheq = $this->cheques->sum("pivot.amount");
+        $total = $pay+$cheq;
+
+        return (money_db_format($this->grand_total) - $total);
+    }
+
     public function tags()
     {
         return $this->morphToMany(Tags::class, 'taggable');

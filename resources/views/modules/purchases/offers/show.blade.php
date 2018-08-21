@@ -1,11 +1,9 @@
 @extends('layouts.master')
 @section('content')
-    <!-- widget grid -->
     <section id="show" v-cloak>
         <div class="col-lg-12 new-title">
             <div class="col-lg-8 col-sm-8">
                 <h1><i class="fa fa-file-text-o"></i> <span class="semi-bold">{{$offer->descriptions}}</span></h1>
-
             </div>
             <div class="col-lg-4 col-sm-4">
 
@@ -15,25 +13,25 @@
                                     class="fa fa-reorder"></span> &nbsp;<span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{route("sales.offers.form",[aid(),$offer->id,"update"])}}"><i
-                                            class="fa fa-edit" arisha-hidden="true"></i>
-                                    {{trans("WORD.edit")}}</a>
+                                <a href="{{route("purchases.offers.form",[aid(),$offer->id,"update"])}}"><i
+                                            class="fa fa-edit" aria-hidden="true"></i>
+                                    {{trans("word.edit")}}</a>
                             </li>
                             <li>
-                                <a href="{{route("sales.offers.form",[aid(),$offer->id,"copy"])}}"><i class="fa fa-copy"
+                                <a href="{{route("purchases.offers.form",[aid(),$offer->id,"copy"])}}"><i class="fa fa-copy"
                                                                                                       aria-hidden="true"></i>
                                     {{trans("sentence.create_copy")}}</a>
                             </li>
-                            <li>
-                                <a href="{{route("sales.orders.form",[aid(),$offer->id,"offers"])}}"><i
-                                            class="fa fa-reply " aria-hidden="true"></i>
-                                    {{trans("sentence.convert_to_order")}}</a>
-                            </li>
+                            {{--<li>--}}
+                                {{--<a href="{{route("purchases.orders.form",[aid(),$offer->id,"offers"])}}"><i--}}
+                                            {{--class="fa fa-reply " aria-hidden="true"></i>--}}
+                                    {{--{{trans("sentence.convert_to_order")}}</a>--}}
+                            {{--</li>--}}
                             <li class="divider"></li>
                             <li>
-                                <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
-                                                                                              aria-hidden="true"></i>
-                                    {{trans("word.delete")}}</a>
+                                <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    {{trans("word.delete")}}
+                                </a>
                             </li>
 
                         </ul>
@@ -43,22 +41,28 @@
                         <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
                                     class="fa fa-print"></span> {{trans("word.print")}} <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
-                                            class="fa fa-print" aria-hidden="true"></i>
-                                    {{trans("sentence.print_offer")}}</a>
+                            <li class="dropdown-submenu">
+                                <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.print_offer")}}</a>
+                                <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
+                                   @foreach($langs as $lang)
+                                    <li><a tabindex="-1" target="_blank" href="{{route("purchases.offers.pdf",[aid(),$offer->id,"url",$lang->lang_code])}}"> <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
+                                    @endforeach
+                                </ul>
                             </li>
-                            <li>
-                                <a download="" href="http://demo.iyspro.com/salesmanager/sales-offer/8/printDown"
-                                   id="waybillInfo"><i class="fa fa-print" aria-hidden="true"></i>
-                                    {{trans("sentence.download_offer")}}</a>
+                            <li class="dropdown-submenu">
+                                <a class="test" tabindex="-1" href="#">   <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.download_offer")}} </a>
+                                <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
+                                    @foreach($langs as $lang)
+                                        <li><a tabindex="-1" target="_blank" href="{{route("purchases.offers.pdf",[aid(),$offer->id,"url",$lang->lang_code])}}" > <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
+                                    @endforeach
+                                </ul>
                             </li>
 
                         </ul>
 
                     </div>
 
-                    <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
+                    <a href="#!" data-toggle="modal" data-target="#shareModal" class="btn btn-default"><i
                                 class="fa fa-envelope"></i> {{trans("word.share")}}</a>
 
                 </div>
@@ -79,7 +83,7 @@
                             <div class="row">
                                 <div class="col-sm-5" style="font-weight: 400;font-size:15px;"><i
                                             class="fa fa-building-o"></i> <a
-                                            href="{{route("sales.companies.show",[aid(),$offer->company["id"]])}}">{{$offer->company["company_name"] == null ? "Belirtilmedi":$offer->company["company_name"]}}</a>
+                                            href="{{route("purchases.companies.show",[aid(),$offer->company["id"]])}}">{{$offer->company["company_name"] == null ? "Belirtilmedi":$offer->company["company_name"]}}</a>
                                 </div>
                                 <div class="col-sm-3" style="font-weight: 400;font-size:15px;"><i
                                             class="fa fa-calendar"></i> {{$offer->date}}</div>
@@ -97,7 +101,7 @@
                                             <tr>
                                                 <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
                                                 <th width="14%">{{trans("word.quantity")}}</th>
-                                                <th width="10%" style="text-align:right">{{trans("word.unit")}} F.</th>
+                                                <th width="10%" style="text-align:right">{{trans("sentence.unit_price")}}</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.vat")}}</th>
                                                 <th width="10%" style="text-align:right">{{trans("word.total")}}</th>
                                             </tr>
@@ -134,32 +138,38 @@
                                                         <div class="bottom-info">{{trans("sentence.sub_total")}}</div>
                                                     </td>
                                                     <td style="text-align:right">
-                                                        <div class="bottom-info">{{$offer->sub_total}} <i
-                                                                    class="fa fa-{{$offer->currency}}"></i></div>
+                                                        <div class="bottom-info">{{$offer->sub_total}}
+                                                            <i class="fa fa-{{$offer->currency}}"></i>
+                                                        </div>
                                                     </td>
                                                 </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        <div class="bottom-info">{{trans("sentence.total_vat")}}</div>
-                                                    </td>
-                                                    <td style="text-align:right">
-                                                        <div class="bottom-info">{{$offer->vat_total}} <i
-                                                                    class="fa fa-{{$offer->currency}}"></i></div>
-                                                    </td>
-                                                </tr>
+
                                                 <tr v-for="vato in vat_only" class="trow"
                                                     v-if="vato.total!=0">
 
                                                     <td style="border-top: 0px;">
-                                                        <div class="bottom-info" style="font-size: 11px" >{{trans("sentence.total_vat")}}@{{
+                                                        <div class="bottom-info" style="font-size: 11px" >{{trans("sentence.total_vat")}} @{{
                                                             vato.name }}
                                                         </div>
                                                     </td>
                                                     <td style="text-align:right">
-                                                        <div class="bottom-info" style="font-size: 11px"><span
-                                                                    id="total-vat-1">@{{ vato.total }}</span> <i
-                                                                    class="fa fa-{{$offer->currency}}"></i></div>
+                                                        <div class="bottom-info" style="font-size: 11px">
+                                                            <span id="total-vat-1">@{{ vato.total }}</span>
+                                                            <i class="fa fa-{{$offer->currency}}"></i>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="bottom-info">
+                                                            {{trans("sentence.total_vat")}}
+                                                        </div>
+                                                    </td>
+                                                    <td style="text-align:right">
+                                                        <div class="bottom-info">{{$offer->vat_total}}
+                                                            <i class="fa fa-{{$offer->currency}}"></i>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -202,8 +212,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
 
@@ -218,8 +226,9 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="bottom-info">
-                                            {{trans("sentence.offer_amount")}}
-                                            <span class="pull-right" style="font-size:15px;color:#2AC!important">{{$offer->grand_total}}
+                                            {{ trans("sentence.offer_amount")}}
+                                            <span class="pull-right" style="font-size:15px;color:#2AC!important">
+                                                {{$offer->grand_total}}
                                                 <i class="fa fa-{{$offer->currency}}"></i>
                                             </span>
                                         </div>
@@ -240,15 +249,6 @@
                                 </div>
 
                                 <hr>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        {{ trans("sentence.orders_created_from_offer") }}
-                                        <br>
-                                        <a href="http://demo.iyspro.com/salesmanager/sales-orders/22"> {{trans("sentence.sales_order")}}                                            &nbsp;(#22)</a><br>
-                                    </div>
-
-                                </div>
                             </div>
                         </div>
 
@@ -258,10 +258,10 @@
 
 
             </article>
+            <div id="ms-emails"></div>
         </div>
 
-        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans('sentence.are_you_sure_delete_sales_offer'),$id=$offer->id])
-
+        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans('sentence.are_you_sure_delete_purchase_offer'),$id=$offer->id])
 
         {{-- Durum Modal--}}
         <div class="modal fade" id="statusModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
@@ -272,7 +272,9 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             ×
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">{{trans("word.change")}}</h4>
+                        <h4 class="modal-title" id="myModalLabel">
+                            {{trans("word.change")}}
+                        </h4>
                     </div>
                     <div class="modal-body modal-body-content">
                         <form id="StatusForm">
@@ -293,7 +295,9 @@
                                 <HR>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">{{trans("sentence.effective_date")}}</label>
+                                        <label class="col-md-4 control-label">
+                                            {{trans("sentence.effective_date")}}
+                                        </label>
                                         <div class="col-md-4 ">
                                             <div class="input-group">
                                                 <input type="text"
@@ -312,7 +316,9 @@
                                 <hr>
                                 <fieldset>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">{{trans("word.description")}}</label>
+                                        <label class="col-md-4 control-label">
+                                            {{trans("word.description")}}
+                                        </label>
                                         <div class="col-md-6 ">
                                             <div class="input-group">
                                                 <textarea v-model="form.note" rows="3" cols="25"
@@ -327,19 +333,33 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">
-                            {{trans("word.cancel")}}
+                            {{ trans('word.cancel') }}
                         </button>
                         <button type="button" class="btn btn-primary" v-on:click="status_send">
-                            {{trans("word.save")}}
+                            {{ trans('word.save') }}
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+        {{--Durum Modal--}}
+
+
+
 
     </section>
+    @include("components.external.share",[
+    $title=trans('word.offer'),
+    $thread=trans('sentence.purchase_offer').' : ' .$offer->company["company_name"],
+    $message=trans('sentence.purchase_offer_details_by_downloading_the_summary')." ".account()["name"]."</b>",
+    $type="share.purchase_offer",
+    $data = $offer])
+
 
     @push('scripts')
+
+
+
         <script>
             window.addEventListener("load", () => {
                 VueName = new Vue({
@@ -378,7 +398,7 @@
                             $("#statusModal").modal("show");
                         },
                         status_send: function () {
-                            axios.post('{{route("sales.offers.status_send",[aid(),$offer->id])}}', this.form)
+                            axios.post('{{route("purchases.offers.status_send",[aid(),$offer->id])}}', this.form)
                                 .then(function (response) {
                                     if (response.data.message == "success") {
                                         VueName.status_name = response.data.status_name;
@@ -393,10 +413,10 @@
                         },
                         delete_data: function ($id) {
                             fullLoading();
-                            axios.delete('{{route("sales.offers.destroy",[aid(),$offer->id])}}')
+                            axios.delete('{{route("purchases.offers.destroy",[aid(),$offer->id])}}')
                                 .then(function (response) {
                                     if (response.data.message == "success") {
-                                        window.location.href = '{{route("sales.offers.index",aid())}}';
+                                        window.location.href = '{{route("purchases.offers.index",aid())}}';
                                     }
                                 }).catch(function (error) {
                                 notification("Error", error.response.data.message, "danger");

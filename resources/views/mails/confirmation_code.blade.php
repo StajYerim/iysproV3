@@ -2,7 +2,7 @@
 
 @section('content')
     <p>
-        You've been registered to {{ config('app.name') }}.
+        {{ trans('sentence.you_have_been_registered_to') }} {{ config('app.name') }}.
     </p>
 
     <p>
@@ -10,6 +10,5 @@
         <a href="{{ route('activation', ['code' => $user->confirmation_code]) }}">
             {{ route('activation', ['code' => $user->confirmation_code]) }}
         </a>
-
     </p>
 @endsection

@@ -67,8 +67,11 @@ Route::middleware('admin')->group(function() {
 // If user is authenticated and he is not admin
 Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
 
-
+    //Dashboard
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    Route::get("/dashboard/cash-flow");
+
+    //Company Profile
     Route::get('/company-profile', 'AccountsController@profile')->name('company.profile');
 
     Route::post("user/{id}/permission/update","AccountUsersController@permission_update")->name("settings.users.permission.update");
@@ -94,6 +97,7 @@ Route::group(['prefix'=>'{company_id}','middleware'=>'not.admin'],function() {
     Route::get("/exchange","ExchangeController@exchange")->name("exchange");
 
     //Share Offers/Orders
+    Route::post("/purchase-offer-share/{id}","ShareController@purchase_offer_share")->name("share.purchase_offer");
     Route::post("/offer-share/{id}","ShareController@offer_share")->name("share.offer");
     Route::post("/order-share/{id}","ShareController@order_share")->name("share.order");
 

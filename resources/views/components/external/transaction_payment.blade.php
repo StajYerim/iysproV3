@@ -509,7 +509,7 @@
 //                                            VueName.statement();
                                             VuePayment.loading = false;
 
-                                            notification("Success", "Çek ile ödeme işlemi başarıyla gerçekleşti.", "success");
+                                            notification("Success", "Nakit ile ödeme işlemi başarıyla gerçekleşti.", "success");
 
 
                                         }
