@@ -97,7 +97,7 @@
 @include("layouts.main")
 
 @include("layouts.footer")
-{{--@include("layouts.shourcut")--}}
+@include("layouts.shourcut")
 @include("layouts.scripts")
 
 <script>
