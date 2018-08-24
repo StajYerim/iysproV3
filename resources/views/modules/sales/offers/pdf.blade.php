@@ -94,7 +94,10 @@ $app_account = \App\Account::where('id',aid())->first();
 <body>
 
 <div class="invoice-box">
-
+    @if($offerSettings->cover_page)
+        {!! $offerSettings->cover_page !!}
+        <div class="page-break"></div>
+    @endif
     <table style= "width: 100%" cellpadding="0" cellspacing="0">
         <tr class="top" >
             <td colspan="6">
@@ -109,10 +112,8 @@ $app_account = \App\Account::where('id',aid())->first();
                                         @if(!empty($settings_sales_offer) && $settings_sales_offer->logo_show == 1)
                                             @if(!empty($app_account->logo))
                                                 <img src="{{ asset('images/account/'.aid().'/logo/'.$app_account->logo) }}" alt="">
-                                                deneme
                                             @endif
                                         @endif
-                                        td kısmı
                                     </td>
                                     <td style="margin-left:15px;text-align:right;width:35%">
 

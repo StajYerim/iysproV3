@@ -429,7 +429,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'send_to_parasut', 'text'=> ['en'=> 'SEND TO PARAŞÜT','tr'=> "PARAŞÜT'E GÖNDER"]]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_order', 'text'=> ['en'=> 'SALES ORDER','tr'=> "SATIŞ SİPARİŞİ"]]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_offer', 'text'=> ['en'=> 'SALES OFFER','tr'=> "SATIŞ TEKLİFİ"]]);
-        LanguageLine::create(['group'=> 'sentence', 'key'=> 'purchase_offer', 'text'=> ['en'=> 'PURCHASE OFFER','tr'=> "SATIN ALMA TEKLİFİ"]]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'purchase_offer', 'text'=> ['en'=> 'PURCHASE OFFER','tr'=> "SATIŞ TALEBİ"]]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'purchase_order', 'text'=> ['en'=> 'PURCHASE ORDER','tr'=> "ALIŞ SİPARİŞİ"]]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'list_price', 'text'=> ['en'=> 'LIST PRICE','tr'=> "LİSTE FİYATI"]]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'callback_url', 'text'=> ['en'=> 'CALLBACK URL','tr'=> "GERİ DÖNÜŞ URL ADRESİ"]]);

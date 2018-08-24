@@ -45,11 +45,7 @@
                                 <a tabindex="-1" v-if="!planning" @click="orderPlanningSend" href="#"><i class="fa fa-industry"  aria-hidden="true"></i>
                                     ÜRETİME GÖNDER</a>
                             </li>
-                            <li>
-                                <a onclick="$(this).orderReturn()" data-id="0" id="orderReturn" href="#"><i
-                                            class="fa fa-reply " aria-hidden="true"></i>
-                                    {{trans("sentence.convert_to_order")}}</a>
-                            </li>
+
                             <li class="divider"></li>
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"

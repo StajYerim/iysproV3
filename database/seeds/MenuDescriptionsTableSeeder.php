@@ -133,7 +133,7 @@ class MenuDescriptionsTableSeeder extends Seeder
             [
                 'lang_code' => "tr",
                 'menu_id' => 12,
-                'name' => 'Teklifler',
+                'name' => 'Talepler',
             ],
             [
                 'lang_code' => "en",
