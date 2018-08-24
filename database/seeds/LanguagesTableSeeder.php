@@ -196,9 +196,9 @@ class LanguagesTableSeeder extends Seeder
         ]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'enter_username_or_email', 'text'=> [
             'en'=>
-                'Please enter email address/username',
+                'Please enter email address',
             'tr'=>
-                'Lütfen kullanıcı adınızı ya da e-posta adresinizi giriniz.']
+                'Lütfen e-posta adresinizi giriniz.']
         ]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'confirm_email_via_link', 'text'=> [
             'en'=>

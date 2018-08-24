@@ -101,6 +101,10 @@ class PurchaseOffers extends Model
         return get_money($this->attributes['currency_value'], 4);
     }
 
+    public function getFaCurrencyAttribute(){
+        return strtolower($this->currency);
+    }
+
     public function items()
     {
         return $this->hasMany(PurchaseOfferItems::class, "purchase_offer_id", "id");
