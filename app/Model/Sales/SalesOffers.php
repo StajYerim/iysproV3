@@ -116,6 +116,10 @@ class SalesOffers extends Model
         return get_money(money_db_format($this->grand_total) * money_db_format($this->currency_value));
     }
 
+    public function getFaCurrencyAttribute(){
+        return strtolower($this->currency);
+    }
+
     public function getGetStatusAttribute()
     {
         $dizi = array(

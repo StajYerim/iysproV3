@@ -21,7 +21,7 @@ class OfferController extends Controller
             'logo_show' => 'required'
         ]);
         $settings_sales_offer = SettingsSalesOffer::where("account_id",aid())->first();
-        if(count($settings_sales_offer) > 0)
+        if($settings_sales_offer != null)
         {
             $sales_offers = SettingsSalesOffer::where("account_id",aid())->first();
             $sales_offers->account_id = aid();

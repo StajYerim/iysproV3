@@ -26,6 +26,11 @@ class Tags extends Model
         return $this->morphToMany("App\Tags", 'taggable');
     }
 
+    public function expenses_tags()
+    {
+        return $this->morphedByMany(Expenses::class, 'taggable');
+    }
+
     public function sales_orders()
     {
         return $this->morphedByMany(SalesOrders::class, 'taggable');

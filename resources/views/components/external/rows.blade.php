@@ -277,7 +277,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             {name: "%18", total: 0},
                         ],
                         dont_try: false,
-                        currency_class: '{{$form_type == "update" ? "fa fa-".$offer->currency."":""}}',
+                        currency_class: '{{$form_type == "update" ? "fa fa-".$offer->fa_currency."":""}}',
                         currency: '{{$form_type == "update" ? $offer->currency:"TRY"}}',
                         currency_value: '{{$form_type == "update" ? $offer->_value:"0,00"}}',
                         items: [@if($form_type != "update"){
@@ -532,7 +532,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     },
                     currency_process(cur) {
                         console.log(cur)
-                        this.currency_class = "fa fa-" + this.currency;
+                        this.currency_class = "fa fa-" + this.currency.toLowerCase();
 
                         if (cur == "TRY") {
 

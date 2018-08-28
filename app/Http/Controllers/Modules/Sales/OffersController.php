@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Modules\Sales;
 use App\Language;
+use App\Model\Settings\SettingsSalesOffer;
 use App\Taggable;
 use App\Tags;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -119,14 +120,16 @@ class OffersController extends Controller
     public function pdf($aid, $id,$type,$lang)
     {
         Artisan::call('view:clear');
+        $offer = SalesOffers::find($id);
+        $offerSettings = SettingsSalesOffer::where("account_id",$aid)->first();
 
         if($type=="url"){
-            $offer = SalesOffers::find($id);
-            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer","lang"))->setPaper('A4');
+
+            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer","offerSettings","lang"))->setPaper('A4');
             return $pdf->stream();
         }else{
-            $offer = SalesOffers::find($id);
-            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer","lang"))->setPaper('A4');
+
+            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer","offerSettings","lang"))->setPaper('A4');
             return   $pdf->download($offer->company["company_name"].' ('.$offer->description.').pdf');
         }
 

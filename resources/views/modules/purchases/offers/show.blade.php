@@ -116,10 +116,10 @@
 
                                                 <td>@{{ item.quantity }} @{{ item.unit }}</td>
                                                 <td style="text-align:right">@{{ item.price }} <i
-                                                            class='fa fa-{{$offer->currency}}'></i></td>
+                                                            class='fa fa-{{$offer->fa_currency}}'></i></td>
                                                 <td align="right">%@{{item.vat}}</td>
                                                 <td style="text-align:right"> @{{ item.total }} <i
-                                                            class="fa fa-{{$offer->currency}}"></i></td>
+                                                            class="fa fa-{{$offer->fa_currency}}"></i></td>
                                             </tr>
 
 
@@ -139,7 +139,7 @@
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info">{{$offer->sub_total}}
-                                                            <i class="fa fa-{{$offer->currency}}"></i>
+                                                            <i class="fa fa-{{$offer->fa_currency}}"></i>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -156,7 +156,7 @@
                                                     <td style="text-align:right">
                                                         <div class="bottom-info" style="font-size: 11px">
                                                             <span id="total-vat-1">@{{ vato.total }}</span>
-                                                            <i class="fa fa-{{$offer->currency}}"></i>
+                                                            <i class="fa fa-{{$offer->fa_currency}}"></i>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -168,7 +168,7 @@
                                                     </td>
                                                     <td style="text-align:right">
                                                         <div class="bottom-info">{{$offer->vat_total}}
-                                                            <i class="fa fa-{{$offer->currency}}"></i>
+                                                            <i class="fa fa-{{$offer->fa_currency}}"></i>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -179,10 +179,10 @@
                                                     <td style="text-align:right">
                                                         <div class="bottom-info"
                                                              style="color:#2AC!important">{{$offer->grand_total}}
-                                                            <i class="fa fa-{{$offer->currency}}"></i></div>
+                                                            <i class="fa fa-{{$offer->fa_currency}}"></i></div>
                                                     </td>
                                                 </tr>
-                                                @if($offer->currency != "try")
+                                                @if($offer->currency != "TRY")
                                                     <tr>
                                                         <td>
                                                             <div class="bottom-info">
@@ -201,7 +201,7 @@
                                                         </td>
                                                         <td style="text-align:right">
                                                             <div class="bottom-info" style="color:#2AC!important">1 <i
-                                                                        class="fa fa-{{$offer->currency}}"></i>
+                                                                        class="fa fa-{{$offer->fa_currency}}"></i>
                                                                 = {{$offer->currency_value}} <i class="fa fa-try"></i>
                                                             </div>
                                                         </td>
@@ -229,7 +229,7 @@
                                             {{ trans("sentence.offer_amount")}}
                                             <span class="pull-right" style="font-size:15px;color:#2AC!important">
                                                 {{$offer->grand_total}}
-                                                <i class="fa fa-{{$offer->currency}}"></i>
+                                                <i class="fa fa-{{$offer->fa_currency}}"></i>
                                             </span>
                                         </div>
                                     </div>

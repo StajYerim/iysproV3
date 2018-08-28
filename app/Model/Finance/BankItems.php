@@ -13,6 +13,7 @@ class BankItems extends Model
 {
     protected $guarded = [];
     protected $dates = ["date"];
+    protected $appends = ["bank_name"];
 
     public function setAmountAttribute($amount)
     {
@@ -106,6 +107,10 @@ class BankItems extends Model
         }else if($this->type =="expenses"){
             return "GİDER FİŞİ";
         }
+    }
+
+    public function getBankNameAttribute(){
+        return $this->bank_account["name"];
     }
 
 

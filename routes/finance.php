@@ -43,4 +43,8 @@ Route::group(['prefix'=>'{company_id}/finance','middleware'=>'not.admin'],functi
     Route::get("vat-report","Modules\Finance\VatReportController@index")->name("finance.vat_report.index");
     Route::post("vat-report","Modules\Finance\VatReportController@month")->name("finance.vat_report.month");
 
+    //Expenses Reports
+    Route::get("/reports/expenses-report","Modules\Finance\ExpensesReportController@index")->name("finance.expenses_report.index");
+    Route::post("/reports/expenses-pies/data","Modules\Finance\ExpensesReportController@pies_data")->name("finance.expenses_pies.data");
+
 });

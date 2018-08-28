@@ -174,6 +174,9 @@ class PurchaseOrders extends Model
         return $this->morphToMany(Tags::class, 'taggable');
     }
 
+    public function getFaCurrencyAttribute(){
+        return strtolower($this->currency);
+    }
 
     public function getPaymentLabelAttribute()
     {

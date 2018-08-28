@@ -124,13 +124,14 @@ OffersController extends Controller
     public function pdf($aid, $id,$type,$lang)
     {
         Artisan::call('view:clear');
+        $offer = PurchaseOffers::find($id);
 
         if($type=="url"){
-            $offer = PurchaseOffers::find($id);
+
             $pdf = PDF::loadView('modules.purchases.offers.pdf',compact("offer","lang"))->setPaper('A4');
             return $pdf->stream();
         }else{
-            $offer = PurchaseOffers::find($id);
+
             $pdf = PDF::loadView('modules.purchases.offers.pdf',compact("offer","lang"))->setPaper('A4');
             return $pdf->download($offer->company["company_name"].' ('.$offer->description.').pdf');
         }

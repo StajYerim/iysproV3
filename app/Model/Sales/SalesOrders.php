@@ -192,6 +192,10 @@ class SalesOrders extends Model
         }
     }
 
+    public function getFaCurrencyAttribute(){
+       return strtolower($this->currency);
+    }
+
     public function offer(){
         return  $this->hasOne(SalesOffers::class,"id","sales_offer_id");
     }
