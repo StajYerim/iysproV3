@@ -4,7 +4,7 @@
 
     <section id="widget-grid">
 
-        <div class="row">
+        <div class="row" style="display:none">
 
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="highchart-container3"></div>
