@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
 class Expenses extends Model
 {
     protected $guarded = [];
-    protected $appends = ["bank_item","payment_status","pay_status"];
+    protected $appends = ["bank_item","payment_status","pay_status","bank_name","tags_label"];
 
     public function save(array $options = array())
     {
@@ -68,6 +68,17 @@ class Expenses extends Model
         return $this->morphToMany(Tags::class, 'taggable');
     }
 
+    public function getTagsLabelAttribute(){
+        $tags = "";
+
+        foreach($this->tags as $tag){
+            $tags .= "<span class='badge' style='background-color:".$tag["bg_color"]."' > ".$tag["title"]."</span >";
+
+        }
+
+        return  $tags;
+    }
+
     public function getBankItemAttribute()
     {
         return BankItems::with("bank_account")->where(["type" => "expenses", "doc_id" => $this->id])->first();
@@ -76,6 +87,10 @@ class Expenses extends Model
     public function bank()
     {
         return $this->hasone(BankAccounts::class,"id","bank_account_id");
+    }
+
+    public function getBankNameAttribute(){
+        return $this->bank["name"];
     }
 
     public function getPaymentStatusAttribute()
