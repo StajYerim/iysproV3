@@ -26,7 +26,7 @@ class ExpensesReportController extends Controller
 
 
         //Fatura Etiketleri
-        $order_tags = Tags::has("expenses_tags")
+        $order_tags = Tags::has("expenses_tags")->where("account_id",aid())
             ->whereHas("expenses_tags", function ($query) use ($start, $end) {
                 $query->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end]);
             })
