@@ -109,12 +109,12 @@
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group"
-                                             v-bind:class="{'has-error':errors.has('form.termin_date')}">
+                                            >
                                             <label class="col-md-3 control-label">{{trans("sentence.termin_date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"
-                                                              name="form.termin_date" v-validate="'required'"
+                                                              name="form.termin_date"
                                                               class="form-control datepicker"
                                                               v-model="form.termin_date">
                                                     </the-mask>
