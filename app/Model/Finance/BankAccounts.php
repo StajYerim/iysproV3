@@ -11,7 +11,7 @@ class BankAccounts extends Model
 {
 
     protected $guarded = [];
-
+    protected $appends = ["balance"];
     public function cur_info()
     {
         return $this->hasOne(Currency::class, "code", "currency");

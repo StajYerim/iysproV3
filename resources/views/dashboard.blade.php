@@ -27,7 +27,7 @@
                             <tr>
                                 <td>{!!$cash["week_id"] !!}</td>
                                 <td>{{$cash["order_total"]+$cash["cheq_total"]+$cash["bank_total"]}}</td>
-                                <td>{{$cash["porder_total"]+$cash["cheq_payment"]}}</td>
+                                <td>{{$cash["porder_total"]+$cash["cheq_payment"]+$cash["expense_payment"]}}</td>
                             </tr>
                             @endforeach
 
