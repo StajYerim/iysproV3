@@ -76,9 +76,7 @@ class ExpensesReportController extends Controller
 
         $dataset["expenses_list"] = $sales_order_list;
 
-
         return $dataset;
-
 
     }
 }

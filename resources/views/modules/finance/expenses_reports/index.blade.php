@@ -170,6 +170,7 @@
                                 end: end
                             }).then(res => {
                                 sales_report.expenses_list = [];
+                                sales_report.expenses_pie = [];
 
                                 sales_report.expenses_list = res.data["expenses_list"];
 
