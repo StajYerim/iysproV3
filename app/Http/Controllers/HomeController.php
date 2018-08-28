@@ -188,7 +188,7 @@ class HomeController extends Controller
          $expenses_total = 0;
 
          foreach($expenses as $expense){
-
+            if($expense->pay_status == 0)
              $expenses_total += money_db_format($expense->amount);
          }
 
