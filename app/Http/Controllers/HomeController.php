@@ -152,18 +152,18 @@ class HomeController extends Controller
 
 
         $cash_flow = array();
-     for($i=-1;$i<16;$i++) {
+      for($i=0;$i<16;$i++) {
         $weekOfYear = Carbon::now()->addWeek($i)->weekOfYear;
 
         //PURCHASE ORDERS
-          $porderes = PurchaseOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i-1)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
+          $porderes = PurchaseOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
          $porderes_total = 0;
 
          foreach($porderes as $pordered){
              $porderes_total += $pordered->safe_remaining;
          }
 
-         $cheques = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i-1)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
+         $cheques = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
          $cheques_total = 0;
          foreach ($cheques as $cheq) {
              if ($cheq->cheques_status == 0) {
@@ -174,7 +174,7 @@ class HomeController extends Controller
 
 
          //SALES ORDERS
-          $orderes = SalesOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i-1)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
+          $orderes = SalesOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
           $orderes_total = 0;
 
           foreach($orderes as $ordered){
@@ -182,7 +182,7 @@ class HomeController extends Controller
           }
 
           //COLLECT CHEQ
-         $cheques_collect = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i-1)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
+         $cheques_collect = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i)->format("Y-m-d")])->get();
          $cheques_total_collect = 0;
          foreach ($cheques_collect as $cheq) {
              if ($cheq->collect_statu == 0) {
