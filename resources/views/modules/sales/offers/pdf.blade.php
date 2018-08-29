@@ -282,7 +282,7 @@ $app_account = \App\Account::where('id',aid())->first();
     <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2,$offer->currency_name, "KRŞ", "", null, null, null)}}
     </span>
     <br><br><br>
-    {{--{!! $logo->endText !!}--}}
+    {!! $offer->description_detail !!}
 </div>
 
 <div id="altfooter">
