@@ -348,7 +348,7 @@ class OrdersController extends Controller
     /*Order send product planning*/
     public function order_send_planning($aid,Request $request){
 
-        Production::create(["status"=>0,"account_id"=>aid(),"sales_order_id"=>$request->order_id]);
+        Production::create(["status"=>0,"account_id"=>aid(),"sales_order_id"=>$request->order_id,"priority"=>0,"day"=>0]);
 
     }
 
