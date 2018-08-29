@@ -27,6 +27,11 @@ class Product extends Model
 
     ];
 
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->where("account_id", '=', aid());
+    }
+
     //Category info
     public function category()
     {
