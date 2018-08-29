@@ -11,4 +11,5 @@ class PlanningController extends Controller
     {
         return view("modules.settings.planning.index");
     }
+
 }

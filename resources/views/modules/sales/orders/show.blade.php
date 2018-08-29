@@ -1101,8 +1101,8 @@
                                         fullLoading("Lütfen Bekleyiniz.");
 
                                          axios.post("{{route("sales.planning.send",aid())}}",{order_id:"{{$order->id}}"}).then(res=>{
-                                             VueName.planning =1;
-                                             swal("Sipariş başarıyla üretim planlanama bölümüne gönderildi.", {
+                                             VueName.planning = 1;
+                                             swal("Sipariş başarıyla üretim planlama bölümüne gönderildi.", {
                                                  icon: "success",
                                              });
                                                      fullLoadingClose()
