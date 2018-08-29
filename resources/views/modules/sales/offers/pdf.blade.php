@@ -2,7 +2,7 @@
 app()->setLocale($lang);
 $settings_sales_offer =  \App\Model\Settings\SettingsSalesOffer::where('account_id',aid())->first();
 $app_account = \App\Account::where('id',aid())->first();
-
+      $offerSettings = \App\Model\Settings\SettingsSalesOffer::where("account_id",aid())->first();
  @endphp
         <!doctype html>
 <html>
