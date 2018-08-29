@@ -151,7 +151,7 @@
                 {{trans("word.quantity")}}
             </td>
             <td style="text-align: right;width:120px">
-                {{trans("sentence.unity_price")}}
+                {{trans("sentence.unit_price")}}
             </td>
             {{--@if($order->Items->sum("OfferItemDiscount") > 0)--}}
                 {{--<td  style="text-align: right;width:20px" >--}}
