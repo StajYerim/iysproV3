@@ -59,5 +59,5 @@ Route::group(['prefix'=>'{company_id}/sales','middleware'=>['not.admin','permiss
     Route::get("/reports/collect-reports","Modules\Sales\CollectReportController@index")->name("sales.collect_report.index");
 
     //Sales Planning
-    Route::post("/planning-order-send","Modules\Sales\OrdersController@order_send_planning")->name("sales.planning.send");
+    Route::post("/orders/planning-order-send","Modules\Sales\OrdersController@order_send_planning")->name("sales.planning.send");
 });
