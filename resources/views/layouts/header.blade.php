@@ -103,7 +103,7 @@
 
                     <li  class="">
                         <a href=""><i class="fa fa-cubes"></i> {{ trans("word.applications") }}</a>
-                        <a href="{{ route('settings.home',aid()) }}"><i class="fa fa-cubes"></i>{{ trans("sentence.application_settings") }}</a>
+                        <a href="{{ route('settings.home',aid()) }}"><i class="fa fa-cubes"></i> {{ trans("sentence.application_settings") }}</a>
                     </li>
                     <li  class="">
                         <a href="{{route("settings.users.index",aid())}}"><i class="fa fa-users"></i> {{ trans("word.users") }}</a>
