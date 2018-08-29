@@ -94,7 +94,7 @@ $app_account = \App\Account::where('id',aid())->first();
 <body>
 
 <div class="invoice-box">
-    @if($offerSettings->cover_page)
+    @if($offerSettings)
         {!! $offerSettings->cover_page !!}
         <div class="page-break"></div>
     @endif
