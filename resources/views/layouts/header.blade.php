@@ -90,7 +90,7 @@
          <!-- only owner can see this menu item -->
 
                   <li  class="">
-                        <a href="{{route("settings.accounts.profile",aid())}}"><i class="fa fa-suitcase"></i> {{ trans("sentence.company_profile") }}</a>
+                        <a href="{{ route("company_profile", aid()) }}"><i class="fa fa-suitcase"></i> {{ trans("sentence.company_profile") }}</a>
                     </li>
          <!-- only owner can see this menu item -->
 
