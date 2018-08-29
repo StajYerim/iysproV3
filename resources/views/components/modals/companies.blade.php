@@ -104,11 +104,11 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">{{trans("word.district")}}</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" v-model="form.town" id="county"/>
+                                <input type="text" class="form-control" v-model="form.town" />
                             </div>
                             <label class="col-md-3 control-label">{{trans("word.province")}}</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" v-model="form.city" id="city"/>
+                                <input type="text" class="form-control" v-model="form.city" />
                             </div>
 
                         </div>
@@ -213,7 +213,7 @@
 
             }),
             mounted: function () {
-                city_and_county();
+//                city_and_county();
             },
             methods: {
 
