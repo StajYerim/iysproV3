@@ -21,13 +21,22 @@
             <div style="padding: 10px!important;">
                 <table >
                     <tr>
-                        <td><input type="checkbox" name="tahsil_durumu_checkbox" value="1"></td>
-                        <td style="padding: 5px;">Tahsil Edilmiş</td>
+                        <td>
+                            <input id="tahsil_edilmis_checkbox" type="checkbox" name="tahsil_durumu_checkbox" value="1">
+                        </td>
+                        <td style="padding: 5px;">
+                            <a href="javascript:void(0)" id="tahsil_edilmis">Tahsil Edilmiş</a>
+                        </td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox" name="tahsil_durumu_checkbox" value="0"></td>
-                        <td style="padding: 5px;">Tahsil Edilmemiş</td>
+                        <td>
+                            <input id="tahsil_edilmemis_checkbox" type="checkbox" name="tahsil_durumu_checkbox" value="0">
+                        </td>
+                        <td style="padding: 5px;">
+                            <a href="javascript:void(0)" id="tahsil_edilmemis">Tahsil Edilmemiş</a>
+                        </td>
                     </tr>
+                    <hr class="divider">
                     <tr>
                         <td colspan="2">
                             <button class="btn btn-success">Uygula</button>
@@ -37,7 +46,7 @@
             </div>
         </ul>
     </div>
-    <div id="duzenlenme_tarihi_id" class="dropdown duzenlenme_tarihi_filter col-md-2 pull-left" style="display: none;">
+    <div id="duzenlenme_tarihi_id" class="dropdown duzenlenme_tarihi_filter col-md-2 pull-left" style="display: none; margin-right:10px;">
         <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Düzenlenme<span class="caret"></span>
             <span id="duzenlenme_tarihi_close" aria-hidden="true">&times;</span>
@@ -57,7 +66,7 @@
             </div>
         </ul>
     </div>
-    <div id="vade_tarihi_id" class="dropdown vade_tarihi_filter col-md-2 pull-left" style="display: none;">
+    <div id="vade_tarihi_id" class="dropdown vade_tarihi_filter col-md-2 pull-left" style="display: none;margin-right:10px;">
         <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
             Vade Tarihi<span class="caret"></span> <span id="vade_tarihi_close" aria-hidden="true">&times;</span>
         </button>
@@ -92,46 +101,121 @@
 
 <script>
     $(document).ready(function() {
+
         $("#hepsini_kaldir").hide();
+
+        // TAHSİL EDİLMİŞ LİNKİNE TIKLANDIĞINDA CHECKBOX CHECKED YA DA UNCHECKED OLACAK
+        $("#tahsil_edilmis").on("click",function(event){
+            event.preventDefault();
+            $('#tahsil_edilmis_checkbox').each(function () { this.checked = !this.checked; });
+        });
+
+        // TAHSİL EDİLMEMİŞ LİNKİNE TIKLANDIĞINDA CHECKBOX CHECKED YA DA UNCHECKED OLACAK
+        $("#tahsil_edilmemis").on("click",function(event){
+            event.preventDefault();
+            $('#tahsil_edilmemis_checkbox').each(function () { this.checked = !this.checked; });
+        });
+
+        var countButton = [];
+
         $("#tahsilat_durumu").on("click",function(){
+            countButton[0] = "tahsilat_durumu";
             $(".tahsilat_durumu_filter").show();
             $('#filtrele_span').text("");
+            setTimeout(function() {
+                $('.tahsilat_durumu_filter').addClass('open');
+            });
             $("#tahsilat_durumu").hide();
             $("#hepsini_kaldir").show();
         });
         $("#tahsilat_durumu_close").on("click",function(){
+            delete countButton[0]
+            if(jQuery.isEmptyObject(countButton)){
+                $("#hepsini_kaldir").hide();
+                $('#filtrele_span').text("FİLTRELE");
+            }
             $("#tahsilat_durumu").show();
             $(".tahsilat_durumu_filter").hide();
         });
+        $('.tahsilat_durumu_filter .dropdown-menu').on({
+            "click":function(e){
+                e.stopPropagation();
+            }
+        });
+
         $("#duzenlenme_tarihi").on("click",function(){
+            countButton[1] = "düzenlenme tarihi";
             $(".duzenlenme_tarihi_filter").show();
             $('#filtrele_span').text("");
+            setTimeout(function() {
+                $('.duzenlenme_tarihi_filter').addClass('open');
+            });
             $("#duzenlenme_tarihi").hide();
             $("#hepsini_kaldir").show();
         });
         $("#duzenlenme_tarihi_close").on("click",function(){
+            delete countButton[1]
+            if(jQuery.isEmptyObject(countButton)){
+                $("#hepsini_kaldir").hide();
+                $('#filtrele_span').text("FİLTRELE");
+            }
             $("#duzenlenme_tarihi").show();
             $(".duzenlenme_tarihi_filter").hide();
         });
+        $('.duzenlenme_tarihi_filter .dropdown-menu').on({
+            "click":function(e){
+                e.stopPropagation();
+            }
+        });
+
         $("#vade_tarihi").on("click",function(){
+            countButton[2] = "vade tarihi";
             $(".vade_tarihi_filter").show();
             $('#filtrele_span').text("");
+            setTimeout(function() {
+                $('.vade_tarihi_filter').addClass('open');
+            });
             $("#vade_tarihi").hide();
             $("#hepsini_kaldir").show();
         });
         $("#vade_tarihi_close").on("click",function(){
+            delete countButton[2]
+            if(jQuery.isEmptyObject(countButton)){
+                $("#hepsini_kaldir").hide();
+                $('#filtrele_span').text("FİLTRELE");
+            }
             $("#vade_tarihi").show();
             $(".vade_tarihi_filter").hide();
         });
+        $('.vade_tarihi_filter .dropdown-menu').on({
+            "click":function(e){
+                e.stopPropagation();
+            }
+        });
+
         $("#etiket").on("click",function(){
+            countButton[3] = "etiket";
             $(".etiket_filter").show();
             $('#filtrele_span').text("");
+            setTimeout(function() {
+                $('.etiket_filter').addClass('open');
+            });
             $("#etiket").hide();
             $("#hepsini_kaldir").show();
         });
         $("#etiket_close").on("click",function(){
+            delete countButton[3]
+            if(jQuery.isEmptyObject(countButton)){
+                $("#hepsini_kaldir").hide();
+                $('#filtrele_span').text("FİLTRELE");
+            }
             $("#etiket").show();
             $(".etiket_filter").hide();
+        });
+        $('.etiket_filter .dropdown-menu').on({
+            "click":function(e){
+                e.stopPropagation();
+            }
         });
 
         $("#hepsini_kaldir").on("click",function(){
