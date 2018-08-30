@@ -22,25 +22,14 @@
                                 @include("components.external.index_filter")
 
                                 <div class="col-md-4">
-                                    <div class="header-search pull-left" style="margin: -10px 0px 5px 7px;min-width: 360px;">
-
-                                        <input id="search-fld" type="text">
-                                        <button type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                        <a href="javascript:void(0);" id="cancel-search-js" title="{{trans("sentence.cancel_search")}}"><i
-                                                    class="fa fa-times"></i></a>
-                                        <button type="submit">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-
+                                    <div class="header-search pull-left" style="margin: -10px 0px 5px 7px;">
+                                        <input id="search-fld" class="pull-left" type="text" style="width:200px;">
                                     </div>
-
-                                    <div class="pull-right new-button" style="margin-top: -10px;">
+                                    <div class="pull-right new-button" style="margin-top: -40px;">
                                         <a href="{{route("sales.orders.form",[aid(),0,"new"])}}">
-                                    <span class="btn btn-success">
-                                        {{trans("sentence.new_order")}}
-                                    </span>
+                                        <span class="btn btn-success">
+                                            {{trans("sentence.new_order")}}
+                                        </span>
                                         </a>
                                     </div>
                                 </div>

@@ -18,7 +18,7 @@
             <span id="tahsilat_durumu_close" aria-hidden="true">&times;</span>
         </button>
         <ul class="dropdown-menu active" role="menu" aria-labelledby="menu1">
-            <div style="padding: 10px!important;">
+            <div style="padding: 5px!important;">
                 <table >
                     <tr>
                         <td>
