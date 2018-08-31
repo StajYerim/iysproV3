@@ -129,7 +129,7 @@
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6 ">
                                             <label class="control-label">
-                                                {{trans("sentence.user_name")}}
+                                                {{trans("word.password")}}
                                             </label>
                                             <input type="password" class="form-control"  v-model="parasut_form.password">
 

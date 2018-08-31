@@ -89,21 +89,23 @@
                 <ul class="dropdown-menu pull-left">
          <!-- only owner can see this menu item -->
 
-                  <li  class="">
-                        <a href="{{route("settings.accounts.profile",aid())}}"><i class="fa fa-suitcase"></i> {{ trans("sentence.company_profile") }}</a>
-                    </li>
+                  {{--<li class="">--}}
+                        {{--<a href="{{route("settings.accounts.profile",aid())}}"><i class="fa fa-suitcase"></i> {{ trans("sentence.company_profile") }}</a>--}}
+                    {{--</li>--}}
          <!-- only owner can see this menu item -->
 
-                  <li  class="">
+                    <li  class="">
                         <a href="{{route("settings.users.profile",[aid(),auth()->user()->id])}}"><i class="fa fa-user"></i> {{ trans("sentence.user_profile") }}</a>
                     </li>
-                    <li  class="">
-                        <a href=""><i class="fa fa-cogs"></i> {{ trans("sentence.general_settings") }}</a>
-                    </li>
+                    {{--<li  class="">--}}
+                        {{--<a href=""><i class="fa fa-cogs"></i> {{ trans("sentence.general_settings") }}</a>--}}
+                    {{--</li>--}}
 
+                    {{--<li>--}}
+                        {{--<a href=""><i class="fa fa-cubes"></i> {{ trans("word.applications") }}</a>--}}
+                    {{--</li>--}}
                     <li  class="">
-                        <a href=""><i class="fa fa-cubes"></i> {{ trans("word.applications") }}</a>
-                        <a href="{{ route('settings.home',aid()) }}"><i class="fa fa-cubes"></i>{{ trans("sentence.application_settings") }}</a>
+                        <a href="{{ route('settings.home',aid()) }}"><i class="fa fa-cubes"></i> {{ trans("sentence.application_settings") }}</a>
                     </li>
                     <li  class="">
                         <a href="{{route("settings.users.index",aid())}}"><i class="fa fa-users"></i> {{ trans("word.users") }}</a>
