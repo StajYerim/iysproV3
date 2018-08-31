@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-7">
     <div class="dropdown col-md-1 pull-left">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
             <i class="fa fa-filter"></i> <span id="filtrele_span">Filtrele</span>
@@ -12,7 +12,7 @@
             <li><a href="#" id="hepsini_kaldir">HEPSİNİ KALDIR</a></li>
         </ul>
     </div>
-    <div id="tahsilat_durumu_id" class="dropdown tahsilat_durumu_filter col-md-2 pull-left" style="display: none;">
+    <div id="tahsilat_durumu_id" class="dropdown tahsilat_durumu_filter col-md-1 pull-left" style="display: none;">
         <button class="btn btn-default dropdown-toggle" type="button" id="tahsilat_durumu_button" data-toggle="dropdown">Tahsilat
             <span class="caret"></span>
             <span id="tahsilat_durumu_close" aria-hidden="true">&times;</span>

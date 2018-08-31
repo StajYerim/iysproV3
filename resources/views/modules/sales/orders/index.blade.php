@@ -8,29 +8,17 @@
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
                     <div>
                         <div class="widget-body no-padding">
+                            <div class="col-md-12" style="padding: 10px;">
 
-                            <div id="search-mobile" class="btn-header transparent pull-right">
-                                <span>
-                                    <a href="javascript:void(0)" title="{{trans("word.search")}}">
-                                        <i class="fa fa-search"></i>
-                                    </a>
-                                </span>
-                            </div>
+                                @include('components.external.index_filter')
 
-                            <div class="col-md-12" style="padding:10px;">
+                                <div class="col-md-5">
+                                    <div class="col-md-4 header-search" style="margin: -7px 0px 5px 7px; width: 330px;" >
+                                        <input type="text" id="search-fld">
 
-                                @include("components.external.index_filter")
-
-                                <div class="col-md-4">
-                                    <div class="header-search pull-left" style="margin: -10px 0px 5px 7px;">
-                                        <input id="search-fld" class="pull-left" type="text" style="width:200px;">
                                     </div>
-                                    <div class="pull-right new-button" style="margin-top: -40px;">
-                                        <a href="{{route("sales.orders.form",[aid(),0,"new"])}}">
-                                        <span class="btn btn-success">
-                                            {{trans("sentence.new_order")}}
-                                        </span>
-                                        </a>
+                                    <div class="col-md-1" style="margin: 0px 0px 5px 0px;">
+                                        <button class="btn btn-success">New Order</button>
                                     </div>
                                 </div>
 
