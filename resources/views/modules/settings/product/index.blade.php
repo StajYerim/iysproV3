@@ -88,6 +88,7 @@
                 "t" +
                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                 "oLanguage": {
+                    "sUrl": "{{route("general.datatable.lang",aid())}}",
                     "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
                 },
                 buttons: [

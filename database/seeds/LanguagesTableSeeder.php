@@ -572,6 +572,19 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'you_have_been_registered_to', 'text'=> ['en'=> 'You have been registered to ','tr'=> 'Başarıyla kayıt oldunuz ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'confirmation_code', 'text'=> ['en'=> 'CONFIRMATION CODE','tr'=> 'DOĞRULAMA KODU']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'company', 'text'=> ['en'=> 'CONFIRMATION CODE','tr'=> 'DOĞRULAMA KODU']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'no_data_available_in_table', 'text'=> ['en'=> 'NO DATA AVAIBLE IN TABLE','tr'=> 'TABLODA HERHANGİ BİR VERİ MEVCUT DEĞİL']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'info_empty', 'text'=> ['en'=> 'INFO EMPTY','tr'=> 'KAYIT YOK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'loading', 'text'=> ['en'=> 'LOADING...','tr'=> 'YÜKLENİYOR...']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'processing', 'text'=> ['en'=> 'PROCESSING...','tr'=> 'İŞLENİYOR...']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'no_matching_found', 'text'=> ['en'=> 'NO MATCHING RECORDS FOUND','tr'=> 'EŞLEŞEN KAYIT BULUNAMADI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'first', 'text'=> ['en'=> 'FIRST','tr'=> 'İLK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'last', 'text'=> ['en'=> 'LAST','tr'=> 'SON']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'next', 'text'=> ['en'=> 'NEXT','tr'=> 'SONRAKİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'previous', 'text'=> ['en'=> 'PREVIOUS','tr'=> 'ÖNCEKİ']]);
+
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'filtered_from', 'text'=> ['en'=> 'FILTERED FROM','tr'=> 'KAYIT İÇİNDE BULUNAN']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'showing_record', 'text'=> ['en'=> 'SHOWING _START_ TO _END_ TO _TOTAL_ ENTRIES','tr'=> '_TOTAL_ KAYITTAN _START_ - _END_ ARASINDAKİ KAYITLAR GÖSTERİLİYOR']]);
+
 
     }
 }
