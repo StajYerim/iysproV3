@@ -18,4 +18,8 @@ Route::group(['prefix'=>'{company_id}/companies','middleware'=>'not.admin'],func
     Route::get("/companies/account-summary/{id}/{type}","Companies\CompaniesController@summary_pdf")->name("company.summary.pdf");
 
 
+    //Datatable lang url
+    Route::get("/datatable/lang","GeneralController@datatable_lang")->name("general.datatable.lang");
+
+
 });

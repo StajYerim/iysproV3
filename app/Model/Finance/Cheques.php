@@ -14,6 +14,11 @@ class Cheques extends Model
 
     protected $dates = ["payment_date", "date"];
 
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->where("account_id", '=', aid());
+    }
+
     public function company(){
         return $this->hasOne(Companies::class,"id","company_id");
     }

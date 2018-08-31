@@ -56,7 +56,7 @@
                 <input type="text" name="stock" value="1" autocomplete="OFF" class="form-control">
               </div>
             </div>
-            
+
             <h1>{{trans("word.description")}}</h1>
             <div>
               <div class="form-group">
@@ -92,7 +92,7 @@
                 </header>
                 <div style="padding:5px 13px 0">
                     <div class="widget-body no-padding">
-                        
+
                         <table id="table" class="table table-striped table-hover" width="100%">
                             <thead>
                                 <tr>
@@ -149,7 +149,7 @@
                         if (category.subCategoryList) {
                             category.subCategoryList.subCategory.forEach(function(element) {
                                 nextElement.append(`<option value="${element.id}">${element.name}</option>`);
-                            });    
+                            });
                         } else {
                             alert("Başka Alt Kategori Kalmadı!");
                         }
@@ -157,7 +157,7 @@
                 }
                 $('input[name="category"]').val(id);
             }
-            
+
             getCategories();
 
             $.get("{!! route('stock.index_list', aid()) !!}", function ({ data }) {
@@ -210,12 +210,13 @@
                 "sDom": "t" +
                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                 "oLanguage": {
+                    "sUrl": "{{route("general.datatable.lang",aid())}}",
                     "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
                 },
                 "autoWidth": true,
-                stateSave: true,
+//                stateSave: true,
                 responsive: true,
-                stateDuration: 45,
+//                stateDuration: 45,
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route('ecommerce.products.index_list',aid()) !!}',
@@ -240,6 +241,6 @@
             });
 
            table_search(tables)
-        </script> 
+        </script>
     @endpush
 @endsection

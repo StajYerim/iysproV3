@@ -12,4 +12,9 @@ class GeneralController extends Controller
         return view("general.script");
     }
 
+    /*datatable lang code*/
+    public function datatable_lang(){
+        return view("components.datatable.index");
+    }
+
 }

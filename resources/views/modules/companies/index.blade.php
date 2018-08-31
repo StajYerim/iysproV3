@@ -64,13 +64,14 @@
           tables =  $('#table').DataTable({
                 "sDom":"t" +
                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                "oLanguage": {
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-                },
+              "oLanguage": {
+                  "sUrl": "{{route("general.datatable.lang",aid())}}",
+                  "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+              },
                 "autoWidth": true,
-                stateSave: true,
+//                stateSave: true,
                 responsive: true,
-                stateDuration: 45,
+//                stateDuration: 45,
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route($route,[aid(),$type]) !!}',

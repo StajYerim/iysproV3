@@ -117,6 +117,7 @@ foreach($kategori as $kat){
 
 });
 
+
 //General Scripts
 Route::get("/general/script.js","GeneralController@script")->name("general.script");
 
