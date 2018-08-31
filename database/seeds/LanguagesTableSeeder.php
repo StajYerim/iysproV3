@@ -582,7 +582,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'next', 'text'=> ['en'=> 'NEXT','tr'=> 'SONRAKİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'previous', 'text'=> ['en'=> 'PREVIOUS','tr'=> 'ÖNCEKİ']]);
 
-        LanguageLine::create(['group'=> 'sentence', 'key'=> 'filtered_from', 'text'=> ['en'=> 'FILTERED FROM','tr'=> 'KAYIT İÇİNDE BULUNAN']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'filtered_from', 'text'=> ['en'=> 'FILTERED FROM _MAX_ TOTAL ENTRIES','tr'=> '_MAX_ KAYIT İÇERİSİNDEN BULUNAN']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'showing_record', 'text'=> ['en'=> 'SHOWING _START_ TO _END_ TO _TOTAL_ ENTRIES','tr'=> '_TOTAL_ KAYITTAN _START_ - _END_ ARASINDAKİ KAYITLAR GÖSTERİLİYOR']]);
 
 
