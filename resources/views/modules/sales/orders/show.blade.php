@@ -41,10 +41,12 @@
                                 <a tabindex="-1" data-toggle="modal" data-target="#transModal" href="#"><i class="fa fa-truck"  aria-hidden="true"></i>
                                    SEVKİYAT BİLGİSİ GÖNDER</a>
                             </li>
+                            @if(planning_send_permission() == 1)
                             <li>
                                 <a tabindex="-1" v-if="!planning" @click="orderPlanningSend" href="#"><i class="fa fa-industry"  aria-hidden="true"></i>
                                     ÜRETİME GÖNDER</a>
                             </li>
+                            @endif
 
                             <li class="divider"></li>
                             <li>
