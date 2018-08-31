@@ -18,6 +18,10 @@ class Menu extends Model
         return $this->hasOne(MenuDescriptions::class,"menu_id","id");
     }
 
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->where("show", '=', 1);
+    }
 
     public function getLangAttribute(){
 

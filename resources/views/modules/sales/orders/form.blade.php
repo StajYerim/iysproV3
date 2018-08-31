@@ -174,7 +174,7 @@
                             sales_offer_id: "{{$offer_id}}",
                             date: "{{$form_type == "update" ? $order->date:date_tr()}}",
                             due_date: "{{$form_type == "update" ? $order->due_date:date_tr()}}",
-                            termin_date: "{{$form_type == "update" ? $order->termin_date:date_tr()}}",
+                            termin_date: "{{isset($copy)  == true ? date_tr():$form_type == "update" ? $order->termin_date:date_tr()}}",
                             grand_total: "{{$form_type == "update" ? $order->grand_total:"0,00"}}",
                             sub_total: "{{$form_type == "update" ? $order->sub_total:"0,00"}}",
                             vat_total: "{{$form_type == "update" ? $order->vat_total:"0,00"}}",

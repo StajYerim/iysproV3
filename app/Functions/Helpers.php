@@ -153,7 +153,6 @@ function product_type_list()
 
 function colors()
 {
-
     return array(
         '#5cbc68',
         '#f26650',
