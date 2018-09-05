@@ -123,7 +123,7 @@ app()->setLocale($lang);
                 </table>
                 {{--{!! $logo->startText !!}--}}
 
-                <span style="text-align:center"><h2>{{trans("sentence.proforma_invoice")}} / {{trans("word.offer")}} </h2></span>
+                <span style="text-align:center"><h2>{{trans("sentence.proforma_invoice")}} / {{trans("word.request")}} </h2></span>
                 <span style="float:left"><b style="font-size:15px;">
                         {{$offer->company["company_name"]}}
                     </b> <span style="float:right" >{{trans("word.date")}}:

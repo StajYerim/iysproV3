@@ -159,7 +159,6 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'word', 'key'=> 'cheque', 'text'=> ['en'=> 'CHEQUE', 'tr'=> 'ÇEK']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'cheques', 'text'=> ['en'=> 'CHEQUES', 'tr'=> 'ÇEKLER']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'banks', 'text'=> ['en'=> 'BANKS', 'tr'=> 'BANKALAR']]);
-        LanguageLine::create(['group'=> 'word', 'key'=> 'error', 'text'=> ['en'=> 'ERROR', 'tr'=> 'HATA']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'settings', 'text'=> ['en'=> 'SETTINGS', 'tr'=> 'AYARLAR']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'shortcuts', 'text'=> ['en'=> 'SHORTCUTS', 'tr'=> 'KISAYOLLAR']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'maps', 'text'=> ['en'=> 'MAPS', 'tr'=> 'HARİTALAR']]);
@@ -181,6 +180,8 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'word', 'key'=> 'retail', 'text'=> ['en'=> 'RETAIL', 'tr'=> 'PAREKENDE']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'whosale', 'text'=> ['en'=> 'WHOSALE', 'tr'=> 'TOPTAN']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'production', 'text'=> ['en'=> 'PRODUCTION', 'tr'=> 'ÜRETİM']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'success', 'text'=> ['en'=> 'SUCCESS', 'tr'=> 'BAŞARILI']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'error', 'text'=> ['en'=> 'ERROR', 'tr'=> 'HATA']]);
 
 
         // sentence area
@@ -610,6 +611,9 @@ class LanguagesTableSeeder extends Seeder
 
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'filtered_from', 'text'=> ['en'=> 'FILTERED FROM _MAX_ TOTAL ENTRIES','tr'=> '_MAX_ KAYIT İÇERİSİNDEN BULUNAN']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'showing_record', 'text'=> ['en'=> 'SHOWING _START_ TO _END_ TO _TOTAL_ ENTRIES','tr'=> '_TOTAL_ KAYITTAN _START_ - _END_ ARASINDAKİ KAYITLAR GÖSTERİLİYOR']]);
+
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'mail_was_send', 'text'=> ['en'=> 'MAIL WAS SEND','tr'=> 'MAİL GÖNDERİLDİ.']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'mail_wasnot_send', 'text'=> ['en'=> 'MAIL WAS NOT SEND','tr'=> 'MAİL GÖNDERİLEMEDİ.']]);
 
 
     }
