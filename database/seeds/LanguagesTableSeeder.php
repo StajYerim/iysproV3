@@ -14,6 +14,32 @@ class LanguagesTableSeeder extends Seeder
     public function run()
     {
         DB::table('language_lines')->delete();
+        // number area
+        LanguageLine::create(['group'=> 'number', 'key'=> 'one', 'text'=> ['en'=> 'ONE', 'tr'=> 'BİR']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'two', 'text'=> ['en'=> 'TWO', 'tr'=> 'İKİ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'three', 'text'=> ['en'=> 'THREE', 'tr'=> 'ÜÇ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'four', 'text'=> ['en'=> 'FOUR', 'tr'=> 'DÖRT']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'five', 'text'=> ['en'=> 'FIVE', 'tr'=> 'BEŞ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'six', 'text'=> ['en'=> 'SIX', 'tr'=> 'ALTI']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'seven', 'text'=> ['en'=> 'SEVEN', 'tr'=> 'YEDİ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'eight', 'text'=> ['en'=> 'EIGHT', 'tr'=> 'SEKİZ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'nine', 'text'=> ['en'=> 'NINE', 'tr'=> 'DOKUZ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'ten', 'text'=> ['en'=> 'TEN', 'tr'=> 'ON']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'twenty', 'text'=> ['en'=> 'TWENTY', 'tr'=> 'YİRMİ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'thirty', 'text'=> ['en'=> 'THIRTY', 'tr'=> 'OTUZ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'fourty', 'text'=> ['en'=> 'FOURTY', 'tr'=> 'KIRK']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'fifty', 'text'=> ['en'=> 'FIFTY', 'tr'=> 'ELLİ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'sixty', 'text'=> ['en'=> 'SIXTY', 'tr'=> 'ALTMIŞ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'seventy', 'text'=> ['en'=> 'SEVENTY', 'tr'=> 'YETMİŞ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'eighty', 'text'=> ['en'=> 'EIGHTY', 'tr'=> 'SEKSEN']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'ninety', 'text'=> ['en'=> 'NINETY', 'tr'=> 'DOKSAN']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'hundred', 'text'=> ['en'=> 'HUNDRED', 'tr'=> 'YÜZ']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'thousand', 'text'=> ['en'=> 'THOUSAND', 'tr'=> 'BİN']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'million', 'text'=> ['en'=> 'MILLION', 'tr'=> 'MİLYON']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'billion', 'text'=> ['en'=> 'BILLION', 'tr'=> 'MİLYAR']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'trillion', 'text'=> ['en'=> 'TRILLION', 'tr'=> 'TRILLION']]);
+        LanguageLine::create(['group'=> 'number', 'key'=> 'zillion', 'text'=> ['en'=> 'ZILLION', 'tr'=> 'KATRİLYON']]);
+
         // word area
         LanguageLine::create(['group'=> 'word', 'key'=> 'english', 'text'=> ['en'=> 'ENGLISH', 'tr'=> 'İNGİLİZCE']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'turkish', 'text'=> ['en'=> 'TURKISH', 'tr'=> 'TÜRKÇE']]);
