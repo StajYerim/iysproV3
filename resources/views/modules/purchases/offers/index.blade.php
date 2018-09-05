@@ -29,7 +29,7 @@
                             <div class="pull-right new-button">
 
                                 <a href="{{route("purchases.offers.form",[aid(),0,"new"])}}">
-                                <span class="btn btn-success">{{ trans("sentence.new_offer") }}</span>
+                                <span class="btn btn-success">{{ trans("sentence.new_request") }}</span>
                                 </a>
                             </div>
 
