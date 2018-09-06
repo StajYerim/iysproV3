@@ -329,7 +329,7 @@
                                 "us": "",
                                 "sa": ""
                             },
-                            placeholder: {value: "", text: ""},
+                            placeholder: false,
                             onSelect: function (value, element) {
                                 @if($form_type== "update")
                                 axios.post('{{route("stock.product.language",aid())}}', {
