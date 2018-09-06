@@ -616,6 +616,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'mail_wasnot_send', 'text'=> ['en'=> 'MAIL WAS NOT SEND','tr'=> 'MAİL GÖNDERİLEMEDİ.']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'offer_date', 'text'=> ['en'=> 'OFFER DATE','tr'=> 'TALEP TARİHİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'new_offer', 'text'=> ['en'=> 'NEW OFFER','tr'=> 'YENİ TEKLİF']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'offer_amount', 'text'=> ['en'=> 'OFFER AMOUNT','tr'=> 'TEKLİF TUTARI']]);
 
 
     }
