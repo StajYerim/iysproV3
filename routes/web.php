@@ -6,6 +6,7 @@ use App\Role;
 use http\Env\Request;
 use Spatie\TranslationLoader\LanguageLine;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Parasut\Client;
 
@@ -113,8 +114,6 @@ foreach($kategori as $kat){
 }
 
 
-
-
 });
 
 
@@ -122,4 +121,12 @@ foreach($kategori as $kat){
 Route::get("/general/script.js","GeneralController@script")->name("general.script");
 
 
+//Update database
+Route::get("/update",function(){
+   Artisan::call("db:seed",["--class"=>"LanguagesTableSeeder"]);
+   Artisan::call("db:seed",["--class"=>"MenuTableSeeder"]);
+  Artisan::call("db:seed",["--class"=>"MenuDescriptionsTableSeeder"]);
+  Artisan::call("view:clear");
+    dd(Artisan::output());
+});
 
