@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "6cbf9e1d8ddcb330ab59d4c4c657c630",
@@ -2498,27 +2498,24 @@
         },
         {
             "name": "spatie/laravel-translation-loader",
-            "version": "2.1.5",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-translation-loader.git",
-                "reference": "9def108ff17f538fc807cca301bce8341eba900e"
+                "reference": "43b067f14273ac93ff8fd8145510f468539f9739"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-translation-loader/zipball/9def108ff17f538fc807cca301bce8341eba900e",
-                "reference": "9def108ff17f538fc807cca301bce8341eba900e",
+                "url": "https://api.github.com/repos/spatie/laravel-translation-loader/zipball/43b067f14273ac93ff8fd8145510f468539f9739",
+                "reference": "43b067f14273ac93ff8fd8145510f468539f9739",
                 "shasum": ""
             },
             "require": {
-                "illuminate/container": "~5.5.0|~5.6.0",
-                "illuminate/contracts": "~5.5.0|~5.6.0",
-                "illuminate/database": "~5.5.0|~5.6.0",
-                "illuminate/support": "~5.5.0|~5.6.0",
+                "illuminate/translation": "~5.5.0|~5.6.0|~5.7.0",
                 "php": "^7.1"
             },
             "require-dev": {
-                "orchestra/testbench": "~3.5.0|~3.6.0",
+                "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0",
                 "phpunit/phpunit": "^6.3|^7.0"
             },
             "type": "library",
@@ -2558,7 +2555,7 @@
                 "spatie",
                 "translate"
             ],
-            "time": "2018-07-31T16:19:19+00:00"
+            "time": "2018-08-30T11:58:17+00:00"
         },
         {
             "name": "studio/laravel-totem",

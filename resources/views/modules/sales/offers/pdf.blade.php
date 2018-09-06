@@ -2,7 +2,8 @@
 app()->setLocale($lang);
 $settings_sales_offer =  \App\Model\Settings\SettingsSalesOffer::where('account_id',aid())->first();
 $app_account = \App\Account::where('id',aid())->first();
-      $offerSettings = \App\Model\Settings\SettingsSalesOffer::where("account_id",aid())->first();
+$offerSettings = \App\Model\Settings\SettingsSalesOffer::where("account_id",aid())->first();
+$host=$_SERVER["HTTP_HOST"];
  @endphp
         <!doctype html>
 <html>
@@ -105,14 +106,14 @@ $app_account = \App\Account::where('id',aid())->first();
                     <tr>
                         <td class="title">
                     <tr class="information">
-                        <td colspan="6" >
+                        <td colspan="6">
                             <table>
                                 <tr>
                                     <td>
-                                        @if(!empty($settings_sales_offer) && $settings_sales_offer->logo_show == 1)
-                                            @if(!empty($app_account->logo))
-                                                <img src="{{ asset('images/account/'.aid().'/logo/'.$app_account->logo) }}" alt="">
-                                            @endif
+                                        @if($settings_sales_offer->logo_show == 1 && !empty($app_account->logo))
+                                            <img src="http://{{ $host }}/img/noimage.gif" />
+                                        @else
+                                            else
                                         @endif
                                     </td>
                                     <td style="margin-left:15px;text-align:right;width:35%">
