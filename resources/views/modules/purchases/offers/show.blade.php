@@ -42,7 +42,7 @@
                                     class="fa fa-print"></span> {{trans("word.print")}} <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.print_offer")}}</a>
+                                <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.print_request")}}</a>
                                 <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
                                    @foreach($langs as $lang)
                                     <li><a tabindex="-1" target="_blank" href="{{route("purchases.offers.pdf",[aid(),$offer->id,"url",$lang->lang_code])}}"> <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
@@ -50,7 +50,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a class="test" tabindex="-1" href="#">   <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.download_offer")}} </a>
+                                <a class="test" tabindex="-1" href="#">   <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.download_request")}} </a>
                                 <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
                                     @foreach($langs as $lang)
                                         <li><a tabindex="-1" target="_blank" href="{{route("purchases.offers.pdf",[aid(),$offer->id,"url",$lang->lang_code])}}" > <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
@@ -216,6 +216,7 @@
                         </div>
 
                     </div>
+
                     <div class="col-sm-4" >
 
                         <div id="order_info" class="well">
@@ -226,7 +227,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="bottom-info">
-                                            {{ trans("sentence.offer_amount")}}
+                                            {{ trans("sentence.request_amount")}}
                                             <span class="pull-right" style="font-size:15px;color:#2AC!important">
                                                 {{$offer->grand_total}}
                                                 <i class="fa fa-{{$offer->fa_currency}}"></i>
@@ -261,7 +262,7 @@
             <div id="ms-emails"></div>
         </div>
 
-        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans('sentence.are_you_sure_delete_purchase_offer'),$id=$offer->id])
+        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message=trans('sentence.are_you_sure_delete_purchase_request'),$id=$offer->id])
 
         {{-- Durum Modal--}}
         <div class="modal fade" id="statusModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
@@ -349,9 +350,9 @@
 
     </section>
     @include("components.external.share",[
-    $title=trans('word.offer'),
-    $thread=trans('sentence.purchase_offer').' : ' .$offer->company["company_name"],
-    $message=trans('sentence.purchase_offer_details_by_downloading_the_summary')." ".account()["name"]."</b>",
+    $title=trans('word.request'),
+    $thread=trans('sentence.purchase_request').' : ' .$offer->company["company_name"],
+    $message=trans('sentence.purchase_request_details_by_downloading_the_summary')." ".account()["name"]."</b>",
     $type="share.purchase_offer",
     $data = $offer])
 

@@ -120,7 +120,6 @@
         </ul>
     @endif
               <!-- end settings button "only visible for account owner" -->
-
         <!-- multiple lang dropdown : find all flags in the flags page -->
         <ul class="header-dropdown-list hidden-xs">
             @php $locale = \App\Language::where("lang_id",auth()->user()->lang_id)->first();  @endphp

@@ -738,3 +738,21 @@ function yazi_ile($sayi, $kurusbasamak, $parabirimi, $parakurus, $diyez, $bb1, $
     $sonuc = $diyez . $sonuc . " " . $parabirimi . " " . $kurus . $diyez;
     return $sonuc;
 }
+
+function planning_send_permission()
+{
+     $modules = Auth::user()->memberOfAccount["modules"];
+
+
+
+    if ( strpos($modules,"36") == true) {
+
+       if(Auth::user()->role->id == 2){
+           return 1;
+       }else{
+           if ( strpos(Auth::user()->permission,"36") == true) {
+               return 1;
+           }
+       }
+    }
+}
