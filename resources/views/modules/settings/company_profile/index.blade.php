@@ -5,7 +5,7 @@
             <div class="col-sm-12">
                 <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false">
                     <div>
-                        <div class="widget-body ">
+                        <div class="widget-body">
 
                             @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -36,12 +36,20 @@
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">FİRMA LOGOSU</label>
                                         <div class="col-md-10">
-                                            @if($account->logo == null)
-                                                <img width="50" id="logo" src="/img/noimage.gif" alt="Firma Logosu" style="display: inline-block; width: 10%">
-                                            @else
-                                                <img width="50" id="logo" src="{{ asset('images/account/'.aid().'/logo/'.$account->logo) }}" alt="Firma Logosu" style="display: inline-block; width: 10%">
-                                            @endif
-                                            <input id="file-upload" type="file" name="logo">
+                                            <div class="upload-preview col-md-3">
+                                                @if($account->logo == null)
+                                                    <img id="logo" src="/img/noimage.gif" alt="Firma Logosu" style="display: inline-block; width: 156px; height:117px;">
+                                                @else
+                                                    <img id="logo" src="{{ asset('images/account/'.aid().'/logo/'.$account->logo) }}" alt="Firma Logosu" style="display: inline-block; width: 156px; height:117px;">
+                                                @endif
+                                            </div>
+                                            <div class="pull-left col-md-7">
+                                                <input id="image-upload" type="file" name="logo">
+                                                <button type="button" id="removeImg" class="btn btn-xs btn-danger">
+                                                    <span class="fa fa-trash"></span>
+                                                    {{trans("sentence.remove_image")}}
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -143,7 +151,6 @@
                                 </div>
                             </form>
 
-
                         </div>
 
                     </div>
@@ -153,4 +160,32 @@
         </div>
 
     </section>
+
+    <script>
+        $(document).ready(function(){
+            //Upload Image
+            let preview = $(".upload-preview");
+
+            $("#image-upload").change(function (event) {
+                let input = $(event.currentTarget);
+                let file = input[0].files[0];
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    image_base64 = e.target.result;
+
+                    preview.html("<img width='156' height='117' src='" + image_base64 + "'/>");
+                    $("#removeImg").show();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            //Remove Image
+            $("#removeImg").click(function () {
+                preview.html('<img width="156" height="117" src="/img/noimage.gif">');
+                $(this).hide();
+                $("#image-upload").val("");
+            });
+        });
+    </script>
+
 @endsection
