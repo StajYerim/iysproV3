@@ -100,15 +100,17 @@
 
                     $("#shareModal").modal("toggle");
 
+                    axios.post("{{route($type,[aid(),$data->id])}}", this.form)
+                         .then(function (res) {
 
-
-                    axios.post("{{route($type,[aid(),$data->id])}}", this.form).then(function (res) {
-
-                            fullLoadingClose();
-                            ShareForm.btnDisable = false;
-                            notification("Success", "Mail was sent", "success")
-                        }
-                    );
+                             fullLoadingClose();
+                             ShareForm.btnDisable = false;
+                             notification(res.data.title, res.data.message, res.data.status)
+                         })
+                         .catch(function(){
+                             fullLoadingClose();
+                             notification("Error", "Mail was not sent", "danger")
+                         });
 
 
 
