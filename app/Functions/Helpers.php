@@ -562,18 +562,29 @@ if (! function_exists('KdvTotal')) {
 }
 
 
+function tr_strtoupper($text)
+{
+    $search=array("ç","i","ı","ğ","ö","ş","ü");
+    $replace=array("Ç","İ","I","Ğ","Ö","Ş","Ü");
+    $text=str_replace($search,$replace,$text);
+    $text=strtoupper($text);
+    return $text;
+}
+
 //Yazı ile
 function yazi_ile($sayi, $kurusbasamak, $parabirimi, $parakurus, $diyez, $bb1, $bb2, $bb3)
 {
-
     $sayi = money_db_format($sayi);
 // kurusbasamak virgülden sonra gösterilecek basamak sayısı
 // parabirimi = TL gibi , parakurus = Kuruş gibi
 // diyez başa ve sona kapatma işareti atar # gibi
 
-    $b1 = array("", "BİR", "İKİ", "ÜÇ", "DÖRT", "BEŞ", "ALTI", "YEDİ", "SEKİZ", "DOKUZ");
-    $b2 = array("", "ON", "YİRMİ", "OTUZ", "KIRK", "ELLİ", "ALTMIŞ", "YETMİŞ", "SEKSEN", "DOKSAN");
-    $b3 = array("", "YÜZ", "BİN", "MİLYON", "MİLYAR", "TRİLYON", "KATRİLYON");
+    $b1 = array("",trans('number.one'),trans('number.two'),trans('number.three'),trans('number.four'),trans('number.five'),trans('number.six'),trans('number.seven'),trans('number.eight'),trans('number.nine'));
+//    $b1 = array("", "BİR", "İKİ", "ÜÇ", "DÖRT", "BEŞ", "ALTI", "YEDİ", "SEKİZ", "DOKUZ");
+    $b2 = array("",trans('number.ten'),trans('number.twenty'),trans('number.thirty'),trans('number.fourty'),trans('number.fifty'),trans('number.sixty'),trans('number.seventy'),trans('number.eighty'),trans('number.ninety'));
+//    $b2 = array("", "ON", "YİRMİ", "OTUZ", "KIRK", "ELLİ", "ALTMIŞ", "YETMİŞ", "SEKSEN", "DOKSAN");
+    $b3 = array("",trans("number.hundred"), trans('number.thousand'), trans('number.million'), trans("number.billion"), trans("number.trillion"), trans("number.zillion") );
+//    $b3 = array("", "YÜZ", "BİN", "MİLYON", "MİLYAR", "TRİLYON", "KATRİLYON");
 
     if ($bb1 != null) { // farklı dil kullanımı yada farklı yazım biçimi için
         $b1 = $bb1;
@@ -732,8 +743,20 @@ function yazi_ile($sayi, $kurusbasamak, $parabirimi, $parakurus, $diyez, $bb1, $
         } else {
             $kurus = $kurus . " ";
         }
-        $kurus = $kurus . $parakurus; // kuruş hanesine 'kuruş' kelimesi ekler
+
+        if($parakurus == "KRŞ" || $parakurus == "CENT"){
+            $kurus = $kurus.trans("money.cent");
+        }else {
+            $kurus = $kurus . $parakurus; // kuruş hanesine 'kuruş' kelimesi ekler
+        }
     }
+
+//
+    if($parabirimi == "TURK LIRASI"){
+        $parabirimi = trans("money.turkish_lira");
+    }
+
+
 
     $sonuc = $diyez . $sonuc . " " . $parabirimi . " " . $kurus . $diyez;
     return $sonuc;

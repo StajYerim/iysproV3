@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Modules\Purchases;
 
+use App\Currency;
 use App\Language;
 use App\Taggable;
 use App\Tags;
@@ -117,7 +118,6 @@ OffersController extends Controller
     {
         $langs = Language::all();
         $offer = PurchaseOffers::find($id);
-//        dd($offer);
         return view("modules.purchases.offers.show", compact("offer","langs"));
     }
 

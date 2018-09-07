@@ -48,7 +48,7 @@
                         </ul>
 
                     </div>
-                    <div class="btn-group">
+                    <div style="display:none" class="btn-group">
                         <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
                                     class="fa fa-print"></span> {{trans("word.print")}} <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
@@ -67,7 +67,7 @@
 
                     </div>
 
-                    <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
+                    <a style="display:none" href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
                                 class="fa fa-envelope"></i> {{trans("word.share")}}</a>
 
                 </div>

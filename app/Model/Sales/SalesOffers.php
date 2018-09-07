@@ -234,6 +234,15 @@ class SalesOffers extends Model
         }
     }
 
+    public function getCurrencyCoinAttribute(){
+        $currencies = Currency::All();
+        foreach($currencies as $cur){
+            if($cur->code === strtoupper($this->currency)){
+                return strtoupper($cur->coin);
+            }
+        }
+    }
+
     public function orders()
     {
         return $this->hasMany(SalesOrders::class, "sales_offer_id", "id");

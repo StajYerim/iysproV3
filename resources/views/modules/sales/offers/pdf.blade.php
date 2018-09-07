@@ -110,11 +110,11 @@ $host=$_SERVER["HTTP_HOST"];
                             <table>
                                 <tr>
                                     <td>
-                                        @if($settings_sales_offer->logo_show == 1 && !empty($app_account->logo))
-                                            <img src="http://{{ $host }}/img/noimage.gif" />
-                                        @else
-                                            else
-                                        @endif
+                                        {{--@if($settings_sales_offer->logo_show == 1 && !empty($app_account->logo))--}}
+                                            {{--<img src="http://{{ $host }}/img/noimage.gif" />--}}
+                                        {{--@else--}}
+                                            {{--else--}}
+                                        {{--@endif--}}
                                     </td>
                                     <td style="margin-left:15px;text-align:right;width:35%">
 
@@ -280,7 +280,7 @@ $host=$_SERVER["HTTP_HOST"];
         </tr>
     </table>
     <br>
-    <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2,$offer->currency_name, "KRŞ", "", null, null, null)}}
+    <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2,$offer->currency_name, $offer->currency_coin, "", null, null, null)}}
     </span>
     <br><br><br>
     {!! $offer->description_detail !!}

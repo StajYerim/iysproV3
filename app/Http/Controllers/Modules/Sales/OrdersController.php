@@ -153,8 +153,6 @@ class OrdersController extends Controller
 
     public function show($aid, $id)
     {
-
-
         $order = SalesOrders::find($id);
         $langs = Language::All();
 
