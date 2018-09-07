@@ -130,4 +130,10 @@ class ExpensesController extends Controller
     {
      return   $delete = BankItems::where(["doc_id" => $request->id, "type" => "expenses"])->delete();
     }
+
+    function expenses_delete($aid, Request $request)
+    {
+            Expenses::find($request->id)->delete();
+        return   $delete = BankItems::where(["doc_id" => $request->id, "type" => "expenses"])->delete();
+    }
 }
