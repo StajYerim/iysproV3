@@ -15,6 +15,11 @@ class Expenses extends Model
     protected $guarded = [];
     protected $appends = ["bank_item","payment_status","pay_status","bank_name","tags_label"];
 
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->where("account_id", '=', aid());
+    }
+
     public function save(array $options = array())
     {
         if (!$this->account_id) {
