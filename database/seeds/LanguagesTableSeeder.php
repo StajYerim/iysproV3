@@ -14,6 +14,10 @@ class LanguagesTableSeeder extends Seeder
     public function run()
     {
         DB::table('language_lines')->delete();
+        // money unit
+        LanguageLine::create(['group'=> 'money', 'key'=> 'turkish_lira', 'text'=> ['en'=> 'TURKISH LIRA', 'tr'=> 'TÜRK LİRASI']]);
+        LanguageLine::create(['group'=> 'money', 'key'=> 'cent', 'text'=> ['en'=> 'CENT', 'tr'=> 'KRŞ']]);
+
         // number area
         LanguageLine::create(['group'=> 'number', 'key'=> 'one', 'text'=> ['en'=> 'ONE', 'tr'=> 'BİR']]);
         LanguageLine::create(['group'=> 'number', 'key'=> 'two', 'text'=> ['en'=> 'TWO', 'tr'=> 'İKİ']]);

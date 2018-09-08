@@ -125,11 +125,11 @@ class OffersController extends Controller
 
         if($type=="url"){
 
-            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer","offerSettings","lang"))->setPaper('A4');
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('modules.sales.offers.pdf',compact("offer","offerSettings","lang"))->setPaper('A4');
             return $pdf->stream();
         }else{
 
-            $pdf = PDF::loadView('modules.sales.offers.pdf',compact("offer","offerSettings","lang"))->setPaper('A4');
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('modules.sales.offers.pdf',compact("offer","offerSettings","lang"))->setPaper('A4');
             return   $pdf->download($offer->company["company_name"].' ('.$offer->description.').pdf');
         }
 

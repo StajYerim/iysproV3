@@ -192,6 +192,15 @@ class SalesOrders extends Model
         }
     }
 
+    public function getCurrencyCoinAttribute(){
+        $currencies = Currency::All();
+        foreach($currencies as $cur){
+            if(strtoupper($cur->code) === strtoupper($this->currency)){
+                return strtoupper($cur->coin);
+            }
+        }
+    }
+
     public function getFaCurrencyAttribute(){
        return strtolower($this->currency);
     }
