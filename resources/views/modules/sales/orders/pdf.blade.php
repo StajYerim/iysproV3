@@ -277,7 +277,7 @@
         </tr>
     </table>
     <br>
-    <span style="text-transform: uppercase">{{yazi_ile($order->grand_total, 2, $order->currency_name, "KRŞ", "", null, null, null)}}
+    <span style="text-transform: uppercase">{{yazi_ile($order->grand_total, 2, $order->currency_name, $order->currency_coin, "", null, null, null)}}
     </span>
     <br><br><br>
     {{--{!! $logo->endText !!}--}}

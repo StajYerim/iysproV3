@@ -282,7 +282,7 @@ $host=$_SERVER["HTTP_HOST"];
         </tr>
     </table>
     <br>
-    <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2,$offer->currency_name, "KRŞ", "", null, null, null)}}
+    <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2,$offer->currency_name, $offer->currency_coin, "", null, null, null)}}
     </span>
     <br><br><br>
     {!! $offer->description_detail !!}
