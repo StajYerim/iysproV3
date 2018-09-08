@@ -96,8 +96,10 @@ $host=$_SERVER["HTTP_HOST"];
 
 <div class="invoice-box">
     @if($offerSettings)
+        @if($offerSettings->cover_page !=null)
         {!! $offerSettings->cover_page !!}
         <div class="page-break"></div>
+            @endif
     @endif
     <table style= "width: 100%" cellpadding="0" cellspacing="0">
         <tr class="top" >
@@ -106,15 +108,15 @@ $host=$_SERVER["HTTP_HOST"];
                     <tr>
                         <td class="title">
                     <tr class="information">
-                        <td colspan="6">
+                        <td colspan="4">
                             <table>
                                 <tr>
                                     <td>
-                                        {{--@if($settings_sales_offer->logo_show == 1 && !empty($app_account->logo))--}}
-                                            {{--<img src="http://{{ $host }}/img/noimage.gif" />--}}
-                                        {{--@else--}}
-                                            {{--else--}}
-                                        {{--@endif--}}
+                                        @if($settings_sales_offer && !empty($app_account->logo))
+                                         @if($settings_sales_offer->logo_show == 1)
+                                            <img style="height:1000%;width:1000%" src="{{ base_path() }}/public/images/account/{{aid()}}/logo/{{$app_account->logo}}">
+                                        @endif
+                                            @endif
                                     </td>
                                     <td style="margin-left:15px;text-align:right;width:35%">
 

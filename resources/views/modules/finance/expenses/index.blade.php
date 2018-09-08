@@ -191,6 +191,8 @@
 
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-danger pull-left" v-if="form.id!=0" v-on:click="delete_expense(form.id)" >{{trans("word.delete")}}</button>
+
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans("word.close")}}</button>
                         <button type="submit" class="btn btn-primary">{{trans("word.save")}} </button>
                     </div>
@@ -252,6 +254,35 @@
                         datePicker();
                     },
                     methods: {
+                        delete_expense:function($id){
+                            swal({
+                                title: "GİDER FİŞİ SİLİNECEK!",
+                                text: "Bu gider fişi varsa ödemesi ile birlikte kayıtlardan silinecektir.",
+                                icon: "warning",
+                                buttons:["VAZGEÇ","ONAYLA"],
+                                dangerMode: true,
+                            })
+                                .then((willCheck) => {
+                                    if (willCheck) {
+                                        fullLoading("Lütfen Bekleyiniz.");
+
+                                        axios.post("{{route("finance.expenses.delete",aid())}}",{id:$id}).then(res=>{
+                                            fullLoadingClose();
+                                            swal("Gider fişi başarıyla silindi.", {
+                                                icon: "success",
+                                            });
+
+                                            window.location.href = '{{route("finance.expenses.index",aid())}}';
+
+                                        }).catch(error=>{
+                                            fullLoadingClose();
+                                            swal("İşlem hatalı lütfen daha sonra tekrar deneyiniz.", {
+                                                icon: "error",
+                                            });
+                                        });
+                                    }
+                                });
+                        },
                         payment_delete:function($id){
                         axios.post("{{route("finance.expenses.payment.delete",aid())}}",{id:$id}).then(res=>{
                             if(res.data== 1){
