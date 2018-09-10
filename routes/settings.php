@@ -24,7 +24,7 @@ Route::group(['prefix'=>'{company_id}/settings','middleware'=>'not.admin'],funct
         Route::get("/planning","PlanningController@index")->name("planning");
         Route::get("/store","StoreController@index")->name("store");
         Route::get("/email","EmailController@index")->name("email");
-        Route::get("/categoryandtags","CategoryAndTagsController@index")->name("categoryandtags");
+
         Route::get("/invoice","InvoiceController@index")->name("invoice");
         Route::get("/company-profile","CompanyProfileController@index")->name("company_profile");
         Route::post("/company-profile","CompanyProfileController@update")->name("company_profile.update");
@@ -46,5 +46,11 @@ Route::group(['prefix'=>'{company_id}/settings','middleware'=>'not.admin'],funct
     Route::post("user-profile/save","HomeController@profil_update_save")->name("settings.users.profile.save");
     Route::post("user-profile/password/save","HomeController@profil_password_save")->name("settings.users.profile.password.save");
 
+
+    //Category and Tags Settings
+    Route::get("/categoryandtags","Modules\Settings\CategoryAndTagsController@index")->name("categoryandtags");
+    Route::get("/categoryandtags/data","Modules\Settings\CategoryAndTagsController@data")->name("category.data");
+    Route::post("/categoryandtags/delete","Modules\Settings\CategoryAndTagsController@delete")->name("category.tags.delete");
+    Route::post("/categoryandtags/add/update","Modules\Settings\CategoryAndTagsController@add_update")->name("category.tags.add.update");
 
 });
