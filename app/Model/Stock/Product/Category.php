@@ -10,6 +10,10 @@ class Category extends Model
     protected $guarded = [];
     public $timestamps = false;
 
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->where("account_id", '=', aid());
+    }
 
     public function products()
     {
