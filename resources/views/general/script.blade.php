@@ -48,7 +48,6 @@
         $('body').loadingModal('animation', 'fadingCircle');
         }
 
-
         function company2select(){
         $('.company').select2({
         minimumInputLength: 2,
