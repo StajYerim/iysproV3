@@ -66,19 +66,21 @@
                                 </thead>
                                 <tbody>
                                 @foreach($products as $product)
-                                    @if($product->stock_count != 0)
+                                    @if($product->stock_count != 0 && $product->stock_count > 0)
                                         <tr>
                                             <td >{{ $product->code }}</td>
                                             <td>
                                                 <a href="{{ route('stock.product.show',[aid(),$product->id]) }}">
-                                                    <b>{{ $product->named->name }}</b>
+                                                    <b> {{ $product->named->name }} </b>
                                                 </a>
                                                 @if($product->category != [])
                                                 <span class='badge' style='background-color:{{ $product->category->color }}'>{{ $product->category->name }}</span>
                                                 @endif
                                                 <span class="badge bg-color-green">{{ $product->type_name }}</span>
                                             </td>
-                                            <td><b>{{ $product->stock_count }} / {{ $product->unit->short_name }}</b></td>
+                                            <td>
+                                                <b>{{ $product->stock_count }} / {{ $product->unit->short_name }}</b>
+                                            </td>
                                             <td><b>{{ $product->buying_price }} <i class="fa fa-{{ $product->purchase_currency->code }}"></i></b> </td>
                                             <td>
                                                 <b>{{ $product->list_price }} <i class="fa fa-{{ $product->sales_currency->code }}"></i></b>
@@ -100,6 +102,10 @@
                                                   }} <i class="fa fa-try"></i>
                                               </b>
                                             </td>
+                                        </tr>
+                                    @elseif($product->stock_count != 0)
+                                        <tr>
+                                            <td colspan="8" align="center">STOKTA ÜRÜN BULUNAMADI</td>
                                         </tr>
                                     @endif
                                 @endforeach

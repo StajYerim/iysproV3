@@ -137,13 +137,11 @@ class Product extends Model
 
     public function getStockCountAttribute(){
 
-        //Porder
-            $porder_in = $this->porder()->sum("quantity");
         //Stock Hareketleri
          $in = $this->stock_receipts()->where("status", "=",0)->sum("quantity");
          $out = $this->stock_receipts()->where("status", "=",1)->sum("quantity");
 
-      return  ($in-$out)+$porder_in;
+      return  ($in-$out);
     }
 
     public function order_items()
