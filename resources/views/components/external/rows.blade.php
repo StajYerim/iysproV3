@@ -124,11 +124,13 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             <span class="fa fa-list"></span></button>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li><a href="#!" v-on:click="addNote(index)" v-show="!item.description_show">{{ trans("word.note") }}</a></li>
-                            <li><a href="#!" v-on:click="addTermin(index)" v-show="!item.termin_show">{{ trans("word.deadline") }}</a></li>
+                            <li><a href="#!" v-on:click="addTermin(index)" v-show="!item.termin_show">{{ trans("sentence.termin_date") }}</a></li>
                             <li><a href="#!">{{ trans("word.discount") }}</a></li>
-                            <li><a href="#!" v-if="index != 0 " v-on:click="removeRow(index)">
+                            <li>
+                                <a href="#!" v-if="index != 0 " v-on:click="removeRow(index)">
                                    {{trans("sentence.delete_row")}}
-                                </a></li>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </td>
