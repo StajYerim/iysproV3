@@ -6,6 +6,7 @@
             :tags="form.tagsd"
             :placeholder="form.tagsd >= 10 ? 'Daha fazla etiket ekleyemezsiniz. Max(10)' : 'Etiket Ekle'"
             :autocomplete-items="filteredItems"
+            {{--:validation=""--}}
             @tags-changed="newTags => form.tagsd = newTags"
     />
 </div>
