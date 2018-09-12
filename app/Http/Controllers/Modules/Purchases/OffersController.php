@@ -35,7 +35,7 @@ OffersController extends Controller
                 },
             ])
             ->editColumn("grand_total", function ($offer) {
-                return $offer->grand_total . " <span class='fa fa-" . $offer->currency . "'></span>";
+                return $offer->grand_total . " <span class='fa fa-" . strtolower($offer->currency) . "'></span>";
             })
             ->editColumn("status", function ($offer) {
                 return "<span class='badge " . $offer->status_colorbg . " '>" . $offer->status_name . "</span>";

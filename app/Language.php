@@ -12,4 +12,9 @@ class Language extends Model
      * @var string
      */
     protected $table = 'app_languages';
+
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->whereNotIn("lang_id", [3]);
+    }
 }

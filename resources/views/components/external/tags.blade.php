@@ -2,6 +2,7 @@
      id="tag-widget">
     <vue-tags-input
             :max-tags="10"
+            :maxlength="30"
             v-model="form.tag"
             :tags="form.tagsd"
             :placeholder="form.tagsd >= 10 ? 'Daha fazla etiket ekleyemezsiniz. Max(10)' : 'Etiket Ekle'"

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
@@ -71,6 +73,8 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
+
+
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -85,7 +89,9 @@ class LoginController extends Controller
         // check additionally for email confirmation, redirect with info
         // if there is such user
         if ($user = User::where('email', $request->email)->first()) {
-
+            $user->update([
+                'last_seen' => Carbon::now(),
+            ]);
             // if user's email is not confirmed and there is confirmation code
             if (!$user->confirmed && $user->confirmation_code) {
                 return view('auth.not_confirmed', ['email' => $request->email]);
@@ -97,6 +103,8 @@ class LoginController extends Controller
                 flash('Your account has expired.')->error()->important();
                 return redirect()->route('login');
             }
+
+
         }
 
         if ($this->attemptLogin($request)) {
@@ -108,6 +116,8 @@ class LoginController extends Controller
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
+
+
 
         return $this->sendFailedLoginResponse($request);
     }

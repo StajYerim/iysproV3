@@ -43,6 +43,10 @@
 
         }
 
+        function fullLoading(text = "Please waiting.") {
+        $('body').loadingModal({text: '{{trans("sentence.loading")}}'});
+        $('body').loadingModal('animation', 'fadingCircle');
+        }
 
 
         function company2select(){
