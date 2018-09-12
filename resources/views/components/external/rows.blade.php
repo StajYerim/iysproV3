@@ -125,7 +125,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li><a href="#!" v-on:click="addNote(index)" v-show="!item.description_show">{{ trans("word.note") }}</a></li>
                             <li><a href="#!" v-on:click="addTermin(index)" v-show="!item.termin_show">{{ trans("word.deadline") }}</a></li>
-                            <li><a href="#!">{{ trans("word.discount") }}</a></li>
+                            {{--<li><a href="#!">{{ trans("word.discount") }}</a></li>--}}
                             <li><a href="#!" v-if="index != 0 " v-on:click="removeRow(index)">
                                    {{trans("sentence.delete_row")}}
                                 </a></li>
@@ -137,7 +137,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
             <tr>
                 <td colspan="1">
                     <div class="input-group" style="top: 2px;" v-show="item.description_show">
-                        <input type="text" class="form-control" v-model="item.description">
+                        <input type="text" class="form-control" v-model="item.description" maxlength="100">
                         <div class="input-group-btn">
                             <button type="button" placeholder="Description" class="btn btn-default"
                                     @click="item.description_show = false" tabindex="-1">X
