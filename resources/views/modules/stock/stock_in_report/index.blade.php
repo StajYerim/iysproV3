@@ -10,11 +10,11 @@
                         <b>STOK DEĞERİ</b>
                         <div style="margin:20px!important;" class="col-xs-12">
                             <div class="col-xs-4 text-center" style="border:1px solid #ddd; padding:10px;">
-                                <span class="text-info" style="font-size: 25px;">{{ $sales_price }} ₺</span> <br>
+                                <span class="text-info" style="font-size: 25px;">{{ get_money($sales_price) }} ₺</span> <br>
                                 <b>TAHMİNİ SATIŞ DEĞERİ</b>
                             </div>
                             <div class="col-xs-4 text-center" style="border:1px solid #ddd; padding:10px;">
-                                <span class="text-danger" style="font-size: 25px;">{{ $purchase_price }} ₺</span> <br>
+                                <span class="text-danger" style="font-size: 25px;">{{ get_money($purchase_price) }} ₺</span> <br>
                                 <b>TAHMİNİ ALIŞ DEĞERİ</b>
                             </div>
                             <div class="col-xs-4 text-center" style="border:1px solid #ddd; padding:10px;">
