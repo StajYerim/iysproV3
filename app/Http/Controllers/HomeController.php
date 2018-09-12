@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Model\Finance\Cheques;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -244,16 +245,34 @@ class HomeController extends Controller
     }
 
     /*User profile update */
-    public function profil_update_save(Request $request){
-      $user = Auth::user();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->mobile = $request->mobile;
-      $user->save();
+    public function profil_update_save(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'max:100',
+            'email' => 'max:100',
+            'mobile' => 'max:100'
+        ]);
 
-      return response()->json([
-        "message" => "Successfully Updated!"
-      ]);
+        if ($validator->fails()) {
+            return ['title' => trans('word.error'),'message' => trans('sentence.please_check_form_again'),'type' => 'danger'];
+        }else{
+            $user = Auth::user();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->mobile = $request->mobile;
+            $user->save();
+
+            return response()->json(
+                [
+                    "title" => trans('word.success'),
+                    "message"=> trans('sentence.all_your_informations_saved'),
+                    "type" => "success"
+                ]
+            );
+        }
+
+
+
     }
 
     /* User password change save */
