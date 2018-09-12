@@ -292,7 +292,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             product_id: "",
                             tetra: "",
                             amount: "0,00",
-                            quantity: "0",
+                            quantity: "1",
                             total: "0,00",
                         }@endif ],
                     }
@@ -572,7 +572,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             tetra: "",
                             product_id: "",
                             amount: "0,00",
-                            quantity: "0",
+                            quantity: "1",
                             total: "0,00",
                             note: "",
                         });
