@@ -350,6 +350,7 @@
 
     </section>
     @include("components.external.share",[
+     $email=$offer->company["email"],
     $title=trans('word.request'),
     $thread=trans('sentence.purchase_request').' : ' .$offer->company["company_name"],
     $message=trans('sentence.purchase_request_details_by_downloading_the_summary')." ".account()["name"]."</b>",

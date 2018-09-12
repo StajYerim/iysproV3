@@ -75,13 +75,13 @@
     <script src="{{asset("/js/full-loading/loading.js")}}"></script>
 
     <script>
-        function fullLoading(text="Please waiting.") {
-            $('body').loadingModal({text: text});
+        function fullLoading() {
+            $('body').loadingModal({text: '{{trans("sentence.loading")}}'});
             $('body').loadingModal('animation', 'fadingCircle');
             $('body').loadingModal('color', '#000');
         }
 
-        fullLoading("Loading...");
+        fullLoading();
         $( window ).on( "load", function(){
             $('body').loadingModal('destroy');
         } );

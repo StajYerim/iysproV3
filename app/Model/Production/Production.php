@@ -12,12 +12,12 @@ class Production extends Model
     protected $appends = ["finish_date","starting_date","status_label"];
     protected $dates = ["start_date"];
 
-    /*Default where account_id*/
-    public function newQuery($excludeDeleted = true)
-    {
-        return parent::newQuery($excludeDeleted)
-            ->where("account_id", '=', aid());
-    }
+//    /*Default where account_id*/
+//    public function newQuery($excludeDeleted = true)
+//    {
+//        return parent::newQuery($excludeDeleted)
+//            ->where("account_id", '=', aid());
+//    }
 
     public function setStartDateAttribute($value)
     {

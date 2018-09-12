@@ -41,7 +41,7 @@ class OrdersController extends Controller
              return   $orders->company["company_name"]." ".$tags_span."<br>".$orders->description;
             })
             ->editColumn("grand_total",function($orders){
-                return $orders->grand_total."<br>".get_money(money_db_format($orders->grand_total)-money_db_format($orders->remaining));
+                return $orders->grand_total." <span class='fa fa-" . strtolower($orders->currency) . "'></span><br>".get_money(money_db_format($orders->grand_total)-money_db_format($orders->remaining))." <span class='fa fa-" . strtolower($orders->currency) . "'></span>";
             })
             ->editColumn("sub_total",function($orders){
              return   $orders->payment_label;

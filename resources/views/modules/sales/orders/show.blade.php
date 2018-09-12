@@ -319,7 +319,7 @@
                                 @if($order->offer)
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            {{trans("word.offer")}}
+                                            {{trans("word.request")}}
                                             <br>
                                             <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? "SATIŞ TEKLİFİ":$order->offer["description"]}}
                                                 (#{{$order->offer["id"]}})</a><br>
@@ -980,6 +980,7 @@
     @include("components.external.transaction",[$type="collect",$local="sales_orders",$detail = $order,$abble="App\\\Model\\\Sales\\\SalesOrders"])
 
     @include("components.external.share",[
+     $email=$order->company["email"],
     $title="Sipariş",
     $thread="Satış Siparişi : ".$order->company["company_name"],
     $message="Merhaba,<br>Satış Siparişi detaylarınız ektedir indirerek inceleyebilirsiniz.<br>İyi çalışmalar.<br><br><b>".account()["name"]."</b>",

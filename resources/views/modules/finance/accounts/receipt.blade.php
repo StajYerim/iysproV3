@@ -36,6 +36,7 @@
 
                                 <table class="table table-condensed table-striped table-no-padding" width="100%"
                                        border="0">
+                                    @if($receipt->company["company_name"] != null)
                                     <tr>
                                         <td width="200px">
                                             <div class="bottom-info"><i class="fa fa-building-o" aria-hidden="true"></i> {{trans("word.customer")}}
@@ -47,6 +48,7 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    @endif
                                     <tr>
                                         <td width="200px">
                                             <div class="bottom-info">

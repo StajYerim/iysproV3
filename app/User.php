@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Redis;
 
 class User extends Authenticatable
 {
@@ -28,6 +29,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token', 'lang_id', 'role_id', 'mobile'
     ];
+
+    protected $appends = ['lastSeen'];
+
 
     /**
      * User has a Role.
@@ -62,6 +66,13 @@ class User extends Authenticatable
     public function ownsAccount()
     {
         return $this->hasOne(Account::class, 'owner_id');
+    }
+
+    /*Last seen*/
+    public function getLastSeenAttribute()
+    {
+
+        return $this->attributes["last_seen"];
     }
 
     /**

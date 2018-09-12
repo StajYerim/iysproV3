@@ -7,7 +7,7 @@
 
         <div class="col-xs-6 col-sm-6 text-right hidden-xs">
             <div class="txt-color-white inline-block">
-                <i class="txt-color-blueLight hidden-mobile">{{ trans("sentence.last_account_activity") }} <i class="fa fa-clock-o"></i> 52 {{ trans("sentence.mins_ago") }}
+
 
             </div>
         </div>

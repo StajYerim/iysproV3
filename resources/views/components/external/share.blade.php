@@ -86,7 +86,7 @@
                 btnDisable: false,
                 form: {
                     thread: "{{$thread}}",
-                    receivers: [],
+                    receivers: [{email:'{{$email}}'}],
                     message: "{!! $message !!}",
                     lang: "{{app()->getLocale()}}"
                 }
@@ -99,26 +99,29 @@
                     ShareForm.form.message = $('.editor').summernote('code');
 
                     $("#shareModal").modal("toggle");
+                    if(this.form.thread != "" || this.form.message != "") {
+                        axios.post("{{route($type,[aid(),$data->id])}}", this.form)
+                            .then(function (res) {
 
-                    axios.post("{{route($type,[aid(),$data->id])}}", this.form)
-                         .then(function (res) {
+                                fullLoadingClose();
+                                ShareForm.btnDisable = false;
+                                notification("Başarılı", "Mail başarıyla gönderildi.", 'success')
+                            })
+                            .catch(function () {
+                                fullLoadingClose();
+                                notification("Hatalı", "Mail gönderilemedi", "danger")
+                            });
 
-                             fullLoadingClose();
-                             ShareForm.btnDisable = false;
-                             notification(res.data.title, res.data.message, res.data.status)
-                         })
-                         .catch(function(){
-                             fullLoadingClose();
-                             notification("Error", "Mail was not sent", "danger")
-                         });
-
-
+                    }else{
+                        fullLoadingClose();
+                        notification("Hatalı", "Lütfen konu ve mesaj alanını boş bırakmayın", "danger")
+                    }
 
                 },
                 formReset: function () {
                     this.form = {
                         thread: "{{$thread}}",
-                        receivers: [],
+                        receivers: [{}],
                         message: "{!! $message !!}"
                     }
                 }
@@ -147,10 +150,12 @@
             vtype: 'email',
             noSuggestionText: 'Girilen değerde kayıt bulunamadı',
             placeholder: 'Eposta...',
-            data: [],
+            required: true,
+            data: ['{{$email}}'],
+            value:['{{$email}}'],
             valueField: 'email',
             renderer: function (data) {
-                console.log(data.email);
+
                 return ShareForm.form.receivers = {email: data.email};
             },
             resultAsString: false
@@ -160,7 +165,6 @@
             'selectionchange', function (e, cb, s) {
 
                 if (this.isValid() == false) {
-                    console.log(this)
                 } else {
                     ShareForm.form.receivers = [];
 

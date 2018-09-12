@@ -80,10 +80,6 @@ function birimFiyatKvdsiz(adet,kdv,toplam) {
 }
 
 //Full screen delay
-function fullLoading(text = "Please waiting.") {
-    $('body').loadingModal({text: text});
-    $('body').loadingModal('animation', 'fadingCircle');
-}
 
 function fullLoadingClose() {
     $('body').loadingModal('destroy');
@@ -240,6 +236,12 @@ console.log(data);
                 $('.ui-datepicker').css('z-index', 99999999999999);
             }, 0);
         }
+    });
+
+    $(document).ready(function(){
+        $(".datepicker").blur(function(){
+            $(this).value("234234")
+        });
     });
 }
 

@@ -17,6 +17,7 @@
         "laravelista/ekko": "^1.5",
         "liebig/cron": "dev-master",
         "mayoz/parasut": "^1.0",
+        "predis/predis": "^1.1",
         "spatie/laravel-translation-loader": "^2.1",
         "studio/laravel-totem": "^3.2",
         "teknomavi/tcmb": "dev-master",
