@@ -204,13 +204,13 @@
                                 </div>
                             </div>
                             <br>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <button type="button" class="btn btn-block bg-color-blueLight txt-color-white">
-                                        {{trans("sentence.other_account_transactions")}}
-                                    </button>
-                                </div>
-                            </div>
+                            {{--<div class="row">--}}
+                                {{--<div class="col-sm-12">--}}
+                                    {{--<button type="button" class="btn btn-block bg-color-blueLight txt-color-white">--}}
+                                        {{--{{trans("sentence.other_account_transactions")}}--}}
+                                    {{--</button>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                         </div>
 
                         <div v-show="other_transfer_show">
@@ -274,7 +274,7 @@
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
-                                                <input type="text" v-model="money_form.description" class="form-control">
+                                                <input type="text" v-model="money_form.description" maxlength="100" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -335,7 +335,7 @@
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
-                                                <input type="text" v-model="money_form.description"
+                                                <input type="text" maxlength="100" v-model="money_form.description"
                                                        class="form-control">
                                             </div>
                                         </div>
@@ -399,7 +399,7 @@
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group" style="width:100%">
-                                                <input type="text" v-model="money_form.description"
+                                                <input type="text" maxlength="100" v-model="money_form.description"
                                                        class="form-control">
                                             </div>
                                         </div>

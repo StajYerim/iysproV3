@@ -20,7 +20,7 @@
                                             </button>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
-                                            <input v-model="form.name" name="form.name" v-validate="'required'"
+                                            <input v-model="form.name" name="form.name" maxlength="100" v-validate="'required'"
                                                    type="text" class="form-control"
                                                    AUTOCOMPLETE="OFF"
                                                    style="padding: 22px 12px">
@@ -101,7 +101,7 @@
                                         <label class="col-md-3 control-label">{{trans("sentence.bank_name")}}</label>
                                         <div class="col-md-4 ">
                                             <div >
-                                                <input type="text" class="form-control " v-model="form.bank_name">
+                                                <input type="text" class="form-control " maxlength="100" v-model="form.bank_name">
                                             </div>
                                         </div>
                                     </div>
@@ -111,7 +111,7 @@
                                         <label class="col-md-3 control-label">{{trans("sentence.bank_branch")}}</label>
                                         <div class="col-md-4 ">
                                             <div >
-                                                <input type="text" class="form-control " v-model="form.bank_branch">
+                                                <input type="text" class="form-control " maxlength="100" v-model="form.bank_branch">
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +121,7 @@
                                         <label class="col-md-3 control-label">{{trans("sentence.account_number")}}</label>
                                         <div class="col-md-4 ">
                                             <div >
-                                                <input type="text" class="form-control " v-model="form.bank_no">
+                                                <input type="text" class="form-control " maxlength="100" v-model="form.bank_no">
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +131,7 @@
                                         <label class="col-md-3 control-label">{{trans("word.iban")}}</label>
                                         <div class="col-md-4">
                                             <div >
-                                                <input type="text" class="form-control " v-model="form.bank_iban">
+                                                <input type="text" class="form-control " maxlength="100" v-model="form.bank_iban">
                                             </div>
                                         </div>
                                     </div>
