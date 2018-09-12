@@ -621,6 +621,19 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'offer_date', 'text'=> ['en'=> 'OFFER DATE','tr'=> 'TALEP TARİHİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'new_offer', 'text'=> ['en'=> 'NEW OFFER','tr'=> 'YENİ TEKLİF']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'offer_amount', 'text'=> ['en'=> 'OFFER AMOUNT','tr'=> 'TEKLİF TUTARI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'termin_date', 'text'=> ['en'=> 'TERMIN DATE','tr'=> 'TERMİN TARİHİ']]);
+
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'no_products_in_stock', 'text'=> ['en'=> 'THERE IS NO PRODUCT IN STOCK','tr'=> 'STOKTA ÜRÜN BULUNAMADI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'product_code', 'text'=> ['en'=> 'PRODUCT CODE','tr'=> 'ÜRÜN KODU']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'stock_cost', 'text'=> ['en'=> 'STOCK CODE','tr'=> 'STOK MALİYETİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_value', 'text'=> ['en'=> 'SALES VALUE','tr'=> 'SATIŞ DEĞERİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_profit', 'text'=> ['en'=> 'SALES PROFIT','tr'=> 'SATIŞ KARI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'product_list_in_stock', 'text'=> ['en'=> 'PRODUCT LIST IN STOCK','tr'=> 'STOKTAKİ ÜRÜNLER LİSTESİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'potential_gain', 'text'=> ['en'=> 'POTENTIAL GAIN','tr'=> 'POTANSİYEL KAZANÇ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'estimated_purchase_price', 'text'=> ['en'=> 'ESTIMATED PURCHASE PRICE','tr'=> 'TAHMİNİ ALIŞ DEĞERİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'estimated_sales_price', 'text'=> ['en'=> 'ESTIMATED SALES PRICE','tr'=> 'TAHMİNİ SATIŞ DEĞERİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'stock_value', 'text'=> ['en'=> 'STOCK VALUE','tr'=> 'STOK DEĞERİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_purchase_potential_gain', 'text'=> ['en'=> 'Estimated Sales Value, Estimated Buy Value, and Potential Gain are not included in the calculation of non-STO products. Calculations are based on the Purchase Price and the Sales Price specified on the product pages.','tr'=> 'Tahmini Satış Değeri, Tahmini Alış Değeri ve Potansiyel Kazanç hesaplamalarına stokta olmayan ürünler dahil edilmez. Hesaplamalar ürün sayfalarında belirtilen Alış Fiyatı ve Satış Fiyatı üzerinden yapılır.']]);
 
 
     }
