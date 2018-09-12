@@ -237,6 +237,12 @@ console.log(data);
             }, 0);
         }
     });
+
+    $(document).ready(function(){
+        $(".datepicker").blur(function(){
+            $(this).value("234234")
+        });
+    });
 }
 
 
