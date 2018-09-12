@@ -248,8 +248,8 @@ class HomeController extends Controller
     public function profil_update_save(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'max:100',
-            'email' => 'max:100',
+            'name' => 'required|max:100',
+            'email' => 'required|max:100',
             'mobile' => 'max:100'
         ]);
 
@@ -276,23 +276,32 @@ class HomeController extends Controller
     }
 
     /* User password change save */
-    public function profil_password_save(Request $request){
-      $user = Auth::user();
-
-        if (!Hash::check($request->old_password, $user->password)) {
-        return response()->json([
-          "status" => 403,
-          "message" => "Old Password Error!"
+    public function profil_password_save(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required|max:50',
+            'new_password' => 'required|max:50|confirmed'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'title' => trans('word.error'),
+                    'type' => 'danger',
+                    'errors'  => $validator->errors()
+                ],422
+            );
+        }else{
+            $user = Auth::user();
+            if (!Hash::check($request->old_password, $user->password)) {
+                return response()->json(['title' => trans('word.error'),'message' => "eski şifre yanlış",'type' => 'danger']);
+            }else{
+                $user->password = Hash::make($request->new_password);
+                $user->save();
+
+                return response()->json(["title" => trans('word.success'),"message"=> trans('sentence.all_your_informations_saved'),"type" => "success"]);
+            }
         }
-
-      $user->password = Hash::make($request->new_password);
-      $user->save();
-
-        return response()->json([
-        "status" => 200,
-        "message" => "Successfully Updated!"
-      ]);
     }
 
     /*Account update page*/
