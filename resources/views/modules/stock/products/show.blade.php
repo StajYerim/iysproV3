@@ -27,20 +27,20 @@
                                 </li>
                                 @endif
                                 <li>
-                                    <a href="#" data-toggle="modal" data-target="#openStartReceipt">
-                                        <i class="fa fa-plus " aria-hidden="true"></i>
-                                        {{trans("sentence.create_opening_receipt")}}
+                                      <a href="{{route("stock.product.form",[aid(),$product->id,"update"])}}">
+                                        <i class="fa fa-edit " aria-hidden="true"></i>
+                                        {{trans("word.edit")}}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" id="productArchive">
-                                        <i class="fa fa-archive" aria-hidden="true"></i>
-                                        {{trans("word.archive")}}
-                                    </a>
-                                    <a href="#" style="display:none" id="productArchiveOut">
-                                        <i class="fa fa-archive" aria-hidden="true"></i>
-                                        {{trans("sentence.remove_archive")}}
-                                    </a>
+                                    {{--<a href="#" id="productArchive">--}}
+                                        {{--<i class="fa fa-archive" aria-hidden="true"></i>--}}
+                                        {{--{{trans("word.archive")}}--}}
+                                    {{--</a>--}}
+                                    {{--<a href="#" style="display:none" id="productArchiveOut">--}}
+                                        {{--<i class="fa fa-archive" aria-hidden="true"></i>--}}
+                                        {{--{{trans("sentence.remove_archive")}}--}}
+                                    {{--</a>--}}
                                 </li>
                                 <li>
                                     <a href="#!" data-toggle="modal" data-target="#deleteModal">
@@ -51,10 +51,7 @@
                             </ul>
                         </div>
 
-                            <a class="btn btn-default " href="{{route("stock.product.form",[aid(),$product->id,"update"])}}">
-                                <i class="fa fa-edit"></i>
-                                {{trans("word.edit")}}
-                            </a>
+
 
                         </span>
             </div>
@@ -118,7 +115,7 @@
 
 
                     <div class="tab-pane fade" id="g2">
-                        <div>
+                        <div v-show="stock.data.length > 0 ">
                             <div class="table-responsive" v-if="stock.data.length > 0">
 
                                 <table class="table table-hover">
@@ -154,13 +151,13 @@
                             </div>
                             <ul style="bottom:5px" class="pagination pagination-xs no-margin">
                                 <li class="prev ">
-                                    <a href="#!" @click="movements(1)">First</a>
+                                    <a href="#!" @click="movements(1)"><<</a>
                                 </li>
                                 <li  v-for="i in (3, stock.last_page)" @click="movements(i)" :class="{active:stock.current_page == i}">
                                     <a href="javascript:void(0);">@{{ i }}</a>
                                 </li>
                                 <li class="next">
-                                    <a href="#!" @click="movements(stock.last_page)">Last</a>
+                                    <a href="#!" @click="movements(stock.last_page)">>></a>
                                 </li>
                             </ul>
 
@@ -170,6 +167,7 @@
                                 </span>
                             </div>
                         </div>
+                        <div v-show="stock.data.length == 0">Bu ürün için mevcut stok hareketi bulunmuyor.</div>
                     </div>
 
 

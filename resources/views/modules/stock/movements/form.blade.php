@@ -100,7 +100,7 @@
                                         <tr>
                                             <th width="33%">{{trans("word.service")}} / {{trans("word.product")}}</th>
                                             <th width="10%">{{trans("word.quantity")}}</th>
-                                            <th width="10%">{{trans("word.unity")}}</th>
+                                            <th width="10%">{{trans("word.unit")}}</th>
                                             <th width="7%"></th>
                                         </tr>
                                         </tbody>

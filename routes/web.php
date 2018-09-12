@@ -26,7 +26,7 @@ Route::get('/activation/{code}', 'Auth\RegisterController@activateByCode')->name
 Route::post('/activation/{code}', 'Auth\RegisterController@activateWithPassword')->name('activation.post');
 
 // Allows authenticated users to visit
-Route::middleware('auth')->group(function() {
+Route::middleware(["auth"])->group(function() {
     Route::get('/', 'Auth\LoginController@redirect');
     Route::resource('/users', 'AccountUsersController', ['only' => ['edit', 'update']]);
     Route::get('/users/invite/new', 'AccountUsersController@create')->name('users.create');

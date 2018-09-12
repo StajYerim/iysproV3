@@ -80,10 +80,6 @@ function birimFiyatKvdsiz(adet,kdv,toplam) {
 }
 
 //Full screen delay
-function fullLoading(text = "Please waiting.") {
-    $('body').loadingModal({text: text});
-    $('body').loadingModal('animation', 'fadingCircle');
-}
 
 function fullLoadingClose() {
     $('body').loadingModal('destroy');
