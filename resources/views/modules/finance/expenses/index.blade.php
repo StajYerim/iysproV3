@@ -71,8 +71,9 @@
                                         {{trans("word.expense")}}</label>
                                     <div class="col-md-6 ">
                                         <div >
-                                            <input type="text" class="form-control "
-                                                   v-model="form.name" name="form.name">
+                                            <input type="text"  v-validate="'required'" class="form-control "
+                                                   v-model="form.name" maxlength="150" name="form.name">
+                                            <span style="color:red;font-weight: bold">@{{ errors.first('form.name') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -82,8 +83,9 @@
                                     <label class="col-md-3 control-label">{{trans("word.date")}}</label>
                                     <div class="col-md-6 ">
                                         <div>
-                                            <input type="text" class="form-control datepicker" name="form.date"
+                                            <input type="text" class="form-control datepicker"  v-validate="'required|date_format:DD.MM.YYYY'"  name="form.date"
                                                    v-model="form.date">
+                                            <span style="color:red;font-weight: bold">@{{ errors.first('form.date') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +95,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label">{{trans("word.description")}} </label>
                                         <div class="col-md-6">
-                                           <textarea class="form-control" v-model="form.description" rows="2"> </textarea>
+                                           <textarea class="form-control" maxlength="150" v-model="form.description" rows="2"> </textarea>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -107,6 +109,7 @@
                                             <vue-tags-input
                                                     v-model="form.tag"
                                                     :tags="form.tagsd"
+                                                    :maxlength="30"
                                                     :autocomplete-items="filteredItems"
                                                     @tags-changed="newTags => form.tagsd = newTags"
                                             />
@@ -155,8 +158,9 @@
                                 <div class="col-md-6">
 
                                     <input style="width: 270px" type="text" class="form-control datepicker"
-                                           name="form.payment_date"
+                                           name="form.payment_date" v-validate="'required|date_format:DD.MM.YYYY'"
                                            v-model="form.payment_date">
+                                    <span style="color:red;font-weight: bold">@{{ errors.first('form.payment_date') }}</span>
                                     </div>
                                 </div>
                         </fieldset>
@@ -182,7 +186,7 @@
                                     <label class="col-md-3 control-label">{{trans("word.amount")}}</label>
                                     <div class="col-md-6 ">
                                         <div >
-                                            <money v-bind="money" class="form-control "
+                                            <money v-bind="money" maxlength="15" class="form-control "
                                                    v-model="form.amount"></money>
                                         </div>
                                     </div>
@@ -213,6 +217,25 @@
         <script src="https://unpkg.com/@johmun/vue-tags-input/dist/vue-tags-input.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", () => {
+
+                const dict = {
+                    custom: {
+                        'form.name': {
+                            required: 'Gider adı boş bırakılamaz.',
+                        },
+                        'form.date':{
+                            required:'Tarih alanı boş bırakılamaz',
+                            date_format:"Tarihi 'GG.AA.YYYY' olacak şekilde girin"
+
+                        },
+                        'form.payment_date':{
+                            required:'Ödeme tarihi boş bırakılamaz',
+                            date_format:"Tarihi 'GG.AA.YYYY' olacak şekilde girin"
+
+                        }
+
+                    }
+                };
                 VueName = new Vue({
                     el: "#new_expense",
                     data: {
@@ -252,6 +275,7 @@
                     },
                     mounted: function () {
                         datePicker();
+                        this.$validator.localize('en', dict);
                     },
                     methods: {
                         delete_expense:function($id){
@@ -264,6 +288,7 @@
                             })
                                 .then((willCheck) => {
                                     if (willCheck) {
+
                                         fullLoading("Lütfen Bekleyiniz.");
 
                                         axios.post("{{route("finance.expenses.delete",aid())}}",{id:$id}).then(res=>{
@@ -302,6 +327,9 @@
                             console.log( this.form.pay_status)
                         },
                         expense_send: function () {
+                            this.$validator.validate().then((result) => {
+                                if (result) {
+
                             $this = this;
 
                             if ($this.form.pay_status == 1) {
@@ -352,6 +380,7 @@
                                 });
                             }
 
+                                } })
                         },
                         clear: function () {
                             this.form.id = 0;
