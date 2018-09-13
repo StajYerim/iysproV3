@@ -34,9 +34,9 @@
 
                                <tr data-month="{{$i}}" class="month">
                                    <td><b>{{give_me_month_name($i)}}</b></td>
-                                   <td>{{get_money($sales)}}</td>
-                                   <td>{{get_money($purchase)}}</td>
-                                   <td>{{get_money($net_vat)}}</td>
+                                   <td>{{get_money($sales)}} <i class="fa fa-try"></i></td>
+                                   <td>{{get_money($purchase)}} <i class="fa fa-try"></i></td>
+                                   <td>{{get_money($net_vat)}} <i class="fa fa-try"></i></td>
                                </tr>
                             @endif
                             <?php } ?>
@@ -141,12 +141,15 @@
                         else
                         {
                             $.each(response.sales,function(index){
+                                if(response.sales[index].description == null){
+                                    response.sales[index].description = "";
+                                }
                                 content_sales += '<tr>' +
                                     '<td>SATIŞ FATURASI</td>' +
                                     '<td>'+response.sales[index].description+'</td>' +
                                     '<td>'+response.sales[index].company.company_name+'</td>' +
                                     '<td>'+response.sales[index].date+'</td>' +
-                                    '<td>'+response.sales[index].vat_total+'</td>' +
+                                    '<td>'+response.sales[index].vat_total+' <i class="fa fa-try"></i></td>' +
 
                                     '</tr> ';
                             });
@@ -162,17 +165,20 @@
                         else
                         {
                             $.each(response.purchase,function(index){
+                                if(response.purchase[index].description == null){
+                                    response.purchase[index].description = "";
+                                }
                                 content_expenses += '<tr>' +
                                     '<td>FİŞ/FATURA</td>' +
                                     '<td>'+response.purchase[index].description+'</td>' +
                                     '<td>'+response.purchase[index].company.company_name+'</td>' +
                                     '<td>'+response.purchase[index].date+'</td>' +
-                                    '<td>'+response.purchase[index].vat_total+'</td>' +
+                                    '<td>'+response.purchase[index].vat_total+' <i class="fa fa-try"></i></td>' +
                                     '</tr>';
                             });
                         }
-                        $('.sales_table_body').append(content_sales);
-                        $('.expenses_table_body').append(content_expenses);
+                        $('.sales_table_body').html(content_sales);
+                        $('.expenses_table_body').html(content_expenses);
                     },
                     dataType:'json'
                 });
