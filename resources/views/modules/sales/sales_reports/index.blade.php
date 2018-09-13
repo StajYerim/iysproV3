@@ -34,7 +34,7 @@
                                         <div class="text-center"><b>FATURA KATEGORİLERİ</b></div>
 
                                         <canvas v-show="order_pie.length > 0"  id="ordersChart" height="160"></canvas>
-                                        <div v-show="order_pie.length == 0"><br><br><center>Kayıt Bulunamadı</center></div>
+                                        <div v-html='loading'></div>
                                         <div v-show="order_pie.length > 0" v-for='(item,index) in order_pie' :key="index" class="col-md-12">
                                             <label class="pull-left label"
                                                    v-bind:style="{'background-color':item.bgcolor}">
@@ -50,7 +50,7 @@
                                         <div class="text-center" ><b>MÜŞTERİ KATEGORİLERİ</b></div>
 
                                         <canvas v-show="order_pie.length >0" id="customersChart" height="160"></canvas>
-                                        <div v-show="order_pie.length == 0"><br><br><center>Kayıt Bulunamadı</center></div>
+                                        <div v-html='loading'></div>
                                         <div v-show="order_pie.length >0" v-for="(item) in customer_pie" class="col-md-12">
                                             <label class="pull-left label"
                                                    v-bind:style="{'background-color':item.bgcolor}">
@@ -63,7 +63,7 @@
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>HİZMET/ÜRÜN KATEGORİLERİ</b></div>
                                         <canvas v-show="order_pie.length >0" id="productChart" height="160"></canvas>
-                                        <div v-show="order_pie.length == 0"><br><br><center>Kayıt Bulunamadı</center></div>
+                                        <div v-html='loading'></div>
                                                 <div v-show="order_pie.length >0" v-for="(item,index) in product_pie" class="col-md-12">
                                                     <label class="pull-left label"
                                                            v-bind:style="{'background-color':item.bgcolor}">
@@ -103,7 +103,7 @@
             <div class="row">
             <div class="col-sm-12 tab-content">
                 <div id="invoice_table" class="tab-pane fade in active">
-                    <div v-show="order_pie.length == 0">Kayıt bulunamadı</div>
+                    <div v-html='loading'>Kayıt bulunamadı</div>
                     <table v-show="order_pie.length >0" id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
@@ -137,7 +137,7 @@
                     </table>
                 </div>
                 <div id="customer_table" class="tab-pane fade">
-                    <div v-show="order_pie.length == 0">Kayıt bulunamadı</div>
+                    <div v-html='loading'>Kayıt bulunamadı</div>
                     <table v-show="order_pie.length > 0" id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
@@ -164,7 +164,8 @@
                     </table>
                 </div>
                 <div id="product_table" class="tab-pane fade">
-                    <div v-show="order_pie.length == 0">Kayıt bulunamadı</div>
+
+                    <div v-html='loading'>Kayıt bulunamadı</div>
                     <table v-show="order_pie.length > 0" id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
@@ -225,6 +226,7 @@
                         vat:"1",
                         start:"{{ \Carbon\Carbon::now()->subDays(30)->format('Y-m-d') }}",
                         end: "{{ \Carbon\Carbon::now()->format('Y-m-d') }}",
+                        loading: '<br><br><center><i class="fa fa-refresh fa-spin" style="font-size:32px"></i></center><br><br>'
                     },
                     mounted() {
 
@@ -243,6 +245,7 @@
                           });
                         },
                         pies_data: function (start,end) {
+//                            this.loading = '<i class="fa fa-refresh fa-spin" style="font-size:24px"></i>';
                             axios.post("{{route("sales.pies.data",aid())}}",{vat:this.vat,start:start,end:end}).then(res => {
                                 sales_report.order_pie = [];
                                 sales_report.customer_pie = [];
@@ -354,6 +357,11 @@
 
 
                                 });
+                                if(sales_report.order_pie.length >0 ){
+                                    sales_report.loading = '';
+                                }else{
+                                    sales_report.loading = '<br><br><center>Kayıt Bulunamadı</center>';
+                                }
 
 
                             });
