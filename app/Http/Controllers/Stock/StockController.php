@@ -6,11 +6,17 @@ use App\Account;
 
 use App\Currency;
 use App\Model\Parasut;
+use App\Model\Purchases\PurchaseOfferItems;
+use App\Model\Purchases\PurchaseOrders;
+use App\Model\Purchases\PurchaseOrderItems;
+use App\Model\Sales\SalesOfferItems;
+use App\Model\Sales\SalesOrderItems;
 use App\Model\Stock\Product\Barcode;
 use App\Model\Stock\Product\Category;
 use App\Model\Stock\Product\Product;
 use App\Model\Stock\Product\ProductDescriptions;
 use App\Model\Stock\Product\ProductImage;
+use App\Model\Stock\StockItems;
 use App\Images;
 use Validator;
 use Faker\Provider\Image;
@@ -184,11 +190,33 @@ class StockController extends Controller
 
     public function destroy($aid, $id)
     {
-        Product::destroy($id);
 
-        flash()->overlay("Product deleted", 'Success')->success();
-        sleep(1);
-        return ["message" => "success", 'type' => "product"];
+        //Sales Order Items
+        $sales_items = SalesOrderItems::where("product_id",$id)->count();
+        $sales_offer_items = SalesOfferItems::where("product_id",$id)->count();
+        $purchase_items = PurchaseOrderItems::where("product_id",$id)->count();
+        $purchase_offer_items = PurchaseOfferItems::where("product_id",$id)->count();
+        $stock_items = StockItems::where("product_id",$id)->count();
+
+        $total = $sales_items+$sales_offer_items+$purchase_items+$purchase_offer_items+$stock_items;
+        $desc = null;
+        $sonuc = "success";
+
+        if($total >0){
+            $sonuc = "error";
+
+        }else{
+            Product::destroy($id);
+        }
+
+
+
+        if($sonuc == "error"){
+            $desc = "Silmek istediğiniz ürünün, bir veya birden fazla alanda kullanımı mevcut<br>Silme işlemi gerçekleştirilemedi.";
+        }
+
+
+        return ["message" => $sonuc, 'type' => "product","desc"=>$desc];
 
     }
 
