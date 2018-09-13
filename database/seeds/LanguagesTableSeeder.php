@@ -634,6 +634,8 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'estimated_sales_price', 'text'=> ['en'=> 'ESTIMATED SALES PRICE','tr'=> 'TAHMİNİ SATIŞ DEĞERİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'stock_value', 'text'=> ['en'=> 'STOCK VALUE','tr'=> 'STOK DEĞERİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_purchase_potential_gain', 'text'=> ['en'=> 'Estimated Sales Value, Estimated Buy Value, and Potential Gain are not included in the calculation of non-STO products. Calculations are based on the Purchase Price and the Sales Price specified on the product pages.','tr'=> 'Tahmini Satış Değeri, Tahmini Alış Değeri ve Potansiyel Kazanç hesaplamalarına stokta olmayan ürünler dahil edilmez. Hesaplamalar ürün sayfalarında belirtilen Alış Fiyatı ve Satış Fiyatı üzerinden yapılır.']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'all_your_informations_saved', 'text'=> ['en'=> 'ALL YOUR INFORMATIONS SAVED','tr'=> 'TÜM BİLGİLERİNİZ KAYDEDİLDİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'please_check_form_again', 'text'=> ['en'=> 'PLEASE, CHECK FORM AGAIN','tr'=> 'LÜTFEN FORMU TEKRARDAN KONTROL EDİNİZ']]);
 
 
     }
