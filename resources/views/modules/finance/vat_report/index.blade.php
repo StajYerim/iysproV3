@@ -6,7 +6,7 @@
             <div class="jarviswidget" id="wid-id-0">
 
                 <header style="padding-left:10px;">
-                    <b>AYLARA GÖRE KDV RAPORLARI</b>
+                    <b>AYLARA GÖRE KDV RAPORLARI -> {{ trans('month.january') }}</b>
                 </header>
 
                 <div>
@@ -103,7 +103,7 @@
         $(function(){
             function get_month_name(month){
                 var month_name='';
-                month_name += (month == 1) ? 'OCAK' : '';
+                month_name += (month == 1) ? "{{ trans('month.january') }}" : '';
                 month_name += (month == 2) ? 'ŞUBAT' : '';
                 month_name += (month == 3) ? 'MART' : '';
                 month_name += (month == 4) ? 'NİSAN' : '';
@@ -111,7 +111,7 @@
                 month_name += (month == 6) ? 'HAZİRAN' : '';
                 month_name += (month == 7) ? 'TEMMUZ' : '';
                 month_name += (month == 8) ? 'AĞUSTOS' : '';
-                month_name += (month == 9) ? 'EYLÜL' : '';
+                month_name += (month == 9) ? "poh" : '';
                 month_name += (month == 10) ? 'EKİM' : '';
                 month_name += (month == 11) ? 'KASIM' : '';
                 month_name += (month == 12) ? 'ARALIK' : '';

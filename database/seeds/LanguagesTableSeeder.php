@@ -44,6 +44,20 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'number', 'key'=> 'trillion', 'text'=> ['en'=> 'TRILLION', 'tr'=> 'TRILLION']]);
         LanguageLine::create(['group'=> 'number', 'key'=> 'zillion', 'text'=> ['en'=> 'ZILLION', 'tr'=> 'KATRİLYON']]);
 
+        // month area
+        LanguageLine::create(['group'=> 'month', 'key'=> 'january', 'text'=> ['en'=> 'JANUARY', 'tr'=> 'OCAK']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'february', 'text'=> ['en'=> 'FEBRUARY', 'tr'=> 'ŞUBAT']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'march', 'text'=> ['en'=> 'MARCH', 'tr'=> 'MART']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'april', 'text'=> ['en'=> 'APRIL', 'tr'=> 'NİSAN']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'may', 'text'=> ['en'=> 'MAY', 'tr'=> 'MAYIS']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'june', 'text'=> ['en'=> 'JUNE', 'tr'=> 'HAZİRAN']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'july', 'text'=> ['en'=> 'JULY', 'tr'=> 'TEMMUZ']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'august', 'text'=> ['en'=> 'AUGUST', 'tr'=> 'AĞUSTOS']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'september', 'text'=> ['en'=> 'SEPTEMBER', 'tr'=> 'EYLÜL']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'october', 'text'=> ['en'=> 'OCTOBER', 'tr'=> 'EKİM']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'november', 'text'=> ['en'=> 'NOVEMBER', 'tr'=> 'KASIM']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'december', 'text'=> ['en'=> 'DECEMBER', 'tr'=> 'ARALIK']]);
+
         // word area
         LanguageLine::create(['group'=> 'word', 'key'=> 'english', 'text'=> ['en'=> 'ENGLISH', 'tr'=> 'İNGİLİZCE']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'turkish', 'text'=> ['en'=> 'TURKISH', 'tr'=> 'TÜRKÇE']]);
