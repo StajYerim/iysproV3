@@ -16,9 +16,19 @@ class CompanyProfileController extends Controller
 
     public function update(Request $request)
     {
+
         $account_id = aid();
         $this->validate(request(),[
-            "company_name"    =>  "required"
+            "company_name"    =>  "required|max:100",
+            "tax_office"    =>  "max:100",
+            "tax_id"    =>  "max:100",
+            "address"    =>  "max:100",
+            "city"    =>  "max:100",
+            "town"    =>  "max:100",
+            "phone"    =>  "max:100",
+            "fax"    =>  "max:100",
+            "web"    =>  "max:100",
+            "email"    =>  "max:100",
         ]);
 
         $data=[];
