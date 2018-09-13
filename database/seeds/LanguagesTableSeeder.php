@@ -453,7 +453,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'remaining_amount', 'text'=> ['en'=> 'REMAINING AMOUNT', 'tr'=> 'KALAN TUTAR']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'account_balanca', 'text'=> ['en'=> 'ACCOUNT BALANCE', 'tr'=> 'HESAP BAKİYESİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'proforma_invoice', 'text'=> ['en'=> 'PROFORMA INVOICE', 'tr'=> 'PROFORM FATURA']]);
-        LanguageLine::create(['group'=> 'sentence', 'key'=> 'excluding_vat', 'text'=> ['en'=> 'EXCLUDING VAT', 'tr'=> 'KDV HARİÇ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'excluding_vat', 'text'=> ['en'=> 'NO VAT', 'tr'=> 'KDVSİZ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'general_amount', 'text'=> ['en'=> 'GENERAL AMOUNT', 'tr'=> 'GENEL TUTAR']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'orders_created_from_offer', 'text'=> ['en'=> 'ORDERS CREATED FROM OFFER', 'tr'=> 'TEKLİFTEN OLUŞTURULAN SİPARİŞLER']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'cancel_search', 'text'=> ['en'=> 'CANCEL SEARCH', 'tr'=> 'ARAMAYI İPTAL ET']]);
