@@ -6,7 +6,7 @@
             <div class="jarviswidget" id="wid-id-0">
 
                 <header style="padding-left:10px;">
-                    <b>AYLARA GÖRE KDV RAPORLARI -> {{ trans('month.january') }}</b>
+                    <b>{{ trans('sentence.vat_reports_per_calendar_month') }}</b>
                 </header>
 
                 <div>
@@ -14,10 +14,10 @@
                         <table id="table" class="table table-striped table-hover" width="100%">
                             <thead>
                             <tr>
-                                <th>AY</th>
-                                <th>HESAPLANAN KDV</th>
-                                <th>İNDİRİLECEK KDV</th>
-                                <th>NET KDV</th>
+                                <th>{{ trans('word.month') }}</th>
+                                <th>{{ trans('sentence.calculated_vat') }}</th>
+                                <th>{{ trans('sentence.reduced_vat') }}</th>
+                                <th>{{ trans('sentence.clear_vat') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -56,8 +56,8 @@
                             <b class="hangi_ay"></b>
                         </span>
                         <div class="pull-right nav nav-tabs">
-                            <a data-toggle="tab" href="#sales" class="btn btn-xs btn-primary">SATIŞLAR</a>
-                            <a data-toggle="tab" href="#expenses" class="btn btn-xs btn-primary">GİDERLER</a>
+                            <a data-toggle="tab" href="#sales" class="btn btn-xs btn-primary">{{ trans('word.sales') }}</a>
+                            <a data-toggle="tab" href="#expenses" class="btn btn-xs btn-primary">{{ trans('word.expense')  }}</a>
                         </div>
                     </div>
                 </header>
@@ -66,13 +66,13 @@
                         <div id="sales" class="tab-pane fade in active">
                             <table class="table table-striped table-hover" style="width: 100%">
                                 <thead>
-                                <tr>
-                                    <th>İŞLEM TÜRÜ</th>
-                                    <th>AÇIKLAMA</th>
-                                    <th>MÜŞTERİ / TEDARİKÇİ</th>
-                                    <th>DÜZENLENME TARİHİ</th>
-                                    <th>KDV</th>
-                                </tr>
+                                    <tr>
+                                        <th>{{ trans('word.type') }}</th>
+                                        <th>{{ trans('word.description') }}</th>
+                                        <th>{{ trans('word.customer') }} / {{ trans('word.supplier') }}</th>
+                                        <th>{{ trans('sentence.edit_date') }}<th>
+                                        <th>{{ trans('word.vat') }}</th>
+                                    </tr>
                                 </thead>
                                 <tbody class="sales_table_body">
                                 </tbody>
@@ -81,13 +81,13 @@
                         <div id="expenses" class="tab-pane fade">
                             <table id="expenses" class="table table-striped table-hover" style="width: 100%">
                                 <thead>
-                                <tr>
-                                    <th>İŞLEM TÜRÜ</th>
-                                    <th>AÇIKLAMA</th>
-                                    <th>MÜŞTERİ / TEDARİKÇİ</th>
-                                    <th>DÜZENLENME TARİHİ</th>
-                                    <th>KDV</th>
-                                </tr>
+                                    <tr>
+                                        <th>{{ trans('word.type') }}</th>
+                                        <th>{{ trans('word.description') }}</th>
+                                        <th>{{ trans('word.customer') }} / {{ trans('word.supplier') }}</th>
+                                        <th>{{ trans('sentence.edit_date') }}<th>
+                                        <th>{{ trans('word.vat') }}</th>
+                                    </tr>
                                 </thead>
                                 <tbody class="expenses_table_body">
                                 </tbody>
@@ -104,17 +104,17 @@
             function get_month_name(month){
                 var month_name='';
                 month_name += (month == 1) ? "{{ trans('month.january') }}" : '';
-                month_name += (month == 2) ? 'ŞUBAT' : '';
-                month_name += (month == 3) ? 'MART' : '';
-                month_name += (month == 4) ? 'NİSAN' : '';
-                month_name += (month == 5) ? 'MAYIS' : '';
-                month_name += (month == 6) ? 'HAZİRAN' : '';
-                month_name += (month == 7) ? 'TEMMUZ' : '';
-                month_name += (month == 8) ? 'AĞUSTOS' : '';
-                month_name += (month == 9) ? "poh" : '';
-                month_name += (month == 10) ? 'EKİM' : '';
-                month_name += (month == 11) ? 'KASIM' : '';
-                month_name += (month == 12) ? 'ARALIK' : '';
+                month_name += (month == 2) ? "{{ trans('month.february') }}" : '';
+                month_name += (month == 3) ? "{{ trans('month.march') }}" : '';
+                month_name += (month == 4) ? "{{ trans('month.april') }}" : '';
+                month_name += (month == 5) ? "{{ trans('month.may') }}" : '';
+                month_name += (month == 6) ? "{{ trans('month.june') }}" : '';
+                month_name += (month == 7) ? "{{ trans('month.july') }}" : '';
+                month_name += (month == 8) ? "{{ trans('month.august') }}" : '';
+                month_name += (month == 9) ? "{{ trans('month.september') }}" : '';
+                month_name += (month == 10) ? "{{ trans('month.october') }}" : '';
+                month_name += (month == 11) ? "{{ trans('month.november') }}" : '';
+                month_name += (month == 12) ? "{{ trans('month.december') }}" : '';
                 return month_name;
             }
 
@@ -126,7 +126,7 @@
                 var content_expenses = "";
                 month       = $(this).data("month");
                 month_name  = get_month_name(month);
-                $(".hangi_ay").html(month_name+' AYI SATIŞLAR VE GİDERLER KDV BÖLÜMÜ');
+                $(".hangi_ay").html(month_name+ " - {{ trans('sentence.sales_and_expenses_vat_table') }}");
 
                 $.ajax({
                     type: "POST",
@@ -136,7 +136,7 @@
                         console.log(response);
                         if(response.sales.length == 0)
                         {
-                            content_sales += '<tr><td align="center" colspan="5"><b>'+ get_month_name(month) +' AYINDA HERHANGİ BİR SATIŞ FATURASI OLUŞTURULMAMIŞTIR</b></td></tr>';
+                            content_sales += '<tr><td align="center" colspan="5"><b>'+ get_month_name(month) +' - {{ trans("sentence.any_sales_invoice_was_not_created") }}</b></td></tr>';
                         }
                         else
                         {
@@ -145,7 +145,7 @@
                                     response.sales[index].description = "";
                                 }
                                 content_sales += '<tr>' +
-                                    '<td>SATIŞ FATURASI</td>' +
+                                    '<td>{{ trans("sentence.sales_invoice") }}</td>' +
                                     '<td>'+response.sales[index].description+'</td>' +
                                     '<td>'+response.sales[index].company.company_name+'</td>' +
                                     '<td>'+response.sales[index].date+'</td>' +
@@ -155,12 +155,9 @@
                             });
                         }
 
-
-
-
                         if(response.purchase.length == 0)
                         {
-                            content_expenses += '<tr><td align="center" colspan="5"><b>'+ get_month_name(month) +' AYINDA HERHANGİ BİR FİŞ/FATURA OLUŞTURULMAMIŞTIR</b></td></tr>';
+                            content_expenses += '<tr><td align="center" colspan="5"><b>'+ get_month_name(month) +' - {{ trans("sentence.any_sales_invoice_was_not_created") }}</b></td></tr>';
                         }
                         else
                         {
@@ -169,7 +166,7 @@
                                     response.purchase[index].description = "";
                                 }
                                 content_expenses += '<tr>' +
-                                    '<td>FİŞ/FATURA</td>' +
+                                    '<td>{{ trans("word.receipt") }}/{{ trans("word.invoice") }}</td>' +
                                     '<td>'+response.purchase[index].description+'</td>' +
                                     '<td>'+response.purchase[index].company.company_name+'</td>' +
                                     '<td>'+response.purchase[index].date+'</td>' +
