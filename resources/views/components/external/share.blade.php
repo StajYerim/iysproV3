@@ -86,7 +86,7 @@
                 btnDisable: false,
                 form: {
                     thread: "{{$thread}}",
-                    receivers: [{email:'{{$email}}'}],
+                    receivers: "{{$email == null ? "[{email:'".$email."'}]":"[]"}}",
                     message: "{!! $message !!}",
                     lang: "{{app()->getLocale()}}"
                 }
@@ -151,8 +151,8 @@
             noSuggestionText: 'Girilen değerde kayıt bulunamadı',
             placeholder: 'Eposta...',
             required: true,
-            data: ['{{$email}}'],
-            value:['{{$email}}'],
+            data: @if($email)['{{$email}}']@else [] @endif,
+            value:@if($email)['{{$email}}']@else [] @endif,
             valueField: 'email',
             renderer: function (data) {
 

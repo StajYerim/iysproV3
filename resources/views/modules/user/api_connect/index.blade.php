@@ -80,7 +80,7 @@
 
                                 <fieldset>
                                     <legend>
-                                        PARAŞÜT {{trans("sentence.api_informations")}}
+                                         PARAŞÜT {{trans("sentence.api_informations")}}
                                     </legend>
 
                                 </fieldset>
@@ -130,7 +130,7 @@
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6 ">
                                             <label class="control-label">
-                                                {{trans("sentence.user_name")}}
+                                                {{trans("word.password")}}
                                             </label>
                                             <input type="password" class="form-control"  v-model="parasut_form.password">
 
@@ -214,11 +214,10 @@
                     }),
                     methods:{
                         n11_form_send:function(){
-
-
-axios.post("{{route("settings.api.save",aid())}}",this.n11_form) .then(function (response) {
-        notification("Success",response.data.message,"success");
-})
+                            axios.post("{{route("settings.api.save",aid())}}",this.n11_form)
+                                .then(function (response) {
+                                    notification("Success",response.data.message,"danger");
+                                })
                         },
                         parasut_form_send:function(){
 

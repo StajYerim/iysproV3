@@ -9,6 +9,7 @@
             </div>
             <div class="modal-body">
                 <p>{{$message}}</p>
+                <p id="response_data_delete"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans("word.cancel") }}</button>
