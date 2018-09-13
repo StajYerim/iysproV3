@@ -28,12 +28,17 @@
                                 </div>
                             </div>
                             <div class="row">
+
                                 <div class="col-sm-12">
+                                    <div v-if="expenses_list.length == 0">
+                                        Sistemde kayıtlı gider fişi bulunmuyor.
+                                    </div>
                                     <div class="col-sm-4">
 
 
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div v-if="expenses_list.length != 0" class="col-sm-4">
+
                                         <div class="text-center"><b>GİDER KATEGORİLERİ</b></div>
                                         <canvas id="customersChart" height="160"></canvas>
 
@@ -47,6 +52,7 @@
                                         </div>
 
                                     </div>
+
                                     <div class="col-sm-4">
 
 
@@ -70,7 +76,7 @@
 
                                 </div>
                             </div>
-                            <div id="invoice_table" class="tab-pane fade in active">
+                            <div v-if="expenses_list.length != 0" id="invoice_table"  class="tab-pane fade in active">
                                 <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover"
                                        width="100%">
                                     <thead>
@@ -114,6 +120,11 @@
 
                                     </tbody>
                                 </table>
+                            </div>
+                            <div v-if="expenses_list.length == 0" >
+
+                                Sistemde kayıtlı gider fişi bulunmuyor.
+
                             </div>
                         </div>
                     </div>
