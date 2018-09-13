@@ -35,7 +35,6 @@
                                     </div>
                                     <div class="col-sm-4">
 
-
                                     </div>
                                     <div v-if="expenses_list.length != 0" class="col-sm-4">
 

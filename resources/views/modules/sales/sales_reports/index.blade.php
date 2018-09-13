@@ -32,9 +32,10 @@
                                 <div class="col-sm-12">
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>FATURA KATEGORİLERİ</b></div>
-                                        <canvas id="ordersChart" height="160"></canvas>
 
-                                        <div v-for='(item,index) in order_pie' :key="index" class="col-md-12">
+                                        <canvas v-show="order_pie.length > 0"  id="ordersChart" height="160"></canvas>
+                                        <div v-show="order_pie.length == 0"><br><br><center>Kayıt Bulunamadı</center></div>
+                                        <div v-show="order_pie.length > 0" v-for='(item,index) in order_pie' :key="index" class="col-md-12">
                                             <label class="pull-left label"
                                                    v-bind:style="{'background-color':item.bgcolor}">
                                                 @{{ item.labels}}
@@ -46,10 +47,11 @@
 
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="text-center"><b>MÜŞTERİ KATEGORİLERİ</b></div>
-                                        <canvas id="customersChart" height="160"></canvas>
+                                        <div class="text-center" ><b>MÜŞTERİ KATEGORİLERİ</b></div>
 
-                                        <div v-for="(item) in customer_pie" class="col-md-12">
+                                        <canvas v-show="order_pie.length >0" id="customersChart" height="160"></canvas>
+                                        <div v-show="order_pie.length == 0"><br><br><center>Kayıt Bulunamadı</center></div>
+                                        <div v-show="order_pie.length >0" v-for="(item) in customer_pie" class="col-md-12">
                                             <label class="pull-left label"
                                                    v-bind:style="{'background-color':item.bgcolor}">
                                                 @{{ item.labels }}
@@ -60,8 +62,9 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="text-center"><b>HİZMET/ÜRÜN KATEGORİLERİ</b></div>
-                                        <canvas id="productChart" height="160"></canvas>
-                                                <div v-for="(item,index) in product_pie" class="col-md-12">
+                                        <canvas v-show="order_pie.length >0" id="productChart" height="160"></canvas>
+                                        <div v-show="order_pie.length == 0"><br><br><center>Kayıt Bulunamadı</center></div>
+                                                <div v-show="order_pie.length >0" v-for="(item,index) in product_pie" class="col-md-12">
                                                     <label class="pull-left label"
                                                            v-bind:style="{'background-color':item.bgcolor}">
                                                         @{{ item.labels }}
@@ -100,7 +103,8 @@
             <div class="row">
             <div class="col-sm-12 tab-content">
                 <div id="invoice_table" class="tab-pane fade in active">
-                    <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
+                    <div v-show="order_pie.length == 0">Kayıt bulunamadı</div>
+                    <table v-show="order_pie.length >0" id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -133,7 +137,8 @@
                     </table>
                 </div>
                 <div id="customer_table" class="tab-pane fade">
-                    <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
+                    <div v-show="order_pie.length == 0">Kayıt bulunamadı</div>
+                    <table v-show="order_pie.length > 0" id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -159,7 +164,8 @@
                     </table>
                 </div>
                 <div id="product_table" class="tab-pane fade">
-                    <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
+                    <div v-show="order_pie.length == 0">Kayıt bulunamadı</div>
+                    <table v-show="order_pie.length > 0" id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
                             <th width="25">#</th>
