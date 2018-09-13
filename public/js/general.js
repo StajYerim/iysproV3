@@ -126,7 +126,7 @@ function notification(title, message, type, icon, time) {
         content: message,
         color: color,
         iconSmall: "fa fa-" + icons + " fa-2x animated",
-        timeout: times + 000
+        timeout: times
     });
 }
 
