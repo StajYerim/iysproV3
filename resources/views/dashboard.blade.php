@@ -137,10 +137,8 @@
 
         <div class="row">
 
-            <!-- NEW WIDGET START -->
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
                     <header>
@@ -149,10 +147,8 @@
 
                     </header>
 
-                    <!-- widget div-->
                     <div>
 
-                        <!-- widget content -->
                         <div class="widget-body no-padding">
 
                             <article class="col-sm-4">
@@ -161,17 +157,13 @@
                                         <b>TOPLAM</b>
                                     </div>
 
-                                    <!-- end widget edit box -->
-
-                                    <!-- widget content -->
                                     <div class="widget-body no-padding">
 
                                         <div id="total_payment" class="chart no-padding"></div>
 
                                     </div>
-                                    <!-- end widget content -->
                                     <div class="text-center">
-                                        <b>TOPLAM : {{ $total_collect }} <i class="fa fa-try"></i></b>
+                                        <b>TOPLAM : {{ $total_payment }} <i class="fa fa-try"></i></b>
                                     </div>
 
                                 </div>
@@ -181,19 +173,14 @@
                                     <div class="text-center">
                                         <b>GECİKMİŞ</b>
                                     </div>
-                                    <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
 
                                     </div>
-                                    <!-- end widget edit box -->
 
-                                    <!-- widget content -->
                                     <div class="widget-body no-padding">
                                         <div id="overdue_payment" class="chart no-padding"></div>
 
                                     </div>
-                                    <!-- end widget content -->
 
                                 </div>
                             </article>
@@ -202,40 +189,30 @@
                                     <div class="text-center">
                                         <b>GÜNÜ GELMEMİŞ</b>
                                     </div>
-                                    <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
 
                                     </div>
-                                    <!-- end widget edit box -->
 
-                                    <!-- widget content -->
                                     <div class="widget-body no-padding">
 
                                         <div id="unplanning_payment" class="chart no-padding"></div>
 
                                     </div>
-                                    <!-- end widget content -->
 
                                 </div>
                             </article>
 
                         </div>
-                        <!-- end widget content -->
 
                     </div>
-                    <!-- end widget div -->
 
                 </div>
-                <!-- end widget -->
 
             </article>
-            <!-- WIDGET END -->
 
         </div>
 
         <div class="row">
-
             <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div class="jarviswidget" id="wid-id-0">
 
@@ -442,6 +419,7 @@
                 Morris.Donut({
                     element : 'total_collection',
                     data : [
+                        @if($total_collect != 0)
                         {
                             value : '{{$unplanning_collect}}',
                             label : 'GÜNÜ GELMEMİŞ'
@@ -450,87 +428,123 @@
                             value:'{{ $expiry_remaining }}',
                             label:'GECİKMİŞ'
                         }
+                        @else
+                        {
+                            value : 100,
+                            label : 'Kayıt Yok'
+                        }
+                        @endif
 
                     ],
                     labelColor: '#000000',
-                    colors: [
-                        '#3149a4',
-                        '#b5130a',
-                    ],
-                    formatter : function(x) {
+                    colors: {!!  $total_collect_color !!},
+                    formatter : function(x,d) {
+                        if(d.label == "Kayıt Yok"){
+                            return "";
+                        }
                         return x + " ₺"
                     }
                 });
             }
+
             if ($('#overdue_collection').length) {
                 Morris.Donut({
                     element : 'overdue_collection',
                     data : [{
-                        value:'{{ $expiry_remaining }}',
-                        label:''
+                        value:'{{ $expiry_remaining == 0 ? '100' : $expiry_remaining }}',
+                        label:'{{ $expiry_remaining == 0 ? "Kayıt Yok":""}}'
                     }],
-                    formatter : function(x) {
+                    colors: ['{{ $expiry_remaining_color }}'],
+                    formatter : function(x,d,s) {
+                        if(d.label == "Kayıt Yok"){
+                            return "";
+                        }
                         return x + " ₺"
-                    }
+                    },
                 });
             }
+
             if ($('#unplanning_collection').length) {
                 Morris.Donut({
                     element : 'unplanning_collection',
                     data : [{
-                        value:'{{ $unplanning_collect }}',
-                        label:''
+                        value:'{{ $unplanning_collect == 0 ? "100":$unplanning_collect}}',
+                        label:'{{ $unplanning_collect == 0 ? "Kayıt Yok":""}}'
                     }],
-                    formatter : function(x) {
-                        return x + " ₺"
+                    colors: ['{{ $unplanning_collect_color }}'],
+                    formatter : function(x,d,s) {
+                        if(d.label == "Kayıt Yok"){
+                            return "";
+                        }
+                        return  x + " ₺"
                     }
                 });
             }
+
             if ($('#total_payment').length) {
                 Morris.Donut({
                     element : 'total_payment',
                     data : [
-                        {
-                            value : '{{$purchase_expiry_remaining}}',
-                            label : 'GECİKMİŞ'
-                        },
-                        {
-                            value : '{{$unplanning_remaining}}',
-                            label : 'GÜNÜ GELMEMİŞ'
-                        }
+                        @if($total_payment != 0)
+                            {
+                                value : '{{ $unplanning_remaining }}',
+                                label : 'GÜNÜ GELMEMİŞ'
+                            },
+                            {
+                                value:'{{ $purchase_expiry_remaining }}',
+                                label:'GECİKMİŞ'
+                            }
+                        @else
+                            {
+                                value : 100,
+                                label : 'Kayıt Yok'
+                            }
+                        @endif
                     ],
                     labelColor: '#000000',
-                    colors: [
-                        '#3149a4',
-                        '#b5130a',
-                    ],
-                    formatter : function(x) {
-                        return x + " ₺"
+                    colors: {!! $total_payment_color !!},
+                    formatter : function(x,d) {
+                        if(d.label == "Kayıt Yok"){
+                            return "";
+                        }
+                        return x.toLocaleString('tr-TR', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        })+" ₺"
                     }
                 });
             }
+
             if ($('#overdue_payment').length) {
                 Morris.Donut({
                     element : 'overdue_payment',
                     resize: true,
                     data : [{
-                        value:'{{$purchase_expiry_remaining}}',
-                        label:''
+                        value:'{{ $purchase_expiry_remaining == 0 ? 100 : $purchase_expiry_remaining }}',
+                        label:'{{ $purchase_expiry_remaining == 0 ? "Kayıt Yok" : "" }}'
                     }],
-                    formatter : function(x) {
+                    colors: ['{{ $purchase_expiry_remaining_color  }}'],
+                    formatter : function(x,d) {
+                        if(d.label == "Kayıt Yok"){
+                            return "";
+                        }
                         return x + " ₺"
                     }
                 });
             }
+
             if ($('#unplanning_payment').length) {
                 Morris.Donut({
                     element : 'unplanning_payment',
                     data : [{
-                        value:'{{ $unplanning_remaining }}',
-                        label:''
+                        value:'{{ $unplanning_remaining == 0 ? 100 : $unplanning_remaining}}',
+                        label:'{{ $unplanning_remaining == 0 ? "Kayıt Yok" : "" }}'
                     }],
-                    formatter : function(x) {
-
+                    colors: ['{{ $unplanning_remaining_color  }}'],
+                    formatter : function(x,d) {
+                        if(d.label == "Kayıt Yok"){
+                            return "";
+                        }
                         return x + " ₺"
                     }
                 });
