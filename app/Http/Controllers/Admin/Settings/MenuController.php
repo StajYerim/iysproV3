@@ -44,6 +44,7 @@ class MenuController extends Controller
         ]);
     }
 
+    //Order post data $request->list
     public function order_post(Request $request)
     {
 
@@ -51,7 +52,7 @@ class MenuController extends Controller
 
     }
 
-
+    //List detail save
     public static function saveList($list, $parent_id = null, &$order = 0)
     {
         foreach ($list as $item) {

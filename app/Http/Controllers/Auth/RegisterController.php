@@ -221,7 +221,7 @@ class RegisterController extends Controller
             "account_id" => $account->id,
             "name" => "KASA HESABI",
             "type" => 1,
-            "currency" => "try",
+            "currency" => "TRY",
         ]);
 
         // Modules Activated

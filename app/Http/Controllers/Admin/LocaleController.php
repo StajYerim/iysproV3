@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Lang;
 
 class LocaleController extends Controller
 {
+    //Menu list
     public function index()
     {
         $langs = Language::All();
@@ -17,6 +18,7 @@ class LocaleController extends Controller
         return view("admin.locale.index", compact("langs", "language_lines"));
     }
 
+    //Language modal form detail
     public function post_modal_form($type)
     {
         $langs = Language::all();
@@ -25,6 +27,7 @@ class LocaleController extends Controller
         return view("admin.locale.form", compact("type", "langs", "line"));
     }
 
+    //Language modal form save
     public function post_modal_form_store($id, Request $request)
     {
 
@@ -44,6 +47,7 @@ class LocaleController extends Controller
         return redirect()->route("admin.locale.index");
     }
 
+    //Language line delete
     public function destroy($id)
     {
         Language_lines::where("id",$id)->delete();

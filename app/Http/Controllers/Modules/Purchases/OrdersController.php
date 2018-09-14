@@ -182,6 +182,7 @@ class OrdersController extends Controller
     public function destroy($aid, $id)
     {
         $sales_order = PurchaseOrders::find($id);
+        Stock::where("purchase_order_id",$id)->delete();
 
         $sales_order->delete();
 

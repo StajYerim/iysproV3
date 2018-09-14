@@ -35,7 +35,7 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{ strtoupper($type)}}</th>
+                                    <th>{{ strtoupper($type == "customer" ? trans("word.customers"):trans("word.suppliers"))}}</th>
                                     <th>{{trans("word.balance")}}</th>
                                 </tr>
                                 </thead>

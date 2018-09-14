@@ -10,7 +10,7 @@
                         <div class="widget-body">
                             <div class="widget-body-toolbar st">
                                 <div class="row">
-                                    <div class="col-sm-4" style="margin-top:-20px;"><h2>Sales Invoices</h2></div>
+                                    <div class="col-sm-4" style="margin-top:-20px;"><h2>{{trans("sentence.sales_reports")}}</h2></div>
 
                                     <div class="col-sm-4 text-right">
                                         <div class="form-group">
@@ -87,7 +87,7 @@
             <div class="widget-body-toolbar st">
 
                 <div class="row">
-                <div class="col-sm-8" style="margin-top:-20px;"><h2>Satış Rapoları Tablosu</h2></div>
+                <div class="col-sm-8" style="margin-top:-20px;"><h2>SATIŞ RAPORLARI TABLOSU</h2></div>
                     <div class="col-sm-4">
                         <div class="btn-group btn-group-justified nav nav-tabs">
                             <button style="width:100px!important;" data-toggle="tab" href="#invoice_table" class="btn btn-default">FATURA</button>
