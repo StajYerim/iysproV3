@@ -155,83 +155,146 @@ class HomeController extends Controller
 
 
         $cash_flow = array();
-     for($i=0;$i<16;$i++) {
-        $weekOfYear = Carbon::now()->addWeek($i)->weekOfYear;
+         for($i=0;$i<16;$i++)
+         {
+            $weekOfYear = Carbon::now()->addWeek($i)->weekOfYear;
 
-        //PURCHASE ORDERS
-          $porderes = PurchaseOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
-         $porderes_total = 0;
+            //PURCHASE ORDERS
+              $porderes = PurchaseOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
+             $porderes_total = 0;
 
-         foreach($porderes as $pordered){
-             $porderes_total += $pordered->safe_remaining;
-         }
+             foreach($porderes as $pordered){
+                 $porderes_total += $pordered->safe_remaining;
+             }
 
-         $cheques = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
-         $cheques_total = 0;
-         foreach ($cheques as $cheq) {
-             if ($cheq->cheques_status == 0) {
-                 if($cheq->show_button == "verilen0")
+             $cheques = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
+             $cheques_total = 0;
+             foreach ($cheques as $cheq) {
+                 if ($cheq->cheques_status == 0) {
+                     if($cheq->show_button == "verilen0")
+                         $cheques_total += money_db_format($cheq->amount);
+                 }
+             }
+
+
+             //SALES ORDERS
+              $orderes = SalesOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
+              $orderes_total = 0;
+
+              foreach($orderes as $ordered){
+                  $orderes_total += $ordered->safe_remaining;
+              }
+
+             //EXPENSES
+             $expenses = Expenses::where("account_id",aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
+             $expenses_total = 0;
+
+             foreach($expenses as $expense){
+                if($expense->pay_status == 0)
+                 $expenses_total += money_db_format($expense->amount);
+             }
+
+
+              //COLLECT CHEQ
+             $cheques_collect = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
+             $cheques_total_collect = 0;
+             foreach ($cheques_collect as $cheq) {
+                 if ($cheq->collect_statu == 0) {
+                     $cheq->collect_statu;
                      $cheques_total += money_db_format($cheq->amount);
+                 }
              }
+
+
+
+             $between =  Carbon::now()->addWeek($i-1)->format("d.m.Y")."<br>".Carbon::now()->addWeek($i)->format("d.m.Y");
+
+             array_push($cash_flow,array("porder_total"=>$porderes_total,"week_id"=>$weekOfYear,"order_total"=>$orderes_total,"between"=>$between,"cheq_total"=>$cheques_total_collect,"expense_payment"=>$expenses_total,"cheq_payment"=>$cheques_total,"bank_total"=>$bank_total));
+
          }
 
+        $unplanning_collect_color = '#3149A4';
+        if($unplanning_collect === 0){
+            $unplanning_collect = 0;
+            $unplanning_collect_color = '#E9E9E9';
 
-         //SALES ORDERS
-          $orderes = SalesOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
-          $orderes_total = 0;
+        }
 
-          foreach($orderes as $ordered){
-              $orderes_total += $ordered->safe_remaining;
-          }
+        $expiry_remaining_color = '#B71A11';
+        if($expiry_remaining === 0){
+            $expiry_remaining = 0;
+            $expiry_remaining_color = '#E9E9E9';
 
-         //EXPENSES
-         $expenses = Expenses::where("account_id",aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
-         $expenses_total = 0;
+        }
 
-         foreach($expenses as $expense){
-            if($expense->pay_status == 0)
-             $expenses_total += money_db_format($expense->amount);
-         }
+        $total_collect_color =   '[
+            "#3149a4",
+            "#b5130a",
+        ]';
+
+        if($total_collect == 0){
+            $total_collect = 0;
+            $total_collect_color = '["#E9E9E9"]';
+        }
+
+        $purchase_expiry_remaining_color = '#B71A11';
+        if($purchase_expiry_remaining == 0){
+            $purchase_expiry_remaining = 0;
+            $purchase_expiry_remaining_color = '#E9E9E9';
+
+        }
+
+        $unplanning_remaining_color = '#3149A4';
+        if($unplanning_remaining == 0){
+            $unplanning_remaining = 0;
+            $unplanning_remaining_color = '#E9E9E9';
+
+        }
+
+        $total_payment_color =   '[
+            "#3149a4",
+            "#b5130a",
+        ]';
+
+        if($total_payment == 0){
+            $total_payment = 0;
+            $total_payment_color = '["#E9E9E9"]';
+        }
 
 
-          //COLLECT CHEQ
-         $cheques_collect = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
-         $cheques_total_collect = 0;
-         foreach ($cheques_collect as $cheq) {
-             if ($cheq->collect_statu == 0) {
-                 $cheq->collect_statu;
-                 $cheques_total += money_db_format($cheq->amount);
-             }
-         }
 
 
-
-         $between =  Carbon::now()->addWeek($i-1)->format("d.m.Y")."<br>".Carbon::now()->addWeek($i)->format("d.m.Y");
-
-         array_push($cash_flow,array("porder_total"=>$porderes_total,"week_id"=>$weekOfYear,"order_total"=>$orderes_total,"between"=>$between,"cheq_total"=>$cheques_total_collect,"expense_payment"=>$expenses_total,"cheq_payment"=>$cheques_total,"bank_total"=>$bank_total));
-
-     }
-
+        $unplanning_collect = ($unplanning_collect);
+        $expiry_remaining = ($expiry_remaining);
+        $purchase_expiry_remaining = ($purchase_expiry_remaining);
+        $unplanning_remaining = ($unplanning_remaining);
 
         return view('dashboard',
-            compact('bank_accounts',"cash_flow",
+            compact('bank_accounts',
+                'cash_flow',
                 'sales_orders',
                 'purchase_orders',
                 'bank_account_items',
                 "overdue_collect",
                 "unplanning_collect",
+                "unplanning_collect_color",
                 "expiry_total_collect",
                 "total_collect",
+                "total_collect_color",
                 "export_collect",
                 "expiry_remaining",
+                "expiry_remaining_color",
                 "purchase_orders",
                 "purchase_expiry_remaining",
+                "purchase_expiry_remaining_color",
                 "purchase_export_collect",
                 "total_payment",
+                "total_payment_color",
                 "purchase_expiry_total_collect",
                 "overdue_payment",
                 "unplanning_collect",
                 "unplanning_remaining",
+                "unplanning_remaining_color",
                 "last_week",
                 "carbon"
             )
