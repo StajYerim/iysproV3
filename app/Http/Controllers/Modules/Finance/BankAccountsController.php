@@ -18,11 +18,13 @@ use Illuminate\Support\Facades\Session;
 
 class BankAccountsController extends Controller
 {
+    //Bank account list
     public function index()
     {
         return view("modules.finance.accounts.index");
     }
 
+    //Bank account datatable index list
     public function index_list()
     {
 
@@ -41,6 +43,7 @@ class BankAccountsController extends Controller
             ->make(true);
     }
 
+    // Bank account $type = new,update,$form_type = bank or cash id
     public function form($aid, $id, $type, $form_type)
     {
         $account = $form_type != "new" ? BankAccounts::find($id) : "";
@@ -48,6 +51,7 @@ class BankAccountsController extends Controller
         return view("modules.finance.accounts.form", compact("form_type", "type", "account", "id", "currency"));
     }
 
+    //Bank account save
     public function store($aid, $id, Request $request)
     {
 
@@ -81,6 +85,7 @@ class BankAccountsController extends Controller
 
     }
 
+    //Bank account show
     public function show($aid, $id)
     {
         $account = BankAccounts::find($id);
@@ -88,6 +93,7 @@ class BankAccountsController extends Controller
         return view("modules.finance.accounts.show", compact("account", "accounts"));
     }
 
+    //Bank account item receipt
     public function receipt($aid, $id)
     {
         $receipt = BankItems::find($id);
@@ -95,6 +101,7 @@ class BankAccountsController extends Controller
         return view("modules.finance.accounts.receipt", compact("receipt"));
     }
 
+    //Bank account items
     public function items($aid, $id)
     {
         $account = BankAccounts::find($id);
@@ -126,7 +133,7 @@ class BankAccountsController extends Controller
         return $results;
     }
 
-    //Banka/Kasa hesapları arasında para giriş-çıkış işleminin yapılması
+    //Bank account money transfer
     public function transaction($aid, $id, Request $request)
     {
         $account = BankAccounts::find($id);
@@ -178,7 +185,7 @@ class BankAccountsController extends Controller
 
     }
 
-    //Sipariş alanından alınan nakit tahsilat
+    //SalesOrder collect cash tranfer
     public function global_transaction($aid, Request $request)
     {
 
@@ -215,7 +222,7 @@ class BankAccountsController extends Controller
 
     }
 
-    //Alış siparişinin nakit ile ödemesinin yapılması
+    //Purchase Order payment transfer cash
     public function transaction_payment($aid, Request $request)
     {
 
