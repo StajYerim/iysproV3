@@ -71,7 +71,7 @@ class HomeController extends Controller
                     $cheques["gelecek"] += money_db_format($cheq->amount);
             }
         }
-        $total_collect =  $cheques["gecikmis"]+$cheques["gecikmis"]+$sales["gecikmis"]+$sales["gelecek"];
+        $total_collect =  $cheques["gecikmis"]+$cheques["gelecek"]+$sales["gecikmis"]+$sales["gelecek"];
 
         //Total Collect
 
