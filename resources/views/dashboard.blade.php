@@ -719,7 +719,7 @@
 
                     ],
                     colors: [
-                        @if($total_payment != 0)
+                        @if($purchase["gecikmis"]+$cheques_payment["gecikmis"]+$expenses["gecikmis"] != 0)
                                 @if($purchase["gecikmis"] !=0)
                             "#a90329",
                         @endif
@@ -786,7 +786,7 @@
 
                     ],
                     colors: [
-                        @if($total_payment != 0)
+                        @if($purchase["gelecek"]+$cheques_payment["gelecek"]+$expenses["gelecek"] != 0)
                                 @if($purchase["gelecek"] !=0)
                             "#886650",
                         @endif
