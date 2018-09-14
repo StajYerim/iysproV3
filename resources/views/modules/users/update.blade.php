@@ -136,24 +136,23 @@
           fullLoading("Loading..");
           axios.post("{{ route( "settings.users.profile.save", aid() ) }}", this.profile_form) .then(function (response) {
             $('body').loadingModal('destroy');
-            notification("Success",response.data.message,"success");
+            notification(response.data.title,response.data.message,response.data.type);
           });
         },
         password_form_send: function() {
-          if(this.password_form.new_password === this.password_form.new_password_confirmation && !this.is_empty(this.password_form.new_password) && !this.is_empty(this.password_form.new_password_confirmation)) {
-            fullLoading("Loading..");
-            axios.post("{{ route( "settings.users.profile.password.save", aid() ) }}", this.password_form) .then(function (response) {
-              $('body').loadingModal('destroy');
-              if(response.data.status === 200) {
-                notification("Success",response.data.message,"success");                
-              }
-              else if(response.data.status === 403) {
-                notification("Warning",response.data.message,"warning");                
-              }
-            });
-          } else {
-            notification("Warning","Passwords does not match!","warning");
-          }
+          fullLoading("Loading..");
+          axios.post("{{ route( "settings.users.profile.password.save", aid() ) }}", this.password_form)
+              .then(function (response) {
+                  $('body').loadingModal('destroy');
+                  notification(response.data.title,response.data.message,response.data.type);
+              })
+              .catch(function(error){
+                  $('body').loadingModal('destroy');
+
+                  Object.keys(error.response.data.errors).forEach((key) => {
+                      notification(error.response.data.title,error.response.data.errors[key][0],error.response.data.type);
+                  })
+              });
         },
         is_empty: function(str) {
           return (!str || 0 === str.length);

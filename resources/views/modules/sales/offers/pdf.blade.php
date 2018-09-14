@@ -118,12 +118,12 @@ $host=$_SERVER["HTTP_HOST"];
                                         @endif
                                             @endif
                                     </td>
-                                    <td style="margin-left:15px;text-align:right;width:35%">
+                                    <td style="margin-left:15px;text-align:right;width:50%">
 
                                         <b style="line-height: 12px;">{!! account()["name"]!!}</b><br>
                                         <span style="line-height:12px;font-size:10px;">
                                             {!! str_replace("\n","<br>",account()["address"]) !!} {!! account()["town"] !!}/{!! account()["city"] !!}
-                                            <br>{{ trans('sentence.t_office_no') }}{{account()["tax_office"]}} / {!! account()["tax_id"] !!}
+                                            <br>{{ trans('sentence.t_office_no') }} {{account()["tax_office"]}} / {!! account()["tax_id"] !!}
                                             <br>
                                             {{trans("word.phone")}} {!! account()["phone"] !!}<br>
                                         </span>

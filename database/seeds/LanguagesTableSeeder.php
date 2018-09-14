@@ -44,6 +44,20 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'number', 'key'=> 'trillion', 'text'=> ['en'=> 'TRILLION', 'tr'=> 'TRILLION']]);
         LanguageLine::create(['group'=> 'number', 'key'=> 'zillion', 'text'=> ['en'=> 'ZILLION', 'tr'=> 'KATRİLYON']]);
 
+        // month area
+        LanguageLine::create(['group'=> 'month', 'key'=> 'january', 'text'=> ['en'=> 'JANUARY', 'tr'=> 'OCAK']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'february', 'text'=> ['en'=> 'FEBRUARY', 'tr'=> 'ŞUBAT']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'march', 'text'=> ['en'=> 'MARCH', 'tr'=> 'MART']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'april', 'text'=> ['en'=> 'APRIL', 'tr'=> 'NİSAN']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'may', 'text'=> ['en'=> 'MAY', 'tr'=> 'MAYIS']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'june', 'text'=> ['en'=> 'JUNE', 'tr'=> 'HAZİRAN']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'july', 'text'=> ['en'=> 'JULY', 'tr'=> 'TEMMUZ']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'august', 'text'=> ['en'=> 'AUGUST', 'tr'=> 'AĞUSTOS']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'september', 'text'=> ['en'=> 'SEPTEMBER', 'tr'=> 'EYLÜL']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'october', 'text'=> ['en'=> 'OCTOBER', 'tr'=> 'EKİM']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'november', 'text'=> ['en'=> 'NOVEMBER', 'tr'=> 'KASIM']]);
+        LanguageLine::create(['group'=> 'month', 'key'=> 'december', 'text'=> ['en'=> 'DECEMBER', 'tr'=> 'ARALIK']]);
+
         // word area
         LanguageLine::create(['group'=> 'word', 'key'=> 'english', 'text'=> ['en'=> 'ENGLISH', 'tr'=> 'İNGİLİZCE']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'turkish', 'text'=> ['en'=> 'TURKISH', 'tr'=> 'TÜRKÇE']]);
@@ -186,6 +200,8 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'word', 'key'=> 'production', 'text'=> ['en'=> 'PRODUCTION', 'tr'=> 'ÜRETİM']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'success', 'text'=> ['en'=> 'SUCCESS', 'tr'=> 'BAŞARILI']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'error', 'text'=> ['en'=> 'ERROR', 'tr'=> 'HATA']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'month', 'text'=> ['en'=> 'MONTH', 'tr'=> 'AY']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'receipt', 'text'=> ['en'=> 'RECEIPT', 'tr'=> 'FİŞ']]);
 
 
         // sentence area
@@ -437,7 +453,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'remaining_amount', 'text'=> ['en'=> 'REMAINING AMOUNT', 'tr'=> 'KALAN TUTAR']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'account_balanca', 'text'=> ['en'=> 'ACCOUNT BALANCE', 'tr'=> 'HESAP BAKİYESİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'proforma_invoice', 'text'=> ['en'=> 'PROFORMA INVOICE', 'tr'=> 'PROFORM FATURA']]);
-        LanguageLine::create(['group'=> 'sentence', 'key'=> 'excluding_vat', 'text'=> ['en'=> 'EXCLUDING VAT', 'tr'=> 'KDV HARİÇ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'excluding_vat', 'text'=> ['en'=> 'NO VAT', 'tr'=> 'KDVSİZ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'general_amount', 'text'=> ['en'=> 'GENERAL AMOUNT', 'tr'=> 'GENEL TUTAR']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'orders_created_from_offer', 'text'=> ['en'=> 'ORDERS CREATED FROM OFFER', 'tr'=> 'TEKLİFTEN OLUŞTURULAN SİPARİŞLER']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'cancel_search', 'text'=> ['en'=> 'CANCEL SEARCH', 'tr'=> 'ARAMAYI İPTAL ET']]);
@@ -634,6 +650,15 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'estimated_sales_price', 'text'=> ['en'=> 'ESTIMATED SALES PRICE','tr'=> 'TAHMİNİ SATIŞ DEĞERİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'stock_value', 'text'=> ['en'=> 'STOCK VALUE','tr'=> 'STOK DEĞERİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_purchase_potential_gain', 'text'=> ['en'=> 'Estimated Sales Value, Estimated Buy Value, and Potential Gain are not included in the calculation of non-STO products. Calculations are based on the Purchase Price and the Sales Price specified on the product pages.','tr'=> 'Tahmini Satış Değeri, Tahmini Alış Değeri ve Potansiyel Kazanç hesaplamalarına stokta olmayan ürünler dahil edilmez. Hesaplamalar ürün sayfalarında belirtilen Alış Fiyatı ve Satış Fiyatı üzerinden yapılır.']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'all_your_informations_saved', 'text'=> ['en'=> 'ALL YOUR INFORMATIONS SAVED','tr'=> 'TÜM BİLGİLERİNİZ KAYDEDİLDİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'please_check_form_again', 'text'=> ['en'=> 'PLEASE, CHECK FORM AGAIN','tr'=> 'LÜTFEN FORMU TEKRARDAN KONTROL EDİNİZ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_invoice', 'text'=> ['en'=> 'SALES INVOICE','tr'=> 'SATIŞ FATURASI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'calculated_vat', 'text'=> ['en'=> 'CALCULATED VAT','tr'=> 'HESAPLANAN KDV']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'reduced_vat', 'text'=> ['en'=> 'REDUCED VAT','tr'=> 'İNDİRİLECEK KDV']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'clear_vat', 'text'=> ['en'=> 'CLEAR VAT','tr'=> 'NET KDV']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'vat_reports_per_calendar_month', 'text'=> ['en'=> 'VAT REPORTS PER CALENDAR MONTH','tr'=> 'TAKVİM AYI BAŞINA KDV RAPORLARI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_and_expenses_vat_table', 'text'=> ['en'=> 'SALES AND EXPENSES VAT TABLE','tr'=> 'SATIŞLAR VE GİDERLER KDV TABLOSU']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'any_sales_invoice_was_not_created', 'text'=> ['en'=> 'ANY SALES INVOICE WAS NOT CREATED','tr'=> 'HERHANGİ BİR SATIŞ FATURASI OLUŞTURULMAMIŞTIR']]);
 
 
     }

@@ -11,7 +11,7 @@
 
                                 <fieldset>
                                     <legend>
-                                        N11 {{ trans("sentence.api_informations") }}
+                                       N11 {{ trans("sentence.api_informations") }}
                                     </legend>
 
                                 </fieldset>
@@ -129,7 +129,7 @@
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6 ">
                                             <label class="control-label">
-                                                {{trans("sentence.user_name")}}
+                                                {{trans("word.password")}}
                                             </label>
                                             <input type="password" class="form-control"  v-model="parasut_form.password">
 
@@ -211,17 +211,17 @@
                         }
                     }),
                     methods:{
-                        n11_form_send:function(){
-
-
-axios.post("{{route("settings.api.save",aid())}}",this.n11_form) .then(function (response) {
-        notification("Success",response.data.message,"success");
-})
+                        n11_form_send:function()
+                        {
+                            axios.post("{{route("settings.api.save",aid())}}",this.n11_form)
+                                .then(function (response) {
+                                    notification(response.data.title,response.data.message,response.data.type);
+                                })
                         },
                         parasut_form_send:function(){
 
                             axios.post("{{route("settings.api.save",aid())}}",this.parasut_form) .then(function (response) {
-                                notification("Success",response.data.message,"success");
+                                notification(response.data.title,response.data.message,response.data.type);
                             })
                         }
                     }
