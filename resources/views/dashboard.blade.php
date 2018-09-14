@@ -596,7 +596,7 @@
                 Morris.Donut({
                     element: 'total_payment',
                     data: [@if($total_payment != 0)
-                        @if($purchase["gecikmis"] !=0)
+                             @if($purchase["gecikmis"] !=0)
                             {
                                 value: '{{$purchase["gecikmis"]}}',
                                 label: 'GECİKMİŞ ÖDEME'
@@ -690,7 +690,7 @@
                 };
                 Morris.Donut({
                     element: 'overdue_payment',
-                    data: [@if($total_payment != 0)
+                    data: [@if($purchase["gecikmis"]+$cheques_payment["gecikmis"]+$expenses["gecikmis"] != 0)
                         @if($purchase["gecikmis"] !=0)
                     {
                         value: '{{$purchase["gecikmis"]}}',
@@ -757,7 +757,7 @@
                 };
                 Morris.Donut({
                     element: 'unplanning_payment',
-                    data: [@if($total_payment != 0)
+                    data: [@if($purchase["gelecek"]+$cheques_payment["gelecek"]+$expenses["gelecek"] != 0)
                         @if($purchase["gelecek"] !=0)
                     {
                         value: '{{$purchase["gelecek"]}}',
