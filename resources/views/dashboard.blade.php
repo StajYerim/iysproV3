@@ -453,7 +453,7 @@
                     formatter: function (x, data) {
                         if (data.label != "TAHSİLAT YOK") {
                             return parseFloat(x).toLocaleString('tr-TR', {
-                                minimumFractionDigits: 0,
+                                minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
                             }) + " TL";
                         } else {
@@ -512,7 +512,7 @@
                     formatter: function (x, data) {
                         if (data.label != "TAHSİLAT YOK") {
                             return parseFloat(x).toLocaleString('tr-TR', {
-                                minimumFractionDigits: 0,
+                                minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
                             }) + " TL";
                         } else {
@@ -573,7 +573,7 @@
                     formatter: function (x, data) {
                         if (data.label != "TAHSİLAT YOK") {
                             return parseFloat(x).toLocaleString('tr-TR', {
-                                minimumFractionDigits: 0,
+                                minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
                             }) + " TL";
                         } else {
@@ -669,7 +669,7 @@
                     formatter: function (x, data) {
                         if (data.label != "ÖDEME YOK") {
                             return parseFloat(x).toLocaleString('tr-TR', {
-                                minimumFractionDigits: 0,
+                                minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
                             }) + " TL";
                         } else {
@@ -729,6 +729,7 @@
                                 @if($expenses["gecikmis"] !=0)
                             "#a90329",
                         @endif
+
                                 @else
                             "#d8d6d6"
                         @endif
@@ -736,7 +737,7 @@
                     formatter: function (x, data) {
                         if (data.label != "ÖDEME YOK") {
                             return parseFloat(x).toLocaleString('tr-TR', {
-                                minimumFractionDigits: 0,
+                                minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
                             }) + " TL";
                         } else {
@@ -803,7 +804,7 @@
                     formatter: function (x, data) {
                         if (data.label != "ÖDEME YOK") {
                             return parseFloat(x).toLocaleString('tr-TR', {
-                                minimumFractionDigits: 0,
+                                minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
                             }) + " TL";
                         } else {
