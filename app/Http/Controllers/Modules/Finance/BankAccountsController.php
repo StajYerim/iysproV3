@@ -559,4 +559,29 @@ class BankAccountsController extends Controller
         return ["message" => "success", 'type' => "account.receipt"];
     }
 
+    public function destroy($aid, $id)
+    {
+
+       $bank = BankAccounts::find($id);
+       $account = BankAccounts::where("account_id",aid())->count();
+       $count = $bank->items()->count();
+        $desc = null;
+        $sonuc = "success";
+
+        if($count >0){
+            $sonuc = "error";
+            $desc = "Silmek istediğiniz hesabın, bir veya birden fazla alanda kullanımı mevcut<br>Silme işlemi gerçekleştirilemedi.<br>Hesabı silebilmeniz için öncelikle giriş ve çıkış fişlerini silmeniz gerekmektedir.";
+        }elseif($account <= 1 ){
+            $sonuc = "error";
+            $desc = "Hesabınızda en az bir adet Hesap bulunmalı. Bu hesap haricinde başka bir hesap olmadığı için bu hesabı silebilmeniz mümkün değildir.";
+        }else{
+            $bank->destroy();
+
+        }
+
+
+        return ["message" => $sonuc, 'type' => "product","desc"=>$desc];
+
+    }
+
 }
