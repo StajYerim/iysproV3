@@ -33,270 +33,127 @@ class HomeController extends Controller
         $purchase_orders = PurchaseOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->addDays(7))->paginate(6);
         $bank_account_items = BankItems::has("bank_account")->orderBy("date", "desc")->whereRaw('company_id != null')->paginate(6);
 
-        //Toplam Tahsilatlar
-        $orders = SalesOrders::where("account_id", aid())->get();
-        $remaining = 0;
-        foreach ($orders as $order) {
-            $remaining += money_db_format($order->remaining);
+
+        //Total Collect
+        /*Sales Orders Gecikmiş*/
+        $sales = [];
+        $sales_gecikmis = SalesOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->subDay(1))->get();
+        $sales["gecikmis"] = 0;
+
+        foreach ($sales_gecikmis as $gec) {
+            if ($gec->safe_remaining != 0)
+                $sales["gecikmis"] += $gec->safe_remaining;
         }
 
-        $cheques = Cheques::where("account_id", aid())->get();
-        $cheques_total = 0;
-        foreach ($cheques as $cheq) {
+        $sales_gelecek = SalesOrders::where("account_id", aid())->whereDate("due_date", ">", Carbon::now()->subday(1))->get();
+        $sales["gelecek"] = 0;
+        foreach ($sales_gelecek as $gec) {
+            if ($gec->safe_remaining != 0)
+                $sales["gelecek"] += $gec->safe_remaining;
+        }
+
+        /*Çek Tahsilatı */
+        $cheques = [];
+        $cheques_gecikmis = Cheques::where("account_id", aid())->whereDate("payment_date", "<", Carbon::now()->subDay(1))->get();
+        $cheques["gecikmis"] = 0;
+        foreach ($cheques_gecikmis as $cheq) {
             if ($cheq->collect_statu == 0) {
-                $cheq->collect_statu;
-                $cheques_total += money_db_format($cheq->amount);
+                if (money_db_format($cheq->amount) != 0)
+                    $cheques["gecikmis"] += money_db_format($cheq->amount);
             }
         }
 
-
-
-        $total_collect = get_money($remaining + $cheques_total);
-
-        //Vadesi geçen tahsilatlar
-        $order_expiry_date = SalesOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->subDay(1))->get();
-        $expiry_remaining = 0;
-
-        foreach ($order_expiry_date as $order) {
-            $expiry_remaining += money_db_format($order->remaining);
-        }
-
-        $unplanning_order_date = SalesOrders::where("account_id", aid())->whereDate("due_date", ">", Carbon::now()->subDay(1))->get();
-        $unplanning_collect = 0;
-
-        foreach ($unplanning_order_date as $un_pay) {
-            $unplanning_collect += money_db_format($un_pay->remaining);
-        }
-
-
-
-
-
-        $cheques_expiry = Cheques::where("account_id", aid())->whereDate("payment_date","<",Carbon::now()->subDay(1))->get();
-        $cheques_total_expiry = 0;
-        foreach ($cheques_expiry as $cheq) {
+        $cheques_gelecek = Cheques::where("account_id", aid())->whereDate("payment_date", ">", Carbon::now()->subDay(1))->get();
+        $cheques["gelecek"] = 0;
+        foreach ($cheques_gelecek as $cheq) {
             if ($cheq->collect_statu == 0) {
-                $cheques_total_expiry += money_db_format($cheq->amount);
+                if (money_db_format($cheq->amount) != 0)
+                    $cheques["gelecek"] += money_db_format($cheq->amount);
+            }
+        }
+        $total_collect =  $cheques["gecikmis"]+$cheques["gecikmis"]+$sales["gecikmis"]+$sales["gelecek"];
+
+        //Total Collect
+
+        //Total Payment
+
+        /*Gecikmiş Ödeme*/
+        $purchase = [];
+        $purchase_gecikmis = PurchaseOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->subDay(1))->get();
+        $purchase_gelecek = PurchaseOrders::where("account_id", aid())->whereDate("due_date", ">", Carbon::now()->subDay(1))->get();
+        $purchase["gecikmis"] = 0;
+
+        foreach ($purchase_gecikmis as $gec) {
+            if ($gec->safe_remaining != 0)
+                $purchase["gecikmis"] += $gec->safe_remaining;
+        }
+
+        $purchase["gelecek"] = 0;
+
+        foreach ($purchase_gelecek as $gec) {
+            if ($gec->safe_remaining != 0)
+                $purchase["gelecek"] += $gec->safe_remaining;
+        }
+
+        /*Gecikmiş Çek*/
+        $cheques_payment = [];
+        $cheques_payment_gecikmis = Cheques::where("account_id", aid())->whereDate("payment_date", "<", Carbon::now()->subDay(1))->get();
+        $cheques_payment_gelecek = Cheques::where("account_id", aid())->whereDate("payment_date", ">", Carbon::now()->subDay(1))->get();
+        $cheques_payment["gecikmis"] = 0;
+        foreach ($cheques_payment_gecikmis as $cheq) {
+
+            if ($cheq->cheque_status == 0) {
+                if (money_db_format($cheq->amount) != 0)
+                    $cheques_payment["gecikmis"] += money_db_format($cheq->amount);
             }
         }
 
-        $expiry_total_collect = get_money($expiry_remaining+$cheques_total_expiry);
+        $cheques_payment["gelecek"] = 0;
+        foreach ($cheques_payment_gelecek as $cheq) {
 
-        $export_collect= [];
-        $export_collect["sales_orders"] = $orders;
-        $export_collect["cheques"] = $cheques;
+            if ($cheq->cheque_status == 0) {
+                if (money_db_format($cheq->amount) != 0)
+                    $cheques_payment["gelecek"] += money_db_format($cheq->amount);
+            }
+        }
+        /*Çek ödeme*/
 
-        /************* PAYMENTS **********************/
-        //Toplam Ödemeler
-        $purchase_orders = PurchaseOrders::where("account_id", aid())->get();
-        $purchase_remaining = 0;
-        foreach ($purchase_orders as $purchase_order) {
-            $purchase_remaining += money_db_format($purchase_order->remaining);
+        /*Gider ödemesi*/
+        $expenses = [];
+        $expenses_gecikmis = Expenses::where("account_id", aid())->whereDate("payment_date", "<", Carbon::now()->subDay(1))->get();
+        $expenses["gecikmis"] = 0;
+
+        foreach ($expenses_gecikmis as $gec) {
+            if($gec->pay_status == 0){
+            if (money_db_format($gec->amount) != 0){
+                $expenses["gecikmis"] += money_db_format($gec->amount);
+            }
+            }
         }
 
-
-        $purchase_cheques = Cheques::where("account_id", aid())->get();
-        $purchase_cheques_total = 0;
-        foreach ($purchase_cheques as $purchase_cheq) {
-            if ($purchase_cheq->cheques_status == 0) {
-                if($purchase_cheq->show_button == "verilen0")
-                    $purchase_cheques_total += money_db_format($purchase_cheq->amount);
+        $expenses_gelecek = Expenses::where("account_id", aid())->whereDate("payment_date", ">", Carbon::now()->subday(1))->get();
+        $expenses["gelecek"] = 0;
+        foreach ($expenses_gelecek as $gec) {
+            if($gec->pay_status == 0){
+                if (money_db_format($gec->amount) != 0){
+                    $expenses["gelecek"] += money_db_format($gec->amount);
+                }
             }
         }
 
 
-        $total_payment = get_money($purchase_remaining+$purchase_cheques_total);
-
-        //Vadesi geçen Ödemeler
-        $purchase_order_expiry_date = PurchaseOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->subDay(1))->get();
-        $purchase_expiry_remaining = 0;
+        $total_payment = $purchase["gecikmis"]+$purchase["gelecek"]+$cheques_payment["gecikmis"]+$cheques_payment["gelecek"]+$expenses["gecikmis"]+$expenses["gelecek"];
 
 
 
-        foreach ($purchase_order_expiry_date as $purchase_order_expiry) {
-            $purchase_expiry_remaining += money_db_format($purchase_order_expiry->remaining);
-        }
-
-        $unplanning_payments = PurchaseOrders::where("account_id",aid())->whereDate("due_date",">",Carbon::now()->subDay(1))->get();
-        $unplanning_remaining = 0;
-        foreach($unplanning_payments as $un_pay){
-            $unplanning_remaining += money_db_format($un_pay->remaining);
-        }
-
-        $purchase_cheques_expiry = Cheques::where("account_id", aid())->whereDate("payment_date","<",Carbon::now()->subDay(1))->get();
-        $purchase_cheques_total_expiry = 0;
-        foreach ($purchase_cheques_expiry as $purchase_cheq) {
-            if ($purchase_cheq->cheques_status == 0) {
-                if ($purchase_cheq->show_button == "verilen0")
-                    $purchase_cheques_total_expiry += money_db_format($purchase_cheq->amount);
-            }
-        }
-
-
-        $purchase_expiry_total_collect = get_money($purchase_expiry_remaining+$purchase_cheques_total_expiry);
-
-        $purchase_export_collect= [];
-        $purchase_export_collect["purchases_orders"] = $purchase_orders;
-        $purchase_export_collect["cheques"] = $purchase_cheques;
-
-
-        //Cash - Flow
-
-
-        $carbon = Carbon::now();
-
-        $cash_bank = BankAccounts::where("account_id",aid())->get();
-        $bank_total = 0;
-        foreach($cash_bank as $cash){
-
-            $bank_total += (double)money_db_format($cash->balance);
-        }
-
-
-
-        $cash_flow = array();
-         for($i=0;$i<16;$i++)
-         {
-            $weekOfYear = Carbon::now()->addWeek($i)->weekOfYear;
-
-            //PURCHASE ORDERS
-              $porderes = PurchaseOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
-             $porderes_total = 0;
-
-             foreach($porderes as $pordered){
-                 $porderes_total += $pordered->safe_remaining;
-             }
-
-             $cheques = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
-             $cheques_total = 0;
-             foreach ($cheques as $cheq) {
-                 if ($cheq->cheques_status == 0) {
-                     if($cheq->show_button == "verilen0")
-                         $cheques_total += money_db_format($cheq->amount);
-                 }
-             }
-
-
-             //SALES ORDERS
-              $orderes = SalesOrders::where("account_id",aid())->whereBetween(DB::raw("DATE(due_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
-              $orderes_total = 0;
-
-              foreach($orderes as $ordered){
-                  $orderes_total += $ordered->safe_remaining;
-              }
-
-             //EXPENSES
-             $expenses = Expenses::where("account_id",aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
-             $expenses_total = 0;
-
-             foreach($expenses as $expense){
-                if($expense->pay_status == 0)
-                 $expenses_total += money_db_format($expense->amount);
-             }
-
-
-              //COLLECT CHEQ
-             $cheques_collect = Cheques::where("account_id", aid())->whereBetween(DB::raw("DATE(payment_date)"), [Carbon::now()->addWeek($i)->format("Y-m-d"),Carbon::now()->addWeek($i+1)->format("Y-m-d")])->get();
-             $cheques_total_collect = 0;
-             foreach ($cheques_collect as $cheq) {
-                 if ($cheq->collect_statu == 0) {
-                     $cheq->collect_statu;
-                     $cheques_total += money_db_format($cheq->amount);
-                 }
-             }
-
-
-
-             $between =  Carbon::now()->addWeek($i-1)->format("d.m.Y")."<br>".Carbon::now()->addWeek($i)->format("d.m.Y");
-
-             array_push($cash_flow,array("porder_total"=>$porderes_total,"week_id"=>$weekOfYear,"order_total"=>$orderes_total,"between"=>$between,"cheq_total"=>$cheques_total_collect,"expense_payment"=>$expenses_total,"cheq_payment"=>$cheques_total,"bank_total"=>$bank_total));
-
-         }
-
-        $unplanning_collect_color = '#3149A4';
-        if($unplanning_collect === 0){
-            $unplanning_collect = 0;
-            $unplanning_collect_color = '#E9E9E9';
-
-        }
-
-        $expiry_remaining_color = '#B71A11';
-        if($expiry_remaining === 0){
-            $expiry_remaining = 0;
-            $expiry_remaining_color = '#E9E9E9';
-
-        }
-
-        $total_collect_color =   '[
-            "#3149a4",
-            "#b5130a",
-        ]';
-
-        if($total_collect == 0){
-            $total_collect = 0;
-            $total_collect_color = '["#E9E9E9"]';
-        }
-
-        $purchase_expiry_remaining_color = '#B71A11';
-        if($purchase_expiry_remaining == 0){
-            $purchase_expiry_remaining = 0;
-            $purchase_expiry_remaining_color = '#E9E9E9';
-
-        }
-
-        $unplanning_remaining_color = '#3149A4';
-        if($unplanning_remaining == 0){
-            $unplanning_remaining = 0;
-            $unplanning_remaining_color = '#E9E9E9';
-
-        }
-
-        $total_payment_color =   '[
-            "#3149a4",
-            "#b5130a",
-        ]';
-
-        if($total_payment == 0){
-            $total_payment = 0;
-            $total_payment_color = '["#E9E9E9"]';
-        }
-
-
-
-
-        $unplanning_collect = ($unplanning_collect);
-        $expiry_remaining = ($expiry_remaining);
-        $purchase_expiry_remaining = ($purchase_expiry_remaining);
-        $unplanning_remaining = ($unplanning_remaining);
+        //Total Payment
 
         return view('dashboard',
             compact('bank_accounts',
-                'cash_flow',
-                'sales_orders',
+                'sales_orders', "sales", "cheques","total_collect","purchase","total_payment","cheques_payment","expenses",
                 'purchase_orders',
-                'bank_account_items',
-                "overdue_collect",
-                "unplanning_collect",
-                "unplanning_collect_color",
-                "expiry_total_collect",
-                "total_collect",
-                "total_collect_color",
-                "export_collect",
-                "expiry_remaining",
-                "expiry_remaining_color",
-                "purchase_orders",
-                "purchase_expiry_remaining",
-                "purchase_expiry_remaining_color",
-                "purchase_export_collect",
-                "total_payment",
-                "total_payment_color",
-                "purchase_expiry_total_collect",
-                "overdue_payment",
-                "unplanning_collect",
-                "unplanning_remaining",
-                "unplanning_remaining_color",
-                "last_week",
-                "carbon"
+                'bank_account_items'
+
             )
         );
     }

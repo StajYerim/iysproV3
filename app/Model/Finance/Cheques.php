@@ -13,6 +13,7 @@ class Cheques extends Model
     protected $guarded = [];
 
     protected $dates = ["payment_date", "date"];
+    protected $appends = ["collect_statu","cheque_status"];
 
     public function newQuery($excludeDeleted = true) {
         return parent::newQuery($excludeDeleted)
