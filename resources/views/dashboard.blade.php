@@ -7,14 +7,21 @@
         <div class="row">
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <!-- Widget ID (each widget will need unique ID)-->
-                <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
-                    <header>
-                        <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
-                        <h2>TAHSİLATLAR </h2>
+            <div class="jarviswidget jarviswidget-color-blue"  data-widget-colorbutton="false"
+                 data-widget-editbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false" id="wid-id-0">
 
-                    </header>
+            <header>
+                            <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                            <h2>TAHSİLATLAR</h2>
 
+                        </header>
                     <!-- widget div-->
                     <div>
                         <!-- widget content -->
@@ -107,14 +114,20 @@
 
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                    <div class="jarviswidget jarviswidget-color-blue"  data-widget-colorbutton="false"
+                         data-widget-editbutton="false"
+                         data-widget-togglebutton="false"
+                         data-widget-deletebutton="false"
+                         data-widget-fullscreenbutton="false"
+                         data-widget-custombutton="false"
+                         data-widget-collapsed="false"
+                         data-widget-sortable="false" id="wid-id-0">
 
-                    <header>
-                        <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
-                        <h2>ÖDEMELER</h2>
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                            <h2>ÖDEMELER</h2>
 
-                    </header>
-
+                        </header>
                     <div>
 
                         <div class="widget-body no-padding">
@@ -186,12 +199,21 @@
 
         <div class="row">
             <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="jarviswidget" id="wid-id-0">
+                <div class="jarviswidget jarviswidget-color-blueDark"
+                     data-widget-colorbutton="false"
+                     data-widget-editbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false"
+                >
 
                     <header>
-                        <div align="center">
-                            <b>KASA VE HESAPLAR</b>
-                        </div>
+
+                            <h2> KASA VE HESAPLAR </h2>
+
                     </header>
 
                     <div>
@@ -201,7 +223,7 @@
                                 <thead>
                                 <tr>
                                     <th>Firma</th>
-                                    <th>Tarih</th>
+                                    <th>Para Birimi</th>
                                     <th>Bakiye</th>
                                 </tr>
                                 </thead>
@@ -228,12 +250,19 @@
             </article>
 
             <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="jarviswidget" id="wid-id-0">
+                <div class="jarviswidget jarviswidget-color-blue"  data-widget-colorbutton="false"
+                     data-widget-editbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false" id="wid-id-0">
 
                     <header>
-                        <div align="center">
-                            <b>VADESİ GELEN TAHSİLATLAR</b>
-                        </div>
+
+                            <h2>VADESİ GELEN TAHSİLATLAR</h2>
+
                     </header>
 
                     <div>
@@ -270,14 +299,22 @@
                     </div>
                 </div>
             </article>
-
+        </div>
+            <div class="row">
             <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="jarviswidget" id="wid-id-0">
+                <div class="jarviswidget jarviswidget-color-blue"  data-widget-colorbutton="false"
+                     data-widget-editbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false" id="wid-id-0">
 
                     <header>
-                        <div align="center">
-                            <b>VADESİ GELEN ÖDEMELER</b>
-                        </div>
+
+                        <h2>VADESİ GELEN ÖDEMELER</h2>
+
                     </header>
 
                     <div>
@@ -317,12 +354,19 @@
             </article>
 
             <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="jarviswidget" id="wid-id-0">
+                <div class="jarviswidget jarviswidget-color-blue"  data-widget-colorbutton="false"
+                     data-widget-editbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false" id="wid-id-0">
 
                     <header>
-                        <div align="center">
-                            <b>ÖDEME GEÇMİŞİ</b>
-                        </div>
+
+                        <h2>ÖDEME GEÇMİŞİ</h2>
+
                     </header>
 
                     <div>
