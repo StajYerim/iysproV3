@@ -14,12 +14,12 @@
                     </div>
                     <div class="col-sm-6">
                         <table style="display:none" class="highchart table table-hover table-bordered" data-graph-container=".. .. .highchart-container3" data-graph-type="column">
-                            <caption>NAKİT AKIŞI</caption>
+                            <caption>{{ trans('sentence.cash_flow') }}</caption>
                             <thead>
                             <tr>
-                                <th>HAFTA</th>
-                                <th>TAHSİLATLAR</th>
-                                <th data-graph-type="area">ÖDEMELER</th>
+                                <th>{{ trans('word.week') }}</th>
+                                <th>{{ trans('word.collections') }}</th>
+                                <th data-graph-type="area">{{ trans('word.payments') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -31,8 +31,7 @@
                             </tr>
                             @endforeach
 
-                            </tbody>
-                        </table>
+                            </tbody>{{ trans('word.collections') }}</table>
                     </div>
                 </div>
             </article>
@@ -46,7 +45,7 @@
 
                     <header>
                         <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
-                        <h2>TAHSİLATLAR </h2>
+                        <h2>{{ trans('word.collections') }}</h2>
 
                     </header>
 
@@ -58,7 +57,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>TOPLAM</b>
+                                        <b>{{ trans('word.total') }}</b>
                                     </div>
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
@@ -72,7 +71,7 @@
                                     </div>
                                     <div class="text-center">
                                         <strong>
-                                            TOPLAM : {{ $total_collect }} <i class="fa fa-try"></i>
+                                            {{ trans('word.total') }} : {{ $total_collect }} <i class="fa fa-try"></i>
                                         </strong>
                                     </div>
                                 </div>
@@ -80,7 +79,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>GECİKMİŞ</b>
+                                        <b>{{ trans('word.delayed') }}</b>
                                     </div>
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
@@ -101,7 +100,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>GÜNÜ GELMEMİŞ</b>
+                                        <b>{{ trans('word.unplanning') }}</b>
                                     </div>
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
@@ -143,7 +142,7 @@
 
                     <header>
                         <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
-                        <h2>ÖDEMELER</h2>
+                        <h2>{{ trans('word.payments') }}</h2>
 
                     </header>
 
@@ -154,7 +153,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>TOPLAM</b>
+                                        <b>{{ trans('word.total') }}</b>
                                     </div>
 
                                     <div class="widget-body no-padding">
@@ -163,7 +162,7 @@
 
                                     </div>
                                     <div class="text-center">
-                                        <b>TOPLAM : {{ $total_payment }} <i class="fa fa-try"></i></b>
+                                        <b>{{ trans('word.total') }} : {{ $total_payment }} <i class="fa fa-try"></i></b>
                                     </div>
 
                                 </div>
@@ -171,7 +170,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>GECİKMİŞ</b>
+                                        <b>{{ trans('word.delayed') }}</b>
                                     </div>
                                     <div class="jarviswidget-editbox">
 
@@ -187,7 +186,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>GÜNÜ GELMEMİŞ</b>
+                                        <b>{{ trans('word.unplanning') }}</b>
                                     </div>
                                     <div class="jarviswidget-editbox">
 
@@ -218,7 +217,7 @@
 
                     <header>
                         <div align="center">
-                            <b>KASA VE HESAPLAR</b>
+                            <b>{{ trans('sentence.safe_and_accounts') }}</b>
                         </div>
                     </header>
 
@@ -228,9 +227,9 @@
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Firma</th>
-                                    <th>Tarih</th>
-                                    <th>Bakiye</th>
+                                    <th>{{ trans('word.company') }}</th>
+                                    <th>{{ trans('word.date') }}</th>
+                                    <th>{{ trans('word.balance') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -260,7 +259,7 @@
 
                     <header>
                         <div align="center">
-                            <b>VADESİ GELEN TAHSİLATLAR</b>
+                            <b>{{ trans('sentence.due_collections') }}</b>
                         </div>
                     </header>
 
@@ -269,9 +268,9 @@
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Firma</th>
-                                    <th>Tarih</th>
-                                    <th>Bakiye</th>
+                                    <th>{{ trans('word.company') }}</th>
+                                    <th>{{ trans('word.date') }}</th>
+                                    <th>{{ trans('word.balance') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -304,7 +303,7 @@
 
                     <header>
                         <div align="center">
-                            <b>VADESİ GELEN ÖDEMELER</b>
+                            <b>{{ trans('sentence.due_payments') }}</b>
                         </div>
                     </header>
 
@@ -314,9 +313,9 @@
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Firma</th>
-                                    <th>Tarih</th>
-                                    <th>Bakiye</th>
+                                    <th>{{ trans('word.company') }}</th>
+                                    <th>{{ trans('word.date') }}</th>
+                                    <th>{{ trans('word.balance') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -349,7 +348,7 @@
 
                     <header>
                         <div align="center">
-                            <b>ÖDEME GEÇMİŞİ</b>
+                            <b>{{ trans('sentence.payment_history') }}</b>
                         </div>
                     </header>
 
@@ -359,10 +358,10 @@
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Firma</th>
-                                    <th>Tarih</th>
-                                    <th>Bakiye</th>
-                                    <th>Durum</th>
+                                    <th>{{ trans('word.company') }}</th>
+                                    <th>{{ trans('word.date') }}</th>
+                                    <th>{{ trans('word.balance') }}</th>
+                                    <th>{{ trans('word.status') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -378,11 +377,11 @@
                                             <td>
                                                 @if($bank_account_item->action_type == 1)
                                                     <span style="color:green">
-                                                    GİRİŞ
+                                                    {{ trans('word.entry') }}
                                                 </span>
                                                 @else
                                                     <span style="color:red">
-                                                    ÇIKIŞ
+                                                    {{ trans('word.exit') }}
                                                 </span>
                                                 @endif
 
@@ -394,8 +393,6 @@
 
                             </table>
                             <ul>
-
-
 
 
                             </ul>
@@ -422,16 +419,16 @@
                         @if($total_collect != 0)
                         {
                             value : '{{$unplanning_collect}}',
-                            label : 'GÜNÜ GELMEMİŞ'
+                            label : '{{ trans("word.unplanning") }}'
                         },
                         {
                             value:'{{ $expiry_remaining }}',
-                            label:'GECİKMİŞ'
+                            label:'{{ trans("word.delayed") }}'
                         }
                         @else
                         {
                             value : 100,
-                            label : 'Kayıt Yok'
+                            label : '{{ trans('sentence.no_record') }}'
                         }
                         @endif
 
@@ -439,7 +436,7 @@
                     labelColor: '#000000',
                     colors: {!!  $total_collect_color !!},
                     formatter : function(x,d) {
-                        if(d.label == "Kayıt Yok"){
+                        if(d.label == "{{ trans('sentence.no_record') }}"){
                             return "";
                         }
                         return x + " ₺"
@@ -452,11 +449,11 @@
                     element : 'overdue_collection',
                     data : [{
                         value:'{{ $expiry_remaining == 0 ? '100' : $expiry_remaining }}',
-                        label:'{{ $expiry_remaining == 0 ? "Kayıt Yok":""}}'
+                        label:'{{ $expiry_remaining == 0 ? trans('sentence.no_record') :""}}'
                     }],
                     colors: ['{{ $expiry_remaining_color }}'],
                     formatter : function(x,d,s) {
-                        if(d.label == "Kayıt Yok"){
+                        if(d.label == "{{ trans('sentence.no_record') }}"){
                             return "";
                         }
                         return x + " ₺"
@@ -469,11 +466,11 @@
                     element : 'unplanning_collection',
                     data : [{
                         value:'{{ $unplanning_collect == 0 ? "100":$unplanning_collect}}',
-                        label:'{{ $unplanning_collect == 0 ? "Kayıt Yok":""}}'
+                        label:'{{ $unplanning_collect == 0 ? trans('sentence.no_record') :""}}'
                     }],
                     colors: ['{{ $unplanning_collect_color }}'],
                     formatter : function(x,d,s) {
-                        if(d.label == "Kayıt Yok"){
+                        if(d.label == "{{ trans('sentence.no_record') }}"){
                             return "";
                         }
                         return  x + " ₺"
@@ -488,23 +485,23 @@
                         @if($total_payment != 0)
                             {
                                 value : '{{ $unplanning_remaining }}',
-                                label : 'GÜNÜ GELMEMİŞ'
+                                label : "{{ trans('word.unplanning') }}"
                             },
                             {
                                 value:'{{ $purchase_expiry_remaining }}',
-                                label:'GECİKMİŞ'
+                                label:"{{ trans('word.delayed') }}"
                             }
                         @else
                             {
                                 value : 100,
-                                label : 'Kayıt Yok'
+                                label : "{{ trans('sentence.no_record') }}"
                             }
                         @endif
                     ],
                     labelColor: '#000000',
                     colors: {!! $total_payment_color !!},
                     formatter : function(x,d) {
-                        if(d.label == "Kayıt Yok"){
+                        if(d.label == "{{ trans('sentence.no_record') }}"){
                             return "";
                         }
                         return x.toLocaleString('tr-TR', {
@@ -521,11 +518,11 @@
                     resize: true,
                     data : [{
                         value:'{{ $purchase_expiry_remaining == 0 ? 100 : $purchase_expiry_remaining }}',
-                        label:'{{ $purchase_expiry_remaining == 0 ? "Kayıt Yok" : "" }}'
+                        label:'{{ $purchase_expiry_remaining == 0 ? trans('sentence.no_record') : "" }}'
                     }],
                     colors: ['{{ $purchase_expiry_remaining_color  }}'],
                     formatter : function(x,d) {
-                        if(d.label == "Kayıt Yok"){
+                        if(d.label == "{{ trans('sentence.no_record') }}"){
                             return "";
                         }
                         return x + " ₺"
@@ -538,11 +535,11 @@
                     element : 'unplanning_payment',
                     data : [{
                         value:'{{ $unplanning_remaining == 0 ? 100 : $unplanning_remaining}}',
-                        label:'{{ $unplanning_remaining == 0 ? "Kayıt Yok" : "" }}'
+                        label:'{{ $unplanning_remaining == 0 ? trans('sentence.no_record') : "" }}'
                     }],
                     colors: ['{{ $unplanning_remaining_color  }}'],
                     formatter : function(x,d) {
-                        if(d.label == "Kayıt Yok"){
+                        if(d.label == "{{ trans('sentence.no_record') }}"){
                             return "";
                         }
                         return x + " ₺"

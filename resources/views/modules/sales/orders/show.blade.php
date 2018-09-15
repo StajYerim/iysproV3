@@ -39,12 +39,12 @@
 
                             <li>
                                 <a tabindex="-1" data-toggle="modal" data-target="#transModal" href="#"><i class="fa fa-truck"  aria-hidden="true"></i>
-                                   SEVKİYAT BİLGİSİ GÖNDER</a>
+                                   {{ trans('sentence.send_transport_informations') }}</a>
                             </li>
                             @if(planning_send_permission() == 1)
                             <li>
                                 <a tabindex="-1" v-if="!planning" @click="orderPlanningSend" href="#"><i class="fa fa-industry"  aria-hidden="true"></i>
-                                    ÜRETİME GÖNDER</a>
+                                    {{ trans('sentence.send_to_production') }}</a>
                             </li>
                             @endif
 
@@ -97,9 +97,7 @@
 
             </div>
         </div>
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET START -->
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                 <div class="row">
@@ -289,8 +287,8 @@
                               <hr>
                                 <div class="row" v-if="planning">
                                     <div class="col-sm-12">
-                                        <strong>SİPARİŞ ÜRETİME GÖNDERİLDİ</strong><br>
-                                        DURUM : {{$order->order_planning == true ? $order->order_planning->status_text:"BEKLEMEDE"}}
+                                        <strong>{{ trans('sentence.the_order_sent_to_production') }}</strong><br>
+                                        {{ trans('word.status') }} : {{$order->order_planning == true ? $order->order_planning->status_text: trans('word.pending') }}
                                     </div>
                                 </div>
                                 <hr>
@@ -300,16 +298,16 @@
                                         <div class="col-sm-12"> <span class="pull-right">
 
                                         <a href="{{route("sales.invoice.print",[aid(),$order->id])}}" target="_blank"
-                                           class="btn btn-primary btn-circle" title="Fatura Yazdır!"><i
+                                           class="btn btn-primary btn-circle" title="{{ trans('sentence.print_invoice') }}"><i
                                                     class="glyphicon glyphicon-print"></i></a>
                                         <a href="javascript:void(0);"
                                            @click="deleteInvoice('{{$order->invoice["id"]}}')"
-                                           class="btn btn-danger btn-circle" title="Fatura Kaydını Sil!"><i
+                                           class="btn btn-danger btn-circle" title="{{ trans('sentence.delete_invoice_record') }}"><i
                                                     class="glyphicon glyphicon-remove"></i></a>
                                     </span>
-                                            <strong>Fatura Bilgileri</strong><br>
+                                            <strong>{{ trans('sentence.billing_informations') }}</strong><br>
                                             {{$order->invoice["seri"]}} {{$order->invoice["number"]}}
-                                            <b>Tarih: </b>{{$order->invoice["date"]}} {{$order->invoice["clock"]}}
+                                            <b>{{ trans('word.date') }}: </b>{{$order->invoice["date"]}} {{$order->invoice["clock"]}}
 
                                         </div>
                                     </div>
@@ -321,7 +319,7 @@
                                         <div class="col-sm-12">
                                             {{trans("word.request")}}
                                             <br>
-                                            <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? "SATIŞ TEKLİFİ":$order->offer["description"]}}
+                                            <a href="{{route("sales.offers.show",[aid(),$order->offer["id"]])}}"> {{$order->offer["description"] == null ? trans('sentence.sales_order') : $order->offer["description"]}}
                                                 (#{{$order->offer["id"]}})</a><br>
                                         </div>
                                     </div>
@@ -527,7 +525,7 @@
                                                         <center>
                                                             <a type="button" class="btn btn-success btn-lg"
                                                                @click="waybill_print"
-                                                               data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> İşlem Tamamlandı. Yazdırılıyor..."
+                                                               data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>{{ trans('sentence.the_proccess_completed') }} {{ trans('sentence.it_is_printing') }}"
                                                                id="WaybillButton"><i class="fa fa-check"></i>
                                                                 {{trans("word.print")}}</a>
                                                         </center>
@@ -779,7 +777,7 @@
                                                 {{--</div>--}}
                                                 <center>
                                                     <a type="button" class="btn btn-success btn-lg" @click="invoiceAdd"
-                                                       data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> İşlem Onaylandı. Yazdırılıyor..."
+                                                       data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> {{ trans('sentence.the_transaction_approved') }} {{ trans('sentence.it_is_printing') }}"
                                                        id="InvoiceCheckPrint"><i class="fa fa-check"></i>
                                                         {{ trans("sentence.confirm_and_print") }}
                                                     </a>
@@ -981,9 +979,9 @@
 
     @include("components.external.share",[
      $email=$order->company["email"],
-    $title="Sipariş",
-    $thread="Satış Siparişi : ".$order->company["company_name"],
-    $message="Merhaba,<br>Satış Siparişi detaylarınız ektedir indirerek inceleyebilirsiniz.<br>İyi çalışmalar.<br><br><b>".account()["name"]."</b>",
+    $title=trans('word.order'),
+    $thread=trans('sentence.sales_order')." : ".$order->company["company_name"],
+    $message=trans('sentence.sales_order_details_by_downloading_the_summary')."<br>".trans('sentence.good_work')."<br><br><b>".account()["name"]."</b>",
     $type="share.order",
     $data = $order])
 
@@ -1031,7 +1029,7 @@
                                 type:"cheq",
                                 id:"{{$che->id}}",
                                 date:"{{$che->date}}",
-                                bank_account:'ALINAN ÇEK',
+                                bank_account:'{{ trans("sentence.received_check") }}',
                                 amount:"{{get_money($che->pivot->amount)}}"
                             },
                             @endforeach()
@@ -1093,25 +1091,25 @@
                     methods: {
                         orderPlanningSend:function(){
                             swal({
-                                title: "Üretim Onayı",
-                                text: "Bu sipariş üretim planlanmasına dahil edilecektir.",
+                                title: "{{ trans('sentence.production_approval') }}",
+                                text: "{{ trans('sentence.this_order_will_be_included_in_the_production_planning') }}",
                                 icon: "warning",
-                                buttons:["VAZGEÇ","ONAYLA"],
+                                buttons:["{{ trans('word.cancel') }}","{{ trans('word.approve') }}"],
                                 dangerMode: true,
                             })
                                 .then((willCheck) => {
                                     if (willCheck) {
-                                        fullLoading("Lütfen Bekleyiniz.");
+                                        fullLoading("{{ trans('sentence.please_wait') }}");
 
                                          axios.post("{{route("sales.planning.send",aid())}}",{order_id:"{{$order->id}}"}).then(res=>{
                                              VueName.planning = 1;
-                                             swal("Sipariş başarıyla üretim planlama bölümüne gönderildi.", {
+                                             swal("{{ trans('sentence.the_order_was_successfully_submitted_to_the_production_planning_department') }}", {
                                                  icon: "success",
                                              });
                                                      fullLoadingClose()
                                          }).catch(error=>{
                                              fullLoadingClose()
-                                             swal("İşlem hatalı lütfen daha sonra tekrar deneyiniz.", {
+                                             swal("{{ trans('sentence.the_transaction_is_faulty') }} {{ trans('sentence.please_try_again_later') }}", {
                                                  icon: "error",
                                              });
                                          });
@@ -1127,7 +1125,7 @@
 
                                 if (this.trans.form.mail_check == true && this.trans.form.customer_mail == "") {
                                     $("#transferButton").button("reset");
-                                    notification("Hata","Kargo bilgisini mail göndermek istiyorsanız lütfen mail adresini boş bırakmayın.","danger")
+                                    notification("{{ trans('word.error') }}","{{ trans('sentence.if_you_want_to_send_cargo_information_by_email') }}","danger")
                                 } else {
                                     axios.post("{{route("sales.transfer.add",[aid(),$order->id])}}", $form).then(res => {
                                         if (res.data != "error") {
@@ -1137,7 +1135,7 @@
                                             VueName.trans.form.transfer_no = "";
                                             VueName.trans.form.not = "";
                                             $("#transModal").modal("hide");
-                                            notification("Başarılı", "İşleminiz başarıyla tamamlandı.","success")
+                                            notification("{{ trans('word.successfull') }}", "{{ trans('sentence.the_proccess_completed') }}","success")
                                             $("#transferButton").button("reset");
                                         }
 
@@ -1146,7 +1144,7 @@
                                 }
                             } else {
                                 $("#transferButton").button("reset");
-                                notification("Hata", "Lütfen Sevkiyat bilgisini eksiksiz giriniz.","danger")
+                                notification("{{ trans('word.error') }}", "{{ trans('sentence.please_enter_full_transport_informations') }}","danger")
                             }
                         },
                         transferList: function () {
@@ -1169,16 +1167,16 @@
                         },
                         deleteInvoice: function ($id) {
                             swal({
-                                title: "Fatura Silme İşlemini Onayla!",
-                                text: "Faturayı silmek istediğinizden eminmisiniz ? " +
-                                "Bu siparişten faturayı silmek üzeresiniz.",
+                                title: "{{ trans('sentence.confirm_billing_deletion') }}!",
+                                text: "{{ trans('sentence.are_you_sure_you_want_to_delete_the_bill') }} " +
+                                "{{ trans('sentence.you_are_about_to_delete_the_bill_from_this_order') }}",
                                 buttons: {
                                     catch: {
-                                        text: "SİL!",
+                                        text: "{{ trans('word.delete') }}",
                                         value: "delete",
                                     },
                                     defeat: false,
-                                    cancel: "Vazgeç"
+                                    cancel: "{{ trans('word.cancel') }}"
                                 },
                                 dangerMode: true
                             })
@@ -1225,19 +1223,19 @@
                             }else{
                                 $number = $number;
                             }
-                            swal(+$number + " irsaliye için ne yapmak istiyorsunuz ?", {
+                            swal("{{ trans('word.waybill') }} : "+$number + " - {{ trans('sentence.what_do_you_want_to_do') }}", {
                                 buttons: {
 
                                     print: {
-                                        text: "Yazdır",
+                                        text: "{{ trans('word.print') }}",
                                         value: "print"
                                     },
                                     catch: {
-                                        text: "SİL!",
+                                        text: "{{ trans('word.delete') }}",
                                         value: "delete",
                                     },
                                     defeat: false,
-                                    cancel: "Vazgeç"
+                                    cancel: "{{ trans('word.cancel') }}"
                                 },
                             })
                                 .then((value) => {
@@ -1248,7 +1246,7 @@
                                                 $.post("/{{aid()}}/sales/orders/waybill-delete/" + $id, function (data) {
 
                                                 });
-                                                swal("Başarılı", "Seçilen irsaliye kaldırıldı!", "success");
+                                                swal("{{ trans('word.successfull') }}", "{{ trans('sentence.you_have_removed_the_selected_waybill') }}", "success");
                                                 location.reload();
                                                 break;
                                             case "print":

@@ -1414,7 +1414,7 @@
                     }, [t._t("option", [t._v("\n          " + t._s(t.getOptionLabel(e)) + "\n        ")], null, e)], 2)])
                 }), t._v(" "), t.filteredOptions.length ? t._e() : n("li", {
                     staticClass: "no-options"
-                }, [t._t("no-options", [t._v("Sorry, no matching options.")])], 2)], 2) : t._e()])], 1)
+                }, [t._t("no-options", [t._v("Eşleşme bulunamadı.")])], 2)], 2) : t._e()])], 1)
             },
             staticRenderFns: []
         }
