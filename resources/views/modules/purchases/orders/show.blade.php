@@ -8,7 +8,11 @@
                     <i class="fa fa-file-text-o"></i>
                     <span class="semi-bold">{{$order->descriptions}}</span>
                     @if($order->tags->count() != 0)
-                        <span class="pull-right">@foreach($order->tags as $tag) <span  class="badge" style="background-color:{{$tag->bg_color}}">{{$tag->title}}</span>@endforeach</span>
+                        <span class="pull-right">
+                            @foreach($order->tags as $tag)
+                                <span  class="badge" style="background-color:{{$tag->bg_color}}">{{$tag->title}}</span>
+                            @endforeach
+                        </span>
                     @endif
                 </h1>
             </div>
@@ -49,13 +53,15 @@
 
                     </div>
                     <div style="display:none" class="btn-group">
-                        <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
-                                    class="fa fa-print"></span> {{trans("word.print")}} <span class="caret"></span> </a>
+                        <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <span class="fa fa-print"></span> {{trans("word.print")}} <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print"><i
-                                            class="fa fa-print" aria-hidden="true"></i>
-                                    {{trans("sentence.print_offer")}}</a>
+                                <a target="_blank" href="http://demo.iyspro.com/salesmanager/sales-offer/8/print">
+                                    <i class="fa fa-print" aria-hidden="true"></i>
+                                    {{trans("sentence.print_offer")}}
+                                </a>
                             </li>
                             <li>
                                 <a download="" href="http://demo.iyspro.com/salesmanager/sales-offer/8/printDown"
@@ -67,8 +73,9 @@
 
                     </div>
 
-                    <a style="display:none" href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default"><i
-                                class="fa fa-envelope"></i> {{trans("word.share")}}</a>
+                    <a style="display:none" href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-default">
+                        <i class="fa fa-envelope"></i> {{trans("word.share")}}
+                    </a>
 
                 </div>
 
@@ -88,7 +95,7 @@
                             <div class="row">
                                 <div class="col-sm-5" style="font-weight: 400;font-size:15px;"><i
                                             class="fa fa-building-o"></i> <a
-                                            href="{{route("sales.companies.show",[aid(),$order->company["id"]])}}">{{$order->company["company_name"] == null ? "Belirtilmedi":$order->company["company_name"]}}</a>
+                                            href="{{route("sales.companies.show",[aid(),$order->company["id"]])}}">{{$order->company["company_name"] == null ? trans('sentence.not_specified') :$order->company["company_name"]}}</a>
                                 </div>
                                 <div class="col-sm-3" style="font-weight: 400;font-size:15px;"><i
                                             class="fa fa-calendar"></i> {{$order->date}}</div>
@@ -235,16 +242,9 @@
                                                 </tbody>
                                             </table>
 
-
-
                                     </div>
 
-
                                 </div>
-
-
-
-
 
                             </div>
                         </div>
@@ -253,7 +253,6 @@
                     <div class="col-sm-4">
 
                         <div id="order_info" class="well">
-
 
                             <div id="short_info" class="col-12">
 
@@ -264,11 +263,13 @@
                                                 <i class="fa fa-{{$order->fa_currency}}"></i></span></div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <div class="bottom-info">{{trans("sentence.remaining_amount")}}<span class="pull-right"
-                                                                                     style="font-size:15px;color:#2AC!important">@{{ remaining }}
-                                                <i class="fa fa-{{$order->fa_currency}}"></i></span></div>
+                                        <div class="bottom-info">
+                                            {{trans("sentence.remaining_amount")}}
+                                            <span class="pull-right" style="font-size:15px;color:#2AC!important">@{{ remaining }}
+                                                <i class="fa fa-{{$order->fa_currency}}"></i>
+                                            </span>
+                                        </div>
                                     </div>
-
 
                                 </div>
 
@@ -294,7 +295,6 @@
                 VueName = new Vue({
                     el: "#show",
                     data: {
-
                         remaining:"{{$order->remaining}}",
                         collect_items:[
                                 @foreach($order->payments as $pay)
@@ -311,7 +311,7 @@
                                 type:"cheq",
                                 id:"{{$che->id}}",
                                 date:"{{$che->date}}",
-                                bank_account:'VERİLEN ÇEK',
+                                bank_account:'{{ trans('sentence.given_check') }}',
                                 amount:"{{get_money($che->pivot->amount)}}"
                             },
                             @endforeach()
@@ -374,9 +374,7 @@
 
                                     st = q * a;
                                     sr = t - st;
-
                                     vat1 += sr;
-
 
                                 } else if (item.vat == 8) {
 
@@ -396,7 +394,6 @@
 
                                     st = q * a;
                                     sr = t - st;
-
                                     vat18 += sr;
                                 }
 

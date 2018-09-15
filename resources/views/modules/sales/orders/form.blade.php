@@ -144,8 +144,8 @@
         @include("components.modals.companies",[$option="customer",$title="New Company",$type = "new_company",$message="Company Form",$id=0])
     </section>
 
-    {{--@include("components.modals.companies",[$title="New Company",$type = "new_company",$message="Company Form",$id=0])--}}
-    {{--@include("components.modals.products",[$title="New Product",$type = "new_product",$message="Product Form",$id=0])--}}
+    {{--@include("components.modals.companies",[$title="{{ trans('sentence.new_company') }}",$type = "new_company",$message="{{ trans('sentence.company_form') }}",$id=0])--}}
+    {{--@include("components.modals.products",[$title="{{ trans('sentence.new_product') }}",$type = "new_product",$message="{{ trans('sentence.product_form') }}",$id=0])--}}
 
     @push("scripts")
 
@@ -250,12 +250,12 @@
                                             }
                                         }).catch(function (error) {
                                         fullLoadingClose();
-                                        notification("Error", "Please add order item", "danger");
+                                        notification("Error", "{{ trans('sentence.please_fill_required_fields') }}", "danger");
 
                                     });
 
                                 } else {
-                                    notification("Error","Please required fields","danger");
+                                    notification("Error","{{ trans('sentence.please_fill_required_fields') }}","danger");
                                 }
                             })
 

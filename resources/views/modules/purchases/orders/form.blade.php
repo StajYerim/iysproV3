@@ -222,12 +222,12 @@
                                             }
                                         }).catch(function (error) {
                                         fullLoadingClose();
-                                        notification("Error", "Please add offer item", "danger");
+                                        notification("Error", "{{ trans('sentence.please_fill_required_fields') }}", "danger");
 
                                     });
 
                                 } else {
-                                    notification("Error","Please required fields","danger");
+                                    notification("Error","{{ trans('sentence.please_fill_required_fields') }}","danger");
                                 }
                             })
 

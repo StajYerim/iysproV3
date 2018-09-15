@@ -10,20 +10,20 @@
                         <div class="widget-body">
                             <div class="widget-body-toolbar st">
                                 <div class="row">
-                                    <div class="col-sm-4" style="margin-top:-20px;"><h2>Sales Invoices</h2></div>
+                                    <div class="col-sm-4" style="margin-top:-20px;"><h2>{{ trans('sentence.sales_invoices') }}</h2></div>
 
                                     <div class="col-sm-4 text-right">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input class="form-control" id="demo" type="text" placeholder='6 TEMMUZ 2017 - 6 EKIM 2017' />
+                                                <input class="form-control" id="demo" type="text" placeholder='{{ trans("sentence.day_month_year_format") }} - {{ trans("sentence.day_month_year_format") }}' />
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4 text-right">
                                         <select v-model='vat' @change="updateData()" class="form-control">
-                                            <option value="1">VERGİLER DAHİL</option>
-                                            <option value="0">VERGİLER HARİÇ</option>
+                                            <option value="1">{{ trans('sentence.including_vat') }}</option>
+                                            <option value="0">{{ trans('sentence.excluding_vat') }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="col-sm-4">
-                                        <div class="text-center"><b>FATURA KATEGORİLERİ</b></div>
+                                        <div class="text-center"><b>{{ trans('sentence.invoice_categories') }}</b></div>
                                         <canvas id="ordersChart" height="160"></canvas>
 
                                         <div v-for='(item,index) in order_pie' :key="index" class="col-md-12">
@@ -46,7 +46,7 @@
 
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="text-center"><b>MÜŞTERİ KATEGORİLERİ</b></div>
+                                        <div class="text-center"><b>{{ trans('sentence.customer_categories') }}</b></div>
                                         <canvas id="customersChart" height="160"></canvas>
 
                                         <div v-for="(item) in customer_pie" class="col-md-12">
@@ -59,17 +59,15 @@
 
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="text-center"><b>HİZMET/ÜRÜN KATEGORİLERİ</b></div>
+                                        <div class="text-center"><b>{{ trans('sentence.service_and_product_categories') }}</b></div>
                                         <canvas id="productChart" height="160"></canvas>
-                                                <div v-for="(item,index) in product_pie" class="col-md-12">
-                                                    <label class="pull-left label"
-                                                           v-bind:style="{'background-color':item.bgcolor}">
-                                                        @{{ item.labels }}
-                                                    </label>
-                                                    <label class="pull-right"><b>@{{formatPrice(item.data)}}</b> <i class="fa fa-try"></i></label>
-                                                </div>
-
-
+                                            <div v-for="(item,index) in product_pie" class="col-md-12">
+                                                <label class="pull-left label"
+                                                       v-bind:style="{'background-color':item.bgcolor}">
+                                                    @{{ item.labels }}
+                                                </label>
+                                                <label class="pull-right"><b>@{{formatPrice(item.data)}}</b> <i class="fa fa-try"></i></label>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -82,20 +80,17 @@
             <div class="jarviswidget well" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
             <div class="widget-body">
             <div class="widget-body-toolbar st">
-
                 <div class="row">
-                <div class="col-sm-8" style="margin-top:-20px;"><h2>Satış Rapoları Tablosu</h2></div>
+                <div class="col-sm-8" style="margin-top:-20px;"><h2>{{ trans('sentence.sales_reports_table') }}</h2></div>
                     <div class="col-sm-4">
                         <div class="btn-group btn-group-justified nav nav-tabs">
-                            <button style="width:100px!important;" data-toggle="tab" href="#invoice_table" class="btn btn-default">FATURA</button>
-                            <button style="width:100px!important;" data-toggle="tab" href="#customer_table" class="btn btn-default">MÜŞTERİ</button>
-                            <button style="width:100px!important;" data-toggle="tab" href="#product_table" class="btn btn-default">ÜRÜN</button>
+                            <button style="width:100px!important;" data-toggle="tab" href="#invoice_table" class="btn btn-default">{{ trans('word.invoice') }}</button>
+                            <button style="width:100px!important;" data-toggle="tab" href="#customer_table" class="btn btn-default">{{ trans('word.customer') }}</button>
+                            <button style="width:100px!important;" data-toggle="tab" href="#product_table" class="btn btn-default">{{ trans('word.product') }}</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-
 
             <div class="row">
             <div class="col-sm-12 tab-content">
@@ -104,9 +99,9 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th width="33%">AÇIKLAMA</th>
-                            <th width="33%">DÜZENLENME TARİHİ</th>
-                            <th width="33%">BAKİYE</th>
+                            <th width="33%">{{ trans('word.description') }}</th>
+                            <th width="33%">{{ trans('sentence.edit_date') }}</th>
+                            <th width="33%">{{ trans('word.balance') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -118,7 +113,7 @@
                             <td>
                                 <b>@{{order.company.company_name}}</b> <br>
                                  <span v-if="order.description != null"> @{{ order.description }}</span>
-                                 <span v-if="order.description == null"> FATURA</span>
+                                 <span v-if="order.description == null"> {{ trans('word.invoice') }}</span>
                             </td>
                             <td>
                                 @{{ order.date }}
@@ -137,8 +132,8 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th width="50%">ŞİRKET ADI</th>
-                            <th width="45%">BAKİYE</th>
+                            <th width="50%">{{ trans('sentence.company_name') }}</th>
+                            <th width="45%">{{ trans('word.balance') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -163,9 +158,9 @@
                         <thead>
                         <tr>
                             <th width="25">#</th>
-                            <th width="33%">ÜRÜN</th>
-                            <th width="33%">ADET</th>
-                            <th width="33%">TUTAR</th>
+                            <th width="33%">{{ trans('word.product') }}</th>
+                            <th width="33%">{{ trans('word.quantity') }}</th>
+                            <th width="33%">{{ trans('word.amount') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -363,58 +358,58 @@
                                 "locale": {
                                     "format": "DD-MM-YYYY",
                                     "separator": " / ",
-                                    "applyLabel": "Uygula",
-                                    "cancelLabel": "İptal",
+                                    "applyLabel": "{{ trans('word.apply') }}",
+                                    "cancelLabel": "{{ trans('word.cancel') }}",
                                     "fromLabel": "From",
                                     "toLabel": "To",
-                                    "customRangeLabel": "Özel Tarih",
+                                    "customRangeLabel": "{{ trans('time.special_date') }}",
                                     "daysOfWeek": [
-                                        "Pt",
-                                        "Sa",
-                                        "Ça",
-                                        "Pe",
-                                        "Cu",
-                                        "Ct",
-                                        "Pa"
+                                        "{{ trans('time.mo') }}",
+                                        "{{ trans('time.tu') }}",
+                                        "{{ trans('time.we') }}",
+                                        "{{ trans('time.th') }}",
+                                        "{{ trans('time.fr') }}",
+                                        "{{ trans('time.sa') }}",
+                                        "{{ trans('time.su') }}"
                                     ],
                                     "monthNames": [
-                                        "Ocak",
-                                        "Şubat",
-                                        "Mart",
-                                        "Nisan",
-                                        "Mayıs",
-                                        "Haziran",
-                                        "Temmuz",
-                                        "Ağustos",
-                                        "Eylül",
-                                        "Ekim",
-                                        "Kasım",
-                                        "Aralık"
+                                        "{{ trans('month.january') }}",
+                                        "{{ trans('month.february') }}",
+                                        "{{ trans('month.march') }}",
+                                        "{{ trans('month.april') }}",
+                                        "{{ trans('month.may') }}",
+                                        "{{ trans('month.june') }}",
+                                        "{{ trans('month.july') }}",
+                                        "{{ trans('month.august') }}",
+                                        "{{ trans('month.september') }}",
+                                        "{{ trans('month.october') }}",
+                                        "{{ trans('month.november') }}",
+                                        "{{ trans('month.december') }}"
                                     ],
                                     "firstDay": 1
                                 },
                                 "ranges": {
-                                    "Bugün": [
+                                    "{{ trans('time.today') }}": [
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}",
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
                                     ],
-                                    "Dün": [
+                                    "{{ trans('time.yesterday') }}": [
                                         "{{ \Carbon\Carbon::yesterday()->format('d-m-Y') }}",
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
                                     ],
-                                    "Son 7 Gün": [
+                                    "{{ trans('time.last_7_days') }}": [
                                         "{{ \Carbon\Carbon::now()->subDays(7)->format('d-m-Y') }}",
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
                                     ],
-                                    "Son 30 Gün": [
+                                    "{{ trans('time.last_30_days') }}": [
                                         "{{ \Carbon\Carbon::now()->subDays(30)->format('d-m-Y') }}",
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
                                     ],
-                                    "Bu Ay": [
+                                    "{{ trans('time.this_month') }}": [
                                         "{{ \Carbon\Carbon::now()->startOfMonth()->format('d-m-Y') }}",
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
                                     ],
-                                    "Geçen Ay": [
+                                    "{{ trans('time.last_month') }}": [
                                         "{{ $start->format('d-m-Y') }}",
                                         "{{ $end->format('d-m-Y') }}"
                                     ]

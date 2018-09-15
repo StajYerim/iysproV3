@@ -88,7 +88,7 @@
         }
     </style>
 </head>
-<body><p>{{$company->company_name}} <span style="float:right">CARİ HESAP EXTRESİ</span></p>
+<body><p>{{$company->company_name}} <span style="float:right">{{ trans('sentence.current_account_extract') }}</span></p>
 <b>İşlem Hareketleri</b>
 {{--<span style="float:right "><b>@if($actions != "[]"){{$actions->where("ActionShow",0)->first()->ActionDate->format("d.m.Y")}} - {{$actions->where("ActionShow",0)->last()->ActionDate->format("d.m.Y")}} @endif</b></span>--}}
 <hr>
@@ -116,22 +116,22 @@
         </tr>
         <tr class="heading" style="font-size:11px;">
             <td width="75px" style="text-align: left;">
-                TARİH
+                {{ trans('word.date') }}
             </td>
             <td width="90px">
-                İŞLEM
+                {{ trans('word.transaction') }}
             </td>
             <td style="text-align:left" width="200px">
-                AÇIKLAMA
+                {{ trans('word.description') }}
             </td>
             <td width="110px">
-                BORÇ
+                {{ trans('word.debt') }}
             </td>
             <td width="110px">
-                ALACAK
+                {{ trans('word.credit') }}
             </td>
             <td style="text-align:right" width="130px">
-                BAKİYE
+                {{ trans('word.balance') }}
             </td>
         </tr>
         @php $borc = 0; $alacak=0; @endphp
@@ -174,7 +174,7 @@
         @empty
             <tr class="item">
                 <td colspan="5">
-                    Hesap hareketi bulunmamaktadır.
+                   {{ trans('sentence.there_is_no_account_activity') }}
                 </td>
             </tr>
         @endforelse
@@ -185,7 +185,7 @@
             <tr class="total">
                 <td colspan="4"></td>
                 <td colspan="1" style="text-align: right">
-                    ALACAK:
+                    {{ trans('word.credit') }}:
                 </td>
                 <td colspan="1" style="text-align: right">
                   {{get_money($alacak)}}  TL
@@ -194,7 +194,7 @@
             <tr class="total">
                 <td colspan="4"></td>
                 <td colspan="1" style="text-align: right">
-                    BORÇ:
+                    {{ trans('word.debt') }}:
                 </td>
                 <td colspan="1" style="text-align: right">
                    {{get_money($borc)}} TL
@@ -203,7 +203,7 @@
             <tr class="total" style="float:right">
                 <td colspan="4"></td>
                 <td colspan="1" style="text-align: right">
-                    BAKİYE:
+                    {{ trans('word.balance') }}:
                 </td>
                 <td colspan="1" style="text-align: right">
                    {{$company->balance}} TL

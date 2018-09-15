@@ -1184,12 +1184,12 @@
                                         if (willDelete) {
                                             $.post("{{route("sales.invoice.delete",[aid(),$order->id])}}", function (data) {
                                                 if (data == "delete") {
-                                                    swal("Fatura başarıyla silindi.", {
+                                                    swal("{{ trans('sentence.the_invoice_deleted_successfully') }}.", {
                                                         icon: "success",
                                                     });
                                                     location.reload();
                                                 } else {
-                                                    swal("Fatura silinemedi lütfen sistem yöneticinizle görüşün.", {
+                                                    swal("{{ trans('sentence.the_invoice_could_not_be_deleted') }}. {{ trans('sentence.please_contact_your_system_administrator') }}.", {
                                                         icon: "error",
                                                     });
                                                 }
@@ -1389,16 +1389,16 @@
                             rules: {
                                 email: {
                                     required: true,
-                                    email: "Your email address must be in the format of name@domain.com"
+                                    email: "{{ trans('sentence.your_email_address_must_be_in_the_format') }}"
                                 },
                             },
 
                             messages: {
-                                fname: "Please specify your First name",
-                                lname: "Please specify your Last name",
+                                fname: "{{ trans('sentence.please_specify_your_first_name') }}",
+                                lname: "{{ trans('sentence.please_specify_your_last_name') }}",
                                 email: {
-                                    required: "We need your email address to contact you",
-                                    email: "Your email address must be in the format of name@domain.com"
+                                    required: "{{ trans('sentence.we_need_your_email_address_to_contact_you') }}",
+                                    email: "{{ trans('sentence.your_email_address_must_be_in_the_format') }}"
                                 }
                             },
 
@@ -1424,16 +1424,16 @@
                             rules: {
                                 email: {
                                     required: true,
-                                    email: "Your email address must be in the format of name@domain.com"
+                                    email: "{{ trans('sentence.your_email_address_must_be_in_the_format') }}"
                                 },
                             },
 
                             messages: {
-                                fname: "Please specify your First name",
-                                lname: "Please specify your Last name",
+                                fname: "{{ trans('sentence.please_specify_your_first_name') }}",
+                                lname: "{{ trans('sentence.please_specify_your_last_name') }}",
                                 email: {
-                                    required: "We need your email address to contact you",
-                                    email: "Your email address must be in the format of name@domain.com"
+                                    required: "{{ trans('sentence.we_need_your_email_address_to_contact_you') }}",
+                                    email: "{{ trans('sentence.your_email_address_must_be_in_the_format') }}"
                                 }
                             },
 
