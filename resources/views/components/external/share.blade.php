@@ -16,12 +16,25 @@
                             <div class="form-group">
                                 <label class="col-md-3 ">{{ trans("word.receiver") }} *</label>
                                 <div class="col-md-9">
-                                    <input id='magicsuggest' name="shareEmail" type='text' v-model="form.receivers">
+                                    <vue-tags-input
+                                            :max-tags="10"
+                                            :maxlength="30"
+                                            v-model="form.tag"
+                                            :tags="form.tagsd"
+                                            @tags-changed="newTags => form.tagsd = newTags"
+                                            :autocomplete-items="filteredItems"
+                                            :validation="validation"
+                                            :placeholder="'Mail adresi ekle'"
+
+                                    />
+                                    {{--<input id='magicsuggest' name="shareEmail" type='text' v-model="form.receivers">--}}
                                 </div>
                             </div>
                         </div>
                         <br>
                         <hr>
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-md-3 ">{{ trans("word.subject") }} *</label>
@@ -83,14 +96,28 @@
         ShareForm = new Vue({
             el: "#share-form",
             data: {
+                autocompleteItems: [ @if($email){
+                    text: '{{$email}}',
+                }, @endif],
+                validation: [
+                    {
+                    type: 'no-numbers',
+                    rule: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                }],
                 btnDisable: false,
                 form: {
                     thread: "{{$thread}}",
-                    receivers: "{{$email == null ? "[{email:'".$email."'}]":"[]"}}",
                     message: "{!! $message !!}",
-                    lang: "{{app()->getLocale()}}"
+                    lang: "{{app()->getLocale()}}",
+                    tag: '',
+                    tagsd: [{'text':"{{$email}}"}],
                 }
 
+            },
+            computed: {
+                filteredItems() {
+                    return this.autocompleteItems.filter(i => new RegExp(this.tag, 'i').test(i.text));
+                },
             },
             methods: {
                 formSend: function () {
@@ -98,23 +125,27 @@
                     this.btnDisable = true;
                     ShareForm.form.message = $('.editor').summernote('code');
 
-                    $("#shareModal").modal("toggle");
-                    if(this.form.thread != "" || this.form.message != "") {
+
+                    if(this.form.tagsd.length > 0) {
                         axios.post("{{route($type,[aid(),$data->id])}}", this.form)
                             .then(function (res) {
 
                                 fullLoadingClose();
                                 ShareForm.btnDisable = false;
                                 notification("Başarılı", "Mail başarıyla gönderildi.", 'success')
+                                $("#shareModal").modal("toggle");
+
                             })
                             .catch(function () {
                                 fullLoadingClose();
                                 notification("Hatalı", "Mail gönderilemedi", "danger")
+                                ShareForm.btnDisable = false;
                             });
 
                     }else{
                         fullLoadingClose();
-                        notification("Hatalı", "Lütfen konu ve mesaj alanını boş bırakmayın", "danger")
+                        notification("Hatalı", "Lütfen mail adresini boş bırakmayın.", "danger")
+                        this.btnDisable = false;
                     }
 
                 },
@@ -144,35 +175,6 @@
             height: 150
         });
 
-
-        //Magic suggesst
-        let ms = $('#magicsuggest').magicSuggest({
-            vtype: 'email',
-            noSuggestionText: 'Girilen değerde kayıt bulunamadı',
-            placeholder: 'Eposta...',
-            required: true,
-            data: @if($email)['{{$email}}']@else [] @endif,
-            value:@if($email)['{{$email}}']@else [] @endif,
-            valueField: 'email',
-            renderer: function (data) {
-
-                return ShareForm.form.receivers = {email: data.email};
-            },
-            resultAsString: false
-        });
-
-        $(ms).on(
-            'selectionchange', function (e, cb, s) {
-
-                if (this.isValid() == false) {
-                } else {
-                    ShareForm.form.receivers = [];
-
-                    mail = this.getValue();
-                    ShareForm.form.receivers = mail;
-                }
-            }
-        );
 
     </script>
 @endpush
