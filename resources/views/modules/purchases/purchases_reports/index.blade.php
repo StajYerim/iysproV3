@@ -31,7 +31,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="col-sm-4">
-                                        <div class="text-center"><b>FATURA KATEGORİLERİ</b></div>
+                                        <div class="text-center"><b>{{ trans('sentence.invoice_categories') }}</b></div>
                                         <canvas v-show="order_pie.length > 0" id="ordersChart" height="160"></canvas>
                                         <div v-html='loading'></div>
                                         <div v-show="order_pie.length > 0"  v-for='(item,index) in order_pie' :key="index" class="col-md-12">
@@ -46,7 +46,7 @@
 
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="text-center"><b>TEDARİKÇİ KATEGORİLERİ</b></div>
+                                        <div class="text-center"><b>{{ trans('sentence.supplier_categories') }}</b></div>
                                         <canvas id="customersChart" v-show="order_pie.length > 0" height="160"></canvas>
                                         <div v-html='loading'></div>
                                         <div v-show="order_pie.length > 0" v-for="(item) in customer_pie" class="col-md-12">
@@ -59,7 +59,7 @@
 
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="text-center"><b>HİZMET/ÜRÜN KATEGORİLERİ</b></div>
+                                        <div class="text-center"><b>{{ trans('sentence.service_and_product_categories') }}</b></div>
                                         <div v-html='loading'></div>
                                         <canvas v-show="order_pie.length > 0" id="productChart" height="160"></canvas>
                                                 <div v-show="order_pie.length > 0" v-for="(item,index) in product_pie" class="col-md-12">
@@ -101,7 +101,7 @@
             <div class="row">
             <div class="col-sm-12 tab-content">
                 <div id="invoice_table" class="tab-pane fade in active">
-                    <div v-html='loading'>Kayıt bulunamadı</div>
+                    <div v-html='loading'>{{ trans('sentence.no_records_found') }}</div>
                     <table v-show="order_pie.length > 0" id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
@@ -135,7 +135,7 @@
                     </table>
                 </div>
                 <div id="customer_table" class="tab-pane fade">
-                    <div v-html='loading'>Kayıt bulunamadı</div>
+                    <div v-html='loading'>{{ trans('sentence.no_records_found') }}</div>
                     <table v-show="order_pie.length > 0" id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
@@ -162,7 +162,7 @@
                     </table>
                 </div>
                 <div id="product_table" class="tab-pane fade">
-                    <div v-html='loading'>Kayıt bulunamadı</div>
+                    <div v-html='loading'>{{ trans('sentence.no_records_found') }}</div>
                     <table v-show="order_pie.length > 0" id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
@@ -358,7 +358,7 @@
                                 if(sales_report.order_pie.length >0 ){
                                     sales_report.loading = '';
                                 }else{
-                                    sales_report.loading = '<br><br><center>Kayıt Bulunamadı</center>';
+                                    sales_report.loading = "<br><br><center>{{ trans('sentence.no_records_found') }}</center>";
                                 }
                             });
 

@@ -19,7 +19,7 @@
 
             <header>
                             <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
-                            <h2>TAHSİLATLAR</h2>
+                            <h2>{{ trans('word.collections') }}</h2>
 
                         </header>
                     <!-- widget div-->
@@ -30,7 +30,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>TOPLAM TAHSİLATLAR</b><br>
+                                        <b>{{ trans('sentence.total_collections') }}</b><br>
                                         <span>{{get_money($total_collect)}} TL</span>
                                     </div>
                                     <!-- widget edit box -->
@@ -52,7 +52,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>GECİKMİŞ TAHSİLATLAR</b>
+                                        <b>{{ trans('sentence.delayed_collections') }}</b>
                                         <br>
                                         <span>{{get_money($sales["gecikmis"]+$cheques["gecikmis"])}} TL</span>
 
@@ -76,7 +76,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>GÜNÜ GELMEMİŞ TAHSİLATLAR</b>
+                                        <b>{{ trans('sentence.unplannıng_collections') }}</b>
                                         <br>
                                         <span>{{get_money($sales["gelecek"]+$cheques["gelecek"])}} TL</span>
                                     </div>
@@ -125,7 +125,7 @@
 
                         <header>
                             <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
-                            <h2>ÖDEMELER</h2>
+                            <h2>{{ trans('word.payments') }}</h2>
 
                         </header>
                     <div>
@@ -135,7 +135,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>TOPLAM ÖDEMELER</b>
+                                        <b>{{ trans('sentence.total_payments') }}</b>
                                         <br>
                                         <span>{{get_money($total_payment)}} TL</span>
                                     </div>
@@ -151,7 +151,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>GECİKMİŞ ÖDEMELER</b>
+                                        <b>{{ trans('sentence.delayed_payments') }}</b>
                                         <br>
                                         <span>{{get_money($purchase["gecikmis"]+$cheques_payment["gecikmis"]+$expenses["gecikmis"])}} TL</span>
                                     </div>
@@ -169,7 +169,7 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>GÜNÜ GELMEMİŞ ÖDEMELER</b>
+                                        <b>{{ trans('sentence.unplannıng_payments') }}</b>
                                         <br>
                                         <span>{{get_money($purchase["gelecek"]+$cheques_payment["gelecek"]+$expenses["gelecek"])}} TL</span>
 
@@ -212,7 +212,7 @@
 
                     <header>
 
-                            <h2> KASA VE HESAPLAR </h2>
+                            <h2> {{ trans('sentence.safe_and_accounts') }}</h2>
 
                     </header>
 
@@ -223,7 +223,7 @@
                                 <thead>
                                 <tr>
                                     <th>{{ trans('word.company') }}</th>
-                                    <th>{{ trans('word.date') }}</th>
+                                    <th>{{ trans('word.currency') }}</th>
                                     <th>{{ trans('word.balance') }}</th>
                                 </tr>
                                 </thead>
@@ -261,7 +261,7 @@
 
                     <header>
 
-                            <h2>VADESİ GELEN TAHSİLATLAR</h2>
+                            <h2>{{ trans('sentence.due_collections') }}</h2>
 
                     </header>
 
@@ -313,7 +313,7 @@
 
                     <header>
 
-                        <h2>VADESİ GELEN ÖDEMELER</h2>
+                        <h2>{{ trans('sentence.due_payments') }}</h2>
 
                     </header>
 
@@ -365,7 +365,7 @@
 
                     <header>
 
-                        <h2>ÖDEME GEÇMİŞİ</h2>
+                        <h2>{{ trans('sentence.payment_history') }}</h2>
 
                     </header>
 
@@ -444,32 +444,32 @@
                         @if($sales["gecikmis"] !=0)
                     {
                         value: '{{$sales["gecikmis"]}}',
-                        label: 'GECİKMİŞ SİPARİŞ'
+                        label: "{{ trans('sentence.delayed_order') }}"
                     },
                             @endif
                             @if($sales["gelecek"] !=0)
                         {
                             value: '{{$sales["gelecek"]}}',
-                            label: 'GELECEK SİPARİŞ'
+                            label: "{{ trans('sentence.future_order') }}"
                         },
                             @endif
                             @if($cheques["gecikmis"] != 0)
                         {
                             value: '{{$cheques["gecikmis"]}}',
-                            label: 'GECİKMİŞ ÇEK'
+                            label: "{{ trans('sentence.delayed_cheque') }}"
                         },
                             @endif()
                             @if($cheques["gelecek"] !=0)
                         {
                             value: '{{$cheques["gelecek"]}}',
-                            label: 'GELECEK ÇEK'
+                            label: "{{ trans('sentence.future_cheque') }}"
                         },
                             @endif()
 
                             @else
                         {
                             value: '100',
-                            label: 'TAHSİLAT YOK'
+                            label: "{{ trans('sentence.no_collection') }}"
                         }
                         @endif()
 
@@ -493,7 +493,7 @@
                         @endif
                     ],
                     formatter: function (x, data) {
-                        if (data.label != "TAHSİLAT YOK") {
+                        if (data.label != "{{ trans('sentence.no_collection') }}") {
                             return parseFloat(x).toLocaleString('tr-TR', {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
@@ -520,21 +520,21 @@
                         @if($sales["gecikmis"] !=0)
                     {
                         value: '{{$sales["gecikmis"]}}',
-                        label: 'GECİKMİŞ SİPARİŞ'
+                        label: "{{ trans('sentence.delayed_order') }}"
                     },
                             @endif()
 
                             @if($cheques["gecikmis"] !=0)
                         {
                             value: '{{$cheques["gecikmis"]}}',
-                            label: 'GECİKMİŞ ÇEK'
+                            label: "{{ trans('sentence.delayed_cheque') }}"
                         }
                         , @endif()
 
                             @else
                         {
                             value: '100',
-                            label: 'TAHSİLAT YOK'
+                            label: "{{ trans('sentence.no_collection') }}"
                         }
                         @endif
                     ],
@@ -552,7 +552,7 @@
                         @endif
                     ],
                     formatter: function (x, data) {
-                        if (data.label != "TAHSİLAT YOK") {
+                        if (data.label != "{{ trans('sentence.no_collection') }}") {
                             return parseFloat(x).toLocaleString('tr-TR', {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
@@ -579,21 +579,21 @@
                         @if($sales["gelecek"] !=0)
                     {
                         value: '{{$sales["gelecek"]}}',
-                        label: 'GELECEK SİPARİŞ'
+                        label: "{{ trans('sentence.future_order') }}"
                     },
                             @endif
 
                             @if($cheques["gelecek"] !=0)
                         {
                             value: '{{$cheques["gelecek"]}}',
-                            label: 'GELECEK ÇEK'
+                            label: "{{ trans('sentence.future_cheque') }}"
                         }
                         , @endif()
 
                             @else
                         {
                             value: '100',
-                            label: 'TAHSİLAT YOK'
+                            label: "{{ trans('sentence.no_collection') }}"
                         }
 
                         @endif
@@ -613,7 +613,7 @@
                         @endif
                     ],
                     formatter: function (x, data) {
-                        if (data.label != "TAHSİLAT YOK") {
+                        if (data.label != "{{ trans('sentence.no_collection') }}") {
                             return parseFloat(x).toLocaleString('tr-TR', {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
@@ -641,44 +641,44 @@
                              @if($purchase["gecikmis"] !=0)
                             {
                                 value: '{{$purchase["gecikmis"]}}',
-                                label: 'GECİKMİŞ ÖDEME'
+                                label: "{{ trans('sentence.delayed_payment') }}"
                             },
                             @endif
                             @if($cheques_payment["gecikmis"] !=0)
                         {
                             value: '{{$cheques_payment["gecikmis"]}}',
-                            label: 'GECİKMİŞ ÇEK'
+                            label: "{{ trans('sentence.delayed_cheque') }}"
                         },
                             @endif
                             @if($expenses["gecikmis"] !=0)
                         {
                             value: '{{$expenses["gecikmis"]}}',
-                            label: 'GECİKMİŞ GİDER'
+                            label: "{{ trans('sentence.delayed_expense') }}"
                         },
                             @endif
                             @if($purchase["gelecek"] !=0)
                         {
                             value: '{{$purchase["gelecek"]}}',
-                            label: 'GELECEK ÖDEME'
+                            label: "{{ trans('sentence.future_payment') }}"
                         },
                             @endif
 
                             @if($cheques_payment["gelecek"] !=0)
                         {
                             value: '{{$cheques_payment["gelecek"]}}',
-                            label: 'GELECEK ÇEK'
+                            label: "{{ trans('sentence.future_cheque') }}"
                         },
                             @endif
                             @if($expenses["gelecek"] !=0)
                         {
                             value: '{{$expenses["gelecek"]}}',
-                            label: 'GELECEK GİDER'
+                            label: "{{ trans('sentence.future_expense') }}"
                         },
                             @endif
                             @else
                         {
                             value: '100',
-                            label: 'ÖDEME YOK'
+                            label: "{{ trans('sentence.no_payment') }}"
                         }
                         @endif()
 
@@ -709,7 +709,7 @@
                         @endif
                     ],
                     formatter: function (x, data) {
-                        if (data.label != "ÖDEME YOK") {
+                        if (data.label != "{{ trans('sentence.no_payment') }}") {
                             return parseFloat(x).toLocaleString('tr-TR', {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
@@ -736,26 +736,26 @@
                         @if($purchase["gecikmis"] !=0)
                     {
                         value: '{{$purchase["gecikmis"]}}',
-                        label: 'GECİKMİŞ ÖDEME'
+                        label: "{{ trans('sentence.delayed_payment') }}"
                     },
                             @endif
                             @if($cheques_payment["gecikmis"] !=0)
                         {
                             value: '{{$cheques_payment["gecikmis"]}}',
-                            label: 'GECİKMİŞ ÇEK'
+                            label: "{{ trans('sentence.delayed_cheque') }}"
                         },
                             @endif
                             @if($expenses["gecikmis"] !=0)
                         {
                             value: '{{$expenses["gecikmis"]}}',
-                            label: 'GECİKMİŞ GİDER'
+                            label: "{{ trans('sentence.delayed_expense') }}"
                         },
                             @endif
 
                             @else
                         {
                             value: '100',
-                            label: 'ÖDEME YOK'
+                            label: "{{ trans('sentence.no_payment') }}"
                         }
                         @endif()
 
@@ -777,7 +777,7 @@
                         @endif
                     ],
                     formatter: function (x, data) {
-                        if (data.label != "ÖDEME YOK") {
+                        if (data.label != "{{ trans('sentence.no_payment') }}") {
                             return parseFloat(x).toLocaleString('tr-TR', {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
@@ -804,26 +804,26 @@
                         @if($purchase["gelecek"] !=0)
                     {
                         value: '{{$purchase["gelecek"]}}',
-                        label: 'GELECEK ÖDEME'
+                        label: "{{ trans('sentence.future_payment') }}"
                     },
                             @endif
                             @if($cheques_payment["gelecek"] !=0)
                         {
                             value: '{{$cheques_payment["gelecek"]}}',
-                            label: 'GELECEK ÇEK'
+                            label: "{{ trans('sentence.future_cheque') }}"
                         },
                             @endif
                             @if($expenses["gelecek"] !=0)
                         {
                             value: '{{$expenses["gelecek"]}}',
-                            label: 'GELECEK GİDER'
+                            label: "{{ trans('sentence.future_expense') }}"
                         },
                             @endif
 
                             @else
                         {
                             value: '100',
-                            label: 'ÖDEME YOK'
+                            label: "{{ trans('sentence.no_payment') }}"
                         }
                         @endif()
 
@@ -844,7 +844,7 @@
                         @endif
                     ],
                     formatter: function (x, data) {
-                        if (data.label != "ÖDEME YOK") {
+                        if (data.label != "{{ trans('sentence.no_payment') }}") {
                             return parseFloat(x).toLocaleString('tr-TR', {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
