@@ -23,7 +23,7 @@ class Permission
 
 
 
-        flash('You do not have permission to visit this page.')->error();
+        flash('Bu sayfayı ziyaret edebilmek için yetkiniz yoktur.')->error();
         return redirect()->route('login');
     }
 }

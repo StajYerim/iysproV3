@@ -41,8 +41,7 @@
                         <div class="widget-body">
                             <div class="widget-body-toolbar st">
                                 <div class="row">
-                                    <div class="col-sm-8" ><h4>TAHSİLATLAR RAPORU</h4></div>
-
+                                    <div class="col-sm-8" ><h4>{{ trans('sentence.collect_reports') }}</h4></div>
                                 </div>
                             </div>
                             <style>
@@ -54,11 +53,11 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="col-sm-4">
-                                            <div class="text-center"><h6><b>VADESİ GEÇEN</b></h6></div>
+                                            <div class="text-center"><h6><b>{{ trans('sentence.overdue_collections') }}</b></h6></div>
                                             <div class="text-center" style="font-size:30px;color:#E74C3C!important">{{$expiry_total_collect}}<b> <small class="note"><i class="fa fa-try"></i> </small></b></div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <div class="text-center"><h6><b>TOPLAM TAHSİLAT</b></h6></div>
+                                            <div class="text-center"><h6><b>{{ trans('sentence.total_collection') }}</b></h6></div>
                                             <div class="text-center" style="font-size:30px;color:#2AC!important">{{$total_collect}}<b> <small class="note"><i class="fa fa-try"></i> </small></b></div>
 
                                         </div>
@@ -74,11 +73,11 @@
                                     <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
                                         <thead>
                                         <tr>
-                                            <th width="15%">TAHSİLAT TARİHİ</th>
-                                            <th width="15%">FATURA/ÇEK TARİHİ</th>
-                                            <th width="30%">MÜŞTERİ/TEDARİKÇİ</th>
-                                            <th width="10%">FATURA/ÇEK</th>
-                                            <th width="10%">GİRİŞ</th>
+                                            <th width="15%">{{ trans('sentence.collection_date') }}</th>
+                                            <th width="15%">{{ trans('sentence.invoice_and_cheque_date') }}</th>
+                                            <th width="30%">{{ trans('sentence.customer_and_supplier') }}</th>
+                                            <th width="10%">{{ trans('sentence.invoice_and_cheque') }}</th>
+                                            <th width="10%">{{ trans('word.entry') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>

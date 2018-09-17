@@ -222,9 +222,9 @@
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Firma</th>
-                                    <th>Para Birimi</th>
-                                    <th>Bakiye</th>
+                                    <th>{{ trans('word.company') }}</th>
+                                    <th>{{ trans('word.date') }}</th>
+                                    <th>{{ trans('word.balance') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -270,9 +270,9 @@
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Firma</th>
-                                    <th>Tarih</th>
-                                    <th>Bakiye</th>
+                                    <th>{{ trans('word.company') }}</th>
+                                    <th>{{ trans('word.date') }}</th>
+                                    <th>{{ trans('word.balance') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -323,9 +323,9 @@
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Firma</th>
-                                    <th>Tarih</th>
-                                    <th>Bakiye</th>
+                                    <th>{{ trans('word.company') }}</th>
+                                    <th>{{ trans('word.date') }}</th>
+                                    <th>{{ trans('word.balance') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -375,10 +375,10 @@
                             <table id="table" class="table table-striped table-hover" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Firma</th>
-                                    <th>Tarih</th>
-                                    <th>Bakiye</th>
-                                    <th>Durum</th>
+                                    <th>{{ trans('word.company') }}</th>
+                                    <th>{{ trans('word.date') }}</th>
+                                    <th>{{ trans('word.balance') }}</th>
+                                    <th>{{ trans('word.status') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -394,11 +394,11 @@
                                             <td>
                                                 @if($bank_account_item->action_type == 1)
                                                     <span style="color:green">
-                                                    GİRİŞ
+                                                    {{ trans('word.entry') }}
                                                 </span>
                                                 @else
                                                     <span style="color:red">
-                                                    ÇIKIŞ
+                                                    {{ trans('word.exit') }}
                                                 </span>
                                                 @endif
 
@@ -410,8 +410,6 @@
 
                             </table>
                             <ul>
-
-
 
 
                             </ul>

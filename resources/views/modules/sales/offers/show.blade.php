@@ -256,7 +256,7 @@
                                         {{trans("sentence.orders_created_from_offer")}}
                                         <br>
                                         @foreach($offer->orders as $order)
-                                        <a href="{{route("sales.orders.show",[aid(),$order->id])}}"> {{$order->description == null ? "SATIŞ SİPARİŞİ": $order->description}}
+                                        <a href="{{route("sales.orders.show",[aid(),$order->id])}}"> {{$order->description == null ? "mocuk": $order->description}}
                                             &nbsp;(#{{$order->id}})</a><br>
                                             @endforeach
                                     </div>

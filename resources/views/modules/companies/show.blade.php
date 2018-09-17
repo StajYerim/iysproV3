@@ -214,14 +214,14 @@
                 data: {
                     remaining:"{{$company->balance}}",
                     details: false,
-                    detail_name: 'TÜM BİLGİLER',
+                    detail_name: '{{ trans("sentence.all_informations") }}',
                     items: []
                 },
                     mounted: function () {
                        this.statement();
                         <?php
                         if (session()->has('cheque_status')) {?>
-                        notification("Success", "Çek Alım işlemi başarıyla gerçekleşti.", "success");
+                        notification("{{ trans('word.successfull') }}", "{{ trans('sentence.the_cheque_purchase_transaction_happened') }}.", "success");
                         <?php          }
                         ?>
                     },
@@ -240,11 +240,11 @@
                     detail:function(){
                         if(this.details == false){
                             this.details = true;
-                            this.detail_name = "ÖZET BİLGİ"
+                            this.detail_name = "{{ trans('sentence.summary_information') }}"
 
                         }else{
                             this.details = false;
-                            this.detail_name = "TÜM BİLGİLER"
+                            this.detail_name = "{{ trans('sentence.all_informations') }}"
                         }
                     },
                     redirect:function(url){

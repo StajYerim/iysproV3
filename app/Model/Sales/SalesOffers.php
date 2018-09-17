@@ -123,13 +123,13 @@ class SalesOffers extends Model
     public function getGetStatusAttribute()
     {
         $dizi = array(
-            ["id"=>0,  "name"=>"TASLAK"],
-            ["id"=>1,  "name"=>"İPTAL EDİLDİ"],
-            ["id"=>2,  "name"=>"REDDEDİLDİ"],
-            ["id"=>3,  "name"=>"KABUL EDİLDİ"],
-            ["id"=>4,  "name"=>"GERİ ÇEKİLDİ"],
-            ["id"=>5,  "name"=>"BEKLEMEDE"],
-            ["id"=>6,  "name"=>"TEKLİF TALEBİ"]);
+            ["id"=>0,  "name"=> trans('word.draft')],
+            ["id"=>1,  "name"=> trans('word.cancelled')],
+            ["id"=>2,  "name"=> trans('word.rejected')],
+            ["id"=>3,  "name"=> trans('word.accepted')],
+            ["id"=>4,  "name"=> trans('word.retreated')],
+            ["id"=>5,  "name"=> trans('word.pending')],
+            ["id"=>6,  "name"=> trans('sentence.offer_request')]);
 
         return $dizi;
 
@@ -139,26 +139,26 @@ class SalesOffers extends Model
     {
         switch ($this->status) {
             case 0:
-                return "TASLAK";
+                return trans('word.draft');
                 break;
             case 1:
-                return "İPTAL EDİLDİ";
+                return trans('word.cancelled');
                 break;
 
             case 2:
-                return "REDDEDİLDİ";
+                return trans('word.rejected');
                 break;
             case 3:
-                return "KABUL EDİLDİ";
+                return trans('word.accepted');
                 break;
             case 4:
-                return "GERİ ÇEKİLDİ";
+                return trans('word.retreated');
                 break;
             case 5:
-                return "BEKLEMEDE";
+                return trans('word.pending');
                 break;
             case 6:
-                return "TEKLİF TALEBİ";
+                return trans('sentence.offer_request');
                 break;
         }
     }

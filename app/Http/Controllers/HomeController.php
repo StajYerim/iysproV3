@@ -102,7 +102,7 @@ class HomeController extends Controller
         $cheques_payment["gecikmis"] = 0;
         foreach ($cheques_payment_gecikmis as $cheq) {
 
-            if ($cheq->cheque_status == 0) {
+            if ($cheq->show_button == "verilen0") {
                 if (money_db_format($cheq->amount) != 0)
                     $cheques_payment["gecikmis"] += money_db_format($cheq->amount);
             }
@@ -111,7 +111,7 @@ class HomeController extends Controller
         $cheques_payment["gelecek"] = 0;
         foreach ($cheques_payment_gelecek as $cheq) {
 
-            if ($cheq->cheque_status == 0) {
+            if ($cheq->show_button == "verilen0") {
                 if (money_db_format($cheq->amount) != 0)
                     $cheques_payment["gelecek"] += money_db_format($cheq->amount);
             }

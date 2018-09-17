@@ -575,8 +575,7 @@ class BankAccountsController extends Controller
             $sonuc = "error";
             $desc = "Hesabınızda en az bir adet Hesap bulunmalı. Bu hesap haricinde başka bir hesap olmadığı için bu hesabı silebilmeniz mümkün değildir.";
         }else{
-            $bank->destroy();
-
+            $bank->delete();
         }
 
 
