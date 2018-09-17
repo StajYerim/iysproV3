@@ -4,51 +4,24 @@
 
     <section id="widget-grid">
 
-        <div class="row" style="display:none">
-
-            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="highchart-container3"></div>
-                <div class="col-sm-12 well">
-                    <div class="col-sm-12 ">
-                        <div class="highchart-container3"></div>
-                    </div>
-                    <div class="col-sm-6">
-                        <table style="display:none" class="highchart table table-hover table-bordered" data-graph-container=".. .. .highchart-container3" data-graph-type="column">
-                            <caption>{{ trans('sentence.cash_flow') }}</caption>
-                            <thead>
-                            <tr>
-                                <th>{{ trans('word.week') }}</th>
-                                <th>{{ trans('word.collections') }}</th>
-                                <th data-graph-type="area">{{ trans('word.payments') }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($cash_flow as $cash)
-                            <tr>
-                                <td>{!!$cash["week_id"] !!}</td>
-                                <td>{{$cash["order_total"]+$cash["cheq_total"]+$cash["bank_total"]}}</td>
-                                <td>{{$cash["porder_total"]+$cash["cheq_payment"]+$cash["expense_payment"]}}</td>
-                            </tr>
-                            @endforeach
-
-                            </tbody>{{ trans('word.collections') }}</table>
-                    </div>
-                </div>
-            </article>
-
-        </div>
-
         <div class="row">
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <!-- Widget ID (each widget will need unique ID)-->
-                <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
-                    <header>
-                        <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
-                        <h2>{{ trans('word.collections') }}</h2>
+            <div class="jarviswidget jarviswidget-color-blue"  data-widget-colorbutton="false"
+                 data-widget-editbutton="false"
+                 data-widget-togglebutton="false"
+                 data-widget-deletebutton="false"
+                 data-widget-fullscreenbutton="false"
+                 data-widget-custombutton="false"
+                 data-widget-collapsed="false"
+                 data-widget-sortable="false" id="wid-id-0">
 
-                    </header>
+            <header>
+                            <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                            <h2>TAHSİLATLAR</h2>
 
+                        </header>
                     <!-- widget div-->
                     <div>
                         <!-- widget content -->
@@ -57,7 +30,8 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>{{ trans('word.total') }}</b>
+                                        <b>TOPLAM TAHSİLATLAR</b><br>
+                                        <span>{{get_money($total_collect)}} TL</span>
                                     </div>
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
@@ -66,20 +40,22 @@
                                     <!-- end widget edit box -->
                                     <div class="widget-body no-padding">
 
+                                        {{--<div class="text-center">--}}
+                                        {{--<img src="https://koban.cloud/wp-content/uploads/2017/08/fa-check.png" style="width:40px">--}}
+                                        {{--</div>--}}
                                         <div id="total_collection" class="chart no-padding"></div>
 
                                     </div>
-                                    <div class="text-center">
-                                        <strong>
-                                            {{ trans('word.total') }} : {{ $total_collect }} <i class="fa fa-try"></i>
-                                        </strong>
-                                    </div>
+
                                 </div>
                             </article>
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>{{ trans('word.delayed') }}</b>
+                                        <b>GECİKMİŞ TAHSİLATLAR</b>
+                                        <br>
+                                        <span>{{get_money($sales["gecikmis"]+$cheques["gecikmis"])}} TL</span>
+
                                     </div>
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
@@ -100,7 +76,9 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>{{ trans('word.unplanning') }}</b>
+                                        <b>GÜNÜ GELMEMİŞ TAHSİLATLAR</b>
+                                        <br>
+                                        <span>{{get_money($sales["gelecek"]+$cheques["gelecek"])}} TL</span>
                                     </div>
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
@@ -119,8 +97,6 @@
 
                                 </div>
                             </article>
-
-
                         </div>
                         <!-- end widget content -->
 
@@ -138,14 +114,20 @@
 
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                    <div class="jarviswidget jarviswidget-color-blue"  data-widget-colorbutton="false"
+                         data-widget-editbutton="false"
+                         data-widget-togglebutton="false"
+                         data-widget-deletebutton="false"
+                         data-widget-fullscreenbutton="false"
+                         data-widget-custombutton="false"
+                         data-widget-collapsed="false"
+                         data-widget-sortable="false" id="wid-id-0">
 
-                    <header>
-                        <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
-                        <h2>{{ trans('word.payments') }}</h2>
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                            <h2>ÖDEMELER</h2>
 
-                    </header>
-
+                        </header>
                     <div>
 
                         <div class="widget-body no-padding">
@@ -153,7 +135,9 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>{{ trans('word.total') }}</b>
+                                        <b>TOPLAM ÖDEMELER</b>
+                                        <br>
+                                        <span>{{get_money($total_payment)}} TL</span>
                                     </div>
 
                                     <div class="widget-body no-padding">
@@ -161,16 +145,15 @@
                                         <div id="total_payment" class="chart no-padding"></div>
 
                                     </div>
-                                    <div class="text-center">
-                                        <b>{{ trans('word.total') }} : {{ $total_payment }} <i class="fa fa-try"></i></b>
-                                    </div>
 
                                 </div>
                             </article>
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>{{ trans('word.delayed') }}</b>
+                                        <b>GECİKMİŞ ÖDEMELER</b>
+                                        <br>
+                                        <span>{{get_money($purchase["gecikmis"]+$cheques_payment["gecikmis"]+$expenses["gecikmis"])}} TL</span>
                                     </div>
                                     <div class="jarviswidget-editbox">
 
@@ -186,7 +169,10 @@
                             <article class="col-sm-4">
                                 <div>
                                     <div class="text-center">
-                                        <b>{{ trans('word.unplanning') }}</b>
+                                        <b>GÜNÜ GELMEMİŞ ÖDEMELER</b>
+                                        <br>
+                                        <span>{{get_money($purchase["gelecek"]+$cheques_payment["gelecek"]+$expenses["gelecek"])}} TL</span>
+
                                     </div>
                                     <div class="jarviswidget-editbox">
 
@@ -213,12 +199,21 @@
 
         <div class="row">
             <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="jarviswidget" id="wid-id-0">
+                <div class="jarviswidget jarviswidget-color-blueDark"
+                     data-widget-colorbutton="false"
+                     data-widget-editbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false"
+                >
 
                     <header>
-                        <div align="center">
-                            <b>{{ trans('sentence.safe_and_accounts') }}</b>
-                        </div>
+
+                            <h2> KASA VE HESAPLAR </h2>
+
                     </header>
 
                     <div>
@@ -255,12 +250,19 @@
             </article>
 
             <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="jarviswidget" id="wid-id-0">
+                <div class="jarviswidget jarviswidget-color-blue"  data-widget-colorbutton="false"
+                     data-widget-editbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false" id="wid-id-0">
 
                     <header>
-                        <div align="center">
-                            <b>{{ trans('sentence.due_collections') }}</b>
-                        </div>
+
+                            <h2>VADESİ GELEN TAHSİLATLAR</h2>
+
                     </header>
 
                     <div>
@@ -297,14 +299,22 @@
                     </div>
                 </div>
             </article>
-
+        </div>
+            <div class="row">
             <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="jarviswidget" id="wid-id-0">
+                <div class="jarviswidget jarviswidget-color-blue"  data-widget-colorbutton="false"
+                     data-widget-editbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false" id="wid-id-0">
 
                     <header>
-                        <div align="center">
-                            <b>{{ trans('sentence.due_payments') }}</b>
-                        </div>
+
+                        <h2>VADESİ GELEN ÖDEMELER</h2>
+
                     </header>
 
                     <div>
@@ -344,12 +354,19 @@
             </article>
 
             <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="jarviswidget" id="wid-id-0">
+                <div class="jarviswidget jarviswidget-color-blue"  data-widget-colorbutton="false"
+                     data-widget-editbutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false"
+                     data-widget-custombutton="false"
+                     data-widget-collapsed="false"
+                     data-widget-sortable="false" id="wid-id-0">
 
                     <header>
-                        <div align="center">
-                            <b>{{ trans('sentence.payment_history') }}</b>
-                        </div>
+
+                        <h2>ÖDEME GEÇMİŞİ</h2>
+
                     </header>
 
                     <div>
@@ -404,145 +421,437 @@
         </div>
 
     </section>
-    <script src="/js/plugin/highChartCore/highcharts-custom.min.js"></script>
-    <script src="/js/plugin/highchartTable/jquery.highchartTable.min.js"></script>
-    <script src="/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
     <script src="/js/plugin/morris/raphael.min.js"></script>
     <script src="/js/plugin/morris/morris.min.js"></script>
     <script>
 
         $(document).ready(function(){
+            pageSetUp();
+            // donut
             if ($('#total_collection').length) {
+                Morris.Donut.prototype.drawEmptyDonutLabel = function (xPos, yPos, color, fontSize, fontWeight) {
+                    var text;
+                    text = this.raphael.text(xPos, yPos, '').attr('font-size', "12px").attr('fill', "#636972").attr('font-family', "futura-pt");
+                    if (fontWeight != null) {
+                        text.attr('font-weight', fontWeight);
+                    }
+                    return text;
+                };
                 Morris.Donut({
                     element : 'total_collection',
-                    data : [
-                        @if($total_collect != 0)
+                    data: [@if($total_collect != 0)
+                        @if($sales["gecikmis"] !=0)
+                    {
+                        value: '{{$sales["gecikmis"]}}',
+                        label: 'GECİKMİŞ SİPARİŞ'
+                    },
+                            @endif
+                            @if($sales["gelecek"] !=0)
                         {
-                            value : '{{$unplanning_collect}}',
-                            label : '{{ trans("word.unplanning") }}'
+                            value: '{{$sales["gelecek"]}}',
+                            label: 'GELECEK SİPARİŞ'
                         },
+                            @endif
+                            @if($cheques["gecikmis"] != 0)
                         {
-                            value:'{{ $expiry_remaining }}',
-                            label:'{{ trans("word.delayed") }}'
-                        }
-                        @else
+                            value: '{{$cheques["gecikmis"]}}',
+                            label: 'GECİKMİŞ ÇEK'
+                        },
+                            @endif()
+                            @if($cheques["gelecek"] !=0)
                         {
-                            value : 100,
-                            label : '{{ trans('sentence.no_record') }}'
+                            value: '{{$cheques["gelecek"]}}',
+                            label: 'GELECEK ÇEK'
+                        },
+                            @endif()
+
+                            @else
+                        {
+                            value: '100',
+                            label: 'TAHSİLAT YOK'
                         }
-                        @endif
+                        @endif()
 
                     ],
-                    labelColor: '#000000',
-                    colors: {!!  $total_collect_color !!},
-                    formatter : function(x,d) {
-                        if(d.label == "{{ trans('sentence.no_record') }}"){
+                    colors: [
+                        @if($total_collect != 0)
+                                @if($sales["gecikmis"] !=0)
+                            "#a90329",
+                        @endif
+                                @if($sales["gelecek"] !=0)
+                            "#2AC",
+                        @endif
+                                @if($cheques["gecikmis"] !=0)
+                            "#a90329",
+                        @endif
+                                @if($cheques["gelecek"] !=0)
+                            "#2AC",
+                        @endif
+                                @else
+                            "#d8d6d6"
+                        @endif
+                    ],
+                    formatter: function (x, data) {
+                        if (data.label != "TAHSİLAT YOK") {
+                            return parseFloat(x).toLocaleString('tr-TR', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }) + " TL";
+                        } else {
                             return "";
                         }
-                        return x + " ₺"
                     }
                 });
             }
 
             if ($('#overdue_collection').length) {
+                Morris.Donut.prototype.drawEmptyDonutLabel = function (xPos, yPos, color, fontSize, fontWeight) {
+                    var text;
+                    text = this.raphael.text(xPos, yPos, '').attr('font-size', "12px").attr('fill', "#636972").attr('font-family', "futura-pt");
+                    if (fontWeight != null) {
+                        text.attr('font-weight', fontWeight);
+                    }
+                    return text;
+                };
                 Morris.Donut({
-                    element : 'overdue_collection',
-                    data : [{
-                        value:'{{ $expiry_remaining == 0 ? '100' : $expiry_remaining }}',
-                        label:'{{ $expiry_remaining == 0 ? trans('sentence.no_record') :""}}'
-                    }],
-                    colors: ['{{ $expiry_remaining_color }}'],
-                    formatter : function(x,d,s) {
-                        if(d.label == "{{ trans('sentence.no_record') }}"){
-                            return "";
-                        }
-                        return x + " ₺"
+                    element: 'overdue_collection',
+                    data: [@if($sales["gecikmis"]+$cheques["gecikmis"]!= 0)
+                        @if($sales["gecikmis"] !=0)
+                    {
+                        value: '{{$sales["gecikmis"]}}',
+                        label: 'GECİKMİŞ SİPARİŞ'
                     },
-                });
-            }
+                            @endif()
 
-            if ($('#unplanning_collection').length) {
-                Morris.Donut({
-                    element : 'unplanning_collection',
-                    data : [{
-                        value:'{{ $unplanning_collect == 0 ? "100":$unplanning_collect}}',
-                        label:'{{ $unplanning_collect == 0 ? trans('sentence.no_record') :""}}'
-                    }],
-                    colors: ['{{ $unplanning_collect_color }}'],
-                    formatter : function(x,d,s) {
-                        if(d.label == "{{ trans('sentence.no_record') }}"){
+                            @if($cheques["gecikmis"] !=0)
+                        {
+                            value: '{{$cheques["gecikmis"]}}',
+                            label: 'GECİKMİŞ ÇEK'
+                        }
+                        , @endif()
+
+                            @else
+                        {
+                            value: '100',
+                            label: 'TAHSİLAT YOK'
+                        }
+                        @endif
+                    ],
+                    colors: [
+                        @if($sales["gecikmis"]+$cheques["gecikmis"]!= 0)
+                                @if($sales["gecikmis"] !=0)
+                            "#a90329",
+                        @endif
+
+                                @if($cheques["gecikmis"] !=0)
+                            "#a90329",
+                        @endif
+                                @else
+                            "#d8d6d6"
+                        @endif
+                    ],
+                    formatter: function (x, data) {
+                        if (data.label != "TAHSİLAT YOK") {
+                            return parseFloat(x).toLocaleString('tr-TR', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }) + " TL";
+                        } else {
                             return "";
                         }
-                        return  x + " ₺"
                     }
                 });
             }
 
-            if ($('#total_payment').length) {
+            if ($('#unplanning_collection').length) {
+                Morris.Donut.prototype.drawEmptyDonutLabel = function (xPos, yPos, color, fontSize, fontWeight) {
+                    var text;
+                    text = this.raphael.text(xPos, yPos, '').attr('font-size', "12px").attr('fill', "#636972").attr('font-family', "futura-pt");
+                    if (fontWeight != null) {
+                        text.attr('font-weight', fontWeight);
+                    }
+                    return text;
+                };
                 Morris.Donut({
-                    element : 'total_payment',
-                    data : [
-                        @if($total_payment != 0)
-                            {
-                                value : '{{ $unplanning_remaining }}',
-                                label : "{{ trans('word.unplanning') }}"
-                            },
-                            {
-                                value:'{{ $purchase_expiry_remaining }}',
-                                label:"{{ trans('word.delayed') }}"
-                            }
-                        @else
-                            {
-                                value : 100,
-                                label : "{{ trans('sentence.no_record') }}"
-                            }
+                    element: 'unplanning_collection',
+                    data: [@if($sales["gelecek"]+$cheques["gelecek"]!= 0)
+                        @if($sales["gelecek"] !=0)
+                    {
+                        value: '{{$sales["gelecek"]}}',
+                        label: 'GELECEK SİPARİŞ'
+                    },
+                            @endif
+
+                            @if($cheques["gelecek"] !=0)
+                        {
+                            value: '{{$cheques["gelecek"]}}',
+                            label: 'GELECEK ÇEK'
+                        }
+                        , @endif()
+
+                            @else
+                        {
+                            value: '100',
+                            label: 'TAHSİLAT YOK'
+                        }
+
+                        @endif
+
+                    ],
+                    colors: [@if($sales["gelecek"]+$cheques["gelecek"]!= 0)
+                            @if($sales["gelecek"] !=0)
+                        "#2AC",
+                        @endif
+
+                                @if($cheques["gelecek"] !=0)
+                            "#2AC",
+                        @endif
+
+                                @else
+                            "#d8d6d6"
                         @endif
                     ],
-                    labelColor: '#000000',
-                    colors: {!! $total_payment_color !!},
-                    formatter : function(x,d) {
-                        if(d.label == "{{ trans('sentence.no_record') }}"){
+                    formatter: function (x, data) {
+                        if (data.label != "TAHSİLAT YOK") {
+                            return parseFloat(x).toLocaleString('tr-TR', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }) + " TL";
+                        } else {
                             return "";
                         }
-                        return x.toLocaleString('tr-TR', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        })+" ₺"
+                    }
+                });
+            }
+//                    total payment
+
+            if ($('#total_payment').length) {
+                Morris.Donut.prototype.drawEmptyDonutLabel = function (xPos, yPos, color, fontSize, fontWeight) {
+                    var text;
+                    text = this.raphael.text(xPos, yPos, '').attr('font-size', "12px").attr('fill', "#636972").attr('font-family', "futura-pt");
+                    if (fontWeight != null) {
+                        text.attr('font-weight', fontWeight);
+                    }
+                    return text;
+                };
+                Morris.Donut({
+                    element: 'total_payment',
+                    data: [@if($total_payment != 0)
+                             @if($purchase["gecikmis"] !=0)
+                            {
+                                value: '{{$purchase["gecikmis"]}}',
+                                label: 'GECİKMİŞ ÖDEME'
+                            },
+                            @endif
+                            @if($cheques_payment["gecikmis"] !=0)
+                        {
+                            value: '{{$cheques_payment["gecikmis"]}}',
+                            label: 'GECİKMİŞ ÇEK'
+                        },
+                            @endif
+                            @if($expenses["gecikmis"] !=0)
+                        {
+                            value: '{{$expenses["gecikmis"]}}',
+                            label: 'GECİKMİŞ GİDER'
+                        },
+                            @endif
+                            @if($purchase["gelecek"] !=0)
+                        {
+                            value: '{{$purchase["gelecek"]}}',
+                            label: 'GELECEK ÖDEME'
+                        },
+                            @endif
+
+                            @if($cheques_payment["gelecek"] !=0)
+                        {
+                            value: '{{$cheques_payment["gelecek"]}}',
+                            label: 'GELECEK ÇEK'
+                        },
+                            @endif
+                            @if($expenses["gelecek"] !=0)
+                        {
+                            value: '{{$expenses["gelecek"]}}',
+                            label: 'GELECEK GİDER'
+                        },
+                            @endif
+                            @else
+                        {
+                            value: '100',
+                            label: 'ÖDEME YOK'
+                        }
+                        @endif()
+
+                    ],
+                    colors: [
+                        @if($total_payment != 0)
+                                @if($purchase["gecikmis"] !=0)
+                            "#a90329",
+                        @endif
+                                @if($cheques_payment["gecikmis"] !=0)
+                            "#a90329",
+                        @endif
+                                @if($expenses["gecikmis"] !=0)
+                            "#a90329",
+                        @endif
+                                @if($purchase["gelecek"] !=0)
+                            "#886650",
+                        @endif
+
+                                @if($cheques_payment["gelecek"] !=0)
+                            "#886650",
+                        @endif
+                                @if($expenses["gelecek"] !=0)
+                            "#886650",
+                        @endif
+                                @else
+                            "#d8d6d6"
+                        @endif
+                    ],
+                    formatter: function (x, data) {
+                        if (data.label != "ÖDEME YOK") {
+                            return parseFloat(x).toLocaleString('tr-TR', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }) + " TL";
+                        } else {
+                            return "";
+                        }
                     }
                 });
             }
 
             if ($('#overdue_payment').length) {
+                Morris.Donut.prototype.drawEmptyDonutLabel = function (xPos, yPos, color, fontSize, fontWeight) {
+                    var text;
+                    text = this.raphael.text(xPos, yPos, '').attr('font-size', "12px").attr('fill', "#636972").attr('font-family', "futura-pt");
+                    if (fontWeight != null) {
+                        text.attr('font-weight', fontWeight);
+                    }
+                    return text;
+                };
                 Morris.Donut({
-                    element : 'overdue_payment',
-                    resize: true,
-                    data : [{
-                        value:'{{ $purchase_expiry_remaining == 0 ? 100 : $purchase_expiry_remaining }}',
-                        label:'{{ $purchase_expiry_remaining == 0 ? trans('sentence.no_record') : "" }}'
-                    }],
-                    colors: ['{{ $purchase_expiry_remaining_color  }}'],
-                    formatter : function(x,d) {
-                        if(d.label == "{{ trans('sentence.no_record') }}"){
+                    element: 'overdue_payment',
+                    data: [@if($purchase["gecikmis"]+$cheques_payment["gecikmis"]+$expenses["gecikmis"] != 0)
+                        @if($purchase["gecikmis"] !=0)
+                    {
+                        value: '{{$purchase["gecikmis"]}}',
+                        label: 'GECİKMİŞ ÖDEME'
+                    },
+                            @endif
+                            @if($cheques_payment["gecikmis"] !=0)
+                        {
+                            value: '{{$cheques_payment["gecikmis"]}}',
+                            label: 'GECİKMİŞ ÇEK'
+                        },
+                            @endif
+                            @if($expenses["gecikmis"] !=0)
+                        {
+                            value: '{{$expenses["gecikmis"]}}',
+                            label: 'GECİKMİŞ GİDER'
+                        },
+                            @endif
+
+                            @else
+                        {
+                            value: '100',
+                            label: 'ÖDEME YOK'
+                        }
+                        @endif()
+
+                    ],
+                    colors: [
+                        @if($purchase["gecikmis"]+$cheques_payment["gecikmis"]+$expenses["gecikmis"] != 0)
+                                @if($purchase["gecikmis"] !=0)
+                            "#a90329",
+                        @endif
+                                @if($cheques_payment["gecikmis"] !=0)
+                            "#a90329",
+                        @endif
+                                @if($expenses["gecikmis"] !=0)
+                            "#a90329",
+                        @endif
+
+                                @else
+                            "#d8d6d6"
+                        @endif
+                    ],
+                    formatter: function (x, data) {
+                        if (data.label != "ÖDEME YOK") {
+                            return parseFloat(x).toLocaleString('tr-TR', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }) + " TL";
+                        } else {
                             return "";
                         }
-                        return x + " ₺"
                     }
                 });
             }
 
             if ($('#unplanning_payment').length) {
+                Morris.Donut.prototype.drawEmptyDonutLabel = function (xPos, yPos, color, fontSize, fontWeight) {
+                    var text;
+                    text = this.raphael.text(xPos, yPos, '').attr('font-size', "12px").attr('fill', "#636972").attr('font-family', "futura-pt");
+                    if (fontWeight != null) {
+                        text.attr('font-weight', fontWeight);
+                    }
+                    return text;
+                };
                 Morris.Donut({
-                    element : 'unplanning_payment',
-                    data : [{
-                        value:'{{ $unplanning_remaining == 0 ? 100 : $unplanning_remaining}}',
-                        label:'{{ $unplanning_remaining == 0 ? trans('sentence.no_record') : "" }}'
-                    }],
-                    colors: ['{{ $unplanning_remaining_color  }}'],
-                    formatter : function(x,d) {
-                        if(d.label == "{{ trans('sentence.no_record') }}"){
+                    element: 'unplanning_payment',
+                    data: [@if($purchase["gelecek"]+$cheques_payment["gelecek"]+$expenses["gelecek"] != 0)
+                        @if($purchase["gelecek"] !=0)
+                    {
+                        value: '{{$purchase["gelecek"]}}',
+                        label: 'GELECEK ÖDEME'
+                    },
+                            @endif
+                            @if($cheques_payment["gelecek"] !=0)
+                        {
+                            value: '{{$cheques_payment["gelecek"]}}',
+                            label: 'GELECEK ÇEK'
+                        },
+                            @endif
+                            @if($expenses["gelecek"] !=0)
+                        {
+                            value: '{{$expenses["gelecek"]}}',
+                            label: 'GELECEK GİDER'
+                        },
+                            @endif
+
+                            @else
+                        {
+                            value: '100',
+                            label: 'ÖDEME YOK'
+                        }
+                        @endif()
+
+                    ],
+                    colors: [
+                        @if($purchase["gelecek"]+$cheques_payment["gelecek"]+$expenses["gelecek"] != 0)
+                                @if($purchase["gelecek"] !=0)
+                            "#886650",
+                        @endif
+                                @if($cheques_payment["gelecek"] !=0)
+                            "#886650",
+                        @endif
+                                @if($expenses["gelecek"] !=0)
+                            "#886650",
+                        @endif
+                                @else
+                            "#d8d6d6"
+                        @endif
+                    ],
+                    formatter: function (x, data) {
+                        if (data.label != "ÖDEME YOK") {
+                            return parseFloat(x).toLocaleString('tr-TR', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }) + " TL";
+                        } else {
                             return "";
                         }
-                        return x + " ₺"
                     }
                 });
             }
@@ -552,7 +861,7 @@
 
         $(document).ready(function() {
 
-            $('table.highchart').highchartTable();
+
         })
 
     </script>

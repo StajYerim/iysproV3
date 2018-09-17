@@ -21,8 +21,10 @@ class ShareController extends Controller
         $data["offer_id"] = $id;
 
 
-        Mail::to($request->receivers)
+        foreach($request->tagsd as $mail){
+        Mail::to($mail->text)
             ->send(new Offer($data));
+        }
     }
 
     /*Purchase Offer mail send*/
@@ -35,9 +37,10 @@ class ShareController extends Controller
         $data["lang"] = $request->lang;
         $data["offer_id"] = $id;
 
-
-        Mail::to($request->receivers)
-            ->send(new \App\Mail\Share\Purchases\Offer($data));
+        foreach($request->tagsd as $mail){
+            Mail::to($mail["text"])
+                ->send(new \App\Mail\Share\Purchases\Offer($data));
+        }
     }
 
     /*Sales order mail share of pdf*/
@@ -51,8 +54,10 @@ class ShareController extends Controller
         $data["lang"] = $request->lang;
         $data["offer_id"] = $id;
 
+        foreach($request->tagsd as $mail){
+            Mail::to($mail["text"])
+                ->send(new Order($data));
+        }
 
-        Mail::to($request->receivers)
-            ->send(new Order($data));
     }
 }

@@ -28,9 +28,12 @@
                         </span>
                         <span class="pull-right">
                             <a class="btn btn-default" href="{{route("finance.accounts.form",[aid(),$account->id,$account->type,"update"])}}">
-                                {{trans("word.edit")}}
+                                <i class="fa fa-edit" aria-hidden="true"></i> {{trans("word.edit")}}
 					        </a>
-
+   <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+       <i class="fa fa-trash-o" aria-hidden="true"></i>
+       {{trans("word.delete")}}
+					        </a>
                         </span>
                     </h1>
 
@@ -152,6 +155,9 @@
                                         @{{ item.last_balance }}
                                         <i class="fa fa-{{strtolower($account->cur_info["code"] == "TRL" ? "try":$account->cur_info["code"])}}"></i>
                                     </td>
+                                </tr>
+                                <tr v-show="itemsReverse.length == 0" >
+                                    <td colspan="6">Hesap içinde hareket mevcut değil</td>
                                 </tr>
                                 </tbody>
 
@@ -437,6 +443,7 @@
             </div>
         </div>
 
+        @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message="Bu hesabı silmek istediğinizden eminmisiniz ?",$id=$account->id])
 
 
     </section>
@@ -487,14 +494,18 @@
                     },
                     delete_data: function ($id) {
                         fullLoading();
-                        axios.delete('{{route("stock.movements.destroy",[aid(),$account->id])}}')
+                        axios.post('{{route("finance.accounts.destroy",[aid(),$id])}}')
                             .then(function (response) {
                                 if (response.data.message == "success") {
-                                    window.location.href = '{{route("stock.movements.index",aid())}}';
+                                    window.location.href = '{{route("finance.accounts.index",aid())}}';
+                                } else {
+                                    $("#response_data_delete").html(response.data.desc)
                                 }
+                                fullLoadingClose();
                             }).catch(function (error) {
-                            notification("Error", error.response.data.message, "danger");
                             fullLoadingClose();
+                            notification("Error", error.response.data.message, "danger");
+
                         });
                     },
                     money_in: function () {

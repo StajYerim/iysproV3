@@ -116,7 +116,7 @@
 
                     <div class="tab-pane fade" id="g2">
                         <div v-show="stock.data.length > 0 ">
-                            <div class="table-responsive" v-if="stock.data.length > 0">
+                            <div class="table-responsive" v-show="stock.data.length > 0">
 
                                 <table class="table table-hover">
                                     <thead>
@@ -161,7 +161,7 @@
                                 </li>
                             </ul>
 
-                            <div class="alert alert-info" v-else="stock.data.length < 0">
+                            <div class="alert alert-info" v-show="stock.data.length < 0">
                                 <span class="fa fa-info-circle">
                                     {{trans("sentence.service_product_transaction_history")}}
                                 </span>
@@ -207,10 +207,14 @@
                             .then(function (response) {
                                 if (response.data.message == "success") {
                                     window.location.href = '{{route("stock.index",aid())}}';
+                                }else{
+                                    $("#response_data_delete").html(response.data.desc)
                                 }
+                                fullLoadingClose();
                             }).catch(function (error) {
-                            notification("Error", error.response.data.message, "danger");
                             fullLoadingClose();
+                            notification("Error", error.response.data.message, "danger");
+
                         });
                     },
 

@@ -157,7 +157,7 @@
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
                                                 <div class="bottom-info">
-                                                    {{ trans("word.BANKS") }}
+                                                    {{ trans("word.banks") }}
                                                 </div>
                                             </label>
                                             <div class="col-sm-8 " v-if="cheque_payment.no_banks">

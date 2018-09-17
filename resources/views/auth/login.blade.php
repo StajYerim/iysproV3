@@ -95,11 +95,11 @@
                     // Messages for form validation
                     messages: {
                         email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
+                            required: 'Lütfen mail adresinizi girin',
+                            email: 'Lütfen geçerli bir mail adresi girin'
                         },
                         password: {
-                            required: 'Please enter your password'
+                            required: 'Lütfen şifresinizi girin.'
                         }
                     },
 

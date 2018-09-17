@@ -102,7 +102,7 @@ class RegisterController extends Controller
                 $user->save();
 
                 // flash success, password is in place and account confirmed
-                flash('Email confirmed successfully')->success();
+                flash('Emailiniz başarıyla onaylandı.')->success();
             } else { // in other case, redirect to form with password setup
                 return view('auth.password_setup', [
                     'user' => $user,
@@ -221,7 +221,7 @@ class RegisterController extends Controller
             "account_id" => $account->id,
             "name" => "KASA HESABI",
             "type" => 1,
-            "currency" => "try",
+            "currency" => "TRY",
         ]);
 
         // Modules Activated
