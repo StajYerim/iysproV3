@@ -186,7 +186,7 @@
                     en: {
                         messages: {
                             email: function () {
-                                return "Lütfen geçerli bir mail adresi giriniz."
+                                return "{{ trans('sentence.please_enter_a_valid_email_address') }}"
                             }
                         }
                     }
@@ -299,7 +299,7 @@
                                     });
 
                                 } else {
-                                    notification("Error", "Lütfen gerekli alanları doldurunuz", "danger");
+                                    notification("Error", "{{ trans('sentence.please_fill_required_fields') }}", "danger");
 
                                 }
                             })

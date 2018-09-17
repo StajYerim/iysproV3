@@ -250,10 +250,10 @@
                     <td class="body" width="100%" cellpadding="0" cellspacing="0">
 
                         <br>
-                        MÜŞTERİ : <b>{{$waybill->order->company["company_name"]}}</b><BR>
-                        {{--TARİH : <B>{{$waybill->edit_date}}</B><br>--}}
-                        {{--SEVK : <B>{{$waybill->dispatch_date}}</B><br>--}}
-                        İRSALİYE : <b>{{$waybill->number}}</b>
+                        {{ trans('word.customer') }} : <b>{{$waybill->order->company["company_name"]}}</b><BR>
+                        {{--{{ trans('word.date') }} : <B>{{$waybill->edit_date}}</B><br>--}}
+                        {{--{{ trans('word.dispatch') }} : <B>{{$waybill->dispatch_date}}</B><br>--}}
+                        {{ trans('word.waybill') }}: <b>{{$waybill->number}}</b>
                         <br><BR>
                         <table class="inner-body" align="center" width="700" cellpadding="0" cellspacing="0">
                             <tr style="padding:0px;">

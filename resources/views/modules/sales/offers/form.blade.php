@@ -132,7 +132,7 @@
             </div>
         </div>
 
-        @include("components.modals.companies",[$option="customer",$title="New Company",$type = "new_company",$message="Company Form",$id=0])
+        @include("components.modals.companies",[$option="customer",$title="{{ trans('sentence.new_company') }}",$type = "new_company",$message="{{ trans('sentence.company_form') }}",$id=0])
 
     </section>
 
@@ -259,12 +259,12 @@
                                             }
                                         }).catch(function (error) {
                                         fullLoadingClose();
-                                        notification("Error", "Please add offer item", "danger");
+                                        notification("Error", "{{ trans('sentence.please_fill_required_fields') }}", "danger");
 
                                     });
 
                                 } else {
-                                    notification("Error","Please required fields","danger");
+                                    notification("Error","{{ trans('sentence.please_fill_required_fields') }}","danger");
                                 }
                             })
 

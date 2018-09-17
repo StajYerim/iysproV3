@@ -58,6 +58,22 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'month', 'key'=> 'november', 'text'=> ['en'=> 'NOVEMBER', 'tr'=> 'KASIM']]);
         LanguageLine::create(['group'=> 'month', 'key'=> 'december', 'text'=> ['en'=> 'DECEMBER', 'tr'=> 'ARALIK']]);
 
+        // time area
+        LanguageLine::create(['group'=> 'time', 'key'=> 'today', 'text'=> ['en'=> 'TODAY', 'tr'=> 'BUGÜN']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'yesterday', 'text'=> ['en'=> 'YESTERDAY', 'tr'=> 'DÜN']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'last_7_days', 'text'=> ['en'=> 'LAST 7 DAYS', 'tr'=> 'SON 7 GÜN']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'last_30_days', 'text'=> ['en'=> 'LAST 30 DAYS', 'tr'=> 'SON 30 GÜN']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'this_month', 'text'=> ['en'=> 'THIS MONTH', 'tr'=> 'BU AY']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'last_month', 'text'=> ['en'=> 'LAST MONTH', 'tr'=> 'GEÇEN AY']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'special_date', 'text'=> ['en'=> 'SPECIAL DATE', 'tr'=> 'ÖZEL TARİH']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'mo', 'text'=> ['en'=> 'MO', 'tr'=> 'PT']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'tu', 'text'=> ['en'=> 'TU', 'tr'=> 'SA']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'we', 'text'=> ['en'=> 'WE', 'tr'=> 'ÇA']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'th', 'text'=> ['en'=> 'TH', 'tr'=> 'PE']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'fr', 'text'=> ['en'=> 'FR', 'tr'=> 'CU']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'sa', 'text'=> ['en'=> 'SA', 'tr'=> 'CT']]);
+        LanguageLine::create(['group'=> 'time', 'key'=> 'su', 'text'=> ['en'=> 'SU', 'tr'=> 'PA']]);
+
         // word area
         LanguageLine::create(['group'=> 'word', 'key'=> 'english', 'text'=> ['en'=> 'ENGLISH', 'tr'=> 'İNGİLİZCE']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'turkish', 'text'=> ['en'=> 'TURKISH', 'tr'=> 'TÜRKÇE']]);
@@ -123,6 +139,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'word', 'key'=> 'tax', 'text'=> ['en'=> 'TAX', 'tr'=> 'VERGİ']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'all', 'text'=> ['en'=> 'ALL', 'tr'=> 'TÜM']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'new', 'text'=> ['en'=> 'NEW', 'tr'=> 'YENİ']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'approve', 'text'=> ['en'=> 'APPROVE', 'tr'=> 'ONAYLA']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'approved', 'text'=> ['en'=> 'APPROVED', 'tr'=> 'ONAYLI']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'rejected', 'text'=> ['en'=> 'REJECTED', 'tr'=> 'REDDEDİLDİ']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'shipped', 'text'=> ['en'=> 'SHIPPED', 'tr'=> 'SEVK EDİLDİ']]);
@@ -198,10 +215,28 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'word', 'key'=> 'retail', 'text'=> ['en'=> 'RETAIL', 'tr'=> 'PAREKENDE']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'whosale', 'text'=> ['en'=> 'WHOSALE', 'tr'=> 'TOPTAN']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'production', 'text'=> ['en'=> 'PRODUCTION', 'tr'=> 'ÜRETİM']]);
-        LanguageLine::create(['group'=> 'word', 'key'=> 'success', 'text'=> ['en'=> 'SUCCESS', 'tr'=> 'BAŞARILI']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'success', 'text'=> ['en'=> 'SUCCESS', 'tr'=> 'BAŞARI']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'successfull', 'text'=> ['en'=> 'SUCCESSFULL', 'tr'=> 'BAŞARILI']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'error', 'text'=> ['en'=> 'ERROR', 'tr'=> 'HATA']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'month', 'text'=> ['en'=> 'MONTH', 'tr'=> 'AY']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'receipt', 'text'=> ['en'=> 'RECEIPT', 'tr'=> 'FİŞ']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'entry', 'text'=> ['en'=> 'ENTRY', 'tr'=> 'GİRİŞ']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'exit', 'text'=> ['en'=> 'EXIT', 'tr'=> 'ÇIKIŞ']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'unplanning', 'text'=> ['en'=> 'UNPLANNING', 'tr'=> 'GÜNÜ GELMEMİŞ']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'delayed', 'text'=> ['en'=> 'DELAYED', 'tr'=> 'GECİKMİŞ']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'payments', 'text'=> ['en'=> 'PAYMENTS', 'tr'=> 'ÖDEMELER']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'collections', 'text'=> ['en'=> 'COLLECTIONS', 'tr'=> 'TAHSİLATLAR']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'week', 'text'=> ['en'=> 'WEEK', 'tr'=> 'HAFTA']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'draft', 'text'=> ['en'=> 'DRAFT', 'tr'=> 'TASLAK']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'cancelled', 'text'=> ['en'=> 'CANCELLED', 'tr'=> 'İPTAL EDİLDİ']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'accepted', 'text'=> ['en'=> 'ACCEPTED', 'tr'=> 'KABUL EDİLDİ']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'retreated', 'text'=> ['en'=> 'RETREATED', 'tr'=> 'GERİ ÇEKİLDİ']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'pending', 'text'=> ['en'=> 'PENDING', 'tr'=> 'BEKLEMEDE']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'waybill', 'text'=> ['en'=> 'WAYBILL', 'tr'=> 'İRSALİYE']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'apply', 'text'=> ['en'=> 'APPLY', 'tr'=> 'UYGULA']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'transaction', 'text'=> ['en'=> 'TRANSACTION', 'tr'=> 'İŞLEM']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'debt', 'text'=> ['en'=> 'DEBT', 'tr'=> 'BORÇ']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'credit', 'text'=> ['en'=> 'CREDIT', 'tr'=> 'ALACAK']]);
 
 
         // sentence area
@@ -330,6 +365,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'api_password', 'text'=> ['en'=> 'API PASSWORD', 'tr'=> 'API ŞİFRESİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_reports', 'text'=> ['en'=> 'SALES REPORTS', 'tr'=> 'SATIŞ RAPORLARI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'purchase_reports', 'text'=> ['en'=> 'PURCHASE REPORTS', 'tr'=> 'SATIN ALMA RAPORLARI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'purchase_reports_table', 'text'=> ['en'=> 'PURCHASE REPORTS TABLE', 'tr'=> 'SATIN ALMA RAPORLARI TABLOSU']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'payment_reports', 'text'=> ['en'=> 'PAYMENT REPORTS', 'tr'=> 'ÖDEME RAPORLARI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'expenses_reports', 'text'=> ['en'=> 'EXPENSES REPORT', 'tr'=> 'GİDER RAPORLARI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'vat_reports', 'text'=> ['en'=> 'VAT REPORTS', 'tr'=> 'KDV RAPORLARI']]);
@@ -372,6 +408,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'paid_account', 'text'=> ['en'=> 'PAID ACCOUNT', 'tr'=> 'ÖDENECEK HESAP']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'select_account', 'text'=> ['en'=> 'SELECT ACCOUNT', 'tr'=> 'HESAP SEÇ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'cash_account', 'text'=> ['en'=> 'CASH ACCOUNT', 'tr'=> 'KASA HESABI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'cash_flow', 'text'=> ['en'=> 'CASH FLOW', 'tr'=> 'NAKİT AKIŞI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'account_name', 'text'=> ['en'=> 'ACCOUNT NAME', 'tr'=> 'HESAB ADI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'add_safe', 'text'=> ['en'=> 'ADD SAFE', 'tr'=> 'KASA EKLE']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'add_bank', 'text'=> ['en'=> 'ADD BANK', 'tr'=> 'BANKA EKLE']]);
@@ -454,6 +491,8 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'account_balanca', 'text'=> ['en'=> 'ACCOUNT BALANCE', 'tr'=> 'HESAP BAKİYESİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'proforma_invoice', 'text'=> ['en'=> 'PROFORMA INVOICE', 'tr'=> 'PROFORM FATURA']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'excluding_vat', 'text'=> ['en'=> 'NO VAT', 'tr'=> 'KDVSİZ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'excluding_vat', 'text'=> ['en'=> 'NO VAT', 'tr'=> 'KDVSİZ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'including_vat', 'text'=> ['en'=> 'INCLUDING VAT', 'tr'=> 'KDV DAHİL']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'general_amount', 'text'=> ['en'=> 'GENERAL AMOUNT', 'tr'=> 'GENEL TUTAR']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'orders_created_from_offer', 'text'=> ['en'=> 'ORDERS CREATED FROM OFFER', 'tr'=> 'TEKLİFTEN OLUŞTURULAN SİPARİŞLER']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'cancel_search', 'text'=> ['en'=> 'CANCEL SEARCH', 'tr'=> 'ARAMAYI İPTAL ET']]);
@@ -608,6 +647,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'if_there_is', 'text'=> ['en'=> 'IF THERE IS','tr'=> 'VARSA']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'customer_email', 'text'=> ['en'=> 'CUSTOMER E-MAIL','tr'=> 'MÜŞTERİ E-POSTA']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_offer_details_by_downloading_the_summary', 'text'=> ['en'=> 'HELLO, YOU CAN REVIEW THE SALES OFFER DETAILS BY DOWNLOADING THE SUMMARY. ','tr'=> 'MERHABA, SATIŞ TEKLİFİ DETAYLARINIZ EKTEDİR, İNDİREREK İNCELEYEBİLİRSİNİZ. ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_order_details_by_downloading_the_summary', 'text'=> ['en'=> 'HELLO, YOU CAN REVIEW THE SALES ORDER DETAILS BY DOWNLOADING THE SUMMARY. ','tr'=> 'MERHABA, SATIŞ SİPARİŞİ DETAYLARINIZ EKTEDİR, İNDİREREK İNCELEYEBİLİRSİNİZ. ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'purchase_request_details_by_downloading_the_summary', 'text'=> ['en'=> 'HELLO, YOU CAN REVIEW THE PURCHASE REQUEST DETAILS BY DOWNLOADING THE SUMMARY. ','tr'=> 'MERHABA, SATIN ALMA TALEBİ DETAYLARINIZ EKTEDİR, İNDİREREK İNCELEYEBİLİRSİNİZ. ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'you_do_not_have_permission_to_visit_this_page', 'text'=> ['en'=> 'YOU DO NOT HAVE PERMISSION TO VISIT THIS PAGE','tr'=> 'BU SAYFAYI ZİYARET ETME İZNİNİZ YOK']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'new_transaction', 'text'=> ['en'=> 'NEW TRANSACTION','tr'=> 'YENİ İŞLEM']]);
@@ -618,7 +658,6 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'back_to_login', 'text'=> ['en'=> 'BACK TO LOGIN','tr'=> 'GİRİŞE GERİ DÖN']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'you_have_been_registered_to', 'text'=> ['en'=> 'You have been registered to ','tr'=> 'Başarıyla kayıt oldunuz ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'confirmation_code', 'text'=> ['en'=> 'CONFIRMATION CODE','tr'=> 'DOĞRULAMA KODU']]);
-        LanguageLine::create(['group'=> 'sentence', 'key'=> 'company', 'text'=> ['en'=> 'CONFIRMATION CODE','tr'=> 'DOĞRULAMA KODU']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'no_data_available_in_table', 'text'=> ['en'=> 'NO DATA AVAIBLE IN TABLE','tr'=> 'TABLODA HERHANGİ BİR VERİ MEVCUT DEĞİL']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'info_empty', 'text'=> ['en'=> 'INFO EMPTY','tr'=> 'KAYIT YOK']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'loading', 'text'=> ['en'=> 'LOADING...','tr'=> 'YÜKLENİYOR...']]);
@@ -653,12 +692,75 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'all_your_informations_saved', 'text'=> ['en'=> 'ALL YOUR INFORMATIONS SAVED','tr'=> 'TÜM BİLGİLERİNİZ KAYDEDİLDİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'please_check_form_again', 'text'=> ['en'=> 'PLEASE, CHECK FORM AGAIN','tr'=> 'LÜTFEN FORMU TEKRARDAN KONTROL EDİNİZ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_invoice', 'text'=> ['en'=> 'SALES INVOICE','tr'=> 'SATIŞ FATURASI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_invoices', 'text'=> ['en'=> 'SALES INVOICES','tr'=> 'SATIŞ FATURALARI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'calculated_vat', 'text'=> ['en'=> 'CALCULATED VAT','tr'=> 'HESAPLANAN KDV']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'reduced_vat', 'text'=> ['en'=> 'REDUCED VAT','tr'=> 'İNDİRİLECEK KDV']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'clear_vat', 'text'=> ['en'=> 'CLEAR VAT','tr'=> 'NET KDV']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'vat_reports_per_calendar_month', 'text'=> ['en'=> 'VAT REPORTS PER CALENDAR MONTH','tr'=> 'TAKVİM AYI BAŞINA KDV RAPORLARI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_and_expenses_vat_table', 'text'=> ['en'=> 'SALES AND EXPENSES VAT TABLE','tr'=> 'SATIŞLAR VE GİDERLER KDV TABLOSU']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'any_sales_invoice_was_not_created', 'text'=> ['en'=> 'ANY SALES INVOICE WAS NOT CREATED','tr'=> 'HERHANGİ BİR SATIŞ FATURASI OLUŞTURULMAMIŞTIR']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'payment_history', 'text'=> ['en'=> 'PAYMENT HISTORY','tr'=> 'ÖDEME GEÇMİŞİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'due_payments', 'text'=> ['en'=> 'DUE PAYMENTS','tr'=> 'VADESİ GELEN ÖDEMELER']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'due_collections', 'text'=> ['en'=> 'DUE COLLECTIONS','tr'=> 'VADESİ GELEN TAHSİLATLAR']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'safe_and_accounts', 'text'=> ['en'=> 'SAFE AND ACCOUNTS','tr'=> 'KASA VE HESAPLAR']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'no_record', 'text'=> ['en'=> 'NO RECORD','tr'=> 'KAYIT YOK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'offer_request', 'text'=> ['en'=> 'OFFER REQUEST','tr'=> 'TEKLİF TALEBİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'good_work', 'text'=> ['en'=> 'GOOD WORK','tr'=> 'İYİ ÇALIŞMALAR']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'received_check', 'text'=> ['en'=> 'RECEIVED CHECK','tr'=> 'ALINAN ÇEK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'given_check', 'text'=> ['en'=> 'GIVEN CHECK','tr'=> 'VERİLEN ÇEK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'send_transport_informations', 'text'=> ['en'=> 'SEND TRANSPORT INFORMATIONS','tr'=> 'SEVKİYAT BİLGİLERİNİ GÖNDER']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'send_to_production', 'text'=> ['en'=> 'SEND TO PRODUCTION','tr'=> 'ÜRETİME GÖNDER']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_proccess_completed', 'text'=> ['en'=> 'THE PROCCESS COMPLETED.','tr'=> 'İŞLEM TAMAMLANDI.']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'it_is_printing', 'text'=> ['en'=> 'IT IS PRINTING...','tr'=> 'YAZDIRILIYOR...']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'delete_invoice_record', 'text'=> ['en'=> 'DELETE INVOICE RECORD','tr'=> 'FATURA KAYDINI SİL']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_order_sent_to_production', 'text'=> ['en'=> 'DELETE INVOICE RECORD','tr'=> 'FATURA KAYDINI SİL']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'what_do_you_want_to_do', 'text'=> ['en'=> 'WHAT DO YOU WANT TO DO?','tr'=> 'NE YAPMAK İSTİYORSUNUZ?']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'you_have_removed_the_selected_waybill', 'text'=> ['en'=> 'YOU HAVE REMOVED THE SELECTED WAYBILL','tr'=> 'SEÇİLEN İRSALİYEYİ KALDIRDINIZ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_transaction_approved', 'text'=> ['en'=> 'THE TRANSACTION APPROVED.','tr'=> 'İŞLEM ONAYLANDI.']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'production_approval', 'text'=> ['en'=> 'PRODUCTION APPROVAL','tr'=> 'ÜRETİM ONAYI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'this_order_will_be_included_in_the_production_planning', 'text'=> ['en'=> 'THIS ORDER WILL BE INCLUDED IN THE PRODUCTION PLANNING.','tr'=> 'BU SİPARİŞ ÜRETİM PLANLANMASINA DAHİL EDİLECEKTİR.']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'please_wait', 'text'=> ['en'=> 'PLEASE, WAIT','tr'=> 'LÜTFEN BEKLEYİNİZ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_order_was_successfully_submitted_to_the_production_planning_department', 'text'=> ['en'=> 'THE ORDER WAS SUCCESSFULLY SUBMITTED TO THE PRODUCTION PLANNING DEPARTMENT','tr'=> 'SİPARİŞ BAŞARIYLA ÜRETİM PLANLAMA BÖLÜMÜNE GÖNDERİLDİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_transaction_is_faulty', 'text'=> ['en'=> 'THE TRANSACTION IS FAULTY.','tr'=> 'İŞLEM HATALI.']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'please_try_again_later', 'text'=> ['en'=> 'PLEASE TRY AGAIN LATER.','tr'=> 'LÜTFEN DAHA SONRA TEKRAR DENEYİNİZ.']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'if_you_want_to_send_cargo_information_by_email', 'text'=> ['en'=> 'IF YOU WANT TO SEND CARGO INFORMATION BY E-MAIL, PLEASE DO NOT LEAVE YOUR E-MAIL ADDRESS BLANK','tr'=> 'KARGO BİLGİSİNİ MAİL OLARAK GÖNDERMEK İSTİYORSANIZ, LÜTFEN E-POSTA ADRESİNİ BOŞ BIRAKMAYINIZ.']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'please_enter_full_transport_informations', 'text'=> ['en'=> 'PLEASE, ENTER FULL TRANSPORT INFORMATIONS.','tr'=> 'LÜTFEN SEVKİYAT BİLGİLERİNİ EKSİKSİZ GİRİNİZ.']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'confirm_billing_deletion', 'text'=> ['en'=> 'CONFIRM BILLING DELETION','tr'=> 'FATURA SİLME İŞLEMİNİ ONAYLA']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'are_you_sure_you_want_to_delete_the_bill', 'text'=> ['en'=> 'ARE YOU SURE YOU WANT TO DELETE THE BILL','tr'=> 'FATURAYI SİLMEK İSTEDİĞİNİZDEN EMİN MİSİNİZ?']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'you_are_about_to_delete_the_bill_from_this_order', 'text'=> ['en'=> 'YOU ARE ABOUT TO DELETE THE BILL FROM THIS ORDER','tr'=> 'BU SİPARİŞTEN FATURAYI SİLMEK ÜZERESİNİZ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_invoice_deleted_successfully', 'text'=> ['en'=> 'THE INVOICE DELETED SUCCESSFULLY','tr'=> 'FATURA BAŞARIYLA SİLİNDİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_invoice_could_not_be_deleted', 'text'=> ['en'=> 'THE INVOICE COULD NOT BE DELETED','tr'=> 'FATURA SİLİNEMEDİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'please_contact_your_system_administrator', 'text'=> ['en'=> 'PLEASE, CONTACT YOUR SYSTEM ADMINISTRATOR','tr'=> 'LÜTFEN SİSTEM YÖNETİCİNİZ İLE GÖRÜŞÜN']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'your_email_address_must_be_in_the_format', 'text'=> ['en'=> 'YOUR E-MAIL ADDRESS MUT BE IN THE FORMAT OF name@domain.com','tr'=> 'E-POSTA ADRESİNİZ isim@alanadi.com BİÇİMİNDE OLMALIDIR']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'please_specify_your_first_name', 'text'=> ['en'=> 'PLEASE, SPECIFY YOUR FIRST NAME','tr'=> 'LÜTFEN ADINIZI BELİRTİNİZ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'please_specify_your_last_name', 'text'=> ['en'=> 'PLEASE, SPECIFY YOUR LAST NAME','tr'=> 'LÜTFEN SOYADINIZI BELİRTİNİZ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'we_need_your_email_address_to_contact_you', 'text'=> ['en'=> 'WE NEED YOUR E-MAIL ADDRESS TO CONTACT YOU','tr'=> 'SİZİNLE İLETİŞİM KURMAK İÇİN E-POSTA ADRESİNİZE İHTİYACIMIZ VAR']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'please_fill_required_fields', 'text'=> ['en'=> 'PLEASE, FILL REQUIRED FIELDS','tr'=> 'LÜTFEN, ZORUNLU ALANLARI DOLDURUNUZ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'new_company', 'text'=> ['en'=> 'NEW COMPANY','tr'=> 'YENİ FİRMA']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'company_form', 'text'=> ['en'=> 'COMPANY FORM','tr'=> 'FİRMA FORMU']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'new_product', 'text'=> ['en'=> 'NEW PRODUCT','tr'=> 'YENİ ÜRÜN']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'product_form', 'text'=> ['en'=> 'PRODUCT FORM','tr'=> 'ÜRÜN FORMU']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'day_month_year_format', 'text'=> ['en'=> 'DD/MM/YYYY','tr'=> 'GG/AA/YYYY']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'invoice_categories', 'text'=> ['en'=> 'INVOICE CATEGORIES','tr'=> 'FATURA KATEGORİLERİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'customer_categories', 'text'=> ['en'=> 'CUSTOMER CATEGORIES','tr'=> 'MÜŞTERİ KATEGORİLERİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'service_and_product_categories', 'text'=> ['en'=> 'SERVICE / PRODUCT CATEGORIES','tr'=> 'HİZMET / ÜRÜN KATEGORİLERİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_reports_table', 'text'=> ['en'=> 'SALES REPORTS TABLE','tr'=> 'SATIŞ RAPORLARI TABLOSU']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'company_name', 'text'=> ['en'=> 'COMPANY NAME','tr'=> 'ŞİRKET ADI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'overdue_collections', 'text'=> ['en'=> 'OVERDUE COLLECTIONS','tr'=> 'VADESİ GEÇEN TAHSİLATLAR']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'overdue_payments', 'text'=> ['en'=> 'OVERDUE PAYMENTS','tr'=> 'VADESİ GEÇEN ÖDEMELER']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'total_collection', 'text'=> ['en'=> 'TOTAL COLLECTION','tr'=> 'TOPLAM TAHSİLAT']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'total_payment', 'text'=> ['en'=> 'TOTAL PAYMENT','tr'=> 'TOPLAM ÖDEME']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'collection_date', 'text'=> ['en'=> 'COLLECTION DATE','tr'=> 'TAHSİLAT TARİHİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'invoice_and_cheque_date', 'text'=> ['en'=> 'INVOICE / CHEQUE DATE','tr'=> 'FATURA / ÇEK TARİHİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'customer_and_supplier', 'text'=> ['en'=> 'CUSTOMER / SUPPLIER','tr'=> 'MÜŞTERİ / TEDARİKÇİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'invoice_and_cheque', 'text'=> ['en'=> 'INVOICE / CHEQUE','tr'=> 'FATURA / ÇEK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'not_specified', 'text'=> ['en'=> 'NOT SPECIFIED','tr'=> 'BELİRTİLMEDİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'payment_date', 'text'=> ['en'=> 'PAYMENT DATE','tr'=> 'ÖDEME TARİHİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'please_enter_a_valid_email_address', 'text'=> ['en'=> 'PLEASE ENTER A VALID E-MAIL ADDRESS','tr'=> 'LÜTFEN GEÇERLİ BİR E-POSTA ADRESİ GİRİNİZ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_cheque_purchase_transaction_happened', 'text'=> ['en'=> 'THE CHEQUE PURCHASE TRANSACTION HAPPENED','tr'=> 'ÇEK ALIM İŞLEMİ GERÇEKLEŞTİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'summary_information', 'text'=> ['en'=> 'SUMMARY INFORMATION','tr'=> 'ÖZET BİLGİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'current_account_extract', 'text'=> ['en'=> 'CURRENT ACCOUNT EXTRACT','tr'=> 'CARİ HESAP EKSTRESİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'there_is_no_account_activity', 'text'=> ['en'=> 'THERE IS NO ACCOUNT ACTIVITY','tr'=> 'HESAP FAALİYETİ BULUNMAMAKTADIR']]);
 
 
     }
