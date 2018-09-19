@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Modules\Sales;
 
 use App\Bankabble;
+use App\Companies;
 use App\Language;
 use App\Mail\Share\Sales\Order;
 use App\Mail\Share\Sales\Transfer;
@@ -103,6 +104,9 @@ class OrdersController extends Controller
             "vat_total" => $request->form["vat_total"],
             "grand_total" => $request->form["grand_total"]
         ]);
+
+        Companies::find($request->form["company_id"]["id"])->update(["customer"=>1]);
+
 
         Taggable::where("taggable_type","App\Model\Sales\SalesOrders")->where("taggable_id",$order->id)->delete();
 

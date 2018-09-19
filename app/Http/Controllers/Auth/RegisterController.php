@@ -143,7 +143,7 @@ class RegisterController extends Controller
         $user->save();
 
         // redirect to login page
-        flash('Password is set and account confirmed. You can login now.');
+        flash('Şifrenizi başarıyla belirlediniz. Hesabınız aktif edildi. Giriş yapabilirsiniz.');
         return redirect()->route('login');
     }
 
@@ -166,7 +166,7 @@ class RegisterController extends Controller
         // resend confirmation code
         Mail::to($user->email)->send(new ConfirmationCode($user));
 
-        flash('Email with confirmation code is resent.')->success();
+        flash('Email aktivasyonunuz yeniden mail adresinize gönderildi.')->success();
         return redirect()->route('login');
     }
 

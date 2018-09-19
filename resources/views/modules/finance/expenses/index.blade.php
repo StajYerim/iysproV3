@@ -241,7 +241,7 @@
                     data: {
                         autocompleteItems: [@foreach($tags as $tag) {
                             text: '{{$tag->title}}',
-                            style: 'background-color:{{$tag->bg_color}}',
+                            style: 'color:#fff;background-color:{{$tag->bg_color}}',
                         }, @endforeach],
                         accounts: [{
                             name: "Select Account",

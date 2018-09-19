@@ -222,6 +222,8 @@ function datePicker() {
                         VueName.invoice.due_date = date;
                     }else if(data =="production.start_date"){
                         VueName.production.start_date = date;
+                    }else if(data =="form.termin_date"){
+                        VueName.form.termin_date = date;
                     }
 
 console.log(data);
@@ -238,11 +240,7 @@ console.log(data);
         }
     });
 
-    $(document).ready(function(){
-        $(".datepicker").blur(function(){
-            $(this).value("234234")
-        });
-    });
+
 }
 
 

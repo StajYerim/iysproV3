@@ -140,7 +140,7 @@
 
 
             </div>
-            @include("components.external.delete_modal",[$title="Are you sure ?",$type = "deleteModal",$message="Are you sure delete account receipt ?",$id=$receipt->id])
+            @include("components.external.delete_modal",[$title="Onaylıyormusunuz ?",$type = "deleteModal",$message="Bu fişi silmek istediğinizden eminmisiniz ?",$id=$receipt->id])
 
         </div>
 

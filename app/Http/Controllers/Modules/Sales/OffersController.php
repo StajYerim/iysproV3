@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Modules\Sales;
+use App\Companies;
 use App\Language;
 use App\Model\Settings\SettingsSalesOffer;
 use App\Taggable;
@@ -69,6 +70,9 @@ class OffersController extends Controller
             "vat_total" => $request->form["vat_total"],
             "grand_total" => $request->form["grand_total"]
         ]);
+
+        Companies::find($request->form["company_id"]["id"])->update(["customer"=>1]);
+
 
 
         Taggable::where("taggable_type","App\Model\Sales\SalesOffers")->where("taggable_id",$offer->id)->delete();

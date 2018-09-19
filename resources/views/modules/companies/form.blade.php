@@ -234,7 +234,7 @@
                     data: () => ({
                         autocompleteItems: [@foreach($tags as $tag) {
                             text: '{{$tag->title}}',
-                            style: 'background-color:{{$tag->bg_color}}',
+                            style: 'color:#fff;background-color:{{$tag->bg_color}}',
                         }, @endforeach],
                         form: {
                             company_name: "{{$form_type == "Update" ? $company->company_name:""}}",
@@ -265,7 +265,7 @@
                         @if($form_type == "Update")
                             this.form.tagsd.push(@foreach($company->tags as $tag)
                             {
-                                style: "background-color:{{$tag->bg_color}}", text: "{{$tag->title}}"
+                                style: "color: #fff;background-color:{{$tag->bg_color}}", text: "{{$tag->title}}"
                             },
                                 @endforeach());
                         @endif
