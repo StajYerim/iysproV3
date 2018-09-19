@@ -22,7 +22,7 @@ class ShareController extends Controller
 
 
         foreach($request->tagsd as $mail){
-        Mail::to($mail->text)
+        Mail::to($mail["text"])
             ->send(new Offer($data));
         }
     }

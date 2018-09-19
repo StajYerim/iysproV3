@@ -42,7 +42,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     <div class="input-group">
                         <span class="input-group-addon"> 1 <div v-bind:class="[currency_class]"></div> = </span>
                         <input class="form-control" id="appendprepend" type="text" v-model="currency_value"
-                               v-on:keyup="currency_process()" style="width: 117px;">
+                               v-on:keypress="isNumber();currency_process_value();" style="width: 117px;">
                         <span class="input-group-addon"><i class="fa fa-try"></i></span>
                     </div>
 
@@ -556,6 +556,31 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                                 VueName.form.currency_value = "0,00";
                                 notification("Error", "Kur bilgisi çekilemedi.", "error");
                             });
+
+                            this.dont_try = true;
+                        }
+
+                        $(".dropdown").removeClass("open");
+                    },
+                    currency_process_value(cur) {
+                        console.log(cur)
+                        this.currency_class = "fa fa-" + this.currency.toLowerCase();
+
+                        if (cur == "TRY") {
+
+                            this.dont_try = false;
+                            this.currency_value = "0,00"
+                            VueName.form.currency_value = "0,00";
+                            VueName.form.currency = "TRY";
+
+                        } else {
+                            VueName.form.currency = cur;
+
+                                VueName.form.currency_value = Vuen.currency_value.toLocaleString('tr-TR', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 4
+                                });
+
 
                             this.dont_try = true;
                         }

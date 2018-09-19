@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Modules\Purchases;
 
+use App\Companies;
 use App\Currency;
 use App\Language;
 use App\Taggable;
@@ -72,6 +73,9 @@ OffersController extends Controller
             "vat_total" => $request->form["vat_total"],
             "grand_total" => $request->form["grand_total"]
         ]);
+
+        Companies::find($request->form["company_id"]["id"])->update(["supplier"=>1]);
+
 
 
         Taggable::where("taggable_type","App\Model\Purchases\PurchaseOffers")->where("taggable_id",$offer->id)->delete();

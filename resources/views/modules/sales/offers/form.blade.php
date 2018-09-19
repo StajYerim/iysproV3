@@ -172,7 +172,7 @@
                         },
                         autocompleteItems: [@foreach($tags as $tag) {
                             text: '{{$tag->title}}',
-                            style: 'background-color:{{$tag->bg_color}}',
+                            style: 'color:#fff;background-color:{{$tag->bg_color}}',
                         }, @endforeach],
                         form: {
                             description_detail:  "{!! $form_type == "update" ? str_replace( array( "\n", "\r" ), array( "\\n", "\\r" ), $offer->description_detail ):"" !!}",

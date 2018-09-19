@@ -24,6 +24,11 @@ class NotAdmin
         if(auth()->check() && !auth()->user()->isAdmin() && aid() != Request::segment(1)){
             return response()->view('errors.404', [], 404);
         }
+
+       //Kullanıcı sayfa izin kontrolü
+
+        //Kullanıcı sayfa izin kontrolü
+
         if (auth()->check() && !auth()->user()->isAdmin()) {
 
             session()->put("company_id",auth()->user()->id);
