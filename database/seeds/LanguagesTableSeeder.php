@@ -489,7 +489,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'order_amount', 'text'=> ['en'=> 'ORDER AMOUNT', 'tr'=> 'SİPARİŞ TUTARI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'remaining_amount', 'text'=> ['en'=> 'REMAINING AMOUNT', 'tr'=> 'KALAN TUTAR']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'account_balanca', 'text'=> ['en'=> 'ACCOUNT BALANCE', 'tr'=> 'HESAP BAKİYESİ']]);
-        LanguageLine::create(['group'=> 'sentence', 'key'=> 'proforma_invoice', 'text'=> ['en'=> 'PROFORMA INVOICE', 'tr'=> 'PROFORM FATURA']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'proforma_invoice', 'text'=> ['en'=> 'PROFORMA INVOICE', 'tr'=> 'PROFORMA FATURA']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'excluding_vat', 'text'=> ['en'=> 'NO VAT', 'tr'=> 'KDVSİZ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'excluding_vat', 'text'=> ['en'=> 'NO VAT', 'tr'=> 'KDVSİZ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'including_vat', 'text'=> ['en'=> 'INCLUDING VAT', 'tr'=> 'KDV DAHİL']]);

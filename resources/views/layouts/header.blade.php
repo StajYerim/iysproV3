@@ -3,7 +3,7 @@
     <div id="logo-group">
 
         <!-- PLACE YOUR LOGO HERE -->
-        <span id="logo"> <img src="{{asset("img/logo.png")}}" alt="SmartAdmin"> </span>
+        {{--<span id="logo"> <img src="{{asset("img/logo.png")}}" alt="SmartAdmin"> </span>--}}
         <!-- END LOGO PLACEHOLDER -->
 
     </div>
