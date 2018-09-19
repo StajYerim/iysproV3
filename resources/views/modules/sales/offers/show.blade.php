@@ -53,7 +53,7 @@
                                 <a class="test" tabindex="-1" href="#">   <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.download_request")}} </a>
                                 <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
                                     @foreach($langs as $lang)
-                                        <li><a tabindex="-1" target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"url",$lang->lang_code])}}" > <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
+                                        <li><a tabindex="-1" target="_blank" href="{{route("sales.offers.pdf",[aid(),$offer->id,"download",$lang->lang_code])}}" > <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}"> {{$lang->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
