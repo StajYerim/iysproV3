@@ -108,7 +108,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'word', 'key'=> 'total', 'text'=> ['en'=>'TOTAL','tr'=>'TOPLAM']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'status', 'text'=> ['en'=>'STATUS','tr'=>'DURUM']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'description', 'text'=> ['en'=>'DESCRIPTION','tr'=>'AÇIKLAMA']]);
-        LanguageLine::create(['group'=> 'word', 'key'=> 'currency', 'text'=> ['en'=> 'CURRENCY', 'tr'=> 'DÖVİZ']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'currency', 'text'=> ['en'=> 'CURRENCY', 'tr'=> 'PARA BİRİMİ']        ]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'service', 'text'=> ['en'=> 'SERVICE', 'tr'=> 'HİZMET']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'quantity', 'text'=> ['en'=> 'QUANTITY', 'tr'=> 'MİKTAR']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'unit', 'text'=> ['en'=> 'UNIT', 'tr'=> 'BİRİM']]);
@@ -713,7 +713,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_proccess_completed', 'text'=> ['en'=> 'THE PROCCESS COMPLETED.','tr'=> 'İŞLEM TAMAMLANDI.']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'it_is_printing', 'text'=> ['en'=> 'IT IS PRINTING...','tr'=> 'YAZDIRILIYOR...']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'delete_invoice_record', 'text'=> ['en'=> 'DELETE INVOICE RECORD','tr'=> 'FATURA KAYDINI SİL']]);
-        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_order_sent_to_production', 'text'=> ['en'=> 'DELETE INVOICE RECORD','tr'=> 'FATURA KAYDINI SİL']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_order_sent_to_production', 'text'=> ['en'=> 'THE ORDER SENT TO PRODUCTION','tr'=> 'SİPARİŞ ÜRETİME GÖNDERİLDİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'what_do_you_want_to_do', 'text'=> ['en'=> 'WHAT DO YOU WANT TO DO?','tr'=> 'NE YAPMAK İSTİYORSUNUZ?']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'you_have_removed_the_selected_waybill', 'text'=> ['en'=> 'YOU HAVE REMOVED THE SELECTED WAYBILL','tr'=> 'SEÇİLEN İRSALİYEYİ KALDIRDINIZ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_transaction_approved', 'text'=> ['en'=> 'THE TRANSACTION APPROVED.','tr'=> 'İŞLEM ONAYLANDI.']]);
@@ -743,13 +743,16 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'day_month_year_format', 'text'=> ['en'=> 'DD/MM/YYYY','tr'=> 'GG/AA/YYYY']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'invoice_categories', 'text'=> ['en'=> 'INVOICE CATEGORIES','tr'=> 'FATURA KATEGORİLERİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'customer_categories', 'text'=> ['en'=> 'CUSTOMER CATEGORIES','tr'=> 'MÜŞTERİ KATEGORİLERİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'supplier_categories', 'text'=> ['en'=> 'SUPPLIER CATEGORIES','tr'=> 'TEDARİKÇİ KATEGORİLERİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'service_and_product_categories', 'text'=> ['en'=> 'SERVICE / PRODUCT CATEGORIES','tr'=> 'HİZMET / ÜRÜN KATEGORİLERİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_reports_table', 'text'=> ['en'=> 'SALES REPORTS TABLE','tr'=> 'SATIŞ RAPORLARI TABLOSU']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'company_name', 'text'=> ['en'=> 'COMPANY NAME','tr'=> 'ŞİRKET ADI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'overdue_collections', 'text'=> ['en'=> 'OVERDUE COLLECTIONS','tr'=> 'VADESİ GEÇEN TAHSİLATLAR']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'overdue_payments', 'text'=> ['en'=> 'OVERDUE PAYMENTS','tr'=> 'VADESİ GEÇEN ÖDEMELER']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'total_collection', 'text'=> ['en'=> 'TOTAL COLLECTION','tr'=> 'TOPLAM TAHSİLAT']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'total_collections', 'text'=> ['en'=> 'TOTAL COLLECTIONS','tr'=> 'TOPLAM TAHSİLATLAR']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'total_payment', 'text'=> ['en'=> 'TOTAL PAYMENT','tr'=> 'TOPLAM ÖDEME']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'total_payments', 'text'=> ['en'=> 'TOTAL PAYMENTS','tr'=> 'TOPLAM ÖDEMELER']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'collection_date', 'text'=> ['en'=> 'COLLECTION DATE','tr'=> 'TAHSİLAT TARİHİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'invoice_and_cheque_date', 'text'=> ['en'=> 'INVOICE / CHEQUE DATE','tr'=> 'FATURA / ÇEK TARİHİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'customer_and_supplier', 'text'=> ['en'=> 'CUSTOMER / SUPPLIER','tr'=> 'MÜŞTERİ / TEDARİKÇİ']]);
@@ -761,6 +764,24 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'summary_information', 'text'=> ['en'=> 'SUMMARY INFORMATION','tr'=> 'ÖZET BİLGİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'current_account_extract', 'text'=> ['en'=> 'CURRENT ACCOUNT EXTRACT','tr'=> 'CARİ HESAP EKSTRESİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'there_is_no_account_activity', 'text'=> ['en'=> 'THERE IS NO ACCOUNT ACTIVITY','tr'=> 'HESAP FAALİYETİ BULUNMAMAKTADIR']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'default_validity_day', 'text'=> ['en'=> 'DEFAULT VALIDITY DAY','tr'=> 'VARSAYILAN GEÇERLİLİK GÜNÜ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'show_logo', 'text'=> ['en'=> 'SHOW LOGO','tr'=> 'LOGOYU GÖSTER']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'introduction_text', 'text'=> ['en'=> 'INTRODUCTION TEXT','tr'=> 'GİRİŞ METNİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'bottom_note', 'text'=> ['en'=> 'BOTTOM NOTE','tr'=> 'ALT NOT']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'if_you_do_not_want_to_use_the_cover_page', 'text'=> ['en'=> 'IF YOU DO NOT WANT TO USE THE COVER PAGE, YOU SHALL BE EMPTY.','tr'=> 'KAPAK SAYFASINI KULLANMAK İSTEMİYORSANIZ BOŞ BIRAKINIZ.']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'cover_page', 'text'=> ['en'=> 'COVER PAGE','tr'=> 'KAPAK SAYFASI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'no_records_found', 'text'=> ['en'=> 'NO RECORDS FOUND','tr'=> 'KAYIT BULUNAMADI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'delayed_collections', 'text'=> ['en'=> 'DELAYED COLLECTIONS','tr'=> 'GECİKMİŞ TAHSİLATLAR']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'unplannıng_collections', 'text'=> ['en'=> 'UNPLANNING COLLECTIONS','tr'=> 'GÜNÜ GELMEMİŞ TAHSİLATLAR']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'delayed_payments', 'text'=> ['en'=> 'DELAYED PAYMENTS','tr'=> 'GECİKMİŞ ÖDEMELER']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'unplannıng_payments', 'text'=> ['en'=> 'UNPLANNING PAYMENTS','tr'=> 'GÜNÜ GELMEMİŞ ÖDEMELER']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'delayed_order', 'text'=> ['en'=> 'DELAYED ORDER','tr'=> 'GECİKMİŞ SİPARİŞ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'future_order', 'text'=> ['en'=> 'FUTURE ORDER','tr'=> 'GELECEK SİPARİŞ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'delayed_cheque', 'text'=> ['en'=> 'DELAYED CHEQUE','tr'=> 'GECİKMİŞ ÇEK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'future_cheque', 'text'=> ['en'=> 'FUTURE CHEQUE','tr'=> 'GELECEK ÇEK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'no_collection', 'text'=> ['en'=> 'NO COLLECTION','tr'=> 'TAHSİLAT YOK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'delayed_expense', 'text'=> ['en'=> 'DELAYED EXPENSE','tr'=> 'GECİKMİŞ GİDER']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'no_payment', 'text'=> ['en'=> 'NO PAYMENT','tr'=> 'ÖDEME YOK']]);
 
 
     }
