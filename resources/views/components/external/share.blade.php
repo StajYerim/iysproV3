@@ -125,9 +125,11 @@
                     this.btnDisable = true;
                     ShareForm.form.message = $('.editor').summernote('code');
 
+                    setTimeout(function(){
+                    if(ShareForm.form.tagsd.length > 0) {
 
-                    if(this.form.tagsd.length > 0) {
-                        axios.post("{{route($type,[aid(),$data->id])}}", this.form)
+
+                        axios.post("{{route($type,[aid(),$data->id])}}", ShareForm.form)
                             .then(function (res) {
 
                                 fullLoadingClose();
@@ -145,8 +147,9 @@
                     }else{
                         fullLoadingClose();
                         notification("Hatalı", "Lütfen mail adresini boş bırakmayın.", "danger")
-                        this.btnDisable = false;
+                        ShareForm.btnDisable = false;
                     }
+                    }, 500);
 
                 },
                 formReset: function () {
