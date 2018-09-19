@@ -110,7 +110,7 @@
                     message: "{!! $message !!}",
                     lang: "{{app()->getLocale()}}",
                     tag: '',
-                    tagsd: [{'text':"{{$email}}"}],
+                    tagsd: [@if($email) {'text':"{{$email}}"}, @endif],
                 }
 
             },
