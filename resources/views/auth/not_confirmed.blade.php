@@ -8,6 +8,7 @@
             <div class="well no-padding">
                 <form action="{{ route('activation.resend') }}" method="POST"  id="smart-form-register" class="smart-form client-form">
                     @csrf
+                    <input type="hidden" name="email" value="{{$email}}">
                     <header>
                         {{trans("sentence.email_confirmation_is_required")}}
                     </header>

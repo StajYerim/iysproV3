@@ -155,10 +155,13 @@ class RegisterController extends Controller
      */
     public function resendCode(Request $request)
     {
+
         // validate email
         $validated = $request->validate([
             'email' => 'required|email|exists:users,email'
         ]);
+
+
 
         // get user
         $user = User::where('email', $validated['email'])->first();
