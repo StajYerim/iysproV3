@@ -713,7 +713,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_proccess_completed', 'text'=> ['en'=> 'THE PROCCESS COMPLETED.','tr'=> 'İŞLEM TAMAMLANDI.']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'it_is_printing', 'text'=> ['en'=> 'IT IS PRINTING...','tr'=> 'YAZDIRILIYOR...']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'delete_invoice_record', 'text'=> ['en'=> 'DELETE INVOICE RECORD','tr'=> 'FATURA KAYDINI SİL']]);
-        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_order_sent_to_production', 'text'=> ['en'=> 'THE ORDER SENT TO PRODUCTION','tr'=> 'ÜRETİM SİPARİŞE GÖNDERİLDİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_order_sent_to_production', 'text'=> ['en'=> 'THE ORDER SENT TO PRODUCTION','tr'=> 'SİPARİŞ ÜRETİME GÖNDERİLDİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'what_do_you_want_to_do', 'text'=> ['en'=> 'WHAT DO YOU WANT TO DO?','tr'=> 'NE YAPMAK İSTİYORSUNUZ?']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'you_have_removed_the_selected_waybill', 'text'=> ['en'=> 'YOU HAVE REMOVED THE SELECTED WAYBILL','tr'=> 'SEÇİLEN İRSALİYEYİ KALDIRDINIZ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'the_transaction_approved', 'text'=> ['en'=> 'THE TRANSACTION APPROVED.','tr'=> 'İŞLEM ONAYLANDI.']]);
