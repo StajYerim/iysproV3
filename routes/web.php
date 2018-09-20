@@ -127,6 +127,7 @@ Route::get("/update",function(){
    Artisan::call("db:seed",["--class"=>"MenuTableSeeder"]);
    Artisan::call("db:seed",["--class"=>"CurrencyTableSeeder"]);
   Artisan::call("db:seed",["--class"=>"MenuDescriptionsTableSeeder"]);
+  Artisan::call("migrate");
   Artisan::call("view:clear");
     dd(Artisan::output());
 });
