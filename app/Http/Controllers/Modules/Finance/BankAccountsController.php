@@ -28,7 +28,7 @@ class BankAccountsController extends Controller
     public function index_list()
     {
 
-        $accounts = BankAccounts::select("bank_accounts.*")->where("account_id", aid());
+        $accounts = BankAccounts::select("bank_accounts.*")->where("account_id", aid())->where("hide_users","NOT LIKE","%".auth()->user()->id."%");
 
         return Datatables::of($accounts)
             ->setRowAttr([
@@ -581,6 +581,16 @@ class BankAccountsController extends Controller
 
         return ["message" => $sonuc, 'type' => "product","desc"=>$desc];
 
+    }
+
+    public function hidden_users_send($aid, $id, Request $request)
+    {
+
+
+      $bank =   BankAccounts::find($id);
+      $hidden = $bank->hide_users;
+      $bank->hide_users = $request->hidden_users;
+      $bank->save();
     }
 
 }
