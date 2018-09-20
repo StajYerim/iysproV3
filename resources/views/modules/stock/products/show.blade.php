@@ -103,6 +103,11 @@
                             {{trans("sentence.stock_movements")}}
                         </a>
                     </li>
+                    <li>
+                        <a href="#g3" data-toggle="tab">
+                            ÜRÜN AÇIKLAMASI
+                        </a>
+                    </li>
                 </ul>
                 <div id="myTabContent1" class="tab-content padding-10" style="background-color: #fff">
                     <div class="tab-pane fade  active in" id="g1">
@@ -169,6 +174,32 @@
                         </div>
                         <div v-show="stock.data.length == 0">Bu ürün için mevcut stok hareketi bulunmuyor.</div>
                     </div>
+                    <div class="tab-pane fade" id="g3">
+
+                        <form class="form-horizontal">
+                            <div class="chat-footer">
+
+                                <!-- CHAT TEXTAREA -->
+                                <div class="textarea-div" style="width:500px;">
+
+                                    <div class="typearea">
+                                        <textarea v-model="description" placeholder="Ürün açıklaması...."
+                                                  rows="10"></textarea>
+                                    </div>
+
+                                </div>
+
+                                <!-- CHAT REPLY/SEND -->
+                                <span class="textarea-controls" style="width:500px">
+								<button type="button" v-on:click="desc_save()" class="btn btn-sm btn-primary pull-right">
+									KAYDET
+								</button> <span class="pull-right smart-form"
+                                                style="margin-top: 3px; margin-right: 10px;">  </span></span>
+
+                            </div>
+
+                        </form>
+                    </div>
 
 
                 </div>
@@ -184,10 +215,16 @@
            $stock = new Vue({
                 el: "#show",
                 data: {
+                    description: "{{$product->description}}",
                     details: false,
                     stock:[]
                 },
                methods: {
+                    desc_save:function(){
+                        axios.post("{{route("stock.product.description.save",aid())}}",{id:"{{$product->id}}",description:this.description}).then(res=>{
+                           notification("Başarılı","Ürün açıklaması kaydedildi.","success");
+                        })
+                    },
                    formatPrice: function (val) {
                return    val.toLocaleString('tr-TR', {
                            minimumFractionDigits: 2,

@@ -301,4 +301,9 @@ class StockController extends Controller
 
       return  response()->json($product->movements()->with("receipt","receipt.company","unit","product","purchase_order","sales_order")->paginate(5));
     }
+
+    public function description_save(Request $request)
+    {
+        Product::find($request->id)->update(["description"=>$request->description]);
+    }
 }

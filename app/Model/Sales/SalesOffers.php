@@ -22,6 +22,11 @@ class SalesOffers extends Model
         parent::save($options);
     }
 
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->where("account_id", '=', aid());
+    }
+
     public function getDescriptionsAttribute()
     {
         return $this->description == null ? "SATIŞ TEKLİFİ" : $this->description;

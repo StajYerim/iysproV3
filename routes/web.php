@@ -125,6 +125,7 @@ Route::get("/general/script.js","GeneralController@script")->name("general.scrip
 Route::get("/update",function(){
    Artisan::call("db:seed",["--class"=>"LanguagesTableSeeder"]);
    Artisan::call("db:seed",["--class"=>"MenuTableSeeder"]);
+   Artisan::call("db:seed",["--class"=>"CurrencyTableSeeder"]);
   Artisan::call("db:seed",["--class"=>"MenuDescriptionsTableSeeder"]);
   Artisan::call("view:clear");
     dd(Artisan::output());

@@ -27,13 +27,35 @@
                             {{$account->name}}
                         </span>
                         <span class="pull-right">
-                            <a class="btn btn-default" href="{{route("finance.accounts.form",[aid(),$account->id,$account->type,"update"])}}">
-                                <i class="fa fa-edit" aria-hidden="true"></i> {{trans("word.edit")}}
-					        </a>
-   <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-       <i class="fa fa-trash-o" aria-hidden="true"></i>
-       {{trans("word.delete")}}
-					        </a>
+                            <div class="btn-group"><a data-toggle="dropdown" aria-expanded="false"
+                                                      class="btn btn-default dropdown-toggle">
+                                DİĞER İŞLEMLER
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{route("finance.accounts.form",[aid(),$account->id,$account->type,"update"])}}">
+                                            <i aria-hidden="true" class="fa fa-edit "></i>
+                                            {{trans("word.edit")}}
+                                    </a>
+                                    </li>
+                                    @if(auth()->user()->role->id == 2)
+                                        <li>
+                                          <a href="#!" data-toggle="modal" data-target="#hide_account"><i
+                                                      aria-hidden="true" class="fa fa-lock"></i>
+                                              HESABI GİZLE
+                                    </a>
+                                    </li>
+                                    @endif
+                                    <li>
+                                        <a href="#!" data-toggle="modal" data-target="#deleteModal"><i
+                                                    aria-hidden="true" class="fa fa-trash-o"></i>
+                                            {{trans("word.delete")}}
+                                    </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+
                         </span>
                     </h1>
 
@@ -442,7 +464,64 @@
 
             </div>
         </div>
+        {{--Account hide--}}
+        @if(auth()->user()->role->id == 2)
+            <div class="modal fade" id="hide_account" role="dialog">
+                <div class="modal-dialog">
 
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">BU HESABI BAZI KULLANICILAR İÇİN GİZLE</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>{{trans("sentence.users")}}</th>
+                                        <th>{{trans("sentence.email")}}</th>
+                                        <th>Gizle</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach(\App\User::where("account_id",aid())->get() as $user)
+                                        @if($user->role_id == 3)
+
+                                            <tr>
+                                                <td>{{$user->name }}</td>
+                                                <td>{{$user->email }}</td>
+                                                <td>
+
+                                               <input type="checkbox"  :value="'{{$user->id}}'" v-model="hidden_users" class="checkbox style-0" style="visibility:inherit" >
+
+                                                </td>
+
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">{{ trans("word.cancel") }}</button>
+                            <button type="button" class="btn btn-success"
+                                   v-on:click="hidden_users_send" data-loading-text="Waiting">{{ trans("word.save") }}</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        @endif
+        {{--Account hide--}}
         @include("components.external.delete_modal",[$title=trans('sentence.are_you_sure'),$type = "deleteModal",$message="Bu hesabı silmek istediğinizden eminmisiniz ?",$id=$account->id])
 
 
@@ -477,6 +556,7 @@
                         description: "",
                         type: ""
                     },
+                    hidden_users:{!! json_encode($account->hide_users) !!}
 
                 },
                 computed: {
@@ -491,6 +571,16 @@
                 methods: {
                     redirect:function($id){
                         return window.location.href='/{{aid()}}/finance/accounts/'+$id+'/receipt';
+                    },
+                    hidden_users_send:function(){
+                        axios.post('{{route("finance.accounts.hidden_users",[aid(),$id])}}',{hidden_users:this.hidden_users})
+                            .then(function (response) {
+
+                                 $("#hide_account").modal("hide");
+                                 notification("Başarılı","Hesap gizliliği düzenlendi.","success")
+
+                            });
+                      console.log(this.hidden_users)
                     },
                     delete_data: function ($id) {
                         fullLoading();

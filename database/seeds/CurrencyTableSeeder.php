@@ -19,6 +19,7 @@ class CurrencyTableSeeder extends Seeder
                 'code' => 'TRY',
                 'name' => 'Türk Lirası',
                 'desc' => 'Türkiye Para Birimi',
+                'coin' => 'KRŞ',
             ],
             [
                 'id' => '2',
@@ -26,6 +27,7 @@ class CurrencyTableSeeder extends Seeder
                 'code' => 'USD',
                 'name' => 'Dolar',
                 'desc' => 'Amerika Birleşik Devletler Para birimi',
+                'coin' => 'CENT',
             ],
             [
                 'id' => '3',
@@ -33,6 +35,15 @@ class CurrencyTableSeeder extends Seeder
                 'code' => 'EUR',
                 'name' => 'Euro',
                 'desc' => 'Avrupa Para Birimi',
+                'coin' => 'CENT',
+            ],
+            [
+                'id' => '4',
+                'icon' => '£',
+                'code' => 'GBP',
+                'name' => 'İngiliz Sterlini',
+                'desc' => 'İngiltere Para Birimi',
+                'coin' => 'PENCE',
             ],
 
         ]);

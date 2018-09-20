@@ -147,7 +147,7 @@
             <td  style="text-align: left;width:340px" >
                 {{trans("word.product")}}/{{trans("word.service")}}
             </td>
-            <td  style="text-align: right;width:60px" >
+            <td  style="text-align: right;width:75px" >
                 {{trans("word.quantity")}}
             </td>
             <td style="text-align: right;width:120px">

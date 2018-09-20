@@ -12,6 +12,9 @@ class BankAccounts extends Model
 
     protected $guarded = [];
     protected $appends = ["balance"];
+    protected $casts = [
+        'hide_users' => 'array',
+    ];
 
     public function newQuery($excludeDeleted = true) {
         return parent::newQuery($excludeDeleted)
