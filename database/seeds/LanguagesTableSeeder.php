@@ -779,6 +779,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'future_order', 'text'=> ['en'=> 'FUTURE ORDER','tr'=> 'GELECEK SİPARİŞ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'future_payment', 'text'=> ['en'=> 'FUTURE PAYMENT','tr'=> 'GELECEK ÖDEME']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'delayed_cheque', 'text'=> ['en'=> 'DELAYED CHEQUE','tr'=> 'GECİKMİŞ ÇEK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'sentence.delayed_payment', 'text'=> ['en'=> 'DELAYED PAYMENT','tr'=> 'GECİKMİŞ ÖDEME']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'future_cheque', 'text'=> ['en'=> 'FUTURE CHEQUE','tr'=> 'GELECEK ÇEK']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'no_collection', 'text'=> ['en'=> 'NO COLLECTION','tr'=> 'TAHSİLAT YOK']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'delayed_expense', 'text'=> ['en'=> 'DELAYED EXPENSE','tr'=> 'GECİKMİŞ GİDER']]);
