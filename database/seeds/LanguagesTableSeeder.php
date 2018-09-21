@@ -225,7 +225,9 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'word', 'key'=> 'unplanning', 'text'=> ['en'=> 'UNPLANNING', 'tr'=> 'GÜNÜ GELMEMİŞ']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'delayed', 'text'=> ['en'=> 'DELAYED', 'tr'=> 'GECİKMİŞ']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'payments', 'text'=> ['en'=> 'PAYMENTS', 'tr'=> 'ÖDEMELER']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'payment', 'text'=> ['en'=> 'PAYMENT', 'tr'=> 'ÖDEME']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'collections', 'text'=> ['en'=> 'COLLECTIONS', 'tr'=> 'TAHSİLATLAR']]);
+        LanguageLine::create(['group'=> 'word', 'key'=> 'collection', 'text'=> ['en'=> 'COLLECTION', 'tr'=> 'TAHSİLAT']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'week', 'text'=> ['en'=> 'WEEK', 'tr'=> 'HAFTA']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'draft', 'text'=> ['en'=> 'DRAFT', 'tr'=> 'TASLAK']]);
         LanguageLine::create(['group'=> 'word', 'key'=> 'cancelled', 'text'=> ['en'=> 'CANCELLED', 'tr'=> 'İPTAL EDİLDİ']]);
@@ -420,7 +422,6 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'bank_branch', 'text'=> ['en'=> 'BANK BRANCH', 'tr'=> 'BANKA ŞUBESİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'account_number', 'text'=> ['en'=> 'ACCOUNT NUMBER', 'tr'=> 'HESAP NUMARASI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'cheque_available', 'text'=> ['en'=> 'CHEQUE AVAILABLE', 'tr'=> 'ÇEK KULLANILABİLİR']]);
-        LanguageLine::create(['group'=> 'sentence', 'key'=> 'expiry_date', 'text'=> ['en'=> 'EXPIRY DATE', 'tr'=> 'SON KULLANMA TARİHİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'stock_quantity', 'text'=> ['en'=> 'STOCK QUANTITY', 'tr'=> 'STOK MİKTARI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'purchase_price', 'text'=> ['en'=> 'PURCHASE PRICE', 'tr'=> 'ALIŞ FİYATI']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'sales_price', 'text'=> ['en'=> 'SALES PRICE', 'tr'=> 'SATIŞ FİYATI']]);
@@ -785,6 +786,16 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'no_collection', 'text'=> ['en'=> 'NO COLLECTION','tr'=> 'TAHSİLAT YOK']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'delayed_expense', 'text'=> ['en'=> 'DELAYED EXPENSE','tr'=> 'GECİKMİŞ GİDER']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'no_payment', 'text'=> ['en'=> 'NO PAYMENT','tr'=> 'ÖDEME YOK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'collected_account', 'text'=> ['en'=> 'COLLECTED ACCOUNT','tr'=> 'TAHSİL EDİLDİĞİ HESAP']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'payment_will_be_done', 'text'=> ['en'=> 'PAYMENT WILL BE DONE','tr'=> 'ÖDEME YAPILACAK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'payment_completed', 'text'=> ['en'=> 'PAYMENT COMPLETED','tr'=> 'ÖDEME YAPILDI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'collection_will_be_done', 'text'=> ['en'=> 'COLLECTION WILL BE DONE','tr'=> 'TAHSİLAT YAPILACAK']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'collection_completed', 'text'=> ['en'=> 'COLLECTION COMPLETED','tr'=> 'TAHSİLAT YAPILDI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'there_is_no_expense_receipt_in_the_system', 'text'=> ['en'=> 'THERE IS NO EXPENSE RECEIPT IN THE SYSTEM','tr'=> 'SİSTEMDE KAYTTLI GİDER FİŞİ BULUNMUYOR']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'expense_reports', 'text'=> ['en'=> 'EXPENSE REPORTS','tr'=> 'GİDER RAPORLARI']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'expense_categories', 'text'=> ['en'=> 'EXPENSE CATEGORIES','tr'=> 'GİDER KATEGORİLERİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'expense_reports_table', 'text'=> ['en'=> 'EXPENSE REPORTS TABLE','tr'=> 'GİDER RAPORLARI TABLOSU']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'not_paid', 'text'=> ['en'=> 'NOT PAID','tr'=> 'ÖDENMEDİ']]);
 
 
     }

@@ -21,18 +21,18 @@ function sortFunction( $a, $b ) {
 function give_me_month_name($month)
 {
     $month_name='';
-    $month_name .= ($month == 1) ? 'OCAK' : '';
-    $month_name .= ($month == 2) ? 'ŞUBAT' : '';
-    $month_name .= ($month == 3) ? 'MART' : '';
-    $month_name .= ($month == 4) ? 'NİSAN' : '';
-    $month_name .= ($month == 5) ? 'MAYIS' : '';
-    $month_name .= ($month == 6) ? 'HAZİRAN' : '';
-    $month_name .= ($month == 7) ? 'TEMMUZ' : '';
-    $month_name .= ($month == 8) ? 'AĞUSTOS' : '';
-    $month_name .= ($month == 9) ? 'EYLÜL' : '';
-    $month_name .= ($month == 10) ? 'EKİM' : '';
-    $month_name .= ($month == 11) ? 'KASIM' : '';
-    $month_name .= ($month == 12) ? 'ARALIK' : '';
+    $month_name .= ($month == 1) ? trans('month.january') : '';
+    $month_name .= ($month == 2) ? trans('month.february') : '';
+    $month_name .= ($month == 3) ? trans('month.march') : '';
+    $month_name .= ($month == 4) ? trans('month.april') : '';
+    $month_name .= ($month == 5) ? trans('month.may') : '';
+    $month_name .= ($month == 6) ? trans('month.june') : '';
+    $month_name .= ($month == 7) ? trans('month.july') : '';
+    $month_name .= ($month == 8) ? trans('month.august') : '';
+    $month_name .= ($month == 9) ? trans('month.september') : '';
+    $month_name .= ($month == 10) ? trans('month.october') : '';
+    $month_name .= ($month == 11) ? trans('month.november') : '';
+    $month_name .= ($month == 12) ? trans('month.december') : '';
     return $month_name;
 }
 

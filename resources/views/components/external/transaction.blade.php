@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
-                <h4 class="modal-title" id="myModalLabel">{{ $type == 'payment' ? 'ÖDEME EKLE' : 'TAHSİLAT EKLE' }}</h4>
+                <h4 class="modal-title" id="myModalLabel">{{ $type == 'payment' ? trans('sentence.add_payment') : trans('sentence.add_collection') }}</h4>
             </div>
             <div class="modal-body" id="vue-trans">
                 <div v-show="loading" style="text-align: center;"><img
@@ -18,12 +18,12 @@
                         class="nav nav-tabs flex-wrap">
                         <li class="active" style="text-align: center;flex:1;">
                             <a href="#s1" data-toggle="tab"
-                               aria-expanded="false">{{ trans("word.cash") }} {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}
+                               aria-expanded="false">{{ trans("word.cash") }} {{ $type == 'payment' ? trans('word.payment') : trans('word.collection') }}
                             </a>
                         </li>
                         <li style="text-align: center;flex:1;">
                             <a href="#s2" data-toggle="tab"
-                                   aria-expanded="true">{{ trans("sentence.cheque_promissory_note") }} {{ $type == 'payment' ? 'ÖDEME' : 'TAHSİLAT' }}</a>
+                                   aria-expanded="true">{{ trans("sentence.cheque_promissory_note") }} {{ $type == 'payment' ? trans('word.payment') : trans('word.collection') }}</a>
                         </li>
                     </ul>
 
@@ -44,8 +44,9 @@
                                                        name="collection.form.date"
                                                        class="form-control datepicker"
                                                        data-dateformat="dd.mm.yy">
-                                                <span class="input-group-addon"><i
-                                                            class="fa fa-calendar"></i></span>
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +116,7 @@
                             </button>
                             <button @click="collectionFormSend" :disabled="collection.collect_send_btn" type="button"
                                     class="btn btn btn-danger pull-right">
-                                {{ $type == 'payment' ? 'ÖDEME EKLE' : 'TAHSİLAT EKLE' }}
+                                {{ $type == 'payment' ? trans('sentence.add_payment') : trans('sentence.add_collection') }}
                             </button>
                         </div>
 
@@ -219,7 +220,7 @@
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
                                                 <div class="bottom-info">
-                                                    {{ trans("sentence.expiry_date") }}
+                                                    {{ trans("sentence.due_date") }}
                                                 </div>
                                             </label>
                                             <div class="col-sm-8 ">
