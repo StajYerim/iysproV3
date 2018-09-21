@@ -17,6 +17,9 @@ Route::group(['prefix'=>'{company_id}/finance','middleware'=>'not.admin'],functi
     Route::get("accounts/{id}/receipt","Modules\Finance\BankAccountsController@receipt")->name("finance.accounts.receipt");
     Route::delete("accounts/{id}/receipt-destroy","Modules\Finance\BankAccountsController@receipt_destroy")->name("finance.accounts.receipt.destroy");
     Route::post("accounts/{id}/delete","Modules\Finance\BankAccountsController@destroy")->name("finance.accounts.destroy");
+    Route::post("accounts/{id}/hidden_users","Modules\Finance\BankAccountsController@hidden_users_send")->name("finance.accounts.hidden_users");
+
+
     //Accounts->Transactions
     Route::post("accounts/{id}/items","Modules\Finance\BankAccountsController@items")->name("finance.accounts.items");
     Route::post("accounts/{id}/transaction","Modules\Finance\BankAccountsController@transaction")->name("finance.accounts.transaction");//Accounts to Account

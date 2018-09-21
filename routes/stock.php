@@ -16,7 +16,7 @@ Route::group(['prefix'=>'{company_id}/stocks','middleware'=>'not.admin'],functio
     Route::get("{id}/{type}","Stock\StockController@form")->name("stock.product.form");
     Route::post("/product/image/upload","Stock\StockController@image_upload")->name("stock.image.upload");
     Route::post("/product/image/delete","Stock\StockController@image_delete")->name("stock.image.delete");
-
+    Route::post("/product/description/save","Stock\StockController@description_save")->name("stock.product.description.save");
     //Stock->movements
     Route::get("/product/{id}/movements", "Stock\StockController@movements")->name("stock.product.movements");
 
