@@ -27,10 +27,6 @@
                         <label class="label">{{ trans("word.email") }}</label>
                         <label class="input"> <i class="icon-append fa fa-user"></i>
                             <input type="email" name="email" value="{{ old('email') }}">
-
-                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>
-                                {{ trans("sentence.enter_username_or_email") }}
-                            </b>
                         </label>
                     </section>
 
@@ -43,9 +39,6 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                             @endif
-                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>
-                                {{trans("sentence.enter_your_password")}}
-                            </b>
                         </label>
                         <div class="note">
                             <a href="{{ route('password.request') }}">{{ trans("sentence.forgot_password") }}?</a>
