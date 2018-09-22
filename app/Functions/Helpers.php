@@ -18,47 +18,38 @@ function sortFunction( $a, $b ) {
 }
 
 
+/**
+ * @param $month
+ * @return mixed
+ */
 function give_me_month_name($month)
 {
-    $month_name='';
-    $month_name .= ($month == 1) ? 'OCAK' : '';
-    $month_name .= ($month == 2) ? 'ŞUBAT' : '';
-    $month_name .= ($month == 3) ? 'MART' : '';
-    $month_name .= ($month == 4) ? 'NİSAN' : '';
-    $month_name .= ($month == 5) ? 'MAYIS' : '';
-    $month_name .= ($month == 6) ? 'HAZİRAN' : '';
-    $month_name .= ($month == 7) ? 'TEMMUZ' : '';
-    $month_name .= ($month == 8) ? 'AĞUSTOS' : '';
-    $month_name .= ($month == 9) ? 'EYLÜL' : '';
-    $month_name .= ($month == 10) ? 'EKİM' : '';
-    $month_name .= ($month == 11) ? 'KASIM' : '';
-    $month_name .= ($month == 12) ? 'ARALIK' : '';
-    return $month_name;
+    $monthList =['',
+    'OCAK',
+    'ŞUBAT',
+    'MART',
+    'NİSAN',
+    'MAYIS',
+    'HAZİRAN',
+    'TEMMUZ',
+    'AĞUSTOS',
+    'EYLÜL',
+    'EKİM',
+    'KASIM',
+    'ARALIK'];
+    return $monthList[$month];
 }
 
+/**
+ * @return string
+ */
 function create_a_random_date()
 {
     $day = rand(1,28);
-    $day = $day == 1 ? '01' : $day;
-    $day = $day == 2 ? '02' : $day;
-    $day = $day == 3 ? '03' : $day;
-    $day = $day == 4 ? '04' : $day;
-    $day = $day == 5 ? '05' : $day;
-    $day = $day == 6 ? '06' : $day;
-    $day = $day == 7 ? '07' : $day;
-    $day = $day == 8 ? '08' : $day;
-    $day = $day == 9 ? '09' : $day;
     $month = rand(1,12);
-    $month = $month == 1 ? '01' : $month;
-    $month = $month == 2 ? '02' : $month;
-    $month = $month == 3 ? '03' : $month;
-    $month = $month == 4 ? '04' : $month;
-    $month = $month == 5 ? '05' : $month;
-    $month = $month == 6 ? '06' : $month;
-    $month = $month == 7 ? '07' : $month;
-    $month = $month == 8 ? '08' : $month;
-    $month = $month == 9 ? '09' : $month;
-    return "2018-$month-$day 15:15:45";
+    $day = $day < 10 ? "0".$day : $day;
+    $month = $month < 10 ? "0".$month : $month;
+    return sprintf("2018-%s-%s 15:15:45",$month,$day) ;
 }
 
 function account()
