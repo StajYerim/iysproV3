@@ -108,15 +108,15 @@ class Cheques extends Model
 
         if($this->cheque_status == 0){
             if($type == null){
-                return "ÖDEME YAPILACAK";
+                return trans('sentence.payment_will_be_done');
             }else{
-                return "ÖDEME YAPILDI";
+                return trans('sentence.payment_completed');
             }
         }else if($this->cheque_status == 1){
             if($type == null){
-                return "TAHSİLAT YAPILACAK";
+                return trans('sentence.collection_will_be_done');
             }else{
-                return "TAHSİLAT YAPILDI";
+                return trans('sentence.collection_completed');
             }
         }
 
