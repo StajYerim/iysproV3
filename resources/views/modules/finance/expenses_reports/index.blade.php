@@ -11,7 +11,7 @@
                         <div class="widget-body">
                             <div class="widget-body-toolbar st">
                                 <div class="row">
-                                    <div class="col-sm-4" style="margin-top:-20px;"><h2>Gider Raporları</h2></div>
+                                    <div class="col-sm-4" style="margin-top:-20px;"><h2>{{ trans('sentence.expense_reports') }}</h2></div>
 
                                     <div class="col-sm-4 text-right">
 
@@ -20,7 +20,7 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <input class="form-control" id="demo" type="text"
-                                                       placeholder='6 TEMMUZ 2017 - 6 EKIM 2017'/>
+                                                       placeholder='{{ trans("sentence.day_month_year_format") }} - {{ trans("sentence.day_month_year_format") }}'/>
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                             </div>
                                         </div>
@@ -31,14 +31,14 @@
 
                                 <div class="col-sm-12">
                                     <div v-if="expenses_list.length == 0">
-                                        Sistemde kayıtlı gider fişi bulunmuyor.
+                                        {{ trans('sentence.there_is_no_expense_receipt_in_the_system') }}
                                     </div>
                                     <div class="col-sm-4">
 
                                     </div>
                                     <div v-if="expenses_list.length != 0" class="col-sm-4">
 
-                                        <div class="text-center"><b>GİDER KATEGORİLERİ</b></div>
+                                        <div class="text-center"><b>{{ trans('sentence.expense_categories') }}</b></div>
                                         <canvas id="customersChart" height="160"></canvas>
 
                                         <div v-for="(item) in expenses_pie" class="col-md-12">
@@ -46,8 +46,10 @@
                                                    v-bind:style="{'background-color':item.bgcolor}">
                                                 @{{ item.labels }}
                                             </label>
-                                            <label class="pull-right"><b>@{{formatPrice(item.data)}}</b> <i
-                                                        class="fa fa-try"></i></label>
+                                            <label class="pull-right">
+                                                <b>@{{formatPrice(item.data)}}</b>
+                                                <i class="fa fa-try"></i>
+                                            </label>
                                         </div>
 
                                     </div>
@@ -70,7 +72,7 @@
                             <div class="widget-body-toolbar st">
 
                                 <div class="row">
-                                    <div class="col-sm-8" style="margin-top:-20px;"><h2>Gider Raporları Tablosu</h2>
+                                    <div class="col-sm-8" style="margin-top:-20px;"><h2>{{ trans('sentence.expense_reports_table') }}</h2>
                                     </div>
 
                                 </div>
@@ -81,12 +83,12 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th width="40%">ADI</th>
-                                        <th width="30%">AÇIKLAMA</th>
-                                        <th width="10%">HESAP</th>
-                                        <th width="10%">TARİH</th>
-                                        <th width="10%">TUTAR</th>
-                                        <th width="10%">DURUMU</th>
+                                        <th width="40%">{{ trans('word.name') }}</th>
+                                        <th width="30%">{{ trans('word.description') }}</th>
+                                        <th width="10%">{{ trans('word.account') }}</th>
+                                        <th width="10%">{{ trans('word.date') }}</th>
+                                        <th width="10%">{{ trans('word.amount') }}</th>
+                                        <th width="10%">{{ trans('word.status') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -112,8 +114,8 @@
                                             @{{ item.amount }} <i class="fa fa-try"></i>
                                         </td>
                                         <td>
-                                            <span class="label label-success" v-if="item.pay_status == 1">ÖDENDİ</span>
-                                            <span class="label label-danger" v-if="item.pay_status == 0">ÖDENMEDİ</span>
+                                            <span class="label label-success" v-if="item.pay_status == 1">{{ trans('word.paid') }}</span>
+                                            <span class="label label-danger" v-if="item.pay_status == 0">{{ trans('sentence.not_paid') }}</span>
                                         </td>
                                     </tr>
 
@@ -122,7 +124,7 @@
                             </div>
                             <div v-if="expenses_list.length == 0" >
 
-                                Sistemde kayıtlı gider fişi bulunmuyor.
+                                {{ trans('sentence.there_is_no_expense_receipt_in_the_system') }}
 
                             </div>
                         </div>
@@ -233,58 +235,58 @@
                                 "locale": {
                                     "format": "DD-MM-YYYY",
                                     "separator": " / ",
-                                    "applyLabel": "Uygula",
-                                    "cancelLabel": "İptal",
+                                    "applyLabel": "{{ trans('word.apply') }}",
+                                    "cancelLabel": "{{ trans('word.cancel') }}",
                                     "fromLabel": "From",
                                     "toLabel": "To",
-                                    "customRangeLabel": "Özel Tarih",
+                                    "customRangeLabel": "{{ trans('time.special_date') }}",
                                     "daysOfWeek": [
-                                        "Pt",
-                                        "Sa",
-                                        "Ça",
-                                        "Pe",
-                                        "Cu",
-                                        "Ct",
-                                        "Pa"
+                                        "{{ trans('time.mo') }}",
+                                        "{{ trans('time.tu') }}",
+                                        "{{ trans('time.we') }}",
+                                        "{{ trans('time.th') }}",
+                                        "{{ trans('time.fr') }}",
+                                        "{{ trans('time.sa') }}",
+                                        "{{ trans('time.su') }}"
                                     ],
                                     "monthNames": [
-                                        "Ocak",
-                                        "Şubat",
-                                        "Mart",
-                                        "Nisan",
-                                        "Mayıs",
-                                        "Haziran",
-                                        "Temmuz",
-                                        "Ağustos",
-                                        "Eylül",
-                                        "Ekim",
-                                        "Kasım",
-                                        "Aralık"
+                                        "{{ trans('month.january') }}",
+                                        "{{ trans('month.february') }}",
+                                        "{{ trans('month.march') }}",
+                                        "{{ trans('month.april') }}",
+                                        "{{ trans('month.may') }}",
+                                        "{{ trans('month.june') }}",
+                                        "{{ trans('month.july') }}",
+                                        "{{ trans('month.august') }}",
+                                        "{{ trans('month.september') }}",
+                                        "{{ trans('month.october') }}",
+                                        "{{ trans('month.november') }}",
+                                        "{{ trans('month.december') }}"
                                     ],
                                     "firstDay": 1
                                 },
                                 "ranges": {
-                                    "Bugün": [
+                                    "{{ trans('time.today') }}": [
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}",
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
                                     ],
-                                    "Dün": [
+                                    "{{ trans('time.yesterday') }}": [
                                         "{{ \Carbon\Carbon::yesterday()->format('d-m-Y') }}",
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
                                     ],
-                                    "Son 7 Gün": [
+                                    "{{ trans('time.last_7_days') }}": [
                                         "{{ \Carbon\Carbon::now()->subDays(7)->format('d-m-Y') }}",
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
                                     ],
-                                    "Son 30 Gün": [
+                                    "{{ trans('time.last_30_days') }}": [
                                         "{{ \Carbon\Carbon::now()->subDays(30)->format('d-m-Y') }}",
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
                                     ],
-                                    "Bu Ay": [
+                                    "{{ trans('time.this_month') }}": [
                                         "{{ \Carbon\Carbon::now()->startOfMonth()->format('d-m-Y') }}",
                                         "{{ \Carbon\Carbon::now()->format('d-m-Y') }}"
                                     ],
-                                    "Geçen Ay": [
+                                    "{{ trans('time.last_month') }}": [
                                         "{{ $start->format('d-m-Y') }}",
                                         "{{ $end->format('d-m-Y') }}"
                                     ]

@@ -19,9 +19,6 @@
                                         <strong>{{ $errors->first('company_name') }}</strong>
                                     </span>
                             @endif
-                            <b class="tooltip tooltip-bottom-right">
-                                {{trans("sentence.needed_to_enter_the_website")}}
-                            </b>
                         </label>
                     </section>
 
@@ -49,9 +46,6 @@
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                             @endif
-                            <b class="tooltip tooltip-bottom-right">
-                                {{trans("sentence.needed_to_enter_the_website")}}
-                            </b>
                         </label>
                     </section>
                     <section>
@@ -62,9 +56,6 @@
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                             @endif
-                            <b class="tooltip tooltip-bottom-right">
-                                {{trans("sentence.needed_to_verify_your_account")}}
-                            </b>
                         </label>
                     </section>
                     <section>
@@ -75,7 +66,7 @@
                                         <strong>{{ $errors->first('mobile') }}</strong>
                                     </span>
                             @endif
-                            <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
+                        </label>
                     </section>
 
                     <section>
@@ -86,18 +77,12 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                             @endif
-                            <b class="tooltip tooltip-bottom-right">
-                                {{ trans("sentence.do_not_forget_your_password") }}
-                            </b>
                         </label>
                     </section>
 
                     <section>
                         <label class="input"> <i class="icon-append fa fa-lock"></i>
                             <input type="password" name="password_confirmation" placeholder="{{ trans("sentence.confirm_password") }}">
-                            <b class="tooltip tooltip-bottom-right">
-                                {{ trans("sentence.do_not_forget_your_password") }}
-                            </b>
                         </label>
                     </section>
                 </fieldset>

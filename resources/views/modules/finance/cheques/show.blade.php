@@ -40,8 +40,8 @@
                                     <i class="fa fa-calendar"></i> {{trans("sentence.received_date")}}, {{trans("word.customer")}}<br><br>
                                     <i class="fa fa-calendar"></i> {{trans("sentence.given_date")}}, {{trans("word.supplier")}}<br><br>
                                 @endif
-                                <i class="fa fa-calendar"></i> {{trans("sentence.expiry_date")}}<br><br>
-                                <div v-if="collect_cheque_show == true"><i class="fa fa-calendar"></i> TAHSİL EDİLDİĞİ HESAP <br><br></div>
+                                <i class="fa fa-calendar"></i> {{trans("sentence.due_date")}}<br><br>
+                                <div v-if="collect_cheque_show == true"><i class="fa fa-calendar"></i> {{ trans('sentence.collected_account') }} <br><br></div>
                             </div>
 
 
@@ -79,7 +79,7 @@
                                 <tr>
                                     <td width="5%"></td>
                                     <td></td>
-                                    <td style="text-align:right" >KALAN</td>
+                                    <td style="text-align:right" >{{ trans('word.remaining') }}</td>
                                     <td><span class="pull-right">{{$cheq->remaining}} <i class="fa fa-try"></i></span></td>
                                 </tr>
                                 </tfoot>
@@ -124,7 +124,7 @@
                                 <div class="col-sm-12">
                                     <button v-on:click="other_transfer" type="button"
                                             class="btn  btn-block bg-color-blue txt-color-white ">
-                                        {{trans("word.charge")}}
+                                        {{trans("sentence.add_collection")}}
                                     </button>
 
                                 </div>
@@ -133,7 +133,7 @@
                                 <div class="col-sm-12">
                                     <button v-on:click="other_transfer" type="button"
                                             class="btn  btn-block bg-color-blue txt-color-white ">
-                                        ÖDEME EKLE
+                                        {{ trans('sentence.add_payment') }}
                                     </button>
 
                                 </div>
@@ -195,7 +195,7 @@
                                     </button>
 
                                     <button type="submit" :disabled="money_form.bank_account_id == '' " class="btn btn btn-danger pull-right" >
-                                        {{trans("word.charge")}}
+                                        {{trans("word.save")}}
                                     </button>
                                     <br><br>
                                 </footer>

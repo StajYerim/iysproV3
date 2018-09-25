@@ -24,43 +24,46 @@
                             <li>
                                 <a href="{{route("sales.orders.form",[aid(),$order->id,"update"])}}"><i
                                             class="fa fa-edit" aria-hidden="true"></i>
-                                    {{trans("word.edit")}}</a>
+                                    {{trans("word.edit")}}
+                                </a>
                             </li>
                             <li>
-                                <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction"><i
-                                            class="fa fa-edit" aria-hidden="true"></i>
-                                    {{trans("sentence.add_collection")}}</a>
+                                <a href="#!" v-if="remaining !='0,00'"  data-toggle="modal" data-target="#transaction">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                    {{trans("sentence.add_collection")}}
+                                </a>
                             </li>
                             <li>
-                                <a href="{{route("sales.orders.form",[aid(),$order->id,"copy"])}}"><i class="fa fa-copy"
-                                                                                                      aria-hidden="true"></i>
-                                    {{trans("sentence.create_copy")}}</a>
+                                <a href="{{route("sales.orders.form",[aid(),$order->id,"copy"])}}">
+                                    <i class="fa fa-copy" aria-hidden="true"></i>
+                                    {{trans("sentence.create_copy")}}
+                                </a>
                             </li>
-
                             <li>
                                 <a tabindex="-1" data-toggle="modal" data-target="#transModal" href="#"><i class="fa fa-truck"  aria-hidden="true"></i>
-                                   {{ trans('sentence.send_transport_informations') }}</a>
+                                   {{ trans('sentence.send_transport_informations') }}
+                                </a>
                             </li>
                             @if(planning_send_permission() == 1)
                             <li>
                                 <a tabindex="-1" v-if="!planning" @click="orderPlanningSend" href="#"><i class="fa fa-industry"  aria-hidden="true"></i>
-                                    {{ trans('sentence.send_to_production') }}</a>
+                                    {{ trans('sentence.send_to_production') }}
+                                </a>
                             </li>
                             @endif
 
                             <li class="divider"></li>
                             <li>
-                                <a href="#" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash-o"
-                                                                                              aria-hidden="true"></i>
-                                    {{trans("word.delete")}}</a>
+                                <a href="#" data-toggle="modal" data-target="#deleteModal">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    {{trans("word.delete")}}
+                                </a>
                             </li>
-
                         </ul>
-
                     </div>
                     <div class="btn-group">
-                        <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span
-                                    class="fa fa-print"></span> {{trans("word.print")}} <span class="caret"></span> </a>
+                        <a class="btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <span class="fa fa-print"></span> {{trans("word.print")}} <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
                                 <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> {{trans("sentence.print_order")}}</a>
@@ -767,13 +770,12 @@
                                             <br>
                                             <br>
                                             <div class="row">
-
                                                 {{--<div class="alert alert-warning">--}}
-                                                {{--<strong>{{$order->company["company_name"]}}</strong>--}}
-                                                {{--<br>--}}
-                                                {{--{{$order->grand_total}} <i class="fa fa-{{$order->fa_currency}}"></i>--}}
-                                                {{--alacak bakiyesi--}}
-                                                {{--oluşturulacaktır.--}}
+                                                    {{--<strong>{{$order->company["company_name"]}}</strong>--}}
+                                                    {{--<br>--}}
+                                                    {{--{{$order->grand_total}} <i class="fa fa-{{$order->fa_currency}}"></i>--}}
+                                                    {{--alacak bakiyesi--}}
+                                                    {{--oluşturulacaktır.--}}
                                                 {{--</div>--}}
                                                 <center>
                                                     <a type="button" class="btn btn-success btn-lg" @click="invoiceAdd"
@@ -808,13 +810,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </form>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -985,21 +984,20 @@
     $type="share.order",
     $data = $order])
 
-@push("style")
-    <style>
-        .popover {
-            z-index: 1055;
-        }
-        .row_dark{
-            background:#e2e2e2
-        }
+    @push("style")
+        <style>
+            .popover {
+                z-index: 1055;
+            }
+            .row_dark{
+                background:#e2e2e2
+            }
 
-        hr {
-            margin-top: 6px;
-            margin-bottom: 6px;
-        }
-    </style>
-
+            hr {
+                margin-top: 6px;
+                margin-bottom: 6px;
+            }
+        </style>
     @endpush
 
     @push('scripts')
