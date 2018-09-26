@@ -14,8 +14,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 
                 <div class="input-group">
                     <div class="dropdown change"><a data-toggle="dropdown" href="#"
-                                              aria-expanded="true"
-                                              class="btn btn-sm btn-default change dropdown-toggle "><span
+                                                    aria-expanded="true"
+                                                    class="btn btn-sm btn-default change dropdown-toggle "><span
                                     class="fa fa-try"></span> {{ trans("sentence.currency_type") }}</a>
                         <ul class="dropdown-menu change dropdown-caret"
                             style="min-width: 350px; padding: 7px 9px; margin: -32px -1px 0px;">
@@ -95,8 +95,6 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     <input v-on:keypress="isNumber" v-model.lazy="item.quantity"
                            class="form-control"
                            style="text-align: right"/>
-
-
                 </td>
                 <td>
                     <select v-model="item.unit" disabled class="form-control select-disabled">
@@ -109,7 +107,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     @{{ subamount_row[index] }}
                 </td>
                 <td>
-                    <select v-model="item.vat" class="form-control">
+                    <select v-model="item.vat"  class="form-control">
                         <option v-for="vat in vats" :value="vat.id">@{{ vat.name }}</option>
                     </select>
                 </td>
@@ -128,7 +126,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             {{--<li><a href="#!">{{ trans("word.discount") }}</a></li>--}}
                             <li>
                                 <a href="#!" v-if="index != 0 " v-on:click="removeRow(index)">
-                                   {{trans("sentence.delete_row")}}
+                                    {{trans("sentence.delete_row")}}
                                 </a>
                             </li>
                         </ul>
@@ -149,9 +147,9 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                 </td>
                 <td colspan="2">
                     <div class="input-group" style="top: 2px;" v-show="item.termin_show">
-                        <input  type="date"
-                                  class="form-control"
-                                  v-model="item.termin_date">
+                        <input type="date"
+                               class="form-control"
+                               v-model="item.termin_date">
 
                         <div class="input-group-btn">
                             <button type="button" placeholder="Termin {{ trans("word.date") }}" class="btn btn-default"
@@ -167,10 +165,10 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
             </tbody>
         </table>
         <div class="row ">
-            <div class="col-sm-8">
+            <div class="col-sm-7">
                 <button type="button" v-on:click="addRow" class="btn btn-default"><i class="fa fa-plus"></i>  {{ trans("sentence.add_new_row") }}</button>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-5">
 
                 <table class="table table-condensed table-striped table-no-padding" width="100%" border="0">
                     <tbody>
@@ -183,7 +181,58 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                                 <div v-bind:class="[currency_class]"></div>
                             </div>
                         </td>
+                        <td style="text-align:left;border-top: 0px;">
+                            <div class="dropdown open">
+                                <button type="button" data-toggle="dropdown"
+                                        class="btn btn-sm btn-default dropdown-toggle" aria-expanded="true"><span
+                                            class="fa fa-plus"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#!" v-on:click="discount = true">ARA TOPLAM İNDİRİMİ EKLE</a></li>
+                                </ul>
+                            </div>
+                        </td>
 
+                    </tr>
+                    <tr v-show="discount">
+                        <td style="border-bottom: 1px solid #ddd;">
+                            <div class="bottom-info">ARA TOPLAM İNDİRİMİ</div><BR>
+
+                        </td>
+                        <td style="text-align:right;    border-bottom: 1px solid #ddd;">
+                            <div class="input-group">
+                                <input type="text" v-on:keypress="isNumber()" class="form-control" value="0,00"
+                                       autocomplete="OFF" v-model="discount_value">
+                                <div class="input-group-btn">
+                                    <select v-model="discount_type" class="price_currency">
+
+                                        <option value="0">TL</option>
+
+                                    </select>
+
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align:left;border-top: 0px;">
+                            <div class="dropdown open">
+                                <button type="button" v-on:click="discount=false;discount_value='0,00'"
+                                        class="btn btn-sm btn-default"><span
+                                            class="fa fa-close"></span></button>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr v-show="discount">
+                        <td style="border-bottom: 1px solid #ddd;">
+                            <div class="bottom-info">BRÜT TOPLAM</div><BR>
+
+                        </td>
+                        <td style="text-align:right;    border-bottom: 1px solid #ddd;">
+                            <div class="bottom-info" >
+                                <span
+                                      >    @{{ brut_total }}</span> <i
+                                        v-bind:class="[currency_class]"></i></div>
+
+                        </td>
                     </tr>
 
                     <tr v-for="vato in vat_only" v-if="vato.total!=0 || vato.name != vato.name">
@@ -191,7 +240,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             <div class="bottom-info" style="font-size: 11px">{{ trans("sentence.total_vat") }}@{{ vato.name }}</div>
                         </td>
                         <td style="text-align:right">
-                            <div class="bottom-info" style="font-size: 11px"><span
+                            <div class="bottom-info" style="font-size: 11px">
+                                <span
                                         id="total-vat-1">@{{ vato.total }}</span> <i
                                         v-bind:class="[currency_class]"></i></div>
                         </td>
@@ -206,6 +256,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                                 <div v-bind:class="[currency_class]"></div>
                             </div>
                         </td>
+
                     </tr>
 
 
@@ -238,7 +289,12 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 
     </div>
 </div>
+@push("style")
+    <link href="{{asset("/js/boost-select/css/bootstrap-select.min.css")}}"
+          rel="stylesheet"/>
+@endpush
 @push("script_form")
+    <script src="{{asset("/js/boost-select/js/bootstrap-select.js")}}"></script>
     <script>
         window.addEventListener("load", () => {
             Vue.directive('focus', {
@@ -247,7 +303,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         el.focus()
                     })
                 }
-            })
+            });
 
             Vue.component('v-select', VueSelect.VueSelect);
             Vuen = new Vue({
@@ -282,6 +338,9 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         currency_class: '{{$form_type == "update" ? "fa fa-".$offer->fa_currency."":""}}',
                         currency: '{{$form_type == "update" ? $offer->currency:"TRY"}}',
                         currency_value: '{{$form_type == "update" ? $offer->_value:"0,00"}}',
+                        discount: '{{$form_type == "update" ? $offer->discount_value == "0,00" ? false:true:false}}',
+                        discount_value: '{{$form_type == "update" ? $offer->discount_value:"0,00"}}',
+                        discount_type: '{{$form_type == "update" ? $offer->discount_type:0}}',
                         items: [@if($form_type != "update"){
                             id: 0,
                             description: "",
@@ -323,17 +382,59 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     }
                 },
                 computed: {
+                    brut_total(){
+                      return (money_clear(this.sub_total)-money_clear(this.discount_value)).toLocaleString('tr-TR', {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2
+                      });
+                    },
                     subtotal_row() {
-                        return this.items.map((item) => {
+
+                        VueName.form.discount_value = this.discount_value.toLocaleString('tr-TR', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                });
+                        VueName.form.discount_type = this.discount_type;
+                        satir_sayisi = 0;
+                        $.each(this.items,function(key,value){
+                            if(money_clear(value.quantity)*money_clear(value.amount) > 0){
+                                satir_sayisi +=1;
+                            }
+                        });
+
+
+                        if (this.discount_value == "0,00" || this.discount_value == 0 || this.discount_value == null) {
+                            indirim_sonucu = 0;
+                        } else {
+                            indirim_sonucu = money_clear(this.discount_value) / satir_sayisi;
+                        }
+
+                        return this.items.map((item, idx) => {
+                            //discount value
 
                             total = total_price(money_clear(item.quantity), item.vat, money_clear(item.amount));
+
+                            if(money_clear(item.quantity)*money_clear(item.amount) > 0){
+                                this.items[idx].indirimli_total = total_price(money_clear(item.quantity), item.vat, money_clear(item.amount), indirim_sonucu).toLocaleString('tr-TR', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                });
+                                ;
+                                this.items[idx].indirimli_amount = (money_clear(item.amount) - indirim_sonucu).toLocaleString('tr-TR', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                });
+                            }else{
+                                this.items[idx].indirimli_amount = "0,00";
+                                this.items[idx].indirimli_total = "0,00"
+                            }
 
                             return total.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                         });
                     },
                     subamount_row() {
+                        $(".dropdown").removeClass("open");
                         return this.items.map((item, idx) => {
-
 
                             $net = ((this.items[idx].total) / (1 + (this.items[idx].vat / 100)) / (money_clear(this.items[idx].quantity))).toLocaleString('tr-TR', {
                                 minimumFractionDigits: 2,
@@ -348,19 +449,28 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     },
                     sub_totall() {
                         let st = 0;
+                        let ts = 0;
                         return this.items.reduce((total, item) => {
                             st += money_clear(item.quantity) * money_clear(item.amount);
                             result = st.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 4});
                             this.sub_total = result;
+
                             VueName.form.sub_total = result;
                             return result;
                         }, 0);
 
                     },
                     general_total() {
+                        VueName.form.discount_value = this.discount_value.toLocaleString('tr-TR', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                });
+                        VueName.form.discount_type = this.discount_type;
                         let tp = 0;
+                        let tc = 0;
                         this.items.reduce((total, item) => {
-                            tp += money_clear(item.total) * 1;
+                            tp += money_clear(item.indirimli_total) * 1;
+                            tc += money_clear(item.total) * 1;
                         }, 0);
 
                         let yeni = tp.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 4});
@@ -378,17 +488,30 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         });
                     },
                     vat_totall() {
-                        vat_totali = money_clear(this.general_total) - money_clear(this.sub_totall);
 
-                        result = vat_totali.toLocaleString('tr-TR', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 4
+                       VueName.form.discount_value = this.discount_value.toLocaleString('tr-TR', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                });
+                       VueName.form.discount_type = this.discount_type;
+                        this.items.reduce((total, item) => {});
+                        vat_total = 0;
+                        $.each(this.vat_only, function (key, val) {
+                            vat_total += money_clear(val.total);
+
                         });
-                        this.vat_total = result;
-                        VueName.form.vat_total = result;
-                        return result;
+
+                        return vat_total.toLocaleString('tr-TR', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
                     },
                     vat_check() {
+                        VueName.form.discount_value = this.discount_value.toLocaleString('tr-TR', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                });
+                        VueName.form.discount_type = this.discount_type;
                         vat1 = 0;
                         vat8 = 0;
                         vat18 = 0;
@@ -397,8 +520,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 
                             if (item.vat == 1) {
 
-                                t = money_clear(item.total);
-                                a = money_clear(item.amount);
+                                t = money_clear(item.indirimli_total);
+                                a = money_clear(item.indirimli_amount);
                                 q = money_clear(item.quantity);
 
                                 st = q * a;
@@ -409,8 +532,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 
                             } else if (item.vat == 8) {
 
-                                t = money_clear(item.total);
-                                a = money_clear(item.amount);
+                                t = money_clear(item.indirimli_total);
+                                a = money_clear(item.indirimli_amount);
                                 q = money_clear(item.quantity);
 
                                 st = q * a;
@@ -420,8 +543,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             } else if (item.vat == 18) {
 
 
-                                t = money_clear(item.total);
-                                a = money_clear(item.amount);
+                                t = money_clear(item.indirimli_total);
+                                a = money_clear(item.indirimli_amount);
                                 q = money_clear(item.quantity);
 
                                 st = q * a;
@@ -469,6 +592,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                 mounted: function () {
                     datePicker();
 
+                    $('.price_currency').selectpicker();
                     @if($form_type == "update")
 
                             @foreach($offer->items as $item)
@@ -491,9 +615,9 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     );
                     @endforeach
 
-                   @endif
+                            @endif
 
-                   this.currency_process(this.currency);
+                        this.currency_process(this.currency);
 
                     window.addEventListener("keypress", function (e) {
                         if (e.keyCode == 43) {
@@ -514,7 +638,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                 },
                 methods: {
                     itemdate(index){
-                      return "itemdate-"+index;
+                        return "itemdate-" + index;
                     },
                     consoleCallback: function (val, tag) {
 
@@ -576,10 +700,10 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         } else {
                             VueName.form.currency = cur;
 
-                                VueName.form.currency_value = Vuen.currency_value.toLocaleString('tr-TR', {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 4
-                                });
+                            VueName.form.currency_value = Vuen.currency_value.toLocaleString('tr-TR', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 4
+                            });
 
 
                             this.dont_try = true;
@@ -601,6 +725,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             amount: "0,00",
                             quantity: "1",
                             total: "0,00",
+                            discount: "",
                             note: "",
                         });
 
@@ -610,7 +735,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             const input = this.$refs["field-" + col][0].$el.querySelector('input');
                             input.focus();
 
-                        })
+                        });
 
                         console.log(this.items[col].product_id = '');
                     },
@@ -649,8 +774,13 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
 
                     }, 350),
 
+
                 }
             })
         });
+
+        console.clear()
+
+
     </script>
 @endpush
