@@ -796,6 +796,7 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'expense_categories', 'text'=> ['en'=> 'EXPENSE CATEGORIES','tr'=> 'GİDER KATEGORİLERİ']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'expense_reports_table', 'text'=> ['en'=> 'EXPENSE REPORTS TABLE','tr'=> 'GİDER RAPORLARI TABLOSU']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'not_paid', 'text'=> ['en'=> 'NOT PAID','tr'=> 'ÖDENMEDİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'transaction_movements', 'text'=> ['en'=> 'TRANSACTION MOVEMENTS','tr'=> 'İŞLEM HAREKETLERİ']]);
 
 
     }
