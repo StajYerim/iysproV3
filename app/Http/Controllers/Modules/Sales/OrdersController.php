@@ -165,8 +165,6 @@ class OrdersController extends Controller
 
     public function pdf($aid, $id,$type,$lang)
     {
-
-
         if($type=="url"){
             $order = SalesOrders::find($id);
             $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order","lang"))->setPaper('A4');
@@ -176,8 +174,6 @@ class OrdersController extends Controller
             $pdf = PDF::loadView('modules.sales.orders.pdf',compact("order","lang"))->setPaper('A4');
             return   $pdf->download($order->company["company_name"].' ('.$order->description.').pdf');
         }
-
-
     }
 
     public function destroy($aid, $id)
