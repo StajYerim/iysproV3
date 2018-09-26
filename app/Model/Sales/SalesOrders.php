@@ -90,6 +90,13 @@ class SalesOrders extends Model
         $this->attributes['sub_total'] = money_db_format($value);
     }
 
+    public function setDiscountValueAttribute($value)
+    {
+        $this->attributes['discount_value'] = money_db_format($value);
+    }
+
+
+
     public function setVatTotalAttribute($value)
     {
         $this->attributes['vat_total'] = money_db_format($value);
@@ -103,6 +110,11 @@ class SalesOrders extends Model
     public function getGrandTotalAttribute()
     {
         return get_money($this->attributes['grand_total']);
+    }
+
+    public function getDiscountValueAttribute()
+    {
+        return get_money($this->attributes['discount_value']);
     }
 
     public function getGrandTotalsAttribute()

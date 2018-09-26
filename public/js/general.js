@@ -65,9 +65,11 @@ if(val == 0){
 }
 
 //Toplam Fiyat
-function total_price(adet,kdv,birimfiyat) {
-
-    let toplam = (birimfiyat*adet)*(1+(kdv/100));
+function total_price(adet,kdv,birimfiyat,indirimli_tutar = 0) {
+    if(indirimli_tutar == "0,00"){
+        indirimli_tutar = 0;
+    }
+    let toplam = ((birimfiyat*adet)-indirimli_tutar)*(1+(kdv/100));
     return toplam;
 }
 
