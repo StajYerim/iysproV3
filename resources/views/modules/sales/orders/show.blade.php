@@ -168,9 +168,29 @@
                                                                     class="fa fa-{{$order->fa_currency}}"></i></div>
                                                     </td>
                                                 </tr>
+                                                @if( $order->discount_value != "0,00")
+                                                    <tr>
+                                                        <td>
+                                                            <div class="bottom-info">{{trans("sentence.sub_total_discount")}}</div>
+                                                        </td>
+                                                        <td style="text-align:right">
+                                                            <div class="bottom-info">{{$order->discount_value}} <i
+                                                                        class="fa fa-{{$order->fa_currency}}"></i></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="bottom-info">{{trans("sentence.gross_total")}}</div>
+                                                        </td>
+                                                        <td style="text-align:right">
+                                                            <div class="bottom-info">{{get_money(money_db_format($order->sub_total)-money_db_format($order->discount_value))}} <i
+                                                                        class="fa fa-{{$order->fa_currency}}"></i></div>
+                                                        </td>
+                                                    </tr>
+                                                @endif
 
 
-                                                <tr v-for="vato in vat_only" class="trow"
+                                                <tr v-for="vato in vat_only" style="display:none" class="trow"
                                                     v-if="vato.total!=0">
 
                                                     <td style="border-top: 0px;">

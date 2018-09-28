@@ -221,36 +221,36 @@ app()->setLocale($lang);
                 {{$offer->sub_total}} {!! $offer->currency_icon!!}
             </td>
         </tr>
-        {{--@if($offer->Items->sum("OfferItemDiscount") > 0)--}}
-            {{--<tr class="total">--}}
-                {{--<td></td>--}}
-                {{--<td></td>--}}
-                {{--<td></td>--}}
-                {{--<td></td>--}}
-                {{--<td colspan="1" style="text-align: right">--}}
-                    {{--İNDİRİM:--}}
-                {{--</td>--}}
-                {{--<td colspan="1" style="text-align: right">--}}
-                    {{--{{tl($offer->OfferDiscount)}} TL--}}
-                {{--</td>--}}
-            {{--</tr>--}}
-        {{--@endif--}}
+        @if($offer->discount_value != "0,00")
+            <tr class="total">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="1" style="text-align: right">
+                    {{trans("word.discount")}}:
+                </td>
+                <td colspan="1" style="text-align: right">
+                    {{$offer->discount_value}}  {!! $offer->currency_icon!!}
+                </td>
+            </tr>
+        @endif
         <tr class="total">
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td colspan="1" style="text-align: right">
-              <div style=";font-size:10px;">  @if(KdvTotal($offer->items,1) > 0)%1 {{trans("word.vat")}}<br>@endif
-                @if(KdvTotal($offer->items,8) > 0) %8 {{trans("word.vat")}}<br>@endif
-                @if(KdvTotal($offer->items,18) > 0) %18 {{trans("word.vat")}}<br>@endif
-              </div>
+              {{--<div style=";font-size:10px;">  @if(KdvTotal($offer->items,1) > 0)%1 {{trans("word.vat")}}<br>@endif--}}
+                {{--@if(KdvTotal($offer->items,8) > 0) %8 {{trans("word.vat")}}<br>@endif--}}
+                {{--@if(KdvTotal($offer->items,18) > 0) %18 {{trans("word.vat")}}<br>@endif--}}
+              {{--</div>--}}
                 {{ trans("sentence.total_vat") }} :
             </td>
             <td colspan="1" style="text-align: right">
-                <div style=";font-size:10px;">   @if(KdvTotal($offer->items,1) > 0)  {{KdvTotal($offer->items,1)}} {!! $offer->currency_icon!!}<br>@endif
-                @if(KdvTotal($offer->items,8) > 0) {{KdvTotal($offer->items,8)}} {!! $offer->currency_icon!!}<br>@endif
-                @if(KdvTotal($offer->items,18) > 0){{KdvTotal($offer->items,18)}} {!! $offer->currency_icon!!}<br>@endif  </div>
+                {{--<div style=";font-size:10px;">   @if(KdvTotal($offer->items,1) > 0)  {{KdvTotal($offer->items,1)}} {!! $offer->currency_icon!!}<br>@endif--}}
+                {{--@if(KdvTotal($offer->items,8) > 0) {{KdvTotal($offer->items,8)}} {!! $offer->currency_icon!!}<br>@endif--}}
+                {{--@if(KdvTotal($offer->items,18) > 0){{KdvTotal($offer->items,18)}} {!! $offer->currency_icon!!}<br>@endif  </div>--}}
                 {{$offer->vat_total}} {!! $offer->currency_icon!!}
 
             </td>

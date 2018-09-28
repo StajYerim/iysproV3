@@ -65,6 +65,8 @@ OffersController extends Controller
             "description_detail" => $request->form["description_detail"],
             "company_id" => $request->form["company_id"]["id"],
             "date" => $request->form["date"],
+            "discount_type" => $request->form["discount_type"],
+            "discount_value" => $request->form["discount_value"],
             "expired_date" => $request->form["expired_date"],
             "effective_date" => date_tr(),
             "currency" => $request->form["currency"],
