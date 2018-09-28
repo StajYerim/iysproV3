@@ -103,7 +103,7 @@ $host=$_SERVER["HTTP_HOST"];
     @endif
     <table style= "width: 100%" cellpadding="0" cellspacing="0">
         <tr class="top" >
-            <td colspan="6">
+            <td colspan="5">
                 <table>
                     <tr>
                         <td class="title">
@@ -114,7 +114,7 @@ $host=$_SERVER["HTTP_HOST"];
                                     <td>
                                         @if($settings_sales_offer && !empty($app_account->logo))
                                          @if($settings_sales_offer->logo_show == 1)
-                                            <img style="height:1000%;width:1000%" src="{{ base_path() }}/public/images/account/{{aid()}}/logo/{{$app_account->logo}}">
+                                            <img  src="{{ base_path() }}/public/images/account/{{aid()}}/logo/{{$app_account->logo}}">
                                         @endif
                                             @endif
                                     </td>
