@@ -385,6 +385,9 @@ class LanguagesTableSeeder extends Seeder
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'add_new_row', 'text'=> ['en'=> 'ADD NEW ROW', 'tr'=> 'YENİ SATIR EKLE']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'detailed_description', 'text'=> ['en'=> 'DETAILED DESCRIPTION', 'tr'=> 'DETAYLI AÇIKLAMA']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'sub_total', 'text'=> ['en'=> 'SUB TOTAL', 'tr'=> 'ARA TOPLAM']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'sub_total_discount', 'text'=> ['en'=> 'SUB TOTAL DISCOUNT', 'tr'=> 'ARA TOPLAM İNDİRİMİ']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'sub_total_discount_add', 'text'=> ['en'=> 'ADD SUB TOTAL DISCOUNT', 'tr'=> 'ARA TOPLAM İNDİRİMİ EKLE']]);
+        LanguageLine::create(['group'=> 'sentence', 'key'=> 'gross_total', 'text'=> ['en'=> 'GROSS TOTAL', 'tr'=> 'BRÜT TOPLAM']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'total_vat', 'text'=> ['en'=> 'TOTAL VAT', 'tr'=> 'TOPLAM KDV']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'general_total', 'text'=> ['en'=> 'GENERAL TOTAL', 'tr'=> 'GENEL TOPLAM']]);
         LanguageLine::create(['group'=> 'sentence', 'key'=> 'choose_company', 'text'=> ['en'=> 'CHOOSE COMPANY', 'tr'=> 'ŞİRKET SEÇ']]);

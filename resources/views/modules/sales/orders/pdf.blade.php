@@ -228,37 +228,38 @@
                 {{$order->sub_total}} {!! $order->currency_icon!!}
             </td>
         </tr>
-        {{--@if($order->Items->sum("OfferItemDiscount") > 0)--}}
-            {{--<tr class="total">--}}
-                {{--<td></td>--}}
-                {{--<td></td>--}}
-                {{--<td></td>--}}
-                {{--<td></td>--}}
-                {{--<td colspan="1" style="text-align: right">--}}
-                    {{--İNDİRİM:--}}
-                {{--</td>--}}
-                {{--<td colspan="1" style="text-align: right">--}}
-                    {{--{{tl($order->OfferDiscount)}} TL--}}
-                {{--</td>--}}
-            {{--</tr>--}}
-        {{--@endif--}}
+            @if($order->discount_value != "0,00")
+            <tr class="total">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="1" style="text-align: right">
+                    {{trans("word.discount")}}:
+                </td>
+                <td colspan="1" style="text-align: right">
+                    {{$order->discount_value}}  {!! $order->currency_icon!!}
+                </td>
+            </tr>
+        @endif
+
         <tr class="total">
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td colspan="1" style="text-align: right">
-              <div style=";font-size:10px;">  @if(KdvTotal($order->items,1) > 0)%1 {{trans("word.vat")}}<br>@endif
-                @if(KdvTotal($order->items,8) > 0) %8 {{trans("word.vat")}}<br>@endif
-                @if(KdvTotal($order->items,18) > 0) %18 {{trans("word.vat")}}<br>@endif
-              </div>
+              {{--<div style=";font-size:10px;">  @if(KdvTotal($order->items,1) > 0)%1 {{trans("word.vat")}}<br>@endif--}}
+                {{--@if(KdvTotal($order->items,8) > 0) %8 {{trans("word.vat")}}<br>@endif--}}
+                {{--@if(KdvTotal($order->items,18) > 0) %18 {{trans("word.vat")}}<br>@endif--}}
+              {{--</div>--}}
                 {{trans("sentence.total_vat")}} :
 
             </td>
             <td colspan="1" style="text-align: right">
-                <div style=";font-size:10px;">   @if(KdvTotal($order->items,1) > 0)  {{KdvTotal($order->items,1)}} {!! $order->currency_icon!!}<br>@endif
-                @if(KdvTotal($order->items,8) > 0) {{KdvTotal($order->items,8)}} {!! $order->currency_icon!!}<br>@endif
-                @if(KdvTotal($order->items,18) > 0){{KdvTotal($order->items,18)}} {!! $order->currency_icon!!}<br>@endif  </div>
+                {{--<div style=";font-size:10px;">   @if(KdvTotal($order->items,1) > 0)  {{KdvTotal($order->items,1)}} {!! $order->currency_icon!!}<br>@endif--}}
+                {{--@if(KdvTotal($order->items,8) > 0) {{KdvTotal($order->items,8)}} {!! $order->currency_icon!!}<br>@endif--}}
+                {{--@if(KdvTotal($order->items,18) > 0){{KdvTotal($order->items,18)}} {!! $order->currency_icon!!}<br>@endif  </div>--}}
                 {{$order->vat_total}} {!! $order->currency_icon!!}
 
             </td>

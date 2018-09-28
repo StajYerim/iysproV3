@@ -111,6 +111,16 @@ class SalesOffers extends Model
         return $this->hasMany(SalesOfferItems::class, "sales_offer_id", "id");
     }
 
+    public function getDiscountValueAttribute()
+    {
+        return get_money($this->attributes['discount_value']);
+    }
+
+    public function setDiscountValueAttribute($value)
+    {
+        $this->attributes['discount_value'] = money_db_format($value);
+    }
+
     public function company()
     {
         return $this->hasOne(Companies::class, "id", "company_id");

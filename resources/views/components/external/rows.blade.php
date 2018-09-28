@@ -182,12 +182,12 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             </div>
                         </td>
                         <td style="text-align:left;border-top: 0px;">
-                            <div class="dropdown open">
+                            <div class="dropdown " v-show="!discount">
                                 <button type="button" data-toggle="dropdown"
                                         class="btn btn-sm btn-default dropdown-toggle" aria-expanded="true"><span
                                             class="fa fa-plus"></span></button>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="#!" v-on:click="discount = true">ARA TOPLAM İNDİRİMİ EKLE</a></li>
+                                    <li><a href="#!" v-on:click="discount = true">{{trans("sentence.sub_total_discount_add")}}</a></li>
                                 </ul>
                             </div>
                         </td>
@@ -195,21 +195,15 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     </tr>
                     <tr v-show="discount">
                         <td style="border-bottom: 1px solid #ddd;">
-                            <div class="bottom-info">ARA TOPLAM İNDİRİMİ</div><BR>
+                            <div class="bottom-info">{{trans("sentence.sub_total_discount")}}</div>
 
                         </td>
                         <td style="text-align:right;    border-bottom: 1px solid #ddd;">
                             <div class="input-group">
-                                <input type="text" v-on:keypress="isNumber()" class="form-control" value="0,00"
+                                <input type="text" v-on:keypress="isNumber()" s
+                                       class="form-control" value="0,00"
                                        autocomplete="OFF" v-model="discount_value">
-                                <div class="input-group-btn">
-                                    <select v-model="discount_type" class="price_currency">
 
-                                        <option value="0">TL</option>
-
-                                    </select>
-
-                                </div>
                             </div>
                         </td>
                         <td style="text-align:left;border-top: 0px;">
@@ -223,7 +217,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                     </tr>
                     <tr v-show="discount">
                         <td style="border-bottom: 1px solid #ddd;">
-                            <div class="bottom-info">BRÜT TOPLAM</div><BR>
+                            <div class="bottom-info">{{trans("sentence.gross_total")}}</div>
 
                         </td>
                         <td style="text-align:right;    border-bottom: 1px solid #ddd;">
@@ -379,7 +373,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                             })
                         },
                         deep: true
-                    }
+                    },
                 },
                 computed: {
                     brut_total(){
@@ -396,12 +390,12 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                                 });
                         VueName.form.discount_type = this.discount_type;
                         satir_sayisi = 0;
+
                         $.each(this.items,function(key,value){
                             if(money_clear(value.quantity)*money_clear(value.amount) > 0){
                                 satir_sayisi +=1;
                             }
                         });
-
 
                         if (this.discount_value == "0,00" || this.discount_value == 0 || this.discount_value == null) {
                             indirim_sonucu = 0;
@@ -410,8 +404,6 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         }
 
                         return this.items.map((item, idx) => {
-                            //discount value
-
                             total = total_price(money_clear(item.quantity), item.vat, money_clear(item.amount));
 
                             if(money_clear(item.quantity)*money_clear(item.amount) > 0){
@@ -419,7 +411,7 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                                     minimumFractionDigits: 2,
                                     maximumFractionDigits: 2
                                 });
-                                ;
+
                                 this.items[idx].indirimli_amount = (money_clear(item.amount) - indirim_sonucu).toLocaleString('tr-TR', {
                                     minimumFractionDigits: 2,
                                     maximumFractionDigits: 2
@@ -499,6 +491,12 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         $.each(this.vat_only, function (key, val) {
                             vat_total += money_clear(val.total);
 
+                        });
+
+
+                        VueName.form.vat_total = vat_total.toLocaleString('tr-TR', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
                         });
 
                         return vat_total.toLocaleString('tr-TR', {
@@ -773,13 +771,12 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         });
 
                     }, 350),
-
-
                 }
-            })
+
+
         });
 
-        console.clear()
+        });
 
 
     </script>

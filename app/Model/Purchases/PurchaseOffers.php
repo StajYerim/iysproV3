@@ -26,6 +26,15 @@ class PurchaseOffers extends Model
     {
         return $this->description == null ? "SATINALMA TALEBİ" : $this->description;
     }
+    public function getDiscountValueAttribute()
+    {
+        return get_money($this->attributes['discount_value']);
+    }
+
+    public function setDiscountValueAttribute($value)
+    {
+        $this->attributes['discount_value'] = money_db_format($value);
+    }
 
     public function setDateAttribute($value)
     {

@@ -200,6 +200,11 @@ function product_img_url($img)
     return "/images/account/" . aid() . "/product/" . $img;
 }
 
+
+function vat_calc(){
+
+}
+
 function movements_type($action = 7)
 {
     if ($action == 0) {

@@ -181,6 +181,8 @@
                             date: "{{$form_type == "update" ? $offer->date:date_tr()}}",
                             expired_date: "{{$form_type == "update" ? $offer->expired_date:date_tr()}}",
                             grand_total: "{{$form_type == "update" ? $offer->grand_total:"0,00"}}",
+                            discount_type: "{{$form_type == "update" ? $order->discount_type == null ? 0:$order->discount_type:0}}",
+                            discount_value: "{{$form_type == "update" ? $order->discount_value == null ? "0,00":$order->discount_value:"0,00"}}",
                             sub_total: "{{$form_type == "update" ? $offer->sub_total:"0,00"}}",
                             vat_total: "{{$form_type == "update" ? $offer->vat_total:"0,00"}}",
                             currency: "{{$form_type == "update" ? $offer->currency:"try"}}",

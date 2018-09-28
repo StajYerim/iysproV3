@@ -149,6 +149,8 @@
                             due_date: "{{$form_type == "update" ? $order->due_date:date_tr()}}",
                             grand_total: "{{$form_type == "update" ? $order->grand_total:"0,00"}}",
                             sub_total: "{{$form_type == "update" ? $order->sub_total:"0,00"}}",
+                            discount_type: "{{$form_type == "update" ? $order->discount_type == null ? 0:$order->discount_type:0}}",
+                            discount_value: "{{$form_type == "update" ? $order->discount_value == null ? "0,00":$order->discount_value:"0,00"}}",
                             vat_total: "{{$form_type == "update" ? $order->vat_total:"0,00"}}",
                             currency: "{{$form_type == "update" ? $order->currency:"try"}}",
                             currency_value: "{{$form_type == "update" ? $order->currency_value:"0,00"}}",

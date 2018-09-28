@@ -154,22 +154,41 @@
                                                                     class="fa fa-{{$order->fa_currency}}"></i></div>
                                                     </td>
                                                 </tr>
+                                                @if( $order->discount_value != "0,00" and $order->discount_value !=null)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="bottom-info">{{trans("sentence.sub_total_discount")}}</div>
+                                                        </td>
+                                                        <td style="text-align:right">
+                                                            <div class="bottom-info">{{$order->discount_value}} <i
+                                                                        class="fa fa-{{$order->fa_currency}}"></i></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="bottom-info">{{trans("sentence.gross_total")}}</div>
+                                                        </td>
+                                                        <td style="text-align:right">
+                                                            <div class="bottom-info">{{get_money(money_db_format($order->sub_total)-money_db_format($order->discount_value))}} <i
+                                                                        class="fa fa-{{$order->fa_currency}}"></i></div>
+                                                        </td>
+                                                    </tr>
+                                                @endif
 
+                                                {{--<tr v-for="vato in vat_only" class="trow"--}}
+                                                    {{--v-if="vato.total!=0">--}}
 
-                                                <tr v-for="vato in vat_only" class="trow"
-                                                    v-if="vato.total!=0">
-
-                                                    <td style="border-top: 0px;">
-                                                        <div class="bottom-info" style="font-size: 11px" >{{trans("sentence.total_vat")}} @{{
-                                                            vato.name }}
-                                                        </div>
-                                                    </td>
-                                                    <td style="text-align:right">
-                                                        <div class="bottom-info" style="font-size: 11px"><span
-                                                                    id="total-vat-1">@{{ vato.total }}</span> <i
-                                                                    class="fa fa-{{$order->fa_currency}}"></i></div>
-                                                    </td>
-                                                </tr>
+                                                    {{--<td style="border-top: 0px;">--}}
+                                                        {{--<div class="bottom-info" style="font-size: 11px" >{{trans("sentence.total_vat")}} @{{--}}
+                                                            {{--vato.name }}--}}
+                                                        {{--</div>--}}
+                                                    {{--</td>--}}
+                                                    {{--<td style="text-align:right">--}}
+                                                        {{--<div class="bottom-info" style="font-size: 11px"><span--}}
+                                                                    {{--id="total-vat-1">@{{ vato.total }}</span> <i--}}
+                                                                    {{--class="fa fa-{{$order->fa_currency}}"></i></div>--}}
+                                                    {{--</td>--}}
+                                                {{--</tr>--}}
                                                 <tr>
                                                     <td>
                                                         <div class="bottom-info">{{trans("word.total")}} KDV</div>
