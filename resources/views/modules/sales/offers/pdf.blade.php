@@ -285,7 +285,7 @@ $host=$_SERVER["HTTP_HOST"];
     <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2,$offer->currency_name, $offer->currency_coin, "", null, null, null)}}
     </span>
     <br><br><br>
-    {!! $offer->description_detail !!}
+    <p style="white-space: pre;">{!! $offer->description_detail !!}</p>
 </div>
 
 <div id="altfooter">
