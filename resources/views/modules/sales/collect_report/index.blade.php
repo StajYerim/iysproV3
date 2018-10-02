@@ -88,7 +88,7 @@
                                             <td>{{$order->date}}</td>
                                             <td>{{$order->company["company_name"]}}</td>
                                             <td>FATURA</td>
-                                            <td>{{$order->remaining}}  <i class="fa fa-try"></i></td>
+                                            <td>{{$order->remaining}}  <i class="fa fa-{{strtolower($order->currency)}}"></i></td>
                                         </tr>
                                         @endif
                                         @endforeach
@@ -119,14 +119,6 @@
     <!-- END MAIN CONTENT -->
 
     @push("scripts")
-        <!-- PAGE RELATED PLUGIN(S) -->
-        {{--<script src="/js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>--}}
-        {{--<script src="/js/plugin/moment/moment.min.js"></script>--}}
-        {{--<script src="/js/plugin/chartjs/chart.min.js"></script>--}}
-        {{--<script src="/js/plugin/morris/raphael.min.js"></script>--}}
-        {{--<script src="/js/plugin/morris/morris.min.js"></script>--}}
-        {{--<script src="/js/plugin/daterangepicker/daterangepicker.js"></script>--}}
-        {{--<link rel="stylesheet" href="/js/plugin/daterangepicker/daterangepicker.css">--}}
 
         <script type="text/javascript">
 
