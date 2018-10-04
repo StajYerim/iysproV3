@@ -45,23 +45,18 @@
                                         <h4>{{ trans('sentence.collect_reports') }}</h4>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a class="btn btn-default  dropdown-toggle " data-toggle="dropdown" aria-expanded="false">
+                                        <a class="btn btn-default  dropdown-toggle pull-right" data-toggle="dropdown" aria-expanded="false">
                                             <span class="fa fa-print"></span> {{trans("word.print")}} <span class="caret"></span>
                                         </a>
-                                        <ul class="dropdown-menu">
-                                            <li class="dropdown-submenu">
-                                                <a class="test" tabindex="-1" href="#">  <i class="fa fa-print" aria-hidden="true"></i> TAHSİLAT YAZDIR</a>
-                                                <ul class="dropdown-menu"  style="   right: 158px;top: 5px;">
-                                                    @foreach($langs as $lang)
-                                                        <li>
-                                                            <a tabindex="-1" target="_blank" href="{{ route("sales.collect_report.pdf",[aid(),"url",$lang->lang_code])}}">
-                                                                <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}">
-                                                                {{$lang->name}}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
+                                        <ul class="dropdown-menu pull-right">
+                                            @foreach($langs as $lang)
+                                                <li>
+                                                    <a tabindex="-1" target="_blank" href="{{ route("sales.collect_report.pdf",[aid(),"url",$lang->lang_code])}}">
+                                                        <img src="https://dev.iyspro.com/img/blank.gif" class="flag flag-{{$lang->lang_code == "en" ? "us":$lang->lang_code}}">
+                                                        {{$lang->name}}
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
 
                                     </div>
@@ -78,10 +73,17 @@
                                         <div class="col-sm-4">
                                             <div class="text-center"><h6><b>{{ trans('sentence.overdue_collections') }}</b></h6></div>
                                             <div class="text-center" style="font-size:30px;color:#E74C3C!important">{{$expiry_total_collect}}<b> <small class="note"><i class="fa fa-try"></i> </small></b></div>
+                                            @if($expiry_usd != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($expiry_usd)}}<b> <small class="note"><i class="fa fa-usd"></i> </small></b></div>@endif
+                                            @if($expiry_eur != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($expiry_eur)}}<b> <small class="note"><i class="fa fa-eur"></i> </small></b></div>@endif
+                                            @if($expiry_gbp != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($expiry_gbp)}}<b> <small class="note"><i class="fa fa-gbp"></i> </small></b></div>@endif
+
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="text-center"><h6><b>{{ trans('sentence.total_collection') }}</b></h6></div>
                                             <div class="text-center" style="font-size:30px;color:#2AC!important">{{$total_collect}}<b> <small class="note"><i class="fa fa-try"></i> </small></b></div>
+                                            @if($usd != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($usd)}}<b> <small class="note"><i class="fa fa-usd"></i> </small></b></div>@endif
+                                            @if($eur != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($eur)}}<b> <small class="note"><i class="fa fa-eur"></i> </small></b></div>@endif
+                                            @if($gbp != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($gbp)}}<b> <small class="note"><i class="fa fa-gbp"></i> </small></b></div>@endif
 
                                         </div>
                                         <div class="col-sm-4">

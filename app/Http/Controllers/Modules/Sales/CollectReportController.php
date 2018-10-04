@@ -20,9 +20,20 @@ class CollectReportController extends Controller
 
         //Toplam Tahsilatlar
         $orders = SalesOrders::where("account_id", aid())->get();
-        $remaining = 0;
+        $tl = 0;
+        $usd = 0;
+        $gbp = 0;
+        $eur = 0;
         foreach ($orders as $order) {
-            $remaining += money_db_format($order->remaining);
+            if($order->currency == "TRY") {
+                $tl += money_db_format($order->remaining);
+            }else if($order->currency == "USD"){
+                $usd += money_db_format($order->remaining);
+            }else if($order->currency == "GBP"){
+                $gbp += money_db_format($order->remaining);
+            }else if($order->currency == "EUR"){
+                $eur += money_db_format($order->remaining);
+            }
         }
 
         $cheques = Cheques::where("account_id", aid())->get();
@@ -36,14 +47,26 @@ class CollectReportController extends Controller
 
 
 
-        $total_collect = get_money($remaining + $cheques_total);
+        $total_collect = get_money($tl + $cheques_total);
 
         //Vadesi geçen tahsilatlar
         $order_expiry_date = SalesOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->subDay(1))->get();
-        $expiry_remaining = 0;
+        $expiry_tl = 0;
+        $expiry_usd = 0;
+        $expiry_gbp = 0;
+        $expiry_eur = 0;
 
         foreach ($order_expiry_date as $order) {
-            $expiry_remaining += money_db_format($order->remaining);
+            if($order->currency == "TRY") {
+                $expiry_tl += money_db_format($order->remaining);
+            }else if($order->currency == "USD"){
+                $expiry_usd += money_db_format($order->remaining);
+            }else if($order->currency == "GBP"){
+                $expiry_gbp += money_db_format($order->remaining);
+            }else if($order->currency == "EUR"){
+                $expiry_eur += money_db_format($order->remaining);
+            }
+
         }
 
         $cheques_expiry = Cheques::where("account_id", aid())->whereDate("payment_date","<",Carbon::now()->subDay(1))->get();
@@ -54,13 +77,13 @@ class CollectReportController extends Controller
             }
         }
 
-        $expiry_total_collect = get_money($expiry_remaining+$cheques_total_expiry);
+        $expiry_total_collect = get_money($expiry_tl+$cheques_total_expiry);
 
         $export_collect= [];
         $export_collect["sales_orders"] = $orders;
         $export_collect["cheques"] = $cheques;
 
-        return view("modules.sales.collect_report.index", compact( "langs","expiry_total_collect", "total_collect", "export_collect"));
+        return view("modules.sales.collect_report.index", compact( "langs","expiry_total_collect", "total_collect", "export_collect","eur","usd","gbp","expiry_eur","expiry_usd","expiry_gbp"));
     }
 
     public function pdf($aid,$type,$lang)
