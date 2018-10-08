@@ -73,9 +73,9 @@
                                         <div class="col-sm-4">
                                             <div class="text-center"><h6><b>{{ trans('sentence.overdue_collections') }}</b></h6></div>
                                             <div class="text-center" style="font-size:30px;color:#E74C3C!important">{{$expiry_total_collect}}<b> <small class="note"><i class="fa fa-try"></i> </small></b></div>
-                                            @if($expiry_usd != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($expiry_usd)}}<b> <small class="note"><i class="fa fa-usd"></i> </small></b></div>@endif
-                                            @if($expiry_eur != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($expiry_eur)}}<b> <small class="note"><i class="fa fa-eur"></i> </small></b></div>@endif
-                                            @if($expiry_gbp != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($expiry_gbp)}}<b> <small class="note"><i class="fa fa-gbp"></i> </small></b></div>@endif
+                                            @if($expiry_usd != 0)<div class="text-center" style="font-size:30px;color:#E74C3C!important">{{get_money($expiry_usd)}}<b> <small class="note"><i class="fa fa-usd"></i> </small></b></div>@endif
+                                            @if($expiry_eur != 0)<div class="text-center" style="font-size:30px;color:#E74C3C!important">{{get_money($expiry_eur)}}<b> <small class="note"><i class="fa fa-eur"></i> </small></b></div>@endif
+                                            @if($expiry_gbp != 0)<div class="text-center" style="font-size:30px;color:#E74C3C!important">{{get_money($expiry_gbp)}}<b> <small class="note"><i class="fa fa-gbp"></i> </small></b></div>@endif
 
                                         </div>
                                         <div class="col-sm-4">

@@ -197,6 +197,38 @@
                                             </div>
                                         </div>
                                     </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group has-feedback">
+                                            <label class="col-sm-4 control-label">
+                                                <div class="bottom-info">
+                                                    SERİ NO
+                                                </div>
+                                            </label>
+                                            <div class="col-sm-8 ">
+                                                <div class="input-group" style="width:100%">
+                                                    <input type="text" v-model="cheque_collect.form.seri_no"
+                                                           class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group has-feedback">
+                                            <label class="col-sm-4 control-label">
+                                                <div class="bottom-info">
+                                                    CİRO
+                                                </div>
+                                            </label>
+                                            <div class="col-sm-8 ">
+                                                <div class="input-group" style="width:100%">
+                                                    <input type="text" v-model="cheque_collect.form.ciro_names"
+                                                           class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                     <fieldset>
                                         <div class="form-group has-feedback">
                                             <label class="col-sm-4 control-label">
@@ -327,6 +359,8 @@
                             bank_name:"",
                             branch_name:"",
                             number:"",
+                            seri_no:"",
+                            ciro_names:"",
                             date:"{{date_tr()}}",
                             payment_date:"{{date_tr()}}",
                             amount:"0,00",
