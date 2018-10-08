@@ -331,6 +331,8 @@ class BankAccountsController extends Controller
                 "type" => $request->doc_type,
                 "description" => $request->description,
                 "document_no" => $request->number,
+                "seri_no" => $request->seri_no,
+                "ciro_names" => $request->ciro_names,
                 "bank_name" => $request->bank_name,
                 "bank_branch" => $request->branch_name,
                 "date" => $request->date,

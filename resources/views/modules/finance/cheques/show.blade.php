@@ -33,15 +33,22 @@
                         <div class="col-12">
                             <div class="col-sm-5" style="font-weight: 400;font-size:15px;">
                                 @if($cheq->cheque_status == 1)
-                                <i class="fa fa-calendar"></i> {{trans("sentence.received_date")}}, {{trans("word.customer")}}<br><br>
+                                <i class="fa fa-calendar"></i> {{trans("sentence.received_date")}}, {{trans("word.customer")}}<br>
                                 @elseif($cheq->cheque_status == 0)
-                                    <i class="fa fa-calendar"></i> {{trans("sentence.given_date")}}, {{trans("word.supplier")}}<br><br>
+                                    <i class="fa fa-calendar"></i> {{trans("sentence.given_date")}}, {{trans("word.supplier")}}<br>
                                 @elseif($cheq->cheque_status == 2)
-                                    <i class="fa fa-calendar"></i> {{trans("sentence.received_date")}}, {{trans("word.customer")}}<br><br>
-                                    <i class="fa fa-calendar"></i> {{trans("sentence.given_date")}}, {{trans("word.supplier")}}<br><br>
+                                    <i class="fa fa-calendar"></i> {{trans("sentence.received_date")}}, {{trans("word.customer")}}<br>
+                                    <i class="fa fa-calendar"></i> {{trans("sentence.given_date")}}, {{trans("word.supplier")}}<br>
+                                    <i class="fa fa-calendar"></i> {{trans("sentence.given_date")}}, {{trans("word.supplier")}}<br>
                                 @endif
-                                <i class="fa fa-calendar"></i> {{trans("sentence.due_date")}}<br><br>
-                                <div v-if="collect_cheque_show == true"><i class="fa fa-calendar"></i> {{ trans('sentence.collected_account') }} <br><br></div>
+                                <i class="fa fa-calendar"></i> {{trans("sentence.due_date")}}<br>
+                                    @if($cheq->bank_name != null)   <i class="fa fa-calendar"></i> BANKA ADI<br>@endif
+                                    @if($cheq->bank_branch != null)  <i class="fa fa-calendar"></i> ŞUBE<br>@endif
+                                    @if($cheq->document_no != null)  <i class="fa fa-calendar"></i> EVRAK NO<br>@endif
+                                    @if($cheq->seri_no != null) <i class="fa fa-calendar"></i> SERİ NO<br>@endif
+                                    @if($cheq->ciro_names != null)  <i class="fa fa-calendar"></i> CİRO<br>@endif
+                                    @if($cheq->description != null) <i class="fa fa-calendar"></i> AÇIKLAMA<br>@endif
+                                <div v-if="collect_cheque_show == true"><i class="fa fa-calendar"></i> {{ trans('sentence.collected_account') }} <br></div>
                             </div>
 
 
@@ -49,24 +56,30 @@
                                 @if($cheq->cheque_status == 1)
                                     {{$cheq->date}}, <a
                                             href="{{route("sales.companies.show",[aid(),$cheq->company["id"]])}}"> {{short($cheq->company["company_name"],25)}}</a>
-                                    <br><br>
+                                    <br>
                                 @elseif($cheq->cheque_status == 0)
                                     {{$cheq->date}}, <a
                                             href="{{route("sales.companies.show",[aid(),$cheq->transfer_company["id"]])}}"> {{short($cheq->transfer_company["company_name"],25)}}</a>
-                                    <br><br>
+                                    <br>
                                 @elseif($cheq->cheque_status == 2)
                                     <a
                                             href="{{route("sales.companies.show",[aid(),$cheq->company["id"]])}}"> {{short($cheq->company["company_name"],25)}}</a>
-                                    <br><br>
+                                    <br>
                                     {{$cheq->date}}, <a
                                             href="{{route("sales.companies.show",[aid(),$cheq->transfer_company["id"]])}}"> {{short($cheq->transfer_company["company_name"])}}</a>
-                                    <br><br>
+                                    <br>
                                 @endif
 
 
 
-                                {{$cheq->payment_date}}<br><br>
-                                <div v-if="collect_cheque_show == true"> <div v-html="bank_name"></div><br><br></div>
+                                {{$cheq->payment_date}}<br>
+                                    @if($cheq->bank_name != null) {{$cheq->bank_name}}  <br>@endif
+                                    @if($cheq->bank_branch != null)  {{$cheq->bank_branch}} <br>@endif
+                                    @if($cheq->document_no != null) {{$cheq->document_no}}   <br>@endif
+                                    @if($cheq->seri_no != null) {{$cheq->seri_no}}  <br>@endif
+                                    @if($cheq->ciro_names != null) {{$cheq->ciro_names}}  <br>@endif
+                                    @if($cheq->description != null) {{$cheq->description}} <br>@endif
+                                <div v-if="collect_cheque_show == true"> <div v-html="bank_name"></div><br></div>
                             </div>
 
                         </div>
@@ -197,7 +210,7 @@
                                     <button type="submit" :disabled="money_form.bank_account_id == '' " class="btn btn btn-danger pull-right" >
                                         {{trans("word.save")}}
                                     </button>
-                                    <br><br>
+                                    <br>
                                 </footer>
                             </form>
 

@@ -114,7 +114,7 @@
                     <td style="text-align:left;width:23%">{{$order->date}}</td>
                     <td style="text-align:left;width:30%">{{$order->company["company_name"]}}</td>
                     <td style="text-align:left;width:18%">{{ trans('word.invoice') }}</td>
-                    <td style="text-align:right;width:10%">{{$order->remaining}}  <i class="fa fa-try"></i></td>
+                    <td style="text-align:right;width:14%">{{$order->remaining}}  {!! $order->currency_icon !!}</td>
                 </tr>
             @endif
         @endforeach
@@ -125,7 +125,7 @@
                     <td>{{$cheque->date}}</td>
                     <td>{{$cheque->company_id != null ? $cheque->company["company_name"]:"-"}}</td>
                     <td>{{ trans('word.cheque') }}</td>
-                    <td>{{$cheque->amount}} <i class="fa fa-try"></i></td>
+                    <td>{{$cheque->amount}} ₺</td>
                 </tr>
             @endif
         @endforeach
