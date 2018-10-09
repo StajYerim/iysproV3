@@ -19,7 +19,7 @@ class CollectReportController extends Controller
 
 
         //Toplam Tahsilatlar
-        $orders = SalesOrders::where("account_id", aid())->get();
+        $orders = SalesOrders::whereNotNull("due_date")->where("account_id", aid())->get();
         $tl = 0;
         $usd = 0;
         $gbp = 0;
@@ -49,8 +49,33 @@ class CollectReportController extends Controller
 
         $total_collect = get_money($tl + $cheques_total);
 
+        //vadesi bilinmeyen tahsilatlar
+        //Toplam Tahsilatlar
+        $not_due_orders = SalesOrders::whereNull("due_date")->where("account_id", aid())->get();
+        $not_tl = 0;
+        $not_usd = 0;
+        $not_gbp = 0;
+        $not_eur = 0;
+        foreach ($not_due_orders as $order) {
+            if($order->currency == "TRY") {
+                $not_tl += money_db_format($order->remaining);
+            }else if($order->currency == "USD"){
+                $not_usd += money_db_format($order->remaining);
+            }else if($order->currency == "GBP"){
+                $not_gbp += money_db_format($order->remaining);
+            }else if($order->currency == "EUR"){
+                $not_eur += money_db_format($order->remaining);
+            }
+        }
+
+        $not_total_collect = get_money($tl);
+
+
+
+
+
         //Vadesi geçen tahsilatlar
-        $order_expiry_date = SalesOrders::where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->subDay(1))->get();
+        $order_expiry_date = SalesOrders::whereNotNull("due_date")->where("account_id", aid())->whereDate("due_date", "<", Carbon::now()->subDay(1))->get();
         $expiry_tl = 0;
         $expiry_usd = 0;
         $expiry_gbp = 0;
@@ -81,9 +106,25 @@ class CollectReportController extends Controller
 
         $export_collect= [];
         $export_collect["sales_orders"] = $orders;
+        $export_collect["not_sales_orders"] = $not_due_orders;
         $export_collect["cheques"] = $cheques;
 
-        return view("modules.sales.collect_report.index", compact( "langs","expiry_total_collect", "total_collect", "export_collect","eur","usd","gbp","expiry_eur","expiry_usd","expiry_gbp"));
+        return view("modules.sales.collect_report.index", compact(
+            "langs",
+            "expiry_total_collect",
+            "total_collect",
+            "export_collect",
+            "eur",
+            "usd",
+            "gbp",
+            "expiry_eur",
+            "expiry_usd",
+            "expiry_gbp",
+            "not_total_collect",
+            "not_eur",
+            "not_gbp",
+            "not_usd"
+            ));
     }
 
     public function pdf($aid,$type,$lang)

@@ -87,10 +87,11 @@
 
                                         </div>
                                         <div class="col-sm-4">
-                                            {{--<div class="text-center"><h6><b>ORT.VADE AŞIMI</b></h6></div>--}}
-
-                                            {{--<div class="text-center" style="font-size:30px"><b>30 <small class="note">gün</small></b></div>--}}
-                                        </div>
+                                            <div class="text-center"><h6><b>VADESİ BİLİNMEYEN TAHSİLATLAR</b></h6></div>
+                                            <div class="text-center" style="font-size:30px;color:#2AC!important">{{$not_total_collect}}<b> <small class="note"><i class="fa fa-try"></i> </small></b></div>
+                                            @if($not_usd != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($not_usd)}}<b> <small class="note"><i class="fa fa-usd"></i> </small></b></div>@endif
+                                            @if($not_eur != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($not_eur)}}<b> <small class="note"><i class="fa fa-eur"></i> </small></b></div>@endif
+                                            @if($not_gbp != 0)<div class="text-center" style="font-size:30px;color:#2AC!important">{{get_money($not_gbp)}}<b> <small class="note"><i class="fa fa-gbp"></i> </small></b></div>@endif </div>
                                     </div>
                                 </div>
                                 <hr>
@@ -116,6 +117,18 @@
                                             <td>{{$order->remaining}}  <i class="fa fa-{{strtolower($order->currency)}}"></i></td>
                                         </tr>
                                         @endif
+                                        @endforeach
+
+                                        @foreach($export_collect["not_sales_orders"] as $order)
+                                            @if($order->remaining != "0,00")
+                                                <tr style="cursor:pointer" onclick="window.location.href='{{route("sales.orders.show",[aid(),$order->id])}}'">
+                                                    <td>{{$order->due_date}}</td>
+                                                    <td>{{$order->date}}</td>
+                                                    <td>{{$order->company["company_name"]}}</td>
+                                                    <td>FATURA</td>
+                                                    <td>{{$order->remaining}}  <i class="fa fa-{{strtolower($order->currency)}}"></i></td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                         @foreach($export_collect["cheques"] as $cheque)
                                             @if($cheque->collect_statu == 0)
