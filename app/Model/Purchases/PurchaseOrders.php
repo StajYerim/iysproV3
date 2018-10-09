@@ -66,8 +66,13 @@ class PurchaseOrders extends Model
 
     public function getDueDateAttribute()
     {
-        $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["due_date"]);
-        return $dt->format("d.m.Y");
+        if($this->attributes["due_date"] == null){
+            return "BİLİNMİYOR";
+        }else{
+            $dt = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes["due_date"]);
+            return $dt->format("d.m.Y");
+        }
+
     }
 
     public function setGrandTotalAttribute($value)

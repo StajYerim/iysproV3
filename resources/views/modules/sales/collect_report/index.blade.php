@@ -119,17 +119,6 @@
                                         @endif
                                         @endforeach
 
-                                        @foreach($export_collect["not_sales_orders"] as $order)
-                                            @if($order->remaining != "0,00")
-                                                <tr style="cursor:pointer" onclick="window.location.href='{{route("sales.orders.show",[aid(),$order->id])}}'">
-                                                    <td>{{$order->due_date}}</td>
-                                                    <td>{{$order->date}}</td>
-                                                    <td>{{$order->company["company_name"]}}</td>
-                                                    <td>FATURA</td>
-                                                    <td>{{$order->remaining}}  <i class="fa fa-{{strtolower($order->currency)}}"></i></td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
                                         @foreach($export_collect["cheques"] as $cheque)
                                             @if($cheque->collect_statu == 0)
                                             <tr style="cursor:pointer" onclick="window.location.href='{{route("finance.cheques.show",[aid(),$cheque->id])}}'">

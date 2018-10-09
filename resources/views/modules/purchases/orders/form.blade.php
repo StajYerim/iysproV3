@@ -82,18 +82,32 @@
                                         </div>
                                     </fieldset>
                                     <fieldset>
-                                        <div class="form-group"
-                                             v-bind:class="{'has-error':errors.has('form.due_date')}">
+                                        <div class="form-group" v-show="due_null == 0"
+                                            >
                                             <label class="col-md-3 control-label">{{trans("sentence.payable_date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"
-                                                              name="form.due_date" v-validate="'required'"
+                                                              name="form.due_date"
                                                               class="form-control datepicker"
                                                               v-model="form.due_date"></the-mask>
 
-                                                    <span class="input-group-addon"><i
-                                                                class="fa fa-calendar"></i></span>
+                                                    <span style="cursor:pointer" class="input-group-addon" v-on:click="due_null_change(1)">
+                                                        <i class="fa fa-close"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" v-show="due_null == 1" style="cursor:pointer" v-on:click="due_null_change(0)"
+                                             v-bind:class="{'has-error':errors.has('form.payable_date')}">
+                                            <label class="col-md-3 control-label">{{trans("sentence.payable_date")}}</label>
+                                            <div class="col-md-2 ">
+                                                <div class="input-group">
+                                                    <input type="text" CLASS="form-control" disabled value="BİLİNMİYOR">
+
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,6 +156,7 @@
                             text: '{{$tag->title}}',
                             style: 'color:#fff;background-color:{{$tag->bg_color}}',
                         }, @endforeach],
+                        due_null:"{{$form_type == "update" ? $order->due_date == "BİLİNMİYOR" ? 1:0:0}}",
                         form: {
                             description: "{{$form_type == "update" ? $order->description:""}}",
                             company_id: @if($form_type == "update") { id:'{{$order->company["id"]}}',text:'{{$order->company["company_name"]}}' } @else "" @endif,
@@ -177,6 +192,14 @@
                         },
                     },
                     methods: {
+                        due_null_change:function(type){
+                            VueName.due_null = type;
+                            if(type == 0){
+                                VueName.form.due_date = "{{date_tr()}}"
+                            }else if(type == 1 ){
+                                VueName.form.due_date = null
+                            }
+                        },
                         addRow: function () {
                             this.form.items.push({
                                 id: 0,

@@ -192,8 +192,8 @@
                             precision: 2,
                             masked: false
                         },
-                        due_null:"{{$order->due_date == "BİLİNMİYOR" ? 1:0}}",
-                        termin_null:"{{$order->termin_date == "BİLİNMİYOR" ? 1:0}}",
+                        due_null:"{{$form_type == "update" ? $order->due_date == "BİLİNMİYOR" ? 1:0:0}}",
+                        termin_null:"{{$form_type == "update" ? $order->termin_date == "BİLİNMİYOR" ? 1:0:0}}",
                         autocompleteItems: [@foreach($tags as $tag) {
                             text: '{{$tag->title}}',
                             style: 'color:#fff;background-color:{{$tag->bg_color}}',

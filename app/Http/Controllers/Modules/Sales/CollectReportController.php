@@ -19,7 +19,7 @@ class CollectReportController extends Controller
 
 
         //Toplam Tahsilatlar
-        $orders = SalesOrders::whereNotNull("due_date")->where("account_id", aid())->get();
+        $orders = SalesOrders::where("account_id", aid())->get();
         $tl = 0;
         $usd = 0;
         $gbp = 0;
@@ -50,7 +50,6 @@ class CollectReportController extends Controller
         $total_collect = get_money($tl + $cheques_total);
 
         //vadesi bilinmeyen tahsilatlar
-        //Toplam Tahsilatlar
         $not_due_orders = SalesOrders::whereNull("due_date")->where("account_id", aid())->get();
         $not_tl = 0;
         $not_usd = 0;
