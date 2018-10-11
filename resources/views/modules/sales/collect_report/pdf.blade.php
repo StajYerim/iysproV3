@@ -121,11 +121,11 @@
         @foreach($export_collect["cheques"] as $cheque)
             @if($cheque->collect_statu == 0)
                 <tr style="cursor:pointer" onclick="window.location.href='{{route("finance.cheques.show",[aid(),$cheque->id])}}'">
-                    <td>{{$cheque->payment_date}}</td>
+                    <td style="text-align:left;">{{$cheque->payment_date}}</td>
                     <td>{{$cheque->date}}</td>
-                    <td>{{$cheque->company_id != null ? $cheque->company["company_name"]:"-"}}</td>
-                    <td>{{ trans('word.cheque') }}</td>
-                    <td>{{$cheque->amount}} ₺</td>
+                    <td style="text-align:left;">{{$cheque->company_id != null ? $cheque->company["company_name"]:"-"}}</td>
+                    <td style="text-align:left;">{{ trans('word.cheque') }}</td>
+                    <td >{{$cheque->amount}} ₺</td>
                 </tr>
             @endif
         @endforeach

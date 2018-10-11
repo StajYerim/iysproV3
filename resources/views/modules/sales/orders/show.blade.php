@@ -928,7 +928,7 @@
                                             <th>{{ trans('word.code') }}</th>
                                             <th>{{ trans('word.product') }}</th>
                                             <th>{{ trans('word.quantity') }}</th>
-                                            <th>{{ trans('word.unity') }}</th>
+                                            <th>{{ trans('word.unit') }}</th>
                                             <th>#</th>
                                         </th>
                                         <tbody>

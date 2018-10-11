@@ -89,16 +89,30 @@
                                         </div>
                                     </fieldset>
                                     <fieldset>
-                                        <div class="form-group"
+                                        <div class="form-group" v-show="due_null == 0"
                                              v-bind:class="{'has-error':errors.has('form.due_date')}">
                                             <label class="col-md-3 control-label">{{trans("sentence.due_date")}}</label>
                                             <div class="col-md-2 ">
                                                 <div class="input-group">
                                                     <the-mask :mask="['##.##.####']" type="text"
-                                                              name="form.due_date" v-validate="'required'"
+                                                              name="form.due_date"
                                                               class="form-control datepicker"
                                                               v-model="form.due_date">
                                                     </the-mask>
+
+                                                    <span style="cursor:pointer" class="input-group-addon" v-on:click="due_null_change(1)">
+                                                        <i class="fa fa-close"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" v-show="due_null == 1" style="cursor:pointer" v-on:click="due_null_change(0)"
+                                             v-bind:class="{'has-error':errors.has('form.due_date')}">
+                                            <label class="col-md-3 control-label">{{trans("sentence.due_date")}}</label>
+                                            <div class="col-md-2 ">
+                                                <div class="input-group">
+                                                  <input type="text" CLASS="form-control" disabled value="BİLİNMİYOR">
 
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
@@ -108,7 +122,7 @@
                                         </div>
                                     </fieldset>
                                     <fieldset>
-                                        <div class="form-group"
+                                        <div class="form-group"  v-show="termin_null == 0"
                                             >
                                             <label class="col-md-3 control-label">{{trans("sentence.termin_date")}}</label>
                                             <div class="col-md-2 ">
@@ -118,6 +132,20 @@
                                                               class="form-control datepicker"
                                                               v-model="form.termin_date">
                                                     </the-mask>
+
+                                                    <span style="cursor:pointer" class="input-group-addon" v-on:click="termin_null_change(1)">
+                                                        <i class="fa fa-close"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" v-show="termin_null == 1" style="cursor:pointer" v-on:click="termin_null_change(0)"
+                                             v-bind:class="{'has-error':errors.has('form.termin_date')}">
+                                            <label class="col-md-3 control-label">{{trans("sentence.termin_date")}}</label>
+                                            <div class="col-md-2 ">
+                                                <div class="input-group">
+                                                    <input type="text" CLASS="form-control" disabled value="BİLİNMİYOR">
 
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
@@ -164,6 +192,8 @@
                             precision: 2,
                             masked: false
                         },
+                        due_null:"{{$form_type == "update" ? $order->due_date == "BİLİNMİYOR" ? 1:0:0}}",
+                        termin_null:"{{$form_type == "update" ? $order->termin_date == "BİLİNMİYOR" ? 1:0:0}}",
                         autocompleteItems: [@foreach($tags as $tag) {
                             text: '{{$tag->title}}',
                             style: 'color:#fff;background-color:{{$tag->bg_color}}',
@@ -188,6 +218,7 @@
                     }),
                     mounted: function () {
                         @if($form_type == "update")
+
                                 @foreach($order->tags as $tag)
                         this.form.tagsd.push(
                             {
@@ -205,6 +236,22 @@
                         },
                     },
                     methods: {
+                        due_null_change:function(type){
+                            VueName.due_null = type;
+                            if(type == 0){
+                                VueName.form.due_date = "{{date_tr()}}"
+                            }else if(type == 1 ){
+                                VueName.form.due_date = null
+                            }
+                        },
+                        termin_null_change:function(type){
+                            VueName.termin_null = type;
+                            if(type == 0){
+                                VueName.form.termin_date = "{{date_tr()}}"
+                            }else if(type == 1 ){
+                                VueName.form.termin_date = null
+                            }
+                        },
                         addRow: function () {
                             this.form.items.push({
                                 id: 0,
