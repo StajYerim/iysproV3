@@ -505,6 +505,8 @@ $products = \App\Model\Stock\Product\Product::where("account_id",aid())->whereIn
                         });
                     },
                     vat_check() {
+                        VueName.form.sub_total;
+
                         VueName.form.discount_value = this.discount_value.toLocaleString('tr-TR', {
                                     minimumFractionDigits: 2,
                                     maximumFractionDigits: 2
