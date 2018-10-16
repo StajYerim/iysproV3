@@ -172,7 +172,11 @@ class SalesOrders extends Model
         $pay = $this->payments->sum("pivot.amount");
         $cheq = $this->cheques->sum("pivot.amount");
         $total = $pay+$cheq;
-        return get_money((money_db_format($this->grand_total) - $total));
+
+       return get_money((money_db_format($this->grand_total) - $total));
+
+
+
     }
 
     public function getSafeRemainingAttribute()
