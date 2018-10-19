@@ -1,16 +1,16 @@
 
 
-.login {
+.login-desktop {
     padding:50px 500px 0px 500px
 }
-@media only screen and (max-width: 768px) {
-    .login {
-        padding: 5px 5px 0px 5px
-    }
 
+.login-phone {
+    padding: 5px 5px 0px 5px
 }
+
+
 @media only screen and (max-width: 1024px) {
-    .login {
+    .login-desktop {
         padding:48px 281px 0px 378px
     }
 

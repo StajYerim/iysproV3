@@ -11,7 +11,7 @@ class ExchangeController extends Controller
     public function exchange($aid,Request $request){
 
         $exchange = new \Teknomavi\Tcmb\Doviz();
-        $result = $exchange->kurAlis(strtoupper($request->code));
+        $result = $exchange->kurSatis(strtoupper($request->code));
 
         return number_format($result,"4",",",".");
 

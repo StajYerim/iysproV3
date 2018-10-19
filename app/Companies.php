@@ -136,7 +136,7 @@ class Companies extends Model
     public function getBalanceAttribute()
     {
         //Satış Siparişlerinin Toplam Tutarı;
-        $sales_orders = $this->sales_orders()->sum("grand_total");
+        $sales_orders = $this->sales_orders()->sum("exchange_total");
 
         //Alış Siparişlerinin Toplam Tutarı;
         $purchase_orders = $this->purchase_orders()->sum("grand_total");

@@ -19,7 +19,7 @@ class SalesOrders extends Model
 
     protected $dates = ["date", "due_date"];
 
-    protected $appends = ["grand_totals","collect_label","remaining"];
+    protected $appends = ["grand_totals","collect_label","remaining","currency_icon"];
 
     public function newQuery($excludeDeleted = true) {
         return parent::newQuery($excludeDeleted)
@@ -172,7 +172,11 @@ class SalesOrders extends Model
         $pay = $this->payments->sum("pivot.amount");
         $cheq = $this->cheques->sum("pivot.amount");
         $total = $pay+$cheq;
-        return get_money((money_db_format($this->grand_total) - $total));
+
+       return get_money((money_db_format($this->grand_total) - $total));
+
+
+
     }
 
     public function getSafeRemainingAttribute()

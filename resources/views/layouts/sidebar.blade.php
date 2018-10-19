@@ -1,9 +1,9 @@
 <!-- Left panel : Navigation area -->
 <!-- Note: This width of the aside area can be adjusted through LESS variables -->
-<aside id="left-panel">
+<aside id="left-panel" >
 
     <!-- User info -->
-    <div class="login-info">
+    <div class="login-info no-print">
 				<span> <!-- User image size is adjusted inside CSS, it should stay as it -->
 					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
 						{{--<img src="{{asset("img/avatars/sunny.png")}}" alt="me" class="online" />--}}
@@ -31,7 +31,7 @@
     }
     }
 @endphp
-    <nav>
+    <nav class="no-print">
         <ul>
             @forelse($menu as $item)
 
