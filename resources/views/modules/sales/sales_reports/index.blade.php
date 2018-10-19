@@ -126,7 +126,7 @@
                             </td>
                             <td>
                               <span v-html="order.collect_label"></span> <br>
-                                <b>@{{ order.grand_total }}</b> <i class="fa fa-try"></i>
+                                <b>@{{ order.grand_total }} <span v-html="order.currency_icon"></span></b>
                             </td>
                         </tr>
 
@@ -153,7 +153,7 @@
                             <td>@{{ customer[0]["company"]["company_name"] }}</td>
                             <td>
                                 <b>@{{ customer[0]["company"]["balance"]  }}</b>
-                                <i class="fa fa-try"></i>
+                                {{--<i v-html=""></i>--}}
                             </td>
                         </tr>
 

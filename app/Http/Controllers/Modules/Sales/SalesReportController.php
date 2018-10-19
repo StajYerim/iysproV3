@@ -48,7 +48,7 @@ class SalesReportController extends Controller
         $customer_total = 0;
         foreach ($customers_sum as $sum) {
             if ($request->vat == 1) {
-                $customer_total += $sum->sales_orders()->sum("grand_total");
+                $customer_total += $sum->sales_orders()->sum("exchange_total");
             } else {
                 $customer_total += $sum->sales_orders()->sum("sub_total");
             }
@@ -67,7 +67,7 @@ class SalesReportController extends Controller
                 ->doesntHave("tags")
                 ->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end])
                 ->where("account_id", aid())
-                ->sum("grand_total");
+                ->sum("exchange_total");
         } else {
             $sales_orders_sum = SalesOrders::with('tags')
                 ->doesntHave("tags")

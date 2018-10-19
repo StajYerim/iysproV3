@@ -52,7 +52,13 @@
 </head>
 
 <body>
-<div role="main" class="login">
+<div role="main"  @php use Jenssegers\Agent\Agent;$agent = new Agent();
+
+                if($agent->isPhone()){
+               echo "class='login-phone'";
+                }else{
+               echo "class='login-desktop'";
+                } @endphp>
 
 @yield('guest')
 

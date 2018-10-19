@@ -19,7 +19,7 @@ class SalesOrders extends Model
 
     protected $dates = ["date", "due_date"];
 
-    protected $appends = ["grand_totals","collect_label","remaining"];
+    protected $appends = ["grand_totals","collect_label","remaining","currency_icon"];
 
     public function newQuery($excludeDeleted = true) {
         return parent::newQuery($excludeDeleted)

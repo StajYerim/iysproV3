@@ -48,12 +48,12 @@ class Tags extends Model
 
     public function getSalesOrdersAmountAttribute()
     {
-        return get_money($this->sales_orders()->sum("grand_total"));
+        return get_money($this->sales_orders()->sum("exchange_total"));
     }
 
     public function getPurchaseOrdersAmountAttribute()
     {
-        return get_money($this->purchase_orders()->sum("grand_total"));
+        return get_money($this->purchase_orders()->sum("exchange_total"));
     }
 
     public function getPurchaseOrdersAmountSafeAttribute()
@@ -76,7 +76,7 @@ class Tags extends Model
 
         $total = 0;
         foreach ($this->companies as $company) {
-                 $total += $company->sales_orders()->sum("grand_total");
+                 $total += $company->sales_orders()->sum("exchange_total");
         }
 
         return ($total);
@@ -101,7 +101,7 @@ class Tags extends Model
 
         $total = 0;
         foreach ($this->companies as $company) {
-            $total += $company->purchase_orders()->sum("grand_total");
+            $total += $company->purchase_orders()->sum("exchange_total");
         }
 
         return ($total);

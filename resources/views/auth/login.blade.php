@@ -17,6 +17,7 @@
             <form action="{{ route('login') }}" method="POST" id="login-form" class="smart-form client-form">
 
                 @csrf
+
                 <header>
                     {{ trans("sentence.sign_in") }}
                 </header>
