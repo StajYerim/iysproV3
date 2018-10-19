@@ -58,12 +58,12 @@ class Tags extends Model
 
     public function getPurchaseOrdersAmountSafeAttribute()
     {
-        return get_money($this->purchase_orders()->sum("sub_total"));
+        return get_money($this->purchase_orders()->sum("exchange_sub_total"));
     }
 
     public function getSalesOrdersAmountSafeAttribute()
     {
-        return get_money($this->sales_orders()->sum("sub_total"));
+        return get_money($this->sales_orders()->sum("exchange_sub_total"));
     }
 
     public function companies()

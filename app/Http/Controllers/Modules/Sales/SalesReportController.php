@@ -50,7 +50,7 @@ class SalesReportController extends Controller
             if ($request->vat == 1) {
                 $customer_total += $sum->sales_orders()->sum("exchange_total");
             } else {
-                $customer_total += $sum->sales_orders()->sum("sub_total");
+                $customer_total += $sum->sales_orders()->sum("exchange_sub_total");
             }
         }
 
@@ -73,7 +73,7 @@ class SalesReportController extends Controller
                 ->doesntHave("tags")
                 ->where("account_id", aid())
                 ->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end])
-                ->sum("sub_total");
+                ->sum("exchange_sub_total");
         }
 
         //Ürün Kategorileri
