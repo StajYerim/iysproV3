@@ -282,7 +282,18 @@ $host=$_SERVER["HTTP_HOST"];
         </tr>
     </table>
     <br>
-    <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2,$offer->currency_name, $offer->currency_coin, "", null, null, null)}}
+        @php
+            $list1 = array('', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven',
+   'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
+);
+$list2 = array('', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety', 'hundred');
+$list3 = array('', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillion', 'septillion',
+   'octillion', 'nonillion', 'decillion', 'undecillion', 'duodecillion', 'tredecillion', 'quattuordecillion',
+   'quindecillion', 'sexdecillion', 'septendecillion', 'octodecillion', 'novemdecillion', 'vigintillion'
+);
+
+        @endphp
+    <span style="text-transform: uppercase">{{yazi_ile($offer->grand_total, 2,$offer->currency_name, $offer->currency_coin, "", $list1, $list2, $list3,"tr")}}
     </span>
     <br><br><br>
     <p style="white-space: pre;">{!! $offer->description_detail !!}</p>

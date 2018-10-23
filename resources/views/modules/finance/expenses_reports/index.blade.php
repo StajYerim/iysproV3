@@ -33,9 +33,7 @@
                                     <div v-if="expenses_list.length == 0">
                                         {{ trans('sentence.there_is_no_expense_receipt_in_the_system') }}
                                     </div>
-                                    <div class="col-sm-4">
 
-                                    </div>
                                     <div v-if="expenses_list.length != 0" class="col-sm-4">
 
                                         <div class="text-center"><b>{{ trans('sentence.expense_categories') }}</b></div>

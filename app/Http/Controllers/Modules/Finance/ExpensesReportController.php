@@ -17,7 +17,7 @@ class ExpensesReportController extends Controller
         return view("modules.finance.expenses_reports.index");
     }
 
-    /*Sales report pies data and list*/
+
     public function pies_data(Request $request)
     {
         $start = Carbon::createFromFormat('Y-m-d', $request->start)->format("Y-m-d");
@@ -25,14 +25,13 @@ class ExpensesReportController extends Controller
 
 
 
-        //Fatura Etiketleri
+
         $order_tags = Tags::has("expenses_tags")->where("account_id",aid())
             ->whereHas("expenses_tags", function ($query) use ($start, $end) {
                 $query->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end]);
             })
             ->get();
 
-        // Fatura Etiketsizlerin -> Fiyatları
 
             $sales_orders_sum = Expenses::with('tags')
                 ->doesntHave("tags")
@@ -42,15 +41,15 @@ class ExpensesReportController extends Controller
 
 
 
-        //SALES ORDERS
+
         $labels_tag = array();
         $data_tag = array();
         $backgroundColor_tag = array();
         foreach ($order_tags as $tag) {
-            if ($tag->expenses_tags[0]["amount"] != "0,00") {
+            if ($tag->expenses_tags()->sum("amount") != "0,00") {
                 array_push($labels_tag, $tag->title);
 
-                    array_push($data_tag, (double)money_db_format($tag->expenses_tags[0]["amount"]));
+                    array_push($data_tag, (double)($tag->expenses_tags()->sum("amount")));
 
                 array_push($backgroundColor_tag, $tag->bg_color);
             }
@@ -65,11 +64,11 @@ class ExpensesReportController extends Controller
         $dataset["expenses"]["labels"] = $labels_tag;
         $dataset["expenses"]["data"] = $data_tag;
         $dataset["expenses"]["bgcolor"] = $backgroundColor_tag;
-        //SALES ORDERS
 
 
 
-        //SALES ORDER LİST
+
+
         $sales_order_list = Expenses::where("account_id", aid())
             ->whereBetween(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"), [$start, $end])
             ->get();

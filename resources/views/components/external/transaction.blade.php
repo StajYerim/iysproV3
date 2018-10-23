@@ -67,7 +67,8 @@
                                                         name="AccId">
 
                                                     <option v-for="(acc,index) in accounts" :disabled="acc.id ==''"
-                                                            :value="acc.id">@{{acc.name}} (@{{ acc.balance }})
+                                                            :value="acc.id">@{{ acc.currency }} - @{{acc.name}} (@{{
+                                                        acc.balance }})
                                                     </option>
 
                                                 </select>
@@ -332,7 +333,7 @@
                 el: "#vue-trans",
                 data: {
                     loading: false,
-                    accounts: [{id: "", name: "Select Account"}],
+                    accounts: [{id: "", name: "Hesap Seçiniz"}],
                     collection: {
                         warning_amount: false,
                         warning_amount_message: "",
@@ -370,13 +371,32 @@
                 },
                 mounted: function () {
                     this.accounts.push(
+                                @if(($detail->currency))
                                 @foreach($banks as $acc)
+
+                                @if(strtoupper($detail->currency) == strtoupper($acc->currency))
+                        {
+                            "id": "{{$acc->id}}",
+                            "name": "{{$acc->name}}",
+                            "balance": "{{$acc->balance}}",
+                            "currency": "{{$acc->currency}}"
+                        },
+                                @endif
+
+                                @endforeach()
+                                @else
+                                @foreach($banks as $acc)
+
                         {
                             "id": "{{$acc->id}}",
                             "name": "{{$acc->name}}",
                             "balance":"{{$acc->balance}}",
-                        },@endforeach()
+                            "currency": "{{$acc->currency}}"
+                        },
 
+
+                            @endforeach()
+                            @endif()
                     )
                 },
                 watch: {
