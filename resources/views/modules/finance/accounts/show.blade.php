@@ -143,16 +143,16 @@
                     </div>
 
                     <div class="row">
-                        <div class="table-responsive table-condensed table-hover " >
-                            <table class="table table-hover">
+                        <div class="table-responsive table-hover " >
+                            <table class="table table-hover table-bordered">
                                 <tbody>
                                 <tr>
-                                    <th width="20%">{{trans("word.type")}}</th>
-                                    <th width="20%">{{trans("word.date")}}</th>
-                                    <th style="text-align:right" width="10%">{{trans("word.customer")}}/{{trans("word.supplier")}}</th>
-                                    <th style="text-align:right" width="15%">{{trans("word.description")}}</th>
-                                    <th style="text-align:right" width="20%">{{trans("word.sum")}}</th>
-                                    <th style="text-align:right" width="20%">{{trans("word.balance")}}</th>
+                                    <th width="12%">{{trans("word.type")}}</th>
+                                    <th width="4%">{{trans("word.date")}}</th>
+                                    <th style="text-align:left" width="15%">{{trans("word.customer")}}/{{trans("word.supplier")}}</th>
+                                    <th style="text-align:right" width="20%">{{trans("word.description")}}</th>
+                                    <th style="text-align:right" width="10%">{{trans("word.sum")}}</th>
+                                    <th style="text-align:right" width="10%">{{trans("word.balance")}}</th>
                                 </tr>
                                 </tbody>
                                 <tbody id="tablo" style="font-size: 11px;">
