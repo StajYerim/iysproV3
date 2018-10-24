@@ -752,8 +752,6 @@ function yazi_ile($sayi, $kurusbasamak, $parabirimi, $parakurus, $diyez, $bb1, $
         $parabirimi = trans("money.turkish_lira");
     }
 
-
-
     $sonuc = $diyez . $sonuc . " " . $parabirimi . " " . $kurus . $diyez;
     return $sonuc;
 }

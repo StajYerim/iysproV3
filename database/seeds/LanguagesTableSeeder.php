@@ -16,6 +16,8 @@ class LanguagesTableSeeder extends Seeder
         DB::table('language_lines')->delete();
         // money unit
         LanguageLine::create(['group'=> 'money', 'key'=> 'turkish_lira', 'text'=> ['en'=> 'TURKISH LIRA', 'tr'=> 'TÜRK LİRASI']]);
+        LanguageLine::create(['group'=> 'money', 'key'=> 'sterlin', 'text'=> ['en'=> 'BRITISH POUND', 'tr'=> 'İNGİLİZ STERLİNİ']]);
+        LanguageLine::create(['group'=> 'money', 'key'=> 'dolar', 'text'=> ['en'=> 'USD', 'tr'=> 'DOLAR']]);
         LanguageLine::create(['group'=> 'money', 'key'=> 'cent', 'text'=> ['en'=> 'CENT', 'tr'=> 'KRŞ']]);
 
         // number area

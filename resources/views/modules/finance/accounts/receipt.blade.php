@@ -86,7 +86,7 @@
                         <div class="col-sm-4" style="font-weight: 600;font-size:15px;">
                             {{trans("sentence.collected_sum")}}
                             <span class="pull-right">{{$receipt->amount}}
-                                <i class="fa fa-try"></i>
+                                <i class="fa fa-{{strtolower($receipt->bank_account["currency"])}}"></i>
                             </span>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                                     <td>
                                         <span class="pull-right">
                                             {{$receipt->remaining}}
-                                            <i class="fa fa-{{$receipt->currency}}"></i>
+                                            <i class="fa fa-{{strtolower($receipt->bank_account["currency"])}}"></i>
                                         </span>
                                     </td>
                                 </tr>
@@ -123,7 +123,7 @@
                                     </td>
                                     <td>@{{ item.status }}</td>
                                     <td style="text-align:right">@{{ item.grand_total }} </td>
-                                    <td align="right">@{{ item.process_amount }}</td>
+                                    <td align="right">@{{ item.process_amount }} <span :class="'fa fa-'+item.currency"></span></td>
 
                                 </tr>
                                 </tbody>
@@ -162,6 +162,7 @@
                                   name:"Satış Siparişi",
                                   status:"{{$order->status}}",
                                   grand_total:"{{$order->grand_total}}",
+                                  currency:"{{strtolower($order->currency)}}",
                                   process_amount:"{{get_money($order->pivot->amount)}}"
                               },@endforeach()
                                 @foreach($receipt->porders as $order){
@@ -170,6 +171,7 @@
                                   name:"Alış Siparişi",
                                   status:"{{$order->status}}",
                                   grand_total:"{{$order->grand_total}}",
+                                  currency:"{{strtolower($order->currency)}}",
                                   process_amount:"{{get_money($order->pivot->amount)}}"
                               },@endforeach()
                               );

@@ -42,9 +42,9 @@ class ExpensesController extends Controller
             })
             ->addColumn("payment_status", function ($expense) {
                 if ($expense->payment_status) {
-                    return '<span class="label label-success">ÖDENDİ</span>';
+                    return '<span class="label label-success">ÖDENDİ</span><br>'.$expense->amount." <i class='fa fa-try'></i>";
                 } else {
-                    return '<span class="label label-danger">ÖDENMEDİ</span>';
+                    return '<span class="label label-danger">ÖDENMEDİ</span><br>'.$expense->amount." <i class='fa fa-try'></i>";
                 }
             })
             ->setRowClass("row-title")
@@ -92,7 +92,7 @@ class ExpensesController extends Controller
                 "date" => $request->payment_date,
                 "doc_id" => $expense->id,
                 "amount" => $request->amount,
-                "description" => "GİDER FİŞİ ÖDEMESİ",
+                "description" => $request->description,
                 "action_type" => 0,
 
             ]);
