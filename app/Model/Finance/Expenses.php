@@ -3,6 +3,7 @@
 namespace App\Model\Finance;
 
 
+use App\Companies;
 use App\Tags;
 use App\Model\Finance\BankAccounts;
 use Illuminate\Database\Eloquent\Model;
@@ -30,7 +31,6 @@ class Expenses extends Model
     }
 
     public $rules = [
-        'name' => 'required|max:150',
         'amount' => 'required|max:12'
 
     ];
@@ -114,5 +114,9 @@ class Expenses extends Model
         }else{
             return 0;
         }
+    }
+
+    public function supplier(){
+        return $this->hasOne(Companies::class,"id","company_id");
     }
 }

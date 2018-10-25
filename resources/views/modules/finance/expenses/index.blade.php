@@ -37,7 +37,7 @@
                                 <thead>
                                 <tr>
                                     <th width="1px">#</th>
-                                    <th>{{trans("word.name")}}</th>
+                                    <th>{{trans("word.supplier")}}</th>
                                     <th>{{trans("word.description")}}</th>
                                     <th>{{trans("word.account")}}</th>
                                     <th>{{trans("word.date")}}</th>
@@ -68,12 +68,29 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">
-                                        {{trans("word.expense")}}</label>
+                                        {{trans("word.supplier")}}</label>
                                     <div class="col-md-6 ">
-                                        <div >
-                                            <input type="text"  v-validate="'required'" class="form-control "
-                                                   v-model="form.name" maxlength="150" name="form.name">
-                                            <span style="color:red;font-weight: bold">@{{ errors.first('form.name') }}</span>
+                                        <div>
+                                            <v-select label="text" :filterable="true" placeholder="{{ trans('sentence.choose_company') }}"
+                                                      :options="options_company" @search="onSearch"
+                                                      transition="fade" v-model="form.company_id">
+                                                <template slot="no-options">
+                                                    <a type="button" style="color:white" class='btn btn-sm btn-warning' href='#!'
+                                                       data-toggle='modal' data-target='#new_company'>
+                                                        {{trans("sentence.click_for_a_new_company")}}
+                                                    </a>
+                                                </template>
+                                                <template slot="option" slot-scope="option">
+                                                    <div class="d-center">
+                                                        @{{ option.text }}
+                                                    </div>
+                                                </template>
+                                                <template slot="selected-option" scope="option">
+                                                    <div class="selected d-center">
+                                                        @{{ option.text }}
+                                                    </div>
+                                                </template>
+                                            </v-select>
                                         </div>
                                     </div>
                                 </div>
@@ -204,6 +221,7 @@
                 </div>
             </div>
         </div>
+        @include("components.modals.companies",[$option="supplier",$title="New Company",$type = "new_company",$message="Company Form",$id=0])
 
 
     </section>
@@ -220,9 +238,6 @@
 
                 const dict = {
                     custom: {
-                        'form.name': {
-                            required: 'Gider adı boş bırakılamaz.',
-                        },
                         'form.date':{
                             required:'Tarih alanı boş bırakılamaz',
                             date_format:"Tarihi 'GG.AA.YYYY' olacak şekilde girin"
@@ -236,9 +251,11 @@
 
                     }
                 };
+                Vue.component('v-select', VueSelect.VueSelect);
                 VueName = new Vue({
                     el: "#new_expense",
                     data: {
+                        options_company: [],
                         autocompleteItems: [@foreach($tags as $tag) {
                             text: '{{$tag->title}}',
                             style: 'color:#fff;background-color:{{$tag->bg_color}}',
@@ -249,7 +266,7 @@
                         }, @foreach($accounts as $acc) {name: "{{$acc->name}}", id: "{{$acc->id}}"}, @endforeach],
                         form: {
                             id: 0,
-                            name: "",
+                            company_id:"",
                             date: "{{date_tr()}}",
                             payment_date: "{{date_tr()}}",
                             amount: "",
@@ -277,7 +294,18 @@
                         datePicker();
                         this.$validator.localize('en', dict);
                     },
-                    methods: {
+                    methods: {  onSearch(search, loading) {
+                            loading(true);
+                            this.search(loading, search, this);
+                        }, search: _.debounce(function (loading, search, vm) {
+                            axios.get("{{route("company.source",aid())}}?q=" + search).then(function (res) {
+                                Companies.company_name = search;
+                                vm.options_company = res.data;
+
+                                loading(false)
+                            });
+
+                        }, 350),
                         delete_expense:function($id){
                             swal({
                                 title: "GİDER FİŞİ SİLİNECEK!",
@@ -384,7 +412,7 @@
                         },
                         clear: function () {
                             this.form.id = 0;
-                            this.form.name = "";
+                            this.form.company_id = "";
                             this.form.date = "{{date_tr()}}";
                             this.form.payment_date = "{{date_tr()}}";
                             this.form.amount = "";
@@ -428,7 +456,7 @@
                                 return '<i class="fa fa-shopping-cart fa-2x"></i>';
                         },
                     }, {
-                        data: "name",
+                        data: "company_id",
                     }, {
                         data: "description"
 
@@ -467,6 +495,11 @@
 
                 axios.get("{{route("finance.expenses.info",aid())}}?id="+id).then(response=>{
                     VueName.form = response.data;
+                   if(response.data.supplier != null)
+                    VueName.form.company_id = {
+                        id: response.data.supplier.id,
+                        text: response.data.supplier.company_name
+                    };
                    $("#new_expense").modal("show");
 
                 });

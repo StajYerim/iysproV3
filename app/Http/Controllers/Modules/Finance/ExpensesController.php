@@ -28,6 +28,9 @@ class ExpensesController extends Controller
         $expenses = Expenses::with("tags")->select(["expenses.*"])->where("account_id", aid())->get();
 
         return Datatables::of($expenses)
+            ->editColumn("company_id", function ($expense) {
+                return $expense->supplier["company_name"];
+            })
             ->editColumn("date", function ($expense) {
                 return $expense->date;
             })
@@ -65,7 +68,7 @@ class ExpensesController extends Controller
 
         $expense = Expenses::updateOrCreate(["id" => $request->id],
             [
-                "name" => $request->name,
+                "company_id" => $request->company_id["id"],
                 "description" => $request->description,
                 "date" => $request->date,
                 "payment_date" => $request->payment_date,
@@ -110,6 +113,7 @@ class ExpensesController extends Controller
         $expenses = Expenses::find($request->id);
 
         $data["data"] = $expenses;
+        $data["data"]["supplier"] = $expenses->supplier;
 
         if ($expenses->tags != "[]"){
             foreach ($expenses->tags as $tag) {
