@@ -447,6 +447,7 @@
                 responsive: true,
 //                stateDuration: 45,
                 processing: true,
+                "order": [[ 4, "desc" ]],
                 serverSide: true,
                 ajax: '{!! route('finance.expenses.index_list',aid()) !!}',
                 columns: [
