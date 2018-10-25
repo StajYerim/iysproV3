@@ -144,7 +144,7 @@
 
                     <div class="row">
                         <div class="table-responsive table-hover " >
-                            <table class="table table-hover table-bordered">
+                            <table class="table table-hover ">
                                 <tbody>
                                 <tr>
                                     <th width="12%">{{trans("word.type")}}</th>
