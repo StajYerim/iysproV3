@@ -87,6 +87,8 @@ class OrdersController extends Controller
             "company_id" => $request->form["company_id"]["id"],
             "date" => $request->form["date"],
             "due_date" => $request->form["due_date"],
+            "exchange_total" => $request->form["currency"] == "TRY" ? money_db_format($request->form["grand_total"]):(money_db_format($request->form["grand_total"])*money_db_format($request->form["currency_value"])),
+            "exchange_sub_total" => $request->form["currency"] == "TRY" ? money_db_format($request->form["sub_total"]):(money_db_format($request->form["sub_total"])*money_db_format($request->form["currency_value"])),
             "discount_type" => $request->form["discount_type"],
             "discount_value" => $request->form["discount_value"],
             "currency" => $request->form["currency"],

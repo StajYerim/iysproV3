@@ -126,8 +126,8 @@
                                 @{{ order.date }}
                             </td>
                             <td>
-                              <span v-html="order.collect_label"></span> <br>
-                                <b>@{{ order.grand_total }}</b> <i class="fa fa-try"></i>
+
+                                <b>@{{ order.grand_total }}</b> <span v-html="order.currency_icon"></span>
                             </td>
                         </tr>
 

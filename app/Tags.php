@@ -113,7 +113,7 @@ class Tags extends Model
 
         $total = 0;
         foreach ($this->companies as $company) {
-            $total += $company->purchase_orders()->sum("sub_total");
+            $total += $company->purchase_orders()->sum("exchange_sub_total");
         }
 
         return ($total);
