@@ -161,6 +161,53 @@
                                         </div>
                                     </div>
                                 </fieldset>
+                                <hr>
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">AÇILIŞ BAKİYESİ </label>
+                                        <div class="col-md-3">
+                                            <input type="checkbox" style="margin-top:10px"
+                                                   v-model="form.opening_balance_status"/>
+
+                                        </div>
+
+
+                                    </div>
+                                </fieldset>
+                                <fieldset v-if="form.opening_balance_status == 1">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">DETAY </label>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control">
+                                                    <span class="input-group-btn">
+        <select style="width:110px" class="form-control">
+
+            @php
+                    $currency = \App\Currency::all();
+
+                    @endphp
+            @foreach($currency as $cur)
+          <option value="{{$cur->code}}" {{$cur->code == 'TRY' ? "selected":""}}>{{$cur->code}}</option>
+                @endforeach
+        </select>
+
+      </span>
+                                                    <span class="input-group-btn">
+        <select style="width:140px" class="form-control">
+          <option value="1">ALACAĞI VAR</option>
+          <option value="0">BORCU VAR</option>
+        </select>
+
+      </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </fieldset>
                                 @includeIf('components.external.tags', [$type="companies"])
                             </form>
                         </div>
@@ -254,6 +301,7 @@
                             iban: "{{$form_type == "Update" ? $company->iban:""}}",
                             tag: '',
                             tagsd: [],
+                            opening_balance_status: 0
                         },
                     }),
                  computed: {
