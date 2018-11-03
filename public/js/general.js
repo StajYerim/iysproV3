@@ -226,6 +226,8 @@ function datePicker() {
                         VueName.production.start_date = date;
                     }else if(data =="form.termin_date"){
                         VueName.form.termin_date = date;
+                    }else if(data =="money_form.date"){
+                        VueName.money_form.date = date;
                     }
 
 console.log(data);

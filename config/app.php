@@ -146,6 +146,8 @@ return [
         Spatie\TranslationLoader\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        PhpJunior\LaravelHtmlEncrypt\LaravelHtmlEncryptServiceProvider::class,
+
 
         /*
          * Package Service Providers...

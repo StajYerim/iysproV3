@@ -272,7 +272,7 @@
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
-                                                <input type="text" v-model="money_form.date" class="form-control  datepicker "
+                                                <input type="text" v-model="money_form.date" name="money_form.date" class="form-control  datepicker "
                                                        data-mask="99.99.9999" data-dateformat="dd.mm.yy">
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                             </div>
@@ -332,7 +332,7 @@
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
-                                                <input type="text" v-model="money_form.date"
+                                                <input type="text" v-model="money_form.date" name="money_form.date"
                                                        class="form-control  datepicker " data-mask="99.99.9999"
                                                        data-dateformat="dd.mm.yy">
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -396,7 +396,7 @@
                                         </label>
                                         <div class="col-sm-8 ">
                                             <div class="input-group">
-                                                <input type="text" v-model="money_form.date"
+                                                <input type="text" v-model="money_form.date" name="money_form.date"
                                                        class="form-control  datepicker " data-mask="99.99.9999"
                                                        data-dateformat="dd.mm.yy" id="dp1526983556332">
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -532,7 +532,7 @@
 
             window.addEventListener("load", function(event) {
 
-            new Vue({
+       VueName =      new Vue({
                 el: "#show",
                 data: {
                     balance: "{{$account->balance}}",
