@@ -21,10 +21,21 @@
                                aria-expanded="false">{{ trans("word.cash") }} {{ $type == 'payment' ? trans('word.payment') : trans('word.collection') }}
                             </a>
                         </li>
+
+                        @if(strtoupper($detail->currency) == "TRY")
                         <li style="text-align: center;flex:1;">
                             <a href="#s2" data-toggle="tab"
-                                   aria-expanded="true">{{ trans("sentence.cheque_promissory_note") }} {{ $type == 'payment' ? trans('word.payment') : trans('word.collection') }}</a>
+                               aria-expanded="true">{{ trans("sentence.cheque_promissory_note") }} {{ $type == 'payment' ? trans('word.payment') : trans('word.collection') }}</a>
                         </li>
+                        @endif
+                        @if($local!="sales_orders")
+                            <li style="text-align: center;flex:1;">
+                                <a href="#s2" data-toggle="tab"
+                                   aria-expanded="true">{{ trans("sentence.cheque_promissory_note") }} {{ $type == 'payment' ? trans('word.payment') : trans('word.collection') }}</a>
+                            </li>
+                        @endif
+
+
                     </ul>
 
                     <div id="myTabContent1" class="tab-content padding-10 ">

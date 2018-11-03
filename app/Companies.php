@@ -139,7 +139,7 @@ class Companies extends Model
         $sales_orders = $this->sales_orders()->sum("exchange_total");
 
         //Alış Siparişlerinin Toplam Tutarı;
-        $purchase_orders = $this->purchase_orders()->sum("grand_total");
+        $purchase_orders = $this->purchase_orders()->sum("exchange_total");
 
         //Yapılan Tahsilat
         $collects = $this->collects()->where("action_type", 1)->sum("amount");

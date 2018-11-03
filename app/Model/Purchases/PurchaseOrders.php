@@ -17,6 +17,7 @@ class PurchaseOrders extends Model
     protected $guarded = [];
 
     protected $dates = ["date", "due_date"];
+    protected $appends = ["currency_icon"];
 
 
     public function save(array $options = array())

@@ -25,7 +25,7 @@ class ExpensesController extends Controller
     public function index_list()
     {
 
-        $expenses = Expenses::with("tags")->select(["expenses.*"])->where("account_id", aid())->get();
+        $expenses = Expenses::with("tags")->select(["expenses.*"])->orderBy("date","desc")->where("account_id", aid())->get();
 
         return Datatables::of($expenses)
             ->editColumn("company_id", function ($expense) {
