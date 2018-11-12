@@ -108,7 +108,7 @@ class BankAccountsController extends Controller
         $results = array();
 
         $last_balance = 0;
-        foreach ($account->items as $item) {
+        foreach ($account->items()->orderBy("date","asc")->get() as $item) {
             if ($item->action_type == 0) {
                 $last_balance = $last_balance - money_db_format($item->amount);
             } else {
