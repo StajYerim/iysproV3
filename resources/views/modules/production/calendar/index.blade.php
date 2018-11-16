@@ -112,25 +112,25 @@
                 -->
                 <header>
                     <h2> ÜRETİM TAKVİMİ </h2>
-                    <div class="widget-toolbar">
-                        <!-- add: non-hidden - to disable auto hide -->
-                        <div class="btn-group">
-                            <button class="btn dropdown-toggle btn-xs btn-default" data-toggle="dropdown">
-                                Showing <i class="fa fa-caret-down"></i>
-                            </button>
-                            <ul class="dropdown-menu js-status-update pull-right">
-                                <li>
-                                    <a href="javascript:void(0);" id="mt">AYLIK</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);" id="ag">Agenda</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);" id="td">Today</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    {{--<div class="widget-toolbar">--}}
+                        {{--<!-- add: non-hidden - to disable auto hide -->--}}
+                        {{--<div class="btn-group">--}}
+                            {{--<button class="btn dropdown-toggle btn-xs btn-default" data-toggle="dropdown">--}}
+                                {{--Gösterme Seçenekleri <i class="fa fa-caret-down"></i>--}}
+                            {{--</button>--}}
+                            {{--<ul class="dropdown-menu js-status-update pull-right">--}}
+                                {{--<li>--}}
+                                    {{--<a href="javascript:void(0);" id="mt">AYLIK</a>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<a href="javascript:void(0);" id="ag">Agenda</a>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<a href="javascript:void(0);" id="td">Today</a>--}}
+                                {{--</li>--}}
+                            {{--</ul>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </header>
 
                 <!-- widget div-->
