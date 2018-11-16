@@ -28,11 +28,11 @@
 
                             <div class="pull-right new-button">
 
-                                <a href="{{route("sales.orders.form",[aid(),0,"new"])}}">
-                                    <span class="btn btn-success">
-                                        {{trans("sentence.new_order")}}
+                                <button id="print_list" class="btn btn-success">
+                                    <span >
+                                        {{trans("word.print")}}
                                     </span>
-                                </a>
+                                </button>
                             </div>
 
                             <table id="table" class="table table-striped table-hover" width="100%">
@@ -52,6 +52,62 @@
                 </div>
             </article>
         </div>
+
+        {{--Liste Yazdır--}}
+        <div class="modal fade" id="printListModal" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"
+             style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">ÜRETİM LİSTESİ YAZDIR</h4>
+                    </div>
+                    <form id="list_option_form" target="_blank" method="post" action="{{route("production.print_list",aid())}}">
+                   @csrf
+                    <div class="modal-body modal-body-content">
+
+                        <div class="form-group">
+
+                            <label class="col-md-2 control-label">Filtre</label>
+                            <div class="col-md-10">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="list_option[]" checked value="0" class="checkbox style-0">
+                                    <span>BEKLEYENLER</span>
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="list_option[]" checked value="1" class="checkbox style-0">
+                                    <span>ÜRETİMDEKİLER</span>
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="list_option[]" checked value="2" class="checkbox style-0">
+                                    <span>TAMAMLANANLAR</span>
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Vazgeç
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="on_print">
+                            Yazdır
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{--Liste Yazdır--}}
+
+
+
+
     </section>
     @push('scripts')
         <!-- PAGE RELATED PLUGIN(S) -->
@@ -61,6 +117,17 @@
         <script src="/js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="/js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
+
+
+            $("#print_list").on("click",function(){
+                $("#printListModal").modal();
+            });
+
+            $("#on_print").on("click",function(){
+                $("#printListModal").modal("hide");
+
+            });
+
             var responsiveHelper_dt_basic = undefined;
             var breakpointDefinition = {
                 tablet: 1024,

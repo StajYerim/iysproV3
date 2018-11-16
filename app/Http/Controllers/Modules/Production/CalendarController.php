@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Modules\Production;
 
 use App\Model\Production\Production;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class CalendarController extends Controller
 {
@@ -54,5 +56,33 @@ class CalendarController extends Controller
         }
 
         return $data;
+    }
+
+    public function print_list(Request $request){
+
+
+        $productions_process = Production::whereIn("status", $request->list_option)->get();
+
+         $orders = [];
+        foreach($productions_process as $product) {
+            {
+
+                $orders[] = array(
+                    "title" => $product->order->company["company_name"],
+                    "desc" => $product->order["description"] == null ? "":$product->order["description"],
+                    "start" => $product->start_date,
+                    "end" => $product->finish_date,
+                    "status" => $product->status_text,
+                );
+            }
+
+        }
+
+
+
+
+        $pdf = PDF::loadView('modules.production.orders.list_print', compact("orders"))->setPaper('A4');
+        return $pdf->stream("Üretim listesi - ".Carbon::now()->format("d.m.Y H:i"));
+
     }
 }

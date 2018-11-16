@@ -556,6 +556,7 @@ class BankAccountsController extends Controller
     public function receipt_destroy($aid, $id)
     {
         BankItems::destroy($id);
+        BankItems::where("type","account_transfer")->where("doc_id",$id)->delete();
         flash()->overlay("Account Receipt Deleted", 'Success')->success();
         sleep(1);
         return ["message" => "success", 'type' => "account.receipt"];
