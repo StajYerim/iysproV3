@@ -66,7 +66,6 @@ class CalendarController extends Controller
          $orders = [];
         foreach($productions_process as $product) {
             {
-
                 $orders[] = array(
                     "title" => $product->order->company["company_name"],
                     "desc" => $product->order["description"] == null ? "":$product->order["description"],
