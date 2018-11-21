@@ -207,8 +207,8 @@ class CompaniesController extends Controller
             ]
         );
 
-        Address::create(["company_id" => $company->id],
-            [
+        Address::create(
+            ["company_id" => $company->id,
                 "address_abroad" => $request->address_abroad,
                 "address" => $request->address,
                 "town" => $request->town,
