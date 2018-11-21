@@ -691,7 +691,7 @@
                                                 <fieldset>
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">
-                                                            {{trans("sentence.expiry_date")}}
+                                                            VADE TARİHİ
                                                         </label>
                                                         <div class="col-md-7 ">
                                                             <div class="input-group">
