@@ -40,12 +40,12 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{route("stock.movements.form",[aid(),0,"new","in"])}}">
-                                            {{ trans("sentence.in_stock") }}
+                                            STOK GİRİŞİ
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route("stock.movements.form",[aid(),0,"new","out"])}}">
-                                            {{ trans("sentence.out_stock") }}
+                                            STOK ÇIKIŞI
                                         </a>
                                     </li>
                                 </ul>
@@ -109,7 +109,7 @@
                         data: "description",
                         render: function (description,d,s) {
                             if (description == null) {
-                             return   (s.status) === 0 ? "Stock In":"Stock Out";
+                             return   (s.status) === 0 ? "Stok Girişi":"Stok Çıkışı";
                             } else {
                                 return description;
                             }
