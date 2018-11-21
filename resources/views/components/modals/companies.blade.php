@@ -221,7 +221,7 @@
                     eventing = event
                     this.$validator.validate().then((result) => {
                         if (result) {
-                            axios.post('{{route("company.quick.store",[aid(),0])}}', this.form, {tags: []})
+                            axios.post('{{route("company.quick.store",[aid(),0])}}', Companies.form, {tags: []})
                                 .then(function (response) {
 
                                     if(response.data.id){
