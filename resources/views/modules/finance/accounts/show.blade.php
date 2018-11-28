@@ -156,7 +156,7 @@
                                 </tr>
                                 </tbody>
                                 <tbody id="tablo" style="font-size: 11px;">
-                                <paginate name="actions" :per="10" :list="itemsReverse" class="pagination pagination-sm">
+                                <paginate name="actions" :per="10" :list="itemsReverse" >
                                     <tr v-for="item in paginated('actions')" style="cursor:pointer" v-on:click="redirect(item.id)">
                                         <td>
                                             @{{ item.type }}
@@ -189,7 +189,7 @@
                             </table>
 
 
-                            <paginate-links for="actions" class="pagination" :show-step-links="true"></paginate-links>
+                            <paginate-links for="actions"  :hide-single-page="true" class="pagination pagination-sm" :show-step-links="true"></paginate-links>
 
                         </div>
                     </div>

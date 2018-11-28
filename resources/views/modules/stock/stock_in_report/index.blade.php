@@ -2,37 +2,37 @@
 
 @section('content')
 
-    <section id="widget-grid">
-        <div class="row">
-            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-                    <div class="well">
-                        <b>{{ trans('sentence.stock_value') }}</b>
-                        <div style="margin:20px!important;" class="col-xs-12">
-                            <div class="col-xs-4 text-center" style="border:1px solid #ddd; padding:10px;">
-                                <span class="text-info" style="font-size: 25px;">{{ get_money($sales_price) }} ₺</span> <br>
-                                <b>{{ trans('sentence.estimated_sales_price') }}</b>
-                            </div>
-                            <div class="col-xs-4 text-center" style="border:1px solid #ddd; padding:10px;">
-                                <span class="text-danger" style="font-size: 25px;">{{ get_money($purchase_price) }} ₺</span> <br>
-                                <b>{{ trans('sentence.estimated_purchase_price') }}</b>
-                            </div>
-                            <div class="col-xs-4 text-center" style="border:1px solid #ddd; padding:10px;">
-                                <span class="text-success" style="font-size: 25px;">{{ get_money($potantial_price) }} ₺</span> <br>
-                                <b>{{ trans('sentence.potential_gain') }}</b>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="text-center" style="margin-bottom:25px; font-size:12px;">
-                            <i class="fa fa-info-circle"></i>
-                            <b>{{ trans('sentence.sales_purchase_potential_gain') }}</b>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </section>
+    {{--<section id="widget-grid">--}}
+        {{--<div class="row">--}}
+            {{--<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">--}}
+                {{--<div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">--}}
+                    {{--<div class="well">--}}
+                        {{--<b>{{ trans('sentence.stock_value') }}</b>--}}
+                        {{--<div style="margin:20px!important;" class="col-xs-12">--}}
+                            {{--<div class="col-xs-4 text-center" style="border:1px solid #ddd; padding:10px;">--}}
+                                {{--<span class="text-info" style="font-size: 25px;">{{ get_money($sales_price) }} ₺</span> <br>--}}
+                                {{--<b>{{ trans('sentence.estimated_sales_price') }}</b>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-4 text-center" style="border:1px solid #ddd; padding:10px;">--}}
+                                {{--<span class="text-danger" style="font-size: 25px;">{{ get_money($purchase_price) }} ₺</span> <br>--}}
+                                {{--<b>{{ trans('sentence.estimated_purchase_price') }}</b>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-4 text-center" style="border:1px solid #ddd; padding:10px;">--}}
+                                {{--<span class="text-success" style="font-size: 25px;">{{ get_money($potantial_price) }} ₺</span> <br>--}}
+                                {{--<b>{{ trans('sentence.potential_gain') }}</b>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div>--}}
+                            {{--<div class="text-center" style="margin-bottom:25px; font-size:12px;">--}}
+                            {{--<i class="fa fa-info-circle"></i>--}}
+                            {{--<b>{{ trans('sentence.sales_purchase_potential_gain') }}</b>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</article>--}}
+        {{--</div>--}}
+    {{--</section>--}}
 
     <section id="widget-grid" class="">
         <div class="row">
