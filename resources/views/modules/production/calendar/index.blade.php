@@ -1,6 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
+    <style>
+        .mr{
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+    </style>
     <div class="row" id="production" v-cloak>
 
         <div class="col-sm-12 col-md-12 col-lg-3">
@@ -20,7 +26,33 @@
                             <a href="#!" @click="detail(item.id)">
                                @{{item.order.company.company_name}}
                             </a>
-                            <br>
+                            <hr class="mr">
+                        </div>
+
+
+                        <!-- end content -->
+                    </div>
+
+                </div>
+                <!-- end widget div -->
+            </div>
+
+            <div class="jarviswidget jarviswidget-color-blueDark">
+                <header>
+                    <h2> ÜRETİMDEKİ SİPARİŞLER <span class="badge bg-color-red"></span></h2>
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <div class="widget-body">
+                        <!-- content goes here -->
+
+                        <div v-for="item in production_list" v-if="item.status == 1">
+                            <a href="#!" @click="detail(item.id)">
+                                @{{item.order.company.company_name}}
+                            </a>
+                            <hr class="mr">
                         </div>
 
 
@@ -43,11 +75,11 @@
                     <div class="widget-body" style="min-height: 0px;">
                         <!-- content goes here -->
 
-                        <div v-for="item in production_list" v-if="item.status == 2">
+                        <div v-for="item in production_list.slice(0,5)" v-if="item.status == 2">
                             <a href="#!" @click="detail(item.id)">
                                 (@{{item.order.id}}) @{{item.order.company.company_name}}
                             </a>
-                            <br>
+                            <hr class="mr">
                         </div>
 
                         <div class="form-actions">
