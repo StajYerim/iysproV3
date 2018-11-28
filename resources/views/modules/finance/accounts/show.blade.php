@@ -156,35 +156,40 @@
                                 </tr>
                                 </tbody>
                                 <tbody id="tablo" style="font-size: 11px;">
-                                <tr v-for="item in itemsReverse" style="cursor:pointer" v-on:click="redirect(item.id)">
-                                    <td>
-                                        @{{ item.type }}
-                                    </td>
-                                    <td>
-                                        @{{ item.date }}
-                                    </td>
-                                    <td>
-                                        @{{ item.company }} @{{ item.contact }}
-                                    </td>
-                                    <td align="right">
-                                        @{{ item.description }}
-                                    </td>
-                                    <td align="right">
-                                        @{{ item.action_type }} @{{ item.amount }}
-                                        <i class="fa fa-{{strtolower($account->cur_info["code"] == "TRL" ? "try":$account->cur_info["code"])}}"></i>
-                                    </td>
-                                    <td align="right">
-                                        @{{ item.last_balance }}
-                                        <i class="fa fa-{{strtolower($account->cur_info["code"] == "TRL" ? "try":$account->cur_info["code"])}}"></i>
-                                    </td>
-                                </tr>
-                                <tr v-show="itemsReverse.length == 0" >
-                                    <td colspan="6">Hesap içinde hareket mevcut değil</td>
-                                </tr>
+                                <paginate name="actions" :per="10" :list="itemsReverse" class="pagination pagination-sm">
+                                    <tr v-for="item in paginated('actions')" style="cursor:pointer" v-on:click="redirect(item.id)">
+                                        <td>
+                                            @{{ item.type }}
+                                        </td>
+                                        <td>
+                                            @{{ item.date }}
+                                        </td>
+                                        <td>
+                                            @{{ item.company }} @{{ item.contact }}
+                                        </td>
+                                        <td align="right">
+                                            @{{ item.description }}
+                                        </td>
+                                        <td align="right">
+                                            @{{ item.action_type }} @{{ item.amount }}
+                                            <i class="fa fa-{{strtolower($account->cur_info["code"] == "TRL" ? "try":$account->cur_info["code"])}}"></i>
+                                        </td>
+                                        <td align="right">
+                                            @{{ item.last_balance }}
+                                            <i class="fa fa-{{strtolower($account->cur_info["code"] == "TRL" ? "try":$account->cur_info["code"])}}"></i>
+                                        </td>
+                                    </tr>
+                                    <tr v-show="itemsReverse.length == 0" >
+                                        <td colspan="6">Hesap içinde hareket mevcut değil</td>
+                                    </tr>
+
+                                </paginate>
                                 </tbody>
 
                             </table>
 
+
+                            <paginate-links for="actions" class="pagination" :show-step-links="true"></paginate-links>
 
                         </div>
                     </div>
@@ -505,6 +510,8 @@
                                     </tbody>
                                 </table>
 
+
+
                             </div>
 
 
@@ -528,6 +535,7 @@
     </section>
 
     @push('scripts')
+        <script src="https://rawgit.com/TahaSh/vue-paginate/master/dist/vue-paginate.js"></script>
         <script>
 
             window.addEventListener("load", function(event) {
@@ -556,7 +564,8 @@
                         description: "",
                         type: ""
                     },
-                    hidden_users:{!! json_encode($account->hide_users) !!}
+                    hidden_users:{!! json_encode($account->hide_users) !!},
+                    paginate: ['actions']
 
                 },
                 computed: {
@@ -569,6 +578,9 @@
                     this.actions();
                 },
                 methods: {
+                    clickCallback: function(pageNum) {
+                        console.log(pageNum)
+                    },
                     redirect:function($id){
                         return window.location.href='/{{aid()}}/finance/accounts/'+$id+'/receipt';
                     },
