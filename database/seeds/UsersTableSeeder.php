@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Admin Admin',
-                'email' => 'admin@iyspro.com',
+                'email' => 'ofis@aseyazilim.com.tr',
                 'password' => bcrypt('secret'),
                 'lang_id' => 1,
                 'permissions' => "[]",
@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 2,
                 'name' => 'Account Owner',
-                'email' => 'owner@iyspro.com',
+                'email' => 'owner@aseyazilim.com.tr',
                 'password' => bcrypt('secret'),
                 'lang_id' => 1,
                 'permissions' => "[]",
@@ -49,7 +49,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 3,
                 'name' => 'Regular User',
-                'email' => 'user@iyspro.com',
+                'email' => 'user@aseyazilim.com.tr',
                 'password' => bcrypt('secret'),
                 'lang_id' => 1,
                 'role_id' => 3,
