@@ -178,7 +178,7 @@
                         </div>
 
                         <div class="col-md-4"
-                             v-show="form.type_id === '3'">
+                             v-show="form.type_id === '3' || form.type_id === '2'">
                             <label> Satış Fiyatı</label>
                             <div class="input-group">
                                 <input type="text" class="form-control money1" value="0,00"

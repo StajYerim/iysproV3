@@ -136,11 +136,11 @@ function product_type_list()
             "name" => "İLK MADDE VE MALZEME GİDERLERİ",
             "type" => array(1),
             "hscode" => 790
-       ], [
-            "id" => 5,
-            "name" => "HİZMETLER",
-            "type" => array(1, 2, 3),
-            "hscode" => 649
+//       ], [
+//            "id" => 5,
+//            "name" => "HİZMETLER",
+//            "type" => array(1, 2, 3),
+//            "hscode" => 649
         ]
 
     );
