@@ -139,7 +139,7 @@ function product_type_list()
        ], [
             "id" => 5,
             "name" => "HİZMETLER",
-            "type" => array(2, 3),
+            "type" => array(1, 2, 3),
             "hscode" => 649
         ]
 
