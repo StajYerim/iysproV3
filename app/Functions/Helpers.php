@@ -133,14 +133,14 @@ function product_type_list()
             "hscode" => 153
         ], [
             "id" => 4,
-            "name" => "HİZMETLER",
-            "type" => array(2, 3),
-            "hscode" => 649
-        ], [
-            "id" => 4,
             "name" => "İLK MADDE VE MALZEME GİDERLERİ",
             "type" => array(1),
             "hscode" => 790
+       ], [
+            "id" => 5,
+            "name" => "HİZMETLER",
+            "type" => array(2, 3),
+            "hscode" => 649
         ]
 
     );
