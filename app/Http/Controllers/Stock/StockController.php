@@ -140,8 +140,9 @@ class StockController extends Controller
     public function image_upload($aid, Request $request)
     {
         $this->validate($request, [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|mimes:jpeg,bmp,png,jpg,gif,svg|max:2048',
         ]);
+
 
         $image = $request->file('image');
 
