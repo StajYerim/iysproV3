@@ -27,7 +27,9 @@ class Product extends Model
 
     ];
 
-    public function newQuery($excludeDeleted = true) {
+
+    public function newQuery($excludeDeleted = true)
+    {
         return parent::newQuery($excludeDeleted)
             ->where("account_id", '=', aid());
     }
@@ -52,7 +54,7 @@ class Product extends Model
     //First reg barcode
     public function getBarcodeAttribute()
     {
-        return $this->barcodes()->first()["barcode"];
+        return $this->barcodes()->first() ? $this->barcodes()->first()["barcode"]:'';
     }
 
     //Ürünün Alış fiyatı -> veritabanına uygun şekilde kayıt edilir decimal
@@ -84,7 +86,7 @@ class Product extends Model
 
     public function named()
     {
-        return $this->hasOne(ProductDescriptions::class)->where("lang_code","tr");
+        return $this->hasOne(ProductDescriptions::class)->where("lang_code", "tr");
     }
 
     public function names()
@@ -103,16 +105,15 @@ class Product extends Model
 
     public function getNameAttribute()
     {
-        return $this->names()->where("lang_code","tr")->first()["name"];
+        return $this->names()->where("lang_code", "tr")->first()["name"];
     }
 
 
     public function lang($id, $lang)
     {
-       if($lang == "en")
-       {
-           $lang = "us";
-       }
+        if ($lang == "en") {
+            $lang = "us";
+        }
         $data = ProductDescriptions::where("product_id", $id)->where("lang_code", $lang)->first();
 
         if ($data == "[]") {
@@ -123,30 +124,34 @@ class Product extends Model
         }
     }
 
-    public function stock_receipts(){
-        return $this->belongsToMany(Stock::class,"stock_items");
+    public function stock_receipts()
+    {
+        return $this->belongsToMany(Stock::class, "stock_items");
     }
 
-    public function porder(){
-        return $this->hasMany(PurchaseOrderItems::class,"product_id","id");
+    public function porder()
+    {
+        return $this->hasMany(PurchaseOrderItems::class, "product_id", "id");
     }
 
-    public function porder_items(){
-        return $this->hasMany(PurchaseOrderItems::class,"product_id","id");
+    public function porder_items()
+    {
+        return $this->hasMany(PurchaseOrderItems::class, "product_id", "id");
     }
 
-    public function getStockCountAttribute(){
+    public function getStockCountAttribute()
+    {
 
         //Stock Hareketleri
-         $in = $this->stock_receipts()->where("status", "=",0)->sum("quantity");
-         $out = $this->stock_receipts()->where("status", "=",1)->sum("quantity");
+        $in = $this->stock_receipts()->where("status", "=", 0)->sum("quantity");
+        $out = $this->stock_receipts()->where("status", "=", 1)->sum("quantity");
 
-      return  ($in-$out);
+        return ($in - $out);
     }
 
     public function order_items()
     {
-        return $this->hasMany(SalesOrderItems::class, "product_id",  "id");
+        return $this->hasMany(SalesOrderItems::class, "product_id", "id");
     }
 
     public function waybills()
@@ -154,21 +159,27 @@ class Product extends Model
         $this->hasMany(StockItems::class, "product_id", "id");
     }
 
-    public function getOrderCountAttribute(){
-        $toplam_sipariler = $items = $this->order_items;
-        $order = $items = $this->order_items()->sum("quantity");
+    public function getOrderCountAttribute()
+    {
+        $toplam_sipariler = $this->order_items;
+        $order = $this->order_items()->sum("quantity");
         $waybill = 0;
-        foreach ($toplam_sipariler as $sip) {
 
-          return intval($sip->waybill_item["quantity"]);
+        foreach ($toplam_sipariler as $sip) {
+            if ($sip->waybill_item) {
+                $waybill += intval($sip->waybill_item["quantity"]);
+            }
+
         }
 
-        return $order-$waybill;
+
+        return $order - $waybill;
 
     }
 
-    public function unit(){
-        return $this->hasOne(Units::class,"id","unit_id");
+    public function unit()
+    {
+        return $this->hasOne(Units::class, "id", "unit_id");
     }
 
     public function movements()
@@ -178,12 +189,12 @@ class Product extends Model
 
     public function purchase_currency()
     {
-        return $this->hasOne(Currency::class,'id','buying_currency');
+        return $this->hasOne(Currency::class, 'id', 'buying_currency');
     }
 
     public function sales_currency()
     {
-        return $this->hasOne(Currency::class,'id','currency');
+        return $this->hasOne(Currency::class, 'id', 'currency');
     }
 
 }

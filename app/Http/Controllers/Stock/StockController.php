@@ -43,15 +43,20 @@ class StockController extends Controller
                 },
             ])
             ->editColumn("named.name",function($product){
-                return $product->named["name"]." <span class='badge' style='background-color:".$product->category["color"]."'>".$product->category["name"]."</span><span class='badge' style='background-color:success'>".$product->type_name."</span>";
+                $category = $product->category ?
+                    "<span class='badge' style='background-color:" . $product->category["color"] . "'> " . $product->category["name"] . "</span>" : '';
 
+                $type = "<span class='badge' style='background-color:greenyellow'>" . $product->type_name . "</span>";
+
+
+                return $product->named["name"] . " " . $category . " " . $type;
             })
             ->editColumn("inventory_tracking",function($product){
 
                 if($product->type_id == 1 or $product->type_id == 4){
-                    return $product->stock_count."/- ".$product->unit["short_name"];
+                    return $product->stock_count."/- ".$product->unit ? $product->unit["short_name"]:'';
                 }else{
-                    return $product->stock_count."/".$product->order_count." ".$product->unit["short_name"];
+                    return $product->stock_count."/".$product->order_count." ".$product->unit ? $product->unit["short_name"]:'';
                 }
 
             })

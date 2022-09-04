@@ -73,8 +73,8 @@
 
                                                 <div class="dropdown" style="margin-top: 9px;">
                                                     <a data-toggle="dropdown" class="dropdown-toggle category" href="#" aria-expanded="true">
-                                                        <span class="badge" style="background-color:{{$form_type == "update" ?  $product->category["color"] == null ? "#999":$product->category["color"]:"#999"}} ">
-                                                            {{$form_type == "update" ? $product->category["name"] == null ? "NOT CATEGORY":$product->category["name"]:"NOT CATEGORY"}}
+                                                        <span class="badge" style="background-color:{{$form_type == "update" ?  $product->category   == null ? "#999":$product->category["color"]:"#999"}} ">
+                                                            {{$form_type == "update" ? $product->category == null ? "NOT CATEGORY":$product->category["name"]:"NOT CATEGORY"}}
                                                         </span>
                                                     </a>
                                                     <ul class="dropdown-menu dropdown-caret category-ul" style="  min-width: 219px;padding: 7px 9px;margin: 2px 0 0;">
@@ -125,7 +125,7 @@
                                         <div class="col-md-2">
                                             <div class="upload-preview">
                                                 <img width="156px" height="117px"
-                                                     src="{{$form_type == "update" ? $product->images()->first()["name"] != null ? "/images/account/".aid()."/product/".$product->images->last()["name"]:"/img/noimage.gif":"/img/noimage.gif"}}">
+                                                     src="{{$form_type == "update" ? $product->images()->first() != null ? "/images/account/".aid()."/product/".$product->images->last()["name"]:"/img/noimage.gif":"/img/noimage.gif"}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6" style="margin-top: 34px;">
@@ -268,12 +268,12 @@
                     el: "#customer",
                     data: () => ({
                         color: false,
-                        image_name: "{{$form_type == "update" ? $product->images->last()["name"] != null ? $product->images->last()["name"]:"":""}}",
+                        image_name: "{{$form_type == "update" ? $product->images->last()  ? $product->images->last()["name"]:"":""}}",
                         form: {
                             name: "{{$form_type == "update" ? $product->lang($product->id,"tr"):""}}",
                             name_lang: "tr",
                             barcode: '{{$form_type == "update" ? $product->barcode:""}}',
-                            category_id: '{{$form_type == "update" ? $product->category["id"]:null}}',
+                            category_id: '{{$form_type == "update" ? $product->category ? $product->category["id"]:null:null}}',
                             code: '{{$form_type == "update" ? $product->code:""}}',
                             vat_rate: '{{$form_type == "update" ? $product->vat_rate:""}}',
                             unit_id: '{{$form_type == "update" ? $product->unit_id:"1"}}',

@@ -75,10 +75,15 @@
                                     </small>
                                 </div>
                                 <div class="col-lg-4 col-xs-3">
+                                    @if($product->category)
                                     <span class="badge" style="background:{{$product->category["color"]}}"> {{$product->category["name"]}} </span>
+                                    @else
+                                        <span class="badge" style="background:lightgrey"> Kategorisiz </span>
+
+                                    @endif
                                 </div>
                                 <div class="col-lg-4" style="text-align:right">
-                                    <img src="{{$product->images->last()["name"] == null ? "/img/noimage.gif":product_img_url($product->images->last()["name"])}}"
+                                    <img src="{{$product->images->last() ? $product->images->last()["name"] == null ? "/img/noimage.gif":product_img_url($product->images->last()["name"]):"/img/noimage.gif"}}"
                                             width="135px" height="100px;">
                                 </div>
                                 <hr>
